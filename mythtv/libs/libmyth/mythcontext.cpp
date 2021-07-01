@@ -79,8 +79,9 @@ class MythContextPrivate : private QObject
                       bool prompt, bool autodetect);
     bool FindDatabase(bool prompt, bool autodetect);
 
-    void TempMainWindow(bool languagePrompt = true);
+    void TempMainWindow(void);
     void EndTempWindow(void);
+    void LanguagePrompt(void);
 
     bool LoadDatabaseSettings(void);
     bool SaveDatabaseParams(const DatabaseParams &params, bool force);
@@ -276,7 +277,7 @@ MythContextPrivate::~MythContextPrivate()
  *        seem to be used after the temp window is destroyed.
  *
  */
-void MythContextPrivate::TempMainWindow(bool languagePrompt)
+void MythContextPrivate::TempMainWindow(void)
 {
     if (HasMythMainWindow())
         return;
@@ -290,13 +291,6 @@ void MythContextPrivate::TempMainWindow(bool languagePrompt)
     GetMythUI()->Init();
     MythMainWindow *mainWindow = MythMainWindow::getMainWindow(false);
     mainWindow->Init();
-
-    if (languagePrompt)
-    {
-        // ask user for language settings
-        LanguageSelection::prompt();
-        MythTranslation::load("mythfrontend");
-    }
 }
 
 void MythContextPrivate::EndTempWindow(void)
@@ -314,6 +308,13 @@ void MythContextPrivate::EndTempWindow(void)
         }
     }
     EnableDBerrors();
+}
+
+void MythContextPrivate::LanguagePrompt(void)
+{
+    // ask user for language settings
+    LanguageSelection::prompt();
+    MythTranslation::load("mythfrontend");
 }
 
 /**
@@ -366,9 +367,8 @@ bool MythContextPrivate::Init(const bool gui, const bool ignoreDB,
     // we didn't already do so.
     if (gui && !gCoreContext->GetDB()->HaveSchema())
     {
-        TempMainWindow(false);
-        LanguageSelection::prompt();
-        MythTranslation::load("mythfrontend");
+        TempMainWindow();
+        LanguagePrompt();
     }
     gCoreContext->InitLocale();
     gCoreContext->SaveLocaleDefaults();
@@ -716,6 +716,7 @@ bool MythContextPrivate::PromptForDatabaseParams(const QString &error)
     if (m_gui)
     {
         TempMainWindow();
+        LanguagePrompt();
 
         // Tell the user what went wrong:
         if (!error.isEmpty())
@@ -1065,7 +1066,7 @@ void MythContextPrivate::ShowGuiStartup(void)
 {
     if (!m_gui)
         return;
-    TempMainWindow(false);
+    TempMainWindow();
     MythMainWindow *mainWindow = GetMythMainWindow();
     MythScreenStack *mainStack = mainWindow->GetMainStack();
     if (mainStack)
@@ -1147,6 +1148,7 @@ void MythContextPrivate::ResetDatabase(void) const
 int MythContextPrivate::ChooseBackend(const QString &error)
 {
     TempMainWindow();
+    LanguagePrompt();
 
     // Tell the user what went wrong:
     if (!error.isEmpty())
@@ -1609,7 +1611,7 @@ bool MythContext::Init(const bool gui,
             "with the installed MythTV libraries.");
         if (gui)
         {
-            d->TempMainWindow(false);
+            d->TempMainWindow();
             ShowOkPopup(warning);
         }
         LOG(VB_GENERAL, LOG_WARNING, warning);
@@ -1644,7 +1646,7 @@ bool MythContext::Init(const bool gui,
                           " Please set the environment variable HOME";
         if (gui)
         {
-            d->TempMainWindow(false);
+            d->TempMainWindow();
             ShowOkPopup(warning);
         }
         LOG(VB_GENERAL, LOG_WARNING, warning);
