@@ -143,6 +143,7 @@ class MythContextPrivate : private QObject
     static const std::vector<QString> kSettingsToSave;
 };
 
+// MythUIMenuCallbacks used in MythContextPrivate::Init
 static void exec_program_cb(const QString &cmd)
 {
     myth_system(cmd);
