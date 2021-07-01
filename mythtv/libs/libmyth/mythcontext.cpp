@@ -57,7 +57,7 @@
 
 #define LOC      QString("MythContext: ")
 
-#if QT_VERSION < QT_VERSION_CHECK(5,10,0)
+#if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
 #define qEnvironmentVariable getenv
 #endif
 
@@ -305,7 +305,8 @@ void MythContextPrivate::EndTempWindow(void)
         if (m_guiStartup && !m_guiStartup->m_Exit)
         {
             MythScreenStack *mainStack = GetMythMainWindow()->GetMainStack();
-            if (mainStack) {
+            if (mainStack)
+            {
                 mainStack->PopScreen(m_guiStartup, false);
                 m_guiStartup = nullptr;
             }
@@ -327,7 +328,7 @@ bool MythContextPrivate::checkPort(QString &host, int port, std::chrono::seconds
 {
     PortChecker checker;
     if (m_guiStartup)
-        QObject::connect(m_guiStartup,&GUIStartup::cancelPortCheck,&checker,&PortChecker::cancelPortCheck);
+        QObject::connect(m_guiStartup, &GUIStartup::cancelPortCheck, &checker, &PortChecker::cancelPortCheck);
     return checker.checkPort(host, port, timeLimit);
 }
 
@@ -373,7 +374,8 @@ bool MythContextPrivate::Init(const bool gui,
     gCoreContext->SaveLocaleDefaults();
 
     // Close GUI Startup Window.
-    if (m_guiStartup) {
+    if (m_guiStartup)
+    {
         MythScreenStack *mainStack = GetMythMainWindow()->GetMainStack();
         if (mainStack)
             mainStack->PopScreen(m_guiStartup, false);
@@ -588,7 +590,8 @@ bool MythContextPrivate::LoadDatabaseSettings(void)
         }
 #ifdef Q_OS_ANDROID
 #define ANDROID_EXCEPTION_CHECK \
-  if (env->ExceptionCheck()) { \
+  if (env->ExceptionCheck()) \
+  { \
     env->ExceptionClear(); \
     exception=true; \
   }
@@ -602,13 +605,13 @@ bool MythContextPrivate::LoadDatabaseSettings(void)
             QAndroidJniObject activity = QtAndroid::androidActivity();
             ANDROID_EXCEPTION_CHECK;
             QAndroidJniObject appctx = activity.callObjectMethod
-                ("getApplicationContext","()Landroid/content/Context;");
+                ("getApplicationContext", "()Landroid/content/Context;");
             ANDROID_EXCEPTION_CHECK;
             QAndroidJniObject contentR = appctx.callObjectMethod
                 ("getContentResolver", "()Landroid/content/ContentResolver;");
             ANDROID_EXCEPTION_CHECK;
             QAndroidJniObject androidId = QAndroidJniObject::callStaticObjectMethod
-                ("android/provider/Settings$Secure","getString",
+                ("android/provider/Settings$Secure", "getString",
                  "(Landroid/content/ContentResolver;Ljava/lang/String;)Ljava/lang/String;",
                  contentR.object<jobject>(),
                  myID.object<jstring>());
@@ -829,11 +832,10 @@ QString MythContextPrivate::TestDBconnection(bool prompt)
         st_success = 6
     } startupState = st_start;
 
-    static const std::array<const QString,7> kGuiStatuses
-        {"start","dbAwake","dbStarted","dbConnects","beWOL","beAwake",
-            "success" };
+    static const std::array<const QString, 7> kGuiStatuses
+        {"start", "dbAwake", "dbStarted", "dbConnects", "beWOL", "beAwake", "success"};
 
-    auto secondsStartupScreenDelay = gCoreContext->GetDurSetting<std::chrono::seconds>("StartupScreenDelay",2s);
+    auto secondsStartupScreenDelay = gCoreContext->GetDurSetting<std::chrono::seconds>("StartupScreenDelay", 2s);
     auto msStartupScreenDelay = std::chrono::duration_cast<std::chrono::milliseconds>(secondsStartupScreenDelay);
     do
     {
@@ -906,7 +908,8 @@ QString MythContextPrivate::TestDBconnection(bool prompt)
                 m_guiStartup->setMessageState("empty");
                 processEvents();
             }
-            switch (startupState) {
+            switch (startupState)
+            {
             case st_start:
                 if (m_dbParams.m_wolEnabled)
                 {
@@ -962,7 +965,8 @@ QString MythContextPrivate::TestDBconnection(bool prompt)
                         startupState = st_beWOL;
                     }
                 }
-                else {
+                else
+                {
                     startupState = st_success;
                     break;
                 }
@@ -973,7 +977,8 @@ QString MythContextPrivate::TestDBconnection(bool prompt)
                 backendPort = MythCoreContext::GetMasterServerPort();
                 [[clang::fallthrough]];
             case st_beWOL:
-                if (!beWOLCmd.isEmpty()) {
+                if (!beWOLCmd.isEmpty())
+                {
                     if (attempt > 0)
                         MythWakeup(beWOLCmd);
                     if (!checkPort(backendIP, backendPort, useTimeout))
@@ -1068,14 +1073,18 @@ void MythContextPrivate::ShowGuiStartup(void)
     TempMainWindow(false);
     MythMainWindow *mainWindow = GetMythMainWindow();
     MythScreenStack *mainStack = mainWindow->GetMainStack();
-    if (mainStack) {
-        if (!m_guiStartup) {
+    if (mainStack)
+    {
+        if (!m_guiStartup)
+        {
             m_guiStartup = new GUIStartup(mainStack,m_loop);
-            if (!m_guiStartup->Create()) {
+            if (!m_guiStartup->Create())
+            {
                 delete m_guiStartup;
                 m_guiStartup = nullptr;
             }
-            if (m_guiStartup) {
+            if (m_guiStartup)
+            {
                 mainStack->AddScreen(m_guiStartup, false);
                 processEvents();
             }
@@ -1491,9 +1500,9 @@ bool MythContextPrivate::saveSettingsCache(void)
     XmlConfiguration config = XmlConfiguration("cache/contextcache.xml");
     for (const auto & setting : kSettingsToSave)
     {
-        QString cacheValue = config.GetValue("Settings/"+setting,QString());
+        QString cacheValue = config.GetValue("Settings/"+setting, QString());
         gCoreContext->ClearOverrideSettingForSession(setting);
-        QString value = gCoreContext->GetSetting(setting,QString());
+        QString value = gCoreContext->GetSetting(setting, QString());
         if (value != cacheValue)
         {
             config.SetValue("Settings/"+setting,value);
@@ -1511,9 +1520,9 @@ void MythContextPrivate::loadSettingsCacheOverride(void) const
     XmlConfiguration config = XmlConfiguration("cache/contextcache.xml");
     for (const auto & setting : kSettingsToSave)
     {
-        if (!gCoreContext->GetSetting(setting,QString()).isEmpty())
+        if (!gCoreContext->GetSetting(setting, QString()).isEmpty())
             continue;
-        QString value = config.GetValue("Settings/"+setting,QString());
+        QString value = config.GetValue("Settings/"+setting, QString());
         if (!value.isEmpty())
             gCoreContext->OverrideSettingForSession(setting, value);
     }
@@ -1525,13 +1534,13 @@ void MythContextPrivate::loadSettingsCacheOverride(void) const
 
 void MythContextPrivate::clearSettingsCacheOverride(void)
 {
-    QString language = gCoreContext->GetSetting("Language",QString());
+    QString language = gCoreContext->GetSetting("Language", QString());
     for (const auto & setting : kSettingsToSave)
         gCoreContext->ClearOverrideSettingForSession(setting);
     // Restore power off TV setting
     gCoreContext->ClearOverrideSettingForSession("PowerOffTVAllowed");
 
-    if (language != gCoreContext->GetSetting("Language",QString()))
+    if (language != gCoreContext->GetSetting("Language", QString()))
         MythTranslation::load("mythfrontend");
 }
 
@@ -1547,7 +1556,8 @@ MythContext::MythContext(QString binversion, bool needsBackend)
 {
 #ifdef _WIN32
     static bool WSAStarted = false;
-    if (!WSAStarted) {
+    if (!WSAStarted)
+    {
         WSADATA wsadata;
         int res = WSAStartup(MAKEWORD(2, 0), &wsadata);
         LOG(VB_SOCKET, LOG_INFO,
