@@ -73,10 +73,9 @@ class MythContextPrivate : public QObject
     explicit MythContextPrivate(MythContext *lparent);
    ~MythContextPrivate() override;
 
-    bool Init        (bool gui,
-                      bool prompt, bool noPrompt,
-                      bool ignoreDB);
-    bool FindDatabase(bool prompt, bool noAutodetect);
+    bool Init        (bool gui, bool ignoreDB,
+                      bool prompt, bool autodetect);
+    bool FindDatabase(bool prompt, bool autodetect);
 
     void TempMainWindow(bool languagePrompt = true);
     void EndTempWindow(void);
@@ -333,13 +332,12 @@ bool MythContextPrivate::checkPort(QString &host, int port, std::chrono::seconds
 }
 
 
-bool MythContextPrivate::Init(const bool gui,
-                              const bool promptForBackend,
-                              const bool noPrompt,
-                              const bool ignoreDB)
+bool MythContextPrivate::Init(const bool gui, const bool ignoreDB,
+                              const bool prompt, const bool autodetect)
 {
-    gCoreContext->GetDB()->IgnoreDatabase(ignoreDB);
     m_gui = gui;
+    gCoreContext->GetDB()->IgnoreDatabase(ignoreDB);
+    
     loadSettingsCacheOverride();
 
     if (gCoreContext->IsFrontend())
@@ -354,7 +352,7 @@ bool MythContextPrivate::Init(const bool gui,
 
     // ---- database connection stuff ----
 
-    if (!ignoreDB && !FindDatabase(promptForBackend, noPrompt))
+    if (!ignoreDB && !FindDatabase(prompt, autodetect))
     {
         EndTempWindow();
         return false;
@@ -399,7 +397,8 @@ bool MythContextPrivate::Init(const bool gui,
 }
 
 /**
- * Get database connection settings and test connectivity.
+ * \name MythContextPrivate::FindDatabase()
+ * \brief Get database connection settings and test connectivity.
  *
  * Can use UPnP AutoDiscovery to locate backends, and get their DB settings.
  * The user can force the AutoDiscovery chooser with the --prompt argument,
@@ -407,13 +406,15 @@ bool MythContextPrivate::Init(const bool gui,
  * There is also an autoconfigure function, which counts the backends,
  * and if there is exactly one, uses it as above.
  *
- * Despite its name, the disable argument currently only disables the chooser.
- * If set, autoconfigure will still be attempted in some situations.
+ * \param prompt boolean, is the chooser enabled
+ * \param autodetect boolean, is autodiscovery enabled
+ * 
+ * \return boolean, was a database found and selected
  */
-bool MythContextPrivate::FindDatabase(bool prompt, bool noAutodetect)
+bool MythContextPrivate::FindDatabase(bool prompt, bool autodetect)
 {
     // We can only prompt if autodiscovery is enabled..
-    bool manualSelect = prompt && !noAutodetect;
+    bool manualSelect = prompt && autodetect;
 
     QString failure;
 
@@ -424,7 +425,7 @@ bool MythContextPrivate::FindDatabase(bool prompt, bool noAutodetect)
     // In addition to the UI chooser, we can also try to autoSelect later,
     // but only if we're not doing manualSelect and there was no
     // valid config.xml
-    bool autoSelect = !manualSelect && !loaded && !noAutodetect;
+    bool autoSelect = autodetect && !(manualSelect || loaded);
 
     // 2. If the user isn't forcing up the chooser UI, look for a default
     //    backend in config.xml, then test DB settings we've got so far:
@@ -1649,7 +1650,7 @@ bool MythContext::Init(const bool gui,
         return false;
     }
 
-    if (!d->Init(gui, promptForBackend, disableAutoDiscovery, ignoreDB))
+    if (!d->Init(gui, ignoreDB, promptForBackend, !disableAutoDiscovery))
     {
         return false;
     }
