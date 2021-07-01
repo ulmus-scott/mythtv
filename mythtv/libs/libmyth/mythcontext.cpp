@@ -65,11 +65,13 @@ MythContext *gContext = nullptr;
 
 static const QString sLocation = "MythContext";
 
-class MythContextPrivate : public QObject
+// MythContextPrivate is a "private class" inaccessible from outside mythcontext.cpp
+class MythContextPrivate : private QObject
 {
     friend class MythContextSlotHandler;
+    friend class MythContext;
 
-  public:
+  private: // methods
     explicit MythContextPrivate(MythContext *lparent);
    ~MythContextPrivate() override;
 
@@ -101,7 +103,7 @@ class MythContextPrivate : public QObject
     static void clearSettingsCacheOverride(void);
 
 
-  protected:
+//  protected:
     bool event(QEvent* /*e*/) override; // QObject
 
     void ShowConnectionFailurePopup(bool persistent);
@@ -109,10 +111,10 @@ class MythContextPrivate : public QObject
 
     void ShowVersionMismatchPopup(uint remote_version);
 
-  public slots:
+  private slots:
     void OnCloseDialog();
 
-  public:
+  private: // members
     MythContext            *m_parent             {nullptr};
 
                             /// Should this context use GUI elements?
@@ -134,7 +136,6 @@ class MythContextPrivate : public QObject
     bool                    m_needsBackend       {false};
     bool                    m_settingsCacheDirty {false};
 
-  private:
     MythConfirmationDialog *m_mbeVersionPopup    {nullptr};
     int                     m_registration       {-1};
     QDateTime               m_lastCheck;
