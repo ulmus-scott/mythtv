@@ -708,14 +708,6 @@ bool MythContextPrivate::SaveDatabaseParams(
     return ret;
 }
 
-void MythContextSlotHandler::OnCloseDialog(void)
-{
-    if (d && d->m_loop 
-      && d->m_loop->isRunning())
-        d->m_loop->exit();
-}
-
-
 bool MythContextPrivate::PromptForDatabaseParams(const QString &error)
 {
     bool accepted = false;
@@ -1551,6 +1543,14 @@ void MythContextSlotHandler::VersionMismatchPopupClosed(void)
     d->m_mbeVersionPopup = nullptr;
     qApp->exit(GENERIC_EXIT_SOCKET_ERROR);
 }
+
+void MythContextSlotHandler::OnCloseDialog(void)
+{
+    if (d && d->m_loop 
+      && d->m_loop->isRunning())
+        d->m_loop->exit();
+}
+
 
 MythContext::MythContext(QString binversion, bool needsBackend)
     : m_appBinaryVersion(std::move(binversion))
