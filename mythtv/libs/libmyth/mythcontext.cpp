@@ -364,7 +364,7 @@ bool MythContextPrivate::Init(const bool gui,
 
     // Prompt for language if this is a first time install and
     // we didn't already do so.
-    if (m_gui && !gCoreContext->GetDB()->HaveSchema())
+    if (gui && !gCoreContext->GetDB()->HaveSchema())
     {
         TempMainWindow(false);
         LanguageSelection::prompt();
