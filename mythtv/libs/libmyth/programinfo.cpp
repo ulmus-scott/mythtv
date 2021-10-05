@@ -7,8 +7,6 @@
 
 // C++ headers
 #include <algorithm>
-using std::max;
-using std::min;
 
 // Qt headers
 #include <QMap>
@@ -22,6 +20,7 @@ using std::min;
 #include "mythcorecontext.h"
 #include "mythscheduler.h"
 #include "mythmiscutil.h"
+#include "stringutil.h"
 #include "storagegroup.h"
 #include "mythlogging.h"
 #include "programinfo.h"
@@ -379,7 +378,7 @@ ProgramInfo::ProgramInfo(
     m_recStartTs(std::move(_recstartts)),
     m_recEndTs(std::move(_recendts)),
 
-    m_stars(clamp(_stars, 0.0F, 1.0F)),
+    m_stars(std::clamp(_stars, 0.0F, 1.0F)),
 
     m_originalAirDate(_originalAirDate),
     m_lastModified(std::move(_lastmodified)),
@@ -562,7 +561,7 @@ ProgramInfo::ProgramInfo(
     m_recStartTs(std::move(_recstartts)),
     m_recEndTs(std::move(_recendts)),
 
-    m_stars(clamp(_stars, 0.0F, 1.0F)),
+    m_stars(std::clamp(_stars, 0.0F, 1.0F)),
 
     m_originalAirDate(_originalAirDate),
     m_lastModified(m_startTs),
@@ -1594,15 +1593,15 @@ void ProgramInfo::ToMap(InfoMap &progMap,
 
     if (m_season > 0 || m_episode > 0)
     {
-        progMap["season"] = format_season_and_episode(m_season, 1);
-        progMap["episode"] = format_season_and_episode(m_episode, 1);
-        progMap["totalepisodes"] = format_season_and_episode(m_totalEpisodes, 1);
+        progMap["season"]        = StringUtil::intToPaddedString(m_season,  1);
+        progMap["episode"]       = StringUtil::intToPaddedString(m_episode, 1);
+        progMap["totalepisodes"] = StringUtil::intToPaddedString(m_totalEpisodes, 1);
         progMap["s00e00"] = QString("s%1e%2")
-            .arg(format_season_and_episode(GetSeason(), 2),
-                 format_season_and_episode(GetEpisode(), 2));
+            .arg(StringUtil::intToPaddedString(GetSeason(),  2),
+                 StringUtil::intToPaddedString(GetEpisode(), 2));
         progMap["00x00"] = QString("%1x%2")
-            .arg(format_season_and_episode(GetSeason(), 1),
-                 format_season_and_episode(GetEpisode(), 2));
+            .arg(StringUtil::intToPaddedString(GetSeason(),  1),
+                 StringUtil::intToPaddedString(GetEpisode(), 2));
     }
     else
     {
@@ -1891,7 +1890,7 @@ std::chrono::seconds ProgramInfo::GetSecondsInRecording(void) const
 {
     auto recsecs  = std::chrono::seconds(m_recStartTs.secsTo(m_endTs));
     auto duration = std::chrono::seconds(m_startTs.secsTo(m_endTs));
-    return (recsecs > 0s) ? recsecs : max(duration,0s);
+    return (recsecs > 0s) ? recsecs : std::max(duration, 0s);
 }
 
 /// \brief Returns catType as a string
@@ -2092,7 +2091,7 @@ bool ProgramInfo::LoadProgramFromRecorded(
     m_recStartTs   = MythDate::as_utc(query.value(24).toDateTime());
     m_recEndTs     = MythDate::as_utc(query.value(25).toDateTime());
 
-    m_stars        = clamp((float)query.value(23).toDouble(), 0.0F, 1.0F);
+    m_stars        = std::clamp(static_cast<float>(query.value(23).toDouble()), 0.0F, 1.0F);
 
     m_year         = query.value(26).toUInt();
     m_partNumber   = query.value(49).toUInt();
@@ -6218,21 +6217,6 @@ PMapDBReplacement::PMapDBReplacement() : lock(new QMutex())
 PMapDBReplacement::~PMapDBReplacement()
 {
     delete lock;
-}
-
-MPUBLIC QString format_season_and_episode(int seasEp, int digits)
-{
-    QString seasEpNum;
-
-    if (seasEp > -1)
-    {
-        seasEpNum = QString::number(seasEp);
-
-        if (digits == 2 && seasEpNum.size() < 2)
-            seasEpNum.prepend("0");
-    }
-
-    return seasEpNum;
 }
 
 // ---------------------------------------------------------------------------

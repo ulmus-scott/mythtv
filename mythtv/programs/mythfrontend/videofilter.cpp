@@ -6,7 +6,7 @@
 #include "mythuibutton.h"
 #include "mythuitext.h"
 #include "mythuitextedit.h"
-#include "mythmiscutil.h"
+#include "stringutil.h"
 #include "globals.h"
 #include "dbaccess.h"
 #include "videometadatalistmanager.h"
@@ -361,7 +361,7 @@ bool VideoFilterSettings::meta_less_than(const VideoMetadata &lhs,
         {
             const QString& lhsfn = lhs.GetSortFilename();
             const QString& rhsfn = rhs.GetSortFilename();
-            ret = naturalCompare(lhsfn, rhsfn) < 0;
+            ret = StringUtil::naturalCompare(lhsfn, rhsfn) < 0;
             break;
         }
         case kOrderByID:

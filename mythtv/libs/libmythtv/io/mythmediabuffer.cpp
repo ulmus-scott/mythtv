@@ -7,7 +7,6 @@
 #include "threadedfilewriter.h"
 #include "io/mythfilebuffer.h"
 #include "io/mythstreamingbuffer.h"
-#include "mythmiscutil.h"
 #include "livetvchain.h"
 #include "mythcontext.h"
 #include "mythconfig.h"
@@ -1190,7 +1189,7 @@ bool MythMediaBuffer::WaitForReadsAllowed(void)
     while ((timer.elapsed() < timeoutms) && !check && !m_stopReads &&
            !m_requestPause && !m_commsError && m_readAheadRunning)
     {
-        std::chrono::milliseconds delta = clamp(timeoutms - timer.elapsed(), 10ms, 100ms);
+        std::chrono::milliseconds delta = std::clamp(timeoutms - timer.elapsed(), 10ms, 100ms);
         m_generalWait.wait(&m_rwLock, delta.count());
         if (!check && timer.elapsed() > 1s && (count % 100) == 0)
             LOG(VB_GENERAL, LOG_WARNING, LOC + "Taking too long to be allowed to read..");
@@ -1227,7 +1226,7 @@ int MythMediaBuffer::WaitForAvail(int Count, std::chrono::milliseconds  Timeout)
     while ((available < Count) && !m_stopReads && !m_requestPause && !m_commsError && m_readAheadRunning)
     {
         m_wantToRead = Count;
-        std::chrono::milliseconds delta = clamp(Timeout - timer.elapsed(), 10ms, 250ms);
+        std::chrono::milliseconds delta = std::clamp(Timeout - timer.elapsed(), 10ms, 250ms);
         m_generalWait.wait(&m_rwLock, delta.count());
         available = ReadBufAvail();
         if (m_ateof)

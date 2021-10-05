@@ -208,20 +208,20 @@ void MythPlayerOverlayUI::UpdateSliderInfo(osdInfo &Info, bool PaddedFields)
         QString text3;
         if (PaddedFields)
         {
-            text1 = MythFormatTime(secsplayed, "HH:mm:ss");
-            text2 = MythFormatTime(playbackLen, "HH:mm:ss");
-            text3 = MythFormatTime(secsbehind, "HH:mm:ss");
+            text1 = MythDate::formatTime(secsplayed, "HH:mm:ss");
+            text2 = MythDate::formatTime(playbackLen, "HH:mm:ss");
+            text3 = MythDate::formatTime(secsbehind, "HH:mm:ss");
         }
         else
         {
             QString fmt = (playbackLen >= 1h) ? "H:mm:ss" : "m:ss";
-            text1 = MythFormatTime(secsplayed, fmt);
-            text2 = MythFormatTime(playbackLen, fmt);
+            text1 = MythDate::formatTime(secsplayed, fmt);
+            text2 = MythDate::formatTime(playbackLen, fmt);
 
             if (secsbehind >= 1h)
-                text3 = MythFormatTime(secsbehind, "H:mm:ss");
+                text3 = MythDate::formatTime(secsbehind, "H:mm:ss");
             else if (secsbehind >= 1min)
-                text3 = MythFormatTime(secsbehind, "m:ss");
+                text3 = MythDate::formatTime(secsbehind, "m:ss");
             else
                 text3 = tr("%n second(s)", "", static_cast<int>(secsbehind.count()));
         }

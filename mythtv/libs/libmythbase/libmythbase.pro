@@ -30,7 +30,7 @@ HEADERS += mythbinaryplist.h bswap.h signalhandling.h mythtimezone.h mythdate.h
 HEADERS += mythplugin.h mythpluginapi.h housekeeper.h
 HEADERS += ffmpeg-mmx.h
 HEADERS += mythsystemlegacy.h mythtypes.h
-HEADERS += threadedfilewriter.h mythsingledownload.h codecutil.h
+HEADERS += threadedfilewriter.h mythsingledownload.h stringutil.h
 HEADERS += mythsession.h
 HEADERS += ../../external/qjsonwrapper/qjsonwrapper/Json.h
 HEADERS += cleanupguard.h portchecker.h
@@ -53,7 +53,7 @@ SOURCES += filesysteminfo.cpp hardwareprofile.cpp serverpool.cpp
 SOURCES += mythbinaryplist.cpp signalhandling.cpp mythtimezone.cpp mythdate.cpp
 SOURCES += mythplugin.cpp housekeeper.cpp
 SOURCES += mythsystemlegacy.cpp mythtypes.cpp
-SOURCES += threadedfilewriter.cpp mythsingledownload.cpp codecutil.cpp
+SOURCES += threadedfilewriter.cpp mythsingledownload.cpp stringutil.cpp
 SOURCES += mythsession.cpp
 SOURCES += ../../external/qjsonwrapper/qjsonwrapper/Json.cpp
 SOURCES += cleanupguard.cpp portchecker.cpp
@@ -96,7 +96,7 @@ inc.files += plist.h bswap.h signalhandling.h ffmpeg-mmx.h mythdate.h
 inc.files += mythplugin.h mythpluginapi.h
 inc.files += remotefile.h mythsystemlegacy.h mythtypes.h
 inc.files += threadedfilewriter.h mythsingledownload.h mythsession.h
-inc.files += mythsorthelper.h mythdbcheck.h
+inc.files += mythsorthelper.h mythdbcheck.h stringutil.h
 
 # Allow both #include <blah.h> and #include <libmythbase/blah.h>
 inc2.path  = $${PREFIX}/include/mythtv/libmythbase

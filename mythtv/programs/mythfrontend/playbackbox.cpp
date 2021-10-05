@@ -42,6 +42,7 @@
 #include "mythdb.h"
 #include "mythdate.h"
 #include "tv.h"
+#include "stringutil.h"
 
 #ifdef _MSC_VER
 #  include "compat.h"                   // for random
@@ -4934,14 +4935,14 @@ void PlaybackBox::saveRecMetadata(const QString &newTitle,
         QString episode;
         if (newSeason > 0 || newEpisode > 0)
         {
-            season = format_season_and_episode(newSeason, 1);
-            episode = format_season_and_episode(newEpisode, 1);
+            season  = StringUtil::intToPaddedString(newSeason,  1);
+            episode = StringUtil::intToPaddedString(newEpisode, 1);
             seasone = QString("s%1e%2")
-                .arg(format_season_and_episode(newSeason, 2),
-                     format_season_and_episode(newEpisode, 2));
+                            .arg(StringUtil::intToPaddedString(newSeason,  2),
+                                 StringUtil::intToPaddedString(newEpisode, 2));
             seasonx = QString("%1x%2")
-                .arg(format_season_and_episode(newSeason, 1),
-                     format_season_and_episode(newEpisode, 2));
+                            .arg(StringUtil::intToPaddedString(newSeason,  1),
+                                 StringUtil::intToPaddedString(newEpisode, 2));
         }
 
         item->SetText(tempSubTitle, "titlesubtitle");

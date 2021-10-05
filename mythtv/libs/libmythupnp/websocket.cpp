@@ -7,7 +7,7 @@
 #include "mythlogging.h"
 #include "mythcorecontext.h"
 #include "mythevent.h"
-#include "codecutil.h"
+#include "stringutil.h"
 #include "websocket_extensions/websocket_mythevent.h"
 
 // QT headers
@@ -679,7 +679,7 @@ void WebSocketWorker::HandleDataFrame(const WebSocketFrame &frame)
         switch (frame.m_opCode)
         {
             case WebSocketFrame::kOpTextFrame :
-                if (!CodecUtil::isValidUTF8(frame.m_payload))
+                if (!StringUtil::isValidUTF8(frame.m_payload))
                 {
                     LOG(VB_GENERAL, LOG_ERR, "WebSocketWorker - Message is not valid UTF-8");
                     SendClose(kCloseBadData, "Message is not valid UTF-8");
@@ -751,7 +751,7 @@ void WebSocketWorker::HandleCloseConnection(const QByteArray &payload)
     if (payload.length() > 2)
     {
         QByteArray messageBytes = payload.mid(2);
-        if (!CodecUtil::isValidUTF8(messageBytes))
+        if (!StringUtil::isValidUTF8(messageBytes))
         {
             LOG(VB_GENERAL, LOG_ERR, "WebSocketWorker - Message is not valid UTF-8");
             SendClose(kCloseBadData, "Message is not valid UTF-8");
@@ -863,7 +863,7 @@ bool WebSocketWorker::SendText(const QString &message)
 
 bool WebSocketWorker::SendText(const QByteArray& message)
 {
-    if (!CodecUtil::isValidUTF8(message))
+    if (!StringUtil::isValidUTF8(message))
     {
         LOG(VB_GENERAL, LOG_ERR, QString("WebSocketWorker::SendText('%1...') - "
                                           "Text contains invalid UTF-8 character codes. Discarded.")

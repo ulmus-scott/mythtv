@@ -37,9 +37,6 @@ MBASE_PUBLIC bool getMemStats(
 using loadArray = std::array<double,3>;
 MBASE_PUBLIC loadArray getLoadAvgs(void);
 
-MBASE_PUBLIC bool hasUtf8(const char *str);
-#define M_QSTRING_UNICODE(str) hasUtf8(str) ? QString::fromUtf8(str) : str
-
 MBASE_PUBLIC bool ping(const QString &host, std::chrono::milliseconds timeout);
 MBASE_PUBLIC bool telnet(const QString &host, int port);
 
@@ -55,16 +52,6 @@ MBASE_PUBLIC QString getSymlinkTarget(const QString &start_file,
                                       QStringList   *intermediaries = nullptr,
                                       unsigned       maxLinks       = 255);
 
-MBASE_PUBLIC void wrapList(QStringList &list, int width);
-
-inline float clamp(float val, float minimum, float maximum)
-{
-    return std::min(std::max(val, minimum), maximum);
-}
-inline int   clamp(int val, int minimum, int maximum)
-{
-    return std::min(std::max(val, minimum), maximum);
-}
 inline float lerp(float r, float a, float b)
 {
     return ((1.0F - r) * a) + (r * b);
@@ -75,13 +62,6 @@ inline int   lerp(float r, int a, int b)
 }
 inline float sq(float a) { return a*a; }
 inline int   sq(int   a) { return a*a; }
-
-static inline QString xml_bool_to_string(bool val)
-{
-    return (val) ? "true" : "false";
-}
-
-MBASE_PUBLIC QString xml_indent(uint level);
 
 MBASE_PUBLIC bool IsMACAddress(const QString& MAC);
 MBASE_PUBLIC bool WakeOnLAN(const QString& MAC);
@@ -101,25 +81,6 @@ MBASE_PUBLIC bool myth_ioprio(int val);
 MBASE_PUBLIC bool MythRemoveDirectory(QDir &aDir);
 
 MBASE_PUBLIC void setHttpProxy(void);
-
-MBASE_PUBLIC int naturalCompare(const QString &_a, const QString &_b,
-                                Qt::CaseSensitivity caseSensitivity = Qt::CaseSensitive);
-
-/**
- * \brief Format a milliseconds time value
- *
- * Convert a millisecond time value into a textual representation of the value.
- *
- * \param msecs The time value in milliseconds. Since the type of this
- *     field is std::chrono::duration, any duration of a larger
- *     interval can be passed to this function and the compiler will
- *     convert it to milliseconds.
- *
- * \param fmt A formatting string specifying how to output the time.
- *     See QTime::toString for the a definition fo valid formatting
- *     characters.
- */
-MBASE_PUBLIC QString MythFormatTime(std::chrono::milliseconds msecs, const QString& fmt);
 
 // CPU Tick timing function
 #ifdef MMX
@@ -149,7 +110,5 @@ inline void rdtsc(uint64_t &x)
 #else // if !MMX
 inline void rdtsc(uint64_t &x) { x = 0ULL; }
 #endif // !MMX
-
-MBASE_PUBLIC QStringList MythSplitCommandString(const QString &line);
 
 #endif // MYTHMISCUTIL_H_

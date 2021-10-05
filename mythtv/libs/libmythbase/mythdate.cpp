@@ -206,4 +206,10 @@ std::chrono::seconds secsInFuture (const QDateTime& future)
     return std::chrono::seconds(MythDate::current().secsTo(future));
 }
 
-}; // namespace MythDate
+QString formatTime(std::chrono::milliseconds msecs, const QString& fmt)
+{
+    return QTime::fromMSecsSinceStartOfDay(msecs.count()).toString(fmt);
+}
+
+
+} // namespace MythDate

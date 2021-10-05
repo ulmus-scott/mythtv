@@ -10,7 +10,6 @@
 #include "mpegdescriptors.h"
 #include "pespacket.h"
 #include "mythtvexp.h"
-#include "mythmiscutil.h" // for xml_indent
 
 /** \file mpegtables.h
  *  \code
