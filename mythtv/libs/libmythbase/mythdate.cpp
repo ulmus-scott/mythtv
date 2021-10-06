@@ -1,3 +1,5 @@
+#include "mythdate.h"
+
 #include <array>
 
 #include <QtGlobal>
@@ -6,83 +8,10 @@
 #include <QTimeZone>
 
 #include "mythcorecontext.h"
-#include "mythdate.h"
 #include "stringutil.h"
 
 namespace MythDate
 {
-
-QDateTime current(bool stripped)
-{
-    QDateTime rettime = QDateTime::currentDateTimeUtc();
-    if (stripped)
-        rettime = rettime.addMSecs(-rettime.time().msec());
-    return rettime;
-}
-
-QString current_iso_string(bool stripped)
-{
-    return MythDate::current(stripped).toString(Qt::ISODate);
-}
-
-QDateTime as_utc(const QDateTime &old_dt)
-{
-    QDateTime dt(old_dt);
-#if QT_VERSION < QT_VERSION_CHECK(6,5,0)
-    dt.setTimeSpec(Qt::UTC);
-#else
-    dt.setTimeZone(QTimeZone(QTimeZone::UTC));
-#endif
-    return dt;
-}
-
-QDateTime fromString(const QString &dtstr)
-{
-    QDateTime dt;
-    if (dtstr.isEmpty())
-        return as_utc(dt);
-
-    if (!dtstr.contains("-") && dtstr.length() == 14)
-    {
-        // must be in yyyyMMddhhmmss format
-        dt = QDateTime::fromString(dtstr, "yyyyMMddhhmmss");
-    }
-    else
-    {
-        dt = QDateTime::fromString(dtstr, Qt::ISODate);
-    }
-
-    return as_utc(dt);
-}
-
-MBASE_PUBLIC QDateTime fromString(const QString &str, const QString &format)
-{
-    QDateTime dt = QDateTime::fromString(str, format);
-#if QT_VERSION < QT_VERSION_CHECK(6,5,0)
-    dt.setTimeSpec(Qt::UTC);
-#else
-    dt.setTimeZone(QTimeZone(QTimeZone::UTC));
-#endif
-    return dt;
-}
-
-/**
- *  This function takes the number of seconds since the start of the
- *  epoch and returns a QDateTime with the equivalent value.
- *
- *  Note: This function returns a QDateTime set to UTC, whereas the
- *  QDateTime::fromSecsSinceEpoch function returns a value set to
- *  localtime.
- *
- *  \param seconds  The number of seconds since the start of the epoch
- *                  at Jan 1 1970 at 00:00:00.
- *  \return A QDateTime.
- */
-MBASE_PUBLIC QDateTime fromSecsSinceEpoch(int64_t seconds)
-{
-    QDateTime dt = QDateTime::fromSecsSinceEpoch(seconds);
-    return dt.toUTC();
-}
 
 /** \fn toString(const QDateTime&,uint)
  *  \brief Returns a formatted QString based on the supplied QDateTime
@@ -186,37 +115,6 @@ QString toString(const QDate date, uint format)
     }
 
     return result;
-}
-
-/** \brief Returns the total number of seconds since midnight of the supplied QTime
- *
- *  \param time     The QTime object to use
- */
-std::chrono::seconds toSeconds(QTime time)
-{
-    if (!time.isValid())
-        return 0s;
-
-    std::chrono::seconds nSecs = std::chrono::hours(time.hour());
-    nSecs += std::chrono::minutes(time.minute());
-    nSecs += std::chrono::seconds(time.second());
-
-    return nSecs;
-}
-
-std::chrono::milliseconds currentMSecsSinceEpochAsDuration(void)
-{
-    return std::chrono::milliseconds(QDateTime::currentMSecsSinceEpoch());
-};
-
-std::chrono::seconds secsInPast (const QDateTime& past)
-{
-    return std::chrono::seconds(past.secsTo(MythDate::current()));
-}
-
-std::chrono::seconds secsInFuture (const QDateTime& future)
-{
-    return std::chrono::seconds(MythDate::current().secsTo(future));
 }
 
 /**
