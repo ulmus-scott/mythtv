@@ -1,4 +1,3 @@
-
 #include "stringutil.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(6,0,0)
@@ -6,6 +5,8 @@
 #else
 #include <QStringDecoder>
 #endif
+
+#include "ternarycompare.h"
 
 namespace StringUtil {
 
@@ -159,7 +160,7 @@ int naturalCompare(const QString &_a, const QString &_b, Qt::CaseSensitivity cas
         // compare these sequences
         const QString& subA(a.mid(begSeqA - a.unicode(), currA - begSeqA));
         const QString& subB(b.mid(begSeqB - b.unicode(), currB - begSeqB));
-        const int cmp = QString::localeAwareCompare(subA, subB);
+        int cmp = QString::localeAwareCompare(subA, subB);
 
         if (cmp != 0)
         {
@@ -175,9 +176,10 @@ int naturalCompare(const QString &_a, const QString &_b, Qt::CaseSensitivity cas
         while ((currA->isPunct() || currA->isSpace()) &&
                (currB->isPunct() || currB->isSpace()))
         {
-            if (*currA != *currB)
+            cmp = ternary_compare(*currA, *currB);
+            if (cmp != 0)
             {
-                return (*currA < *currB) ? -1 : +1;
+                return cmp;
             }
             ++currA;
             ++currB;
