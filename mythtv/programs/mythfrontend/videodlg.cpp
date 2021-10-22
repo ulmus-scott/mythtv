@@ -2605,7 +2605,7 @@ void VideoDialog::ToggleProcess()
     if (metadata)
     {
         metadata->SetProcessed(!metadata->GetProcessed());
-        metadata->UpdateDatabase();
+        metadata->SaveToDatabase();
 
         refreshData();
     }
@@ -3220,7 +3220,7 @@ void VideoDialog::customEvent(QEvent *levent)
         {
             dismissFetchDialog(metadata, false);
             metadata->SetProcessed(true);
-            metadata->UpdateDatabase();
+            metadata->SaveToDatabase();
         }
         LOG(VB_GENERAL, LOG_INFO,
             QString("No results found for %1 %2 %3").arg(lookup->GetTitle())
@@ -3264,7 +3264,7 @@ void VideoDialog::OnVideoImageSetDone(VideoMetadata *metadata)
     dismissFetchDialog(metadata, true);
 
     metadata->SetProcessed(true);
-    metadata->UpdateDatabase();
+    metadata->SaveToDatabase();
 
     MythUIButtonListItem *item = GetItemByMetadata(metadata);
     if (item != nullptr)
@@ -3371,7 +3371,7 @@ void VideoDialog::ToggleWatched()
     if (metadata)
     {
         metadata->SetWatched(!metadata->GetWatched());
-        metadata->UpdateDatabase();
+        metadata->SaveToDatabase();
         item->DisplayState(WatchedToState(metadata->GetWatched()),
                                        "watchedstate");
     }
@@ -3418,7 +3418,7 @@ void VideoDialog::OnParentalChange(int amount)
         if (curshowlevel.GetLevel() != metadata->GetShowLevel())
         {
             metadata->SetShowLevel(curshowlevel.GetLevel());
-            metadata->UpdateDatabase();
+            metadata->SaveToDatabase();
             refreshData();
         }
     }
@@ -3504,7 +3504,7 @@ void VideoDialog::ResetMetadata()
     if (metadata)
     {
         metadata->Reset();
-        metadata->UpdateDatabase();
+        metadata->SaveToDatabase();
         UpdateItem(item);
     }
 }
@@ -3699,7 +3699,7 @@ void VideoDialog::OnVideoSearchDone(MetadataLookup *lookup)
     metadata->SetCountries(video_countries);
     metadata->SetProcessed(true);
 
-    metadata->UpdateDatabase();
+    metadata->SaveToDatabase();
 
     MythUIButtonListItem *item = GetItemByMetadata(metadata);
     if (item != nullptr)

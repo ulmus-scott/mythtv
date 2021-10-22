@@ -354,7 +354,7 @@ bool Video::AddVideo( const QString &sFileName,
                           VIDEO_BANNER_DEFAULT,
                           VIDEO_FANART_DEFAULT,
                           QString(), QString(), QString(), QString(),
-                          QString(), VIDEO_YEAR_DEFAULT,
+                          QString(), VideoMetadata::k_DefaultYear,
                           QDate::fromString("0000-00-00","YYYY-MM-DD"),
                           VIDEO_INETREF_DEFAULT, 0, QString(),
                           VIDEO_DIRECTOR_DEFAULT, QString(), VIDEO_PLOT_DEFAULT,
@@ -386,7 +386,7 @@ bool Video::UpdateVideoWatchedStatus ( int  nId,
         return false;
 
     metadata->SetWatched(bWatched);
-    metadata->UpdateDatabase();
+    metadata->SaveToDatabase();
 
     return true;
 }
@@ -782,7 +782,7 @@ bool Video::UpdateVideoMetadata ( int           nId,
     }
 
     if (update_required)
-        metadata->UpdateDatabase();
+        metadata->SaveToDatabase();
 
     return true;
 }
