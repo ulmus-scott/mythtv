@@ -344,7 +344,7 @@ bool VideoScannerThread::updateDB(const FileCheckList &add, const PurgeList &rem
                     VIDEO_FANART_DEFAULT,
                     QString(), QString(), QString(), QString(),
                     QString(),
-                    VIDEO_YEAR_DEFAULT,
+                    VideoMetadata::k_DefaultYear,
                     QDate::fromString("0000-00-00","YYYY-MM-DD"),
                     VIDEO_INETREF_DEFAULT, 0, QString(),
                     VIDEO_DIRECTOR_DEFAULT, QString(), VIDEO_PLOT_DEFAULT,

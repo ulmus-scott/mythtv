@@ -528,7 +528,7 @@ void EditMetadataDialog::AddCategory(const QString& category)
 void EditMetadataDialog::SaveAndExit()
 {
     *m_origMetadata = *m_workingMetadata;
-    m_origMetadata->UpdateDatabase();
+    m_origMetadata->SaveToDatabase();
 
     emit Finished();
     Close();

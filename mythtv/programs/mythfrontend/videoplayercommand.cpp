@@ -298,7 +298,7 @@ class VideoPlayerCommandPrivate
         int episode = 0;
         QString inetref;
         std::chrono::minutes length = 0min;
-        QString year = QString::number(VIDEO_YEAR_DEFAULT);
+        QString year = QString::number(VideoMetadata::k_DefaultYear);
         QString id;
 
         if (extraData)

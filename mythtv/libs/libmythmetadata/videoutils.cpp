@@ -199,7 +199,7 @@ QString GetDisplayProcessed(bool processed)
 
 QString GetDisplayYear(int year)
 {
-    return year == VIDEO_YEAR_DEFAULT ? "?" : QString::number(year);
+    return year == VideoMetadata::k_DefaultYear ? QStringLiteral("?") : QString::number(year);
 }
 
 QString GetDisplayRating(const QString &rating)

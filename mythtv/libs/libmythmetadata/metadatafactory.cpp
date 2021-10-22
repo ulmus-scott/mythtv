@@ -399,7 +399,7 @@ void MetadataFactory::OnVideoResult(MetadataLookup *lookup)
 
     if (metadata->GetTagline().isEmpty())
         metadata->SetTagline(lookup->GetTagline());
-    if (metadata->GetYear() == VIDEO_YEAR_DEFAULT || metadata->GetYear() == 0)
+    if (metadata->GetYear() == VideoMetadata::k_DefaultYear || metadata->GetYear() == 0)
         metadata->SetYear(lookup->GetYear());
     if (metadata->GetReleaseDate() == QDate())
         metadata->SetReleaseDate(lookup->GetReleaseDate());
@@ -509,7 +509,7 @@ void MetadataFactory::OnVideoResult(MetadataLookup *lookup)
         metadata->SetScreenshot(sshoturl.path().remove(0,1));
 
     metadata->SetProcessed(true);
-    metadata->UpdateDatabase();
+    metadata->SaveToDatabase();
 
     if (gCoreContext->HasGUI() && parent())
     {

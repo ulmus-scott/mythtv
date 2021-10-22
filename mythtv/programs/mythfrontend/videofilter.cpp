@@ -257,7 +257,7 @@ bool VideoFilterSettings::matches_filter(const VideoMetadata &mdata) const
         if (m_year == kYearFilterUnknown)
         {
             matches = ((mdata.GetYear() == 0) ||
-                       (mdata.GetYear() == VIDEO_YEAR_DEFAULT));
+                       (mdata.GetYear() == VideoMetadata::k_DefaultYear));
         }
         else
         {
@@ -511,7 +511,7 @@ void VideoFilterDialog::fillWidgets()
     for (const auto & md : mdl)
     {
         int year = md->GetYear();
-        if ((year == 0) || (year == VIDEO_YEAR_DEFAULT))
+        if ((year == 0) || (year == VideoMetadata::k_DefaultYear))
             have_unknown_year = true;
         else
             years.insert(year);
