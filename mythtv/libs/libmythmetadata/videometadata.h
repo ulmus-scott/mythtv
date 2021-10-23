@@ -35,7 +35,6 @@ class META_PUBLIC VideoMetadata
                                     const QString &host);
     static QString VideoFileHash(const QString &file_name, const QString &host);
     static QString FilenameToMeta(const QString &file_name, int position);
-    static QString TrimTitle(const QString &title, bool ignore_case);
 
     explicit VideoMetadata(QString filename = QString(),
              QString sortFilename = QString(),
@@ -99,7 +98,7 @@ class META_PUBLIC VideoMetadata
     static QString MetadataGetStateCb(const QString& name, void *data);
 
     const QString &GetPrefix() const { return m_prefix; }
-    void SetPrefix(const QString &prefix) { m_prefix = prefix; }
+    void SetPrefix(QString prefix) { m_prefix = std::move(prefix); }
 
     const QString &GetTitle() const { return m_title; }
     const QString &GetSortTitle() const { return m_sortTitle; }
@@ -112,15 +111,15 @@ class META_PUBLIC VideoMetadata
 
     const QString &GetSubtitle() const { return m_subtitle; }
     const QString &GetSortSubtitle() const { return m_sortSubtitle; }
-    void SetSubtitle(const QString &subtitle, const QString &sortSubtitle = "")
+    void SetSubtitle(QString subtitle, QString sortSubtitle = "")
     {
-        m_subtitle = subtitle;
-        m_sortSubtitle = sortSubtitle;
+        m_subtitle = std::move(subtitle);
+        m_sortSubtitle = std::move(sortSubtitle);
         ensureSortFields();
     }
 
     const QString &GetTagline() const { return m_tagline; }
-    void SetTagline(const QString &tagline) { m_tagline = tagline; }
+    void SetTagline(QString tagline) { m_tagline = std::move(tagline); }
 
     int GetYear() const { return m_year; }
     void SetYear(int year) { m_year = year; }
@@ -129,25 +128,25 @@ class META_PUBLIC VideoMetadata
     void SetReleaseDate(QDate releasedate) { m_releasedate = releasedate; }
 
     const QString &GetInetRef() const { return m_inetref; }
-    void SetInetRef(const QString &inetRef) { m_inetref = inetRef; }
+    void SetInetRef(QString inetRef) { m_inetref = std::move(inetRef); }
 
     int GetCollectionRef() const { return m_collectionref; }
     void SetCollectionRef(int collectionref) { m_collectionref = collectionref; }
 
     const QString &GetHomepage() const { return m_homepage; }
-    void SetHomepage(const QString &homepage) { m_homepage = homepage; }
+    void SetHomepage(QString homepage) { m_homepage = std::move(homepage); }
 
     const QString &GetDirector() const { return m_director; }
-    void SetDirector(const QString &director) { m_director = director; }
+    void SetDirector(QString director) { m_director = std::move(director); }
 
     const QString &GetStudio() const { return m_studio; }
-    void SetStudio(const QString &studio) { m_studio = studio; }
+    void SetStudio(QString studio) { m_studio = std::move(studio); }
 
     const QString &GetPlot() const { return m_plot; }
-    void SetPlot(const QString &plot) { m_plot = plot; }
+    void SetPlot(QString plot) { m_plot = std::move(plot); }
 
     const QString &GetRating() const { return m_rating; }
-    void SetRating(const QString &rating) { m_rating = rating; }
+    void SetRating(QString rating) { m_rating = std::move(rating); }
 
     float GetUserRating() const { return m_userrating; }
     void SetUserRating(float userRating) { m_userrating = userRating; }
@@ -183,9 +182,9 @@ class META_PUBLIC VideoMetadata
     void SetContentType(VideoContentType contenttype) { m_contenttype = contenttype; }
 
     const QString &GetPlayCommand() const { return m_playcommand; }
-    void SetPlayCommand(const QString &playCommand)
+    void SetPlayCommand(QString playCommand)
     {
-        m_playcommand = playCommand;
+        m_playcommand = std::move(playCommand);
     }
 
     unsigned int GetPlayCount() const { return m_playcount; }
@@ -198,49 +197,49 @@ class META_PUBLIC VideoMetadata
     }
 
     const QString &GetHost() const { return m_host; }
-    void SetHost(const QString &host) { m_host = host; }
+    void SetHost(QString host) { m_host = std::move(host); }
 
     const QString &GetFilename() const { return m_filename; }
     const QString &GetSortFilename() const { return m_sortFilename; }
-    void SetFilename(const QString &filename, const QString &sortFilename = "")
+    void SetFilename(QString filename, QString sortFilename = "")
     {
-        m_filename = filename;
-        m_sortFilename = sortFilename;
+        m_filename = std::move(filename);
+        m_sortFilename = std::move(sortFilename);
         ensureSortFields();
     }
 
     const QString &GetHash() const { return m_hash; }
-    void SetHash(const QString &hash) { m_hash = hash; }
+    void SetHash(QString hash) { m_hash = std::move(hash); }
 
     const QString &GetTrailer() const { return m_trailer; }
-    void SetTrailer(const QString &trailer) { m_trailer = trailer; }
+    void SetTrailer(QString trailer) { m_trailer = std::move(trailer); }
 
     const QString &GetCoverFile() const { return m_coverfile; }
-    void SetCoverFile(const QString &coverFile) { m_coverfile = coverFile; }
+    void SetCoverFile(QString coverFile) { m_coverfile = std::move(coverFile); }
 
     const QString &GetScreenshot() const { return m_screenshot; }
-    void SetScreenshot(const QString &screenshot) { m_screenshot = screenshot; }
+    void SetScreenshot(QString screenshot) { m_screenshot = std::move(screenshot); }
 
     const QString &GetBanner() const { return m_banner; }
-    void SetBanner(const QString &banner) { m_banner = banner; }
+    void SetBanner(QString banner) { m_banner = std::move(banner); }
 
     const QString &GetFanart() const { return m_fanart; }
-    void SetFanart(const QString &fanart) { m_fanart = fanart; }
+    void SetFanart(QString fanart) { m_fanart = std::move(fanart); }
 
     const QString &GetCategory() const { return m_category; }
-//    void SetCategory(const QString &category) { m_category = category; }
+//    void SetCategory(QString category) { m_category = std::move(category); }
 
     const genre_list &GetGenres() const { return m_genres; }
-    void SetGenres(const genre_list &genres) { m_genres = genres; }
+    void SetGenres(genre_list genres) { m_genres = std::move(genres); }
 
     const country_list &GetCountries() const { return m_countries; }
-    void SetCountries(const country_list &countries)
+    void SetCountries(country_list countries)
     {
-        m_countries = countries;
+        m_countries = std::move(countries);
     }
 
     const cast_list &GetCast() const { return m_cast; }
-    void SetCast(const cast_list &cast) { m_cast = cast; }
+    void SetCast(cast_list cast) { m_cast = std::move(cast); }
 
     int GetCategoryID() const
     {
