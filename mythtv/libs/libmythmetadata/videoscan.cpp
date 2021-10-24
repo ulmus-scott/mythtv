@@ -24,7 +24,6 @@
 // libmythmetadata
 #include "videometadatalistmanager.h"
 #include "videoutils.h"
-#include "globals.h"
 #include "dbaccess.h"
 #include "dirscan.h"
 
@@ -234,19 +233,12 @@ void VideoScannerThread::run()
 
 
 void VideoScannerThread::removeOrphans(unsigned int id,
-                                       const QString &filename)
+                                       const QString& /*filename*/)
 {
-    (void) filename;
-
     // TODO: use single DB connection for all calls
-    if (m_removeAll)
-        m_dbMetadata->purgeByID(id);
-
-    if (!m_keepAll && !m_removeAll)
-    {
-        m_removeAll = true;
-        m_dbMetadata->purgeByID(id);
-    }
+    // m_removeAll = m_removeAll || (!m_keepAll && !m_removeAll);
+    m_removeAll = m_removeAll || !m_keepAll;
+    m_dbMetadata->purgeByID(id);
 }
 
 void VideoScannerThread::verifyFiles(FileCheckList &files,
@@ -343,23 +335,8 @@ bool VideoScannerThread::updateDB(const FileCheckList &add, const PurgeList &rem
             }
             if (id == -1)
             {
-                VideoMetadata newFile(
-                    p->first, QString(), hash,
-                    VIDEO_TRAILER_DEFAULT,
-                    VIDEO_COVERFILE_DEFAULT,
-                    VIDEO_SCREENSHOT_DEFAULT,
-                    VIDEO_BANNER_DEFAULT,
-                    VIDEO_FANART_DEFAULT,
-                    QString(), QString(), QString(), QString(),
-                    QString(),
-                    VideoMetadata::k_DefaultYear,
-                    QDate::fromString("0000-00-00","YYYY-MM-DD"),
-                    VIDEO_INETREF_DEFAULT, 0, QString(),
-                    VIDEO_DIRECTOR_DEFAULT, QString(), VIDEO_PLOT_DEFAULT,
-                    0.0, VIDEO_RATING_DEFAULT, 0, 0,
-                    0, 0,
-                    MythDate::current().date(),
-                    0, ParentalLevel::plLowest);
+                VideoMetadata newFile(p->first, QString(), hash);
+                newFile.SetInsertdate(MythDate::current().date());
 
                 LOG(VB_GENERAL, LOG_INFO, QString("Adding : %1 : %2 : %3")
                     .arg(newFile.GetHost(), newFile.GetFilename(), hash));

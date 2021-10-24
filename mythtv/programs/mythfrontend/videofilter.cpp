@@ -7,7 +7,6 @@
 #include "mythuitext.h"
 #include "mythuitextedit.h"
 #include "stringutil.h"
-#include "globals.h"
 #include "dbaccess.h"
 #include "videometadatalistmanager.h"
 #include "videoutils.h"
@@ -295,7 +294,7 @@ bool VideoFilterSettings::matches_filter(const VideoMetadata &mdata) const
 
     if (matches && m_inetRef != kInetRefFilterAll)
     {
-        matches = (mdata.GetInetRef() == VIDEO_INETREF_DEFAULT);
+        matches = (mdata.GetInetRef() == k_VideoMetadata::Default::inetref);
     }
 
     if (matches && m_coverFile != kCoverFileFilterAll)
@@ -538,7 +537,7 @@ void VideoFilterDialog::fillWidgets()
     for (const auto & vc : vcl)
         new MythUIButtonListItem(m_categoryList, vc.second, vc.first);
 
-    new MythUIButtonListItem(m_categoryList, VIDEO_CATEGORY_UNKNOWN,
+    new MythUIButtonListItem(m_categoryList, k_VideoMetadata::Unknown::category,
                            kCategoryFilterUnknown);
     m_categoryList->SetValueByData(m_settings.GetCategory());
 
@@ -549,7 +548,7 @@ void VideoFilterDialog::fillWidgets()
     for (const auto & g : gl)
         new MythUIButtonListItem(m_genreList, g.second, g.first);
 
-    new MythUIButtonListItem(m_genreList, VIDEO_GENRE_UNKNOWN, kGenreFilterUnknown);
+    new MythUIButtonListItem(m_genreList, k_VideoMetadata::Unknown::genre, kGenreFilterUnknown);
     m_genreList->SetValueByData(m_settings.getGenre());
 
     // Cast
@@ -559,7 +558,7 @@ void VideoFilterDialog::fillWidgets()
     for (const auto & c : cl)
         new MythUIButtonListItem(m_castList, c.second, c.first);
 
-    new MythUIButtonListItem(m_castList, VIDEO_CAST_UNKNOWN, kCastFilterUnknown);
+    new MythUIButtonListItem(m_castList, k_VideoMetadata::Unknown::cast, kCastFilterUnknown);
     m_castList->SetValueByData(m_settings.GetCast());
 
     // Country
@@ -569,7 +568,7 @@ void VideoFilterDialog::fillWidgets()
     for (const auto & cn : cnl)
         new MythUIButtonListItem(m_countryList, cn.second, cn.first);
 
-    new MythUIButtonListItem(m_countryList, VIDEO_COUNTRY_UNKNOWN,
+    new MythUIButtonListItem(m_countryList, k_VideoMetadata::Unknown::country,
                            kCountryFilterUnknown);
     m_countryList->SetValueByData(m_settings.getCountry());
 
@@ -582,7 +581,7 @@ void VideoFilterDialog::fillWidgets()
     }
 
     if (have_unknown_year)
-        new MythUIButtonListItem(m_yearList, VIDEO_YEAR_UNKNOWN,
+        new MythUIButtonListItem(m_yearList, k_VideoMetadata::Unknown::year,
                                kYearFilterUnknown);
 
     m_yearList->SetValueByData(m_settings.getYear());
@@ -591,7 +590,7 @@ void VideoFilterDialog::fillWidgets()
     new MythUIButtonListItem(m_runtimeList, tr("All", "Runtime"), kRuntimeFilterAll);
 
     if (have_unknown_runtime)
-        new MythUIButtonListItem(m_runtimeList, VIDEO_RUNTIME_UNKNOWN,
+        new MythUIButtonListItem(m_runtimeList, k_VideoMetadata::Unknown::runtime,
                                kRuntimeFilterUnknown);
 
     for (int runtime : runtimes)

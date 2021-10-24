@@ -310,3 +310,9 @@ QString GetFontsDir(void)
 {
     return GetShareDir() + "fonts/";
 }
+
+#ifdef Q_OS_MAC
+const QString k_VideoStartupDirDefault = QDir::homePath() + "/Movies";
+#else
+const QString k_VideoStartupDirDefault = "/share/Movies/dvd";
+#endif

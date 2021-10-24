@@ -4,7 +4,6 @@
 #include <QDir>
 
 #include "mythdirs.h"
-#include "globals.h"
 
 #include "videodlg.h"
 #include "videoglobalsettings.h"
@@ -105,7 +104,7 @@ HostTextEditSetting *VideoStartupDirectory()
 
     gc->setLabel(VideoGeneralSettings::tr("Directories that hold videos"));
 
-    gc->setValue(DEFAULT_VIDEOSTARTUP_DIR);
+    gc->setValue(k_VideoStartupDirDefault);
 
     gc->setHelpText(VideoGeneralSettings::tr("Multiple directories can be "
                                              "separated by ':'. Each "

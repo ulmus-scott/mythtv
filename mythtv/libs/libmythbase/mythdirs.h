@@ -27,4 +27,6 @@
  MBASE_PUBLIC  QString FindTranslation(const QString &translation);
  MBASE_PUBLIC  QString GetFontsDir(void);
 
+MBASE_PUBLIC extern const QString k_VideoStartupDirDefault;
+
 #endif

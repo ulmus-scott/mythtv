@@ -21,7 +21,6 @@
 #include "mythprogressdialog.h"
 #include "stringutil.h"
 #include "remoteutil.h"
-#include "globals.h"
 #include "dbaccess.h"
 #include "videometadatalistmanager.h"
 #include "videoutils.h"
@@ -320,7 +319,7 @@ void EditMetadataDialog::fillWidgets()
 
     // No memory leak. MythUIButtonListItem adds the new item into
     // m_categoryList.
-    new MythUIButtonListItem(m_categoryList, VIDEO_CATEGORY_UNKNOWN);
+    new MythUIButtonListItem(m_categoryList, k_VideoMetadata::Unknown::category);
     const VideoCategory::entry_list &vcl =
             VideoCategory::GetCategory().getList();
     for (const auto & vc : vcl)

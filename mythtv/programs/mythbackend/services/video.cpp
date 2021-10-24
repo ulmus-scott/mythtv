@@ -40,7 +40,6 @@
 #include "mythcorecontext.h"
 #include "storagegroup.h"
 #include "remotefile.h"
-#include "globals.h"
 #include "mythdate.h"
 #include "serviceUtil.h"
 #include "mythmiscutil.h"
@@ -347,22 +346,8 @@ bool Video::AddVideo( const QString &sFileName,
         hash = "";
     }
 
-    VideoMetadata newFile(sFileName, QString(), hash,
-                          VIDEO_TRAILER_DEFAULT,
-                          VIDEO_COVERFILE_DEFAULT,
-                          VIDEO_SCREENSHOT_DEFAULT,
-                          VIDEO_BANNER_DEFAULT,
-                          VIDEO_FANART_DEFAULT,
-                          QString(), QString(), QString(), QString(),
-                          QString(), VideoMetadata::k_DefaultYear,
-                          QDate::fromString("0000-00-00","YYYY-MM-DD"),
-                          VIDEO_INETREF_DEFAULT, 0, QString(),
-                          VIDEO_DIRECTOR_DEFAULT, QString(), VIDEO_PLOT_DEFAULT,
-                          0.0, VIDEO_RATING_DEFAULT, 0, 0,
-                          0, 0,
-                          MythDate::current().date(), 0,
-                          ParentalLevel::plLowest);
-
+    VideoMetadata newFile(sFileName, QString(), hash);
+    newFile.SetInsertdate(MythDate::current().date());
     newFile.SetHost(sHostName);
     newFile.SaveToDatabase();
 

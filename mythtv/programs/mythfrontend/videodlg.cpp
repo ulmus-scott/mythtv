@@ -33,7 +33,6 @@
 #include "storagegroup.h"
 
 #include "videoscan.h"
-#include "globals.h"
 #include "videometadatalistmanager.h"
 #include "parentalcontrols.h"
 #include "videoutils.h"
@@ -1704,7 +1703,7 @@ QString VideoDialog::GetFirstImage(MythGenericTree *node, const QString& type,
                         test_file = metadata->GetFanart();
 
                     if (!test_file.endsWith("/") && !test_file.isEmpty() &&
-                        test_file != VIDEO_FANART_DEFAULT && (gpnode.isEmpty() ||
+                        test_file != k_VideoMetadata::Default::fanart && (gpnode.isEmpty() ||
                         (QString::compare(gpnode, title, Qt::CaseInsensitive) == 0)))
                     {
                         icon_file = test_file;
@@ -1721,7 +1720,7 @@ QString VideoDialog::GetFirstImage(MythGenericTree *node, const QString& type,
                         test_file = metadata->GetBanner();
 
                     if (!test_file.endsWith("/") && !test_file.isEmpty() &&
-                        test_file != VIDEO_BANNER_DEFAULT && (gpnode.isEmpty() ||
+                        test_file != k_VideoMetadata::Default::banner && (gpnode.isEmpty() ||
                         (QString::compare(gpnode, title, Qt::CaseInsensitive) == 0)))
                     {
                         icon_file = test_file;
@@ -1738,7 +1737,7 @@ QString VideoDialog::GetFirstImage(MythGenericTree *node, const QString& type,
                         test_file = metadata->GetScreenshot();
 
                     if (!test_file.endsWith("/") && !test_file.isEmpty() &&
-                       test_file != VIDEO_SCREENSHOT_DEFAULT && (gpnode.isEmpty() ||
+                       test_file != k_VideoMetadata::Default::screenshot && (gpnode.isEmpty() ||
                        (QString::compare(gpnode, title, Qt::CaseInsensitive) == 0)))
                     {
                         icon_file = test_file;
@@ -1781,7 +1780,7 @@ QString VideoDialog::GetScreenshot(MythGenericTree *node)
 
     if (nodeInt  == kSubFolder || nodeInt == kUpFolder)  // subdirectory
     {
-        icon_file = VIDEO_SCREENSHOT_DEFAULT;
+        icon_file = k_VideoMetadata::Default::screenshot;
     }
     else
     {
@@ -3607,7 +3606,7 @@ void VideoDialog::OnVideoSearchDone(MetadataLookup *lookup)
         metadata->SetYear(lookup->GetYear());
     if (metadata->GetReleaseDate() == QDate())
         metadata->SetReleaseDate(lookup->GetReleaseDate());
-    if (metadata->GetDirector() == VIDEO_DIRECTOR_UNKNOWN ||
+    if (metadata->GetDirector() == k_VideoMetadata::Unknown::director ||
         metadata->GetDirector().isEmpty())
     {
         QList<PersonInfo> director = lookup->GetPeople(kPersonDirector);
@@ -3620,12 +3619,12 @@ void VideoDialog::OnVideoSearchDone(MetadataLookup *lookup)
         if (studios.count() > 0)
             metadata->SetStudio(studios.takeFirst());
     }
-    if (metadata->GetPlot() == VIDEO_PLOT_DEFAULT ||
+    if (metadata->GetPlot() == k_VideoMetadata::Default::plot ||
         metadata->GetPlot().isEmpty())
         metadata->SetPlot(lookup->GetDescription());
     if (metadata->GetUserRating() == 0)
         metadata->SetUserRating(lookup->GetUserRating());
-    if (metadata->GetRating() == VIDEO_RATING_DEFAULT)
+    if (metadata->GetRating() == k_VideoMetadata::Default::rating)
         metadata->SetRating(lookup->GetCertification());
     if (metadata->GetLength() == 0min)
         metadata->SetLength(lookup->GetRuntime());
