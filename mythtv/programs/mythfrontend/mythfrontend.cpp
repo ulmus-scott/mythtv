@@ -65,7 +65,6 @@
 #include "libmythbase/remoteutil.h"
 #include "libmythbase/signalhandling.h"
 #include "libmythmetadata/cleanup.h"
-#include "libmythmetadata/globals.h"
 #include "libmythtv/channelutil.h"
 #include "libmythtv/dbcheck.h"
 #include "libmythtv/mythsystemevent.h"
@@ -357,7 +356,15 @@ namespace
             g_settingsHelper = nullptr;
         }
     }
-}
+
+const QString JUMP_VIDEO_MANAGER   = "Video Manager";
+const QString JUMP_VIDEO_BROWSER   = "Video Browser";
+const QString JUMP_VIDEO_TREE      = "Video Listings";
+const QString JUMP_VIDEO_GALLERY   = "Video Gallery";
+const QString JUMP_VIDEO_DEFAULT   = "Video Default";
+
+const QString JUMP_GALLERY_DEFAULT = "Gallery Default";
+} // anonymous namespace
 
 static void startAppearWiz(void)
 {

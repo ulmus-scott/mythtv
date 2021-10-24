@@ -13,7 +13,6 @@
 #include "libmythbase/storagegroup.h"
 #include "libmythbase/stringutil.h"
 #include "libmythmetadata/dbaccess.h"
-#include "libmythmetadata/globals.h"
 #include "libmythmetadata/metadatafactory.h"
 #include "libmythmetadata/mythuiimageresults.h"
 #include "libmythmetadata/videometadatalistmanager.h"
@@ -328,7 +327,7 @@ void EditMetadataDialog::fillWidgets()
 
     // No memory leak. MythUIButtonListItem adds the new item into
     // m_categoryList.
-    new MythUIButtonListItem(m_categoryList, VIDEO_CATEGORY_UNKNOWN);
+    new MythUIButtonListItem(m_categoryList, k_VideoMetadata::Unknown::category);
     const VideoCategory::entry_list &vcl =
             VideoCategory::GetCategory().getList();
     for (const auto & vc : vcl)

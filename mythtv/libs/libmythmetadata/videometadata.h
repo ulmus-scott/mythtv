@@ -17,6 +17,46 @@ class VideoMetadataListManager;
 
 using MetadataMap = QHash<QString,QString>;
 
+namespace META_PUBLIC k_VideoMetadata
+{
+    namespace Unknown
+    {
+        inline const QString category = QCoreApplication::translate("(Globals)",
+                                                   "Unknown", "Unknown video category");
+        inline const QString director = QCoreApplication::translate("(Globals)",
+                                                   "Unknown", "Unknown video director");
+        inline const QString genre    = QCoreApplication::translate("(Globals)",
+                                                   "Unknown", "Unknown video genre");
+        inline const QString country  = QCoreApplication::translate("(Globals)",
+                                                   "Unknown", "Unknown video country");
+        inline const QString year     = QCoreApplication::translate("(Globals)",
+                                                   "Unknown", "Unknown video year");
+        inline const QString runtime  = QCoreApplication::translate("(Globals)",
+                                                   "Unknown", "Unknown video runtime");
+        inline const QString cast     = QCoreApplication::translate("(Globals)",
+                                                   "Unknown", "Unknown video cast");
+    }
+
+    namespace Default
+    {
+        inline const QString category = Unknown::category;
+        inline const QString director = Unknown::director;
+        inline const QString inetref  = QStringLiteral("00000000");
+        inline const QString coverfile;
+        inline const QString trailer;
+        inline const QString screenshot;
+        inline const QString banner;
+        inline const QString fanart;
+        inline const QString rating = QCoreApplication::translate("(Globals)",
+                                                 "NR", "Default video rating");
+        inline const QString plot   = QCoreApplication::translate("(Globals)",
+                                                 "None", "Default video plot");
+        inline const QString cast   = Unknown::cast;
+
+        constexpr int year = 1895;
+    }
+} // k_VideoMetadata
+
 class META_PUBLIC VideoMetadata
 {
     Q_DECLARE_TR_FUNCTIONS(VideoMetadata);

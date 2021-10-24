@@ -16,14 +16,13 @@
 #include "libmythui/mythuitext.h"
 
 // libmythmetadata
-#include "globals.h"
 #include "videometadatalistmanager.h"
 
 namespace
 {
-    const QString VIDEO_COVERFILE_DEFAULT_OLD = 
+    const QString k_VideoDefaultCoverfileOld =
         QCoreApplication::translate("(VideoUtils)", "None", "No cover");
-    const QString VIDEO_COVERFILE_DEFAULT_OLD2 = 
+    const QString k_VideoDefaultCoverfileOld2 =
         QCoreApplication::translate("(VideoUtils)", "No Cover");
 
     template <typename T>
@@ -89,7 +88,7 @@ QStringList GetVideoDirsByHost(const QString& host)
         QString seperator = ":";
 #endif
         QStringList tmp3 = gCoreContext->GetSetting("VideoStartupDir",
-                    DEFAULT_VIDEOSTARTUP_DIR).split(seperator, Qt::SkipEmptyParts);
+                    k_VideoStartupDirDefault).split(seperator, Qt::SkipEmptyParts);
         for (const auto& dir : std::as_const(tmp3))
         {
             bool matches = false;
@@ -120,26 +119,26 @@ QStringList GetVideoDirs()
 
 bool IsDefaultCoverFile(const QString &coverfile)
 {
-    return coverfile == VIDEO_COVERFILE_DEFAULT ||
-            coverfile == VIDEO_COVERFILE_DEFAULT_OLD ||
-            coverfile == VIDEO_COVERFILE_DEFAULT_OLD2 ||
-            coverfile.endsWith(VIDEO_COVERFILE_DEFAULT_OLD) ||
-            coverfile.endsWith(VIDEO_COVERFILE_DEFAULT_OLD2);
+    return coverfile == k_VideoMetadata::Default::coverfile ||
+            coverfile == k_VideoDefaultCoverfileOld ||
+            coverfile == k_VideoDefaultCoverfileOld2 ||
+            coverfile.endsWith(k_VideoDefaultCoverfileOld) ||
+            coverfile.endsWith(k_VideoDefaultCoverfileOld2);
 }
 
 bool IsDefaultScreenshot(const QString &screenshot)
 {
-    return screenshot == VIDEO_SCREENSHOT_DEFAULT;
+    return screenshot == k_VideoMetadata::Default::screenshot;
 }
 
 bool IsDefaultBanner(const QString &banner)
 {
-    return banner == VIDEO_BANNER_DEFAULT;
+    return banner == k_VideoMetadata::Default::banner;
 }
 
 bool IsDefaultFanart(const QString &fanart)
 {
-    return fanart == VIDEO_FANART_DEFAULT;
+    return fanart == k_VideoMetadata::Default::fanart;
 }
 
 QString GetDisplayUserRating(float userrating)
@@ -199,7 +198,7 @@ QString GetDisplayProcessed(bool processed)
 
 QString GetDisplayYear(int year)
 {
-    return year == VideoMetadata::k_DefaultYear ? QStringLiteral("?") : QString::number(year);
+    return year == k_VideoMetadata::Default::year ? QStringLiteral("?") : QString::number(year);
 }
 
 QString GetDisplayRating(const QString &rating)

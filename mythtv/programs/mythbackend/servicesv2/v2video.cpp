@@ -9,7 +9,6 @@
 #include "libmythbase/programinfo.h"
 #include "libmythbase/storagegroup.h"
 #include "libmythmetadata/bluraymetadata.h"
-#include "libmythmetadata/globals.h"
 #include "libmythmetadata/metadatafactory.h"
 #include "libmythmetadata/videometadata.h"
 #include "libmythtv/mythavutil.h"
@@ -572,17 +571,17 @@ bool V2Video::AddVideo( const QString &sFileName,
     }
 
     VideoMetadata newFile(sFileName, QString(), hash,
-                          VIDEO_TRAILER_DEFAULT,
-                          VIDEO_COVERFILE_DEFAULT,
-                          VIDEO_SCREENSHOT_DEFAULT,
-                          VIDEO_BANNER_DEFAULT,
-                          VIDEO_FANART_DEFAULT,
+                          k_VideoMetadata::Default::trailer,
+                          k_VideoMetadata::Default::coverfile,
+                          k_VideoMetadata::Default::screenshot,
+                          k_VideoMetadata::Default::banner,
+                          k_VideoMetadata::Default::fanart,
                           QString(), QString(), QString(), QString(),
-                          QString(), VideoMetadata::k_DefaultYear,
+                          QString(), k_VideoMetadata::Default::year,
                           QDate::fromString("0000-00-00","YYYY-MM-DD"),
-                          VIDEO_INETREF_DEFAULT, 0, QString(),
-                          VIDEO_DIRECTOR_DEFAULT, QString(), VIDEO_PLOT_DEFAULT,
-                          0.0, VIDEO_RATING_DEFAULT, 0, 0,
+                          k_VideoMetadata::Default::inetref, 0, QString(),
+                          k_VideoMetadata::Default::director, QString(), k_VideoMetadata::Default::plot,
+                          0.0, k_VideoMetadata::Default::rating, 0, 0,
                           0, 0,
                           MythDate::current().date(), 0,
                           ParentalLevel::plLowest);

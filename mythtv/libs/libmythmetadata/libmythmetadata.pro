@@ -14,7 +14,7 @@ QMAKE_CLEAN += version.cpp
 
 # Input
 
-HEADERS += cleanup.h  dbaccess.h  dirscan.h  globals.h  parentalcontrols.h
+HEADERS += cleanup.h  dbaccess.h  dirscan.h  parentalcontrols.h
 HEADERS += videoscan.h  videoutils.h  videometadata.h  videometadatalistmanager.h
 HEADERS += quicksp.h metadatacommon.h metadatadownload.h metadataimagedownload.h
 HEADERS += bluraymetadata.h mythmetaexp.h metadatafactory.h mythuimetadataresults.h
@@ -25,7 +25,7 @@ HEADERS += metaiowavpack.h metaioid3.h metaiooggvorbis.h
 HEADERS += imagetypes.h imagemetadata.h imagethumbs.h imagescanner.h imagemanager.h
 HEADERS += musicfilescanner.h metadatagrabber.h lyricsdata.h
 
-SOURCES += cleanup.cpp  dbaccess.cpp  dirscan.cpp  globals.cpp
+SOURCES += cleanup.cpp  dbaccess.cpp  dirscan.cpp
 SOURCES += parentalcontrols.cpp  videoscan.cpp  videoutils.cpp
 SOURCES += videometadata.cpp  videometadatalistmanager.cpp
 SOURCES += metadatacommon.cpp metadatadownload.cpp metadataimagedownload.cpp
@@ -93,7 +93,7 @@ win32-msvc* {
 
 inc.path = $${PREFIX}/include/mythtv/libmythmetadata/
 
-inc.files = cleanup.h  dbaccess.h  dirscan.h  globals.h  parentalcontrols.h
+inc.files = cleanup.h  dbaccess.h  dirscan.h  parentalcontrols.h
 inc.files += videoscan.h  videoutils.h  videometadata.h  videometadatalistmanager.h
 inc.files += quicksp.h metadatacommon.h metadatadownload.h metadataimagedownload.h
 inc.files += bluraymetadata.h mythmetaexp.h metadatafactory.h mythuimetadataresults.h

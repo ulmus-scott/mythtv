@@ -21,7 +21,6 @@
 #include "libmythbase/ternarycompare.h"
 
 #include "dbaccess.h"
-#include "globals.h"
 #include "videometadatalistmanager.h"
 #include "videoutils.h"
 
@@ -213,14 +212,15 @@ bool VideoMetadata::DeleteFile()
 
 void VideoMetadata::Reset()
 {
+    using namespace k_VideoMetadata::Default;
     VideoMetadata tmp(m_filename, QString(),
-                    VideoMetadata::VideoFileHash(m_filename, m_host), VIDEO_TRAILER_DEFAULT,
-                    VIDEO_COVERFILE_DEFAULT, VIDEO_SCREENSHOT_DEFAULT, VIDEO_BANNER_DEFAULT,
-                    VIDEO_FANART_DEFAULT, QString(), QString(), QString(), QString(),
-                    QString(), VideoMetadata::k_DefaultYear,
-                    QDate(), VIDEO_INETREF_DEFAULT, -1, QString(), VIDEO_DIRECTOR_DEFAULT,
-                    QString(), VIDEO_PLOT_DEFAULT, 0.0,
-                    VIDEO_RATING_DEFAULT, 0, 0,
+                    VideoMetadata::VideoFileHash(m_filename, m_host), trailer,
+                    coverfile, screenshot, banner,
+                    fanart, QString(), QString(), QString(), QString(),
+                    QString(), year,
+                    QDate(), inetref, -1, QString(), director,
+                    QString(), plot, 0.0,
+                    rating, 0, 0,
                     0, 0, QDate(), m_id,
                     ParentalLevel::plLowest, 0, -1, true, false, "", "",
                     VideoMetadata::genre_list(), VideoMetadata::country_list(),
@@ -346,6 +346,8 @@ void VideoMetadata::fromDBRow(MSqlQuery &query)
 
 void VideoMetadata::SaveToDatabase()
 {
+    using namespace k_VideoMetadata;
+    using namespace k_VideoMetadata::Default;
     if (m_title.isEmpty())
         m_title = VideoMetadata::FilenameToMeta(m_filename, 1);
     if (m_hash.isEmpty())
@@ -353,11 +355,11 @@ void VideoMetadata::SaveToDatabase()
     if (m_subtitle.isEmpty())
         m_subtitle = VideoMetadata::FilenameToMeta(m_filename, 4);
     if (m_director.isEmpty())
-        m_director = VIDEO_DIRECTOR_UNKNOWN;
+        m_director = Unknown::director;
     if (m_plot.isEmpty())
-        m_plot = VIDEO_PLOT_DEFAULT;
+        m_plot = plot;
     if (m_rating.isEmpty())
-        m_rating = VIDEO_RATING_DEFAULT;
+        m_rating = rating;
     ensureSortFields();
 
     InfoMap metadataMap;
@@ -368,17 +370,17 @@ void VideoMetadata::SaveToDatabase()
     QString fanartfile  = metadataMap["fanartfile"];
 
     if (coverfile.isEmpty() || !RemoteFile::Exists(coverfile))
-        m_coverfile = VIDEO_COVERFILE_DEFAULT;
+        m_coverfile = coverfile;
     if (screenshot.isEmpty() || !RemoteFile::Exists(screenshot))
-        m_screenshot = VIDEO_SCREENSHOT_DEFAULT;
+        m_screenshot = screenshot;
     if (bannerfile.isEmpty() || !RemoteFile::Exists(bannerfile))
-        m_banner = VIDEO_BANNER_DEFAULT;
+        m_banner = banner;
     if (fanartfile.isEmpty() || !RemoteFile::Exists(fanartfile))
-        m_fanart = VIDEO_FANART_DEFAULT;
+        m_fanart = fanart;
     if (m_trailer.isEmpty())
-        m_trailer = VIDEO_TRAILER_DEFAULT;
+        m_trailer = trailer;
     if (m_inetref.isEmpty())
-        m_inetref = VIDEO_INETREF_DEFAULT;
+        m_inetref = inetref;
     if (std::isnan(m_userrating))
         m_userrating = 0.0;
     if (m_userrating < -10.0F || m_userrating > 10.0F)

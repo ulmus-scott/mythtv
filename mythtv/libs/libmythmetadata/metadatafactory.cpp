@@ -28,7 +28,6 @@
 
 // Needed for video scanning
 #include "videometadatalistmanager.h"
-#include "globals.h"
 
 // Input for a lookup
 #include "videometadata.h"
@@ -399,12 +398,12 @@ void MetadataFactory::OnVideoResult(MetadataLookup *lookup)
 
     if (metadata->GetTagline().isEmpty())
         metadata->SetTagline(lookup->GetTagline());
-    if (metadata->GetYear() == VideoMetadata::k_DefaultYear || metadata->GetYear() == 0)
+    if (metadata->GetYear() == k_VideoMetadata::Default::year || metadata->GetYear() == 0)
         metadata->SetYear(lookup->GetYear());
     if (metadata->GetReleaseDate() == QDate())
         metadata->SetReleaseDate(lookup->GetReleaseDate());
-    if (metadata->GetDirector() == VIDEO_DIRECTOR_UNKNOWN ||
-        metadata->GetDirector().isEmpty())
+    if (metadata->GetDirector().isEmpty() ||
+        metadata->GetDirector() == k_VideoMetadata::Unknown::director)
     {
         QList<PersonInfo> director = lookup->GetPeople(kPersonDirector);
         if (director.count() > 0)
@@ -416,12 +415,12 @@ void MetadataFactory::OnVideoResult(MetadataLookup *lookup)
         if (studios.count() > 0)
             metadata->SetStudio(studios.takeFirst());
     }
-    if (metadata->GetPlot() == VIDEO_PLOT_DEFAULT ||
-        metadata->GetPlot().isEmpty())
+    if (metadata->GetPlot().isEmpty() ||
+        metadata->GetPlot() == k_VideoMetadata::Default::plot)
         metadata->SetPlot(lookup->GetDescription());
     if (metadata->GetUserRating() == 0)
         metadata->SetUserRating(lookup->GetUserRating());
-    if (metadata->GetRating() == VIDEO_RATING_DEFAULT)
+    if (metadata->GetRating() == k_VideoMetadata::Default::rating)
         metadata->SetRating(lookup->GetCertification());
     if (metadata->GetLength() == 0min)
         metadata->SetLength(lookup->GetRuntime());
