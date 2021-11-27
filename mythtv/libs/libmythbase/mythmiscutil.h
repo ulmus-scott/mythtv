@@ -52,17 +52,6 @@ MBASE_PUBLIC QString getSymlinkTarget(const QString &start_file,
                                       QStringList   *intermediaries = nullptr,
                                       unsigned       maxLinks       = 255);
 
-inline float lerp(float r, float a, float b)
-{
-    return ((1.0F - r) * a) + (r * b);
-}
-inline int   lerp(float r, int a, int b)
-{
-    return (int) lerp(r, (float) a, (float) b);
-}
-inline float sq(float a) { return a*a; }
-inline int   sq(int   a) { return a*a; }
-
 MBASE_PUBLIC bool IsMACAddress(const QString& MAC);
 MBASE_PUBLIC bool WakeOnLAN(const QString& MAC);
 MBASE_PUBLIC bool MythWakeup(const QString &wakeUpCommand,
