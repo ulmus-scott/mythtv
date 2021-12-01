@@ -5,16 +5,13 @@
 
 #include "mythcorecontext.h"
 
-namespace MythDateTime
-{
-
-/** \fn toString(const QDateTime&,uint)
+/**
  *  \brief Returns a formatted QString based on the supplied QDateTime
  *
  *  \param raw_dt    The QDateTime object to use
  *  \param format   The format of the string to return
  */
-QString toString(const QDateTime &raw_dt, uint format)
+QString MythDateTime::toString(const QDateTime &raw_dt, uint format)
 {
     QString result;
 
@@ -66,7 +63,7 @@ QString toString(const QDateTime &raw_dt, uint format)
  *  \param date     The QDate object to use
  *  \param format   The format of the string to return
  */
-QString toString(const QDate date, uint format)
+QString MythDateTime::toString(const QDate date, uint format)
 {
     QString result;
 
@@ -111,6 +108,3 @@ QString toString(const QDate date, uint format)
 
     return result;
 }
-
-
-} // namespace MythDateTime
