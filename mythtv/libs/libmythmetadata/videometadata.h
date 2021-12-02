@@ -103,7 +103,7 @@ class META_PUBLIC VideoMetadata
              int playcount = 0,
              int season = 0,
              int episode = 0,
-             QDate insertdate = QDate(),
+             QDate insertdate = QDate::currentDate(),
              int id = 0,
              ParentalLevel::Level showlevel = ParentalLevel::plLowest,
              int categoryID = 0,
@@ -348,7 +348,7 @@ class META_PUBLIC VideoMetadata
     int                  m_playcount     {0};
     int                  m_season        {0};
     int                  m_episode       {0};
-    QDate                m_insertdate;
+    QDate                m_insertdate    {QDate::currentDate()};
     ParentalLevel::Level m_showlevel     {ParentalLevel::plNone};
     bool                 m_browse        {true};
     bool                 m_watched       {false};

@@ -330,7 +330,6 @@ bool VideoScannerThread::updateDB(const FileCheckList &add, const PurgeList &rem
             if (id == -1)
             {
                 VideoMetadata newFile(p->first, QString(), hash);
-                newFile.SetInsertdate(MythDate::current().date());
 
                 LOG(VB_GENERAL, LOG_INFO, QString("Adding : %1 : %2 : %3")
                     .arg(newFile.GetHost(), newFile.GetFilename(), hash));
