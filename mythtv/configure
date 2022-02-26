@@ -105,7 +105,6 @@ Advanced options (experts only):
   --disable-avx            disable AVX optimizations
   --disable-yasm           disable use of yasm assembler
   --enable-pic             build position-independent code
-  --enable-proc-opt        enable processor specific compilation
   --enable-compdb          enable clang compiler database
 
   --disable-audio-oss      disable OSS audio support
@@ -2030,7 +2029,6 @@ MYTHTV_LIST='
     audio_oss
     ffmpeg_pthreads
     mac_bundle
-    proc_opt
     silent_cc
     symbol_visibility
     deprecation_warnings
@@ -3174,13 +3172,6 @@ else
     shlibdir_default="${prefix_default}/${libdir_name}"
 fi
 
-if enabled_any cpu_override cross_compile || test x"$tune" != x"generic" &&
-    enabled proc_opt; then
-    echo "Warning! --enable-proc-opt shouldn't be used with --arch, --cpu or --tune"
-    echo "Disabling it now."
-    disable proc_opt
-fi
-
 for e in $env; do
     eval "export $e"
 done
@@ -4019,9 +4010,6 @@ if test "$cpu" = host; then
 
     if test "${cpu:-host}" != host ; then
         cpuflags_native="-march=native -mtune=native"
-    else
-        enable proc_opt_old
-        cpu="$arch"
     fi
 
     test "${cpu:-host}" = host &&
@@ -4074,191 +4062,6 @@ esac
 
 is_in $arch $ARCH_LIST || warn "unknown architecture $arch"
 enable $arch
-
-# if no tune setting and we know cpu class look at $processor
-if enabled proc_opt_old; then
-# first try to tune based on processor info
-# Intel i3, i5, i7 processors (EMT64T capable)
-   if expr "$processor" : ".*Intel(R).*Core(TM) i[357] CPU.*" > /dev/null ; then
-       cpu="core2"
-# EM64T era Intel Xeon
-   elif expr "$processor" : ".*Intel(R) Xeon(R) CPU.*51[1-6][08]" > /dev/null ; then
-       cpu="core2"
-   elif expr "$processor" : ".*Intel(R) Xeon(R) CPU.*54[0-9][025]" > /dev/null ; then
-       cpu="core2"
-   elif expr "$processor" : ".*Intel(R) Xeon(R) CPU.*33[2567]0" > /dev/null ; then
-       cpu="core2"
-   elif expr "$processor" : ".*Intel(R) Xeon(R) CPU.*X32[123]0" > /dev/null ; then
-       cpu="core2"
-# Various Intel Duo processors (EMT64T capable)
-   elif expr "$processor" : ".*Intel(R).*Core(TM)2.*CPU" > /dev/null ; then
-       cpu="core2"
-   elif expr "$processor" : "*.Pentium(R) 5 CPU" > /dev/null ; then
-       cpu="nocona"
-# EM64T compatible Intel Celeron
-   elif expr "$processor" : ".*Celeron(R) D CPU" > /dev/null ; then
-       cpu="nocona"
-       enable small
-# Intel Core2 Duo
-   elif expr "$processor" : ".*Genuine.*Intel.*CPU.*2160" > /dev/null ; then
-       cpu="core2"
-# Intel Atom
-   elif expr "$processor" : ".*Intel(R) Atom(TM)" > /dev/null ; then
-       cpu="nocona"
-       enable small
-# Reportedly Intel Duo, but we assume 32 bit P3 due to generic name
-   elif expr "$processor" : ".*Genuine.*Intel.*CPU" > /dev/null ; then
-       cpu="pentium3"
-# Pentium-M derivative in AppleTV, assume 32 bit P3 due to generic name
-   elif expr "$processor" : ".*Genuine.*Intel.*processor" > /dev/null ; then
-       cpu="pentium3"
-# P4
-   elif expr "$processor" : ".*Xeon(TM) CPU" > /dev/null ; then
-       cpu="pentium4"
-   elif expr "$processor" : ".*XEON(TM) CPU" > /dev/null ; then
-       cpu="pentium4"
-   elif expr "$processor" : ".*XEON(TM) MP CPU" > /dev/null ; then
-       cpu="pentium4"
-   elif expr "$processor" : "pentium4" > /dev/null ; then
-       cpu="pentium4"
-   elif expr "$processor" : ".*Pentium(R) [4D]" > /dev/null ; then
-       cpu="pentium4"
-   elif expr "$processor" : ".*Celeron(R) CPU" > /dev/null ; then
-       cpu="pentium4"
-       enable small
-# P6, which includes Intel Core
-   elif expr "$processor" : ".*Intel P6 Family" > /dev/null ; then
-       cpu="pentium4"
-# P3
-   elif expr "$processor" : "pentium3" > /dev/null ; then
-       cpu="pentium3"
-   elif expr "$processor" : ".*Pentium.* III" > /dev/null ; then
-       cpu="pentium3"
-   elif expr "$processor" : ".*Coppermine" > /dev/null ; then
-       cpu="pentium3"
-       enable small
-   elif expr "$processor" : ".*Celeron(TM) CPU" > /dev/null ; then
-       cpu="pentium3"
-       enable small
-   elif expr "$processor" : ".*Pentium(R) M" > /dev/null ; then
-       cpu="pentium3"
-   elif expr "$processor" : ".*Celeron(R) M processor" > /dev/null ; then
-       cpu="pentium3"
-       enable small
-# P2
-   elif expr "$processor" : "pentium2" > /dev/null ; then
-       cpu="pentium2"
-   elif expr "$processor" : ".*Mendocino" > /dev/null ; then
-       cpu="pentium2"
-       enable small
-   elif expr "$processor" : ".*Klamath" > /dev/null ; then
-       cpu="pentium2"
-       enable small
-   elif expr "$processor" : ".*Deschutes" > /dev/null ; then
-       cpu="pentium2"
-       enable small
-   elif expr "$processor" : ".*Pentium II" > /dev/null ; then
-       cpu="pentium2"
-       enable small
-# AMD Turion
-   elif expr "$processor" : ".*AMD Turion(tm) 64" > /dev/null ; then
-       cpu="k8"
-# AMD Geode NX
-   elif expr "$processor" : ".*AMD Geode(tm) NX" > /dev/null ; then
-       cpu="athlon"
-       enable small
-# Athlon 64
-   elif expr "$processor" : ".*AMD Athlon(tm) II" > /dev/null ; then
-       cpu="k8"
-   elif expr "$processor" : ".*AMD Athlon(tm) 64" > /dev/null ; then
-       cpu="k8"
-   elif expr "$processor" : ".*AMD Athlon(tm) Dual Core" > /dev/null ; then
-       cpu="k8"
-   elif expr "$processor" : ".*Athlon LE-16" > /dev/null ; then
-       cpu="k8"
-# AMD Phenom
-   elif expr "$processor" : ".*AMD Phenom(tm)" > /dev/null ; then
-       cpu="barcelona"
-# AMD Opteron
-   elif expr "$processor" : ".*AMD Opteron(tm)" >/dev/null ; then
-       cpu="k8"
-# Athlon MP
-   elif expr "$processor" : ".*AMD Athlon(tm) MP.*" > /dev/null ; then
-       cpu="athlon-mp"
-# Athlon XP
-   elif expr "$processor" : "athlon-xp" > /dev/null ; then
-       cpu="athlon-xp"
-   elif expr "$processor" : ".*AMD Athlon(tm) XP" > /dev/null ; then
-       cpu="athlon-xp"
-   elif expr "$processor" : ".*AMD Sempron(tm)" > /dev/null ; then
-       cpu="athlon-xp"
-# Athlon
-   elif expr "$processor" : "athlon" > /dev/null ; then
-       cpu="athlon"
-   elif expr "$processor" : ".*AMD Athlon(..)" > /dev/null ; then
-       cpu="athlon"
-   elif expr "$processor" : ".*AMD Duron(..)" > /dev/null ; then
-       cpu="athlon"
-       enable small
-# K6
-   elif expr "$processor" : ".*AMD-K6(tm) 3D" > /dev/null ; then
-       cpu="k6"
-       enable small
-# Transmeta Crusoe
-   elif expr "$processor" : ".*Crusoe(m) Processor TM5600" > /dev/null ; then
-       cpu="pentium2"
-# c3-2
-   elif expr "$processor" : ".*VIA Esther" > /dev/null ; then
-       cpu="c3-2"
-       enable small
-   elif expr "$processor" : ".*VIA Nehemiah" > /dev/null ; then
-       cpu="c3-2"
-       enable small
-# c3
-   elif expr "$processor" : ".*VIA.*Ezra" > /dev/null ; then
-       cpu="c3"
-       enable small
-   elif expr "$processor" : ".*VIA Samuel" > /dev/null ; then
-       cpu="c3"
-       enable small
-# if no known processor info, tune base on uname -m info
-   else
-       enable proc_error_msg
-   fi
-fi
-
-if enabled proc_error_msg; then
-    UNAME_M_INFO=` uname -m 2> /dev/null`
-    UNAME_P_INFO=` uname -p 2> /dev/null`
-    PROC_INFO=`cat /proc/cpuinfo | grep "model name" | head -n 1 | sed s/"\t"//g 2>/dev/null`
-    PROC_FLAG=`cat /proc/cpuinfo | grep "flags" | head -n 1 | sed s/"\t"//g 2>/dev/null`
-    echo ""
-    echo " *** WARNING *** "
-    echo " Your CPU was not detected properly:"
-    echo "   uname -m: $UNAME_M_INFO"
-    echo "   uname -p: $UNAME_P_INFO"
-    echo " $PROC_INFO"
-    echo "      $PROC_FLAG"
-    echo ""
-    echo " If you are using a recent checkout from "
-    echo "   https://github.com/MythTV/mythtv "
-    echo " please e-mail the above to mythtv-dev@mythtv.org"
-    echo " With the subject \"configure did not detect my cpu\""
-    echo ""
-fi
-
-if test $target_os = "darwin"; then
-     # Apple GCC doesn't support march=core2 yet:
-    if test $cpu = "core2"; then
-        cpu="nocona"
-    fi
-    # Core Duo might be identified as march=pentium3, which errors:
-    # ...MachineExceptions.h:... error: '__m128i' does not name a type
-    # ...MachineExceptions.h:... error: '__m128i' does not name a type
-    if test $cpu = "pentium3"; then
-        cpu=prescott
-    fi
-fi
 
 # Add processor-specific flags
 if enabled aarch64; then
@@ -4573,7 +4376,7 @@ if test -n "$cpuflags"; then
 int main( void ) { return 0; }
 EOF
     if test -z "$cpuflags"; then
-        if enabled cpu_override || enabled proc_opt || test x"$tune" != x"generic"; then
+        if enabled cpu_override || test x"$tune" != x"generic"; then
             echo "ERROR: CPU specific ./configure options failed compile test"
             echo "       Removing CPU specific compilation options. ($tmp_cpuflags)"
             echo ""
@@ -7884,12 +7687,6 @@ if disabled backend; then
     echo
     echo "WARNING: --disable-backend is only intended to aid porting."
     echo "WARNING: You are on your own now."
-fi
-
-if enabled proc_opt; then
-    echo
-    echo "WARNING: When using --enable-proc-opt you must include the "
-    echo "         output of ./configure along with any bug report."
 fi
 
 if enabled cpu_override; then
