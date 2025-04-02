@@ -135,20 +135,27 @@ class MPoolThread : public MThread
 
             bool autodelete = m_runnable->autoDelete();
             m_runnable->run();
+            LOG(VB_GENERAL, LOG_ALERT, QString("thread %1 exited run()").arg(objectName()));
+            LOG(VB_GENERAL, LOG_ALERT, QString("thread %1 autodelete = %2, m_reserved = %3").arg(objectName()).arg(autodelete).arg(m_reserved));
             if (autodelete)
                 delete m_runnable;
+            LOG(VB_GENERAL, LOG_ALERT, QString("thread %1 deleted runnable").arg(objectName()));
             if (m_reserved)
                 m_pool.ReleaseThread();
+            LOG(VB_GENERAL, LOG_ALERT, QString("thread %1 released thread").arg(objectName()));
             m_reserved = false;
             m_runnable = nullptr;
 
             loggingDeregisterThread();
             loggingRegisterThread(objectName());
 
+            LOG(VB_GENERAL, LOG_ALERT, QString("thread %1 purging idle connections").arg(objectName()));
             GetMythDB()->GetDBManager()->PurgeIdleConnections(false);
+            LOG(VB_GENERAL, LOG_ALERT, QString("thread %1 calling processEvents()").arg(objectName()));
             qApp->processEvents();
             qApp->sendPostedEvents(nullptr, QEvent::DeferredDelete);
 
+            LOG(VB_GENERAL, LOG_ALERT, QString("thread %1 processed events").arg(objectName()));
             t.start();
 
             if (m_doRun)
