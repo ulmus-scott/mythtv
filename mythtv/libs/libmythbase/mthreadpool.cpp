@@ -112,8 +112,6 @@ class MPoolThread : public MThread
     {
         RunProlog();
 
-        MythTimer t;
-        t.start();
         QMutexLocker locker(&m_lock);
         if (m_doRun && m_runnable == nullptr)
         {
@@ -147,8 +145,6 @@ class MPoolThread : public MThread
             qApp->sendPostedEvents(nullptr, QEvent::DeferredDelete);
 
             LOG(VB_GENERAL, LOG_ALERT, QString("thread %1 processed events").arg(objectName()));
-            t.start();
-
             if (m_doRun)
             {
                 locker.unlock();
