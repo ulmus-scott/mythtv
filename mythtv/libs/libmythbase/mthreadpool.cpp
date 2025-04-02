@@ -265,9 +265,11 @@ void MThreadPool::Stop(void)
 {
     QMutexLocker locker(&m_priv->m_lock);
     m_priv->m_running = false;
+    LOG(VB_GENERAL, LOG_ALERT, "Shutting down available threads");
     QSet<MPoolThread*>::iterator it = m_priv->m_availThreads.begin();
     for (; it != m_priv->m_availThreads.end(); ++it)
         (*it)->Shutdown();
+    LOG(VB_GENERAL, LOG_ALERT, "Shutting down running threads");
     it = m_priv->m_runningThreads.begin();
     for (; it != m_priv->m_runningThreads.end(); ++it)
         (*it)->Shutdown();
