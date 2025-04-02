@@ -189,9 +189,13 @@ class MPoolThread : public MThread
 
     void Shutdown(void)
     {
+        QString name = objectName();
+        LOG(VB_GENERAL, LOG_ALERT, QString("Shutting down thread %1").arg(name));
         QMutexLocker locker(&m_lock);
+        LOG(VB_GENERAL, LOG_ALERT, QString("Acquired lock for thread %1").arg(name));
         m_doRun = false;
         m_wait.wakeAll();
+        LOG(VB_GENERAL, LOG_ALERT, QString("Shut down thread %1").arg(name));
     }
 
     QMutex          m_lock;
