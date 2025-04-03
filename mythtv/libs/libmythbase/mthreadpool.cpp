@@ -123,7 +123,9 @@ class MPoolThread : public MThread
                 loggingRegisterThread(m_runnableName);
 
             bool autodelete = m_runnable->autoDelete();
+            locker.unlock();
             m_runnable->run();
+            locker.relock();
             LOG(VB_GENERAL, LOG_ALERT, QString("thread %1 exited run()").arg(objectName()));
             LOG(VB_GENERAL, LOG_ALERT, QString("thread %1 autodelete = %2, m_reserved = %3").arg(objectName()).arg(autodelete).arg(m_reserved));
             if (autodelete)
