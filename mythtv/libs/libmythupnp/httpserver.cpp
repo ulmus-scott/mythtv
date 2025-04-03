@@ -692,7 +692,7 @@ void HttpWorker::run(void)
     delete pSocket;
     pSocket = nullptr;
 
-    LOG(VB_HTTP, LOG_DEBUG, QString("HttpWorkerThread::run() socket=%1 -- end").arg(m_socket));
+    LOG(VB_HTTP, LOG_DEBUG, QString("HttpWorker::run() socket=%1 -- end").arg(m_socket));
 }
 
 
