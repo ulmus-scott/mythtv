@@ -130,7 +130,11 @@ class MPoolThread : public MThread
                 delete m_runnable;
             LOG(VB_GENERAL, LOG_ALERT, QString("thread %1 deleted runnable").arg(objectName()));
             if (m_reserved)
+            {
+                locker.unlock();
                 m_pool.ReleaseThread();
+                locker.relock();
+            }
             LOG(VB_GENERAL, LOG_ALERT, QString("thread %1 released thread").arg(objectName()));
             m_reserved = false;
             m_runnable = nullptr;
