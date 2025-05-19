@@ -83,14 +83,13 @@ bool CetonRTSP::ProcessRequest(
         // empty socket's waiting data just in case
         m_socket->waitForReadyRead(30);
         QVector<char> trash;
-        do
+        uint avail {0};
+        while ((avail = m_socket->bytesAvailable()) > 0)
         {
-            uint avail = m_socket->bytesAvailable();
             trash.resize(std::max((uint)trash.size(), avail));
             m_socket->read(trash.data(), avail);
             m_socket->waitForReadyRead(30);
         }
-        while (m_socket->bytesAvailable() > 0);
     }
 
     QStringList requestHeaders;
@@ -314,9 +313,9 @@ bool CetonRTSP::Describe(void)
         return false;
 
     // find control url
-    QRegularExpression ws { "[\r\n]" };
+    static const QRegularExpression eol { "[\r\n]" };
     QString content = QString::fromUtf8(m_responseContent);
-    QStringList lines = content.split(ws, Qt::SkipEmptyParts);
+    QStringList lines = content.split(eol, Qt::SkipEmptyParts);
     bool found = false;
     QUrl base = m_controlUrl = GetBaseUrl();
 
