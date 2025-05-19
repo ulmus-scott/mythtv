@@ -2322,7 +2322,7 @@ int HLSRingBuffer::ParseM3U8(const QByteArray *buffer, StreamsList *streams)
         /* */
         std::chrono::seconds segment_duration = -1s;
         QString title;
-        do
+        while (err == RET_OK)
         {
             /* Next line */
             line = stream.readLine();
@@ -2378,7 +2378,6 @@ int HLSRingBuffer::ParseM3U8(const QByteArray *buffer, StreamsList *streams)
                 title = "";
             }
         }
-        while (err == RET_OK);
     }
     return err;
 }
@@ -2788,7 +2787,7 @@ int HLSRingBuffer::SafeRead(void *data, uint sz)
         return 0;
     }
 
-    do
+    while (i_read > 0 && !m_interrupted) // cppcheck-suppress knownConditionTrueFalse
     {
         int segnum = m_playback->Segment();
         if (segnum >= NumSegments())
@@ -2845,7 +2844,6 @@ int HLSRingBuffer::SafeRead(void *data, uint sz)
         i_read  -= len;
         segment->Unlock();
     }
-    while (i_read > 0 && !m_interrupted); // cppcheck-suppress knownConditionTrueFalse
 
     if (m_interrupted)
         LOG(VB_PLAYBACK, LOG_DEBUG, LOC + QString("interrupted"));
