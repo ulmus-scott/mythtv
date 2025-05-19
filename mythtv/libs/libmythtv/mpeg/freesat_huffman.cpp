@@ -1,8 +1,8 @@
 #include "freesat_huffman.h"
 
-static constexpr uint8_t START   { '\0' };
-static constexpr uint8_t STOP    { '\0' };
-static constexpr uint8_t ESCAPE  { '\1' };
+static constexpr uint8_t START   { 255 };
+static constexpr uint8_t STOP    {   0 };
+static constexpr uint8_t ESCAPE  {   1 };
 
 QString freesat_huffman_to_string(const unsigned char *compressed, uint size)
 {
@@ -26,8 +26,10 @@ QString freesat_huffman_to_string(const unsigned char *compressed, uint size)
     }
     uchar lastch = START;
 
-    do
+    while (lastch != STOP && byte < size+4)
     {
+        if (lastch == START)
+            lastch = STOP;
         bool found = false;
         unsigned bitShift = 0;
         uchar nextCh = STOP;
@@ -95,7 +97,7 @@ QString freesat_huffman_to_string(const unsigned char *compressed, uint size)
             result.append("...");
             return result;
         }
-    } while (lastch != STOP && byte < size+4);
+    }
 
     return QString::fromUtf8(uncompressed);
 }
