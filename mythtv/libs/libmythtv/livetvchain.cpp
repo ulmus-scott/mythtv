@@ -450,6 +450,7 @@ ProgramInfo *LiveTVChain::DoGetNextProgram(bool up, int curpos, int &newid,
     LiveTVChainEntry oldentry;
     LiveTVChainEntry entry;
     ProgramInfo *pginfo = nullptr;
+    int step = up ? 1 : -1;
 
     GetEntryAt(curpos, oldentry);
 
@@ -464,7 +465,7 @@ ProgramInfo *LiveTVChain::DoGetNextProgram(bool up, int curpos, int &newid,
     {
         // try to find recordings during first pass
         // we'll skip dummy and empty recordings
-        while (!pginfo && newid < m_chain.count() && newid >= 0)
+        while (!pginfo && (newid >= 0) && (newid < m_chain.count()))
         {
             GetEntryAt(newid, entry);
 
@@ -490,7 +491,7 @@ ProgramInfo *LiveTVChain::DoGetNextProgram(bool up, int curpos, int &newid,
 
             if (!pginfo)
             {
-                newid += up ? 1 : -1;
+                newid += step;
             }
         }
 
@@ -498,10 +499,9 @@ ProgramInfo *LiveTVChain::DoGetNextProgram(bool up, int curpos, int &newid,
         {
             // didn't find in first pass, now get back to the next good one
             // as this is the one we will use
-            do
+            newid -= step; // Bring newid back in range of m_chain
+            while (!pginfo && (newid >= 0) && (newid < m_chain.count()))
             {
-                newid += up ? -1 : 1;
-
                 GetEntryAt(newid, entry);
 
                 bool at_last_entry =
@@ -523,8 +523,11 @@ ProgramInfo *LiveTVChain::DoGetNextProgram(bool up, int curpos, int &newid,
                     delete pginfo;
                     pginfo = nullptr;
                 }
+                if (!pginfo)
+                {
+                    newid -= step;
+                }
             }
-            while (!pginfo && newid < m_chain.count() && newid >= 0);
 
             if (!pginfo)
             {
