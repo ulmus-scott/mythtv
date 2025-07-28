@@ -76,7 +76,7 @@ static int lirc_mode(
 		     struct lirc_config_entry **new_config,
 		     struct lirc_config_entry **first_config,
 		     struct lirc_config_entry **last_config,
-		     int (check)(char *s),
+		     int (check)(std::string& s),
 		     const char *name,int line);
 /*
   lircrc_config relies on this function, hence don't make it static
@@ -96,21 +96,21 @@ static void stack_free(struct filestack_t *entry);
 static int lirc_readconfig_only_internal(const struct lirc_state *state,
                                          const char *file,
                                          struct lirc_config **config,
-                                         int (check)(char *s),
+                                         int (check)(std::string& s),
                                          std::string& full_name,
                                          std::string& sha_bang);
 static std::string lirc_startupmode(const struct lirc_state *state,
 							  struct lirc_config_entry *first);
 static void lirc_freeconfigentries(struct lirc_config_entry *first);
 static void lirc_clearmode(struct lirc_config *config);
-static char *lirc_execute(const struct lirc_state *state,
+static std::string lirc_execute(const struct lirc_state *state,
 			  struct lirc_config *config,
 			  struct lirc_config_entry *scan);
 static int lirc_iscode(struct lirc_config_entry *scan, char *remote,
 		       char *button,unsigned int rep);
 static int lirc_code2char_internal(const struct lirc_state *state,
 				   struct lirc_config *config,const char *code,
-				   char **string, char **prog);
+				   std::string& string, std::string& prog);
 static const char *lirc_read_string(const struct lirc_state *state, int fd);
 static int lirc_identify(const struct lirc_state *state, int sockfd);
 
@@ -431,7 +431,7 @@ int lirc_mode(const struct lirc_state *state,
 	      struct lirc_config_entry **new_config,
 	      struct lirc_config_entry **first_config,
 	      struct lirc_config_entry **last_config,
-	      int (check)(char *s),
+	      int (check)(std::string& s),
 	      const char *name,int line)
 {
 	struct lirc_config_entry *new_entry=*new_config;
@@ -803,7 +803,7 @@ static void stack_free(struct filestack_t *entry)
 int lirc_readconfig(const struct lirc_state *state,
                     const char *file,
                     struct lirc_config **config,
-                    int (check)(char *s))
+                    int (check)(std::string& s))
 {
 	struct sockaddr_un addr {};
 	int sockfd = -1;
@@ -882,7 +882,7 @@ int lirc_readconfig(const struct lirc_state *state,
 int lirc_readconfig_only(const struct lirc_state *state,
                          const char *file,
                          struct lirc_config **config,
-                         int (check)(char *s))
+                         int (check)(std::string& s))
 {
 	std::string filename;
 	std::string sha_bang;
@@ -892,7 +892,7 @@ int lirc_readconfig_only(const struct lirc_state *state,
 static int lirc_readconfig_only_internal(const struct lirc_state *state,
                                          const char *file,
                                          struct lirc_config **config,
-                                         int (check)(char *s),
+                                         int (check)(std::string& s),
                                          std::string& full_name,
                                          std::string& sha_bang)
 {
@@ -1155,15 +1155,7 @@ static int lirc_readconfig_only_internal(const struct lirc_state *state,
 				}
 				else if(strcasecmp(token,"config")==0)
 				{
-					auto *new_list =
-                                            (struct lirc_list *)malloc(sizeof(struct lirc_list));
-					if(new_list==nullptr)
-					{
-						free(token2);
-						lirc_printf(state, "out of memory\n");
-						ret=-1;
-					}
-					else
+					auto *new_list = new lirc_list;
 					{
 						lirc_parse_string(state,token2,filestack->m_name,filestack->m_line);
 						new_list->string=token2;
@@ -1343,9 +1335,9 @@ static void lirc_freeconfigentries(struct lirc_config_entry *first)
                 struct lirc_list *list=c->config;
 		while(list!=nullptr)
 		{
-			if(list->string) free(list->string);
+			list->string.clear();
 			struct lirc_list *list_temp=list->next;
-			free(list);
+			delete list;
 			list=list_temp;
 		}
 		struct lirc_config_entry *config_temp=c->next;
@@ -1376,7 +1368,7 @@ static void lirc_clearmode(struct lirc_config *config)
 	config->current_mode=nullptr;
 }
 
-static char *lirc_execute(const struct lirc_state *state,
+static std::string lirc_execute(const struct lirc_state *state,
 			  struct lirc_config *config,
 			  struct lirc_config_entry *scan)
 {
@@ -1407,13 +1399,13 @@ static char *lirc_execute(const struct lirc_state *state,
 	   strcasecmp(scan->prog,state->lirc_prog.data())==0 &&
 	   do_once==1)
 	{
-                char *s=scan->next_config->string;
+		std::string s=scan->next_config->string;
 		scan->next_config=scan->next_config->next;
 		if(scan->next_config==nullptr)
 			scan->next_config=scan->config;
 		return(s);
 	}
-	return nullptr;
+	return {};
 }
 
 static int lirc_iscode(struct lirc_config_entry *scan, char *remote,
@@ -1517,7 +1509,7 @@ static int lirc_iscode(struct lirc_config_entry *scan, char *remote,
 	return(0);
 }
 
-int lirc_code2char(const struct lirc_state *state, struct lirc_config *config,const char *code,char **string)
+int lirc_code2char(const struct lirc_state *state, struct lirc_config *config,const char *code,std::string& string)
 {
 	if(config->sockfd!=-1)
 	{
@@ -1536,11 +1528,11 @@ int lirc_code2char(const struct lirc_state *state, struct lirc_config *config,co
 		{
 			if(ret > 0)
 			{
-				*string = s_buf.data();
+				string = s_buf.data();
 			}
 			else
 			{
-				*string = nullptr;
+				string.clear();
 			}
 			free(command);
 			return LIRC_RET_SUCCESS;
@@ -1548,18 +1540,18 @@ int lirc_code2char(const struct lirc_state *state, struct lirc_config *config,co
 		free(command);
 		return LIRC_RET_ERROR;
 	}
-	return lirc_code2char_internal(state, config, code, string, nullptr);
+	std::string dummy;
+	return lirc_code2char_internal(state, config, code, string, dummy);
 }
 
 static int lirc_code2char_internal(const struct lirc_state *state,
                                    struct lirc_config *config, const char *code,
-                                   char **string, char **prog)
+                                   std::string& string, std::string& prog)
 {
 	unsigned int rep = 0;
 	char *strtok_state = nullptr;
-	char *s=nullptr;
 
-	*string=nullptr;
+	string.clear();
 	if(sscanf(code,"%*20x %20x %*5000s %*5000s\n",&rep)==1)
 	{
 		char *backup=strdup(code);
@@ -1578,6 +1570,7 @@ static int lirc_code2char_internal(const struct lirc_state *state,
 		
 		struct lirc_config_entry *scan=config->next;
 		int quit_happened=0;
+		std::string s;
 		while(scan!=nullptr)
 		{
 			int exec_level = lirc_iscode(scan,remote,button,rep);
@@ -1592,14 +1585,14 @@ static int lirc_code2char_internal(const struct lirc_state *state,
 				if(exec_level > 1)
 				{
 					s=lirc_execute(state,config,scan);
-					if(s != nullptr && prog != nullptr)
+					if(!s.empty())
 					{
-						*prog = scan->prog;
+						prog = scan->prog;
 					}
 				}
 				else
 				{
-					s = nullptr;
+					s.clear();
 				}
 				if(scan->flags&quit)
 				{
@@ -1608,7 +1601,7 @@ static int lirc_code2char_internal(const struct lirc_state *state,
 					scan=scan->next;
 					continue;
 				}
-				if(s!=nullptr)
+				if(!s.empty())
 				{
 					config->next=scan->next;
 					break;
@@ -1617,9 +1610,9 @@ static int lirc_code2char_internal(const struct lirc_state *state,
 			scan=scan->next;
 		}
 		free(backup);
-		if(s!=nullptr)
+		if(!s.empty())
 		{
-			*string=s;
+			string=s;
 			return(0);
 		}
 	}
