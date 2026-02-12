@@ -12,5 +12,13 @@ else()
   message(FATAL_ERROR "X11 must be installed.")
 endif()
 
+# Set the RPATH variables so that the libraries under
+# /usr/pkg/qt?/lib # can be found. (/usr/pkg/lib is
+# automatically added.)  You will still need to set
+# "LD_LIBRARY_PATH=/usr/pkg/lib" in your environment
+# for Qt to properly load the mysql plugin.
+list(APPEND CMAKE_INSTALL_RPATH /usr/pkg/${QT_PKG_NAME_LC}/lib)
+list(APPEND CMAKE_BUILD_RPATH /usr/pkg/${QT_PKG_NAME_LC}/lib)
+
 # Ensure that the /usr/pkg/include is always searched
 include_directories(SYSTEM AFTER /usr/pkg/include)
