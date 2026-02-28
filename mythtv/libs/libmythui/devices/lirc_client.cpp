@@ -667,7 +667,7 @@ unsigned int lirc_flags(const struct lirc_state *state, char *string)
 		{
 			lirc_printf(state, "%s: unknown flag \"%s\"\n",state->lirc_prog,s);
 		}
-		s=strtok_r(nullptr," \t",&strtok_state);
+		s=strtok_r(nullptr," \t|",&strtok_state);
 	}
 	return(flags);
 }
