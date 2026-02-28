@@ -10,7 +10,9 @@ MythPainterGPU::MythPainterGPU(MythMainWindow* Parent)
   : m_parent(Parent)
 {
     MythDisplay* display = m_parent->GetDisplay();
-    CurrentDPIChanged(m_parent->devicePixelRatioF());
+    QScreen *screen = display->GetCurrentScreen();
+
+    CurrentDPIChanged(screen->physicalDotsPerInch());
     connect(display, &MythDisplay::CurrentDPIChanged, this,
             &MythPainterGPU::CurrentDPIChanged);
 }
@@ -22,9 +24,9 @@ void MythPainterGPU::SetViewControl(ViewControls Control)
 
 void MythPainterGPU::CurrentDPIChanged(qreal DPI)
 {
-    m_pixelRatio = DPI;
+    QScreen *screen = m_parent->GetDisplay()->GetCurrentScreen();
+
+    m_DPI = DPI;
+    m_pixelRatio = screen->devicePixelRatio();
     m_usingHighDPI = !qFuzzyCompare(m_pixelRatio, 1.0);
-    LOG(VB_GENERAL, LOG_INFO,
-        QString("High DPI scaling %1")
-        .arg(m_usingHighDPI ? "enabled" : "disabled"));
 }
