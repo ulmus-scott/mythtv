@@ -359,13 +359,13 @@ Q_SLOT void MythExternRecApp::Close(void)
     if (m_tuneProc.state() == QProcess::Running)
     {
         m_tuneProc.closeReadChannel(QProcess::StandardOutput);
-        TerminateProcess(m_tuneProc, "App");
+        TerminateProcess(m_tuneProc, "Close app");
     }
 
     if (m_proc.state() == QProcess::Running)
     {
         m_proc.closeReadChannel(QProcess::StandardOutput);
-        TerminateProcess(m_proc, "App");
+        TerminateProcess(m_proc, "Close app");
         std::this_thread::sleep_for(50us);
     }
 
@@ -399,7 +399,7 @@ void MythExternRecApp::Run(void)
     if (m_proc.state() == QProcess::Running)
     {
         m_proc.closeReadChannel(QProcess::StandardOutput);
-        TerminateProcess(m_proc, "App");
+        TerminateProcess(m_proc, "No longer running app");
     }
 
     emit Done();
@@ -480,7 +480,7 @@ Q_SLOT void MythExternRecApp::DataStarted(void)
     QStringList args = MythCommandLineParser::MythSplitCommandString(startcmd);
     startcmd = args.takeFirst();
 
-    TerminateProcess(m_finishTuneProc, "FinishTuning");
+    TerminateProcess(m_finishTuneProc, "Finish tuning");
 
     LOG(VB_RECORD, LOG_INFO, LOC + QString("Finishing tune: '%1' %3")
         .arg(startcmd, background ? "in the background" : ""));
@@ -957,7 +957,7 @@ Q_SLOT void MythExternRecApp::StopStreaming(const QString & serial, bool silent)
     m_streaming = false;
     if (m_proc.state() == QProcess::Running)
     {
-        TerminateProcess(m_proc, "App");
+        TerminateProcess(m_proc, "Stop streaming app");
 
         LOG(VB_RECORD, LOG_INFO, LOC + ": External application terminated.");
         if (silent)
@@ -1075,6 +1075,12 @@ Q_SLOT void MythExternRecApp::ProcReadStandardError(void)
             {
                 LOG(VB_RECORD, LOG_WARNING, LOC + QString(">>> %1").arg(msgs[idx]));
                 emit SendMessage("STATUS", "0", message, "WARN");
+            }
+            else if (msgs[idx].startsWith("damage", Qt::CaseInsensitive))
+            {
+                LOG(VB_RECORD, LOG_WARNING, LOC + QString(">>> %1").arg(msgs[idx]));
+                LOG.flush()
+                emit SendMessage("STATUS", "0", message, "DAMAGE");
             }
             else
             {
