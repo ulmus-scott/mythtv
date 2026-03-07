@@ -46,7 +46,7 @@ class MythExternRecApp : public QObject
     bool Open(void);
     void Run(void);
 
-    void ReplaceVariables(QString & cmd) const;
+    QString ReplaceCmdVariables(const QString & cmd) const;
     QString Desc(void) const;
     void MythLog(const QString & msg)
     { emit SendMessage("", "0", "STATUS", msg); }
@@ -94,10 +94,9 @@ class MythExternRecApp : public QObject
     void TerminateProcess(QProcess & proc, const QString & desc) const;
 
   private:
+    void replace_variables(void);
     bool config(void);
     static QString sanitize_var(const QString & var);
-    QString replace_extra_args(const QString & var,
-                               const QVariantMap & extra_args) const;
 
     mutable bool            m_terminating  { false };
     bool                    m_fatal        { false };

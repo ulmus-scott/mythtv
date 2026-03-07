@@ -61,7 +61,7 @@ MythExternRecApp::MythExternRecApp(QString command,
     m_desc.replace("%CHANNUM%", "");
     m_desc.replace("%CHANNAME%", "");
     m_desc.replace("%CALLSIGN%", "");
-    ReplaceVariables(m_desc);
+    m_desc = ReplaceCmdVariables(m_desc);
 }
 
 MythExternRecApp::~MythExternRecApp(void)
@@ -99,41 +99,29 @@ QString MythExternRecApp::sanitize_var(const QString & var)
     return cleaned;
 }
 
-QString MythExternRecApp::replace_extra_args(const QString & var,
-                                             const QVariantMap & extra_args) const
+QString MythExternRecApp::ReplaceCmdVariables(const QString & cmd) const
 {
-    QString result = var;
-    /*
-      Replace any information provided in JSON message
-     */
-    for (auto it = extra_args.keyValueBegin();
-         it != extra_args.keyValueEnd(); ++it)
-    {
-        if (it->first == "command")
-            continue;
-        result.replace(QString("\%%1\%").arg(it->first.toUpper()),
-                        it->second.toString());
-        LOG(VB_CHANNEL, LOG_DEBUG, LOC +
-            QString("Replaced '%1' with '%2'")
-            .arg(it->first.toUpper(), it->second.toString()));
-    }
-    result = sanitize_var(result);
+    if (cmd.isEmpty())
+        return cmd;
 
-    return result;
-}
+    LOG(VB_CHANNEL, LOG_DEBUG,
+        QString("Replacing variables in '%1'").arg(cmd));
+    QString result = cmd;
 
-void MythExternRecApp::ReplaceVariables(QString & cmd) const
-{
     QMap<QString, QString>::const_iterator Ivar;
     for (Ivar = m_settingVars.constBegin();
          Ivar != m_settingVars.constEnd(); ++Ivar)
     {
+        LOG(VB_CHANNEL, LOG_DEBUG,
+            QString("Looking for '%1'").arg(Ivar.key()));
+
         QString repl = "%" + Ivar.key() + "%";
-        if (cmd.indexOf(repl) >= 0)
+        if (result.indexOf(repl) >= 0)
         {
-            LOG(VB_CHANNEL, LOG_DEBUG, QString("Replacing '%1' with '%2'")
+            result.replace(repl, Ivar.value());
+            LOG(VB_CHANNEL, LOG_DEBUG,
+                QString("Replacing '%1' with '%2'")
                 .arg(repl, Ivar.value()));
-            cmd.replace(repl, Ivar.value());
         }
         else
         {
@@ -141,6 +129,7 @@ void MythExternRecApp::ReplaceVariables(QString & cmd) const
                 .arg(repl, cmd));
         }
     }
+    return sanitize_var(result);
 }
 
 QString MythExternRecApp::Desc(void) const
@@ -151,9 +140,56 @@ QString MythExternRecApp::Desc(void) const
         extra = QString("(pid %1) ").arg(m_proc.processId());
 
     QString desc = m_desc;
-    ReplaceVariables(desc);
+    desc = ReplaceCmdVariables(desc);
 
     return QString("%1%2 ").arg(extra, desc);
+}
+
+void MythExternRecApp::replace_variables(void)
+{
+    QString repl;
+    QMap<QString, QString>::iterator Ivar;
+    QMap<QString, QString>::iterator Ivar2;
+
+    if (!m_chaninfo.isEmpty())
+    {
+        for (auto it = m_chaninfo.keyValueBegin();
+             it != m_chaninfo.keyValueEnd(); ++it)
+        {
+            if (it->first == "command")
+                continue;
+            m_settingVars[it->first.toUpper()] = it->second.toString();
+        }
+    }
+
+    /* Replace defined VARs in other defined VARs */
+    for (Ivar = m_settingVars.begin();
+         Ivar != m_settingVars.end(); ++Ivar)
+    {
+        repl = "%" + Ivar.key() + "%";
+        for (Ivar2 = m_settingVars.begin();
+             Ivar2 != m_settingVars.end(); ++Ivar2)
+        {
+            if ((*Ivar2).indexOf(repl) >= 0)
+            {
+                (*Ivar2).replace(repl, Ivar.value());
+                LOG(VB_CHANNEL, LOG_DEBUG,
+                    QString("Replacing '%1' with '%2' in '%3'")
+                    .arg(repl, Ivar.value(), *Ivar2));
+            }
+        }
+    }
+
+    if (VERBOSE_LEVEL_CHECK(VB_RECORD, LOG_DEBUG))
+    {
+        LOG(VB_RECORD, LOG_DEBUG, "All Variables:");
+        for (Ivar = m_settingVars.begin();
+             Ivar != m_settingVars.end(); ++Ivar)
+        {
+            LOG(VB_RECORD, LOG_DEBUG,
+                QString("'%1' = '%2'").arg(Ivar.key(), Ivar.value()));
+        }
+    }
 }
 
 bool MythExternRecApp::config(void)
@@ -186,30 +222,9 @@ bool MythExternRecApp::config(void)
                 .arg(var, settings.value(var).toString()));
         }
         settings.endGroup();
+    }
 
-        /* Replace defined VARs in the subsequently defined VARs */
-        QMap<QString, QString>::iterator Ivar;
-        QMap<QString, QString>::iterator Ivar2;
-        for (Ivar = m_settingVars.begin();
-             Ivar != m_settingVars.end(); ++Ivar)
-        {
-            QString repl = "%" + Ivar.key() + "%";
-            Ivar2 = Ivar;
-            for (++Ivar2; Ivar2 != m_settingVars.end(); ++Ivar2)
-            {
-                if ((*Ivar2).indexOf(repl) >= 0)
-                {
-                    LOG(VB_CHANNEL, LOG_DEBUG, QString("Replacing '%1' with '%2'")
-                        .arg(repl, Ivar.value()));
-                    (*Ivar2).replace(repl, Ivar.value());
-                }
-            }
-        }
-    }
-    else
-    {
-        LOG(VB_CHANNEL, LOG_DEBUG, "No VARIABLES section");
-    }
+    replace_variables();
 
     if (!settings.contains("RECORDER/command"))
     {
@@ -232,13 +247,13 @@ bool MythExternRecApp::config(void)
     m_scanCommand = settings.value("SCANNER/command", "").toString();
     m_scanTimeout = settings.value("SCANNER/timeout", "").toInt();
 
-    ReplaceVariables(m_recCommand);
-    ReplaceVariables(m_recDesc);
-    ReplaceVariables(m_cleanup);
-    ReplaceVariables(m_tuneCommand);
-    ReplaceVariables(m_newEpisodeCommand);
-    ReplaceVariables(m_onDataStart);
-    ReplaceVariables(m_scanCommand);
+    m_recCommand  = ReplaceCmdVariables(m_recCommand);
+    m_recDesc     = ReplaceCmdVariables(m_recDesc);
+    m_cleanup     = ReplaceCmdVariables(m_cleanup);
+    m_tuneCommand = ReplaceCmdVariables(m_tuneCommand);
+    m_onDataStart = ReplaceCmdVariables(m_onDataStart);
+    m_scanCommand = ReplaceCmdVariables(m_scanCommand);
+    m_newEpisodeCommand = ReplaceCmdVariables(m_newEpisodeCommand);
 
     settings.beginGroup("ENVIRONMENT");
 
@@ -415,10 +430,10 @@ Q_SLOT void MythExternRecApp::Cleanup(void)
     QStringList args = MythCommandLineParser::MythSplitCommandString(m_cleanup);
     QString cmd = args.takeFirst();
 
-    LOG(VB_RECORD, LOG_WARNING, LOC +
+    LOG(VB_RECORD, LOG_DEBUG, LOC +
         QString(" Beginning cleanup: '%1'").arg(cmd));
 
-    cmd = replace_extra_args(cmd, m_chaninfo);
+    cmd = ReplaceCmdVariables(cmd);
 
     QProcess cleanup;
     cleanup.start(cmd, args);
@@ -455,7 +470,7 @@ Q_SLOT void MythExternRecApp::DataStarted(void)
         QString cmd = settings.value("ONSTART").toString();
         if (!cmd.isEmpty())
         {
-            ReplaceVariables(cmd);
+            cmd = ReplaceCmdVariables(cmd);
             LOG(VB_CHANNEL, LOG_INFO, LOC +
                 QString(": Using ONSTART cmd from '%1': '%2'")
                 .arg(m_channelsIni, cmd));
@@ -467,7 +482,7 @@ Q_SLOT void MythExternRecApp::DataStarted(void)
 
     if (startcmd.isEmpty())
         return;
-    startcmd = replace_extra_args(startcmd, m_chaninfo);
+    startcmd = ReplaceCmdVariables(startcmd);
 
     bool background = false;
     int pos = startcmd.lastIndexOf(QChar('&'));
@@ -642,7 +657,7 @@ void MythExternRecApp::NewEpisodeStarting(void)
         cmd = cmd.left(pos);
     }
 
-    cmd = replace_extra_args(cmd, m_chaninfo);
+    cmd = ReplaceCmdVariables(cmd);
 
     QStringList args = MythCommandLineParser::MythSplitCommandString(cmd);
     cmd = args.takeFirst();
@@ -713,6 +728,8 @@ Q_SLOT void MythExternRecApp::TuneChannel(const QString & serial,
     QString url;
     bool    background = false;
 
+    replace_variables();
+
     if (!m_channelsIni.isEmpty())
     {
         QSettings settings(m_channelsIni, QSettings::IniFormat);
@@ -721,7 +738,7 @@ Q_SLOT void MythExternRecApp::TuneChannel(const QString & serial,
         QString cmd = settings.value("TUNE").toString();
         if (!cmd.isEmpty())
         {
-            ReplaceVariables(cmd);
+            cmd = ReplaceCmdVariables(cmd);
             LOG(VB_CHANNEL, LOG_INFO, LOC +
                 QString(": Using tune cmd from '%1': '%2'")
                 .arg(m_channelsIni, cmd));
@@ -764,7 +781,7 @@ Q_SLOT void MythExternRecApp::TuneChannel(const QString & serial,
         tunecmd = tunecmd.left(pos);
     }
 
-    tunecmd = replace_extra_args(tunecmd, m_chaninfo);
+    tunecmd = ReplaceCmdVariables(tunecmd);
 
     if (!m_logFile.isEmpty() && m_command.indexOf("%LOGFILE%") >= 0)
     {
@@ -1079,7 +1096,6 @@ Q_SLOT void MythExternRecApp::ProcReadStandardError(void)
             else if (msgs[idx].startsWith("damage", Qt::CaseInsensitive))
             {
                 LOG(VB_RECORD, LOG_WARNING, LOC + QString(">>> %1").arg(msgs[idx]));
-                LOG.flush()
                 emit SendMessage("STATUS", "0", message, "DAMAGE");
             }
             else
