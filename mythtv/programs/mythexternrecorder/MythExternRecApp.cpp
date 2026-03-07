@@ -461,6 +461,7 @@ Q_SLOT void MythExternRecApp::DataStarted(void)
     LOG(VB_RECORD, LOG_INFO, LOC + "DataStarted");
 
     QString startcmd = m_onDataStart;
+    QString from = m_configIni;
 
     if (!m_channelsIni.isEmpty())
     {
@@ -470,11 +471,8 @@ Q_SLOT void MythExternRecApp::DataStarted(void)
         QString cmd = settings.value("ONSTART").toString();
         if (!cmd.isEmpty())
         {
-            cmd = ReplaceCmdVariables(cmd);
-            LOG(VB_CHANNEL, LOG_INFO, LOC +
-                QString(": Using ONSTART cmd from '%1': '%2'")
-                .arg(m_channelsIni, cmd));
             startcmd = cmd;
+            from = m_channelsIni;
         }
 
         settings.endGroup();
@@ -483,6 +481,9 @@ Q_SLOT void MythExternRecApp::DataStarted(void)
     if (startcmd.isEmpty())
         return;
     startcmd = ReplaceCmdVariables(startcmd);
+    LOG(VB_CHANNEL, LOG_INFO, LOC +
+        QString(": Data started cmd from '%1': '%2'")
+        .arg(from, startcmd));
 
     bool background = false;
     int pos = startcmd.lastIndexOf(QChar('&'));
