@@ -44,18 +44,6 @@ foreach(_FLAG IN LISTS CFLAGS)
   endif()
 endforeach()
 
-#
-# Compile this library as a static library on Android because of the circular
-# linking dependency issue with libmythtv (specifically the calls to the
-# MythDVD_* functions).  Cmake only enables PIC code by default on shared
-# libraries, so need to enable PIC on the library later after its defined.
-#
-if(ANDROID OR WIN32)
-  set(LIBRARY_TYPE STATIC)
-else()
-  set(LIBRARY_TYPE SHARED)
-endif()
-
 set(LIBDVDNAV_HEADERS
   dvdnav/dvdnav/dvd_types.h
   dvdnav/dvdnav/dvdnav.h
@@ -77,7 +65,7 @@ set(LIBDVDREAD_HEADERS
 
 add_library(
   mythdvdnav
-  ${LIBRARY_TYPE}
+  SHARED
   ${LIBDVDNAV_HEADERS}
   dvdnav/dvdnav.c
   dvdnav/dvdnav_internal.h
@@ -164,8 +152,10 @@ target_compile_definitions(mythdvdnav PRIVATE
 #
 if(CMAKE_C_COMPILER_ID MATCHES "Clang")
   if(CMAKE_SHARED_LINKER_FLAGS)
-    string(REPLACE "-Wl,--no-undefined" "" CMAKE_SHARED_LINKER_FLAGS
-                   ${CMAKE_SHARED_LINKER_FLAGS})
+    string(REGEX REPLACE " -Wl,--no-undefined " " " CMAKE_SHARED_LINKER_FLAGS
+                        ${CMAKE_SHARED_LINKER_FLAGS})
+    string(REGEX REPLACE " -Wl,--no-undefined$" "" CMAKE_SHARED_LINKER_FLAGS
+                        ${CMAKE_SHARED_LINKER_FLAGS})
   endif()
 
   # Compiles with clang on Apple specifically need "-undefined dynamic_lookup"
@@ -174,17 +164,6 @@ if(CMAKE_C_COMPILER_ID MATCHES "Clang")
   # to the loader.  Its not clear if this helps on Android (since the explicit
   # opposite has just been removed), but it couldn't hurt.
   target_link_options(mythdvdnav PRIVATE -undefined dynamic_lookup)
-endif()
-
-#
-# Compile PIC code on android.  The default for PIC code is ON for shared
-# libraries, but on android this library is built as a static library because of
-# the circular linking dependency issue with libmythtv.
-#
-if(ANDROID)
-  set_target_properties(
-    mythdvdnav PROPERTIES POSITION_INDEPENDENT_CODE ON
-                          SUFFIX "-${CMAKE_PROJECT_VERSION_MAJOR}.a")
 endif()
 
 target_include_directories(
