@@ -97,6 +97,12 @@ else()
 endif()
 
 #
+# Find the libmythdvdnav built by the super-project
+#
+pkg_check_modules(MythDvdNav "mythdvdnav" REQUIRED IMPORTED_TARGET)
+add_build_config(PkgConfig::MythDvdNav "mythdvdnav")
+
+#
 # System packages
 #
 find_package(Iconv REQUIRED)

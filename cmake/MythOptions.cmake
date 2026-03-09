@@ -222,6 +222,8 @@ option(LIBS_ALWAYS_REBUILD "Rebuild libraries on every call to --build." OFF)
 # they only need to be compiled once.
 #
 option(LIBS_INSTALL_EXIV2 "Install the exiv2 library in the libs directory" ON)
+option(LIBS_INSTALL_MYTHDVDNAV
+       "Install the libmythdvdnav library in the libs directory" ON)
 option(LIBS_INSTALL_UDFREAD
        "Install the libudfread library in the libs directory" ON)
 option(LIBS_INSTALL_FFMPEG "Install the FFmpeg libraries in the libs directory"

@@ -382,7 +382,7 @@ target_link_libraries(
          $<TARGET_NAME_IF_EXISTS:PkgConfig::SYSTEMD>
          PkgConfig::LIBCRYPTO
          PkgConfig::SoundTouch
-         mythdvdnav
+         PkgConfig::MythDvdNav
          mythbluray
          mythbase
          mythui
