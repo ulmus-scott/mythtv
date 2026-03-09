@@ -194,3 +194,6 @@ install(FILES
   ${CMAKE_CURRENT_BINARY_DIR}/dvdread/dvdread/version.h
   DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/mythtv/dvdread
   )
+
+configure_file(cmake/mythdvdnav.pc.in mythdvdnav.pc @ONLY)
+install(FILES ${CMAKE_BINARY_DIR}/mythdvdnav.pc DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
