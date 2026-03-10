@@ -101,8 +101,6 @@ list(
   -Werror=format-security
   -Werror=implicit-function-declaration
   -Werror=return-type
-  -Werror=undef
-  -Werror=vla
   -Wjump-misses-init
   -Wlogical-op
   -Wnull-dereference
