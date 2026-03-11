@@ -27,13 +27,12 @@ class MUI_PUBLIC MythPainterGPU : public MythPainter
     void SetViewControl    (ViewControls Control);
 
   public slots:
-    void CurrentDPIChanged (qreal DPI);
+    void DisplayChanged ();
 
   protected:
     MythMainWindow* m_parent      { nullptr };
     ViewControls   m_viewControl  { Viewport | Framebuffer };
     qreal          m_pixelRatio   { 1.0     };
-    qreal          m_DPI          { 0.0     };
     bool           m_usingHighDPI { false   };
     QSize          m_lastSize;
 };

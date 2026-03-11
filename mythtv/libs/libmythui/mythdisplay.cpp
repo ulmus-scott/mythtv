@@ -442,14 +442,14 @@ void MythDisplay::ScreenChanged(QScreen *qScreen)
     connect(m_screen, &QScreen::geometryChanged, this, &MythDisplay::GeometryChanged);
     connect(m_screen, &QScreen::physicalDotsPerInchChanged, this, &MythDisplay::PhysicalDPIChanged);
     Initialise();
-    emit CurrentScreenChanged(qScreen);
+    emit DisplayChanged();
 }
 
 void MythDisplay::PhysicalDPIChanged(qreal DPI)
 {
     LOG(VB_GENERAL, LOG_INFO, LOC + QString("Qt screen pixel ratio changed to %1")
         .arg(DPI, 2, 'f', 2, '0'));
-    emit CurrentDPIChanged(DPI);
+    emit DisplayChanged();
 }
 
 void MythDisplay::PrimaryScreenChanged(QScreen* qScreen)
@@ -1097,7 +1097,7 @@ void MythDisplay::WaitForScreenChange()
     QTimer timer;
     timer.setSingleShot(true);
     connect(&timer, &QTimer::timeout,
-            &timer, [](){ LOG(VB_GENERAL, LOG_WARNING, LOC + "Timed out wating for screen change"); });
+            &timer, [](){ LOG(VB_GENERAL, LOG_WARNING, LOC + "Timed out waiting for screen change"); });
     QObject::connect(&timer, &QTimer::timeout, &loop, &QEventLoop::quit);
     QObject::connect(m_screen, &QScreen::geometryChanged, &loop, &QEventLoop::quit);
     // 500ms maximum wait

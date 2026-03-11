@@ -80,23 +80,16 @@ void MythVideoBounds::SetDisplay(MythDisplay *mDisplay)
     }
 
     m_display = mDisplay;
-    connect(m_display, &MythDisplay::CurrentScreenChanged, this, &MythVideoBounds::ScreenChanged);
+    connect(m_display, &MythDisplay::DisplayChanged, this, &MythVideoBounds::DisplayChanged);
+}
+
+void MythVideoBounds::DisplayChanged()
+{
+    PopulateGeometry();
 #ifdef Q_OS_MACOS
-    connect(m_display, &MythDisplay::PhysicalDPIChanged,   this, &MythVideoBounds::PhysicalDPIChanged);
-#endif
-}
-
-void MythVideoBounds::ScreenChanged(QScreen */*screen*/)
-{
-    PopulateGeometry();
-    MoveResize();
-}
-
-void MythVideoBounds::PhysicalDPIChanged(qreal /*DPI*/)
-{
     // PopulateGeometry will update m_devicePixelRatio
-    PopulateGeometry();
     m_windowRect = m_displayVisibleRect = SCALED_RECT(m_rawWindowRect, m_devicePixelRatio);
+#endif
     MoveResize();
 }
 

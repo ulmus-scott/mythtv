@@ -63,9 +63,8 @@ class MUI_PUBLIC MythDisplay : public QObject
     static void  GeometryChanged       (QRect Geometry);
 
   signals:
-    void         CurrentScreenChanged  (QScreen *qScreen);
+    void         DisplayChanged        ();
     void         ScreenCountChanged    (int      Screens);
-    void         CurrentDPIChanged     (qreal    DPI);
 
   protected:
     static MythDisplay* Create(MythMainWindow* MainWindow);

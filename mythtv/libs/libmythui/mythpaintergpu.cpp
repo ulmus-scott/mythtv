@@ -1,4 +1,5 @@
 #include <QtGlobal>
+#include <QWindow>
 
 // MythTV
 #include "libmythbase/mythlogging.h"
@@ -12,9 +13,9 @@ MythPainterGPU::MythPainterGPU(MythMainWindow* Parent)
     MythDisplay* display = m_parent->GetDisplay();
     QScreen *screen = display->GetCurrentScreen();
 
-    CurrentDPIChanged(screen->physicalDotsPerInch());
-    connect(display, &MythDisplay::CurrentDPIChanged, this,
-            &MythPainterGPU::CurrentDPIChanged);
+    DisplayChanged();
+    connect(display, &MythDisplay::DisplayChanged, this,
+            &MythPainterGPU::DisplayChanged);
 }
 
 void MythPainterGPU::SetViewControl(ViewControls Control)
@@ -22,11 +23,10 @@ void MythPainterGPU::SetViewControl(ViewControls Control)
     m_viewControl = Control;
 }
 
-void MythPainterGPU::CurrentDPIChanged(qreal DPI)
+void MythPainterGPU::DisplayChanged()
 {
     QScreen *screen = m_parent->GetDisplay()->GetCurrentScreen();
 
-    m_DPI = DPI;
     m_pixelRatio = screen->devicePixelRatio();
     m_usingHighDPI = !qFuzzyCompare(m_pixelRatio, 1.0);
 }
