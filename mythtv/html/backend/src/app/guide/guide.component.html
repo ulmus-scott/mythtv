@@ -108,8 +108,9 @@
                 [totalRecords]="m_programGuide.ProgramGuide.TotalAvailable">
                 <ng-template pTemplate="header" styleClass="timeHeader">
                 </ng-template>
-                <ng-template let-channelrow let-i="rowIndex" pTemplate="listItem">
-                    <div class="grid col-12 p-3">
+                <!-- <ng-template let-channelrow let-i="rowIndex" pTemplate="listItem"> -->
+                <ng-template let-channels  pTemplate="list">
+                    <div class="grid col-12 p-3" *ngFor="let channelrow of channels;let i = index">
                         <ng-container *ngIf="( i % 5 ) == 0">
                             <div class="col-12">
                                 <app-guide-timebar [guide]="this"></app-guide-timebar>

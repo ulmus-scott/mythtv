@@ -6,13 +6,14 @@ import { TranslateModule } from '@ngx-translate/core';
 import { NgClass } from '@angular/common';
 import { SharedModule } from 'primeng/api';
 import { DataViewModule } from 'primeng/dataview';
+import { NgFor } from '@angular/common';
 
 @Component({
     selector: 'app-legend',
     templateUrl: './legend.component.html',
     styleUrls: ['./legend.component.css'],
     standalone: true,
-    imports: [DataViewModule, SharedModule, NgClass, TranslateModule]
+    imports: [DataViewModule, SharedModule, NgClass, TranslateModule, NgFor]
 })
 export class LegendComponent implements OnInit {
   @Input() programGuide!: ProgramGuide | null;

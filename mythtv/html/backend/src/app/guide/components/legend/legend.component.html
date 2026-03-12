@@ -4,8 +4,8 @@
             <ng-template pTemplate="header">
                 {{ 'dashboard.guide.typecolors' | translate }}
             </ng-template>
-            <ng-template let-type let-i="rowIndex" pTemplate="gridItem">
-                <div class="md:col-2 px-3 py-1">
+            <ng-template let-types pTemplate="gridItem">
+                <div class="md:col-2 px-3 py-1" *ngFor="let type of types">
                     <div [ngClass]="['guide_type_' + type,'guide_type_default']">
                         &nbsp;{{ type }}</div>
                 </div>
@@ -16,8 +16,8 @@
             <ng-template pTemplate="header">
                 {{ 'dashboard.guide.catcolors' | translate }}
             </ng-template>
-            <ng-template let-category let-i="rowIndex" pTemplate="gridItem">
-                <div class="md:col-2 px-3 py-1">
+            <ng-template let-categories pTemplate="gridItem">
+                <div class="md:col-2 px-3 py-1" *ngFor="let category of categories">
                     <div [ngClass]="['guide_cat_' + category.toLowerCase().replace(regex, '_'),'px-1']">
                         {{ category }}</div>
                 </div>
