@@ -1,19 +1,68 @@
 import { Component, HostListener, OnInit, ViewEncapsulation } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
 import { CanComponentDeactivate } from 'src/app/can-deactivate-guard.service';
 import { CaptureCardService } from 'src/app/services/capture-card.service';
 import { CaptureCardList, CardAndInput, CardType, CardTypeList, DiseqcTreeList } from 'src/app/services/interfaces/capture-card.interface';
 import { MythService } from 'src/app/services/myth.service';
 import { SetupService } from 'src/app/services/setup.service';
+import { FirewireComponent } from './firewire/firewire.component';
+import { VboxComponent } from './vbox/vbox.component';
+import { SatipComponent } from './satip/satip.component';
+import { HdpvrComponent } from './hdpvr/hdpvr.component';
+import { V4l2Component } from './v4l2/v4l2.component';
+import { DemoComponent } from './demo/demo.component';
+import { ImportComponent } from './import/import.component';
+import { IptvComponent } from './iptv/iptv.component';
+import { HdhomerunComponent } from './hdhomerun/hdhomerun.component';
+import { ExternalComponent } from './external/external.component';
+import { DvbComponent } from './dvb/dvb.component';
+import { CetonComponent } from './ceton/ceton.component';
+import { AccordionModule } from 'primeng/accordion';
+import { MessageModule } from 'primeng/message';
+import { NgIf, NgFor, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
+import { SharedModule } from 'primeng/api';
+import { ListboxModule } from 'primeng/listbox';
+import { DialogModule } from 'primeng/dialog';
+import { ButtonModule } from 'primeng/button';
+import { CardModule } from 'primeng/card';
 
 @Component({
-  selector: 'app-capture-cards',
-  templateUrl: './capture-cards.component.html',
-  styleUrls: ['./capture-cards.component.css'],
-  encapsulation: ViewEncapsulation.None,
+    selector: 'app-capture-cards',
+    templateUrl: './capture-cards.component.html',
+    styleUrls: ['./capture-cards.component.css'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [
+        CardModule,
+        ButtonModule,
+        DialogModule,
+        ListboxModule,
+        FormsModule,
+        SharedModule,
+        NgIf,
+        MessageModule,
+        AccordionModule,
+        NgFor,
+        NgSwitch,
+        NgSwitchCase,
+        CetonComponent,
+        DvbComponent,
+        ExternalComponent,
+        HdhomerunComponent,
+        IptvComponent,
+        ImportComponent,
+        DemoComponent,
+        V4l2Component,
+        HdpvrComponent,
+        SatipComponent,
+        VboxComponent,
+        FirewireComponent,
+        NgSwitchDefault,
+        TranslateModule,
+    ],
 })
 export class CaptureCardsComponent implements OnInit, CanComponentDeactivate {
 

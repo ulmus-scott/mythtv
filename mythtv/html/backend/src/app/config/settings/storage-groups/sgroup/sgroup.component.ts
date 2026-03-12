@@ -1,8 +1,17 @@
 import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { TranslateService } from '@ngx-translate/core';
+import { NgForm, FormsModule } from '@angular/forms';
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { MythService } from 'src/app/services/myth.service';
 import { SetupService } from 'src/app/services/setup.service';
+import { MessageModule } from 'primeng/message';
+import { ListboxModule } from 'primeng/listbox';
+import { DialogModule } from 'primeng/dialog';
+import { TooltipModule } from 'primeng/tooltip';
+import { RippleModule } from 'primeng/ripple';
+import { ButtonModule } from 'primeng/button';
+import { NgFor, NgIf } from '@angular/common';
+import { SharedModule } from 'primeng/api';
+import { CardModule } from 'primeng/card';
 
 interface GroupCard {
   GroupName: string,
@@ -11,9 +20,11 @@ interface GroupCard {
 };
 
 @Component({
-  selector: 'app-sgroup',
-  templateUrl: './sgroup.component.html',
-  styleUrls: ['./sgroup.component.css']
+    selector: 'app-sgroup',
+    templateUrl: './sgroup.component.html',
+    styleUrls: ['./sgroup.component.css'],
+    standalone: true,
+    imports: [FormsModule, CardModule, SharedModule, TranslateModule, NgFor, ButtonModule, RippleModule, TooltipModule, NgIf, DialogModule, ListboxModule, MessageModule]
 })
 export class SgroupComponent implements OnInit, AfterViewInit {
 

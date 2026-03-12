@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { TranslateService } from '@ngx-translate/core';
+import { NgForm, FormsModule } from '@angular/forms';
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { PartialObserver, Subject } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 import { CaptureCardService } from 'src/app/services/capture-card.service';
@@ -11,11 +11,24 @@ import { VideoSource, VideoSourceList } from 'src/app/services/interfaces/videos
 import { SetupService } from 'src/app/services/setup.service';
 import { InputConnectionsComponent } from '../input-connections.component';
 import { ChannelscanComponent } from '../channelscan/channelscan.component';
+import { MessageModule } from 'primeng/message';
+import { DialogModule } from 'primeng/dialog';
+import { ButtonModule } from 'primeng/button';
+import { FieldsetModule } from 'primeng/fieldset';
+import { CheckboxModule } from 'primeng/checkbox';
+import { DropdownModule } from 'primeng/dropdown';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { NgIf, NgSwitch, NgSwitchCase } from '@angular/common';
+import { SharedModule } from 'primeng/api';
+import { CardModule } from 'primeng/card';
 
 @Component({
-  selector: 'app-iconnection',
-  templateUrl: './iconnection.component.html',
-  styleUrls: ['./iconnection.component.css']
+    selector: 'app-iconnection',
+    templateUrl: './iconnection.component.html',
+    styleUrls: ['./iconnection.component.css'],
+    standalone: true,
+    imports: [FormsModule, CardModule, SharedModule, NgIf, NgSwitch, NgSwitchCase, InputNumberModule, RadioButtonModule, DropdownModule, CheckboxModule, FieldsetModule, ChannelscanComponent, ButtonModule, DialogModule, MessageModule, TranslateModule]
 })
 export class IconnectionComponent implements OnInit, AfterViewInit {
 

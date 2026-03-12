@@ -1,12 +1,19 @@
 import { Component, HostListener, OnInit, ViewEncapsulation } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
 import { CanComponentDeactivate } from 'src/app/can-deactivate-guard.service';
 import { StorageGroupDir } from 'src/app/services/interfaces/storagegroup.interface';
 import { MythService } from 'src/app/services/myth.service';
 import { SetupService } from 'src/app/services/setup.service';
+import { SgroupComponent } from './sgroup/sgroup.component';
+import { NgFor, NgIf } from '@angular/common';
+import { AccordionModule } from 'primeng/accordion';
+import { SharedModule } from 'primeng/api';
+import { DialogModule } from 'primeng/dialog';
+import { ButtonModule } from 'primeng/button';
+import { CardModule } from 'primeng/card';
 
 
 interface GroupCard {
@@ -16,10 +23,23 @@ interface GroupCard {
 };
 
 @Component({
-  selector: 'app-storage-groups',
-  templateUrl: './storage-groups.component.html',
-  styleUrls: ['./storage-groups.component.css'],
-  encapsulation: ViewEncapsulation.None,
+    selector: 'app-storage-groups',
+    templateUrl: './storage-groups.component.html',
+    styleUrls: ['./storage-groups.component.css'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [
+        CardModule,
+        ButtonModule,
+        DialogModule,
+        FormsModule,
+        SharedModule,
+        AccordionModule,
+        NgFor,
+        NgIf,
+        TranslateModule,
+        SgroupComponent,
+    ],
 })
 
 export class StorageGroupsComponent implements OnInit, CanComponentDeactivate {

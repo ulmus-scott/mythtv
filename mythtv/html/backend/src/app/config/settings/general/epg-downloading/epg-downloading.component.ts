@@ -1,13 +1,23 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormsModule } from '@angular/forms';
 
 import { MythService } from 'src/app/services/myth.service';
 import { SetupService } from 'src/app/services/setup.service';
+import { TranslateModule } from '@ngx-translate/core';
+import { ButtonModule } from 'primeng/button';
+import { MessageModule } from 'primeng/message';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { NgIf } from '@angular/common';
+import { CheckboxModule } from 'primeng/checkbox';
+import { SharedModule } from 'primeng/api';
+import { CardModule } from 'primeng/card';
 
 @Component({
-  selector: 'app-epg-downloading',
-  templateUrl: './epg-downloading.component.html',
-  styleUrls: ['./epg-downloading.component.css']
+    selector: 'app-epg-downloading',
+    templateUrl: './epg-downloading.component.html',
+    styleUrls: ['./epg-downloading.component.css'],
+    standalone: true,
+    imports: [FormsModule, CardModule, SharedModule, CheckboxModule, NgIf, InputNumberModule, MessageModule, ButtonModule, TranslateModule]
 })
 
 export class EpgDownloadingComponent implements OnInit, AfterViewInit {

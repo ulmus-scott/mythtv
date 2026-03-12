@@ -1,18 +1,34 @@
 import { Component, HostListener, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
 import { ConfigService } from 'src/app/services/config.service';
 import { SystemEvent, SystemEventList } from 'src/app/services/interfaces/config.interface';
 import { MythService } from 'src/app/services/myth.service';
 import { SetupService } from 'src/app/services/setup.service';
+import { ButtonModule } from 'primeng/button';
+import { MessageModule } from 'primeng/message';
+import { NgFor, NgIf } from '@angular/common';
+import { SharedModule } from 'primeng/api';
+import { CardModule } from 'primeng/card';
 
 @Component({
-  selector: 'app-system-events',
-  templateUrl: './system-events.component.html',
-  styleUrls: ['./system-events.component.css'],
-  encapsulation: ViewEncapsulation.None,
+    selector: 'app-system-events',
+    templateUrl: './system-events.component.html',
+    styleUrls: ['./system-events.component.css'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [
+        FormsModule,
+        CardModule,
+        SharedModule,
+        NgFor,
+        NgIf,
+        MessageModule,
+        ButtonModule,
+        TranslateModule,
+    ],
 })
 
 export class SystemEventsComponent implements OnInit {

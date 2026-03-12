@@ -1,12 +1,17 @@
 import { AfterViewInit, Component, Input, OnInit, Output, ViewChild, EventEmitter } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { TranslateService } from '@ngx-translate/core';
+import { NgForm, FormsModule } from '@angular/forms';
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { CaptureCardService } from 'src/app/services/capture-card.service';
 import { DiseqcTree, DiseqcTreeList } from 'src/app/services/interfaces/capture-card.interface';
 import { SetupService } from 'src/app/services/setup.service';
 import { DiseqcSettingBase } from '../diseqc-setting-base';
 import { DvbComponent } from '../dvb.component';
 import { Observable, Observer } from 'rxjs';
+import { CheckboxModule } from 'primeng/checkbox';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { DropdownModule } from 'primeng/dropdown';
+import { SharedModule } from 'primeng/api';
+import { CardModule } from 'primeng/card';
 
 interface LnbPreset {
   Name: string;
@@ -23,9 +28,11 @@ interface LnbSubType {
 }
 
 @Component({
-  selector: 'app-lnb',
-  templateUrl: './lnb.component.html',
-  styleUrls: ['./lnb.component.css']
+    selector: 'app-lnb',
+    templateUrl: './lnb.component.html',
+    styleUrls: ['./lnb.component.css'],
+    standalone: true,
+    imports: [FormsModule, CardModule, SharedModule, DropdownModule, InputNumberModule, CheckboxModule, TranslateModule]
 })
 export class LnbComponent implements OnInit, AfterViewInit, DiseqcSettingBase {
 

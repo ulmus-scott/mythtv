@@ -4,15 +4,28 @@ import { RecRule, RecRuleFilter } from '../services/interfaces/recording.interfa
 import { DvrService } from '../services/dvr.service';
 import { InputList } from '../services/interfaces/input.interface';
 import { Channel } from '../services/interfaces/channel.interface';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { MythService } from '../services/myth.service';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormsModule } from '@angular/forms';
 import { RecordScheduleRequest } from '../services/interfaces/dvr.interface';
 import { Observable, of } from 'rxjs';
 import { UtilityService } from '../services/utility.service';
 import { ChannelService } from '../services/channel.service';
-import { OverlayPanel } from 'primeng/overlaypanel';
+import { OverlayPanel, OverlayPanelModule } from 'primeng/overlaypanel';
 import { GuideService } from '../services/guide.service';
+import { ButtonModule } from 'primeng/button';
+import { ScrollPanelModule } from 'primeng/scrollpanel';
+import { MessageModule } from 'primeng/message';
+import { SharedModule } from 'primeng/api';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { CheckboxModule } from 'primeng/checkbox';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { CalendarModule } from 'primeng/calendar';
+import { DividerModule } from 'primeng/divider';
+import { DropdownModule } from 'primeng/dropdown';
+import { DialogModule } from 'primeng/dialog';
+import { NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
 
 export interface SchedulerSummary {
   refresh(): void;
@@ -38,9 +51,11 @@ interface MyChannel extends Channel {
 }
 
 @Component({
-  selector: 'app-schedule',
-  templateUrl: './schedule.component.html',
-  styleUrls: ['./schedule.component.css']
+    selector: 'app-schedule',
+    templateUrl: './schedule.component.html',
+    styleUrls: ['./schedule.component.css'],
+    standalone: true,
+    imports: [FormsModule, NgIf, DialogModule, DropdownModule, NgSwitch, NgSwitchCase, NgSwitchDefault, DividerModule, CalendarModule, InputNumberModule, CheckboxModule, MultiSelectModule, RadioButtonModule, SharedModule, MessageModule, OverlayPanelModule, ScrollPanelModule, ButtonModule, TranslateModule]
 })
 export class ScheduleComponent implements OnInit {
   @Input() inter!: ScheduleLink;

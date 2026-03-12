@@ -1,9 +1,9 @@
 import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { TranslateService } from '@ngx-translate/core';
-import { FilterMatchMode, MenuItem, MessageService, SelectItem, SortMeta } from 'primeng/api';
-import { Menu } from 'primeng/menu';
-import { Table, TableLazyLoadEvent } from 'primeng/table';
+import { NgForm, FormsModule } from '@angular/forms';
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { FilterMatchMode, MenuItem, MessageService, SelectItem, SortMeta, SharedModule } from 'primeng/api';
+import { Menu, MenuModule } from 'primeng/menu';
+import { Table, TableLazyLoadEvent, TableModule } from 'primeng/table';
 import { PartialObserver } from 'rxjs';
 import { DvrService } from 'src/app/services/dvr.service';
 import { GetRecordedListRequest, UpdateRecordedMetadataRequest } from 'src/app/services/interfaces/dvr.interface';
@@ -11,12 +11,26 @@ import { ScheduleOrProgram } from 'src/app/services/interfaces/program.interface
 import { JobQCommands } from 'src/app/services/interfaces/setup.interface';
 import { SetupService } from 'src/app/services/setup.service';
 import { UtilityService } from 'src/app/services/utility.service';
+import { ListboxModule } from 'primeng/listbox';
+import { MessageModule } from 'primeng/message';
+import { CalendarModule } from 'primeng/calendar';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { DialogModule } from 'primeng/dialog';
+import { DropdownModule } from 'primeng/dropdown';
+import { NgIf, NgClass, DecimalPipe } from '@angular/common';
+import { TooltipModule } from 'primeng/tooltip';
+import { RippleModule } from 'primeng/ripple';
+import { ButtonModule } from 'primeng/button';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
-  selector: 'app-recordings',
-  templateUrl: './recordings.component.html',
-  styleUrls: ['./recordings.component.css'],
-  providers: [MessageService]
+    selector: 'app-recordings',
+    templateUrl: './recordings.component.html',
+    styleUrls: ['./recordings.component.css'],
+    providers: [MessageService],
+    standalone: true,
+    imports: [FormsModule, ToastModule, MenuModule, ButtonModule, RippleModule, TooltipModule, NgIf, DropdownModule, TableModule, SharedModule, NgClass, DialogModule, InputTextareaModule, InputNumberModule, CalendarModule, MessageModule, ListboxModule, DecimalPipe, TranslateModule]
 })
 export class RecordingsComponent implements OnInit {
 

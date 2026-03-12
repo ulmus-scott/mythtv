@@ -1,15 +1,26 @@
 import { Component, HostListener, OnInit, ViewChild } from "@angular/core";
-import { NgForm } from "@angular/forms";
-import { TranslateService } from "@ngx-translate/core";
+import { NgForm, FormsModule } from "@angular/forms";
+import { TranslateService, TranslateModule } from "@ngx-translate/core";
 import { Observable, of, PartialObserver } from "rxjs";
 import { DvrService } from "src/app/services/dvr.service";
 import { PlayGroup } from "src/app/services/interfaces/dvr.interface";
 import { SetupService } from "src/app/services/setup.service";
+import { MessageModule } from "primeng/message";
+import { InputNumberModule } from "primeng/inputnumber";
+import { DialogModule } from "primeng/dialog";
+import { TooltipModule } from "primeng/tooltip";
+import { RippleModule } from "primeng/ripple";
+import { ButtonModule } from "primeng/button";
+import { SharedModule } from "primeng/api";
+import { TableModule } from "primeng/table";
+import { NgIf } from "@angular/common";
 
 @Component({
-  selector: 'app-playback-groups',
-  templateUrl: './playback-groups.component.html',
-  styleUrls: ['./playback-groups.component.css']
+    selector: 'app-playback-groups',
+    templateUrl: './playback-groups.component.html',
+    styleUrls: ['./playback-groups.component.css'],
+    standalone: true,
+    imports: [NgIf, TableModule, SharedModule, ButtonModule, RippleModule, TooltipModule, FormsModule, DialogModule, InputNumberModule, MessageModule, TranslateModule]
 })
 export class PlaybackGroupsComponent implements OnInit {
 

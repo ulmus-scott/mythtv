@@ -1,13 +1,23 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormsModule } from '@angular/forms';
 
 import { MythService } from 'src/app/services/myth.service';
 import { SetupService } from 'src/app/services/setup.service';
+import { TranslateModule } from '@ngx-translate/core';
+import { ButtonModule } from 'primeng/button';
+import { MessageModule } from 'primeng/message';
+import { NgIf } from '@angular/common';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { FieldsetModule } from 'primeng/fieldset';
+import { SharedModule } from 'primeng/api';
+import { CardModule } from 'primeng/card';
 
 @Component({
-  selector: 'app-backend-wakeup',
-  templateUrl: './backend-wakeup.component.html',
-  styleUrls: ['./backend-wakeup.component.css']
+    selector: 'app-backend-wakeup',
+    templateUrl: './backend-wakeup.component.html',
+    styleUrls: ['./backend-wakeup.component.css'],
+    standalone: true,
+    imports: [FormsModule, CardModule, SharedModule, FieldsetModule, InputNumberModule, NgIf, MessageModule, ButtonModule, TranslateModule]
 })
 export class BackendWakeupComponent implements OnInit, AfterViewInit {
 

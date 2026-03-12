@@ -19,11 +19,18 @@ import { GetHashResponse } from '../services/interfaces/content.interface';
 import { GetCategoryListResponse } from '../services/interfaces/guide.interface';
 import { GuideService } from '../services/guide.service';
 import { WebsocketService } from '../services/websocket.service';
+import { TranslateModule } from '@ngx-translate/core';
+import { ButtonModule } from 'primeng/button';
+import { SharedModule } from 'primeng/api';
+import { AccordionModule } from 'primeng/accordion';
+import { NgIf, NgFor, AsyncPipe, KeyValuePipe } from '@angular/common';
 
 @Component({
     selector: 'app-testbed',
     templateUrl: './testbed.component.html',
-    styleUrls: ['./testbed.component.css']
+    styleUrls: ['./testbed.component.css'],
+    standalone: true,
+    imports: [NgIf, AccordionModule, NgFor, SharedModule, ButtonModule, AsyncPipe, KeyValuePipe, TranslateModule]
 })
 
 export class TestbedComponent implements OnInit {

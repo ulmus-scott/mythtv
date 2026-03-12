@@ -1,16 +1,27 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { TranslateService } from '@ngx-translate/core';
+import { NgForm, FormsModule } from '@angular/forms';
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { PartialObserver } from 'rxjs';
 import { CaptureCardService } from 'src/app/services/capture-card.service';
 import { RecProfile, RecProfileGroup } from 'src/app/services/interfaces/recprofile.interface';
 import { SetupService } from 'src/app/services/setup.service';
 import { ProfileGroupComponent } from '../profile-group.component';
+import { ButtonModule } from 'primeng/button';
+import { MessageModule } from 'primeng/message';
+import { FieldsetModule } from 'primeng/fieldset';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { CheckboxModule } from 'primeng/checkbox';
+import { NgIf } from '@angular/common';
+import { SharedModule } from 'primeng/api';
+import { CardModule } from 'primeng/card';
 
 @Component({
-  selector: 'app-recprofile',
-  templateUrl: './recprofile.component.html',
-  styleUrls: ['./recprofile.component.css']
+    selector: 'app-recprofile',
+    templateUrl: './recprofile.component.html',
+    styleUrls: ['./recprofile.component.css'],
+    standalone: true,
+    imports: [FormsModule, CardModule, SharedModule, NgIf, CheckboxModule, InputNumberModule, DropdownModule, FieldsetModule, MessageModule, ButtonModule, TranslateModule]
 })
 export class RecprofileComponent implements OnInit, AfterViewInit {
 

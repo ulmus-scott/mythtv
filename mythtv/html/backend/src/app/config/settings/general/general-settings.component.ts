@@ -1,17 +1,51 @@
 import { Component, HostListener, OnInit, ViewEncapsulation } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
 import { CanComponentDeactivate } from 'src/app/can-deactivate-guard.service';
 
 import { SetupService } from 'src/app/services/setup.service';
+import { ButtonModule } from 'primeng/button';
+import { EpgDownloadingComponent } from './epg-downloading/epg-downloading.component';
+import { JobqueueCommandsComponent } from './jobqueue-commands/jobqueue-commands.component';
+import { JobqueueGlobalComponent } from './jobqueue-global/jobqueue-global.component';
+import { JobqueueBackendComponent } from './jobqueue-backend/jobqueue-backend.component';
+import { BackendControlComponent } from './backend-control/backend-control.component';
+import { BackendWakeupComponent } from './backend-wakeup/backend-wakeup.component';
+import { ShutdownWakeupComponent } from './shutdown-wakeup/shutdown-wakeup.component';
+import { EitScannerComponent } from './eit-scanner/eit-scanner.component';
+import { MiscSettingsComponent } from './misc-settings/misc-settings.component';
+import { LocaleComponent } from './locale/locale.component';
+import { HostAddressComponent } from './host-address/host-address.component';
+import { SharedModule } from 'primeng/api';
+import { AccordionModule } from 'primeng/accordion';
+import { CardModule } from 'primeng/card';
 
 @Component({
     selector: 'app-general-settings',
     templateUrl: './general-settings.component.html',
     styleUrls: ['./general-settings.component.css'],
     encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [
+        CardModule,
+        AccordionModule,
+        SharedModule,
+        HostAddressComponent,
+        LocaleComponent,
+        MiscSettingsComponent,
+        EitScannerComponent,
+        ShutdownWakeupComponent,
+        BackendWakeupComponent,
+        BackendControlComponent,
+        JobqueueBackendComponent,
+        JobqueueGlobalComponent,
+        JobqueueCommandsComponent,
+        EpgDownloadingComponent,
+        ButtonModule,
+        TranslateModule,
+    ],
 })
 export class SettingsComponent implements OnInit, CanComponentDeactivate {
 

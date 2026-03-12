@@ -1,13 +1,23 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { TranslateService } from '@ngx-translate/core';
+import { NgForm, FormsModule } from '@angular/forms';
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { MythService } from 'src/app/services/myth.service';
 import { SetupService } from 'src/app/services/setup.service';
+import { ButtonModule } from 'primeng/button';
+import { MessageModule } from 'primeng/message';
+import { NgIf } from '@angular/common';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { CheckboxModule } from 'primeng/checkbox';
+import { DropdownModule } from 'primeng/dropdown';
+import { SharedModule } from 'primeng/api';
+import { CardModule } from 'primeng/card';
 
 @Component({
-  selector: 'app-auto-expire',
-  templateUrl: './auto-expire.component.html',
-  styleUrls: ['./auto-expire.component.css']
+    selector: 'app-auto-expire',
+    templateUrl: './auto-expire.component.html',
+    styleUrls: ['./auto-expire.component.css'],
+    standalone: true,
+    imports: [FormsModule, CardModule, SharedModule, DropdownModule, CheckboxModule, InputNumberModule, NgIf, MessageModule, ButtonModule, TranslateModule]
 })
 export class AutoExpireComponent implements OnInit, AfterViewInit {
 

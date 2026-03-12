@@ -9,9 +9,8 @@ describe('GuideComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GuideComponent ],
-      imports:      [ HttpClientModule ]
-    })
+    imports: [HttpClientModule, GuideComponent]
+})
     .compileComponents();
   });
 

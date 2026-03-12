@@ -1,8 +1,8 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import { SortMeta } from 'primeng/api';
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { SortMeta, SharedModule } from 'primeng/api';
 import { Observable, of, PartialObserver } from 'rxjs';
 import { ChannelService } from 'src/app/services/channel.service';
 import { Channel, ChannelRestoreData, CommMethod, DBChannelRequest } from 'src/app/services/interfaces/channel.interface';
@@ -11,6 +11,20 @@ import { VideoSource } from 'src/app/services/interfaces/videosource.interface';
 import { MythService } from 'src/app/services/myth.service';
 import { SetupService } from 'src/app/services/setup.service';
 import { UtilityService } from 'src/app/services/utility.service';
+import { ListboxModule } from 'primeng/listbox';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { MessageModule } from 'primeng/message';
+import { AccordionModule } from 'primeng/accordion';
+import { CheckboxModule } from 'primeng/checkbox';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { DialogModule } from 'primeng/dialog';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { DropdownModule } from 'primeng/dropdown';
+import { TooltipModule } from 'primeng/tooltip';
+import { RippleModule } from 'primeng/ripple';
+import { ButtonModule } from 'primeng/button';
+import { TableModule } from 'primeng/table';
+import { NgIf, NgClass } from '@angular/common';
 
 
 interface MyChannel extends Channel {
@@ -19,9 +33,11 @@ interface MyChannel extends Channel {
 }
 
 @Component({
-  selector: 'app-channel-editor',
-  templateUrl: './channel-editor.component.html',
-  styleUrls: ['./channel-editor.component.css']
+    selector: 'app-channel-editor',
+    templateUrl: './channel-editor.component.html',
+    styleUrls: ['./channel-editor.component.css'],
+    standalone: true,
+    imports: [NgIf, TableModule, SharedModule, ButtonModule, RippleModule, TooltipModule, DropdownModule, FormsModule, NgClass, ProgressSpinnerModule, DialogModule, InputNumberModule, CheckboxModule, AccordionModule, MessageModule, RadioButtonModule, ListboxModule, TranslateModule]
 })
 export class ChannelEditorComponent implements OnInit {
 

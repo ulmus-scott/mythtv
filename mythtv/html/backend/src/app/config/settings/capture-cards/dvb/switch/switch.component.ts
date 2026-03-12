@@ -1,11 +1,23 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { TranslateService } from '@ngx-translate/core';
+import { AfterViewInit, Component, EventEmitter, forwardRef, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { NgForm, FormsModule } from '@angular/forms';
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { Observable, Observer } from 'rxjs';
 import { CaptureCardService } from 'src/app/services/capture-card.service';
 import { DiseqcParm, DiseqcTree, DiseqcTreeList } from 'src/app/services/interfaces/capture-card.interface';
 import { DiseqcSettingBase } from '../diseqc-setting-base';
 import { DvbComponent } from '../dvb.component';
+import { ListboxModule } from 'primeng/listbox';
+import { UnicableComponent } from '../unicable/unicable.component';
+import { RotorComponent } from '../rotor/rotor.component';
+import { LnbComponent } from '../lnb/lnb.component';
+import { DialogModule } from 'primeng/dialog';
+import { ButtonModule } from 'primeng/button';
+import { FieldsetModule } from 'primeng/fieldset';
+import { NgIf, NgFor } from '@angular/common';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { SharedModule } from 'primeng/api';
+import { CardModule } from 'primeng/card';
 
 interface SwitchType {
   Name: string;
@@ -13,9 +25,11 @@ interface SwitchType {
 }
 
 @Component({
-  selector: 'app-switch',
-  templateUrl: './switch.component.html',
-  styleUrls: ['./switch.component.css']
+    selector: 'app-switch',
+    templateUrl: './switch.component.html',
+    styleUrls: ['./switch.component.css'],
+    standalone: true,
+    imports: [FormsModule, CardModule, SharedModule, InputNumberModule, DropdownModule, NgIf, NgFor, FieldsetModule, ButtonModule, DialogModule, LnbComponent, forwardRef(()=> RotorComponent), forwardRef(()=> UnicableComponent), ListboxModule, TranslateModule]
 })
 export class SwitchComponent implements OnInit, AfterViewInit, DiseqcSettingBase {
 

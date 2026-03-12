@@ -1,8 +1,18 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { TranslateService } from '@ngx-translate/core';
+import { NgForm, FormsModule } from '@angular/forms';
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { DataService } from 'src/app/services/data.service';
 import { MythService } from 'src/app/services/myth.service';
+import { PasswordModule } from 'primeng/password';
+import { DialogModule } from 'primeng/dialog';
+import { TooltipModule } from 'primeng/tooltip';
+import { RippleModule } from 'primeng/ripple';
+import { ButtonModule } from 'primeng/button';
+import { SharedModule } from 'primeng/api';
+import { TableModule } from 'primeng/table';
+import { MessageModule } from 'primeng/message';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { NgIf } from '@angular/common';
 
 interface MyUser {
   Name: string;
@@ -17,9 +27,11 @@ interface MyUser {
 
 
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.css']
+    selector: 'app-users',
+    templateUrl: './users.component.html',
+    styleUrls: ['./users.component.css'],
+    standalone: true,
+    imports: [NgIf, RadioButtonModule, FormsModule, MessageModule, TableModule, SharedModule, ButtonModule, RippleModule, TooltipModule, DialogModule, PasswordModule, TranslateModule]
 })
 export class UsersComponent implements OnInit {
 

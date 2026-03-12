@@ -1,13 +1,21 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { SetupWizardService } from 'src/app/services/setupwizard.service';
 import { SetupService } from 'src/app/services/setup.service';
+import { RouterOutlet } from '@angular/router';
+import { BackendWarningComponent } from '../backend-warning/backend-warning.component';
+import { TabMenuModule } from 'primeng/tabmenu';
+import { TooltipModule } from 'primeng/tooltip';
+import { RippleModule } from 'primeng/ripple';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
     selector: 'app-settings',
     templateUrl: './setupwizard.component.html',
-    styleUrls: ['./setupwizard.component.css']
+    styleUrls: ['./setupwizard.component.css'],
+    standalone: true,
+    imports: [ButtonModule, RippleModule, TooltipModule, TabMenuModule, BackendWarningComponent, RouterOutlet, TranslateModule]
 })
 export class SetupWizardComponent implements OnInit, AfterViewInit {
 

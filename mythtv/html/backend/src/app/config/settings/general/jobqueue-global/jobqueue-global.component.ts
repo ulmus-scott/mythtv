@@ -1,13 +1,22 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormsModule } from '@angular/forms';
 
 import { MythService } from 'src/app/services/myth.service';
 import { SetupService } from 'src/app/services/setup.service';
+import { TranslateModule } from '@ngx-translate/core';
+import { ButtonModule } from 'primeng/button';
+import { MessageModule } from 'primeng/message';
+import { NgIf } from '@angular/common';
+import { CheckboxModule } from 'primeng/checkbox';
+import { SharedModule } from 'primeng/api';
+import { CardModule } from 'primeng/card';
 
 @Component({
     selector: 'app-jobqueue-global',
     templateUrl: './jobqueue-global.component.html',
-    styleUrls: ['./jobqueue-global.component.css']
+    styleUrls: ['./jobqueue-global.component.css'],
+    standalone: true,
+    imports: [FormsModule, CardModule, SharedModule, CheckboxModule, NgIf, MessageModule, ButtonModule, TranslateModule]
 })
 export class JobqueueGlobalComponent implements OnInit, AfterViewInit {
 

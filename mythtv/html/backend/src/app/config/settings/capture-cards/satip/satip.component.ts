@@ -1,14 +1,24 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { TranslateService } from '@ngx-translate/core';
+import { NgForm, FormsModule } from '@angular/forms';
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { CaptureCardService } from 'src/app/services/capture-card.service';
 import { CaptureCardList, CaptureDevice, CaptureDeviceList, CardAndInput } from 'src/app/services/interfaces/capture-card.interface';
 import { SetupService } from 'src/app/services/setup.service';
+import { ButtonModule } from 'primeng/button';
+import { MessageModule } from 'primeng/message';
+import { CheckboxModule } from 'primeng/checkbox';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { DropdownModule } from 'primeng/dropdown';
+import { NgIf } from '@angular/common';
+import { SharedModule } from 'primeng/api';
+import { CardModule } from 'primeng/card';
 
 @Component({
-  selector: 'app-satip',
-  templateUrl: './satip.component.html',
-  styleUrls: ['./satip.component.css']
+    selector: 'app-satip',
+    templateUrl: './satip.component.html',
+    styleUrls: ['./satip.component.css'],
+    standalone: true,
+    imports: [FormsModule, CardModule, SharedModule, NgIf, DropdownModule, InputNumberModule, CheckboxModule, MessageModule, ButtonModule, TranslateModule]
 })
 export class SatipComponent implements OnInit, AfterViewInit {
   @Input() card!: CardAndInput;

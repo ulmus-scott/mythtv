@@ -9,9 +9,8 @@ describe('StatusComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ StatusComponent ],
-      imports:      [ HttpClientModule ]
-    })
+    imports: [HttpClientModule, StatusComponent]
+})
     .compileComponents();
   });
 

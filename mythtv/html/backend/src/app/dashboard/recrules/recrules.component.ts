@@ -1,18 +1,30 @@
 import { Component, OnInit } from '@angular/core';
-import { SortMeta } from 'primeng/api';
+import { SortMeta, SharedModule } from 'primeng/api';
 import { ScheduleLink, SchedulerSummary } from 'src/app/schedule/schedule.component';
 import { DvrService } from 'src/app/services/dvr.service';
 import { RecRule } from 'src/app/services/interfaces/recording.interface';
 import { UtilityService } from 'src/app/services/utility.service';
+import { TranslateModule } from '@ngx-translate/core';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { ScheduleComponent } from '../../schedule/schedule.component';
+import { MessageModule } from 'primeng/message';
+import { DialogModule } from 'primeng/dialog';
+import { TooltipModule } from 'primeng/tooltip';
+import { RippleModule } from 'primeng/ripple';
+import { ButtonModule } from 'primeng/button';
+import { TableModule } from 'primeng/table';
+import { NgIf } from '@angular/common';
 
 interface MyRecRule extends RecRule {
   TitleSort?: number;
 }
 
 @Component({
-  selector: 'app-recrules',
-  templateUrl: './recrules.component.html',
-  styleUrls: ['./recrules.component.css']
+    selector: 'app-recrules',
+    templateUrl: './recrules.component.html',
+    styleUrls: ['./recrules.component.css'],
+    standalone: true,
+    imports: [NgIf, TableModule, SharedModule, ButtonModule, RippleModule, TooltipModule, DialogModule, MessageModule, ScheduleComponent, ProgressSpinnerModule, TranslateModule]
 })
 export class RecrulesComponent implements OnInit, SchedulerSummary {
 

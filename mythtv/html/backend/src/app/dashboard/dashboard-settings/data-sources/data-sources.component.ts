@@ -1,13 +1,22 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { TranslateService } from '@ngx-translate/core';
+import { NgForm, FormsModule } from '@angular/forms';
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { MythService } from 'src/app/services/myth.service';
 import { SetupService } from 'src/app/services/setup.service';
+import { ButtonModule } from 'primeng/button';
+import { MessageModule } from 'primeng/message';
+import { NgIf } from '@angular/common';
+import { CheckboxModule } from 'primeng/checkbox';
+import { DropdownModule } from 'primeng/dropdown';
+import { SharedModule } from 'primeng/api';
+import { CardModule } from 'primeng/card';
 
 @Component({
-  selector: 'app-data-sources',
-  templateUrl: './data-sources.component.html',
-  styleUrls: ['./data-sources.component.css']
+    selector: 'app-data-sources',
+    templateUrl: './data-sources.component.html',
+    styleUrls: ['./data-sources.component.css'],
+    standalone: true,
+    imports: [FormsModule, CardModule, SharedModule, DropdownModule, CheckboxModule, NgIf, MessageModule, ButtonModule, TranslateModule]
 })
 export class DataSourcesComponent implements OnInit, AfterViewInit {
 

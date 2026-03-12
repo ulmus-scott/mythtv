@@ -11,11 +11,10 @@ describe('DbsetupComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DbsetupComponent ],
-      imports:      [ FormsModule,
-                      HttpClientModule,
-                      RouterTestingModule ]
-    })
+    imports: [FormsModule,
+        HttpClientModule,
+        RouterTestingModule, DbsetupComponent]
+})
     .compileComponents();
   });
 

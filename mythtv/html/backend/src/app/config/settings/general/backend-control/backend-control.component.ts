@@ -1,13 +1,21 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormsModule } from '@angular/forms';
 
 import { MythService } from 'src/app/services/myth.service';
 import { SetupService } from 'src/app/services/setup.service';
+import { TranslateModule } from '@ngx-translate/core';
+import { ButtonModule } from 'primeng/button';
+import { MessageModule } from 'primeng/message';
+import { NgIf } from '@angular/common';
+import { SharedModule } from 'primeng/api';
+import { CardModule } from 'primeng/card';
 
 @Component({
-  selector: 'app-backend-control',
-  templateUrl: './backend-control.component.html',
-  styleUrls: ['./backend-control.component.css']
+    selector: 'app-backend-control',
+    templateUrl: './backend-control.component.html',
+    styleUrls: ['./backend-control.component.css'],
+    standalone: true,
+    imports: [FormsModule, CardModule, SharedModule, NgIf, MessageModule, ButtonModule, TranslateModule]
 })
 export class BackendControlComponent implements OnInit, AfterViewInit {
 

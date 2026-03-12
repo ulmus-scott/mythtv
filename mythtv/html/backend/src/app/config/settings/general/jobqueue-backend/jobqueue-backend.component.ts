@@ -1,13 +1,21 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { Calendar } from 'primeng/calendar';
-import { TranslateService } from '@ngx-translate/core';
+import { Calendar, CalendarModule } from 'primeng/calendar';
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
 
 import { JobQCommands } from 'src/app/services/interfaces/setup.interface';
 import { SetupService } from 'src/app/services/setup.service';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormsModule } from '@angular/forms';
 import { GetSettingResponse } from 'src/app/services/interfaces/myth.interface';
 import { Observable } from 'rxjs';
 import { MythService } from 'src/app/services/myth.service';
+import { ButtonModule } from 'primeng/button';
+import { MessageModule } from 'primeng/message';
+import { NgIf } from '@angular/common';
+import { CheckboxModule } from 'primeng/checkbox';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { SharedModule } from 'primeng/api';
+import { CardModule } from 'primeng/card';
 
 interface ddParm {
   name: string,
@@ -15,9 +23,11 @@ interface ddParm {
 }
 
 @Component({
-  selector: 'app-jobqueue-backend',
-  templateUrl: './jobqueue-backend.component.html',
-  styleUrls: ['./jobqueue-backend.component.css']
+    selector: 'app-jobqueue-backend',
+    templateUrl: './jobqueue-backend.component.html',
+    styleUrls: ['./jobqueue-backend.component.css'],
+    standalone: true,
+    imports: [FormsModule, CardModule, SharedModule, InputNumberModule, CalendarModule, DropdownModule, CheckboxModule, NgIf, MessageModule, ButtonModule, TranslateModule]
 })
 
 export class JobqueueBackendComponent implements OnInit, AfterViewInit {

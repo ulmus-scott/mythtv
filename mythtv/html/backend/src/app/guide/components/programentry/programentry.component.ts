@@ -5,11 +5,15 @@ import { DataService } from 'src/app/services/data.service';
 import { Channel } from 'src/app/services/interfaces/channel.interface';
 import { UtilityService } from 'src/app/services/utility.service';
 import { TranslateService } from '@ngx-translate/core';
+import { TooltipModule } from 'primeng/tooltip';
+import { NgIf, NgClass } from '@angular/common';
 
 @Component({
-  selector: 'app-guide-programentry',
-  templateUrl: './programentry.component.html',
-  styleUrls: ['./programentry.component.css']
+    selector: 'app-guide-programentry',
+    templateUrl: './programentry.component.html',
+    styleUrls: ['./programentry.component.css'],
+    standalone: true,
+    imports: [NgIf, NgClass, TooltipModule]
 })
 export class ProgramEntryComponent implements OnInit {
   @Input() program!: ScheduleOrProgram;

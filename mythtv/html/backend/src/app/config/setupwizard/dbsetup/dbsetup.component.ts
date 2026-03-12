@@ -4,13 +4,23 @@ import { ConfigService } from '../../../services/config.service';
 import { MythService } from '../../../services/myth.service';
 import { WizardData } from '../../../services/interfaces/wizarddata.interface';
 import { SetupWizardService } from '../../../services/setupwizard.service';
-import { MessageService } from 'primeng/api';
+import { MessageService, SharedModule } from 'primeng/api';
 import { Database, TestDBSettingsRequest } from 'src/app/services/interfaces/myth.interface';
-import { TranslateService } from '@ngx-translate/core';
-import { NgForm } from '@angular/forms';
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { NgForm, FormsModule } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { SetupService } from 'src/app/services/setup.service';
 import { Clipboard } from '@angular/cdk/clipboard';
+import { TooltipModule } from 'primeng/tooltip';
+import { RippleModule } from 'primeng/ripple';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { MessageModule } from 'primeng/message';
+import { ButtonModule } from 'primeng/button';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { CheckboxModule } from 'primeng/checkbox';
+import { NgClass, NgIf } from '@angular/common';
+import { CardModule } from 'primeng/card';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
     selector: 'app-dbsetup',
@@ -18,6 +28,23 @@ import { Clipboard } from '@angular/cdk/clipboard';
     styleUrls: ['./dbsetup.component.css'],
     providers: [MessageService],
     encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [
+        ToastModule,
+        FormsModule,
+        CardModule,
+        SharedModule,
+        NgClass,
+        NgIf,
+        CheckboxModule,
+        InputNumberModule,
+        ButtonModule,
+        MessageModule,
+        RadioButtonModule,
+        RippleModule,
+        TooltipModule,
+        TranslateModule,
+    ],
 })
 export class DbsetupComponent implements OnInit {
 

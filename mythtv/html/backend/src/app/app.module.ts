@@ -6,7 +6,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { PrimeNGModule } from './primeng.module';
+
 import { MenuModule } from 'primeng/menu';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -101,114 +101,4 @@ export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http,'./assets/i18n/');
 }
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    NavbarComponent,
-    SidenavComponent,
-    SetupWizardComponent,
-    DashboardComponent,
-    StatusComponent,
-    EncodersComponent,
-    BackendsComponent,
-    FrontendsComponent,
-    ScheduledComponent,
-    JobqueueComponent,
-    MachineinfoComponent,
-    SelectLanguageComponent,
-    DbsetupComponent,
-    TestbedComponent,
-    GuideComponent,
-    ChannelIconComponent,
-    ProgramEntryComponent,
-    TimebarComponent,
-    SettingsComponent,
-    HostAddressComponent,
-    LocaleComponent,
-    MiscSettingsComponent,
-    EitScannerComponent,
-    ShutdownWakeupComponent,
-    BackendWakeupComponent,
-    BackendControlComponent,
-    JobqueueBackendComponent,
-    JobqueueGlobalComponent,
-    JobqueueCommandsComponent,
-    EpgDownloadingComponent,
-    CaptureCardsComponent,
-    CetonComponent,
-    DvbComponent,
-    LnbComponent,
-    SwitchComponent,
-    RotorComponent,
-    UnicableComponent,
-    ExternalComponent,
-    HdhomerunComponent,
-    IptvComponent,
-    ImportComponent,
-    DemoComponent,
-    VideoSourcesComponent,
-    VsourceComponent,
-    InputConnectionsComponent,
-    IconnectionComponent,
-    StorageGroupsComponent,
-    SgroupComponent,
-    ChannelEditorComponent,
-    RecordingProfilesComponent,
-    ProfileGroupComponent,
-    RecprofileComponent,
-    SystemEventsComponent,
-    BackendWarningComponent,
-    V4l2Component,
-    HdpvrComponent,
-    SatipComponent,
-    VboxComponent,
-    FirewireComponent,
-    ChannelscanComponent,
-    WizChanneleditComponent,
-    RecordingsComponent,
-    ScheduleComponent,
-    UpcomingComponent,
-    RecrulesComponent,
-    VideosComponent,
-    ProgramsComponent,
-    LegendComponent,
-    DashboardSettingsComponent,
-    PlaybackGroupsComponent,
-    ChannelGroupsComponent,
-    AutoExpireComponent,
-    JobsComponent,
-    RecQualityComponent,
-    RecPrioritiesComponent,
-    DataSourcesComponent,
-    CustomPrioritiesComponent,
-    PrevrecsComponent,
-    UsersComponent,
-  ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MenuModule,
-    TranslateModule.forRoot({
-      defaultLanguage: 'en_US',
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    }),
 
-    PrimeNGModule,
-    SetupWizardRoutingModule,
-    DashboardRoutingModule
-  ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-  ],
-  bootstrap: [AppComponent]
-})
-export class AppModule { }

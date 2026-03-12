@@ -1,19 +1,31 @@
 import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import { ConfirmationService, MenuItem, MessageService, SortMeta } from 'primeng/api';
-import { Menu } from 'primeng/menu';
-import { Table, TableLazyLoadEvent } from 'primeng/table';
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { ConfirmationService, MenuItem, MessageService, SortMeta, SharedModule } from 'primeng/api';
+import { Menu, MenuModule } from 'primeng/menu';
+import { Table, TableLazyLoadEvent, TableModule } from 'primeng/table';
 import { ScheduleLink } from 'src/app/schedule/schedule.component';
 import { DvrService } from 'src/app/services/dvr.service';
 import { GetOldRecordedListRequest, RemoveOldRecordedRequest, UpdateOldRecordedRequest } from 'src/app/services/interfaces/dvr.interface';
 import { ScheduleOrProgram } from 'src/app/services/interfaces/program.interface';
 import { UtilityService } from 'src/app/services/utility.service';
+import { ScheduleComponent } from '../../schedule/schedule.component';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { NgIf, NgClass, DecimalPipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { CalendarModule } from 'primeng/calendar';
+import { TooltipModule } from 'primeng/tooltip';
+import { RippleModule } from 'primeng/ripple';
+import { ButtonModule } from 'primeng/button';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
-  selector: 'app-prevrecs',
-  templateUrl: './prevrecs.component.html',
-  styleUrls: ['./prevrecs.component.css'],
-  providers: [ConfirmationService, MessageService]
+    selector: 'app-prevrecs',
+    templateUrl: './prevrecs.component.html',
+    styleUrls: ['./prevrecs.component.css'],
+    providers: [ConfirmationService, MessageService],
+    standalone: true,
+    imports: [ToastModule, ConfirmDialogModule, MenuModule, ButtonModule, RippleModule, TooltipModule, CalendarModule, FormsModule, NgIf, ProgressSpinnerModule, TableModule, SharedModule, NgClass, ScheduleComponent, DecimalPipe, TranslateModule]
 })
 
 export class PrevrecsComponent implements OnInit {

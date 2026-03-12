@@ -3,16 +3,29 @@ import { Language, MythLanguageList } from "src/app/services/interfaces/language
 import { Theme } from 'src/app/services/interfaces/theme.interface';
 import { ThemeService } from '../../services/theme.service';
 import { ConfigService } from '../../services/config.service';
-import { TranslateService } from '@ngx-translate/core';
-import { PrimeNGConfig } from 'primeng/api';
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { PrimeNGConfig, SharedModule } from 'primeng/api';
 import { DataService } from 'src/app/services/data.service';
 import { MythService } from 'src/app/services/myth.service';
 import { Router } from '@angular/router';
+import { MessageModule } from 'primeng/message';
+import { CheckboxModule } from 'primeng/checkbox';
+import { PasswordModule } from 'primeng/password';
+import { DialogModule } from 'primeng/dialog';
+import { FormsModule } from '@angular/forms';
+import { TableModule } from 'primeng/table';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { TooltipModule } from 'primeng/tooltip';
+import { ButtonModule } from 'primeng/button';
+import { RippleModule } from 'primeng/ripple';
+import { NgIf } from '@angular/common';
 
 @Component({
     selector: 'app-navbar',
     templateUrl: './navbar.component.html',
-    styleUrls: ['./navbar.component.css']
+    styleUrls: ['./navbar.component.css'],
+    standalone: true,
+    imports: [NgIf, RippleModule, ButtonModule, TooltipModule, OverlayPanelModule, SharedModule, TableModule, FormsModule, DialogModule, PasswordModule, CheckboxModule, MessageModule, TranslateModule]
 })
 export class NavbarComponent implements OnInit {
 

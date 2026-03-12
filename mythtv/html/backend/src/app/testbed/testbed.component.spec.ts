@@ -10,10 +10,9 @@ describe('TestbedComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TestbedComponent ],
-      imports:      [ HttpClientModule,
-                      TranslateModule.forRoot() ]
-    })
+    imports: [HttpClientModule,
+        TranslateModule.forRoot(), TestbedComponent]
+})
     .compileComponents();
   });
 

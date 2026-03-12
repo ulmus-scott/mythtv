@@ -1,20 +1,32 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormsModule } from '@angular/forms';
 import { ChannelService } from 'src/app/services/channel.service';
 import { FreqTableList, Grabber, GrabberList, VideoSource, VideoSourceList }
   from 'src/app/services/interfaces/videosource.interface';
 import { UpdateVideoSourceRequest } from 'src/app/services/interfaces/channel.interface';
 import { PartialObserver } from 'rxjs';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { SetupService } from 'src/app/services/setup.service';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { BackendInfo } from 'src/app/services/interfaces/backend.interface';
 import { MythService } from 'src/app/services/myth.service';
+import { MessageModule } from 'primeng/message';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { CheckboxModule } from 'primeng/checkbox';
+import { TooltipModule } from 'primeng/tooltip';
+import { RippleModule } from 'primeng/ripple';
+import { ButtonModule } from 'primeng/button';
+import { DropdownModule } from 'primeng/dropdown';
+import { NgIf } from '@angular/common';
+import { SharedModule } from 'primeng/api';
+import { CardModule } from 'primeng/card';
 
 @Component({
-  selector: 'app-vsource',
-  templateUrl: './vsource.component.html',
-  styleUrls: ['./vsource.component.css']
+    selector: 'app-vsource',
+    templateUrl: './vsource.component.html',
+    styleUrls: ['./vsource.component.css'],
+    standalone: true,
+    imports: [FormsModule, CardModule, SharedModule, NgIf, DropdownModule, ButtonModule, RippleModule, TooltipModule, CheckboxModule, InputNumberModule, MessageModule, TranslateModule]
 })
 export class VsourceComponent implements OnInit, AfterViewInit {
 
