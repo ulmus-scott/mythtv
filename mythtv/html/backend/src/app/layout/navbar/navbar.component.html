@@ -1,7 +1,7 @@
-<div class="flex flex-column relative flex-auto">
-    <div class="toolbar flex justify-content-between align-items-center pm-8 surface-section relative lg:static  surface-border"
+<div class="flex flex-col relative flex-auto">
+    <div class="toolbar flex justify-between items-center pm-8 bg-surface-0 dark:bg-surface-950 relative lg:static  border-surface"
         style="height: 80px;" *ngIf="showTopBar else hidden">
-        <div class="toolbar flex align-items-left flex-shrink-0" style="height: 80px;">
+        <div class="toolbar flex align-items-left shrink-0" style="height: 80px;">
             <a pRipple class="p-ripple p-element my-3 mx-1 flex align-items-center cursor-pointer p-3 lg:hidden lg:justify-content-center
                  hover:bg-gray-800 border-round text-300 hover:text-0
                 transition-duration-150 transition-colors" (click)="toggleShowSidebar()">
@@ -13,8 +13,8 @@
                 <h1>{{ 'navbar.mainheading' | translate }}</h1>
             </div>
         </div>
-        <div class="toolbar flex flex-grow-1 align-items-end" style="height: 80px;">
-            <button pButton pRipple icon="pi pi-angle-up" class="p-button-text lg:col-offset-3 p-button-secondary"
+        <div class="toolbar flex grow items-end" style="height: 80px;">
+            <button pButton pRipple icon="pi pi-angle-up" class="p-button-text lg:col-start-4 p-button-secondary"
                 (click)="showTopBar=false" pTooltip="{{ 'navbar.hide' | translate }}"></button>
         </div>
         <div class="pr-2 toolbar" style="height: 80px;">
@@ -28,17 +28,17 @@
              md:border-none surface-border right-0 top-100 z-2 shadow-2 md:shadow-none absolute md:static"
                 [hidden]="m_showNavbar">
                 <li class="toolbar" style="height: 80px;">
-                    <div class="text-primary mt-5 font-light">
+                    <div class="text-primary mt-8 font-light">
                         {{ dataService.loggedInUser }} &nbsp;&nbsp;&nbsp;
                     </div>
                 </li>
                 <li *ngIf="!dataService.loggedInUser" class="toolbar" style="height: 80px;">
-                    <button pButton label="{{ 'navbar.login' | translate }}" class="p-button-text p-button-primary mt-4"
+                    <button pButton label="{{ 'navbar.login' | translate }}" class="p-button-text p-button-primary mt-6"
                         (click)="showLogin();"></button>
                 </li>
                 <li *ngIf="dataService.loggedInUser" class="toolbar" style="height: 80px;">
                     <button pButton label="{{ 'navbar.logout' | translate }}"
-                        class="p-button-text p-button-primary mt-4" (click)="logout()"></button>
+                        class="p-button-text p-button-primary mt-6" (click)="logout()"></button>
                 </li>
 
                 <li class="toolbar" style="height: 80px;">
@@ -72,7 +72,7 @@
     </div>
 
     <ng-template #hidden>
-        <div class="toolbar block flex flex-grow-1 justify-content-center align-items-end " style="height: 2rem;">
+        <div class="toolbar block flex grow justify-center items-end " style="height: 2rem;">
             <button pButton pRipple icon="pi pi-angle-down" class="p-button-text p-button-secondary"
                 (click)="showTopBar=true" pTooltip="{{ 'navbar.show' | translate }}"></button>
         </div>
@@ -120,7 +120,7 @@
     </ng-template>
 </p-overlayPanel>
 
-<form class="ml-3 mr-3" name="loginform" #loginform="ngForm" autocomplete="on">
+<form class="ml-4 mr-4" name="loginform" #loginform="ngForm" autocomplete="on">
 
     <p-dialog header="{{ 'navbar.login' | translate }}" [(visible)]="displayLogin" [modal]="true"
         [style]="{width: '360px'}" [draggable]="false" [resizable]="false" [closable]="false">
@@ -141,18 +141,18 @@
         <div class="form-group field">
             <p-checkbox inputId="KeepLogin" [(ngModel)]="keepLogin" name="KeepLogin"
                 class="mb-2 w-full label" [binary]="true"
-                label="{{ 'navbar.keeplogin' | translate }}">
+                value="{{ 'navbar.keeplogin' | translate }}">
             </p-checkbox>
         </div>
 
 
         <ng-template pTemplate="footer">
-            <div class="col-12" style="text-align: left;">
+            <div class="col-span-12" style="text-align: left;">
                 <p-message *ngIf="keepLogin" severity="error"
                     text="{{ 'navbar.keep_pwd_warn' | translate }}"></p-message>
             </div>
 
-            <div class="col-12" style="text-align: left;">
+            <div class="col-span-12" style="text-align: left;">
                 <p-message *ngIf="errorCount > 0" severity="error"
                     text="{{ 'navbar.loginfail' | translate }}"></p-message>
             </div>

@@ -1,14 +1,14 @@
-<form class="ml-3 mr-3" name="satipform" #satipform="ngForm">
+<form class="ml-4 mr-4" name="satipform" #satipform="ngForm">
     <span #top></span>
-    <p-card class="m-5">
+    <p-card class="m-8">
         <ng-template pTemplate="title">
             {{ 'settings.capture.satip.title' | translate }}
         </ng-template>
         <ng-template pTemplate="subtitle">
         </ng-template>
         <ng-template pTemplate="content">
-            <div class="grid">
-                <div class="mb-4 w-full">
+            <div class="grid grid-cols-12 gap-4">
+                <div class="mb-6 w-full">
 
                     <div class="form-group field">
                         <label for="VideoDevice" class="label block">{{ 'settings.capture.satip.device_label' | translate
@@ -31,7 +31,7 @@
                     <div class="form-group field">
                         <label class="label block">{{ 'settings.capture.satip.friendly_label' | translate
                             }}</label>
-                        <div class="col-10 bg-blue-100 text-gray-900">
+                        <div class="col-span-10 bg-blue-100 text-gray-900">
                             {{ currentDevice.Description}} &nbsp;
                         </div>
                         <small class="block">
@@ -42,7 +42,7 @@
                     <div class="form-group field">
                         <label class="label block">{{ 'settings.capture.satip.tunertype_label' | translate
                             }}</label>
-                        <div class="col-10 bg-blue-100 text-gray-900">
+                        <div class="col-span-10 bg-blue-100 text-gray-900">
                             {{ currentDevice.TunerType}} &nbsp;
                         </div>
                         <small class="block">
@@ -53,7 +53,7 @@
                     <div class="form-group field">
                         <label class="label block">{{ 'settings.capture.satip.tunerindex_label' | translate
                             }}</label>
-                        <div class="col-10 bg-blue-100 text-gray-900">
+                        <div class="col-span-10 bg-blue-100 text-gray-900">
                             {{ currentDevice.TunerNumber}} &nbsp;
                         </div>
                         <small class="block">
@@ -64,7 +64,7 @@
                     <div class="form-group field">
                         <label class="label block">{{ 'settings.capture.satip.deviceid_label' | translate
                             }}</label>
-                        <div class="col-10 bg-blue-100 text-gray-900">
+                        <div class="col-span-10 bg-blue-100 text-gray-900">
                             {{ card.VideoDevice}} &nbsp;
                         </div>
                         <small class="block">
@@ -95,7 +95,7 @@
                     <div class="form-group field">
                         <p-checkbox inputId="DVBEITScan" [(ngModel)]="card.DVBEITScan" name="DVBEITScan"
                             #DVBEITScan="ngModel" class="label mb-2 w-full" [binary]="true"
-                            label="{{ 'settings.capture.dvb.eitscan_label' | translate }}">
+                            value="{{ 'settings.capture.dvb.eitscan_label' | translate }}">
                         </p-checkbox>
                         <small class="block">
                             {{ 'settings.capture.dvb.eitscan_desc' | translate }}
@@ -117,8 +117,8 @@
         </ng-template>
 
         <ng-template pTemplate="footer">
-            <div class="grid nogutter">
-                <div class="col-12">
+            <div class="grid grid-cols-12 gap-4 nogutter">
+                <div class="col-span-12">
                     <p-message *ngIf="this.successCount > 0 && this.errorCount == 0 && !satipform.dirty"
                         severity="success" text="{{ 'common.savesuccess' | translate }}"></p-message>
                     <p-message *ngIf="this.errorCount > 0" severity="error"

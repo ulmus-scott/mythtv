@@ -12,7 +12,7 @@
 
 
         <!-- Menu, Refresh button and number of rows. -->
-        <div class="flex align-items-center p-1 font-bold">
+        <div class="flex items-center p-1 font-bold">
             <button pButton pRipple icon="pi pi-bars" class="p-button-text .p-button-success"
                 (click)="showContextMenu(null, $event)" pTooltip="{{ 'common.selected_menu' | translate }}"
                 tooltipPosition="top"></button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -25,7 +25,7 @@
                     (keydown)="keydown($event)" />
             </span>
 
-            <button pButton pRipple icon="pi pi-search" class="p-button-text w-2rem" (click)="onFilter()"
+            <button pButton pRipple icon="pi pi-search" class="p-button-text w-8" (click)="onFilter()"
                 pTooltip="{{ 'dashboard.guide.title_search' | translate }}" tooltipPosition="top"></button>
 
             &nbsp;&nbsp;&nbsp; {{ 'dashboard.recordings.recgrp' | translate }}: &nbsp;
@@ -58,22 +58,22 @@
                         }}<p-sortIcon field="subtitle"></p-sortIcon></th>
                     <th style="width: 8%" class="p-1" pSortableColumn="SeasEp">{{ 'dashboard.recordings.seas_ep' |
                         translate }}<p-sortIcon field="SeasEp"></p-sortIcon></th>
-                    <th style="width: 9%" class="justify-content-end p-1" pSortableColumn="originalairdate"
+                    <th style="width: 9%" class="justify-end p-1" pSortableColumn="originalairdate"
                         pTooltip="{{ 'dashboard.recordings.orig_airdate_desc' | translate }}" tooltipPosition="top">
                         {{ 'dashboard.recordings.orig_airdate' | translate }}<p-sortIcon
                             field="originalairdate"></p-sortIcon>
                     </th>
-                    <th style="width: 9%" class="justify-content-end p-1" pSortableColumn="StartTime">
+                    <th style="width: 9%" class="justify-end p-1" pSortableColumn="StartTime">
                         {{ 'dashboard.recordings.airdate' | translate }}<p-sortIcon field="StartTime"></p-sortIcon>
                     </th>
                     <th style="width: 11%" class="p-1" pSortableColumn="ChanNum">{{ 'dashboard.recordings.channel' |
                         translate }}<p-sortIcon field="ChanNum"></p-sortIcon></th>
                     <th style="width: 9%" class="p-1" pSortableColumn="RecGroup">
                         {{ 'dashboard.recordings.recgrp' | translate }}<p-sortIcon field="RecGroup"></p-sortIcon> </th>
-                    <th style="width: 7%" class="justify-content-end p-1" pSortableColumn="duration">
+                    <th style="width: 7%" class="justify-end p-1" pSortableColumn="duration">
                         {{ 'dashboard.recordings.duration' | translate }}<p-sortIcon field="duration"></p-sortIcon>
                     </th>
-                    <th style="width: 9%" class="justify-content-end p-1" pSortableColumn="filesize">{{
+                    <th style="width: 9%" class="justify-end p-1" pSortableColumn="filesize">{{
                         'dashboard.recordings.file_size' | translate }}<p-sortIcon field="filesize"></p-sortIcon></th>
                     <th style="width: 5%; white-space: nowrap; background: var(--surface-card);" class="p-1">
                         <a target="_blank">
@@ -112,7 +112,7 @@
                         <div *ngIf="program.Season>0 || program.Episode>0"> {{program.Season}}x{{program.Episode}}
                         </div>
                     </td>
-                    <td class="justify-content-end p-1 overflow-hidden">
+                    <td class="justify-end p-1 overflow-hidden">
                         <div class="mycell">
                             <div *ngIf="program.Airdate" class="mytext"
                                 [ngClass]="{'line-through' : program.Recording.RecGroup == 'Deleted'}"
@@ -123,7 +123,7 @@
                             </div>
                         </div>
                     </td>
-                    <td class="justify-content-end p-1 overflow-hidden">
+                    <td class="justify-end p-1 overflow-hidden">
                         <div class="mycell">
                             <div class="mytext" [ngClass]="{'line-through' : program.Recording.RecGroup == 'Deleted'}"
                                 [innerHTML]="utility.formatDate(program.StartTime,true)"></div>
@@ -137,14 +137,14 @@
                         </div>
                     </td>
                     <td class="p-1">{{program.Recording.RecGroup}}</td>
-                    <td class="justify-content-end p-1">
+                    <td class="justify-end p-1">
                         <div class="mycell">
                             <div class="mytext" [ngClass]="{'line-through' : program.Recording.RecGroup == 'Deleted'}">
                                 {{ getDuration(program) | number:'1.0-0' }} min
                             </div>
                         </div>
                     </td>
-                    <td class="justify-content-end p-1">
+                    <td class="justify-end p-1">
                         <div class="mycell">
                             <div class="mytext" [ngClass]="{'line-through' : program.Recording.RecGroup == 'Deleted'}">
                                 {{program.Recording.FileSize / 1000000 | number:'1.0-0'}} MB</div>
@@ -188,7 +188,7 @@
             <div class="form-group field">
                 <label for="Description" class="label block">{{ 'dashboard.recordings.description' | translate
                     }}</label>
-                <textarea pInputTextarea [rows]="5" [cols]="30" id="Description" [(ngModel)]="program.Description"
+                <textarea pTextarea [rows]="5" [cols]="30" id="Description" [(ngModel)]="program.Description"
                     name="Description" #Description="ngModel" class="mb-2 form-control w-full"></textarea>
             </div>
 
@@ -229,7 +229,7 @@
             </div>
 
             <ng-template pTemplate="footer">
-                <div class="col-12" style="text-align: left;">
+                <div class="col-span-12" style="text-align: left;">
                     <p-message *ngIf="successCount > 0 && errorCount == 0 && !recsform.dirty" severity="success"
                         text="{{ 'common.savesuccess' | translate }}"></p-message>
                     <p-message *ngIf="errorCount > 0" severity="error"

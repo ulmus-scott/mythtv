@@ -1,14 +1,14 @@
-<form class="ml-3 mr-3" name="vsourceform" #vsourceform="ngForm">
+<form class="ml-4 mr-4" name="vsourceform" #vsourceform="ngForm">
     <span #top></span>
-    <p-card class="m-5">
+    <p-card class="m-8">
         <ng-template pTemplate="title">
             {{ 'settings.vsource.item_title' | translate }}
         </ng-template>
         <ng-template pTemplate="subtitle">
         </ng-template>
         <ng-template pTemplate="content">
-            <div class="grid">
-                <div class="mb-4 w-full">
+            <div class="grid grid-cols-12 gap-4">
+                <div class="mb-6 w-full">
 
                     <div class="form-group field">
                         <label for="SourceName" class="label block">{{ 'settings.vsource.source_label' | translate }}</label>
@@ -49,22 +49,22 @@
                         </p>
                         <table>
                             <tr *ngIf="configCommand1">
-                                <td class="align-items-center bg-blue-100 text-gray-900"
+                                <td class="items-center bg-blue-100 text-gray-900"
                                     style="font-family: monospace;">
                                     {{ configCommand1 }}
                                 </td>
-                                <td class="align-items-center">
+                                <td class="items-center">
                                     <button pButton pRipple type="button" icon="pi pi-copy"
                                         class="p-button-rounded p-button-text" (click)="copyConfigure1()"
                                         pTooltip="{{ 'settings.common.clipboard_tooltip' | translate }}"></button>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="align-items-center bg-blue-100 text-gray-900"
+                                <td class="items-center bg-blue-100 text-gray-900"
                                     style="font-family: monospace;">
                                     {{ configCommand2 }}
                                 </td>
-                                <td class="align-items-center">
+                                <td class="items-center">
                                     <button pButton pRipple type="button" icon="pi pi-copy"
                                         class="p-button-rounded p-button-text" (click)="copyConfigure2()"
                                         pTooltip="{{ 'settings.common.clipboard_tooltip' | translate }}"></button>
@@ -76,7 +76,7 @@
                     <div class="form-group field">
                         <p-checkbox inputId="UseEIT" [(ngModel)]="videoSource.UseEIT" name="UseEIT" #UseEIT="ngModel"
                             class="label mb-2 w-full" [binary]="true"
-                            label="{{ 'settings.vsource.eit_label' | translate }}">
+                            value="{{ 'settings.vsource.eit_label' | translate }}">
                         </p-checkbox>
                         <small class="block">
                             {{ 'settings.vsource.eit_desc' | translate }}
@@ -163,8 +163,8 @@
         </ng-template>
 
         <ng-template pTemplate="footer">
-            <div class="grid nogutter">
-                <div class="col-12">
+            <div class="grid grid-cols-12 gap-4 nogutter">
+                <div class="col-span-12">
                     <p-message *ngIf="this.work.successCount > 0 && this.work.errorCount == 0 && !vsourceform.dirty"
                         severity="success" text="{{ 'common.savesuccess' | translate }}"></p-message>
                     <p-message *ngIf="this.work.errorCount > 0" severity="error"

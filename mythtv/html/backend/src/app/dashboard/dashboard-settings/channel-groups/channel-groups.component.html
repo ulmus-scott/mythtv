@@ -34,7 +34,7 @@
     </p-table>
 </div>
 
-<form class="ml-3 mr-3" name="changrpform" #changrpform="ngForm">
+<form class="ml-4 mr-4" name="changrpform" #changrpform="ngForm">
 
     <p-dialog header="{{ dialogHeader }}" [(visible)]="displayGroupDlg" [modal]="true"
         [style]="{height: '75vw', width: '50vw'}" [closable]="false" [closeOnEscape]="false">
@@ -83,7 +83,7 @@
         </p-table>
 
         <ng-template pTemplate="footer">
-            <div class="col-12" style="text-align: left;">
+            <div class="col-span-12" style="text-align: left;">
                 <p-message *ngIf="successCount > 0 && errorCount == 0 && !changrpform.dirty" severity="success"
                     text="{{ 'common.savesuccess' | translate }}"></p-message>
                 <p-message *ngIf="errorCount > 0" severity="error"
@@ -118,7 +118,7 @@
         <p>{{ 'dashboard.channelgroup.delete_details' |
             translate: {Name: group.Name} }}</p>
         <ng-template pTemplate="footer">
-            <div class="col-12" style="text-align: left;">
+            <div class="col-span-12" style="text-align: left;">
                 <p-message *ngIf="errorCount > 0" severity="error"
                     text="{{ 'common.networkfail' | translate }}"></p-message>
             </div>

@@ -1,5 +1,5 @@
-<form class="ml-3 mr-3" name="jobs" #jobs="ngForm">
-    <p-card class="m-5">
+<form class="ml-4 mr-4" name="jobs" #jobs="ngForm">
+    <p-card class="m-8">
         <ng-template pTemplate="title">
             {{ 'dashboard.jobs.heading' | translate }}
         </ng-template>
@@ -7,8 +7,8 @@
             {{ 'dashboard.jobs.subtitle' | translate }}
         </ng-template>
         <ng-template pTemplate="content">
-            <div class="grid">
-                <div class="mb-4 w-full">
+            <div class="grid grid-cols-12 gap-4">
+                <div class="mb-6 w-full">
 
                     <div class="form-group field">
                         <label for="CommercialSkipMethod" class="label block">{{ 'dashboard.jobs.method_label' |
@@ -25,7 +25,7 @@
                     <div class="form-group field">
                         <p-checkbox inputId="CommFlagFast" [(ngModel)]="CommFlagFast" name="CommFlagFast"
                             class="mb-2 w-full label" [binary]="true"
-                            label="{{ 'dashboard.jobs.speedup_label' | translate }}">
+                            value="{{ 'dashboard.jobs.speedup_label' | translate }}">
                         </p-checkbox>
                         <small class="block">
                             {{ 'dashboard.jobs.speedup_desc' | translate }}
@@ -35,7 +35,7 @@
                     <div class="form-group field">
                         <p-checkbox inputId="AggressiveCommDetect" [(ngModel)]="AggressiveCommDetect"
                             name="AggressiveCommDetect" class="mb-2 w-full label" [binary]="true"
-                            label="{{ 'dashboard.jobs.strict_label' | translate }}">
+                            value="{{ 'dashboard.jobs.strict_label' | translate }}">
                         </p-checkbox>
                         <small class="block">
                             {{ 'dashboard.jobs.strict_desc' | translate }}
@@ -57,8 +57,8 @@
         </ng-template>
 
         <ng-template pTemplate="footer">
-            <div class="grid nogutter">
-                <div class="col-12">
+            <div class="grid grid-cols-12 gap-4 nogutter">
+                <div class="col-span-12">
                     <p-message *ngIf="successCount > 0 && errorCount == 0 && !jobs.dirty" severity="success"
                         text="{{ 'common.savesuccess' | translate }}"></p-message>
                     <p-message *ngIf="this.errorCount > 0" severity="error"

@@ -1,14 +1,14 @@
-<form class="ml-3 mr-3" name="vboxform" #vboxform="ngForm">
+<form class="ml-4 mr-4" name="vboxform" #vboxform="ngForm">
     <span #top></span>
-    <p-card class="m-5">
+    <p-card class="m-8">
         <ng-template pTemplate="title">
             {{ 'settings.capture.vbox.title' | translate }}
         </ng-template>
         <ng-template pTemplate="subtitle">
         </ng-template>
         <ng-template pTemplate="content">
-            <div class="grid">
-                <div class="mb-4 w-full"u>
+            <div class="grid grid-cols-12 gap-4">
+                <div class="mb-6 w-full"u>
 
                     <div class="form-group field">
                         <label for="VideoDevicePrompt" class="label block">{{ 'settings.capture.satip.device_label' |
@@ -32,7 +32,7 @@
                     <div class="form-group field">
                         <label class="label block">{{ 'settings.capture.vbox.deviceid_label' | translate
                             }}</label>
-                        <div class="col-10 bg-blue-100 text-gray-900">
+                        <div class="col-span-10 bg-blue-100 text-gray-900">
                             {{ card.VideoDevice}} &nbsp;
                         </div>
                         <small class="block">
@@ -43,7 +43,7 @@
                     <div class="form-group field">
                         <label class="label block">{{ 'settings.capture.vbox.description_label' | translate
                             }}</label>
-                        <div class="col-10 bg-blue-100 text-gray-900">
+                        <div class="col-span-10 bg-blue-100 text-gray-900">
                             {{ currentDevice.Description}} &nbsp;
                         </div>
                         <small class="block">
@@ -94,8 +94,8 @@
         </ng-template>
 
         <ng-template pTemplate="footer">
-            <div class="grid nogutter">
-                <div class="col-12">
+            <div class="grid grid-cols-12 gap-4 nogutter">
+                <div class="col-span-12">
                     <p-message *ngIf="this.successCount > 0 && this.errorCount == 0 && !vboxform.dirty"
                         severity="success" text="{{ 'common.savesuccess' | translate }}"></p-message>
                     <p-message *ngIf="this.errorCount > 0" severity="error"

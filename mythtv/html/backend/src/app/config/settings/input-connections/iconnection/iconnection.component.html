@@ -1,14 +1,14 @@
-<form class="ml-3 mr-3" name="connform" #connform="ngForm">
+<form class="ml-4 mr-4" name="connform" #connform="ngForm">
     <span #top></span>
-    <p-card class="m-5">
+    <p-card class="m-8">
         <ng-template pTemplate="title">
             {{ 'settings.iconnection.title' | translate }}
         </ng-template>
         <ng-template pTemplate="subtitle">
         </ng-template>
         <ng-template pTemplate="content">
-            <div class="grid">
-                <div class="mb-4 w-full">
+            <div class="grid grid-cols-12 gap-4">
+                <div class="mb-6 w-full">
 
                     <div *ngIf="diseqcTree" [ngSwitch]="diseqcTree.Type">
                         <div class="form-group field" *ngSwitchCase="'switch'">
@@ -141,7 +141,7 @@
                     <div class="form-group field" *ngIf="card.CardType == 'DVB'">
                         <p-checkbox inputId="DishnetEIT" [(ngModel)]="card.DishnetEIT" name="DishnetEIT"
                             #DishnetEIT="ngModel" class="label mb-2 w-full" [binary]="true"
-                            label="{{ 'settings.iconnection.dishneteit_label' | translate }}">
+                            value="{{ 'settings.iconnection.dishneteit_label' | translate }}">
                         </p-checkbox>
                         <small class="block">
                             {{ 'settings.iconnection.dishneteit_desc' | translate }}
@@ -149,7 +149,7 @@
                     </div>
 
                     <!-- Scan Panel -->
-                    <p-fieldset class="mb-4 w-full" legend="{{ 'settings.iconnection.scan_title' | translate }}"
+                    <p-fieldset class="mb-6 w-full" legend="{{ 'settings.iconnection.scan_title' | translate }}"
                         [collapsed]="true" [toggleable]="true" *ngIf="!work.isUnscanable">
                         <app-channelscan [card]="card" [cardList]="cardList" [iconnection]="this"
                             [videoSourceLookup]="videoSourceLookup"></app-channelscan>
@@ -158,7 +158,7 @@
                     <br><br>
 
                     <div class="form-group field">
-                        <div class="grid">
+                        <div class="grid grid-cols-12 gap-4">
                             <div style="display:flex; align-items:center;">
                                 <p-button label="{{ 'settings.iconnection.fetch.label' | translate }}"
                                     icon="pi pi-download" iconPos="left" (onClick)="work.fetchChannelsDialog=true"
@@ -200,7 +200,7 @@
                     </div>
 
                     <!-- Interactions Panel -->
-                    <p-fieldset class="mb-4 w-full" legend="{{ 'settings.iconnection.interact_title' | translate }}"
+                    <p-fieldset class="mb-6 w-full" legend="{{ 'settings.iconnection.interact_title' | translate }}"
                         [toggleable]="true" [collapsed]="true">
 
                         <div class="form-group field">
@@ -218,7 +218,7 @@
                             <p-checkbox inputId="SchedGroup" [(ngModel)]="card.SchedGroup" name="SchedGroup"
                                 #DVBWaitForSeqStart="ngModel" class="label mb-2 w-full" [binary]="true"
                                 [disabled]="!work.isTunerSharable"
-                                label="{{ 'settings.iconnection.schedgrp_label' | translate }}">
+                                value="{{ 'settings.iconnection.schedgrp_label' | translate }}">
                             </p-checkbox>
                             <small class="block">
                                 {{ 'settings.iconnection.schedgrp_desc' | translate }}
@@ -273,8 +273,8 @@
         </ng-template>
 
         <ng-template pTemplate="footer">
-            <div class="grid nogutter">
-                <div class="col-12">
+            <div class="grid grid-cols-12 gap-4 nogutter">
+                <div class="col-span-12">
                     <p-message *ngIf="this.work.successCount > 0 && this.work.errorCount == 0 && !connform.dirty"
                         severity="success" text="{{ 'common.savesuccess' | translate }}"></p-message>
                     <p-message *ngIf="this.work.errorCount > 0" severity="error"

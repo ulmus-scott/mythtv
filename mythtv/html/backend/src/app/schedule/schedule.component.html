@@ -1,4 +1,4 @@
-<form class="ml-3 mr-3" name="schedform" #schedform="ngForm">
+<form class="ml-4 mr-4" name="schedform" #schedform="ngForm">
     <div #dlg *ngIf="recRule">
         <p-dialog header="{{ 'dashboard.sched.heading' | translate }}" [(visible)]="displayDlg" [modal]="true"
             [style]="{height: '90vw', width: '700px'}" [closable]="false" [closeOnEscape]="false">
@@ -29,7 +29,7 @@
 
             <div class="form-group field">
                 <label for="Title" class="label block">{{ 'dashboard.sched.title_label' | translate }}</label>
-                <textarea pInputTextArea id="Title" [(ngModel)]="recRule.Title" name="Title"
+                <textarea pTextArea id="Title" [(ngModel)]="recRule.Title" name="Title"
                     class="text-lg mb-2 form-control w-full"
                     [disabled]="['Power Search','Manual Search'].indexOf(recRule.SearchType) == -1 && recRule.Type != 'Recording Template' || recRule.Id == defaultTemplate?.Id"
                     (focusout)="onTitleBlur()" [rows]="titleRows">
@@ -41,7 +41,7 @@
                     {{ 'dashboard.sched.subtitle_label' | translate }}</label>
                 <label *ngIf="recRule.SearchType == 'Power Search'" for="SubTitle" class="label block">
                     {{ 'dashboard.sched.add_tables_label' | translate }}</label>
-                <textarea *ngIf="['None','Power Search'].indexOf(recRule.SearchType)>-1" pInputTextArea id="SubTitle"
+                <textarea *ngIf="['None','Power Search'].indexOf(recRule.SearchType)>-1" pTextArea id="SubTitle"
                     [(ngModel)]="recRule.SubTitle" name="SubTitle" class="text-lg mb-2 form-control w-full"
                     [disabled]="recRule.SearchType!='Power Search'" [rows]="subTitleRows">
                 </textarea>
@@ -61,7 +61,7 @@
                     <label *ngSwitchDefault for="Description" class="label block mb-2">
                         {{ 'dashboard.sched.srchValue_label' | translate }}</label>
                 </div>
-                <textarea pInputTextArea id="Description" [(ngModel)]="recRule.Description" name="Description"
+                <textarea pTextArea id="Description" [(ngModel)]="recRule.Description" name="Description"
                     class="text-lg mb-2 form-control w-full" (focusout)="onDescriptionBlur()"
                     [disabled]="['None','Manual Search'].indexOf(recRule.SearchType) > -1" [rows]="descriptionRows">
                 </textarea>
@@ -122,7 +122,7 @@
 
             <div class="form-group field">
                 <p-checkbox inputId="Active" [(ngModel)]="recRule.Inactive" name="Active" #Active="ngModel"
-                    class="label mb-2 w-full" [binary]="true" label="{{ 'dashboard.sched.active_label' | translate }}"
+                    class="label mb-2 w-full" [binary]="true" value="{{ 'dashboard.sched.active_label' | translate }}"
                     [trueValue]="false" [falseValue]="true" [disabled]="override">
                 </p-checkbox>
             </div>
@@ -152,7 +152,7 @@
 
             <div class="form-group field">
                 <p-checkbox inputId="NewEpisOnly" [(ngModel)]="recRule.NewEpisOnly" name="NewEpisOnly" #UseEIT="ngModel"
-                    class="label mb-2 w-full" [binary]="true" label="{{ 'dashboard.sched.newepis_label' | translate }}">
+                    class="label mb-2 w-full" [binary]="true" value="{{ 'dashboard.sched.newepis_label' | translate }}">
                 </p-checkbox>
             </div>
 
@@ -235,7 +235,7 @@
             <div class="form-group field">
                 <p-checkbox inputId="MaxNewest" [(ngModel)]="recRule.MaxNewest" name="MaxNewest" #MaxNewest="ngModel"
                     class="label mb-2 w-full" [binary]="true"
-                    label="{{ 'dashboard.sched.maxnewest_label' | translate }}">
+                    value="{{ 'dashboard.sched.maxnewest_label' | translate }}">
                 </p-checkbox>
                 <small class="block">
                     {{ 'dashboard.sched.maxnewest_desc' | translate }}
@@ -245,7 +245,7 @@
             <div class="form-group field">
                 <p-checkbox inputId="AutoExpire" [(ngModel)]="recRule.AutoExpire" name="AutoExpire"
                     #AutoExpire="ngModel" class="label mb-2 w-full" [binary]="true"
-                    label="{{ 'dashboard.sched.autoexpire_label' | translate }}">
+                    value="{{ 'dashboard.sched.autoexpire_label' | translate }}">
                 </p-checkbox>
             </div>
 
@@ -260,36 +260,36 @@
 
             <div class="form-group field" *ngIf="recRule.Type != 'Recording Template'">
                 <label for="Inetref" class="label block">{{ 'dashboard.sched.inetref_label' | translate }}</label>
-                <div class="grid p-0">
-                    <div class="col-5 flex align-items-center">
+                <div class="grid grid-cols-12 gap-4 p-0">
+                    <div class="col-span-5 flex items-center">
                         <p-radioButton name="prefix" value="ttvdb4.py_" [(ngModel)]="metaPrefix" inputId="ttvdb"
                             (ngModelChange)="iCheckbox(recRule)"></p-radioButton>
                         <label for="ttvdb"><img class="pl-1 " src="images/metadata/thetvdb.png" alt="thtvdb"
                                 height="40"></label>
                     </div>
-                    <div class="col-7 flex align-items-center">
+                    <div class="col-span-7 flex items-center">
                         <a href="{{ URLencode('https://thetvdb.com/search?query='+recRule.Title) }}" target="_blank">
                             {{ 'dashboard.sched.isearch' | translate }} thetvdb.com</a>
                         <br>
                     </div>
-                    <div class="col-5 flex align-items-center">
+                    <div class="col-span-5 flex items-center">
                         <p-radioButton name="prefix" value="tvmaze.py_" [(ngModel)]="metaPrefix" inputId="tvmaze"
                             (ngModelChange)="iCheckbox(recRule)"></p-radioButton>
                         <label for="tvmaze"><img class="pl-1 " src="images/metadata/tvmaze.png" alt="tvmaze"
                                 height="40"></label>
                     </div>
-                    <div class="col-7 flex align-items-center">
+                    <div class="col-span-7 flex items-center">
                         <a href="{{ URLencode('https://www.tvmaze.com/search?q='+recRule.Title) }}" target="_blank">
                             {{ 'dashboard.sched.isearch' | translate }} tvmaze.com</a>
                         <br>
                     </div>
-                    <div class="col-5 flex align-items-center">
+                    <div class="col-span-5 flex items-center">
                         <p-radioButton name="prefix" value="tmdb3.py_" [(ngModel)]="metaPrefix" inputId="tmdb"
                             (ngModelChange)="iCheckbox(recRule)"></p-radioButton>
                         <label for="tmdb"><img class="pl-1 " src="images/metadata/themoviedb.svg" alt="themoviedb"
                                 height="40"></label>
                     </div>
-                    <div class="col-7 flex align-items-center">
+                    <div class="col-span-7 flex items-center">
                         <a href="{{ URLencode('https://www.themoviedb.org/search?query='+recRule.Title) }}"
                             target="_blank">
                             {{ 'dashboard.sched.isearch' | translate }} themoviedb.org</a>
@@ -305,7 +305,7 @@
             </div>
 
             <ng-template pTemplate="footer">
-                <div class="col-12" style="text-align: left;">
+                <div class="col-span-12" style="text-align: left;">
                     <p-message *ngIf="successCount > 0 && errorCount == 0 && !schedform.dirty" severity="success"
                         text="{{ 'common.savesuccess' | translate }}"></p-message>
                     <p-message *ngIf="errorCount > 0" severity="error"

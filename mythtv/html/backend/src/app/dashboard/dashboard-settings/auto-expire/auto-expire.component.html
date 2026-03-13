@@ -1,5 +1,5 @@
-<form class="ml-3 mr-3" name="autoexpire" #autoexpire="ngForm">
-    <p-card class="m-5">
+<form class="ml-4 mr-4" name="autoexpire" #autoexpire="ngForm">
+    <p-card class="m-8">
         <ng-template pTemplate="title">
             {{ 'dashboard.autoexpire.heading' | translate }}
         </ng-template>
@@ -7,8 +7,8 @@
             {{ 'dashboard.autoexpire.subtitle' | translate }}
         </ng-template>
         <ng-template pTemplate="content">
-            <div class="grid">
-                <div class="mb-4 w-full">
+            <div class="grid grid-cols-12 gap-4">
+                <div class="mb-6 w-full">
 
                     <div class="form-group field">
                         <label for="AutoExpireMethod" class="label block">{{ 'dashboard.autoexpire.method_label' |
@@ -25,7 +25,7 @@
                     <div class="form-group field">
                         <p-checkbox inputId="RerecordWatched" [(ngModel)]="RerecordWatched" name="RerecordWatched"
                             class="mb-2 w-full label" [binary]="true"
-                            label="{{ 'dashboard.autoexpire.rerecord_label' | translate }}">
+                            value="{{ 'dashboard.autoexpire.rerecord_label' | translate }}">
                         </p-checkbox>
                         <small class="block">
                             {{ 'dashboard.autoexpire.rerecord_desc' | translate }}
@@ -35,7 +35,7 @@
                     <div class="form-group field">
                         <p-checkbox inputId="AutoExpireWatchedPriority" [(ngModel)]="AutoExpireWatchedPriority"
                             name="AutoExpireWatchedPriority" class="mb-2 w-full label" [binary]="true"
-                            label="{{ 'dashboard.autoexpire.watched_label' | translate }}">
+                            value="{{ 'dashboard.autoexpire.watched_label' | translate }}">
                         </p-checkbox>
                         <small class="block">
                             {{ 'dashboard.autoexpire.watched_desc' | translate }}
@@ -91,8 +91,8 @@
         </ng-template>
 
         <ng-template pTemplate="footer">
-            <div class="grid nogutter">
-                <div class="col-12">
+            <div class="grid grid-cols-12 gap-4 nogutter">
+                <div class="col-span-12">
                     <p-message *ngIf="successCount > 0 && errorCount == 0 && !autoexpire.dirty" severity="success"
                         text="{{ 'common.savesuccess' | translate }}"></p-message>
                     <p-message *ngIf="this.errorCount > 0" severity="error"

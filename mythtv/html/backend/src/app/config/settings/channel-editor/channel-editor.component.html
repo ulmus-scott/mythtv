@@ -116,7 +116,7 @@
     <p-progressSpinner></p-progressSpinner>
 </ng-template>
 
-<form class="ml-3 mr-3" name="chanform" #chanform="ngForm">
+<form class="ml-4 mr-4" name="chanform" #chanform="ngForm">
 
     <p-dialog header="{{ dialogHeader }}" [(visible)]="displayChannelDlg" [modal]="true"
         [style]="{height: '75vw', width: '50vw'}" [closable]="false" [closeOnEscape]="false">
@@ -165,7 +165,7 @@
                     <div *ngIf="channel.Icon">
                         <img *ngIf="!channel.Icon.endsWith('\t')"
                             src="{{'./Guide/GetChannelIcon?Filename=' + channel.Icon + authorization }}"
-                            class="vertical-align-middle h-2rem" />
+                            class="align-middle h-8" />
                         &nbsp;&nbsp;{{channel.Icon}}
                     </div>
                 </ng-template>
@@ -173,7 +173,7 @@
                     <div>
                         <!-- Name ending with tab character is code for "no icon". -->
                         <img *ngIf="!icon.endsWith('\t')" src="{{'./Guide/GetChannelIcon?Filename=' + icon + authorization }}"
-                            class="vertical-align-middle h-2rem" />
+                            class="align-middle h-8" />
                         &nbsp;&nbsp;{{icon}}
                     </div>
                 </ng-template>
@@ -240,7 +240,7 @@
 
         <div class="form-group field">
             <p-checkbox inputId="UseEIT" [(ngModel)]="channel.UseEIT" name="UseEIT" #UseEIT="ngModel"
-                class="label mb-2 w-full" [binary]="true" label="{{ 'settings.chanedit.eit_label' | translate }}">
+                class="label mb-2 w-full" [binary]="true" value="{{ 'settings.chanedit.eit_label' | translate }}">
             </p-checkbox>
             <small class="block">
                 {{ 'settings.chanedit.eit_desc' | translate }}
@@ -306,7 +306,7 @@
         </p-accordion>
 
         <ng-template pTemplate="footer">
-            <div class="col-12" style="text-align: left;">
+            <div class="col-span-12" style="text-align: left;">
                 <p-message *ngIf="successCount > 0 && errorCount == 0 && !chanform.dirty" severity="success"
                     text="{{ 'common.savesuccess' | translate }}"></p-message>
                 <p-message *ngIf="errorCount > 0" severity="error"
@@ -341,7 +341,7 @@
             ChannelName: channel.ChannelName,
             Source: getSource(channel)} }}</p>
         <ng-template pTemplate="footer">
-            <div class="col-12" style="text-align: left;">
+            <div class="col-span-12" style="text-align: left;">
                 <p-message *ngIf="errorCount > 0" severity="error"
                     text="{{ 'common.networkfail' | translate }}"></p-message>
             </div>
@@ -366,7 +366,7 @@
             <p> {{ 'common.delete' | translate }} {{channel.ChanNum}} {{channel.ChannelName}}</p>
         </div>
         <ng-template pTemplate="footer">
-            <div class="col-12" style="text-align: left;">
+            <div class="col-span-12" style="text-align: left;">
                 <p-message *ngIf="errorCount > 0" severity="error"
                     text="{{ 'common.networkfail' | translate }}"></p-message>
             </div>
@@ -394,7 +394,7 @@
 
         <div class="form-group field">
             <p-checkbox inputId="resXMLTV" [(ngModel)]="resXMLTV" name="resXMLTV" class="label mb-2 w-full"
-                [binary]="true" label="{{ 'settings.chanedit.res_xmltv_label' | translate }}">
+                [binary]="true" value="{{ 'settings.chanedit.res_xmltv_label' | translate }}">
             </p-checkbox>
             <small class="block">
                 {{ 'settings.chanedit.res_xmltv_desc' | translate }}
@@ -403,7 +403,7 @@
 
         <div class="form-group field">
             <p-checkbox inputId="resVisible" [(ngModel)]="resVisible" name="resVisible" class="label mb-2 w-full"
-                [binary]="true" label="{{ 'settings.chanedit.res_visible_label' | translate }}">
+                [binary]="true" value="{{ 'settings.chanedit.res_visible_label' | translate }}">
             </p-checkbox>
             <small class="block">
                 {{ 'settings.chanedit.res_visible_desc' | translate }}
@@ -412,7 +412,7 @@
 
         <div class="form-group field">
             <p-checkbox inputId="resIcon" [(ngModel)]="resIcon" name="resIcon" class="label mb-2 w-full" [binary]="true"
-                label="{{ 'settings.chanedit.res_icon_label' | translate }}">
+                value="{{ 'settings.chanedit.res_icon_label' | translate }}">
             </p-checkbox>
             <small class="block">
                 {{ 'settings.chanedit.res_icon_desc' | translate }}
@@ -420,7 +420,7 @@
         </div>
 
         <ng-template pTemplate="footer">
-            <div class="col-12" style="text-align: left;">
+            <div class="col-span-12" style="text-align: left;">
                 <p-message *ngIf="resSearchDone && !chanform.dirty" severity="info" text="{{ 'settings.chanedit.restore_details' |
                     translate: {NumChannels: resResult.NumChannels,
                      NumXLMTVID: resResult.NumXLMTVID,
@@ -428,11 +428,11 @@
                      NumIcon: resResult.NumIcon} }}">
                 </p-message>
             </div>
-            <div class="col-12" style="text-align: left;">
+            <div class="col-span-12" style="text-align: left;">
                 <p-message *ngIf="successCount > 0 && errorCount == 0 && !chanform.dirty" severity="success"
                     text="{{ 'common.savesuccess' | translate }}"></p-message>
             </div>
-            <div class="col-12" style="text-align: left;">
+            <div class="col-span-12" style="text-align: left;">
                 <p-message *ngIf="errorCount > 0" severity="error"
                     text="{{ 'common.networkfail' | translate }}"></p-message>
             </div>
@@ -466,7 +466,7 @@
         </div>
 
         <ng-template pTemplate="footer">
-            <div class="col-12" style="text-align: left;" *ngIf="icondldStatus > 0">
+            <div class="col-span-12" style="text-align: left;" *ngIf="icondldStatus > 0">
                 {{ 'settings.chanedit.icondld_details' |
                 translate: {Count: icondldCount,
                 Max: icondldMax} }}
@@ -491,7 +491,7 @@
                     </tr>
                 </table>
             </div>
-            <div class="col-12" style="text-align: left;">
+            <div class="col-span-12" style="text-align: left;">
                 <p-message *ngIf="icondldStatus == 2" severity="success"
                     text="{{ 'settings.chanedit.icondld_complete' | translate }}"></p-message>
             </div>
@@ -534,7 +534,7 @@
                 [listStyle]="{'max-height':'18rem'}">
                 <ng-template let-icon pTemplate="item">
                     <div>
-                        <img src="{{icon.url}}" class="vertical-align-middle h-2rem" />
+                        <img src="{{icon.url}}" class="align-middle h-8" />
                         &nbsp;&nbsp;{{icon.name}}
                     </div>
                 </ng-template>
@@ -542,7 +542,7 @@
         </div>
 
         <ng-template pTemplate="footer">
-            <div class="col-12" style="text-align: left;">
+            <div class="col-span-12" style="text-align: left;">
                 <p-message *ngIf="errorCount > 0" severity="error" text="Icon Download Failed"></p-message>
             </div>
             <p-button icon="pi pi-times-circle" (onClick)="iconsrchShowDialog=false"

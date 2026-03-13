@@ -1,13 +1,13 @@
-<form class="ml-3 mr-3" name="quality" #quality="ngForm">
-    <p-card class="m-5">
+<form class="ml-4 mr-4" name="quality" #quality="ngForm">
+    <p-card class="m-8">
         <ng-template pTemplate="title">
             {{ 'dashboard.quality.heading' | translate }}
         </ng-template>
         <ng-template pTemplate="subtitle">
         </ng-template>
         <ng-template pTemplate="content">
-            <div class="grid">
-                <div class="mb-4 w-full">
+            <div class="grid grid-cols-12 gap-4">
+                <div class="mb-6 w-full">
 
                     <div class="form-group field">
                         <label for="RecordPreRoll" class="label block">{{ 'dashboard.quality.preroll_label' |
@@ -60,7 +60,7 @@
                         </small>
                     </div>
 
-                    <p-fieldset class="mb-4 w-full" legend="{{ 'dashboard.quality.panel.overtime' | translate }}"
+                    <p-fieldset class="mb-6 w-full" legend="{{ 'dashboard.quality.panel.overtime' | translate }}"
                         [toggleable]="true" [collapsed]="false">
 
                         <div class="form-group field">
@@ -91,8 +91,8 @@
         </ng-template>
 
         <ng-template pTemplate="footer">
-            <div class="grid nogutter">
-                <div class="col-12">
+            <div class="grid grid-cols-12 gap-4 nogutter">
+                <div class="col-span-12">
                     <p-message *ngIf="successCount > 0 && errorCount == 0 && !quality.dirty" severity="success"
                         text="{{ 'common.savesuccess' | translate }}"></p-message>
                     <p-message *ngIf="this.errorCount > 0" severity="error"

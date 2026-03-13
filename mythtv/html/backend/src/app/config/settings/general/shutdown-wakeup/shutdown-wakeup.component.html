@@ -1,5 +1,5 @@
-<form class="ml-3 mr-3" name="shutwakeopt" #shutwakeopt="ngForm">
-    <p-card class="m-5">
+<form class="ml-4 mr-4" name="shutwakeopt" #shutwakeopt="ngForm">
+    <p-card class="m-8">
         <ng-template pTemplate="title">
             {{ 'settings.shutwake.title' | translate }}
         </ng-template>
@@ -7,8 +7,8 @@
             {{ 'settings.shutwake.subtitle' | translate }}
         </ng-template>
         <ng-template pTemplate="content">
-            <div class="grid">
-                <div class="mb-4 w-full">
+            <div class="grid grid-cols-12 gap-4">
+                <div class="mb-6 w-full">
 
                     <div class="form-group field">
                         <label for="startupCommand" class="label block">{{ 'settings.shutwake.startcmd_label' | translate
@@ -23,7 +23,7 @@
                     <div class="form-group field">
                         <p-checkbox inputId="blockSDWUwithoutClient" [(ngModel)]="blockSDWUwithoutClient"
                             name="blockSDWUwithoutClient" class="mb-2 w-full label" [binary]="true"
-                            label="{{ 'settings.shutwake.block_label' | translate }}">
+                            value="{{ 'settings.shutwake.block_label' | translate }}">
                         </p-checkbox>
                         <small class="block">
                             {{ 'settings.shutwake.block_desc' | translate }}
@@ -108,8 +108,8 @@
         </ng-template>
 
         <ng-template pTemplate="footer">
-            <div class="grid nogutter">
-                <div class="col-12">
+            <div class="grid grid-cols-12 gap-4 nogutter">
+                <div class="col-span-12">
                     <p-message *ngIf="this.successCount > 0 && this.errorCount == 0 && !shutwakeopt.dirty"
                         severity="success" text="{{ 'common.savesuccess' | translate }}"></p-message>
                     <p-message *ngIf="this.errorCount > 0" severity="error"

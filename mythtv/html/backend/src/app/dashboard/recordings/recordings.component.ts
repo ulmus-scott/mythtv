@@ -15,7 +15,7 @@ import { ListboxModule } from 'primeng/listbox';
 import { MessageModule } from 'primeng/message';
 import { CalendarModule } from 'primeng/calendar';
 import { InputNumberModule } from 'primeng/inputnumber';
-import { InputTextareaModule } from 'primeng/inputtextarea';
+import { TextareaModule } from 'primeng/textarea';
 import { DialogModule } from 'primeng/dialog';
 import { DropdownModule } from 'primeng/dropdown';
 import { NgIf, NgClass, DecimalPipe } from '@angular/common';
@@ -30,7 +30,7 @@ import { ToastModule } from 'primeng/toast';
     styleUrls: ['./recordings.component.css'],
     providers: [MessageService],
     standalone: true,
-    imports: [FormsModule, ToastModule, MenuModule, ButtonModule, RippleModule, TooltipModule, NgIf, DropdownModule, TableModule, SharedModule, NgClass, DialogModule, InputTextareaModule, InputNumberModule, CalendarModule, MessageModule, ListboxModule, DecimalPipe, TranslateModule]
+    imports: [FormsModule, ToastModule, MenuModule, ButtonModule, RippleModule, TooltipModule, NgIf, DropdownModule, TableModule, SharedModule, NgClass, DialogModule, TextareaModule, InputNumberModule, CalendarModule, MessageModule, ListboxModule, DecimalPipe, TranslateModule]
 })
 export class RecordingsComponent implements OnInit {
 

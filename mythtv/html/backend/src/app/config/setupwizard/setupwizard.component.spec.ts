@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
@@ -11,9 +11,9 @@ describe('SetupWizardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    imports: [HttpClientModule,
-        RouterTestingModule,
-        TranslateModule.forRoot(), SetupWizardComponent]
+    imports: [RouterTestingModule,
+        TranslateModule.forRoot(), SetupWizardComponent],
+    providers: [provideHttpClient(withInterceptorsFromDi())]
 })
     .compileComponents();
   });

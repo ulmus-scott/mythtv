@@ -11,7 +11,7 @@ import { VideoService } from 'src/app/services/video.service';
 import { MessageModule } from 'primeng/message';
 import { CalendarModule } from 'primeng/calendar';
 import { InputNumberModule } from 'primeng/inputnumber';
-import { InputTextareaModule } from 'primeng/inputtextarea';
+import { TextareaModule } from 'primeng/textarea';
 import { DialogModule } from 'primeng/dialog';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { DropdownModule } from 'primeng/dropdown';
@@ -28,7 +28,7 @@ import { ToastModule } from 'primeng/toast';
     styleUrls: ['./videos.component.css'],
     providers: [MessageService],
     standalone: true,
-    imports: [ToastModule, MenuModule, NgIf, TableModule, SharedModule, ButtonModule, NgFor, CheckboxModule, FormsModule, TooltipModule, RippleModule, DropdownModule, ProgressSpinnerModule, DialogModule, InputTextareaModule, InputNumberModule, CalendarModule, MessageModule, TranslateModule]
+    imports: [ToastModule, MenuModule, NgIf, TableModule, SharedModule, ButtonModule, NgFor, CheckboxModule, FormsModule, TooltipModule, RippleModule, DropdownModule, ProgressSpinnerModule, DialogModule, TextareaModule, InputNumberModule, CalendarModule, MessageModule, TranslateModule]
 })
 export class VideosComponent implements OnInit {
 

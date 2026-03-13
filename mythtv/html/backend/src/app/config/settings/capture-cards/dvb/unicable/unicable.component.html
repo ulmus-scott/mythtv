@@ -1,13 +1,13 @@
-<form class="ml-3 mr-3" name="unicableform" #unicableform="ngForm">
-    <p-card class="m-5">
+<form class="ml-4 mr-4" name="unicableform" #unicableform="ngForm">
+    <p-card class="m-8">
         <ng-template pTemplate="title">
             {{ 'settings.capture.diseqc.unicable.title' | translate }}
         </ng-template>
         <ng-template pTemplate="subtitle">
         </ng-template>
         <ng-template pTemplate="content">
-            <div class="grid">
-                <div class="mb-4 w-full">
+            <div class="grid grid-cols-12 gap-4">
+                <div class="mb-6 w-full">
 
                     <div class="form-group field">
                         <label for="Description" class="label block">{{ 'settings.capture.diseqc.description_label' |
@@ -63,7 +63,7 @@
                     </div>
 
                     <!-- Next Device Panel -->
-                    <p-fieldset class="mb-4 w-full" legend="{{ 'settings.capture.dvb.satellite_heading' | translate }}"
+                    <p-fieldset class="mb-6 w-full" legend="{{ 'settings.capture.dvb.satellite_heading' | translate }}"
                         [toggleable]="true" [collapsed]="true">
                         <p-button label="{{ 'settings.capture.dvb.newsatellite_button' | translate }}"
                             *ngIf="!diseqcSubTree" (onClick)="work.displayNewDiseqc = true" icon="pi pi-plus-circle"

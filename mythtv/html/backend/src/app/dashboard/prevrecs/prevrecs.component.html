@@ -11,11 +11,11 @@
             </p-menu>
 
             <!-- Menu, Refresh button and number of rows. -->
-            <div class="flex align-items-center p-1 font-bold">
+            <div class="flex items-center p-1 font-bold">
                 <button pButton pRipple icon="pi pi-bars" class="p-button-text .p-button-success"
                     (click)="showContextMenu(null, $event)" pTooltip="{{ 'common.selected_menu' | translate }}"
                     tooltipPosition="top"></button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <div class="flex align-items-center  pr-3" style="width:200px">
+                <div class="flex items-center  pr-4" style="width:200px">
                     <p-calendar [(ngModel)]="dateValue" [stepMinute]="30" [dateFormat]="'M yy'"
                         (onClose)="onFilter()"
                         [selectOtherMonths]="true" [showIcon]="true" [showOnFocus]="true" [showButtonBar]="true"
@@ -41,7 +41,7 @@
                         (keydown)="keydown($event)" />
                 </span>
 
-                <button pButton pRipple icon="pi pi-search" class="p-button-text w-2rem" (click)="onFilter()"
+                <button pButton pRipple icon="pi pi-search" class="p-button-text w-8" (click)="onFilter()"
                     pTooltip="{{ 'dashboard.guide.title_search' | translate }}" tooltipPosition="top"></button>
                 <!-- Refresh button and number of rows. -->
                 <div *ngIf="refreshing else refreshBn"><p-progressSpinner
@@ -67,9 +67,9 @@
                         <th style="width: 7%" class="p-1" pSortableColumn="StartTime">
                             {{ 'dashboard.upcoming.date' | translate }}<p-sortIcon field="StartTime"></p-sortIcon>
                         </th>
-                        <th style="width: 7%" class="justify-content-end p-1">
+                        <th style="width: 7%" class="justify-end p-1">
                             {{ 'dashboard.upcoming.time' | translate }} </th>
-                        <th style="width: 7%" class="justify-content-end pl-1 pr-3 pt-1 pb-1"  pSortableColumn="Duration">
+                        <th style="width: 7%" class="justify-end pl-1 pr-4 pt-1 pb-1"  pSortableColumn="Duration">
                             {{ 'dashboard.upcoming.length' | translate }}<p-sortIcon field="Duration"></p-sortIcon></th>
                         <th style="width: 15%" class="p-1" pSortableColumn="Title">
                             {{ 'dashboard.recordings.title' | translate }}<p-sortIcon field="Title"></p-sortIcon>
@@ -97,12 +97,12 @@
                                 <div class="mytext" [innerHTML]="formatStartDate(program, rowIndex)"></div>
                             </div>
                         </td>
-                        <td class="justify-content-end p-1 overflow-hidden">
+                        <td class="justify-end p-1 overflow-hidden">
                             <div class="mycell">
                                 <div class="mytext">{{formatStartTime(program)}} </div>
                             </div>
                         </td>
-                        <td class="justify-content-end pl-1 pr-3 pt-1 pb-1 overflow-hidden">
+                        <td class="justify-end pl-1 pr-4 pt-1 pb-1 overflow-hidden">
                             <div class="mycell">
                                 <div class="mytext">{{ getDuration(program) | number:'1.0-0' }} min</div>
                             </div>

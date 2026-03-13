@@ -1,4 +1,4 @@
-<p-card class="m-5">
+<p-card class="m-8">
     <h2>{{ 'settings.vsource.title' | translate }}</h2>
 
     <p-button label="{{ 'settings.vsource.new_video_source' | translate }}" (onClick)="newSource();"
@@ -19,26 +19,26 @@
         </ng-template>
     </p-dialog>
     <br>
-    <div class="grid nogutter">
-        <div class="col-12" *ngIf="this.expectedCount && this.successCount == this.expectedCount">
+    <div class="grid grid-cols-12 gap-4 nogutter">
+        <div class="col-span-12" *ngIf="this.expectedCount && this.successCount == this.expectedCount">
             <br>
             <p-message severity="success" text="{{ 'settings.common.successful_delete' | translate }}">
             </p-message>
             <br>
         </div>
-        <div class="col-12" *ngIf="this.errorCount > 0">
+        <div class="col-span-12" *ngIf="this.errorCount > 0">
             <br>
             <p-message severity="error" text="{{ 'common.networkfail' | translate }}">
             </p-message>
             <br>
         </div>
     </div>
-    <p-accordion class="col-12 w-full" (onClose)="onTabClose($event)" (onOpen)="onTabOpen($event)">
+    <p-accordion class="col-span-12 w-full" (onClose)="onTabClose($event)" (onOpen)="onTabOpen($event)">
         <p-accordionTab *ngFor="let source of videoSourceList.VideoSourceList.VideoSources; index as ix; first as isFirst"
             [disabled]="disabledTab[ix]" [(selected)]="activeTab[ix]">
             <ng-template pTemplate="header">
-                <div class="grid  w-full">
-                    <div class="col-9 pr-1">
+                <div class="grid grid-cols-12 gap-4  w-full">
+                    <div class="col-span-9 pr-1">
                         {{videoSourceList.VideoSourceList.VideoSources[ix].SourceName}}
                         ({{videoSourceList.VideoSourceList.VideoSources[ix].Grabber}})
                         <b>&nbsp;{{ dirtyMessages[ix] }}</b>
@@ -70,12 +70,12 @@
         </p-accordionTab>
     </p-accordion>
 
-    <div class="flex justify-content-end">
-        <p-button class="p-3" label="{{ 'common.back' | translate }}"
+    <div class="flex justify-end">
+        <p-button class="p-4" label="{{ 'common.back' | translate }}"
             (onClick)="router.navigate(['setupwizard/recording-profiles'])" icon="pi pi-angle-left"
             iconPos="left"></p-button>
 
-        <p-button class="p-3" label="{{ 'common.next' | translate }}"
+        <p-button class="p-4" label="{{ 'common.next' | translate }}"
             (onClick)="router.navigate(['setupwizard/input-connections'])" icon="pi pi-angle-right" iconPos="right"></p-button>
     </div>
 

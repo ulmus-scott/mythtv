@@ -1,14 +1,14 @@
-<form class="ml-3 mr-3" name="firewireform" #firewireform="ngForm">
+<form class="ml-4 mr-4" name="firewireform" #firewireform="ngForm">
     <span #top></span>
-    <p-card class="m-5">
+    <p-card class="m-8">
         <ng-template pTemplate="title">
             {{ 'settings.capture.firewire.title' | translate }}
         </ng-template>
         <ng-template pTemplate="subtitle">
         </ng-template>
         <ng-template pTemplate="content">
-            <div class="grid">
-                <div class="mb-4 w-full">
+            <div class="grid grid-cols-12 gap-4">
+                <div class="mb-6 w-full">
 
                     <div class="form-group field">
                         <label for="VideoDevice" class="label block">{{ 'settings.capture.firewire.device_label' | translate
@@ -30,7 +30,7 @@
                     <div class="form-group field">
                         <label class="label block">{{ 'settings.capture.vbox.description_label' | translate
                             }}</label>
-                        <div class="col-10 bg-blue-100 text-gray-900">
+                        <div class="col-span-10 bg-blue-100 text-gray-900">
                             {{ currentDevice.Description}} &nbsp;
                         </div>
                         <small class="block">
@@ -98,8 +98,8 @@
         </ng-template>
 
         <ng-template pTemplate="footer">
-            <div class="grid nogutter">
-                <div class="col-12">
+            <div class="grid grid-cols-12 gap-4 nogutter">
+                <div class="col-span-12">
                     <p-message *ngIf="this.successCount > 0 && this.errorCount == 0 && !firewireform.dirty"
                         severity="success" text="{{ 'common.savesuccess' | translate }}"></p-message>
                     <p-message *ngIf="this.errorCount > 0" severity="error"

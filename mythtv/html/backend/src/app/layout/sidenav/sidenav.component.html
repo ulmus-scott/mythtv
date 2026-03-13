@@ -1,11 +1,11 @@
 <ng-container>
-    <div class="navbar flex relative lg:static surface-ground">
+    <div class="navbar flex relative lg:static bg-surface-50 dark:bg-surface-950">
         <div id="sidebar"
-            class="bg-gray-900 lg:block flex-shrink-0 absolute lg:static left-0 top-0 z-2 border-gray-800 w-18rem lg:w-5rem select-none"
+            class="bg-gray-900 lg:block shrink-0 absolute lg:static left-0 top-0 z-20 border-gray-800 w-72 lg:w-20 select-none"
             [hidden]="dataService.m_showSidebar">
-            <div class="flex flex-column h-full">
+            <div class="flex flex-col h-full">
                 <div class="mt-1 select-none">
-                    <ul class="list-none p-3 lg:py-3 lg:px-2 m-0">
+                    <ul class="list-none p-4 lg:py-4 lg:px-2 m-0">
                         <li [routerLink]="'dashboard/status'" pTooltip="{{ 'navbar.dashboard' | translate }}"
                             [tooltipDisabled]="dataService.m_showSidebar === false" (click)="dataService.showSidebar(true)">
                             <a pRipple
@@ -39,7 +39,7 @@
                 </div>
             </div>
         </div>
-        <div class="contentarea px-0 lg:px-3 w-full">
+        <div class="contentarea px-0 lg:px-4 w-full">
             <router-outlet></router-outlet>
         </div>
     </div>

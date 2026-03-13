@@ -1,6 +1,6 @@
-<div class="wizard-content m-0 md:m-3">
-    <form class="mx-0 md:mx-3" name="langform" #langform="ngForm">
-        <p-card class="m-0 md:m-5">
+<div class="wizard-content m-0 md:m-4">
+    <form class="mx-0 md:mx-4" name="langform" #langform="ngForm">
+        <p-card class="m-0 md:m-8">
             <ng-template pTemplate="title">
                 {{ 'setupwizard.localSetup' | translate }}
             </ng-template>
@@ -8,8 +8,8 @@
                 {{ 'setupwizard.countryAndLanguage' | translate }}
             </ng-template>
             <ng-template pTemplate="content">
-                <div class="grid m-0 md:m-3">
-                    <div class="col-12 md:col-6 pt-2">
+                <div class="grid grid-cols-12 gap-4 m-0 md:m-4">
+                    <div class="col-span-12 md:col-span-6 pt-2">
                         <p-listbox [options]="m_countries" [(ngModel)]="m_wizardData.Country" [multiple]="false"
                             [filter]="true" optionLabel="Country"
                             [listStyle]="{'max-height':'460px', 'min-height':'460px'}" name="countries">
@@ -18,25 +18,25 @@
                             </ng-template>
                             <ng-template let-country pTemplate="item">
                                 <div #countryrow [attr.id]="country.Code" class="language-item">
-                                    <img class="pr-3" src="images/locale/{{country.Image}}" style="width:70px">
+                                    <img class="pr-4" src="images/locale/{{country.Image}}" style="width:70px">
                                     <pre><span class="font-bold">{{country.Country}}</span>{{country.NativeCountry !== null ? " - " + country.NativeCountry : ""}} ({{ country.Code}})</pre>
                                 </div>
                             </ng-template>
                         </p-listbox>
-                        <div class="pt-5" *ngIf="((m_wizardData.Country.Code != '')) else noCountry">
+                        <div class="pt-8" *ngIf="((m_wizardData.Country.Code != '')) else noCountry">
                             <p-message severity="success"
                                 text="{{ 'setupwizard.selectedCountry' | translate }} {{m_wizardData.Country.Country}}">
                             </p-message>
                         </div>
                         <ng-template #noCountry>
-                            <div class="pt-5">
+                            <div class="pt-8">
                                 <p-message severity="error"
                                     text="{{ 'setupwizard.noCountry' | translate }}"></p-message>
                             </div>
                         </ng-template>
                     </div>
 
-                    <div class="col-12 md:col-6">
+                    <div class="col-span-12 md:col-span-6">
                         <p-listbox [options]="m_languages" [(ngModel)]="m_wizardData.Language" [multiple]="false"
                             [filter]="true" optionLabel="Language"
                             [listStyle]="{'max-height':'460px', 'min-height':'460px'}" name="languages">
@@ -45,19 +45,19 @@
                             </ng-template>
                             <ng-template let-language pTemplate="item">
                                 <div #languagerow [attr.id]="language.Code" class="language-item">
-                                    <img class="pr-3" src="images/locale/{{language.Image}}" style="width:70px">
+                                    <img class="pr-4" src="images/locale/{{language.Image}}" style="width:70px">
                                     <pre><span class="font-bold">{{language.Language}}</span> - {{language.NativeLanguage}} ({{language.Code}})</pre>
                                 </div>
                             </ng-template>
                         </p-listbox>
 
-                        <div class="pt-5" *ngIf="(m_wizardData.Language.Code != '') else noLanguage">
+                        <div class="pt-8" *ngIf="(m_wizardData.Language.Code != '') else noLanguage">
                             <p-message severity="success"
                                 text="{{ 'setupwizard.selectedLanguage' | translate }} {{m_wizardData.Language.NativeLanguage}}">
                             </p-message>
                         </div>
                         <ng-template #noLanguage>
-                            <div class="pt-5">
+                            <div class="pt-8">
                                 <p-message class="pt-2" severity="error"
                                     text="{{ 'setupwizard.noLanguage' | translate }}"></p-message>
                             </div>
@@ -67,8 +67,8 @@
             </ng-template>
 
             <ng-template pTemplate="footer">
-                <div class="grid nogutter m-5">
-                    <div class="col-12">
+                <div class="grid grid-cols-12 gap-4 nogutter m-8">
+                    <div class="col-span-12">
                         <p-message
                             *ngIf="successCount > 0 && successCount == expectedCount && errorCount == 0 && !langform.dirty"
                             severity="success" text="{{ 'common.savesuccess' | translate }}"></p-message>
@@ -79,7 +79,7 @@
                         (onClick)="saveForm(); langform.form.markAsPristine()"
                         [disabled]="!langform.dirty || setupService.schedulingEnabled"></p-button>
 
-                    <p-button class="pr-3" label="{{ 'common.back' | translate }}"
+                    <p-button class="pr-4" label="{{ 'common.back' | translate }}"
                         (onClick)="router.navigate(['setupwizard/dbsetup'])" icon="pi pi-angle-left"
                         iconPos="left"></p-button>
 

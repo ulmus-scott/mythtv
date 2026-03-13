@@ -11,7 +11,7 @@
              [sortField]="sortField" [sortOrder]="sortOrder" [scrollable]="true"  (onSort)="onSort($event)">
             <ng-template pTemplate="caption">
                 <!-- Top Buttons -->
-                <div class="flex align-items-center">
+                <div class="flex items-center">
                     <p-button (onClick)="breadCrumb(0)" label="{{ 'dashboard.videos.heading' | translate }}" class="p-1"
                         styleClass="p-button-primary">
                     </p-button>
@@ -24,7 +24,7 @@
                     &nbsp;&nbsp;&nbsp;
                     <p-checkbox inputId="showAllVideos" [(ngModel)]="showAllVideos" name="showAllVideos"
                         #showAll="ngModel" [binary]="true" (onChange)="showAllChange()"
-                        label="{{ 'dashboard.videos.showall' | translate }} ">
+                        value="{{ 'dashboard.videos.showall' | translate }} ">
                     </p-checkbox>
                     &nbsp;&nbsp;&nbsp;
                     <span class="p-input-icon-right">
@@ -35,7 +35,7 @@
                         (keydown)="keydown($event)" />
                     </span>
 
-                    <button pButton pRipple icon="pi pi-search" class="p-button-text w-2rem" (click)="onFilter()"
+                    <button pButton pRipple icon="pi pi-search" class="p-button-text w-8" (click)="onFilter()"
                       pTooltip="{{ 'dashboard.guide.title_search' | translate }}" tooltipPosition="top"></button>
 
                     &nbsp;&nbsp;&nbsp; {{ 'dashboard.videos.category' | translate }}: &nbsp;
@@ -65,13 +65,13 @@
                         translate }}<p-sortIcon field="subtitle"></p-sortIcon></th>
                     <th style="width: 10%" class="p-1" pSortableColumn="SeasEp">{{ 'dashboard.recordings.seas_ep' |
                         translate }}<p-sortIcon field="SeasEp"></p-sortIcon></th>
-                    <th style="width: 13%" class="justify-content-end p-1" pSortableColumn="ReleaseDate">
+                    <th style="width: 13%" class="justify-end p-1" pSortableColumn="ReleaseDate">
                         {{ 'dashboard.videos.releasedate' | translate }}<p-sortIcon field="ReleaseDate"></p-sortIcon>
                     </th>
-                    <th style="width: 13%" class="justify-content-end p-1" pSortableColumn="insertdate">
+                    <th style="width: 13%" class="justify-end p-1" pSortableColumn="insertdate">
                         {{ 'dashboard.videos.adddate' | translate }}<p-sortIcon field="insertdate"></p-sortIcon>
                     </th>
-                    <th style="width: 13%" class="justify-content-end p-1" pSortableColumn="length">
+                    <th style="width: 13%" class="justify-end p-1" pSortableColumn="length">
                         {{ 'dashboard.recordings.duration' | translate }}<p-sortIcon field="length"></p-sortIcon>
                     </th>
                     <th style="width: 6%; white-space: nowrap;" class="pt-1 pb-0">
@@ -110,17 +110,17 @@
                     <td class="p-1">
                         <div *ngIf="video.Season>0 || video.Episode>0"> {{video.Season}}x{{video.Episode}} </div>
                     </td>
-                    <td class="justify-content-end p-1">
+                    <td class="justify-end p-1">
                         <div class="mycell">
                             <div class="mytext" [innerHTML]="utility.formatDate(video.ReleaseDate,true)"></div>
                         </div>
                     </td>
-                    <td class="justify-content-end p-1">
+                    <td class="justify-end p-1">
                         <div class="mycell">
                             <div class="mytext" [innerHTML]="utility.formatDate(video.AddDate,true)"></div>
                         </div>
                     </td>
-                    <td class="justify-content-end p-1">
+                    <td class="justify-end p-1">
                         <div *ngIf="video.Length > 0">
                             <div class="mycell">
                                 <div class="mytext">{{ video.Length }} min </div>
@@ -142,7 +142,7 @@
         </p-table>
     </div>
 
-    <form class="ml-3 mr-3" name="vidsform" #vidsform="ngForm">
+    <form class="ml-4 mr-4" name="vidsform" #vidsform="ngForm">
         <p-dialog header="{{ 'dashboard.recordings.edit_metadata' | translate }}" [(visible)]="displayMetadataDlg"
             [modal]="true" [style]="{height: '75vw', width: '50vw'}" [closable]="false" [closeOnEscape]="false">
 
@@ -167,7 +167,7 @@
             <div class="form-group field">
                 <label for="Description" class="label block">{{ 'dashboard.recordings.description' | translate
                     }}</label>
-                <textarea pInputTextarea [rows]="5" [cols]="30" id="Description" [(ngModel)]="video.Description"
+                <textarea pTextarea [rows]="5" [cols]="30" id="Description" [(ngModel)]="video.Description"
                     name="Description" #Description="ngModel" class="mb-2 form-control w-full"></textarea>
             </div>
 
@@ -199,7 +199,7 @@
             </div>
 
             <ng-template pTemplate="footer">
-                <div class="col-12" style="text-align: left;">
+                <div class="col-span-12" style="text-align: left;">
                     <p-message *ngIf="successCount > 0 && errorCount == 0 && !vidsform.dirty" severity="success"
                         text="{{ 'common.savesuccess' | translate }}"></p-message>
                     <p-message *ngIf="errorCount > 0" severity="error"

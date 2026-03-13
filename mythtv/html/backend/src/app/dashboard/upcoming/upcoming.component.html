@@ -12,7 +12,7 @@
 
                 <ng-template pTemplate="caption">
                     <!-- Top Buttons -->
-                    <div class="flex align-items-center">
+                    <div class="flex items-center">
 
                         {{ 'dashboard.upcoming.status' | translate }}: &nbsp;
                         <p-dropdown [(ngModel)]="selectedStatus" [options]="dataService.recStatusList"
@@ -51,9 +51,9 @@
                         <th style="width: 10%" class="p-1" pSortableColumn="StartTime">
                             {{ 'dashboard.upcoming.date' | translate }}<p-sortIcon field="StartTime"></p-sortIcon>
                         </th>
-                        <th style="width: 7%" class="justify-content-end p-1">
+                        <th style="width: 7%" class="justify-end p-1">
                             {{ 'dashboard.upcoming.time' | translate }} </th>
-                        <th style="width: 7%" class="justify-content-end pl-1 pr-3 pt-1 pb-1" pSortableColumn="Length">
+                        <th style="width: 7%" class="justify-end pl-1 pr-4 pt-1 pb-1" pSortableColumn="Length">
                             {{ 'dashboard.upcoming.length' | translate }}<p-sortIcon field="Length"></p-sortIcon>
                         </th>
                         <th style="width: 8%" class="p-1">{{ 'dashboard.upcoming.encoder' |
@@ -65,7 +65,7 @@
                             }}</th>
                         <th style="width: 4%" class="p-1">{{ 'dashboard.recordings.seas_ep' | translate
                             }}</th>
-                        <th style="width: 8%" class="justify-content-end p-1">
+                        <th style="width: 8%" class="justify-end p-1">
                             {{ 'dashboard.recordings.orig_airdate' | translate }}
                         </th>
                         <th style="width: 9%" class="p-1" pSortableColumn="Channel.ChanNum">{{
@@ -105,12 +105,12 @@
                                 <div class="mytext" [innerHTML]="formatStartDate(program, rowIndex)"></div>
                             </div>
                         </td>
-                        <td class="justify-content-end p-1 overflow-hidden">
+                        <td class="justify-end p-1 overflow-hidden">
                             <div class="mycell">
                                 <div class="mytext">{{formatStartTime(program)}} </div>
                             </div>
                         </td>
-                        <td class="justify-content-end pl-1 pr-3 pt-1 pb-1 overflow-hidden">
+                        <td class="justify-end pl-1 pr-4 pt-1 pb-1 overflow-hidden">
                             <div class="mycell">
                                 <div class="mytext">{{ getDuration(program) | number:'1.0-0' }} min</div>
                             </div>
@@ -135,7 +135,7 @@
                                 {{program.Season}}x{{program.Episode}}
                             </div>
                         </td>
-                        <td class="justify-content-end p-1">
+                        <td class="justify-end p-1">
                             <div class="mycell">
                                 <div class="mytext" [innerHTML]="formatAirDate(program)"></div>
                             </div>
@@ -207,7 +207,7 @@
                 <p>{{ 'dashboard.recordings.stop_details' |
                     translate }} <br><b> {{ program?.Title }}: {{ program?.SubTitle }}</b></p>
                 <ng-template pTemplate="footer">
-                    <div class="col-12" style="text-align: left;">
+                    <div class="col-span-12" style="text-align: left;">
                         <p-message *ngIf="errorCount > 0" severity="error"
                             text="{{ 'common.networkfail' | translate }}"></p-message>
                     </div>

@@ -1,24 +1,24 @@
-<form class="ml-3 mr-3" name="sgroupform" #sgroupform="ngForm">
+<form class="ml-4 mr-4" name="sgroupform" #sgroupform="ngForm">
     <span #top></span>
-    <p-card class="m-5">
+    <p-card class="m-8">
         <ng-template pTemplate="title">
             <span [translate]="'settings.sgroups.sgroup_title'" [translateParams]="{name: sgroup.LocalizedName}"></span>
         </ng-template>
         <ng-template pTemplate="subtitle">
         </ng-template>
         <ng-template pTemplate="content">
-            <div class="grid">
-                <div class="mb-4 w-full">
+            <div class="grid grid-cols-12 gap-4">
+                <div class="mb-6 w-full">
                     <table>
                         <tr *ngFor="let dirname of editDirs; index as ix">
-                            <td class="align-items-center bg-blue-100 text-gray-900" style="font-family: monospace;">
+                            <td class="items-center bg-blue-100 text-gray-900" style="font-family: monospace;">
                                 {{editDirs[ix]}}
-                            <td class="align-items-center">
+                            <td class="items-center">
                                 <button pButton pRipple type="button" icon="pi pi-pencil"
                                     class="p-button-rounded p-button-text" [disabled]="!editDirs[ix]"
                                     (click)="editDirectory(ix)" pTooltip="Edit"></button>
                             </td>
-                            <td class="align-items-center">
+                            <td class="items-center">
                                 <button pButton pRipple type="button" icon="pi pi-trash"
                                     class="p-button-rounded p-button-text" [disabled]="!editDirs[ix]"
                                     (click)="deleteDirectory(ix)" pTooltip="Delete"></button>
@@ -63,8 +63,8 @@
         </ng-template>
 
         <ng-template pTemplate="footer">
-            <div class="grid nogutter">
-                <div class="col-12">
+            <div class="grid grid-cols-12 gap-4 nogutter">
+                <div class="col-span-12">
                     <p-message *ngIf="this.successCount > 0 && this.errorCount == 0 && !sgroupform.dirty"
                         severity="success" text="{{ 'common.savesuccess' | translate }}"></p-message>
                     <p-message *ngIf="this.errorCount > 0" severity="error"

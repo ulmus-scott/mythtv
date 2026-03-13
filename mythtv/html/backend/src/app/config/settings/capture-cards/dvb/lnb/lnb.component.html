@@ -1,13 +1,13 @@
-<form class="ml-3 mr-3" name="lnbform" #lnbform="ngForm">
-    <p-card class="m-5">
+<form class="ml-4 mr-4" name="lnbform" #lnbform="ngForm">
+    <p-card class="m-8">
         <ng-template pTemplate="title">
             {{ 'settings.capture.diseqc.lnb.title' | translate }}
         </ng-template>
         <ng-template pTemplate="subtitle">
         </ng-template>
         <ng-template pTemplate="content">
-            <div class="grid">
-                <div class="mb-4 w-full">
+            <div class="grid grid-cols-12 gap-4">
+                <div class="mb-6 w-full">
 
                     <div class="form-group field">
                         <label for="Description" class="label block">{{ 'settings.capture.diseqc.description_label' |
@@ -83,7 +83,7 @@
                     <div class="form-group field">
                         <p-checkbox inputId="LnbPolInv" [(ngModel)]="diseqcTree.LnbPolInv" name="LnbPolInv"
                             #LnbPolInv="ngModel" class="label mb-2 w-full" [binary]="true"
-                            label="{{ 'settings.capture.diseqc.lnb.reversed_label' | translate }}"
+                            value="{{ 'settings.capture.diseqc.lnb.reversed_label' | translate }}"
                             [disabled]="currentPreset.SubType != 'custom'">
                         </p-checkbox>
                         <small class="block">

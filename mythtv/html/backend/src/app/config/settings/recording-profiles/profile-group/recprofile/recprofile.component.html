@@ -1,19 +1,19 @@
-<form class="ml-3 mr-3" name="recprofform" #recprofform="ngForm">
+<form class="ml-4 mr-4" name="recprofform" #recprofform="ngForm">
     <span #top></span>
-    <p-card class="m-5">
+    <p-card class="m-8">
         <ng-template pTemplate="title">
             {{ 'settings.rprofiles.proftitle' | translate }} {{ profile.Name }}
         </ng-template>
         <ng-template pTemplate="subtitle">
         </ng-template>
         <ng-template pTemplate="content">
-            <div class="grid">
-                <div class="mb-4 w-full">
+            <div class="grid grid-cols-12 gap-4">
+                <div class="mb-6 w-full">
                     <div class="form-group field" *ngIf="params.Param.includes('autotranscode')">
                         <p-checkbox inputId="autotranscode"
                             [(ngModel)]="profile.RecProfParams[findIx('autotranscode',false)].Value"
                             name="autotranscode" #autotranscode="ngModel" class="label mb-2 w-full" [binary]="true"
-                            label="{{ 'settings.rprofiles.autotranscode_label' | translate }}">
+                            value="{{ 'settings.rprofiles.autotranscode_label' | translate }}">
                         </p-checkbox>
                         <small class="block">
                             {{ 'settings.rprofiles.autotranscode_desc' | translate }}
@@ -55,7 +55,7 @@
                         <p-checkbox inputId="recordmpts"
                             [(ngModel)]="profile.RecProfParams[findIx('recordmpts', false)].Value" name="recordmpts"
                             #recordmpts="ngModel" class="label mb-2 w-full" [binary]="true"
-                            label="{{ 'settings.rprofiles.recordmpts_label' | translate }}">
+                            value="{{ 'settings.rprofiles.recordmpts_label' | translate }}">
                         </p-checkbox>
                         <small class="block">
                             {{ 'settings.rprofiles.recordmpts_desc' | translate }}
@@ -63,7 +63,7 @@
                     </div>
 
                     <!-- Video Compression Panel -->
-                    <p-fieldset class="mb-4 w-full" *ngIf="params.Video.length > 0"
+                    <p-fieldset class="mb-6 w-full" *ngIf="params.Video.length > 0"
                         legend="{{ 'settings.rprofiles.video_label' | translate }}" [toggleable]="true"
                         [collapsed]="true">
 
@@ -246,7 +246,7 @@
                         </div>
 
                         <!-- Low Resolution Panel -->
-                        <p-fieldset class="mb-4 w-full" *ngIf="profile.VideoCodec == 'MPEG-4 AVC Hardware Encoder'"
+                        <p-fieldset class="mb-6 w-full" *ngIf="profile.VideoCodec == 'MPEG-4 AVC Hardware Encoder'"
                             legend="{{ 'settings.rprofiles.lowres_label' | translate }}" [toggleable]="true"
                             [collapsed]="true">
 
@@ -276,7 +276,7 @@
                         </p-fieldset>
 
                         <!-- Medium Resolution Panel -->
-                        <p-fieldset class="mb-4 w-full" *ngIf="profile.VideoCodec == 'MPEG-4 AVC Hardware Encoder'"
+                        <p-fieldset class="mb-6 w-full" *ngIf="profile.VideoCodec == 'MPEG-4 AVC Hardware Encoder'"
                             legend="{{ 'settings.rprofiles.medres_label' | translate }}" [toggleable]="true"
                             [collapsed]="true">
 
@@ -306,7 +306,7 @@
                         </p-fieldset>
 
                         <!-- High Resolution Panel -->
-                        <p-fieldset class="mb-4 w-full" *ngIf="profile.VideoCodec == 'MPEG-4 AVC Hardware Encoder'"
+                        <p-fieldset class="mb-6 w-full" *ngIf="profile.VideoCodec == 'MPEG-4 AVC Hardware Encoder'"
                             legend="{{ 'settings.rprofiles.highres_label' | translate }}" [toggleable]="true"
                             [collapsed]="true">
 
@@ -341,7 +341,7 @@
                             <p-checkbox inputId="scalebitrate"
                                 [(ngModel)]="profile.RecProfParams[findIx('scalebitrate',true)].Value"
                                 name="scalebitrate" #scalebitrate="ngModel" class="label mb-2 w-full" [binary]="true"
-                                label="{{ 'settings.rprofiles.scalebitrate_label' | translate }}">
+                                value="{{ 'settings.rprofiles.scalebitrate_label' | translate }}">
                             </p-checkbox>
                             <small class="block">
                                 {{ 'settings.rprofiles.scalebitrate_desc' | translate }}
@@ -352,7 +352,7 @@
                             <p-checkbox inputId="mpeg4optionvhq"
                                 [(ngModel)]="profile.RecProfParams[findIx('mpeg4optionvhq',false)].Value"
                                 name="mpeg4optionvhq" #mpeg4optionvhq="ngModel" class="label mb-2 w-full" [binary]="true"
-                                label="{{ 'settings.rprofiles.mpeg4optionvhq_label' | translate }}">
+                                value="{{ 'settings.rprofiles.mpeg4optionvhq_label' | translate }}">
                             </p-checkbox>
                             <small class="block">
                                 {{ 'settings.rprofiles.mpeg4optionvhq_desc' | translate }}
@@ -363,7 +363,7 @@
                             <p-checkbox inputId="mpeg4option4mv"
                                 [(ngModel)]="profile.RecProfParams[findIx('mpeg4option4mv',false)].Value"
                                 name="mpeg4option4mv" #mpeg4option4mv="ngModel" class="label mb-2 w-full" [binary]="true"
-                                label="{{ 'settings.rprofiles.mpeg4option4mv_label' | translate }}">
+                                value="{{ 'settings.rprofiles.mpeg4option4mv_label' | translate }}">
                             </p-checkbox>
                             <small class="block">
                                 {{ 'settings.rprofiles.mpeg4option4mv_desc' | translate }}
@@ -374,7 +374,7 @@
                             <p-checkbox inputId="mpeg4optionidct"
                                 [(ngModel)]="profile.RecProfParams[findIx('mpeg4optionidct',false)].Value"
                                 name="mpeg4optionidct" #mpeg4optionidct="ngModel" class="label mb-2 w-full" [binary]="true"
-                                label="{{ 'settings.rprofiles.mpeg4optionidct_label' | translate }}">
+                                value="{{ 'settings.rprofiles.mpeg4optionidct_label' | translate }}">
                             </p-checkbox>
                             <small class="block">
                                 {{ 'settings.rprofiles.mpeg4optionidct_desc' | translate }}
@@ -385,7 +385,7 @@
                             <p-checkbox inputId="mpeg4optionime"
                                 [(ngModel)]="profile.RecProfParams[findIx('mpeg4optionime',false)].Value"
                                 name="mpeg4optionime" #mpeg4optionime="ngModel" class="label mb-2 w-full" [binary]="true"
-                                label="{{ 'settings.rprofiles.mpeg4optionime_label' | translate }}">
+                                value="{{ 'settings.rprofiles.mpeg4optionime_label' | translate }}">
                             </p-checkbox>
                             <small class="block">
                                 {{ 'settings.rprofiles.mpeg4optionime_desc' | translate }}
@@ -409,7 +409,7 @@
                     </p-fieldset> <!-- Video Compression Panel -->
 
                     <!-- Audio Quality Panel -->
-                    <p-fieldset class="mb-4 w-full" *ngIf="params.Audio.length > 0"
+                    <p-fieldset class="mb-6 w-full" *ngIf="params.Audio.length > 0"
                         legend="{{ 'settings.rprofiles.audio_label' | translate }}" [toggleable]="true"
                         [collapsed]="true">
 
@@ -490,8 +490,8 @@
         </ng-template>
 
         <ng-template pTemplate="footer">
-            <div class="grid nogutter">
-                <div class="col-12">
+            <div class="grid grid-cols-12 gap-4 nogutter">
+                <div class="col-span-12">
                     <p-message *ngIf="successCount > 0 && errorCount == 0 && !recprofform.dirty" severity="success"
                         text="{{ 'common.savesuccess' | translate }}"></p-message>
                     <p-message *ngIf="errorCount > 0" severity="error"

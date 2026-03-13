@@ -1,6 +1,6 @@
-<div class="grid">
+<div class="grid grid-cols-12 gap-4">
     <!-- TODO: Use today or date-->
-    <div class="col-1 datebox">{{ guide.m_startDate.toLocaleDateString() }}</div>
+    <div class="col-span-1 datebox">{{ guide.m_startDate.toLocaleDateString() }}</div>
     <div class="col segmentbox">
         <div class="flex">
             <div class="flex-none cursor-pointer" (click)="pageLeft()">&lt;&lt;</div>
@@ -14,7 +14,7 @@
     <div class="col segmentbox">
         <div class="flex">
             <div class="flex-none">{{ segmentToStartTime(5) }}</div>
-            <div class="flex-grow-1">&nbsp;</div>
+            <div class="grow">&nbsp;</div>
             <div class="flex-none cursor-pointer" (click)="pageRight()">&gt;&gt;</div>
         </div>
     </div>

@@ -22,7 +22,7 @@
     <!-- <p>Database is "{{dbstatus.Connected ? Connected : Not Connected}}"</p> -->
 </div>
 
-<p-accordion class="col-12 w-full">
+<p-accordion class="col-span-12 w-full">
     <ng-container *ngIf="(m_storageGroupList$ | async)?.RecStorageGroupList as StorageGroupDir; else loading">
         <p-accordionTab header="Storage Groups">
             <ul>

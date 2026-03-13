@@ -3,7 +3,7 @@
   <div class="flex flex-row">
     <button pButton pRipple icon="pi pi-angle-double-left" class="p-button-text p-button-primary"
       (click)="menu.navBackward()" pTooltip="{{ 'dashboard.scrolltabsleft' | translate }}"></button>
-    <div class="col-11">
+    <div class="col-span-11">
       <p-tabMenu #menu [model]="fullMenu" [activeItem]="activeItem" [scrollable]="false"></p-tabMenu>
     </div>
     <button pButton pRipple icon="pi pi-angle-double-right" class="p-button-text p-button-primary"

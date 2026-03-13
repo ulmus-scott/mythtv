@@ -62,7 +62,7 @@
     </p-table>
 </div>
 
-<form class="ml-3 mr-3" name="userform" #userform="ngForm">
+<form class="ml-4 mr-4" name="userform" #userform="ngForm">
 
     <p-dialog header="{{ dialogHeader }}" [(visible)]="displayUserDlg" [modal]="true" [style]="{width: '50vw'}"
         [closable]="false" [closeOnEscape]="false">
@@ -94,7 +94,7 @@
 
 
         <ng-template pTemplate="footer">
-            <div class="col-12" style="text-align: left;">
+            <div class="col-span-12" style="text-align: left;">
                 <p-message *ngIf="successCount > 0 && errorCount == 0 && !userform.dirty" severity="success"
                     text="{{ 'common.savesuccess' | translate }}"></p-message>
                 <p-message *ngIf="errorCount > 0" severity="error"
@@ -118,7 +118,7 @@
         <p>{{ 'dashboard.users.delete_details' |
             translate: {Name: user.Name} }}</p>
         <ng-template pTemplate="footer">
-            <div class="col-12" style="text-align: left;">
+            <div class="col-span-12" style="text-align: left;">
                 <p-message *ngIf="errorCount > 0" severity="error"
                     text="{{ 'common.networkfail' | translate }}"></p-message>
             </div>

@@ -1,6 +1,6 @@
 <p-card>
      <h2>{{ 'settings.general.title' | translate }}</h2>
-    <p-accordion class="col-12 w-full p-0" (onClose)="onTabClose($event)" (onOpen)="onTabOpen($event)">
+    <p-accordion class="col-span-12 w-full p-0" (onClose)="onTabClose($event)" (onOpen)="onTabOpen($event)">
         <p-accordionTab header="{{ 'settings.hostaddress.title' | translate }}">
             <ng-template pTemplate="header"><b>&nbsp;{{ dirtyMessages[0] }}</b></ng-template>
             <ng-template pTemplate="content">
@@ -80,12 +80,12 @@
 
     </p-accordion>
 
-    <div class="flex justify-content-end">
-        <p-button class="p-3" label="{{ 'common.back' | translate }}"
+    <div class="flex justify-end">
+        <p-button class="p-4" label="{{ 'common.back' | translate }}"
             (onClick)="router.navigate(['setupwizard/selectlanguage'])" icon="pi pi-angle-left"
             iconPos="left"></p-button>
 
-        <p-button class="p-3" label="{{ 'common.next' | translate }}"
+        <p-button class="p-4" label="{{ 'common.next' | translate }}"
             (onClick)="router.navigate(['setupwizard/capture-cards'])" icon="pi pi-angle-right" iconPos="right"></p-button>
     </div>
 

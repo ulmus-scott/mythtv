@@ -1,5 +1,5 @@
-<form class="mx-0 md:mx-3" name="hostaddress" #hostaddress="ngForm">
-    <p-card class="m-0 md:m-5">
+<form class="mx-0 md:mx-4" name="hostaddress" #hostaddress="ngForm">
+    <p-card class="m-0 md:m-8">
         <ng-template pTemplate="title">
             {{ 'settings.hostaddress.title' | translate }}
         </ng-template>
@@ -7,15 +7,15 @@
             {{ 'settings.hostaddress.subtitle' | translate }}
         </ng-template>
         <ng-template pTemplate="content">
-            <div class="grid">
-                <p-fieldset class="mb-4 w-full" legend="{{ 'settings.hostaddress.panel.ports' | translate }}">
+            <div class="grid grid-cols-12 gap-4">
+                <p-fieldset class="mb-6 w-full" legend="{{ 'settings.hostaddress.panel.ports' | translate }}">
                     <div class="form-group field">
                         <label for="backendserverport" class="label block">
                             {{ 'settings.hostaddress.backendport_label' | translate }}
                         </label>
                         <input pInputText id="backendserverport" type="number"
                             [(ngModel)]="m_HostAddressData.BackendServerPort" name="backendserverport"
-                            #backendserverport="ngModel" class="mb-2 form-control w-10rem"
+                            #backendserverport="ngModel" class="mb-2 form-control w-40"
                             [ngClass]="{'is-invalid': backendserverport.invalid }" placeholder="Ex. 6543" required
                             min="0" max="65536" />
                         <small class="block" id="backendserverport-help">
@@ -33,7 +33,7 @@
                         </label>
                         <input pInputText id="backendstatusport" type="number"
                             [(ngModel)]="m_HostAddressData.BackendStatusPort" name="backendstatusport"
-                            #backendstatusport="ngModel" class="mb-2 form-control w-10rem"
+                            #backendstatusport="ngModel" class="mb-2 form-control w-40"
                             [ngClass]="{'is-invalid': backendstatusport.invalid }" placeholder="Ex. 6544" required
                             min="0" max="65536" />
                         <small class="block" id="backendstatusport-help">{{ 'settings.hostaddress.statusport_desc' |
@@ -45,13 +45,13 @@
                     </div>
                 </p-fieldset>
 
-                <p-fieldset class="mb-4 w-full" legend="{{ 'settings.hostaddress.panel.pin' | translate }}">
+                <p-fieldset class="mb-6 w-full" legend="{{ 'settings.hostaddress.panel.pin' | translate }}">
                     <div class="form-group field">
                         <label for="securitypin" class="label block">
                             {{ 'settings.hostaddress.pin_label' | translate }}
                         </label>
                         <input pInputText id="securitypin" type="text" [(ngModel)]="m_HostAddressData.SecurityPin"
-                            name="securitypin" #securitypin="ngModel" class="mb-2 form-control w-10rem"
+                            name="securitypin" #securitypin="ngModel" class="mb-2 form-control w-40"
                             placeholder="Ex. 1234" required />
                         <small class="block" id="securitypin-help">
                             {{ 'settings.hostaddress.pin_desc' | translate }}
@@ -64,11 +64,11 @@
                     </div>
                 </p-fieldset>
 
-                <p-fieldset class="mb-4 w-full" legend="{{ 'settings.hostaddress.panel.allowconn' | translate }}">
+                <p-fieldset class="mb-6 w-full" legend="{{ 'settings.hostaddress.panel.allowconn' | translate }}">
                     <div class="form-group field">
                         <p-checkbox inputId="AllowConnFromAll" [(ngModel)]="m_HostAddressData.AllowConnFromAll"
                             name="AllowConnFromAll" #AllowConnFromAll="ngModel" class="mb-2 w-full" [binary]="true"
-                            label="{{ 'settings.hostaddress.allowconn_label' | translate }}">
+                            value="{{ 'settings.hostaddress.allowconn_label' | translate }}">
                         </p-checkbox>
                         <small class="block" id="securitypin-help">
                             <div [innerHTML]="'settings.hostaddress.allowconn_desc' | translate"></div>
@@ -76,11 +76,11 @@
                     </div>
                 </p-fieldset>
 
-                <p-fieldset class="mb-4 w-full" legend="{{ 'settings.hostaddress.panel.iplisten' | translate }}">
+                <p-fieldset class="mb-6 w-full" legend="{{ 'settings.hostaddress.panel.iplisten' | translate }}">
                     <div class="form-group field">
                         <p-checkbox inputId="ListenOnAllIps" [(ngModel)]="m_HostAddressData.ListenOnAllIps"
                             name="ListenOnAllIps" #ListenOnAllIps="ngModel" class="mb-2 w-full" [binary]="true"
-                            label="{{ 'settings.hostaddress.listenall_label' | translate }}">
+                            value="{{ 'settings.hostaddress.listenall_label' | translate }}">
                         </p-checkbox>
                         <small class="block" id="ListenOnAllIps-help">
                             {{ 'settings.hostaddress.listenall_desc' | translate }}
@@ -92,7 +92,7 @@
                             <label for="BackendServerIP" class="label block">{{ 'settings.hostaddress.ipv4_label' |
                                 translate }}</label>
                             <p-dropdown appendTo="body" [options]="m_IPsV4 "
-                                [(ngModel)]="m_HostAddressData.BackendServerIP" class="block w-15rem mb-2"
+                                [(ngModel)]="m_HostAddressData.BackendServerIP" class="block w-60 mb-2"
                                 name="BackendServerIP" #BackendServerIP="ngModel"
                                 aria-describedby="BackendServerIP-help">
                             </p-dropdown>
@@ -109,7 +109,7 @@
                                 {{ 'settings.hostaddress.ipv6_label' | translate }}
                             </label>
                             <p-dropdown appendTo="body" [options]="m_IPsV6 "
-                                [(ngModel)]="m_HostAddressData.BackendServerIP6" class="block w-15rem mb-2"
+                                [(ngModel)]="m_HostAddressData.BackendServerIP6" class="block w-60 mb-2"
                                 name="BackendServerIP6" #BackendServerIP6="ngModel"
                                 aria-describedby="BackendServerIP6-help">
                             </p-dropdown>
@@ -125,7 +125,7 @@
                         <div class="form-group field">
                             <p-checkbox inputId="AllowLinkLocal" [(ngModel)]="m_HostAddressData.AllowLinkLocal"
                                 name="AllowLinkLocal" #AllowLinkLocal="ngModel" class="mb-2 w-full" [binary]="true"
-                                label="{{ 'settings.hostaddress.listenlinklocal_label' | translate }}">
+                                value="{{ 'settings.hostaddress.listenlinklocal_label' | translate }}">
                             </p-checkbox>
                             <small class="block" id="AllowLinkLocal-help">
                                 {{ 'settings.hostaddress.listenlinklocal_desc' | translate }}
@@ -134,7 +134,7 @@
                     </div>
                 </p-fieldset>
 
-                <p-fieldset class="mb-4 w-full" legend="{{ 'settings.hostaddress.panel.primaryadd' | translate }}">
+                <p-fieldset class="mb-6 w-full" legend="{{ 'settings.hostaddress.panel.primaryadd' | translate }}">
                     <div class="form-group field">
                         <label for="BackendServerAddr" class="label block w-full">
                             {{ 'settings.hostaddress.primaryip_label' | translate }}
@@ -154,11 +154,11 @@
                     </div>
                 </p-fieldset>
 
-                <p-fieldset class="mb-4 w-full" legend="{{ 'settings.hostaddress.panel.masterbe' | translate }}">
+                <p-fieldset class="mb-6 w-full" legend="{{ 'settings.hostaddress.panel.masterbe' | translate }}">
                     <div class="form-group field">
                         <p-checkbox inputId="IsMasterBackend" [(ngModel)]="m_HostAddressData.IsMasterBackend"
                             name="IsMasterBackend" #IsMasterBackend="ngModel" class="mb-2 w-full" [binary]="true"
-                            (onChange)="setMaster();" label="{{ 'settings.hostaddress.ismaster_label' | translate }}">
+                            (onChange)="setMaster();" value="{{ 'settings.hostaddress.ismaster_label' | translate }}">
                         </p-checkbox>
                         <small class="block" id="IsMasterBackend-help">
                             {{ 'settings.hostaddress.ismaster_desc' | translate }}
@@ -174,7 +174,7 @@
                             translate }}</label>
                         <input pInputText id="MasterServerName" type="text"
                             [(ngModel)]="m_HostAddressData.MasterServerName" name="MasterServerName"
-                            #MasterServerName="ngModel" class="mb-2 form-control w-15rem read-only"
+                            #MasterServerName="ngModel" class="mb-2 form-control w-60 read-only"
                             placeholder="Ex. masterbe" disabled="disabled" />
                         <small class="block" id="MasterServerName-help">
                             <div [innerHTML]="'settings.hostaddress.master_desc' | translate"></div>
@@ -189,8 +189,8 @@
         </ng-template>
 
         <ng-template pTemplate="footer">
-            <div class="grid nogutter">
-                <div class="col-12">
+            <div class="grid grid-cols-12 gap-4 nogutter">
+                <div class="col-span-12">
                     <p-message
                         *ngIf="this.m_HostAddressData.successCount > 0 && this.m_HostAddressData.errorCount == 0 && !hostaddress.dirty"
                         severity="success" text="{{ 'common.savesuccess' | translate }}"></p-message>

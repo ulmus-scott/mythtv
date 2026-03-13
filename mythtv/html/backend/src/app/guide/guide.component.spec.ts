@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GuideComponent } from './guide.component';
@@ -9,7 +9,8 @@ describe('GuideComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    imports: [HttpClientModule, GuideComponent]
+    imports: [GuideComponent],
+    providers: [provideHttpClient(withInterceptorsFromDi())]
 })
     .compileComponents();
   });

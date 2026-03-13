@@ -1,7 +1,7 @@
 <p-toast></p-toast>
 
-<form class="mx-0 md:mx-3" name="databaseForm" #databaseForm="ngForm">
-    <p-card class="m-0 md:m-5">
+<form class="mx-0 md:mx-4" name="databaseForm" #databaseForm="ngForm">
+    <p-card class="m-0 md:m-8">
         <ng-template pTemplate="title">
             {{ 'setupwizard.databaseSetup' | translate }}
         </ng-template>
@@ -9,8 +9,8 @@
             {{ 'setupwizard.enterDBLoginDetails' | translate }}
         </ng-template>
         <ng-template pTemplate="content">
-            <div class="formgrid grid form-group">
-                <div class="field col-12 md:col-6">
+            <div class="formgrid grid grid-cols-12 gap-4 form-group">
+                <div class="field col-span-12 md:col-span-6">
                     <label for="ipaddress" class="label block">{{ 'setupwizard.MySQLServerIP' | translate }}</label>
                     <input pInputText id="ipaddress" type="text" aria-describedby="ipaddress-help"
                         [(ngModel)]="database.Host" name="hostname" #host="ngModel" class="mb-2 form-control w-full"
@@ -23,7 +23,7 @@
                     </div>
                 </div>
 
-                <div class="field col-12 md:col-6">
+                <div class="field col-span-12 md:col-span-6">
                     <label for="port" class="label block">{{ 'setupwizard.MySQLServerPort' | translate }}</label>
                     <input pInputText id="port" type="number" aria-describedby="port-help" [(ngModel)]="database.Port"
                         name="port" #port="ngModel" class=" mb-2 form-control w-full" placeholder="Ex. 3306" min="0"
@@ -34,7 +34,7 @@
                     </div>
                 </div>
 
-                <div class="field col-12 md:col-6">
+                <div class="field col-span-12 md:col-span-6">
                     <label for="user" class="label block">{{ 'setupwizard.MySQLUser' | translate }}</label>
                     <input pInputText id="user" type="text" aria-describedby="user-help" [(ngModel)]="database.UserName"
                         name="user" #user="ngModel" class="mb-2 form-control w-full" placeholder="Ex. mythtv"
@@ -44,7 +44,7 @@
                         <small class="p-error block">{{ 'setupwizard.userRequired' | translate }}</small>
                     </div>
                 </div>
-                <div class="field col-12 md:col-6">
+                <div class="field col-span-12 md:col-span-6">
                     <label for="password" class="label block">{{ 'setupwizard.MySQLPassword' | translate }}</label>
                     <input pInputText id="password" type="text" aria-describedby="password-help"
                         [(ngModel)]="database.Password" name="password" #password="ngModel"
@@ -55,7 +55,7 @@
                     </div>
                 </div>
 
-                <div class="field col-12 md:col-6">
+                <div class="field col-span-12 md:col-span-6">
                     <label for="dbname" class="label block">{{ 'setupwizard.MySQLDatabaseName' | translate }}</label>
                     <input pInputText id="dbname" type="text" aria-describedby="dbname-help" [(ngModel)]="database.Name"
                         name="dbname" #dbname="ngModel" class="mb-2 form-control w-full" placeholder="Ex. mythconverg"
@@ -66,16 +66,16 @@
                     </div>
                 </div>
 
-                <div class="field col-12">
+                <div class="field col-span-12">
                     <p-checkbox [(ngModel)]="database.LocalEnabled" name="LocalEnabled" class="mb-2 w-full label block"
-                        [binary]="true" label="{{ 'setupwizard.LocalEnabled_label' | translate }}">
+                        [binary]="true" value="{{ 'setupwizard.LocalEnabled_label' | translate }}">
                     </p-checkbox>
                     <small class="block">
                         {{ 'setupwizard.LocalEnabled_desc' | translate }}
                     </small>
                 </div>
 
-                <div class="field col-12" *ngIf="database.LocalEnabled">
+                <div class="field col-span-12" *ngIf="database.LocalEnabled">
                     <label for="LocalHostName" class="label block">{{ 'setupwizard.LocalHostName_label' | translate
                         }}</label>
                     <input pInputText id="LocalHostName" type="text" aria-describedby="LocalHostName-help"
@@ -84,16 +84,16 @@
                     <small id="LocalHostName-help">{{ 'setupwizard.LocalHostName_desc' | translate }}</small>
                 </div>
 
-                <div class="field col-12">
+                <div class="field col-span-12">
                     <p-checkbox [(ngModel)]="database.WOLEnabled" name="WOLEnabled" class="mb-2 w-full label block"
-                        [binary]="true" label="{{ 'setupwizard.WOLEnabled_label' | translate }}">
+                        [binary]="true" value="{{ 'setupwizard.WOLEnabled_label' | translate }}">
                     </p-checkbox>
                     <small class="block">
                         {{ 'setupwizard.WOLEnabled_desc' | translate }}
                     </small>
                 </div>
 
-                <div class="field col-12 md:col-6" *ngIf="database.WOLEnabled">
+                <div class="field col-span-12 md:col-span-6" *ngIf="database.WOLEnabled">
                     <label for="WOLReconnect" class="label block">
                         {{ 'settings.vsource.WOLReconnect_label' | translate }}
                     </label>
@@ -105,7 +105,7 @@
                     </small>
                 </div>
 
-                <div class="field col-12 md:col-6" *ngIf="database.WOLEnabled">
+                <div class="field col-span-12 md:col-span-6" *ngIf="database.WOLEnabled">
                     <label for="WOLRetry" class="label block">
                         {{ 'settings.vsource.WOLRetry_label' | translate }}
                     </label>
@@ -117,7 +117,7 @@
                     </small>
                 </div>
 
-                <div class="field col-12" *ngIf="database.WOLEnabled">
+                <div class="field col-span-12" *ngIf="database.WOLEnabled">
                     <label for="WOLCommand" class="label block">{{ 'setupwizard.WOLCommand_label' | translate }}</label>
                     <input pInputText id="WOLCommand" type="text" aria-describedby="WOLCommand-help"
                         [(ngModel)]="database.WOLCommand" name="WOLCommand" #WOLCommand="ngModel"
@@ -132,7 +132,7 @@
                     [disabled]="databaseForm.invalid == null || databaseForm.invalid"></p-button>
             </div>
 
-            <div class="pt-4" style="display: flex">
+            <div class="pt-6" style="display: flex">
                 <!-- connected -->
                 <div *ngIf="m_wizardData.DatabaseStatus.DatabaseStatus.Connected else notconnected">
                     <p-message class="pr-2" severity="success"
@@ -163,16 +163,16 @@
             </div>
             <div *ngIf="setupService.isDatabaseIgnored">
                 <h2>{{ 'common.instructions' | translate }}</h2>
-                <div class="flex pb-3">
-                    <div class="flex-none flex align-items-center label block pr-5">
+                <div class="flex pb-4">
+                    <div class="flex-none flex items-center label block pr-8">
                         {{ 'setupwizard.dbsetup.servertype_head' | translate }}
                     </div>
-                    <div class="flex-none flex align-items-center pr-5">
+                    <div class="flex-none flex items-center pr-8">
                         <p-radioButton name="dbtype" value="MySQL" [(ngModel)]="dbtype" inputId="mysql"
                             (ngModelChange)="setCommandList()"></p-radioButton>
                         <label for="mysql">MySql</label>
                     </div>
-                    <div class="flex-none flex align-items-center">
+                    <div class="flex-none flex items-center">
                         <p-radioButton name="dbtype" value="MariaDB" [(ngModel)]="dbtype" inputId="mariadb"
                             (ngModelChange)="setCommandList()"></p-radioButton>
                         <label for="mariadb">MariaDB</label>
@@ -185,10 +185,10 @@
 
                     <table style="white-space: 'pre-line'">
                         <tr>
-                            <td class="align-items-center bg-blue-100 text-gray-900" style="font-family: monospace;">
+                            <td class="items-center bg-blue-100 text-gray-900" style="font-family: monospace;">
                                 <div [innerHTML]="commandlist"></div>
                             </td>
-                            <td class="align-items-center">
+                            <td class="items-center">
                                 <button pButton pRipple type="button" icon="pi pi-copy"
                                     class="p-button-rounded p-button-text" (click)="copyToclipboard(commandlist)"
                                     pTooltip="{{ 'settings.common.clipboard_tooltip' | translate }}"></button>
@@ -198,10 +198,10 @@
                     <p>{{ 'setupwizard.runcommand' | translate }}</p>
                     <table>
                         <tr>
-                            <td class="align-items-center bg-blue-100 text-gray-900" style="font-family: monospace;">
+                            <td class="items-center bg-blue-100 text-gray-900" style="font-family: monospace;">
                                 {{ mySqlCommand }}
                             </td>
-                            <td class="align-items-center">
+                            <td class="items-center">
                                 <button pButton pRipple type="button" icon="pi pi-copy"
                                     class="p-button-rounded p-button-text" (click)="copyToclipboard(mySqlCommand)"
                                     pTooltip="{{ 'settings.common.clipboard_tooltip' | translate }}"></button>
@@ -213,10 +213,10 @@
                 <p class=>{{ 'setupwizard.tztables' | translate }}</p>
                 <table>
                     <tr>
-                        <td class="align-items-center bg-blue-100 text-gray-900" style="font-family: monospace;">
+                        <td class="items-center bg-blue-100 text-gray-900" style="font-family: monospace;">
                             {{ tzCommand }}
                         </td>
-                        <td class="align-items-center">
+                        <td class="items-center">
                             <button pButton pRipple type="button" icon="pi pi-copy"
                                 class="p-button-rounded p-button-text" (click)="copyToclipboard(tzCommand)"
                                 pTooltip="{{ 'settings.common.clipboard_tooltip' | translate }}"></button>
@@ -233,8 +233,8 @@
         </ng-template>
 
         <ng-template pTemplate="footer">
-            <div class="grid nogutter m-5">
-                <div class="col-12">
+            <div class="grid grid-cols-12 gap-4 nogutter m-8">
+                <div class="col-span-12">
                     <p-message
                         *ngIf="successCount > 0 && successCount == expectedCount && errorCount == 0 && !databaseForm.dirty"
                         severity="success" text="{{ 'common.savesuccess' | translate }}"></p-message>
@@ -248,7 +248,7 @@
                     (onClick)="saveForm(true); databaseForm.form.markAsPristine()"
                     [disabled]="(!databaseForm.dirty || setupService.schedulingEnabled) && !setupService.isDatabaseIgnored"></p-button>
 
-                <p-button class="pr-3" label="{{ 'common.next' | translate }}"
+                <p-button class="pr-4" label="{{ 'common.next' | translate }}"
                     (onClick)="router.navigate(['setupwizard/selectlanguage'])" icon="pi pi-angle-right" iconPos="right"
                     [disabled]="setupService.isDatabaseIgnored">
                 </p-button>

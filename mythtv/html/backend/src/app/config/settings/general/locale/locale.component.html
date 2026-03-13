@@ -1,5 +1,5 @@
-<form class="ml-3 mr-3" name="locale" #locale="ngForm" (ngSubmit)="saveForm()">
-    <p-card class="m-5" [style]="{'width':'100%'}">
+<form class="ml-4 mr-4" name="locale" #locale="ngForm" (ngSubmit)="saveForm()">
+    <p-card class="m-8" [style]="{'width':'100%'}">
         <ng-template pTemplate="title">
             {{ 'settings.locale.title' | translate }}
         </ng-template>
@@ -7,8 +7,8 @@
             {{ 'settings.locale.subtitle' | translate }}
         </ng-template>
         <ng-template pTemplate="TV Formats">
-            <div class="grid">
-                <p-fieldset class="mb-4 w-full" legend="{{ 'settings.locale.tvformats_label' | translate }}">
+            <div class="grid grid-cols-12 gap-4">
+                <p-fieldset class="mb-6 w-full" legend="{{ 'settings.locale.tvformats_label' | translate }}">
                     <div class="form-group field">
                         <label for="tvformat" class="label block">{{ 'settings.locale.tvformat_label' | translate }}</label>
                         <p-dropdown  appendTo="body" [options]="m_TVFormats" [(ngModel)]="TVFormat" class="w-full mb-2" name="tvformat"
@@ -22,7 +22,7 @@
                     <div class="form-group field">
                         <label for="vbiformat" class="label block">{{ 'settings.locale.vbiformat_label' | translate
                             }}</label>
-                        <p-dropdown  appendTo="body" [options]="m_vbiFormats" [(ngModel)]="VbiFormat" class="mb-5  w-full"
+                        <p-dropdown  appendTo="body" [options]="m_vbiFormats" [(ngModel)]="VbiFormat" class="mb-8  w-full"
                             name="vbiformat" aria-describedby="vbiformat-help">
                         </p-dropdown>
                         <small class="block mt-2" id="vbiformat-help">
@@ -31,7 +31,7 @@
                     </div>
                 </p-fieldset>
 
-                <p-fieldset class="mb-4 w-full" legend="{{ 'settings.locale.freqtable_label' | translate }}">
+                <p-fieldset class="mb-6 w-full" legend="{{ 'settings.locale.freqtable_label' | translate }}">
                     <div class="form-group field">
                         <label for="freqtable" class="label block">{{ 'settings.locale.channfreq_label' | translate
                             }}</label>
@@ -47,8 +47,8 @@
         </ng-template>
 
         <ng-template pTemplate="footer">
-            <div class="grid nogutter">
-                <div class="col-12">
+            <div class="grid grid-cols-12 gap-4 nogutter">
+                <div class="col-span-12">
                     <p-message *ngIf="this.successCount > 0 && this.errorCount == 0 && !locale.dirty" severity="success"
                         text="{{ 'common.savesuccess' | translate }}"></p-message>
                     <p-message *ngIf="this.errorCount > 0" severity="error"

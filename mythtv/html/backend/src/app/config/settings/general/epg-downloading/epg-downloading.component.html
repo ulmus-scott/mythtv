@@ -1,18 +1,18 @@
-<form class="ml-3 mr-3" name="epgdownload" #epgdownload="ngForm">
-    <p-card class="m-5">
+<form class="ml-4 mr-4" name="epgdownload" #epgdownload="ngForm">
+    <p-card class="m-8">
         <ng-template pTemplate="title">
             {{ 'settings.epgdownload.title' | translate }}
         </ng-template>
         <ng-template pTemplate="subtitle">
         </ng-template>
         <ng-template pTemplate="content">
-            <div class="grid">
-                <div class="mb-4 w-full">
+            <div class="grid grid-cols-12 gap-4">
+                <div class="mb-6 w-full">
 
                     <div class="form-group field">
                         <p-checkbox inputId="MythFillEnabled" [(ngModel)]="MythFillEnabled" name="MythFillEnabled"
                             class="label mb-2 w-full" [binary]="true"
-                            label="{{ 'settings.epgdownload.enabled_label' | translate }}">
+                            value="{{ 'settings.epgdownload.enabled_label' | translate }}">
                         </p-checkbox>
                         <small class="block">
                             {{ 'settings.epgdownload.enabled_desc' | translate }}
@@ -68,7 +68,7 @@
                         <div class="form-group field">
                             <p-checkbox inputId="MythFillGrabberSuggestsTime" [(ngModel)]="MythFillGrabberSuggestsTime"
                                 name="MythFillGrabberSuggestsTime" class="label mb-2 w-full" [binary]="true"
-                                label="{{ 'settings.epgdownload.suggest_label' | translate }}">
+                                value="{{ 'settings.epgdownload.suggest_label' | translate }}">
                             </p-checkbox>
                             <small class="block">
                                 {{ 'settings.epgdownload.suggest_desc' | translate }}
@@ -85,8 +85,8 @@
         </ng-template>
 
         <ng-template pTemplate="footer">
-            <div class="grid nogutter">
-                <div class="col-12">
+            <div class="grid grid-cols-12 gap-4 nogutter">
+                <div class="col-span-12">
                     <p-message *ngIf="this.successCount > 0 && this.errorCount == 0 && !epgdownload.dirty"
                         severity="success" text="{{ 'common.savesuccess' | translate }}"></p-message>
                     <p-message *ngIf="this.errorCount > 0" severity="error"

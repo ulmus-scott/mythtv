@@ -1,5 +1,5 @@
-<form class="ml-3 mr-3" name="jobqbackend" #jobqbackend="ngForm">
-    <p-card class="m-5">
+<form class="ml-4 mr-4" name="jobqbackend" #jobqbackend="ngForm">
+    <p-card class="m-8">
         <ng-template pTemplate="title">
             {{ 'settings.jobqbackend.title' | translate }}
         </ng-template>
@@ -7,8 +7,8 @@
             {{ 'settings.jobqbackend.subtitle' | translate }}
         </ng-template>
         <ng-template pTemplate="content">
-            <div class="grid">
-                <div class="mb-4 w-full">
+            <div class="grid grid-cols-12 gap-4">
+                <div class="mb-6 w-full">
 
                     <div class="form-group field">
                         <label for="JobQueueMaxSimultaneousJobs" class="label block">{{ 'settings.jobqbackend.maxjobs_label' |
@@ -58,7 +58,7 @@
                         <label for="JobQueueCPU" class="label block">{{ 'settings.jobqbackend.cpu_label' | translate
                             }}</label>
                         <p-dropdown [options]="cpuOptions " [(ngModel)]="JobQueueCPU" optionLabel="name"
-                            optionValue="code" class="block w-15rem mb-2" name="JobQueueCPU">
+                            optionValue="code" class="block w-60 mb-2" name="JobQueueCPU">
                         </p-dropdown>
                         <small class="block">
                             {{ 'settings.jobqbackend.cpu_desc' | translate }}
@@ -68,7 +68,7 @@
                     <div class="form-group field">
                         <p-checkbox inputId="JobAllowMetadata" [(ngModel)]="JobAllowMetadata" name="JobAllowMetadata"
                             class="label mb-2 w-full" [binary]="true"
-                            label="{{ 'settings.jobqbackend.meta_label' | translate }}">
+                            value="{{ 'settings.jobqbackend.meta_label' | translate }}">
                         </p-checkbox>
                         <small class="block">
                             {{ 'settings.jobqbackend.allow_desc' | translate }}
@@ -78,7 +78,7 @@
                     <div class="form-group field">
                         <p-checkbox inputId="JobAllowCommFlag" [(ngModel)]="JobAllowCommFlag" name="JobAllowCommFlag"
                             class="label mb-2 w-full" [binary]="true"
-                            label="{{ 'settings.jobqbackend.comm_label' | translate }}">
+                            value="{{ 'settings.jobqbackend.comm_label' | translate }}">
                         </p-checkbox>
                         <small class="block">
                             {{ 'settings.jobqbackend.allow_desc' | translate }}
@@ -87,7 +87,7 @@
 
                     <div class="form-group field">
                         <p-checkbox inputId="JobAllowTranscode" [(ngModel)]="JobAllowTranscode" name="JobAllowTranscode"
-                            class="label mb-2 w-full" [binary]="true" label="{{ 'settings.jobqbackend.trans_label' | translate }}">
+                            class="label mb-2 w-full" [binary]="true" value="{{ 'settings.jobqbackend.trans_label' | translate }}">
                         </p-checkbox>
                         <small class="block">
                             {{ 'settings.jobqbackend.allow_desc' | translate }}
@@ -97,7 +97,7 @@
                     <div class="form-group field">
                         <p-checkbox inputId="JobAllowPreview" [(ngModel)]="JobAllowPreview" name="JobAllowPreview"
                             class="label mb-2 w-full" [binary]="true"
-                            label="{{ 'settings.jobqbackend.preview_label' | translate }}">
+                            value="{{ 'settings.jobqbackend.preview_label' | translate }}">
                         </p-checkbox>
                         <small class="block">
                             {{ 'settings.jobqbackend.allow_desc' | translate }}
@@ -106,7 +106,7 @@
 
                     <div class="form-group field">
                         <p-checkbox inputId="JobAllowUserJob1" [(ngModel)]="JobAllowUserJob1" name="JobAllowUserJob1"
-                            class="label mb-2 w-full" [binary]="true" label="{{JobQCmds.UserJobDesc[0]}}">
+                            class="label mb-2 w-full" [binary]="true" value="{{JobQCmds.UserJobDesc[0]}}">
                         </p-checkbox>
                         <small class="block">
                             {{ 'settings.jobqbackend.allow_desc' | translate }}
@@ -115,7 +115,7 @@
 
                     <div class="form-group field">
                         <p-checkbox inputId="JobAllowUserJob2" [(ngModel)]="JobAllowUserJob2" name="JobAllowUserJob2"
-                            class="label mb-2 w-full" [binary]="true" label="{{JobQCmds.UserJobDesc[1]}}">
+                            class="label mb-2 w-full" [binary]="true" value="{{JobQCmds.UserJobDesc[1]}}">
                         </p-checkbox>
                         <small class="block">
                             {{ 'settings.jobqbackend.allow_desc' | translate }}
@@ -123,7 +123,7 @@
                     </div>
                     <div class="form-group field">
                         <p-checkbox inputId="JobAllowUserJob3" [(ngModel)]="JobAllowUserJob3" name="JobAllowUserJob3"
-                            class="label mb-2 w-full" [binary]="true" label="{{JobQCmds.UserJobDesc[2]}}">
+                            class="label mb-2 w-full" [binary]="true" value="{{JobQCmds.UserJobDesc[2]}}">
                         </p-checkbox>
                         <small class="block">
                             {{ 'settings.jobqbackend.allow_desc' | translate }}
@@ -131,7 +131,7 @@
                     </div>
                     <div class="form-group field">
                         <p-checkbox inputId="JobAllowUserJob4" [(ngModel)]="JobAllowUserJob4" name="JobAllowUserJob4"
-                            class="label mb-2 w-full" [binary]="true" label="{{JobQCmds.UserJobDesc[3]}}">
+                            class="label mb-2 w-full" [binary]="true" value="{{JobQCmds.UserJobDesc[3]}}">
                         </p-checkbox>
                         <small class="block">
                             {{ 'settings.jobqbackend.allow_desc' | translate }}
@@ -144,8 +144,8 @@
         </ng-template>
 
         <ng-template pTemplate="footer">
-            <div class="grid nogutter">
-                <div class="col-12">
+            <div class="grid grid-cols-12 gap-4 nogutter">
+                <div class="col-span-12">
                     <p-message *ngIf="this.successCount > 0 && this.errorCount == 0 && !jobqbackend.dirty"
                         severity="success" text="{{ 'common.savesuccess' | translate }}"></p-message>
                     <p-message *ngIf="this.errorCount > 0" severity="error"

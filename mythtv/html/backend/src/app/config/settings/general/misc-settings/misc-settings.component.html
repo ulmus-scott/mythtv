@@ -1,5 +1,5 @@
-<form class="ml-3 mr-3" name="miscsettings" #miscsettings="ngForm">
-    <p-card class="m-5">
+<form class="ml-4 mr-4" name="miscsettings" #miscsettings="ngForm">
+    <p-card class="m-8">
         <ng-template pTemplate="title">
             {{ 'settings.misc.title' | translate }}
         </ng-template>
@@ -7,14 +7,14 @@
             {{ 'settings.misc.subtitle' | translate }}
         </ng-template>
         <ng-template pTemplate="content">
-            <div class="grid">
+            <div class="grid grid-cols-12 gap-4">
                 <!-- File Management Panel -->
-                <p-fieldset class="mb-4 w-full" legend="{{ 'settings.misc.panel_filemgmt' | translate }}"
+                <p-fieldset class="mb-6 w-full" legend="{{ 'settings.misc.panel_filemgmt' | translate }}"
                     [toggleable]="true" [collapsed]="true">
 
                     <div class="form-group field">
                         <p-checkbox [(ngModel)]="MasterBackendOverride" name="MasterBackendOverride" class="mb-2 w-full label"
-                            [binary]="true" label="{{ 'settings.misc.mbo_label' | translate }}">
+                            [binary]="true" value="{{ 'settings.misc.mbo_label' | translate }}">
                         </p-checkbox>
                         <small class="block">
                             {{ 'settings.misc.mbo_desc' | translate }}
@@ -23,7 +23,7 @@
 
                     <div class="form-group field">
                         <p-checkbox [(ngModel)]="DeletesFollowLinks" name="DeletesFollowLinks" class="mb-2 w-full label"
-                            [binary]="true" label="{{ 'settings.misc.follow_label' | translate }}">
+                            [binary]="true" value="{{ 'settings.misc.follow_label' | translate }}">
                         </p-checkbox>
                         <small class="block">
                             {{ 'settings.misc.follow_desc' | translate }}
@@ -32,7 +32,7 @@
 
                     <div class="form-group field">
                         <p-checkbox [(ngModel)]="TruncateDeletesSlowly" name="TruncateDeletesSlowly" class="mb-2 w-full label"
-                            [binary]="true" label="{{ 'settings.misc.slowly_label' | translate }}">
+                            [binary]="true" value="{{ 'settings.misc.slowly_label' | translate }}">
                         </p-checkbox>
                         <small class="block">
                             {{ 'settings.misc.slowly_desc' | translate }}
@@ -52,7 +52,7 @@
                     <div class="form-group field">
                         <label for="StorageScheduler" class="label block">{{ 'settings.misc.sg_label' | translate }}</label>
                         <p-dropdown  appendTo="body" [options]="soptions " [(ngModel)]="StorageScheduler" optionLabel="name"
-                            optionValue="code" class="block w-15rem mb-2" name="StorageScheduler">
+                            optionValue="code" class="block w-60 mb-2" name="StorageScheduler">
                         </p-dropdown>
                         <small class="block">
                             {{ 'settings.misc.sg_desc' | translate }}
@@ -61,12 +61,12 @@
                 </p-fieldset>
 
                 <!-- UPnP Section -->
-                <p-fieldset class="mb-4 w-full" legend="{{ 'settings.misc.panel_upnp' | translate }}"
+                <p-fieldset class="mb-6 w-full" legend="{{ 'settings.misc.panel_upnp' | translate }}"
                     [toggleable]="true" [collapsed]="true">
                     <div class="form-group field">
                         <label for="UPNPWmpSource" class="label block">{{ 'settings.misc.upnp_label' | translate }}</label>
                         <p-dropdown  appendTo="body" [options]="uoptions" [(ngModel)]="UPNPWmpSource" optionLabel="name"
-                            optionValue="code" class="block w-15rem mb-2" name="UPNPWmpSource">
+                            optionValue="code" class="block w-60 mb-2" name="UPNPWmpSource">
                         </p-dropdown>
                         <small class="block">
                             {{ 'settings.misc.upnp_desc' | translate }}
@@ -74,7 +74,7 @@
                     </div>
                 </p-fieldset>
 
-                <div class="mb-4 w-full">
+                <div class="mb-6 w-full">
 
                     <div class="form-group field">
                         <label for="MiscStatusScript" class="label block">{{ 'settings.misc.statapp_label' | translate
@@ -89,7 +89,7 @@
 
                     <div class="form-group field">
                         <p-checkbox [(ngModel)]="DisableAutomaticBackup" name="DisableAutomaticBackup"
-                            class="mb-2 w-full label" [binary]="true" label="{{ 'settings.misc.disback_label' | translate }}">
+                            class="mb-2 w-full label" [binary]="true" value="{{ 'settings.misc.disback_label' | translate }}">
                         </p-checkbox>
                         <small class="block">
                             {{ 'settings.misc.disback_desc' | translate }}
@@ -98,7 +98,7 @@
 
                     <div class="form-group field">
                         <p-checkbox [(ngModel)]="DisableFirewireReset" name="DisableFirewireReset" class="mb-2 w-full label"
-                            [binary]="true" label="{{ 'settings.misc.disfwr_label' | translate }}">
+                            [binary]="true" value="{{ 'settings.misc.disfwr_label' | translate }}">
                         </p-checkbox>
                         <small class="block">
                             {{ 'settings.misc.disfwr_desc' | translate }}
@@ -110,8 +110,8 @@
         </ng-template>
 
         <ng-template pTemplate="footer">
-            <div class="grid nogutter">
-                <div class="col-12">
+            <div class="grid grid-cols-12 gap-4 nogutter">
+                <div class="col-span-12">
                     <p-message *ngIf="this.successCount > 0 && this.errorCount == 0 && !miscsettings.dirty"
                         severity="success" text="{{ 'common.savesuccess' | translate }}"></p-message>
                     <p-message *ngIf="this.errorCount > 0 && !miscsettings.dirty" severity="error"

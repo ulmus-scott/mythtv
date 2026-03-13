@@ -1,13 +1,13 @@
-<form class="ml-3 mr-3" name="switchform" #switchform="ngForm">
-    <p-card class="m-5">
+<form class="ml-4 mr-4" name="switchform" #switchform="ngForm">
+    <p-card class="m-8">
         <ng-template pTemplate="title">
             {{ 'settings.capture.diseqc.switch.title' | translate }}
         </ng-template>
         <ng-template pTemplate="subtitle">
         </ng-template>
         <ng-template pTemplate="content">
-            <div class="grid">
-                <div class="mb-4 w-full">
+            <div class="grid grid-cols-12 gap-4">
+                <div class="mb-6 w-full">
 
                     <div class="form-group field">
                         <label for="Description" class="label block">{{ 'settings.capture.diseqc.description_label' |
@@ -72,7 +72,7 @@
 
                     <!-- Sub Device Panels -->
                     <div *ngFor="let subtree of diseqcSubTree; index as ix">
-                        <p-fieldset class="mb-4 w-full"
+                        <p-fieldset class="mb-6 w-full"
                             legend="{{ 'settings.capture.dvb.satellite_heading' | translate }}" [toggleable]="true"
                             [collapsed]="true" *ngIf="subtree">
                             <p-button styleClass="p-button-warning" *ngIf="subtree" label="Delete Satellite Devices"
@@ -113,7 +113,7 @@
                     </div>
 
                     <!-- New Device Panel -->
-                    <p-fieldset class="mb-4 w-full" legend="{{ 'settings.capture.dvb.satellite_heading' | translate }}"
+                    <p-fieldset class="mb-6 w-full" legend="{{ 'settings.capture.dvb.satellite_heading' | translate }}"
                         [toggleable]="true" [collapsed]="false" *ngIf="diseqcSubTreeCount < diseqcTree.SwitchPorts">
                         <p-button label="{{ 'settings.capture.dvb.newsatellite_button' | translate }}"
                             (onClick)="work.displayNewDiseqc = true" icon="pi pi-plus-circle"

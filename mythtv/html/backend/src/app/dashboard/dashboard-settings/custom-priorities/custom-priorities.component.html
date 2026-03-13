@@ -37,7 +37,7 @@
     </p-table>
 </div>
 
-<form class="ml-3 mr-3" name="customform" #customform="ngForm">
+<form class="ml-4 mr-4" name="customform" #customform="ngForm">
 
     <p-dialog header="{{ dialogHeader }}" [(visible)]="displayRuleDlg" [modal]="true"
         [style]="{height: '75vw', width: '50vw'}" [closable]="false" [closeOnEscape]="false">
@@ -70,7 +70,7 @@
         </div>
 
         <ng-template pTemplate="footer">
-            <div class="col-12" style="text-align: left;">
+            <div class="col-span-12" style="text-align: left;">
                 <p-message *ngIf="successCount > 0 && errorCount == 0 && !customform.dirty" severity="success"
                     text="{{ 'common.savesuccess' | translate }}"></p-message>
                 <p-message *ngIf="errorMsg" severity="error" text="{{ errorMsg }}"></p-message>
@@ -108,7 +108,7 @@
         <p>{{ 'dashboard.custom.delete_details' |
             translate: {Name: rule.PriorityName} }}</p>
         <ng-template pTemplate="footer">
-            <div class="col-12" style="text-align: left;">
+            <div class="col-span-12" style="text-align: left;">
                 <p-message *ngIf="errorCount > 0" severity="error"
                     text="{{ 'common.networkfail' | translate }}"></p-message>
             </div>
