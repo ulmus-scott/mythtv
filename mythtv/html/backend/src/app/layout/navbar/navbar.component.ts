@@ -111,9 +111,9 @@ export class NavbarComponent implements OnInit {
     }
 
     changeTheme(theme: Theme) {
-        this.m_selectedTheme = theme;
-        this.themeService.switchTheme(theme.CSS);
-        localStorage.setItem('Theme', this.m_selectedTheme.Name);
+        // this.m_selectedTheme = theme;
+        // this.themeService.switchTheme(theme.CSS);
+        // localStorage.setItem('Theme', this.m_selectedTheme.Name);
     }
 
     findLanguageByCode(code: string): Language {
