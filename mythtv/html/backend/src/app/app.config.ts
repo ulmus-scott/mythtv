@@ -10,6 +10,9 @@ import { SetupWizardRoutingModule } from "./config/setupwizard/setupwizard-routi
 import { DashboardRoutingModule } from "./dashboard/dashboard-routing.module";
 import { ErrorInterceptor } from "./services/error.interceptor";
 import { TokenInterceptor } from "./services/token.interceptor";
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { providePrimeNG } from "primeng/config";
+import Aura from '@primeuix/themes/aura';
 
 export const appConfig: ApplicationConfig = {
     providers: [
@@ -27,7 +30,12 @@ export const appConfig: ApplicationConfig = {
         { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
         provideHttpClient(withInterceptorsFromDi()),
-        // provideAnimations()
+        provideAnimationsAsync(),
+        providePrimeNG({
+            theme: {
+                preset: Aura
+            }
+        })
     ]
 };
 
