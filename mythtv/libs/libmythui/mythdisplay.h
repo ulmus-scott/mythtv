@@ -37,6 +37,7 @@ class MUI_PUBLIC MythDisplay : public QObject
     QStringList  GetDescription        ();
     QRect        GetScreenBounds       ();
     QScreen*     GetCurrentScreen      ();
+    QWindow*     GetCurrentWindow      ();
     static int   GetScreenCount        ();
     double       GetPixelAspectRatio   ();
     QSize        GetGUIResolution      ();

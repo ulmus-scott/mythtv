@@ -341,6 +341,11 @@ QScreen* MythDisplay::GetCurrentScreen()
     return m_screen;
 }
 
+QWindow* MythDisplay::GetCurrentWindow()
+{
+    return m_window;
+}
+
 QScreen *MythDisplay::GetDesiredScreen()
 {
     QScreen* newscreen = nullptr;

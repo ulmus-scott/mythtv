@@ -25,8 +25,10 @@ void MythPainterGPU::SetViewControl(ViewControls Control)
 
 void MythPainterGPU::DisplayChanged()
 {
-    QScreen *screen = m_parent->GetDisplay()->GetCurrentScreen();
+    MythDisplay* display = m_parent->GetDisplay();
+    QScreen *screen = display->GetCurrentScreen();
+    QWindow *window = display->GetCurrentWindow();
 
-    m_pixelRatio = screen->devicePixelRatio();
+    m_pixelRatio = window ? window->devicePixelRatio() : screen->devicePixelRatio();
     m_usingHighDPI = !qFuzzyCompare(m_pixelRatio, 1.0);
 }
