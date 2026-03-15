@@ -77,19 +77,19 @@ QString MythExternRecApp::sanitize_var(const QString & var)
     qsizetype p2 { -1 };
     QString cleaned = var;
 
-    while ((p1 = cleaned.indexOf('{')) != -1)
+    while ((p1 = cleaned.indexOf("[{")) != -1)
     {
-        p2 = cleaned.indexOf('}', p1);
+        p2 = cleaned.indexOf("}]", p1);
         if (cleaned.mid(p1, p2 - p1).indexOf('%') == -1)
         {
-            // Just remove the '{' and '}'
-            cleaned = cleaned.remove(p2, 1);
-            cleaned = cleaned.remove(p1, 1);
+            // Just remove the '[{' and '}]'
+            cleaned = cleaned.remove(p2, 2);
+            cleaned = cleaned.remove(p1, 2);
         }
         else
         {
-            // Remove the contents of { ... }
-            cleaned = cleaned.remove(p1, p2 - p1 + 1);
+            // Remove the contents of [{ ... }]
+            cleaned = cleaned.remove(p1, p2 - p1 + 2);
         }
     }
 
