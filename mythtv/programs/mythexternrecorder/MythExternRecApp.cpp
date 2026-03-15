@@ -70,7 +70,7 @@ MythExternRecApp::~MythExternRecApp(void)
 }
 
 /* Remove any non-replaced variables along with any dependant strings.
-   Dependant strings are wrapped in {} */
+   Dependant strings are wrapped in [{ }] */
 QString MythExternRecApp::sanitize_var(const QString & var)
 {
     qsizetype p1 { -1 };
@@ -884,6 +884,23 @@ Q_SLOT void MythExternRecApp::LockTimeout(const QString & serial)
         return;
     }
 
+    if (!m_channelsIni.isEmpty())
+    {
+        bool ok;
+        QSettings settings(m_channelsIni, QSettings::IniFormat);
+        settings.beginGroup(m_tuningChannel);
+        m_lockTimeout = settings.value("TIMEOUT", m_lockTimeout).toInt(&ok);
+        settings.endGroup();
+
+        if (ok)
+            LOG(VB_CHANNEL, LOG_INFO, LOC +
+                QString("Channel defined tune timeout: %1 (chan %2)")
+                .arg(m_lockTimeout).arg(m_tuningChannel));
+        else
+            LOG(VB_CHANNEL, LOG_DEBUG, LOC +
+                "No channel defined tune timeout");
+    }
+
     if (m_lockTimeout > 0)
     {
         LOG(VB_CHANNEL, LOG_INFO, LOC +
@@ -891,6 +908,7 @@ Q_SLOT void MythExternRecApp::LockTimeout(const QString & serial)
         emit SendMessage("LockTimeout", serial, QString::number(m_lockTimeout), "OK");
         return;
     }
+
     LOG(VB_CHANNEL, LOG_INFO, LOC +
         "No LockTimeout defined in config, defaulting to 12000ms");
     emit SendMessage("LockTimeout", serial,

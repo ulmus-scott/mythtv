@@ -3414,6 +3414,14 @@ bool TVRec::SetChannelInfo(uint chanid, uint sourceid,
     return true;
 }
 
+void TVRec::SetChannelTimeout(std::chrono::milliseconds timeout)
+{
+    m_genOpt.m_channelTimeout = timeout.count();
+    LOG(VB_CHANNEL, LOG_INFO, LOC +
+        QString("Override tune timeout: %1ms")
+        .arg(m_genOpt.m_channelTimeout));
+}
+
 /** \fn TVRec::SetRingBuffer(RingBuffer*)
  *  \brief Sets "ringBuffer", deleting any existing RingBuffer.
  */

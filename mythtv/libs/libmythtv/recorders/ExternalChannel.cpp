@@ -100,22 +100,21 @@ bool ExternalChannel::Tune(const QString &channum)
         return true;
 
     QString result;
-    if (m_tuneTimeout < 0ms)
+    if (!m_streamHandler->ProcessCommand("LockTimeout?", result))
     {
-        if (!m_streamHandler->ProcessCommand("LockTimeout?", result))
-        {
-            LOG(VB_CHANNEL, LOG_ERR, LOC + QString
-                ("Failed to retrieve LockTimeout: %1").arg(result));
-            m_tuneTimeout = 60s;
-        }
-        else
-        {
-            m_tuneTimeout = std::chrono::milliseconds(result.split(":")[1].toInt());
-        }
-
-        LOG(VB_CHANNEL, LOG_INFO, LOC + QString("Using Tune timeout of %1ms")
-            .arg(m_tuneTimeout.count()));
+        LOG(VB_CHANNEL, LOG_ERR, LOC + QString
+            ("Failed to retrieve LockTimeout: %1").arg(result));
+        m_tuneTimeout = 60s;
     }
+    else
+    {
+        m_tuneTimeout = std::chrono::milliseconds(result.split(":")[1].toInt());
+    }
+
+    LOG(VB_CHANNEL, LOG_INFO, LOC + QString("Tune timeout: %1ms")
+        .arg(m_tuneTimeout.count()));
+
+    m_pParent->SetChannelTimeout(m_tuneTimeout);
 
     LOG(VB_CHANNEL, LOG_INFO, LOC + "Tuning to " + channum);
 

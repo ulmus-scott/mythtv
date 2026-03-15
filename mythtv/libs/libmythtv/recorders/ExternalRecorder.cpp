@@ -113,6 +113,13 @@ void ExternalRecorder::run(void)
                 QString("Recording is damaged. Setting status to %1")
                 .arg(RecStatus::toString(RecStatus::Failing, kSingleRecord)));
             SetRecordingStatus(RecStatus::Failing, __FILE__, __LINE__);
+
+            // Fudge it with 1 second.
+            QMutexLocker locker(&m_statisticsLock);
+            QDateTime gap_end(MythDate::current());
+            QDateTime gap_start = gap_end.addSecs(-1);
+            m_recordingGaps.push_back(RecordingGap(gap_start, gap_end));
+
             m_streamHandler->ClearDamaged();
         }
     }

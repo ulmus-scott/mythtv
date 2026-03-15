@@ -249,6 +249,7 @@ class MTV_PUBLIC TVRec : public SignalMonitorListener, public QRunnable
     void StatusChannelTuned(const SignalMonitorValue &/*val*/) override { } // SignalMonitorListener
     void StatusSignalLock(const SignalMonitorValue &/*val*/) override { } // SignalMonitorListener
     void StatusSignalStrength(const SignalMonitorValue &/*val*/) override { } // SignalMonitorListener
+    void SetChannelTimeout(std::chrono::milliseconds timeout);
     void EnableActiveScan(bool enable);
 
   protected:
