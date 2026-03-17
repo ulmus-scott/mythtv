@@ -380,7 +380,7 @@
             "backends_detail": "バックエンド: {{ Name }} は IP {{ Type }} 上の {{ IP }}}} です",
             "backends_none": "バックエンドなし",
             "backends_title": "バックエンド",
-            "encoder_text": "{{ DisplayName }}、{{ CardDetails }}はhost {{ HostName }}にあります。 <br> state：{{ State }}。",
+            "encoder_text": "{{ DisplayName }}、{{ CardDetails }} はホスト {{ HostName }} 上にあります。状態: {{ State }}。",
             "encoder_title": "エンコーダのステータス",
             "endtime_text": "この録画は {{ EndTime }} に終了するようにスケジュールされています。",
             "frontends_detail": "フロントエンド: {{ Name }}、IP ポート: {{ IP }}:{{ Port }}、オンライン: {{ OnLine }}",
