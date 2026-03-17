@@ -1,17 +1,19 @@
-<div class="grid grid-cols-12 gap-4">
+<!-- class="grid grid-cols-12 gap-4" -->
+ <!-- class="grid grid-cols-7 grid-nogutter" -->
+<div class="flex">
     <!-- TODO: Use today or date-->
-    <div class="col-span-1 datebox">{{ guide.m_startDate.toLocaleDateString() }}</div>
-    <div class="col segmentbox">
+    <div class="flex-none datebox w-1/12">{{ guide.m_startDate.toLocaleDateString() }}</div>
+    <div class="flex-1 segmentbox">
         <div class="flex">
             <div class="flex-none cursor-pointer" (click)="pageLeft()">&lt;&lt;</div>
             <div class="flex-none">&nbsp;{{ segmentToStartTime(0) }}</div>
         </div>
     </div>
-    <div class="col segmentbox">{{ segmentToStartTime(1) }}</div>
-    <div class="col segmentbox">{{ segmentToStartTime(2) }}</div>
-    <div class="col segmentbox">{{ segmentToStartTime(3) }}</div>
-    <div class="col segmentbox">{{ segmentToStartTime(4) }}</div>
-    <div class="col segmentbox">
+    <div class="flex-1 segmentbox">{{ segmentToStartTime(1) }}</div>
+    <div class="flex-1 segmentbox">{{ segmentToStartTime(2) }}</div>
+    <div class="flex-1 segmentbox">{{ segmentToStartTime(3) }}</div>
+    <div class="flex-1 segmentbox">{{ segmentToStartTime(4) }}</div>
+    <div class="flex-1 segmentbox">
         <div class="flex">
             <div class="flex-none">{{ segmentToStartTime(5) }}</div>
             <div class="grow">&nbsp;</div>

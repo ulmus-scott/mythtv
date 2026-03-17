@@ -2,7 +2,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* This is the usgae for when we get to tailwindcss V4 */
 /* @import "tailwindcss" source("./"); */
+
+h2 {
+  font-size: x-large;
+  font-weight: bold;
+}
+
+h3 {
+  font-size: large;
+  font-weight: bold;
+}
 
 html, body { height: 100%; }
 /* body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;}  */

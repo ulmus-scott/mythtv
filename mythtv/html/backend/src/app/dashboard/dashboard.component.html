@@ -1,14 +1,21 @@
 <div *ngIf="translateDone">
   <h1></h1>
   <div class="flex flex-row">
-    <button pButton pRipple icon="pi pi-angle-double-left" class="p-button-text p-button-primary"
-      (click)="menu.navBackward()" pTooltip="{{ 'dashboard.scrolltabsleft' | translate }}"></button>
-    <div class="col-span-11">
-      <p-tabMenu #menu [model]="fullMenu" [activeItem]="activeItem" [scrollable]="false"></p-tabMenu>
+    <div class="shrink overflow-auto">
+      <!-- tabMenu is deprecated, to be replaced by tabs. Tabs is very ugly and needs
+      styling to be done to be useful. So I am leving tabMenu for now -->
+      <p-tabMenu #menu [model]="fullMenu" [activeItem]="activeItem" [scrollable]="true"/>
+      <!-- This is ugly tabs alternative -->
+      <!-- <p-tabs [scrollable]="true" [selectOnFocus]="true">
+        <p-tablist>
+          @for (tab of fullMenu; track tab.routerLink ) {
+            <p-tab [routerLink]="tab.routerLink">
+              <span>{{tab.label}}</span>
+            </p-tab>
+          } 
+        </p-tablist>
+      </p-tabs> -->
     </div>
-    <button pButton pRipple icon="pi pi-angle-double-right" class="p-button-text p-button-primary"
-      (click)="menu.navForward()" pTooltip="{{ 'dashboard.scrolltabsright' | translate }}"
-      tooltipPosition="left"></button>
   </div>
   <router-outlet></router-outlet>
 </div>

@@ -2,11 +2,11 @@
     <h2>{{ 'dashboard.status.encoder_title' | translate }}</h2>
     <div *ngIf="encoders?.length != 0; else noEncoders">
         <div *ngFor="let encoder of encoders">
-            <ul>
+            <ul class="list-disc list-inside ml-4">
                 <li *ngIf="encoder.ParentId == 0">
-                    <div [innerHTML]="'dashboard.status.encoder_text' 
+                    <span [innerHTML]="'dashboard.status.encoder_text' 
                         | translate: { DisplayName: encoder.Inputs[0].DisplayName, CardDetails: cardDetails(encoder.Id),
-                        HostName: encoder.HostName, State: encoderStatuses(encoder.Id)}"></div>
+                        HostName: encoder.HostName, State: encoderStatuses(encoder.Id)}"></span>
                     <ng-container *ngFor="let sub of encoders">
                         <ng-container *ngIf="sub.Recording && (sub.Id == encoder.Id || sub.ParentId == encoder.Id)">
                             '{{ sub.Recording.Title }}' on {{ sub.Recording.Channel.CallSign }}.

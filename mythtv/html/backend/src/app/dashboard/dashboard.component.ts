@@ -2,19 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
 import { SetupService } from '../services/setup.service';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, RouterLink } from '@angular/router';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { TooltipModule } from 'primeng/tooltip';
 import { RippleModule } from 'primeng/ripple';
 import { ButtonModule } from 'primeng/button';
 import { NgIf } from '@angular/common';
+import { MenubarModule, Menubar } from 'primeng/menubar';
+import { TabsModule, Tabs, TabList } from 'primeng/tabs';
 
 @Component({
     selector: 'app-dashboard',
     templateUrl: './dashboard.component.html',
     styleUrls: ['./dashboard.component.css'],
     standalone: true,
-    imports: [NgIf, ButtonModule, RippleModule, TooltipModule, TabMenuModule, RouterOutlet, TranslateModule]
+    imports: [NgIf, ButtonModule, RippleModule, TooltipModule, TabMenuModule, RouterOutlet, TranslateModule, Menubar, Tabs, TabList, RouterLink]
 })
 export class DashboardComponent implements OnInit {
 

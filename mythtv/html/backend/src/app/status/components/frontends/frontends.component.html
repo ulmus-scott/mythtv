@@ -1,7 +1,7 @@
 <div class="statusBox">
     <h2>{{ 'dashboard.status.frontends_title' | translate }}</h2>
     <div *ngIf="frontends?.length != 0; else noFrontends">
-        <ul>
+        <ul class="list-disc list-inside ml-4">
             <div *ngFor="let frontend of frontends">
                 <li>{{ 'dashboard.status.frontends_detail' |
                     translate: { Name: frontend.Name, IP: frontend.IP, Port: frontend.Port, OnLine: frontend.OnLine } }}

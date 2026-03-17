@@ -1,7 +1,7 @@
 <div class="statusBox">
     <h2>{{ 'dashboard.status.backends_title' | translate }}</h2>
     <div *ngIf="backends?.length != 0; else noBackends">
-        <ul>
+        <ul class="list-disc list-inside ml-4">
             <div *ngFor="let backend of backends">
                 <li>{{ 'dashboard.status.backends_detail' |
                     translate: { Name: backend.Name, Type: backend.Type, IP: backend.IP } }} </li>

@@ -21,18 +21,18 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { CheckboxModule } from 'primeng/checkbox';
 import { RippleModule } from 'primeng/ripple';
 import { ButtonModule } from 'primeng/button';
-import { CalendarModule } from 'primeng/calendar';
 import { TooltipModule } from 'primeng/tooltip';
 import { FormsModule } from '@angular/forms';
-import { DropdownModule } from 'primeng/dropdown';
 import { NgIf, NgFor } from '@angular/common';
+import { DatePicker } from "primeng/datepicker";
+import { SelectModule } from 'primeng/select';
 
 @Component({
     selector: 'app-guide',
     templateUrl: './guide.component.html',
     styleUrls: ['./guide.component.css'],
     standalone: true,
-    imports: [NgIf, DropdownModule, FormsModule, TooltipModule, CalendarModule, ButtonModule, RippleModule, CheckboxModule, ProgressSpinnerModule, DataViewModule, SharedModule, TimebarComponent, ChannelIconComponent, NgFor, ProgramEntryComponent, ProgramsComponent, ScheduleComponent, DialogModule, LegendComponent, TranslateModule]
+    imports: [NgIf, FormsModule, TooltipModule, ButtonModule, RippleModule, CheckboxModule, ProgressSpinnerModule, DataViewModule, SharedModule, TimebarComponent, ChannelIconComponent, NgFor, ProgramEntryComponent, ProgramsComponent, ScheduleComponent, DialogModule, LegendComponent, TranslateModule, DatePicker, SelectModule]
 })
 export class GuideComponent implements OnInit, SchedulerSummary {
 

@@ -15,18 +15,18 @@ import { PasswordModule } from 'primeng/password';
 import { DialogModule } from 'primeng/dialog';
 import { FormsModule } from '@angular/forms';
 import { TableModule } from 'primeng/table';
-import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { TooltipModule } from 'primeng/tooltip';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { NgIf } from '@angular/common';
+import { PopoverModule } from 'primeng/popover';
 
 @Component({
     selector: 'app-navbar',
     templateUrl: './navbar.component.html',
     styleUrls: ['./navbar.component.css'],
     standalone: true,
-    imports: [NgIf, RippleModule, ButtonModule, TooltipModule, OverlayPanelModule, SharedModule, TableModule, FormsModule, DialogModule, PasswordModule, CheckboxModule, MessageModule, TranslateModule]
+    imports: [NgIf, RippleModule, ButtonModule, TooltipModule, PopoverModule, SharedModule, TableModule, FormsModule, DialogModule, PasswordModule, CheckboxModule, MessageModule, TranslateModule]
 })
 export class NavbarComponent implements OnInit {
 

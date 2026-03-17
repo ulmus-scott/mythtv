@@ -3,10 +3,11 @@
     <div *ngIf="scheduled?.length != 0; else noSchedule">
         <p>{{ 'dashboard.status.schedule_text' |
             translate: { length: scheduled?.length } }}</p>
-        <ul>
+        <ul class="list-disc list-inside ml-4">
             <li *ngFor="let schedule of scheduled" class="flex">
                 <div pTooltip="{{schedule.Description}}" tooltipPosition="bottom">
-                    {{ utility.formatDate(schedule.StartTime) }} {{ utility.formatTime(schedule.StartTime) }} - {{schedule.Recording.EncoderId}} - {{schedule.Channel.CallSign}} -
+                    {{ utility.formatDate(schedule.StartTime) }} {{ utility.formatTime(schedule.StartTime) }} -
+                    {{schedule.Recording.EncoderId}} - {{schedule.Channel.CallSign}} -
                     {{schedule.Title}}
                 </div>
             </li>
