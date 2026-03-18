@@ -41,10 +41,10 @@
 
                     &nbsp;&nbsp;&nbsp; {{ 'dashboard.videos.category' | translate }}: &nbsp;
 
-                    <p-dropdown [(ngModel)]="selectedCategory" [options]="catGroups" name="filter"
+                    <p-select [(ngModel)]="selectedCategory" [options]="catGroups" name="filter"
                         (onChange)="onFilter()" placeholder="{{ 'settings.chanedit.all' | translate }}"
                         [showClear]="true" optionLabel="Name" optionValue="Id" class="'px-3">
-                    </p-dropdown>
+                    </p-select>
 
                     <div *ngIf="refreshing else refreshBn">
                         <p-progressSpinner [style]="{width: '30px', height: '30px'}"></p-progressSpinner>
@@ -190,8 +190,8 @@
             <div class="form-group field">
                 <label for="ReleaseDate" class="label block">{{ 'dashboard.videos.releasedate' | translate
                     }}</label>
-                <p-calendar [(ngModel)]="video.ReleaseDate" dateFormat="yy-mm-dd" name="ReleaseDate"
-                    id="ReleaseDate"></p-calendar>
+                <p-datePicker [(ngModel)]="video.ReleaseDate" dateFormat="yy-mm-dd" name="ReleaseDate"
+                    id="ReleaseDate"/>
             </div>
 
             <div class="form-group field">

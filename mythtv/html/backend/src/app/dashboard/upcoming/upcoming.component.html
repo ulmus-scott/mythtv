@@ -15,24 +15,24 @@
                     <div class="flex items-center">
 
                         {{ 'dashboard.upcoming.status' | translate }}: &nbsp;
-                        <p-dropdown [(ngModel)]="selectedStatus" [options]="dataService.recStatusList"
+                        <p-select [(ngModel)]="selectedStatus" [options]="dataService.recStatusList"
                             optionLabel="Name" optionValue="Status" name="Statusfilter" (onChange)="onFilter()"
                             placeholder="{{ 'data.recstatus.Default' | translate }}" [showClear]="true" class="'px-3">
-                        </p-dropdown>
+                        </p-select>
 
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         {{ 'dashboard.upcoming.recrule' | translate }}: &nbsp;
-                        <p-dropdown [(ngModel)]="selectedRule" [options]="recRules" name="rulefilter"
+                        <p-select [(ngModel)]="selectedRule" [options]="recRules" name="rulefilter"
                             (onChange)="onFilter()" optionLabel="Title"
                             placeholder="{{ 'settings.chanedit.all' | translate }}" [showClear]="true" class="'px-3">
-                        </p-dropdown>
+                        </p-select>
 
                         &nbsp;&nbsp;&nbsp; {{ 'dashboard.recordings.recgrp' | translate }}: &nbsp;
 
-                        <p-dropdown [(ngModel)]="selectedRecGroup" [options]="recGroups" name="filter"
+                        <p-select [(ngModel)]="selectedRecGroup" [options]="recGroups" name="filter"
                             (onChange)="onFilter()" placeholder="{{ 'settings.chanedit.all' | translate }}"
                             [showClear]="true" class="'px-3">
-                        </p-dropdown>
+                        </p-select>
 
                         <!-- Refresh button and number of rows. -->
                         <div *ngIf="refreshing else refreshBn"><p-progressSpinner

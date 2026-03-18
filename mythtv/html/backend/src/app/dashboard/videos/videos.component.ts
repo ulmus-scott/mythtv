@@ -9,18 +9,18 @@ import { GetVideoListRequest, UpdateVideoMetadataRequest, VideoCategories, Video
 import { UtilityService } from 'src/app/services/utility.service';
 import { VideoService } from 'src/app/services/video.service';
 import { MessageModule } from 'primeng/message';
-import { CalendarModule } from 'primeng/calendar';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { TextareaModule } from 'primeng/textarea';
 import { DialogModule } from 'primeng/dialog';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { DropdownModule } from 'primeng/dropdown';
 import { RippleModule } from 'primeng/ripple';
 import { TooltipModule } from 'primeng/tooltip';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ButtonModule } from 'primeng/button';
 import { NgIf, NgFor } from '@angular/common';
 import { ToastModule } from 'primeng/toast';
+import { SelectModule } from 'primeng/select';
+import { DatePicker, DatePickerModule } from "primeng/datepicker";
 
 @Component({
     selector: 'app-videos',
@@ -28,7 +28,7 @@ import { ToastModule } from 'primeng/toast';
     styleUrls: ['./videos.component.css'],
     providers: [MessageService],
     standalone: true,
-    imports: [ToastModule, MenuModule, NgIf, TableModule, SharedModule, ButtonModule, NgFor, CheckboxModule, FormsModule, TooltipModule, RippleModule, DropdownModule, ProgressSpinnerModule, DialogModule, TextareaModule, InputNumberModule, CalendarModule, MessageModule, TranslateModule]
+    imports: [ToastModule, MenuModule, NgIf, TableModule, SharedModule, ButtonModule, NgFor, CheckboxModule, FormsModule, TooltipModule, RippleModule, SelectModule, ProgressSpinnerModule, DialogModule, TextareaModule, InputNumberModule, DatePickerModule, MessageModule, TranslateModule, DatePicker]
 })
 export class VideosComponent implements OnInit {
 

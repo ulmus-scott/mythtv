@@ -17,9 +17,9 @@ import { RippleModule } from 'primeng/ripple';
 import { ButtonModule } from 'primeng/button';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { FormsModule } from '@angular/forms';
-import { DropdownModule } from 'primeng/dropdown';
 import { NgIf, NgClass, DecimalPipe } from '@angular/common';
 import { ToastModule } from 'primeng/toast';
+import { SelectModule } from 'primeng/select';
 
 interface RuleListEntry {
   Id: number;
@@ -33,7 +33,7 @@ interface RuleListEntry {
     styleUrls: ['./upcoming.component.css'],
     providers: [MessageService],
     standalone: true,
-    imports: [ToastModule, NgIf, TableModule, SharedModule, DropdownModule, FormsModule, ProgressSpinnerModule, ButtonModule, RippleModule, TooltipModule, NgClass, DialogModule, MessageModule, ScheduleComponent, DecimalPipe, TranslateModule]
+    imports: [ToastModule, NgIf, TableModule, SharedModule, SelectModule, FormsModule, ProgressSpinnerModule, ButtonModule, RippleModule, TooltipModule, NgClass, DialogModule, MessageModule, ScheduleComponent, DecimalPipe, TranslateModule]
 })
 export class UpcomingComponent implements OnInit, SchedulerSummary {
 
