@@ -13,16 +13,16 @@ import { SetupService } from 'src/app/services/setup.service';
 import { UtilityService } from 'src/app/services/utility.service';
 import { ListboxModule } from 'primeng/listbox';
 import { MessageModule } from 'primeng/message';
-import { CalendarModule } from 'primeng/calendar';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { TextareaModule } from 'primeng/textarea';
 import { DialogModule } from 'primeng/dialog';
-import { DropdownModule } from 'primeng/dropdown';
 import { NgIf, NgClass, DecimalPipe } from '@angular/common';
 import { TooltipModule } from 'primeng/tooltip';
 import { RippleModule } from 'primeng/ripple';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
+import { SelectModule } from 'primeng/select';
+import { DatePickerModule } from 'primeng/datepicker';
 
 @Component({
     selector: 'app-recordings',
@@ -30,7 +30,7 @@ import { ToastModule } from 'primeng/toast';
     styleUrls: ['./recordings.component.css'],
     providers: [MessageService],
     standalone: true,
-    imports: [FormsModule, ToastModule, MenuModule, ButtonModule, RippleModule, TooltipModule, NgIf, DropdownModule, TableModule, SharedModule, NgClass, DialogModule, TextareaModule, InputNumberModule, CalendarModule, MessageModule, ListboxModule, DecimalPipe, TranslateModule]
+    imports: [FormsModule, ToastModule, MenuModule, ButtonModule, RippleModule, TooltipModule, NgIf, SelectModule, TableModule, SharedModule, NgClass, DialogModule, TextareaModule, InputNumberModule, DatePickerModule, MessageModule, ListboxModule, DecimalPipe, TranslateModule]
 })
 export class RecordingsComponent implements OnInit {
 
@@ -208,6 +208,8 @@ export class RecordingsComponent implements OnInit {
         event.last = event.first + request.Count;
       }
     }
+    // For lazy remove this
+    // request.Count = 10000;
 
     if (event.last! > this.loadLast)
       this.loadLast = event.last!;
