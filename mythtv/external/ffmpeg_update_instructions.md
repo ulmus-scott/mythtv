@@ -1,8 +1,10 @@
+<!-- SPDX-License-Identifier: Unlicense -->
+
 # FFmpeg Update Instructions
 
-FFmpeg was last updated to FFmpeg 8.0 `9c93070155903e2c2d08f9f7234a920877903f80`
-on 2025-12-12, which branched from FFmpeg master at
-`7eaa0f799ab30e723209cc64777f10063ae55a23`.
+FFmpeg was last updated to FFmpeg 8.1 `9047fa1b084f76b1b4d065af2d743df1b40dfb56`
+on 2026-03-18, which branched from FFmpeg master at
+`67c886222f5fcb4c53d6f5a8b41faec8668b6229`.
 
 MythTV's changes are currently being maintained at
 [ulmus-scott/FFmpeg](https://github.com/ulmus-scott/FFmpeg), not
@@ -215,7 +217,6 @@ commits modifying MythTV.
 
 Post on the mythtv-dev mailing list that the new version is available for testing
 after running whatever tests you can do yourself.
-
 
 ### Step 5: Rebasing FFmpeg modifications
 
