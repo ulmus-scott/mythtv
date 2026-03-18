@@ -63,15 +63,13 @@
                 *ngIf="displayType == GRID" pTooltip="{{ 'dashboard.guide.movies' | translate }}"
                 tooltipPosition="top"></button>
             <p-checkbox inputId="OnlyNew" [(ngModel)]="onlyNew" name="OnlyNew" #OnlyNew="ngModel" class="mx-1"
-                *ngIf="displayType != GRID" [binary]="true" value="{{ 'dashboard.guide.new' | translate }}"
-                checkboxIcon="pi pi-check" (onChange)="newSearch()"
-                pTooltip="{{ 'dashboard.guide.new_search' | translate }}" tooltipPosition="top">
-            </p-checkbox>
+                *ngIf="displayType != GRID" [binary]="true" checkboxIcon="pi pi-check" (onChange)="newSearch()"
+                pTooltip="{{ 'dashboard.guide.new_search' | translate }}" tooltipPosition="top" />
+            <label for="OnlyNew" class="label pl-2 pt-2 pr-2">{{ 'dashboard.guide.new' | translate }}</label>
             <p-checkbox inputId="Movies" [(ngModel)]="onlyMovies" name="OnlyMovies" #OnlyMovies="ngModel" class="mx-1"
-                *ngIf="displayType != GRID" [binary]="true" value="{{ 'dashboard.guide.movies' | translate }}"
-                checkboxIcon="pi pi-check" (onChange)="newSearch()"
-                pTooltip="{{ 'dashboard.guide.movies' | translate }}" tooltipPosition="top">
-            </p-checkbox>
+                *ngIf="displayType != GRID" [binary]="true" checkboxIcon="pi pi-check" (onChange)="newSearch()"
+                pTooltip="{{ 'dashboard.guide.movies' | translate }}" tooltipPosition="top" />
+            <label for="Movies" class="label pl-2 pt-2">{{ 'dashboard.guide.movies' | translate }}</label>
         </div>
 
         <div class="flex items-center"
@@ -108,33 +106,34 @@
                 [totalRecords]="m_programGuide.ProgramGuide.TotalAvailable">
                 <ng-template #header styleClass="timeHeader">
                 </ng-template>
-                <ng-template #list let-channels >
+                <ng-template #list let-channels>
                     <div class="grid grid-cols-12 gap-4 grid-nogutter">
-                    <div class="col-span-12" *ngFor="let channelrow of channels;let i = index" >
-                        <ng-container *ngIf="( i % 5 ) == 0">
-                            <div class="col-span-12">
-                                <app-guide-timebar [guide]="this"></app-guide-timebar>
-                            </div>
-                        </ng-container>
-                        <div class="grid grid-cols-12 gap-4 grow">
-                            <div class="col-span-1" >
-                                <app-guide-channelicon [channel]=channelrow
-                                    [guideComponent]="this"></app-guide-channelicon>
-                            </div>
-                            <div class="col-span-11">
-                                <ng-container *ngFor="let program of channelrow.Programs">
-                                    <ng-container
-                                        *ngIf="!timeChange && inDisplayWindow(program.StartTime, program.EndTime)">
-                                        <app-guide-programentry [program]="program"
-                                            [guideStartTime]="m_programGuide.ProgramGuide.StartTime"
-                                            [guideEndTime]="m_programGuide.ProgramGuide.EndTime" [guideComponent]="this"
-                                            [channel]="channelrow" [runningTime]="runningTime">
-                                        </app-guide-programentry>
+                        <div class="col-span-12" *ngFor="let channelrow of channels;let i = index">
+                            <ng-container *ngIf="( i % 5 ) == 0">
+                                <div class="col-span-12">
+                                    <app-guide-timebar [guide]="this"></app-guide-timebar>
+                                </div>
+                            </ng-container>
+                            <div class="grid grid-cols-12 gap-4 grow">
+                                <div class="col-span-1">
+                                    <app-guide-channelicon [channel]=channelrow
+                                        [guideComponent]="this"></app-guide-channelicon>
+                                </div>
+                                <div class="col-span-11">
+                                    <ng-container *ngFor="let program of channelrow.Programs">
+                                        <ng-container
+                                            *ngIf="!timeChange && inDisplayWindow(program.StartTime, program.EndTime)">
+                                            <app-guide-programentry [program]="program"
+                                                [guideStartTime]="m_programGuide.ProgramGuide.StartTime"
+                                                [guideEndTime]="m_programGuide.ProgramGuide.EndTime"
+                                                [guideComponent]="this" [channel]="channelrow"
+                                                [runningTime]="runningTime">
+                                            </app-guide-programentry>
+                                        </ng-container>
                                     </ng-container>
-                                </ng-container>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     </div>
                 </ng-template>
             </p-dataView>

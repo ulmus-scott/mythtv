@@ -5,10 +5,11 @@
     <h2>{{ 'dashboard.videos.heading' | translate }}</h2>
     <div class="block card w-full" style="height: 90vh">
         <p-menu #menu [popup]="true" [model]="menuToShow"></p-menu>
-        <p-table *ngIf="showTable" #table name="table" [value]="videos" scrollHeight="flex" [scrollable]="true"
-            styleClass="p-datatable-striped p-datatable-sm" [virtualScroll]="true" [rows]="100" [lazy]="true"
-            [totalRecords]="totalRecords" (onLazyLoad)="loadLazy($event)" [rowHover]="true" responsiveLayout="scroll"
-             [sortField]="sortField" [sortOrder]="sortOrder" [scrollable]="true"  (onSort)="onSort($event)">
+        <p-table *ngIf="showTable" #table name="table" [value]="videos" scrollHeight="83vh" [scrollable]="true"
+            [virtualScroll]="true" [rows]="100" [lazy]="true" [totalRecords]="totalRecords"
+            (onLazyLoad)="loadLazy($event)" [rowHover]="true" responsiveLayout="scroll" [sortField]="sortField"
+            [sortOrder]="sortOrder" [scrollable]="true" (onSort)="onSort($event)" [showGridlines]="true"
+            [stripedRows]="true">
             <ng-template pTemplate="caption">
                 <!-- Top Buttons -->
                 <div class="flex items-center">
@@ -23,26 +24,27 @@
                     </span>
                     &nbsp;&nbsp;&nbsp;
                     <p-checkbox inputId="showAllVideos" [(ngModel)]="showAllVideos" name="showAllVideos"
-                        #showAll="ngModel" [binary]="true" (onChange)="showAllChange()"
-                        value="{{ 'dashboard.videos.showall' | translate }} ">
-                    </p-checkbox>
+                        #showAll="ngModel" [binary]="true" (onChange)="showAllChange()" />
+                    <label for="showAllVideos" class="label pl-2 pt-2">{{ 'dashboard.videos.showall' | translate
+                        }}</label>
                     &nbsp;&nbsp;&nbsp;
                     <span class="p-input-icon-right">
-                      <i class="pi pi-times" (click)="resetSearch()" *ngIf="searchValue"></i>
-                      <input type="text" pInputText id="searchValue" [(ngModel)]="searchValue" name="searchValue"
-                        class="text-xl" placeholder="{{ 'common.search_placeholder' | translate }}"
-                        pTooltip="{{ 'dashboard.recordings.regex' | translate }}" tooltipPosition="top"
-                        (keydown)="keydown($event)" />
+                        <i class="pi pi-times" (click)="resetSearch()" *ngIf="searchValue"></i>
+                        <input type="text" pInputText id="searchValue" [(ngModel)]="searchValue" name="searchValue"
+                            class="text-xl" placeholder="{{ 'common.search_placeholder' | translate }}"
+                            pTooltip="{{ 'dashboard.recordings.regex' | translate }}" tooltipPosition="top"
+                            (keydown)="keydown($event)" />
                     </span>
 
                     <button pButton pRipple icon="pi pi-search" class="p-button-text w-8" (click)="onFilter()"
-                      pTooltip="{{ 'dashboard.guide.title_search' | translate }}" tooltipPosition="top"></button>
+                        pTooltip="{{ 'dashboard.guide.title_search' | translate }}" tooltipPosition="top"></button>
 
                     &nbsp;&nbsp;&nbsp; {{ 'dashboard.videos.category' | translate }}: &nbsp;
 
-                 <p-dropdown [(ngModel)]="selectedCategory" [options]="catGroups" name="filter" (onChange)="onFilter()"
-                 placeholder="{{ 'settings.chanedit.all' | translate }}" [showClear]="true" optionLabel="Name" optionValue="Id" class="'px-3">
-                 </p-dropdown>
+                    <p-dropdown [(ngModel)]="selectedCategory" [options]="catGroups" name="filter"
+                        (onChange)="onFilter()" placeholder="{{ 'settings.chanedit.all' | translate }}"
+                        [showClear]="true" optionLabel="Name" optionValue="Id" class="'px-3">
+                    </p-dropdown>
 
                     <div *ngIf="refreshing else refreshBn">
                         <p-progressSpinner [style]="{width: '30px', height: '30px'}"></p-progressSpinner>

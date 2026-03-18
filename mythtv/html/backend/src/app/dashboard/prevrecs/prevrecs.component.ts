@@ -12,20 +12,20 @@ import { ScheduleComponent } from '../../schedule/schedule.component';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { NgIf, NgClass, DecimalPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { CalendarModule } from 'primeng/calendar';
 import { TooltipModule } from 'primeng/tooltip';
 import { RippleModule } from 'primeng/ripple';
 import { ButtonModule } from 'primeng/button';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
+import { DatePickerModule } from 'primeng/datepicker';
 
 @Component({
-    selector: 'app-prevrecs',
-    templateUrl: './prevrecs.component.html',
-    styleUrls: ['./prevrecs.component.css'],
-    providers: [ConfirmationService, MessageService],
-    standalone: true,
-    imports: [ToastModule, ConfirmDialogModule, MenuModule, ButtonModule, RippleModule, TooltipModule, CalendarModule, FormsModule, NgIf, ProgressSpinnerModule, TableModule, SharedModule, NgClass, ScheduleComponent, DecimalPipe, TranslateModule]
+  selector: 'app-prevrecs',
+  templateUrl: './prevrecs.component.html',
+  styleUrls: ['./prevrecs.component.css'],
+  providers: [ConfirmationService, MessageService],
+  standalone: true,
+  imports: [ToastModule, ConfirmDialogModule, MenuModule, ButtonModule, RippleModule, TooltipModule, DatePickerModule, FormsModule, NgIf, ProgressSpinnerModule, TableModule, SharedModule, NgClass, ScheduleComponent, DecimalPipe, TranslateModule]
 })
 
 export class PrevrecsComponent implements OnInit {
@@ -47,10 +47,11 @@ export class PrevrecsComponent implements OnInit {
   inter: ScheduleLink = { summaryComponent: this };
   searchValue = '';
   subSearchValue = '';
-  minDate: Date = new Date();
+  minDate: Date | null = null;
   minSet = false;
   maxDate: Date = new Date();
   dateValue?: Date | null;
+  displayDate = '';
   loadLast = 0;
   sortField = 'StartTime';
   sortOrder = 1;
@@ -98,10 +99,19 @@ export class PrevrecsComponent implements OnInit {
     let sortOrder = this.utility.sortStorage.getItem('prevrecs.sortOrder');
     if (sortOrder)
       this.sortOrder = Number(sortOrder);
-    
     let dateValue = sessionStorage.getItem('prevrecs.dateValue');
-    if (dateValue)
+    if (dateValue) {
       this.dateValue = new Date(dateValue);
+      this.displayDate = this.dateValue.toLocaleDateString(navigator.language, { month: 'short', year: 'numeric' });
+    }
+    else {
+      this.translate.get('dashboard.prevrecs.month_placeholder').subscribe(data =>
+        this.displayDate = data
+      );
+    }
+    let min = sessionStorage.getItem('prevrecs.minDate');
+    if (min)
+      this.minDate = new Date(min);
     let searchValue = sessionStorage.getItem('prevrecs.searchValue');
     if (searchValue)
       this.searchValue = searchValue;
@@ -126,11 +136,11 @@ export class PrevrecsComponent implements OnInit {
 
   reload() {
     if (this.dateValue)
-      sessionStorage.setItem('prevrecs.dateValue',this.dateValue.toISOString());
+      sessionStorage.setItem('prevrecs.dateValue', this.dateValue.toISOString());
     else
       sessionStorage.removeItem('prevrecs.dateValue');
-    sessionStorage.setItem('prevrecs.searchValue',this.searchValue);
-    sessionStorage.setItem('prevrecs.subSearchValue',this.subSearchValue);
+    sessionStorage.setItem('prevrecs.searchValue', this.searchValue);
+    sessionStorage.setItem('prevrecs.subSearchValue', this.subSearchValue);
     location.reload();
   }
 
@@ -141,8 +151,8 @@ export class PrevrecsComponent implements OnInit {
     if (this.lazyLoadEvent!.last! > 15)
       this.loadLazy(this.lazyLoadEvent!, true);
     else
-    // If there are only a few rows do a full reload because the size
-    // may have changed and the loadlazy will not increase the size.
+      // If there are only a few rows do a full reload because the size
+      // may have changed and the loadlazy will not increase the size.
       this.reload();
   }
 
@@ -202,8 +212,9 @@ export class PrevrecsComponent implements OnInit {
         this.totalRecords = data.ProgramList.TotalAvailable;
         this.programs.length = this.totalRecords;
       }
-      if (!this.minSet) {
+      if (!this.minSet && recordings.Programs[0] && !this.dateValue) {
         this.minDate = new Date(recordings.Programs[0].StartTime);
+          sessionStorage.setItem('prevrecs.minDate', this.minDate.toISOString());
         this.minSet = true;
       }
       // populate page of virtual programs

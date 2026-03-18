@@ -5,10 +5,10 @@
     <h2>{{ 'dashboard.upcoming.heading' | translate }}</h2>
     <div class="block card w-full">
         <div style="height: 90vh">
-            <p-table #table *ngIf="showTable" [value]="programs" scrollHeight="flex" [scrollable]="true"
+            <p-table #table *ngIf="showTable" [value]="programs" scrollHeight="83vh" [scrollable]="true"
                 [totalRecords]="totalRecords" styleClass="p-datatable-gridlines p-datatable-sm" [virtualScroll]="true"
                 [rows]="100" [lazy]="true" (onLazyLoad)="loadLazy($event)" [rowHover]="true" [sortField]="sortField"
-                [sortOrder]="sortOrder" (onSort)="onSort($event)">
+                [sortOrder]="sortOrder" (onSort)="onSort($event)" [showGridlines]="true" [stripedRows]="true">
 
                 <ng-template pTemplate="caption">
                     <!-- Top Buttons -->

@@ -16,13 +16,14 @@
                     (click)="showContextMenu(null, $event)" pTooltip="{{ 'common.selected_menu' | translate }}"
                     tooltipPosition="top"></button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <div class="flex items-center  pr-4" style="width:200px">
-                    <p-calendar [(ngModel)]="dateValue" [stepMinute]="30" [dateFormat]="'M yy'"
+                    <p-datePicker [(ngModel)]="dateValue" [dateFormat]="'M yy'"
                         (onClose)="onFilter()"
                         [selectOtherMonths]="true" [showIcon]="true" [showOnFocus]="true" [showButtonBar]="true"
                         [todayButtonStyleClass]="'hidden'" [readonlyInput]="true"
-                        [placeholder]="'dashboard.prevrecs.month_placeholder' | translate" view="month"
+                        [placeholder]="displayDate" view="month"
                         [minDate]="minDate" [maxDate]="maxDate">
-                    </p-calendar>
+                    </p-datePicker>
+                        <!-- [placeholder]="'dashboard.prevrecs.month_placeholder' | translate" view="month" -->
                 </div>
 
                 <span class="p-input-icon-right">
@@ -53,13 +54,13 @@
                 </ng-template>
 
             </div>
-
-            <p-table #table *ngIf="showTable" [value]="programs" scrollHeight="flex" [scrollable]="true"
-                [totalRecords]="totalRecords" styleClass="p-datatable-gridlines p-datatable-sm  p-datatable-striped"
+<!-- styleClass="p-datatable-gridlines p-datatable-sm  p-datatable-striped" -->
+            <p-table #table *ngIf="showTable" [value]="programs" scrollHeight="83vh" [scrollable]="true"
+                [totalRecords]="totalRecords" 
                 [virtualScroll]="true" [rows]="100" [lazy]="true" (onLazyLoad)="loadLazy($event)" [rowHover]="true"
                 [sortField]="sortField" [sortOrder]="sortOrder" selectionMode="multiple" [metaKeySelection]="true"
                 [(selection)]="selection" (onRowSelect)="onSelectChange()" (onRowUnselect)="onSelectChange()"
-                (onSort)="onSort($event)">
+                (onSort)="onSort($event)" [showGridlines]="true" [stripedRows]="true">
 
                 <ng-template pTemplate="header">
                     <tr>
