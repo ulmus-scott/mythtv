@@ -117,39 +117,6 @@ git cherry-pick ..ffmpeg/release/x.y
 git push
 ```
 
-If you want to ensure mpegts-mythtv compiles, instead of
-
-```sh
-git cherry-pick ..ffmpeg/release/x.y
-```
-
-, do
-
-```sh
-git log --reverse -p ..ffmpeg/release/x.y -- libavformat/mpegts.c libavformat/mpegts.h
-```
-
-and cherry-pick until each commit in turn and create a new commit copying the
-changes to `mpegts-mythtv.c` and `mpegts-mythtv.h`.
-
-For each commit:
-
-```sh
-git cherry-pick <commit hash of last commit from FFmpeg>..<commit hash>
-git log -p -- libavformat/mpegts.c libavformat/mpegts.h
-git format-patch HEAD~ -- libavformat/mpegts.c libavformat/mpegts.h
-sed -i "s%libavformat/mpegts%libavformat/mpegts-mythtv%g" *.patch
-git am *.patch
-git log -p
-rm *.patch
-```
-
-and finally:
-
-```sh
-git cherry-pick <commit hash of last commit from FFmpeg>..ffmpeg/release/x.y
-```
-
 ### Step 3: Copying the updated FFmpeg to MythTV
 
 After final compile test of FFmpeg:

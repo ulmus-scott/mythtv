@@ -929,17 +929,6 @@ int AvFormatDecoder::OpenFile(MythMediaBuffer *Buffer, bool novideo,
         return -1;
     }
 
-    if (strcmp(fmt->name, "mpegts") == 0 &&
-        gCoreContext->GetBoolSetting("FFMPEGTS", false))
-    {
-        const AVInputFormat *fmt2 = av_find_input_format("mpegts-ffmpeg");
-        if (fmt2)
-        {
-            fmt = fmt2;
-            LOG(VB_GENERAL, LOG_INFO, LOC + "Using FFmpeg MPEG-TS demuxer (forced)");
-        }
-    }
-
     int err = 0;
     bool scancomplete = false;
     int  remainingscans  = 5;
@@ -994,19 +983,6 @@ int AvFormatDecoder::OpenFile(MythMediaBuffer *Buffer, bool novideo,
                     // resets the read position
                     m_avfRingBuffer->SetInInit(false);
                     continue;
-                }
-
-                if (strcmp(fmt->name, "mpegts") == 0)
-                {
-                    fmt = av_find_input_format("mpegts-ffmpeg");
-                    if (fmt)
-                    {
-                        LOG(VB_GENERAL, LOG_ERR, LOC + "Attempting to use original FFmpeg MPEG-TS demuxer.");
-                        // resets the read position
-                        m_avfRingBuffer->SetInInit(false);
-                        continue;
-                    }
-                    break;
                 }
             }
             found = true;

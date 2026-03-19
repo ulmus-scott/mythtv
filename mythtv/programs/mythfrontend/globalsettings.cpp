@@ -131,20 +131,6 @@ static HostTextEditSetting *VAAPIDevice()
 }
 #endif
 
-static HostCheckBoxSetting *FFmpegDemuxer()
-{
-    auto *gc = new HostCheckBoxSetting("FFMPEGTS");
-
-    gc->setLabel(PlaybackSettings::tr("Use FFmpeg's original MPEG-TS demuxer"));
-
-    gc->setValue(false);
-
-    gc->setHelpText(PlaybackSettings::tr("Experimental: Enable this setting to "
-                                         "use FFmpeg's native demuxer. "
-                                         "Try this when encountering playback issues."));
-    return gc;
-}
-
 static HostComboBoxSetting *DisplayRecGroup()
 {
     auto *gc = new HostComboBoxSetting("DisplayRecGroup");
@@ -4475,8 +4461,6 @@ void PlaybackSettings::Load(void)
     general->addChild(AlwaysShowWatchedProgress());
     general->addChild(ContinueEmbeddedTVPlay());
     general->addChild(LiveTVIdleTimeout());
-
-    general->addChild(FFmpegDemuxer());
 
     general->addChild(new PlayBackScaling());
     general->addChild(StereoDiscard());
