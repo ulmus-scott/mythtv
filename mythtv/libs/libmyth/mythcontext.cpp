@@ -798,7 +798,7 @@ QString MythContext::Impl::TestDBconnection(bool prompt)
 
     // 1 = db awake, 2 = db listening, 3 = db connects,
     // 4 = backend awake, 5 = backend listening
-    // 9 = all ok, 10 = quit
+    // 6 = success
 
     enum  startupStates : std::uint8_t {
         st_start = 0,
@@ -816,7 +816,9 @@ QString MythContext::Impl::TestDBconnection(bool prompt)
     auto secondsStartupScreenDelay = gCoreContext->GetDurSetting<std::chrono::seconds>("StartupScreenDelay", 2s);
     auto msStartupScreenDelay = std::chrono::duration_cast<std::chrono::milliseconds>(secondsStartupScreenDelay);
     DatabaseParams dbParams = GetMythDB()->GetDatabaseParams();
-    do
+    bool keep_trying = true;
+
+    while ((startupState < st_success) && keep_trying)
     {
         QElapsedTimer timer;
         timer.start();
@@ -996,6 +998,8 @@ QString MythContext::Impl::TestDBconnection(bool prompt)
              QString("Start up failure. host %1, status %2")
                   .arg(host, stateMsg));
 
+        if (!m_gui)
+            keep_trying = false;
         if (m_gui && !m_guiStartup)
         {
             ShowGuiStartup();
@@ -1013,9 +1017,10 @@ QString MythContext::Impl::TestDBconnection(bool prompt)
             m_guiStartup->setStatusState(stateMsg);
             m_guiStartup->setMessageState("makeselection");
             m_loop->exec();
+            if (!m_guiStartup->m_Retry)
+                keep_trying = false;
         }
     }
-    while (m_guiStartup && m_guiStartup->m_Retry);
 
     if (startupState < st_dbAwake)
     {
