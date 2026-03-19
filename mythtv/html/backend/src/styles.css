@@ -80,3 +80,7 @@ div.debug3{
   border-style: solid;
   border-color: green;
 }
+
+.form-group {
+    padding-top: 1rem;
+}

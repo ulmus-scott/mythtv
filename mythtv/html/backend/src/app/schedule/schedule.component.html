@@ -10,21 +10,21 @@
             <div class="form-group field" *ngIf="recRule.Type != 'Recording Template'">
                 <label for="Template" class="label block">{{ 'dashboard.sched.template_label' | translate
                     }}</label>
-                <p-dropdown [options]="templates" [(ngModel)]="templateId" [editable]="false" optionLabel="Title"
+                <p-select [options]="templates" [(ngModel)]="templateId" [editable]="false" optionLabel="Title"
                     optionValue="Id" [maxlength]="0" [style]="{'minWidth':'400px'}" name="Template" #Template="ngModel"
                     class="pr-2" (onClick)="templateChange(recRule)" (onChange)="templateChange(recRule)"
                     appendTo="body">
-                </p-dropdown>
+                </p-select>
             </div>
 
             <div class="form-group field">
                 <label for="SearchType" class="label block">{{ 'dashboard.sched.srchtype_label' | translate
                     }}</label>
-                <p-dropdown [options]="srchTypeList" [(ngModel)]="recRule.SearchType" [editable]="false"
+                <p-select [options]="srchTypeList" [(ngModel)]="recRule.SearchType" [editable]="false"
                     optionLabel="prompt" optionValue="value" [maxlength]="0" [style]="{'minWidth':'400px'}"
                     name="SearchType" #SearchType="ngModel" optionDisabled="inactive" [disabled]="srchTypeDisabled"
                     (onChange)="onSearchTypeChange()" appendTo="body">
-                </p-dropdown>
+                </p-select>
             </div>
 
             <div class="form-group field">
@@ -78,10 +78,10 @@
                 <div class="form-group field">
                     <label for="ChanId" class="label block">{{ 'dashboard.sched.channel_label' | translate
                         }}</label>
-                    <p-dropdown [options]="allChannels" [(ngModel)]="channel" [editable]="false"
-                        optionLabel="Description" [maxlength]="0" [style]="{'minWidth':'400px'}" name="Channel"
-                        (onChange)="onChannelChange()" appendTo="body">
-                    </p-dropdown>
+                    <p-select [options]="allChannels" [(ngModel)]="channel" [editable]="false" optionLabel="Description"
+                        [maxlength]="0" [style]="{'minWidth':'400px'}" name="Channel" (onChange)="onChannelChange()"
+                        appendTo="body">
+                    </p-select>
                 </div>
                 <div class="form-group field">
                     <label for="StartTime" class="label block">{{ 'dashboard.sched.starttime_label' | translate
@@ -106,34 +106,35 @@
             <div class="form-group field">
                 <label for="Type" class="label block">{{ 'dashboard.sched.type_label' | translate
                     }}</label>
-                <p-dropdown [options]="typeList" [(ngModel)]="recRule.Type" [editable]="false" optionLabel="prompt"
+                <p-select [options]="typeList" [(ngModel)]="recRule.Type" [editable]="false" optionLabel="prompt"
                     optionValue="value" [maxlength]="0" [style]="{'minWidth':'400px'}" name="Type" #Type="ngModel"
                     [disabled]="schedTypeDisabled" appendTo="body">
-                </p-dropdown>
+                </p-select>
             </div>
 
             <div class="form-group field">
                 <label for="RecGroup" class="label block">{{ 'dashboard.sched.recgroup_label' | translate
                     }}</label>
-                <p-dropdown [options]="recGroups" [(ngModel)]="recRule.RecGroup" [editable]="true" [maxlength]="64"
+                <p-select [options]="recGroups" [(ngModel)]="recRule.RecGroup" [editable]="true" [maxlength]="64"
                     [style]="{'minWidth':'400px'}" name="RecGroup" #RecGroup="ngModel" appendTo="body">
-                </p-dropdown>
+                </p-select>
             </div>
 
             <div class="form-group field">
                 <p-checkbox inputId="Active" [(ngModel)]="recRule.Inactive" name="Active" #Active="ngModel"
-                    class="label mb-2 w-full" [binary]="true" value="{{ 'dashboard.sched.active_label' | translate }}"
-                    [trueValue]="false" [falseValue]="true" [disabled]="override">
-                </p-checkbox>
+                    class="label mb-2 w-full" [binary]="true" [trueValue]="false" [falseValue]="true"
+                    [disabled]="override" />
+                <label for="Active" class="label pl-2">{{ 'dashboard.sched.active_label' | translate
+                    }}</label>
             </div>
 
             <div class="form-group field">
                 <label for="PlayGroup" class="label block">{{ 'dashboard.sched.playgroup_label' | translate
                     }}</label>
-                <p-dropdown [options]="playGroups" [(ngModel)]="recRule.PlayGroup" [editable]="false" [maxlength]="0"
+                <p-select [options]="playGroups" [(ngModel)]="recRule.PlayGroup" [editable]="false" [maxlength]="0"
                     [style]="{'minWidth':'400px'}" PlayGroup="Type" #PlayGroup="ngModel" name="PlayGroup"
                     appendTo="body">
-                </p-dropdown>
+                </p-select>
             </div>
 
             <div class="form-group field">
@@ -152,8 +153,10 @@
 
             <div class="form-group field">
                 <p-checkbox inputId="NewEpisOnly" [(ngModel)]="recRule.NewEpisOnly" name="NewEpisOnly" #UseEIT="ngModel"
-                    class="label mb-2 w-full" [binary]="true" value="{{ 'dashboard.sched.newepis_label' | translate }}">
-                </p-checkbox>
+                    class="label mb-2 w-full" [binary]="true" />
+                <label for="NewEpisOnly" class="label pl-2">{{ 'dashboard.sched.newepis_label' | translate
+                    }}</label>
+
             </div>
 
             <div class="form-group field">
@@ -166,37 +169,37 @@
             <div class="form-group field">
                 <label for="PreferredInput" class="label block">{{ 'dashboard.sched.prefinput_label' | translate
                     }}</label>
-                <p-dropdown [options]="inputList.Inputs" [(ngModel)]="recRule.PreferredInput" [editable]="false"
+                <p-select [options]="inputList.Inputs" [(ngModel)]="recRule.PreferredInput" [editable]="false"
                     optionLabel="DisplayName" optionValue="Id" [maxlength]="0" [style]="{'minWidth':'400px'}"
                     name="PreferredInput" #PreferredInput="ngModel" appendTo="body">
-                </p-dropdown>
+                </p-select>
             </div>
 
             <div class="form-group field">
                 <label for="DupMethod" class="label block">{{ 'dashboard.sched.dupmethod_label' | translate
                     }}</label>
-                <p-dropdown [options]="dupMethodList" [(ngModel)]="recRule.DupMethod" [editable]="false"
+                <p-select [options]="dupMethodList" [(ngModel)]="recRule.DupMethod" [editable]="false"
                     optionLabel="prompt" optionValue="value" [maxlength]="0" [style]="{'minWidth':'400px'}"
                     name="DupMethod" #DupMethod="ngModel" appendTo="body">
-                </p-dropdown>
+                </p-select>
             </div>
 
             <div class="form-group field">
                 <label for="DupIn" class="label block">{{ 'dashboard.sched.dupin_label' | translate
                     }}</label>
-                <p-dropdown [options]="dupInList" [(ngModel)]="recRule.DupIn" [editable]="false" optionLabel="prompt"
+                <p-select [options]="dupInList" [(ngModel)]="recRule.DupIn" [editable]="false" optionLabel="prompt"
                     optionValue="value" [maxlength]="0" [style]="{'minWidth':'400px'}" name="DupIn" #DupIn="ngModel"
                     appendTo="body">
-                </p-dropdown>
+                </p-select>
             </div>
 
             <div class="form-group field">
                 <label for="AutoExtend" class="label block">{{ 'dashboard.sched.autoextend_label' | translate
                     }}</label>
-                <p-dropdown [options]="autoExtendList" [(ngModel)]="recRule.AutoExtend" [editable]="false"
+                <p-select [options]="autoExtendList" [(ngModel)]="recRule.AutoExtend" [editable]="false"
                     optionLabel="prompt" optionValue="value" [maxlength]="0" [style]="{'minWidth':'400px'}"
                     name="AutoExtend" #AutoExtend="ngModel" appendTo="body">
-                </p-dropdown>
+                </p-select>
             </div>
 
             <div class="form-group field">
@@ -210,19 +213,19 @@
             <div class="form-group field">
                 <label for="RecProfile" class="label block">{{ 'dashboard.sched.recprofile_label' | translate
                     }}</label>
-                <p-dropdown [options]="recProfileList" [(ngModel)]="recRule.RecProfile" [editable]="false"
+                <p-select [options]="recProfileList" [(ngModel)]="recRule.RecProfile" [editable]="false"
                     optionLabel="prompt" optionValue="value" [maxlength]="0" [style]="{'minWidth':'400px'}"
                     name="RecProfile" #RecProfile="ngModel" appendTo="body">
-                </p-dropdown>
+                </p-select>
             </div>
 
             <div class="form-group field">
                 <label for="StorageGroup" class="label block">{{ 'dashboard.sched.sgroup_label' | translate
                     }}</label>
-                <p-dropdown [options]="recStorageGroups" [(ngModel)]="recRule.StorageGroup" [editable]="false"
+                <p-select [options]="recStorageGroups" [(ngModel)]="recRule.StorageGroup" [editable]="false"
                     [maxlength]="0" [style]="{'minWidth':'400px'}" name="StorageGroup" #StorageGroup="ngModel"
                     appendTo="body">
-                </p-dropdown>
+                </p-select>
             </div>
 
             <div class="form-group field">
@@ -234,9 +237,9 @@
 
             <div class="form-group field">
                 <p-checkbox inputId="MaxNewest" [(ngModel)]="recRule.MaxNewest" name="MaxNewest" #MaxNewest="ngModel"
-                    class="label mb-2 w-full" [binary]="true"
-                    value="{{ 'dashboard.sched.maxnewest_label' | translate }}">
-                </p-checkbox>
+                    class="label mb-2 w-full" [binary]="true" />
+                <label for="MaxNewest" class="label pl-2">{{ 'dashboard.sched.maxnewest_label' | translate
+                    }}</label>
                 <small class="block">
                     {{ 'dashboard.sched.maxnewest_desc' | translate }}
                 </small>
@@ -244,9 +247,9 @@
 
             <div class="form-group field">
                 <p-checkbox inputId="AutoExpire" [(ngModel)]="recRule.AutoExpire" name="AutoExpire"
-                    #AutoExpire="ngModel" class="label mb-2 w-full" [binary]="true"
-                    value="{{ 'dashboard.sched.autoexpire_label' | translate }}">
-                </p-checkbox>
+                    #AutoExpire="ngModel" class="label mb-2 w-full" [binary]="true"/>
+                <label for="AutoExpire" class="label pl-2">{{ 'dashboard.sched.autoexpire_label' | translate
+                    }}</label>
             </div>
 
             <div class="form-group field">
@@ -311,19 +314,19 @@
                     <p-message *ngIf="errorCount > 0" severity="error"
                         text="{{ 'common.backenderror' | translate }}:  {{errortext}}"></p-message>
                 </div>
-                <p-overlayPanel #overlay>
+                <p-popover #overlay>
                     <p-scrollPanel [style]="{ width: '650px', height: '70vh' }" [step]="100">
                         <div [innerHTML]='fullDetails'></div>
                     </p-scrollPanel>
-                </p-overlayPanel>
+                </p-popover>
                 <p-button icon="pi pi-list" (onClick)="detailsreq($event)" *ngIf="recRule.Type != 'Recording Template'"
-                    label="{{ 'dashboard.sched.fulldetails' | translate }}">
+                    label="{{ 'dashboard.sched.fulldetails' | translate }}" severity="info">
                 </p-button>
                 <p-button icon="pi pi-times-circle" (onClick)="close()" label="{{ 'common.close' | translate }}"
-                    styleClass="p-button-warning">
+                    severity="warn">
                 </p-button>
                 <p-button icon="pi pi-check-circle" (onClick)="save();" label="{{ 'common.save' | translate }}"
-                    styleClass="p-button-success"
+                    severity="success"
                     [disabled]="!schedform.dirty || recRule.Id == 0 && recRule.Type == 'Not Recording' || !recRule.Title || schedTypeDisabled"></p-button>
             </ng-template>
 
@@ -333,10 +336,10 @@
             <p>{{ 'common.unsaved_message' | translate }}</p>
             <ng-template pTemplate="footer">
                 <p-button icon="pi pi-times-circle" (onClick)="close()" label="{{ 'common.nosave' | translate }}"
-                    styleClass="p-button-danger">
+                    severity="danger">
                 </p-button>
                 <p-button icon="pi pi-check-circle" (onClick)="displayUnsaved=false"
-                    label="{{ 'common.continue' | translate }}" styleClass="p-button-success">
+                    label="{{ 'common.continue' | translate }}" severity="success">
                 </p-button>
             </ng-template>
         </p-dialog>

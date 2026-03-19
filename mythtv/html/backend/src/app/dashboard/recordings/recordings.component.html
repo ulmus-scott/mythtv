@@ -61,7 +61,7 @@
             (onRowSelect)="onSelectChange()" (onRowUnselect)="onSelectChange()" [showGridlines]="true"
             [stripedRows]="true" scrollHeight="83vh" [scrollable]="true"
             [sortField]="sortField" [sortOrder]="sortOrder" (onSort)="onSort($event)"
-            (onLazyLoad)="loadLazy($event)" [rows]="100" [lazy]="true" [virtualScroll]="true">
+            (onLazyLoad)="loadLazy($event)" [rows]="100" [lazy]="true" [virtualScroll]="true" size="small">
             <ng-template pTemplate="header">
                 <tr>
                     <!-- Column Headings. -->

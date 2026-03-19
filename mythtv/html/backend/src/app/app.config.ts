@@ -16,8 +16,6 @@ import Aura from '@primeuix/themes/aura';
 
 export const appConfig: ApplicationConfig = {
     providers: [
-        // provideRouter(routes),
-        // provideHttpClient()
         // Other global providers can be added here
         importProvidersFrom(BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule, MenuModule, TranslateModule.forRoot({
             defaultLanguage: 'en_US',

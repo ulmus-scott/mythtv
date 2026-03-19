@@ -11,7 +11,6 @@ import { RecordScheduleRequest } from '../services/interfaces/dvr.interface';
 import { Observable, of } from 'rxjs';
 import { UtilityService } from '../services/utility.service';
 import { ChannelService } from '../services/channel.service';
-import { OverlayPanel, OverlayPanelModule } from 'primeng/overlaypanel';
 import { GuideService } from '../services/guide.service';
 import { ButtonModule } from 'primeng/button';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
@@ -23,9 +22,10 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { CalendarModule } from 'primeng/calendar';
 import { DividerModule } from 'primeng/divider';
-import { DropdownModule } from 'primeng/dropdown';
 import { DialogModule } from 'primeng/dialog';
 import { NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
+import { SelectModule } from 'primeng/select';
+import { Popover, PopoverModule } from 'primeng/popover';
 
 export interface SchedulerSummary {
   refresh(): void;
@@ -55,12 +55,12 @@ interface MyChannel extends Channel {
     templateUrl: './schedule.component.html',
     styleUrls: ['./schedule.component.css'],
     standalone: true,
-    imports: [FormsModule, NgIf, DialogModule, DropdownModule, NgSwitch, NgSwitchCase, NgSwitchDefault, DividerModule, CalendarModule, InputNumberModule, CheckboxModule, MultiSelectModule, RadioButtonModule, SharedModule, MessageModule, OverlayPanelModule, ScrollPanelModule, ButtonModule, TranslateModule]
+    imports: [FormsModule, NgIf, DialogModule, SelectModule, NgSwitch, NgSwitchCase, NgSwitchDefault, DividerModule, CalendarModule, InputNumberModule, CheckboxModule, MultiSelectModule, RadioButtonModule, SharedModule, MessageModule, PopoverModule, ScrollPanelModule, ButtonModule, TranslateModule]
 })
 export class ScheduleComponent implements OnInit {
   @Input() inter!: ScheduleLink;
   @ViewChild("schedform") currentForm!: NgForm;
-  @ViewChild("overlay") overlay!: OverlayPanel;
+  @ViewChild("overlay") overlay!: Popover;
 
   displayDlg = false;
   displayUnsaved = false;

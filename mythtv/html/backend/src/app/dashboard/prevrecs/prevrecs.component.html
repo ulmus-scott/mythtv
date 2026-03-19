@@ -16,14 +16,12 @@
                     (click)="showContextMenu(null, $event)" pTooltip="{{ 'common.selected_menu' | translate }}"
                     tooltipPosition="top"></button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <div class="flex items-center  pr-4" style="width:200px">
-                    <p-datePicker [(ngModel)]="dateValue" [dateFormat]="'M yy'"
-                        (onClose)="onFilter()"
+                    <p-datePicker [(ngModel)]="dateValue" [dateFormat]="'M yy'" (onClose)="onFilter()"
                         [selectOtherMonths]="true" [showIcon]="true" [showOnFocus]="true" [showButtonBar]="true"
-                        [todayButtonStyleClass]="'hidden'" [readonlyInput]="true"
-                        [placeholder]="displayDate" view="month"
-                        [minDate]="minDate" [maxDate]="maxDate">
+                        [todayButtonStyleClass]="'hidden'" [readonlyInput]="true" [placeholder]="displayDate"
+                        view="month" [minDate]="minDate" [maxDate]="maxDate">
                     </p-datePicker>
-                        <!-- [placeholder]="'dashboard.prevrecs.month_placeholder' | translate" view="month" -->
+                    <!-- [placeholder]="'dashboard.prevrecs.month_placeholder' | translate" view="month" -->
                 </div>
 
                 <span class="p-input-icon-right">
@@ -54,13 +52,13 @@
                 </ng-template>
 
             </div>
-<!-- styleClass="p-datatable-gridlines p-datatable-sm  p-datatable-striped" -->
+            <!-- styleClass="p-datatable-gridlines p-datatable-sm  p-datatable-striped" -->
             <p-table #table *ngIf="showTable" [value]="programs" scrollHeight="83vh" [scrollable]="true"
-                [totalRecords]="totalRecords" 
-                [virtualScroll]="true" [rows]="100" [lazy]="true" (onLazyLoad)="loadLazy($event)" [rowHover]="true"
-                [sortField]="sortField" [sortOrder]="sortOrder" selectionMode="multiple" [metaKeySelection]="true"
-                [(selection)]="selection" (onRowSelect)="onSelectChange()" (onRowUnselect)="onSelectChange()"
-                (onSort)="onSort($event)" [showGridlines]="true" [stripedRows]="true">
+                [totalRecords]="totalRecords" [virtualScroll]="true" [rows]="100" [lazy]="true"
+                (onLazyLoad)="loadLazy($event)" [rowHover]="true" [sortField]="sortField" [sortOrder]="sortOrder"
+                selectionMode="multiple" [metaKeySelection]="true" [(selection)]="selection"
+                (onRowSelect)="onSelectChange()" (onRowUnselect)="onSelectChange()" (onSort)="onSort($event)"
+                [showGridlines]="true" [stripedRows]="true" size="small">
 
                 <ng-template pTemplate="header">
                     <tr>
@@ -70,19 +68,23 @@
                         </th>
                         <th style="width: 7%" class="justify-end p-1">
                             {{ 'dashboard.upcoming.time' | translate }} </th>
-                        <th style="width: 7%" class="justify-end pl-1 pr-4 pt-1 pb-1"  pSortableColumn="Duration">
+                        <th style="width: 7%" class="justify-end pl-1 pr-4 pt-1 pb-1" pSortableColumn="Duration">
                             {{ 'dashboard.upcoming.length' | translate }}<p-sortIcon field="Duration"></p-sortIcon></th>
                         <th style="width: 15%" class="p-1" pSortableColumn="Title">
                             {{ 'dashboard.recordings.title' | translate }}<p-sortIcon field="Title"></p-sortIcon>
                         </th>
                         <th style="width: 17%" class="p-1" pSortableColumn="Subtitle">
-                            {{ 'dashboard.recordings.subtitle' | translate }}<p-sortIcon field="Subtitle"></p-sortIcon></th>
+                            {{ 'dashboard.recordings.subtitle' | translate }}<p-sortIcon field="Subtitle"></p-sortIcon>
+                        </th>
                         <th style="width: 6%" class="p-1" pSortableColumn="season,episode">
-                            {{ 'dashboard.recordings.seas_ep' | translate }}<p-sortIcon field="season,episode"></p-sortIcon></th>
+                            {{ 'dashboard.recordings.seas_ep' | translate }}<p-sortIcon
+                                field="season,episode"></p-sortIcon></th>
                         <th style="width: 9%" class="p-1" pSortableColumn="ChanNum">
-                            {{ 'dashboard.recordings.channel' | translate }}<p-sortIcon field="ChanNum"></p-sortIcon></th>
+                            {{ 'dashboard.recordings.channel' | translate }}<p-sortIcon field="ChanNum"></p-sortIcon>
+                        </th>
                         <th style="width: 12%" class="p-1" pSortableColumn="recstatus">
-                            {{ 'dashboard.upcoming.status' | translate }}<p-sortIcon field="recstatus"></p-sortIcon></th>
+                            {{ 'dashboard.upcoming.status' | translate }}<p-sortIcon field="recstatus"></p-sortIcon>
+                        </th>
                         <th style="width: 5%; white-space: nowrap; background: var(--surface-card);" class="p-1">
                             <button pButton pRipple icon="pi pi-ellipsis-v" class="p-button-text p-button-primary"
                                 [disabled]="true"></button>

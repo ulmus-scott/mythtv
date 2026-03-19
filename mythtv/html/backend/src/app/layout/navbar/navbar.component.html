@@ -13,9 +13,9 @@
                 <h1 class="text-3xl font-bold self-center">{{ 'navbar.mainheading' | translate }}</h1>
             </div>
         </div>
-        <div class="toolbar flex grow items-end" style="height: 80px;">
-            <button pButton pRipple icon="pi pi-angle-up" class="p-button-text lg:col-start-4 p-button-secondary"
-                (click)="showTopBar=false" pTooltip="{{ 'navbar.hide' | translate }}"></button>
+        <div class="toolbar text-center flex items-end" style="height: 80px;">
+            <p-button icon="pi pi-angle-up" variant="text" severity="secondary" (click)="showTopBar=false"
+                pTooltip="{{ 'navbar.hide' | translate }}" />
         </div>
         <div class="pr-2 toolbar" style="height: 80px;">
             <a pRipple style="height: 80px;" class="toolbar p-ripple p-element my-2 mx-2 flex align-items-center cursor-pointer p-3 md:hidden md:justify-content-center
@@ -26,19 +26,19 @@
             </a>
             <ul class="toolbar list-none p-0 m-0 md:flex md:align-items-center select-none md:flex-row surface-section border-1
              md:border-none surface-border right-0 top-100 z-2 shadow-2 md:shadow-none absolute md:static"
-                [hidden]="m_showNavbar">
+                [hidden]="m_showNavbar" style="height: 80px;" >
                 <li class="toolbar" style="height: 80px;">
-                    <div class="text-primary mt-8 font-light">
+                    <div class="text-primary mt-6 font-light">
                         {{ dataService.loggedInUser }} &nbsp;&nbsp;&nbsp;
                     </div>
                 </li>
-                <li *ngIf="!dataService.loggedInUser" class="toolbar" style="height: 80px;">
-                    <button pButton label="{{ 'navbar.login' | translate }}" class="p-button-text p-button-primary mt-6"
-                        (click)="showLogin();"></button>
+                <li *ngIf="!dataService.loggedInUser" class="toolbar" style="height: 80px;" class="mt-4">
+                    <p-button label="{{ 'navbar.login' | translate }}" variant="text" severity="primary"
+                        (click)="showLogin();" />
                 </li>
-                <li *ngIf="dataService.loggedInUser" class="toolbar" style="height: 80px;">
-                    <button pButton label="{{ 'navbar.logout' | translate }}"
-                        class="p-button-text p-button-primary mt-6" (click)="logout()"></button>
+                <li *ngIf="dataService.loggedInUser" class="toolbar" style="height: 80px;" class="mt-4">
+                    <p-button label="{{ 'navbar.logout' | translate }}" variant="text" severity="primary"
+                        (click)="logout()" />
                 </li>
 
                 <li class="toolbar" style="height: 80px;">
@@ -73,32 +73,32 @@
 
     <ng-template #hidden>
         <div class="toolbar flex grow justify-center items-end " style="height: 2rem;">
-            <button pButton pRipple icon="pi pi-angle-down" class="p-button-text p-button-secondary"
-                (click)="showTopBar=true" pTooltip="{{ 'navbar.show' | translate }}"></button>
+            <p-button icon="pi pi-angle-down" variant="text" severity="secondary" (click)="showTopBar=true"
+                pTooltip="{{ 'navbar.show' | translate }}" />
         </div>
     </ng-template>
 
 </div>
 
 <p-popover #themePanel [style]="{width: '350px'}">
-        <p-table [value]="m_themes$" selectionMode="single" [paginator]="false" sortField="Name" sortMode="single"
-            [scrollable]="true" scrollHeight="500px" rowGroupMode="subheader" groupRowsBy="Category"
-            responsiveLayout="scroll">
-            <ng-template pTemplate="groupheader" let-theme>
-                <tr pRowGroupHeader>
-                    <td colspan="2">
-                        <span class="font-bold ml-2">{{theme.Category}}</span>
-                    </td>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-rowData let-theme>
-                <tr [pSelectableRow]="rowData" (click)="changeTheme(theme)">
-                    <td style="max-width:80px"><img src="images/themes/{{theme.Image}}" [alt]="theme.image"
-                            class="theme-image" /></td>
-                    <td>{{theme.Name}}</td>
-                </tr>
-            </ng-template>
-        </p-table>
+    <p-table [value]="m_themes$" selectionMode="single" [paginator]="false" sortField="Name" sortMode="single"
+        [scrollable]="true" scrollHeight="500px" rowGroupMode="subheader" groupRowsBy="Category"
+        responsiveLayout="scroll">
+        <ng-template pTemplate="groupheader" let-theme>
+            <tr pRowGroupHeader>
+                <td colspan="2">
+                    <span class="font-bold ml-2">{{theme.Category}}</span>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-theme>
+            <tr [pSelectableRow]="rowData" (click)="changeTheme(theme)">
+                <td style="max-width:80px"><img src="images/themes/{{theme.Image}}" [alt]="theme.image"
+                        class="theme-image" /></td>
+                <td>{{theme.Name}}</td>
+            </tr>
+        </ng-template>
+    </p-table>
 </p-popover>
 
 <p-popover #languagePanel [style]="{width: '450px'}">
@@ -152,10 +152,10 @@
                 </div>
                 <span class="grow">&nbsp;</span>
                 <p-button *ngIf="!APIAuthReqd" icon="pi pi-times-circle" (click)="closeLogin()"
-                    label="{{ 'common.cancel' | translate }}" styleClass="p-button-plain" class="px-2">
+                    label="{{ 'common.cancel' | translate }}" severity="warn" class="px-2">
                 </p-button>
                 <p-button icon="pi pi-check-circle" (click)="login()" label="{{ 'common.ok' | translate }}"
-                    styleClass="p-button-plain" [disabled]="!userName || !userPassword" class="px-2"></p-button>
+                    severity="success" [disabled]="!userName || !userPassword" class="px-2"></p-button>
             </div>
         </ng-template>
     </p-dialog>

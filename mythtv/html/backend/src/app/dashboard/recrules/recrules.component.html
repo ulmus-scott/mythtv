@@ -2,8 +2,8 @@
 <div class="block card w-full" style="height: 90vh; min-width: 960px;" *ngIf="rulesLoaded else loading">
     <p-table [value]="recRules" scrollHeight="flex" [scrollable]="true" styleClass="p-datatable-striped p-datatable-sm"
         [rowHover]="true" responsiveLayout="scroll" [sortField]="sortField" [sortOrder]="sortOrder"
-        (onSort)="onSort($event)"  [showGridlines]="true" [stripedRows]="true" >
-        <ng-template pTemplate="caption">
+        (onSort)="onSort($event)" [showGridlines]="true" [stripedRows]="true">
+        <ng-template pTemplate="caption" size="small">
             <!-- Buttons at top -->
             <button pButton pRipple label="{{ 'dashboard.recrules.new_recrule' | translate }}" icon="pi pi-plus"
                 class="p-button-success mr-2" (click)="newRecRule()"></button>
@@ -42,30 +42,31 @@
         </ng-template>
         <ng-template pTemplate="body" let-recrule>
             <tr>
-                <td  class="p-1 overflow-hidden">
+                <td class="p-1 overflow-hidden">
                     {{recrule.Title}}</td>
-                <td  class="p-1">
+                <td class="p-1">
                     {{ utility.recTypeTrans[recrule.Type]}}</td>
-                <td  class="p-1">{{recrule.RecPriority}}</td>
-                <td  class="p-1">{{recrule.RecGroup}}</td>
-                <td  class="p-1">{{recrule.StorageGroup}}</td>
-                <td  class="justify-end p-1 pr-8">
+                <td class="p-1">{{recrule.RecPriority}}</td>
+                <td class="p-1">{{recrule.RecGroup}}</td>
+                <td class="p-1">{{recrule.StorageGroup}}</td>
+                <td class="justify-end p-1 pr-8">
                     {{utility.formatDate(recrule.LastRecorded)}}</td>
-                <td  class="justify-end p-1 pr-8">
+                <td class="justify-end p-1 pr-8">
                     {{utility.formatDate(recrule.NextRecording)}} {{utility.formatTime(recrule.NextRecording)}}</td>
-                <td  class="pt-1 pb-0">
+                <td class="pt-1 pb-0">
                     <i class="pi pi-times text-pink-500" *ngIf="recrule.Inactive else checkmark"></i>
                     <ng-template #checkmark>
                         <i class="pi pi-check text-green-500"></i>
                     </ng-template>
                 </td>
-                <td  class="pt-1 pb-0"  style="white-space: nowrap;">
+                <td class="pt-1 pb-0" style="white-space: nowrap;">
                     <button pButton pRipple icon="pi pi-pencil" class="p-button-text p-button-primary"
                         (click)="updateRecRule(recrule)" pTooltip="{{ 'dashboard.recordings.edit_rule' | translate }}"
                         tooltipPosition="left"></button>
                     <button pButton pRipple icon="pi pi-trash" class="p-button-text p-button-danger"
                         (click)="deleteRequest(recrule)" pTooltip="{{ 'dashboard.recordings.delete_rule' | translate }}"
-                        tooltipPosition="left" [disabled]="recrule.Type == 'Recording Template' && recrule.Category == 'Default'"></button>
+                        tooltipPosition="left"
+                        [disabled]="recrule.Type == 'Recording Template' && recrule.Category == 'Default'"></button>
 
                 </td>
             </tr>

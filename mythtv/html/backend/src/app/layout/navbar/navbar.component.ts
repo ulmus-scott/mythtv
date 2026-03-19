@@ -20,6 +20,7 @@ import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { NgIf } from '@angular/common';
 import { PopoverModule } from 'primeng/popover';
+import { usePreset } from '@primeuix/themes';
 
 @Component({
     selector: 'app-navbar',
@@ -54,11 +55,11 @@ export class NavbarComponent implements OnInit {
         public dataService: DataService,
         private mythService: MythService,
         private router: Router) {
-        this.themeService.getThemes().then((themes: Theme[]) => {
-            this.m_themes$ = themes;
-            this.m_selectedTheme = this.findThemeByName(localStorage.getItem('Theme') || 'Blue Light');
-            this.themeService.switchTheme(this.m_selectedTheme.CSS);
-        });
+        // this.themeService.getThemes().then((themes: Theme[]) => {
+        //     this.m_themes$ = themes;
+        //     this.m_selectedTheme = this.findThemeByName(localStorage.getItem('Theme') || 'Blue Light');
+        //     this.themeService.switchTheme(this.m_selectedTheme.CSS);
+        // });
 
         this.configService.GetLanguages().subscribe((data: MythLanguageList) => {
             this.m_languages = data.LanguageList.Languages;

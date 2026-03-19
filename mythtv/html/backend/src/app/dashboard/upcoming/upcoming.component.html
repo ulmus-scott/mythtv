@@ -8,15 +8,16 @@
             <p-table #table *ngIf="showTable" [value]="programs" scrollHeight="83vh" [scrollable]="true"
                 [totalRecords]="totalRecords" styleClass="p-datatable-gridlines p-datatable-sm" [virtualScroll]="true"
                 [rows]="100" [lazy]="true" (onLazyLoad)="loadLazy($event)" [rowHover]="true" [sortField]="sortField"
-                [sortOrder]="sortOrder" (onSort)="onSort($event)" [showGridlines]="true" [stripedRows]="true">
+                [sortOrder]="sortOrder" (onSort)="onSort($event)" [showGridlines]="true" [stripedRows]="true"
+                size="small">
 
                 <ng-template pTemplate="caption">
                     <!-- Top Buttons -->
                     <div class="flex items-center">
 
                         {{ 'dashboard.upcoming.status' | translate }}: &nbsp;
-                        <p-select [(ngModel)]="selectedStatus" [options]="dataService.recStatusList"
-                            optionLabel="Name" optionValue="Status" name="Statusfilter" (onChange)="onFilter()"
+                        <p-select [(ngModel)]="selectedStatus" [options]="dataService.recStatusList" optionLabel="Name"
+                            optionValue="Status" name="Statusfilter" (onChange)="onFilter()"
                             placeholder="{{ 'data.recstatus.Default' | translate }}" [showClear]="true" class="'px-3">
                         </p-select>
 
