@@ -2,8 +2,8 @@
     <p-table [value]="playGroups" scrollHeight="flex" [scrollable]="true" sortField="Name"
         styleClass="p-datatable-sm p-datatable-striped" [rowHover]="true" responsiveLayout="scroll">
         <ng-template pTemplate="caption">
-            <button pButton pRipple label="{{ 'dashboard.playgroup.new' | translate }}" icon="pi pi-plus"
-                class="p-button-success mr-2" (click)="openNew()"></button>
+            <p-button label="{{ 'dashboard.playgroup.new' | translate }}" icon="pi pi-plus"
+                class="mr-2" severity="success" (click)="openNew()"/>
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
@@ -108,10 +108,10 @@
                     text="{{ 'common.networkfail' | translate }}"></p-message>
             </div>
             <p-button icon="pi pi-times-circle" (onClick)="closeDialog()" label="{{ 'common.close' | translate }}"
-                styleClass="p-button-warning">
+                severity="warn">
             </p-button>
             <p-button icon="pi pi-save" (onClick)="saveGroup();" label="{{ 'common.save' | translate }}"
-                styleClass="p-button-success" [disabled]="!groupform.dirty || group.Name.trim() == '' || (operation == 1 && groupNames.includes( group.Name.trim()) )"></p-button>
+                severity="success" [disabled]="!groupform.dirty || group.Name.trim() == '' || (operation == 1 && groupNames.includes( group.Name.trim()) )"></p-button>
         </ng-template>
     </p-dialog>
 
@@ -119,10 +119,10 @@
         <p>{{ 'common.unsaved_message' | translate }}</p>
         <ng-template pTemplate="footer">
             <p-button icon="pi pi-times-circle" (onClick)="closeDialog()" label="{{ 'common.nosave' | translate }}"
-                styleClass="p-button-danger">
+                severity="danger">
             </p-button>
             <p-button icon="pi pi-check-circle" (onClick)="displayUnsaved=false"
-                label="{{ 'common.continue' | translate }}" styleClass="p-button-success">
+                label="{{ 'common.continue' | translate }}" severity="success">
             </p-button>
         </ng-template>
     </p-dialog>
@@ -138,10 +138,10 @@
                     text="{{ 'common.networkfail' | translate }}"></p-message>
             </div>
             <p-button icon="pi pi-times-circle" (onClick)="displayDelete=false; groupform.form.markAsPristine();"
-                label="{{ 'common.close' | translate }}" styleClass="p-button-warning">
+                label="{{ 'common.close' | translate }}" severity="warn">
             </p-button>
             <p-button icon="pi pi-check-circle" (onClick)="deleteGroup(group)" label="{{ 'common.delete' | translate }}"
-                styleClass="p-button-danger"></p-button>
+                severity="danger"></p-button>
         </ng-template>
     </p-dialog>
 

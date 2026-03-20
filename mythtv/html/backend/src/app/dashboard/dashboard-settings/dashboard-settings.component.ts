@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
@@ -15,7 +15,7 @@ import { RecQualityComponent } from './rec-quality/rec-quality.component';
 import { JobsComponent } from './jobs/jobs.component';
 import { AutoExpireComponent } from './auto-expire/auto-expire.component';
 import { SharedModule } from 'primeng/api';
-import { AccordionModule } from 'primeng/accordion';
+import { Accordion, AccordionModule } from 'primeng/accordion';
 import { CardModule } from 'primeng/card';
 
 @Component({
@@ -26,75 +26,94 @@ import { CardModule } from 'primeng/card';
     imports: [CardModule, AccordionModule, SharedModule, AutoExpireComponent, JobsComponent, RecQualityComponent, RecPrioritiesComponent, CustomPrioritiesComponent, ChannelGroupsComponent, PlaybackGroupsComponent, DataSourcesComponent, UsersComponent, TranslateModule]
 })
 export class DashboardSettingsComponent implements OnInit, CanComponentDeactivate {
+    // @ViewChild("accordion") accordion!: Accordion;
+    m_showHelp: boolean = false;
+    currentTab: number = -1;
+    // This allows for up to 16 tabs
+    dirtyMessages: string[] = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];
+    // forms: any[] = [, , , , , , , , , , , , , , , ,];
+    dirtyText = 'settings.common.unsaved';
+    warningText = 'settings.common.warning';
+    children: any[] = [, , , , , , , , , , , , , , , ,];
 
-  m_showHelp: boolean = false;
-  currentTab: number = -1;
-  // This allows for up to 16 tabs
-  dirtyMessages: string[] = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];
-  forms: any[] = [, , , , , , , , , , , , , , , ,];
-  dirtyText = 'settings.common.unsaved';
-  warningText = 'settings.common.warning';
+    constructor(private setupService: SetupService, private translate: TranslateService, public router: Router,
+        private cdRef: ChangeDetectorRef) {
+        this.setupService.setCurrentForm(null);
+        translate.get(this.dirtyText).subscribe(data => this.dirtyText = data);
+        translate.get(this.warningText).subscribe(data => this.warningText = data);
+    }
 
-  constructor(private setupService: SetupService, private translate: TranslateService, public router: Router) {
-      this.setupService.setCurrentForm(null);
-      translate.get(this.dirtyText).subscribe(data => this.dirtyText = data);
-      translate.get(this.warningText).subscribe(data => this.warningText = data);
-  }
+    ngOnInit(): void {
+    }
 
-  ngOnInit(): void {
-  }
+    onTabOpen(e: { index: number }) {
 
-  onTabOpen(e: { index: number }) {
-      this.showDirty();
-      if (typeof this.forms[e.index] == 'undefined')
-          this.forms[e.index] = this.setupService.getCurrentForm();
-      this.currentTab = e.index;
-      // This line removes "Unsaved Changes" from current tab header.
-      this.dirtyMessages[this.currentTab] = "";
-      // This line supports showing "Unsaved Changes" on current tab header,
-      // and you must comment the above line,
-      // but the "Unsaved Changes" text does not go away after save, so it
-      // is no good until we solve that problem.
-      // (<NgForm>this.forms[e.index]).valueChanges!.subscribe(() => this.showDirty())
-  }
+        this.showDirty();
+        // if (typeof this.forms[e.index] == 'undefined')
+        //     this.forms[e.index] = this.setupService.getCurrentForm();
+        this.currentTab = e.index;
+        // This line removes "Unsaved Changes" from current tab header.
+        this.dirtyMessages[this.currentTab] = "";
+        // This line supports showing "Unsaved Changes" on current tab header,
+        // and you must comment the above line,
+        // but the "Unsaved Changes" text does not go away after save, so it
+        // is no good until we solve that problem.
+        // (<NgForm>this.forms[e.index]).valueChanges!.subscribe(() => this.showDirty())
+    }
 
-  onTabClose(e: any) {
-      this.showDirty();
-  }
+    // Temporary until onTabOpen and onTabClose are fixed
+    onClick(e: { index: number }) {
+        this.showDirty();
+    }
 
-  showDirty() {
-      if (this.currentTab == -1)
-          return;
-      if ((<NgForm>this.forms[this.currentTab]).dirty)
-          this.dirtyMessages[this.currentTab] = this.dirtyText;
-      else
-          this.dirtyMessages[this.currentTab] = "";
-  }
+    onTabClose(e: any) {
+        this.showDirty();
+        this.currentTab = -1;
+    }
 
-  showHelp() {
-      this.m_showHelp = true;
-  }
+    showDirty() {
+        setTimeout(() => {
+            for (let ix = 0 ; ix < this.dirtyMessages.length; ix++) {
+                if (this.children[ix]) {
+                    if (this.children[ix].dirty())
+                        this.dirtyMessages[ix] = this.dirtyText;
+                    else
+                        this.dirtyMessages[ix] = '';
+                }
+            }
+            // if (this.currentTab == -1)
+            //     return;
+            // if (this.children[this.currentTab].dirty())
+            //     this.dirtyMessages[this.currentTab] = this.dirtyText;
+            // else
+            //     this.dirtyMessages[this.currentTab] = "";
+        }, 200);
+    }
 
-  confirm(message?: string): Observable<boolean> {
-      const confirmation = window.confirm(message);
-      return of(confirmation);
-  };
+    showHelp() {
+        this.m_showHelp = true;
+    }
 
-  canDeactivate(): Observable<boolean> | boolean {
-      if (this.forms[this.currentTab] && (<NgForm>this.forms[this.currentTab]).dirty
-          || this.dirtyMessages.find(element => element.length > 0)) {
-          return this.confirm(this.warningText);
-      }
-      return true;
-  }
+    confirm(message?: string): Observable<boolean> {
+        const confirmation = window.confirm(message);
+        return of(confirmation);
+    };
 
-  @HostListener('window:beforeunload', ['$event'])
-  onWindowClose(event: any): void {
-      if (this.forms[this.currentTab] && (<NgForm>this.forms[this.currentTab]).dirty
-          || this.dirtyMessages.find(element => element.length > 0)) {
-          event.preventDefault();
-          event.returnValue = false;
-      }
-  }
+    canDeactivate(): Observable<boolean> | boolean {
+        if (this.children[this.currentTab] && (this.children[this.currentTab]).dirty()
+            || this.dirtyMessages.find(element => element.length > 0)) {
+            return this.confirm(this.warningText);
+        }
+        return true;
+    }
+
+    @HostListener('window:beforeunload', ['$event'])
+    onWindowClose(event: any): void {
+        if (this.children[this.currentTab] && (this.children[this.currentTab]).dirty()
+            || this.dirtyMessages.find(element => element.length > 0)) {
+            event.preventDefault();
+            event.returnValue = false;
+        }
+    }
 
 }

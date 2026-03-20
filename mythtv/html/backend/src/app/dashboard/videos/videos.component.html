@@ -14,12 +14,12 @@
                 <!-- Top Buttons -->
                 <div class="flex items-center">
                     <p-button (onClick)="breadCrumb(0)" label="{{ 'dashboard.videos.heading' | translate }}" class="p-1"
-                        styleClass="p-button-primary">
+                        severity="info">
                     </p-button>
 
                     <span *ngFor="let dir of directory; index as ix">
                         <p-button (onClick)="breadCrumb(ix+1)" label="{{ dir }}" class="px-1"
-                            styleClass="p-button-primary">
+                            severity="info">
                         </p-button>
                     </span>
                     &nbsp;&nbsp;&nbsp;
@@ -208,10 +208,10 @@
                         text="{{ 'common.networkfail' | translate }}"></p-message>
                 </div>
                 <p-button icon="pi pi-times-circle" (onClick)="closeDialog()" label="{{ 'common.close' | translate }}"
-                    styleClass="p-button-warning">
+                    severity="warn">
                 </p-button>
                 <p-button icon="pi pi-check-circle" (onClick)="saveVideo();" label="{{ 'common.save' | translate }}"
-                    styleClass="p-button-success" [disabled]="!vidsform.dirty || video.Title.trim() == '' "></p-button>
+                    severity="success" [disabled]="!vidsform.dirty || video.Title.trim() == '' "></p-button>
             </ng-template>
 
         </p-dialog>
@@ -220,10 +220,10 @@
             <p>{{ 'common.unsaved_message' | translate }}</p>
             <ng-template pTemplate="footer">
                 <p-button icon="pi pi-times-circle" (onClick)="closeDialog()" label="{{ 'common.nosave' | translate }}"
-                    styleClass="p-button-danger">
+                    severity="danger">
                 </p-button>
                 <p-button icon="pi pi-check-circle" (onClick)="displayUnsaved=false"
-                    label="{{ 'common.continue' | translate }}" styleClass="p-button-success">
+                    label="{{ 'common.continue' | translate }}" severity="success">
                 </p-button>
             </ng-template>
         </p-dialog>

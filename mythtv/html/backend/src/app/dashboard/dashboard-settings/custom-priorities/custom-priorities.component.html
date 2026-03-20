@@ -2,8 +2,8 @@
     <p-table [value]="rules" scrollHeight="flex" [scrollable]="true" sortField="Name"
         styleClass="p-datatable-sm p-datatable-striped" [rowHover]="true" responsiveLayout="scroll">
         <ng-template pTemplate="caption">
-            <button pButton pRipple label="{{ 'dashboard.custom.new' | translate }}" icon="pi pi-plus"
-                class="p-button-success mr-2" (click)="openNew()"></button>
+            <p-button pRipple label="{{ 'dashboard.custom.new' | translate }}" icon="pi pi-plus"
+                class="mr-2" (click)="openNew()" severity="success"/>
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
@@ -79,13 +79,13 @@
                     text="{{ 'common.networkfail' | translate }}"></p-message>
             </div>
             <p-button icon="pi pi-times-circle" (onClick)="closeDialog()" label="{{ 'common.close' | translate }}"
-                styleClass="p-button-warning">
+                severity="warn">
             </p-button>
             <p-button icon="pi pi-check-circle" (onClick)="validate(rule.SelectClause);"
-                label="{{ 'dashboard.custom.validate_label' | translate }}" styleClass="p-button-info"
+                label="{{ 'dashboard.custom.validate_label' | translate }}" severity="info"
                 [disabled]="rule.SelectClause.trim() == '' "></p-button>
             <p-button icon="pi pi-save" (onClick)="saveRule();" label="{{ 'common.save' | translate }}"
-                styleClass="p-button-success"
+                severity="success"
                 [disabled]="!customform.dirty || rule.PriorityName.trim() == '' || rule.SelectClause.trim() == '' "></p-button>
         </ng-template>
     </p-dialog>

@@ -14,9 +14,9 @@
 
         <!-- Menu, Refresh button and number of rows. -->
         <div class="flex items-center p-1 font-bold">
-            <button pButton pRipple icon="pi pi-bars" class="p-button-text .p-button-success"
+            <button pButton pRipple icon="pi pi-bars" class="p-button-text"
                 (click)="showContextMenu(null, $event)" pTooltip="{{ 'common.selected_menu' | translate }}"
-                tooltipPosition="top"></button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                tooltipPosition="top" severity="info"></button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
             <span class="p-input-icon-right">
                 <i class="pi pi-times" (click)="resetSearch()" *ngIf="searchValue"></i>
@@ -27,7 +27,7 @@
             </span>
 
             <button pButton pRipple icon="pi pi-search" class="p-button-text w-8" (click)="onFilter()"
-                pTooltip="{{ 'dashboard.guide.title_search' | translate }}" tooltipPosition="top"></button>
+                pTooltip="{{ 'dashboard.guide.title_search' | translate }}" tooltipPosition="top" severity="info"></button>
 
             &nbsp;&nbsp;&nbsp; {{ 'dashboard.recordings.recgrp' | translate }}: &nbsp;
 
@@ -35,9 +35,9 @@
                 placeholder="{{ 'settings.chanedit.all' | translate }}" [showClear]="true" class="'px-3">
             </p-select>
 
-            <button pButton pRipple icon="pi pi-refresh" class="p-button-text .p-button-success"
+            <button pButton pRipple icon="pi pi-refresh" class="p-button-text"
                 (click)="refreshing=true;refresh()" pTooltip="{{ 'common.refresh' | translate }}"
-                tooltipPosition="top"></button>
+                tooltipPosition="top" severity="info"></button>
             &nbsp;&nbsp;&nbsp;{{ programs.length }} {{ 'common.rows' | translate }}
         </div>
 
@@ -264,10 +264,10 @@
                         text="{{ 'common.networkfail' | translate }}"></p-message>
                 </div>
                 <p-button icon="pi pi-times-circle" (onClick)="closeDialog()" label="{{ 'common.close' | translate }}"
-                    styleClass="p-button-warning">
+                    severity="warn">
                 </p-button>
                 <p-button icon="pi pi-check-circle" (onClick)="saveProgram();" label="{{ 'common.save' | translate }}"
-                    styleClass="p-button-success"
+                    severity="success"
                     [disabled]="!recsform.dirty || program.Title.trim() == '' "></p-button>
             </ng-template>
         </p-dialog>
@@ -285,10 +285,10 @@
             </p-listbox>
             <ng-template pTemplate="footer">
                 <p-button icon="pi pi-times-circle" (onClick)="displayRecGrpDlg=false"
-                    label="{{ 'common.cancel' | translate }}" styleClass="p-button-plain">
+                    label="{{ 'common.cancel' | translate }}" severity="warn">
                 </p-button>
                 <p-button icon="pi pi-check-circle" (onClick)="updaterecgrp()" label="{{ 'common.ok' | translate }}"
-                    styleClass="p-button-plain" [disabled]="!newRecGroup.trim()">
+                    severity="success" [disabled]="!newRecGroup.trim()">
                 </p-button>
             </ng-template>
         </p-dialog>
@@ -298,10 +298,10 @@
             <p>{{ 'common.unsaved_message' | translate }}</p>
             <ng-template pTemplate="footer">
                 <p-button icon="pi pi-times-circle" (onClick)="closeDialog()" label="{{ 'common.nosave' | translate }}"
-                    styleClass="p-button-danger">
+                    severity="danger">
                 </p-button>
                 <p-button icon="pi pi-check-circle" (onClick)="displayUnsaved=false"
-                    label="{{ 'common.continue' | translate }}" styleClass="p-button-success">
+                    label="{{ 'common.continue' | translate }}" severity="success">
                 </p-button>
             </ng-template>
         </p-dialog>

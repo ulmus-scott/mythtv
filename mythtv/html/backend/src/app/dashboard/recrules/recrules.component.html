@@ -2,8 +2,8 @@
 <div class="block card w-full" style="height: 90vh; min-width: 960px;" *ngIf="rulesLoaded else loading">
     <p-table [value]="recRules" scrollHeight="flex" [scrollable]="true" styleClass="p-datatable-striped p-datatable-sm"
         [rowHover]="true" responsiveLayout="scroll" [sortField]="sortField" [sortOrder]="sortOrder"
-        (onSort)="onSort($event)" [showGridlines]="true" [stripedRows]="true">
-        <ng-template pTemplate="caption" size="small">
+        (onSort)="onSort($event)" [showGridlines]="true" [stripedRows]="true" size="small">
+        <ng-template pTemplate="caption" >
             <!-- Buttons at top -->
             <button pButton pRipple label="{{ 'dashboard.recrules.new_recrule' | translate }}" icon="pi pi-plus"
                 class="p-button-success mr-2" (click)="newRecRule()"></button>
