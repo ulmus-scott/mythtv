@@ -295,7 +295,7 @@ void LiveTVChain::GetEntryAt(int at, LiveTVChainEntry &entry) const
     }
 }
 
-ProgramInfo *LiveTVChain::EntryToProgram(const LiveTVChainEntry &entry)
+ProgramInfo *LiveTVChain::EntryToProgram(const LiveTVChainEntry &entry) const
 {
     auto *pginfo = new ProgramInfo(entry.chanid, entry.starttime);
 
