@@ -27,7 +27,7 @@ class MUI_PUBLIC MythPainterGPU : public MythPainter
     void SetViewControl    (ViewControls Control);
 
   public slots:
-    void CurrentDPIChanged (qreal DPI);
+    void DisplayChanged ();
 
   protected:
     MythMainWindow* m_parent      { nullptr };

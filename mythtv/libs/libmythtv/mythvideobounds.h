@@ -44,8 +44,7 @@ class MythVideoBounds : public QObject
 
   public slots:
     void RefreshVideoBoundsState();
-    void ScreenChanged          (QScreen *screen);
-    void PhysicalDPIChanged     (qreal  /*DPI*/);
+    void DisplayChanged         ();
     void SourceChanged          (QSize VideoDim, QSize VideoDispDim, float Aspect);
     void VideoAspectRatioChanged(float Aspect);
     virtual void EmbedPlayback  (bool Embed, QRect Rect);
