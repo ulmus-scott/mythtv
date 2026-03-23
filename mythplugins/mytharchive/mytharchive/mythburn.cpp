@@ -865,12 +865,15 @@ void MythBurn::changeProfile()
 
     auto *profileDialog = new ProfileDialog(popupStack, curItem, m_profileList);
 
-    if (profileDialog->Create())
+    if (!profileDialog->Create())
     {
-        popupStack->AddScreen(profileDialog, false);
-        connect(profileDialog, &ProfileDialog::haveResult,
-                this, &MythBurn::profileChanged);
+        delete profileDialog;
+        return;
     }
+
+    popupStack->AddScreen(profileDialog, false);
+    connect(profileDialog, &ProfileDialog::haveResult,
+            this, &MythBurn::profileChanged);
 }
 
 void MythBurn::profileChanged(int profileNo)
