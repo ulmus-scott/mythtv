@@ -2,7 +2,6 @@ import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/cor
 import { NgForm, FormsModule } from '@angular/forms';
 import { GuideService } from 'src/app/services/guide.service';
 import { MythService } from 'src/app/services/myth.service';
-import { SetupService } from 'src/app/services/setup.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
@@ -41,7 +40,7 @@ export class RecQualityComponent implements OnInit, AfterViewInit {
 
 
     constructor(private mythService: MythService,
-        private setupService: SetupService, private guideService: GuideService) {
+        private guideService: GuideService) {
     }
 
     ngOnInit(): void {
@@ -50,7 +49,6 @@ export class RecQualityComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this.setupService.setCurrentForm(this.currentForm);
     }
 
     dirty() {
@@ -109,7 +107,10 @@ export class RecQualityComponent implements OnInit, AfterViewInit {
     }
 
     markPristine() {
-        setTimeout(() => this.currentForm.form.markAsPristine(), 200);
+        setTimeout(() => {
+            this.currentForm.form.markAsPristine();
+            this.parent.showDirty();
+        }, 100);
     }
 
     swObserver = {

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms';
 import { MythService } from 'src/app/services/myth.service';
 import { SetupService } from 'src/app/services/setup.service';
@@ -6,17 +6,18 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
 import { NgIf } from '@angular/common';
-import { DropdownModule } from 'primeng/dropdown';
 import { FieldsetModule } from 'primeng/fieldset';
 import { SharedModule } from 'primeng/api';
 import { CardModule } from 'primeng/card';
+import { SelectModule } from 'primeng/select';
+import { SettingsComponent } from '../general-settings.component';
 
 @Component({
     selector: 'app-locale',
     templateUrl: './locale.component.html',
     styleUrls: ['./locale.component.css'],
     standalone: true,
-    imports: [FormsModule, CardModule, SharedModule, FieldsetModule, DropdownModule, NgIf, MessageModule, ButtonModule, TranslateModule]
+    imports: [FormsModule, CardModule, SharedModule, FieldsetModule, SelectModule, NgIf, MessageModule, ButtonModule, TranslateModule]
 })
 
 export class LocaleComponent implements OnInit, AfterViewInit {
@@ -27,8 +28,9 @@ export class LocaleComponent implements OnInit, AfterViewInit {
     VbiFormat = 'None';
     FreqTable = 'us-bcast';
 
-    @ViewChild("locale")
-    currentForm!: NgForm;
+    @ViewChild("locale") currentForm!: NgForm;
+    @Input() parent!: SettingsComponent;
+    @Input() tabIndex!: number;
 
     m_vbiFormats: string[];
 
@@ -111,10 +113,15 @@ export class LocaleComponent implements OnInit, AfterViewInit {
 
 
     ngOnInit(): void {
+        this.parent.children[this.tabIndex] = this;
+    }
+
+    dirty() {
+        return this.currentForm.dirty;
     }
 
     ngAfterViewInit() {
-        this.setupService.setCurrentForm(this.currentForm);
+        this.markPristine();
     }
 
     LocaleObs = {
@@ -134,6 +141,13 @@ export class LocaleComponent implements OnInit, AfterViewInit {
                 this.currentForm.form.markAsDirty();
         }
     };
+
+    markPristine() {
+        setTimeout(() => {
+            this.currentForm.form.markAsPristine();
+            this.parent.showDirty();
+        }, 100);
+    }
 
     saveForm() {
         this.successCount = 0;

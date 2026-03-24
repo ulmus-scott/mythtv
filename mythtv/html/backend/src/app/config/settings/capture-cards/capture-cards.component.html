@@ -2,7 +2,7 @@
     <h2>{{ 'settings.capture.title' | translate }}</h2>
 
     <p-button label="{{ 'settings.capture.new_capture_card' | translate }}" (onClick)="displayModal = true"
-        icon="pi pi-plus-circle" styleClass="p-button-plain"></p-button>
+        icon="pi pi-plus-circle" severity="primary"></p-button>
     <p-dialog header="{{ 'settings.capture.new_capture_card' | translate }}" [(visible)]="displayModal" [modal]="true"
         [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
         <p>{{ 'settings.capture.select_type' | translate }}</p>
@@ -10,15 +10,14 @@
             (onDblClick)="newCard();" [listStyle]="{'height':'50vh'}"></p-listbox>
         <ng-template pTemplate="footer">
             <p-button icon="pi pi-times-circle" (onClick)="displayModal=false" label="{{ 'common.cancel' | translate }}"
-                styleClass="p-button-plain">
+                severity="warn">
             </p-button>
             <p-button icon="pi pi-check-circle" (onClick)="newCard();" label="{{ 'common.ok' | translate }}"
-                styleClass="p-button-plain" [disabled]="selectedCardType.CardType == ''"></p-button>
+                severity="success" [disabled]="!selectedCardType || selectedCardType.CardType == ''"></p-button>
         </ng-template>
     </p-dialog>
     &nbsp;
-    <p-button styleClass="p-button-warning"
-        label="{{ 'settings.capture.delete_on_host' | translate: {host: m_hostName} }}"
+    <p-button severity="warn" label="{{ 'settings.capture.delete_on_host' | translate: {host: m_hostName} }}"
         (click)="displayDeleteAllonHost=true" icon="pi pi-trash" [disabled]="setupService.schedulingEnabled">
     </p-button>
     <p-dialog header="{{ 'settings.capture.delete_on_host' | translate: {host: m_hostName} }}"
@@ -27,25 +26,25 @@
         <h2>{{ 'settings.common.ru_sure' | translate }}</h2>
         <ng-template pTemplate="footer">
             <p-button icon="pi pi-times-circle" (click)="displayDeleteAllonHost=false;"
-                label="{{ 'common.no' | translate }}" styleClass="p-button-plain">
+                label="{{ 'common.no' | translate }}" severity="warn">
             </p-button>
             <p-button icon="pi pi-check-circle" (click)="deleteAllOnHost();" label="{{ 'common.yes' | translate }}"
-                styleClass="p-button-plain"></p-button>
+                severity="danger"></p-button>
         </ng-template>
     </p-dialog>
     &nbsp;
-    <p-button styleClass="p-button-danger" label="{{ 'settings.capture.delete_all' | translate }}"
-        (click)="displayDeleteAll=true" icon="pi pi-trash" iconPos="left" [disabled]="setupService.schedulingEnabled">
+    <p-button severity="danger" label="{{ 'settings.capture.delete_all' | translate }}" (click)="displayDeleteAll=true"
+        icon="pi pi-trash" iconPos="left" [disabled]="setupService.schedulingEnabled">
     </p-button>
     <p-dialog header="{{ 'settings.capture.delete_all_all' | translate }}" [(visible)]="displayDeleteAll" [modal]="true"
         [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
         <h2>{{ 'settings.common.ru_sure' | translate }}</h2>
         <ng-template pTemplate="footer">
             <p-button icon="pi pi-times-circle" (click)="displayDeleteAll=false" label="{{ 'common.no' | translate }}"
-                styleClass="p-button-plain">
+                severity="warn">
             </p-button>
             <p-button icon="pi pi-check-circle" (click)="deleteAllOnAllHosts()" label="{{ 'common.yes' | translate }}"
-                styleClass="p-button-plain"></p-button>
+                severity="danger"></p-button>
         </ng-template>
     </p-dialog>
     <br>
@@ -64,21 +63,17 @@
         </div>
     </div>
     <p-accordion class="col-span-12 w-full" (onClose)="onTabClose($event)" (onOpen)="onTabOpen($event)">
-        <p-accordionTab *ngFor="let card of m_CaptureCardsFiltered; index as ix; first as isFirst"
-            [disabled]="disabledTab[ix]" [(selected)]="activeTab[ix]">
-            <ng-template pTemplate="header">
-                <div class="grid grid-cols-12 gap-4  w-full">
-                    <div class="col-span-11 pr-1">
-                        {{m_CaptureCardsFiltered[ix].CardType}}
-                        {{m_CaptureCardsFiltered[ix].VideoDevice}}
-                        ({{m_CaptureCardsFiltered[ix].DisplayName}})
-                        <b>&nbsp;{{ dirtyMessages[ix] }}</b>
-                    </div>
-                </div>
-            </ng-template>
-            <ng-template pTemplate="content">
-                <p-button styleClass="p-button-warning" label="{{ 'settings.capture.delete_this' | translate }}"
-                    icon="pi pi-trash" (onClick)="displayDeleteThis[ix]=true"
+        @for (card of m_CaptureCardsFiltered; track $index; let ix = $index) {
+        <p-accordion-panel [value]="ix" [disabled]="disabledTab[ix]">
+            <p-accordion-header (click)="onClick({index:ix})">
+                {{m_CaptureCardsFiltered[ix].CardType}}
+                {{m_CaptureCardsFiltered[ix].VideoDevice}}
+                ({{m_CaptureCardsFiltered[ix].DisplayName}})
+                {{dirtyMessages[ix]}}
+            </p-accordion-header>
+            <p-accordion-content>
+                <p-button severity="warn" label="{{ 'settings.capture.delete_this' | translate }}" icon="pi pi-trash"
+                    (onClick)="displayDeleteThis[ix]=true"
                     [disabled]="!this.m_CaptureCardsFiltered[ix].CardId || setupService.schedulingEnabled">
                 </p-button>
                 <p-dialog header="{{ 'settings.capture.delete_this' | translate }}" [(visible)]="displayDeleteThis[ix]"
@@ -90,54 +85,57 @@
                         DisplayName: m_CaptureCardsFiltered[ix].DisplayName} }}</p>
                     <ng-template pTemplate="footer">
                         <p-button icon="pi pi-times-circle" (click)="displayDeleteThis[ix]=false"
-                            label="{{ 'common.no' | translate }}" styleClass="p-button-plain">
+                            label="{{ 'common.no' | translate }}" severity="warn">
                         </p-button>
                         <p-button icon="pi pi-check-circle" (click)="deleteThis(ix)"
-                            label="{{ 'common.yes' | translate }}" styleClass="p-button-plain"></p-button>
+                            label="{{ 'common.yes' | translate }}" severity="danger"></p-button>
                     </ng-template>
                 </p-dialog>
                 <div [ngSwitch]="m_CaptureCardsFiltered[ix].CardType">
                     <app-ceton *ngSwitchCase="'CETON'" [card]="m_CaptureCardsFiltered[ix]"
-                        [cardList]="m_CaptureCardList"></app-ceton>
+                        [cardList]="m_CaptureCardList" [parent]="this" [tabIndex]="ix"></app-ceton>
                     <app-dvb *ngSwitchCase="'DVB'" [card]="m_CaptureCardsFiltered[ix]" [cardList]="m_CaptureCardList"
-                        [diseqcTreeList]="diseqcTreeList" [parent]="this"></app-dvb>
+                        [diseqcTreeList]="diseqcTreeList" [parent]="this" [tabIndex]="ix"></app-dvb>
                     <app-external *ngSwitchCase="'EXTERNAL'" [card]="m_CaptureCardsFiltered[ix]"
-                        [cardList]="m_CaptureCardList"></app-external>
+                        [cardList]="m_CaptureCardList" [parent]="this" [tabIndex]="ix"></app-external>
                     <app-hdhomerun *ngSwitchCase="'HDHOMERUN'" [card]="m_CaptureCardsFiltered[ix]"
-                        [cardList]="m_CaptureCardList"></app-hdhomerun>
+                        [cardList]="m_CaptureCardList" [parent]="this" [tabIndex]="ix"></app-hdhomerun>
                     <app-iptv *ngSwitchCase="'FREEBOX'" [card]="m_CaptureCardsFiltered[ix]"
-                        [cardList]="m_CaptureCardList"></app-iptv>
+                        [cardList]="m_CaptureCardList" [parent]="this" [tabIndex]="ix"></app-iptv>
                     <app-import *ngSwitchCase="'IMPORT'" [card]="m_CaptureCardsFiltered[ix]"
-                        [cardList]="m_CaptureCardList"></app-import>
-                    <app-demo *ngSwitchCase="'DEMO'" [card]="m_CaptureCardsFiltered[ix]" [cardList]="m_CaptureCardList">
+                        [cardList]="m_CaptureCardList" [parent]="this" [tabIndex]="ix"></app-import>
+                    <app-demo *ngSwitchCase="'DEMO'" [card]="m_CaptureCardsFiltered[ix]" [cardList]="m_CaptureCardList"
+                        [parent]="this" [tabIndex]="ix">
                     </app-demo>
                     <app-v4l2 *ngSwitchCase="'V4L2ENC'" [card]="m_CaptureCardsFiltered[ix]"
-                        [cardList]="m_CaptureCardList">
+                        [cardList]="m_CaptureCardList" [parent]="this" [tabIndex]="ix">
                     </app-v4l2>
                     <app-hdpvr *ngSwitchCase="'HDPVR'" [card]="m_CaptureCardsFiltered[ix]"
-                        [cardList]="m_CaptureCardList">
+                        [cardList]="m_CaptureCardList" [parent]="this" [tabIndex]="ix">
                     </app-hdpvr>
                     <app-satip *ngSwitchCase="'SATIP'" [card]="m_CaptureCardsFiltered[ix]"
-                        [cardList]="m_CaptureCardList">
+                        [cardList]="m_CaptureCardList" [parent]="this" [tabIndex]="ix">
                     </app-satip>
-                    <app-vbox *ngSwitchCase="'VBOX'" [card]="m_CaptureCardsFiltered[ix]" [cardList]="m_CaptureCardList">
+                    <app-vbox *ngSwitchCase="'VBOX'" [card]="m_CaptureCardsFiltered[ix]" [cardList]="m_CaptureCardList"
+                        [parent]="this" [tabIndex]="ix">
                     </app-vbox>
                     <app-firewire *ngSwitchCase="'FIREWIRE'" [card]="m_CaptureCardsFiltered[ix]"
-                        [cardList]="m_CaptureCardList">
+                        [cardList]="m_CaptureCardList" [parent]="this" [tabIndex]="ix">
                     </app-firewire>
                     <div *ngSwitchDefault><br>Not Supported </div>
                 </div>
-            </ng-template>
-        </p-accordionTab>
+            </p-accordion-content>
+        </p-accordion-panel>
+        }
     </p-accordion>
 
     <div class="flex justify-end">
         <p-button class="p-4" label="{{ 'common.back' | translate }}"
-            (onClick)="router.navigate(['setupwizard/general'])" icon="pi pi-angle-left"
-            iconPos="left"></p-button>
+            (onClick)="router.navigate(['setupwizard/general'])" icon="pi pi-angle-left" iconPos="left"></p-button>
 
         <p-button class="p-4" label="{{ 'common.next' | translate }}"
-            (onClick)="router.navigate(['setupwizard/recording-profiles'])" icon="pi pi-angle-right" iconPos="right"></p-button>
+            (onClick)="router.navigate(['setupwizard/recording-profiles'])" icon="pi pi-angle-right"
+            iconPos="right"></p-button>
     </div>
 
 </p-card>

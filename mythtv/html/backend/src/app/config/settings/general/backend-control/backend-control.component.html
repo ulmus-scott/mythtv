@@ -7,10 +7,7 @@
             {{ 'settings.backendctrl.subtitle' | translate }}
         </ng-template>
         <ng-template pTemplate="content">
-            <div class="grid grid-cols-12 gap-4">
-
                 <div class="mb-6 w-full">
-
                     <div class="form-group field">
                         <label for="BackendStopCommand" class="label block">{{ 'settings.backendctrl.stop_label' | translate
                             }}</label>
@@ -32,8 +29,6 @@
                     </div>
 
                 </div>
-
-            </div>
         </ng-template>
 
         <ng-template pTemplate="footer">
@@ -46,7 +41,7 @@
                         text="{{ 'common.networkfail' | translate }}"></p-message>
                 </div>
                 <p-button class="col pr-1" label="{{'common.save' | translate}}" icon="pi pi-save" iconPos="left"
-                    (onClick)="saveForm(); backendcontrol.form.markAsPristine()"
+                    (onClick)="saveForm(); markPristine()"
                     [disabled]="!backendcontrol.dirty || setupService.schedulingEnabled"></p-button>
             </div>
         </ng-template>

@@ -9,6 +9,7 @@ import { MessageModule } from 'primeng/message';
 import { NgIf } from '@angular/common';
 import { SharedModule } from 'primeng/api';
 import { CardModule } from 'primeng/card';
+import { CaptureCardsComponent } from '../capture-cards.component';
 
 @Component({
     selector: 'app-import',
@@ -18,65 +19,78 @@ import { CardModule } from 'primeng/card';
     imports: [FormsModule, CardModule, SharedModule, NgIf, MessageModule, ButtonModule, TranslateModule]
 })
 export class ImportComponent implements OnInit, AfterViewInit {
-  @Input() card!: CardAndInput;
-  @Input() cardList!: CaptureCardList;
+    @Input() card!: CardAndInput;
+    @Input() cardList!: CaptureCardList;
+    @Input() parent!: CaptureCardsComponent;
+    @Input() tabIndex!: number;
 
-  @ViewChild("importform") currentForm!: NgForm;
-  @ViewChild("top") topElement!: ElementRef;
+    @ViewChild("importform") currentForm!: NgForm;
+    @ViewChild("top") topElement!: ElementRef;
 
-  work = {
-    successCount: 0,
-    errorCount: 0,
-  };
+    work = {
+        successCount: 0,
+        errorCount: 0,
+    };
 
-  constructor(private captureCardService: CaptureCardService, public setupService: SetupService) { }
+    constructor(private captureCardService: CaptureCardService, public setupService: SetupService) { }
 
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {
+        this.parent.children[this.tabIndex] = this;
+    }
 
-  ngAfterViewInit(): void {
-    this.setupService.setCurrentForm(this.currentForm);
-    this.topElement.nativeElement.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
+    dirty() {
+        return this.currentForm.dirty;
+    }
 
-  // good response to add: {"int": 19}
-  saveObserver = {
-    next: (x: any) => {
-      if (this.card.CardId && x.bool)
-        this.work.successCount++;
-      else if (!this.card.CardId && x.int) {
-        this.work.successCount++;
-        this.card.CardId = x.int;
-      }
-      else {
-        this.work.errorCount++;
-        this.currentForm.form.markAsDirty();
-      }
-    },
-    error: (err: any) => {
-      console.error(err);
-      this.work.errorCount++;
-      this.currentForm.form.markAsDirty();
-    },
-  };
+    ngAfterViewInit(): void {
+        this.topElement.nativeElement.scrollIntoView({ behavior: "smooth", block: "start" });
+        this.markPristine();
+    }
 
-  saveForm() {
-    console.log("save form clicked");
-    this.work.successCount = 0;
-    this.work.errorCount = 0;
-    if (this.card.CardId) {
-      // Update device and child devices
-      this.cardList.CaptureCardList.CaptureCards.forEach(card => {
-        if (card.CardId == this.card.CardId || card.ParentId == this.card.CardId) {
-          this.captureCardService.UpdateCaptureCard(card.CardId, 'videodevice', this.card.VideoDevice)
-            .subscribe(this.saveObserver);
+    // good response to add: {"int": 19}
+    saveObserver = {
+        next: (x: any) => {
+            if (this.card.CardId && x.bool)
+                this.work.successCount++;
+            else if (!this.card.CardId && x.int) {
+                this.work.successCount++;
+                this.card.CardId = x.int;
+            }
+            else {
+                this.work.errorCount++;
+                this.currentForm.form.markAsDirty();
+            }
+        },
+        error: (err: any) => {
+            console.error(err);
+            this.work.errorCount++;
+            this.currentForm.form.markAsDirty();
+        },
+    };
+
+    markPristine() {
+        setTimeout(() => {
+            this.currentForm.form.markAsPristine();
+            this.parent.showDirty();
+        }, 100);
+    }
+
+    saveForm() {
+        this.work.successCount = 0;
+        this.work.errorCount = 0;
+        if (this.card.CardId) {
+            // Update device and child devices
+            this.cardList.CaptureCardList.CaptureCards.forEach(card => {
+                if (card.CardId == this.card.CardId || card.ParentId == this.card.CardId) {
+                    this.captureCardService.UpdateCaptureCard(card.CardId, 'videodevice', this.card.VideoDevice)
+                        .subscribe(this.saveObserver);
+                }
+            });
         }
-      });
+        else {
+            this.captureCardService.AddCaptureCard(this.card).subscribe(this.saveObserver);
+        }
     }
-    else {
-      this.captureCardService.AddCaptureCard(this.card).subscribe(this.saveObserver);
-    }
-  }
 
 
 }

@@ -1,10 +1,9 @@
-import { ChangeDetectorRef, Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
 import { CanComponentDeactivate } from 'src/app/can-deactivate-guard.service';
-import { SetupService } from 'src/app/services/setup.service';
 import { UsersComponent } from './users/users.component';
 import { DataSourcesComponent } from './data-sources/data-sources.component';
 import { PlaybackGroupsComponent } from './playback-groups/playback-groups.component';
@@ -15,7 +14,7 @@ import { RecQualityComponent } from './rec-quality/rec-quality.component';
 import { JobsComponent } from './jobs/jobs.component';
 import { AutoExpireComponent } from './auto-expire/auto-expire.component';
 import { SharedModule } from 'primeng/api';
-import { Accordion, AccordionModule } from 'primeng/accordion';
+import { AccordionModule } from 'primeng/accordion';
 import { CardModule } from 'primeng/card';
 
 @Component({
@@ -25,7 +24,7 @@ import { CardModule } from 'primeng/card';
     standalone: true,
     imports: [CardModule, AccordionModule, SharedModule, AutoExpireComponent, JobsComponent, RecQualityComponent, RecPrioritiesComponent, CustomPrioritiesComponent, ChannelGroupsComponent, PlaybackGroupsComponent, DataSourcesComponent, UsersComponent, TranslateModule]
 })
-export class DashboardSettingsComponent implements OnInit, CanComponentDeactivate {
+export class DashboardSettingsComponent implements OnInit, CanComponentDeactivate, AfterViewInit {
     // @ViewChild("accordion") accordion!: Accordion;
     m_showHelp: boolean = false;
     currentTab: number = -1;
@@ -36,9 +35,8 @@ export class DashboardSettingsComponent implements OnInit, CanComponentDeactivat
     warningText = 'settings.common.warning';
     children: any[] = [, , , , , , , , , , , , , , , ,];
 
-    constructor(private setupService: SetupService, private translate: TranslateService, public router: Router,
+    constructor(private translate: TranslateService, public router: Router,
         private cdRef: ChangeDetectorRef) {
-        this.setupService.setCurrentForm(null);
         translate.get(this.dirtyText).subscribe(data => this.dirtyText = data);
         translate.get(this.warningText).subscribe(data => this.warningText = data);
     }
@@ -46,11 +44,14 @@ export class DashboardSettingsComponent implements OnInit, CanComponentDeactivat
     ngOnInit(): void {
     }
 
+    ngAfterViewInit() {
+        setTimeout(() => this.showDirty(), 300);
+    }
+
     onTabOpen(e: { index: number }) {
 
         this.showDirty();
         // if (typeof this.forms[e.index] == 'undefined')
-        //     this.forms[e.index] = this.setupService.getCurrentForm();
         this.currentTab = e.index;
         // This line removes "Unsaved Changes" from current tab header.
         this.dirtyMessages[this.currentTab] = "";
@@ -72,22 +73,20 @@ export class DashboardSettingsComponent implements OnInit, CanComponentDeactivat
     }
 
     showDirty() {
-        setTimeout(() => {
-            for (let ix = 0 ; ix < this.dirtyMessages.length; ix++) {
-                if (this.children[ix]) {
-                    if (this.children[ix].dirty())
-                        this.dirtyMessages[ix] = this.dirtyText;
-                    else
-                        this.dirtyMessages[ix] = '';
-                }
+        for (let ix = 0; ix < this.dirtyMessages.length; ix++) {
+            if (this.children[ix]) {
+                if (this.children[ix].dirty())
+                    this.dirtyMessages[ix] = this.dirtyText;
+                else
+                    this.dirtyMessages[ix] = '';
             }
-            // if (this.currentTab == -1)
-            //     return;
-            // if (this.children[this.currentTab].dirty())
-            //     this.dirtyMessages[this.currentTab] = this.dirtyText;
-            // else
-            //     this.dirtyMessages[this.currentTab] = "";
-        }, 200);
+        }
+        // if (this.currentTab == -1)
+        //     return;
+        // if (this.children[this.currentTab].dirty())
+        //     this.dirtyMessages[this.currentTab] = this.dirtyText;
+        // else
+        //     this.dirtyMessages[this.currentTab] = "";
     }
 
     showHelp() {

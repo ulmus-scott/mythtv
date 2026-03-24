@@ -56,7 +56,7 @@
                         text="{{ 'common.networkfail' | translate }}"></p-message>
                 </div>
                 <p-button class="col pr-1" label="{{'common.save' | translate}}" icon="pi pi-save" iconPos="left"
-                    (onClick)="saveForm(); datasources.form.markAsPristine()" severity="success"
+                    (onClick)="saveForm(); markPristine()" severity="success"
                     [disabled]="!datasources.dirty"></p-button>
             </div>
         </ng-template>

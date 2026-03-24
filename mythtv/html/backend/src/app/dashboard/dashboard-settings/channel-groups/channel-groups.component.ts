@@ -7,7 +7,6 @@ import { GuideService } from 'src/app/services/guide.service';
 import { Channel } from 'src/app/services/interfaces/channel.interface';
 import { ChannelGroup } from 'src/app/services/interfaces/channelgroup.interface';
 import { VideoSource } from 'src/app/services/interfaces/videosource.interface';
-import { SetupService } from 'src/app/services/setup.service';
 import { MessageModule } from 'primeng/message';
 import { CheckboxModule } from 'primeng/checkbox';
 import { DialogModule } from 'primeng/dialog';
@@ -75,7 +74,7 @@ export class ChannelGroupsComponent implements OnInit, AfterViewInit {
   group: MyChannelGroup = this.resetGroup();
 
   constructor(private channelService: ChannelService, private guideService: GuideService,
-    private translate: TranslateService, private setupService: SetupService ) {
+    private translate: TranslateService) {
   }
 
   ngOnInit(): void {
@@ -85,7 +84,6 @@ export class ChannelGroupsComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.setupService.setCurrentForm(this.currentForm);
   }
 
   loadTranslations(): void {

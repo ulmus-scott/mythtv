@@ -6,7 +6,7 @@
                  hover:bg-gray-800 border-round text-300 hover:text-0
                 transition-duration-150 transition-colors" (click)="toggleShowSidebar()">
                 <i class="pi pi-bars mr-1 lg:ml-1 text-base lg:text-xl "></i>
-                <span class="p-ink" ng serve></span>
+                <span class="p-ink"></span>
             </a>
             <img class="py-2 pl-1" src="images/mythtv.png" alt="Image" height="80">
             <div class="hidden md:inline-flex">
@@ -17,16 +17,20 @@
             <p-button icon="pi pi-angle-up" variant="text" severity="secondary" (click)="showTopBar=false"
                 pTooltip="{{ 'navbar.hide' | translate }}" />
         </div>
-        <div class="pr-2 toolbar" style="height: 80px;">
-            <a pRipple style="height: 80px;" class="toolbar p-ripple p-element my-2 mx-2 flex align-items-center cursor-pointer p-3 md:hidden md:justify-content-center
+        <div class="pr-2 toolbar" style="height: 80px;" class="flex items-center">
+            <p-button icon="pi pi-ellipsis-v" variant="text" severity="primary" class="md:hidden items-center"
+                (click)="showMenu($event)"/>
+            <!-- <a pRipple style="height: 80px;" class="toolbar p-ripple p-element my-2 mx-2 flex align-items-center cursor-pointer p-3 md:hidden md:justify-content-center
                  hover:bg-gray-800 border-round text-300 hover:text-0 transition-duration-150 transition-colors"
                 (click)="toggleShowNavbar()">
                 <i class="pi pi-ellipsis-v mr-1 md:mr-0 text-base md:text-xl "></i>
-                <span class="p-ink" ng serve></span>
-            </a>
+                <span class="p-ink"></span>
+            </a> -->
+            <p-menu #menu [model]="navMenu" popup="true"/>
             <ul class="toolbar list-none p-0 m-0 md:flex md:align-items-center select-none md:flex-row surface-section border-1
-             md:border-none surface-border right-0 top-100 z-2 shadow-2 md:shadow-none absolute md:static"
-                [hidden]="m_showNavbar" style="height: 80px;" >
+             md:border-none surface-border right-0 top-100 z-2 shadow-2 md:shadow-none absolute md:static sm:hidden"
+                style="height: 80px;">
+                <!-- [hidden]="m_showNavbar"  -->
                 <li class="toolbar" style="height: 80px;">
                     <div class="text-primary mt-6 font-light">
                         {{ dataService.loggedInUser }} &nbsp;&nbsp;&nbsp;

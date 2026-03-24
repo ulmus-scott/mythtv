@@ -7,185 +7,181 @@
             {{ 'settings.hostaddress.subtitle' | translate }}
         </ng-template>
         <ng-template pTemplate="content">
-            <div class="grid grid-cols-12 gap-4">
-                <p-fieldset class="mb-6 w-full" legend="{{ 'settings.hostaddress.panel.ports' | translate }}">
-                    <div class="form-group field">
-                        <label for="backendserverport" class="label block">
-                            {{ 'settings.hostaddress.backendport_label' | translate }}
-                        </label>
-                        <input pInputText id="backendserverport" type="number"
-                            [(ngModel)]="m_HostAddressData.BackendServerPort" name="backendserverport"
-                            #backendserverport="ngModel" class="mb-2 form-control w-40"
-                            [ngClass]="{'is-invalid': backendserverport.invalid }" placeholder="Ex. 6543" required
-                            min="0" max="65536" />
-                        <small class="block" id="backendserverport-help">
-                            {{ 'settings.hostaddress.backendport_desc' | translate }}
-                        </small>
-                        <div
-                            *ngIf="backendserverport.invalid && (backendserverport.dirty || backendserverport.touched)">
-                            <small class="p-error block">{{ 'setupwizard.portRequired' | translate }}</small>
-                        </div>
+            <!-- <div class="grid grid-cols-12 gap-4"> -->
+            <p-fieldset class="mb-6 w-full" legend="{{ 'settings.hostaddress.panel.ports' | translate }}">
+                <div class="form-group field">
+                    <label for="backendserverport" class="label block">
+                        {{ 'settings.hostaddress.backendport_label' | translate }}
+                    </label>
+                    <input pInputText id="backendserverport" type="number"
+                        [(ngModel)]="m_HostAddressData.BackendServerPort" name="backendserverport"
+                        #backendserverport="ngModel" class="mb-2 form-control w-40"
+                        [ngClass]="{'is-invalid': backendserverport.invalid }" placeholder="Ex. 6543" required min="0"
+                        max="65536" />
+                    <small class="block" id="backendserverport-help">
+                        {{ 'settings.hostaddress.backendport_desc' | translate }}
+                    </small>
+                    <div *ngIf="backendserverport.invalid && (backendserverport.dirty || backendserverport.touched)">
+                        <small class="p-error block">{{ 'setupwizard.portRequired' | translate }}</small>
                     </div>
+                </div>
 
-                    <div class="form-group field">
-                        <label for="backendstatusport" class="label block">
-                            {{ 'settings.hostaddress.statusport_label' | translate }}
-                        </label>
-                        <input pInputText id="backendstatusport" type="number"
-                            [(ngModel)]="m_HostAddressData.BackendStatusPort" name="backendstatusport"
-                            #backendstatusport="ngModel" class="mb-2 form-control w-40"
-                            [ngClass]="{'is-invalid': backendstatusport.invalid }" placeholder="Ex. 6544" required
-                            min="0" max="65536" />
-                        <small class="block" id="backendstatusport-help">{{ 'settings.hostaddress.statusport_desc' |
-                            translate }}</small>
-                        <div
-                            *ngIf="backendstatusport.invalid && (backendstatusport.dirty || backendstatusport.touched)">
-                            <small class="p-error block">{{ 'setupwizard.portRequired' | translate }}</small>
-                        </div>
+                <div class="form-group field">
+                    <label for="backendstatusport" class="label block">
+                        {{ 'settings.hostaddress.statusport_label' | translate }}
+                    </label>
+                    <input pInputText id="backendstatusport" type="number"
+                        [(ngModel)]="m_HostAddressData.BackendStatusPort" name="backendstatusport"
+                        #backendstatusport="ngModel" class="mb-2 form-control w-40"
+                        [ngClass]="{'is-invalid': backendstatusport.invalid }" placeholder="Ex. 6544" required min="0"
+                        max="65536" />
+                    <small class="block" id="backendstatusport-help">{{ 'settings.hostaddress.statusport_desc' |
+                        translate }}</small>
+                    <div *ngIf="backendstatusport.invalid && (backendstatusport.dirty || backendstatusport.touched)">
+                        <small class="p-error block">{{ 'setupwizard.portRequired' | translate }}</small>
                     </div>
-                </p-fieldset>
+                </div>
+            </p-fieldset>
 
-                <p-fieldset class="mb-6 w-full" legend="{{ 'settings.hostaddress.panel.pin' | translate }}">
-                    <div class="form-group field">
-                        <label for="securitypin" class="label block">
-                            {{ 'settings.hostaddress.pin_label' | translate }}
-                        </label>
-                        <input pInputText id="securitypin" type="text" [(ngModel)]="m_HostAddressData.SecurityPin"
-                            name="securitypin" #securitypin="ngModel" class="mb-2 form-control w-40"
-                            placeholder="Ex. 1234" required />
-                        <small class="block" id="securitypin-help">
-                            {{ 'settings.hostaddress.pin_desc' | translate }}
-                        </small>
-                        <div *ngIf="securitypin.invalid && (securitypin.dirty || securitypin.touched)">
-                            <small class="p-error block">
-                                {{ 'settings.hostaddress.pin_reqd' | translate }}
-                            </small>
-                        </div>
-                    </div>
-                </p-fieldset>
-
-                <p-fieldset class="mb-6 w-full" legend="{{ 'settings.hostaddress.panel.allowconn' | translate }}">
-                    <div class="form-group field">
-                        <p-checkbox inputId="AllowConnFromAll" [(ngModel)]="m_HostAddressData.AllowConnFromAll"
-                            name="AllowConnFromAll" #AllowConnFromAll="ngModel" class="mb-2 w-full" [binary]="true"
-                            value="{{ 'settings.hostaddress.allowconn_label' | translate }}">
-                        </p-checkbox>
-                        <small class="block" id="securitypin-help">
-                            <div [innerHTML]="'settings.hostaddress.allowconn_desc' | translate"></div>
+            <p-fieldset class="mb-6 w-full" legend="{{ 'settings.hostaddress.panel.pin' | translate }}">
+                <div class="form-group field">
+                    <label for="securitypin" class="label block">
+                        {{ 'settings.hostaddress.pin_label' | translate }}
+                    </label>
+                    <input pInputText id="securitypin" type="text" [(ngModel)]="m_HostAddressData.SecurityPin"
+                        name="securitypin" #securitypin="ngModel" class="mb-2 form-control w-40" placeholder="Ex. 1234"
+                        required />
+                    <small class="block" id="securitypin-help">
+                        {{ 'settings.hostaddress.pin_desc' | translate }}
+                    </small>
+                    <div *ngIf="securitypin.invalid && (securitypin.dirty || securitypin.touched)">
+                        <small class="p-error block">
+                            {{ 'settings.hostaddress.pin_reqd' | translate }}
                         </small>
                     </div>
-                </p-fieldset>
+                </div>
+            </p-fieldset>
 
-                <p-fieldset class="mb-6 w-full" legend="{{ 'settings.hostaddress.panel.iplisten' | translate }}">
+            <p-fieldset class="mb-6 w-full" legend="{{ 'settings.hostaddress.panel.allowconn' | translate }}">
+                <div class="form-group field">
+                    <p-checkbox inputId="AllowConnFromAll" [(ngModel)]="m_HostAddressData.AllowConnFromAll"
+                        name="AllowConnFromAll" #AllowConnFromAll="ngModel" class="mb-2 w-full" [binary]="true" />
+                    <label for="AllowConnFromAll" class="label pl-2">{{ 'settings.hostaddress.allowconn_label' |
+                        translate
+                        }}</label>
+                    <small class="block" id="securitypin-help">
+                        <div [innerHTML]="'settings.hostaddress.allowconn_desc' | translate"></div>
+                    </small>
+                </div>
+            </p-fieldset>
+
+            <p-fieldset class="mb-6 w-full" legend="{{ 'settings.hostaddress.panel.iplisten' | translate }}">
+                <div class="form-group field">
+                    <p-checkbox inputId="ListenOnAllIps" [(ngModel)]="m_HostAddressData.ListenOnAllIps"
+                        name="ListenOnAllIps" #ListenOnAllIps="ngModel" class="mb-2 w-full" [binary]="true" />
+                    <label for="ListenOnAllIps" class="label pl-2">{{ 'settings.hostaddress.listenall_label' | translate
+                        }}</label>
+                    <small class="block" id="ListenOnAllIps-help">
+                        {{ 'settings.hostaddress.listenall_desc' | translate }}
+                    </small>
+                </div>
+
+                <div *ngIf="!m_HostAddressData.ListenOnAllIps">
                     <div class="form-group field">
-                        <p-checkbox inputId="ListenOnAllIps" [(ngModel)]="m_HostAddressData.ListenOnAllIps"
-                            name="ListenOnAllIps" #ListenOnAllIps="ngModel" class="mb-2 w-full" [binary]="true"
-                            value="{{ 'settings.hostaddress.listenall_label' | translate }}">
-                        </p-checkbox>
-                        <small class="block" id="ListenOnAllIps-help">
-                            {{ 'settings.hostaddress.listenall_desc' | translate }}
-                        </small>
-                    </div>
-
-                    <div *ngIf="!m_HostAddressData.ListenOnAllIps">
-                        <div class="form-group field">
-                            <label for="BackendServerIP" class="label block">{{ 'settings.hostaddress.ipv4_label' |
-                                translate }}</label>
-                            <p-dropdown appendTo="body" [options]="m_IPsV4 "
-                                [(ngModel)]="m_HostAddressData.BackendServerIP" class="block w-60 mb-2"
-                                name="BackendServerIP" #BackendServerIP="ngModel"
-                                aria-describedby="BackendServerIP-help">
-                            </p-dropdown>
-                            <small class="block" id="BackendServerIP-help">
-                                {{ 'settings.hostaddress.ipv4_desc' | translate }}
-                            </small>
-                            <div *ngIf="BackendServerIP.invalid && (BackendServerIP.dirty || BackendServerIP.touched)">
-                                <small id="LocalServerIP-help" class="p-error block">IPv4 address</small>
-                            </div>
-                        </div>
-
-                        <div class=" form-group field">
-                            <label for="BackendServerIP6" class="label block">
-                                {{ 'settings.hostaddress.ipv6_label' | translate }}
-                            </label>
-                            <p-dropdown appendTo="body" [options]="m_IPsV6 "
-                                [(ngModel)]="m_HostAddressData.BackendServerIP6" class="block w-60 mb-2"
-                                name="BackendServerIP6" #BackendServerIP6="ngModel"
-                                aria-describedby="BackendServerIP6-help">
-                            </p-dropdown>
-                            <small class="block" id="BackendServerIP6-help">
-                                {{ 'settings.hostaddress.ipv6_desc' | translate }}
-                            </small>
-                            <div
-                                *ngIf="BackendServerIP6.invalid && (BackendServerIP6.dirty || BackendServerIP6.touched)">
-                                <small class="p-error block">IPv6 address</small>
-                            </div>
-                        </div>
-
-                        <div class="form-group field">
-                            <p-checkbox inputId="AllowLinkLocal" [(ngModel)]="m_HostAddressData.AllowLinkLocal"
-                                name="AllowLinkLocal" #AllowLinkLocal="ngModel" class="mb-2 w-full" [binary]="true"
-                                value="{{ 'settings.hostaddress.listenlinklocal_label' | translate }}">
-                            </p-checkbox>
-                            <small class="block" id="AllowLinkLocal-help">
-                                {{ 'settings.hostaddress.listenlinklocal_desc' | translate }}
-                            </small>
-                        </div>
-                    </div>
-                </p-fieldset>
-
-                <p-fieldset class="mb-6 w-full" legend="{{ 'settings.hostaddress.panel.primaryadd' | translate }}">
-                    <div class="form-group field">
-                        <label for="BackendServerAddr" class="label block w-full">
-                            {{ 'settings.hostaddress.primaryip_label' | translate }}
-                        </label>
-                        <p-dropdown appendTo="body" [options]="m_IPsAll "
-                            [(ngModel)]="m_HostAddressData.BackendServerAddr" [editable]="true"
-                            class="block mb-2 w-full" name="BackendServerAddr" #BackendServerAddr="ngModel"
-                            aria-describedby="BackendServerAddr-help">
-                        </p-dropdown>
-                        <small class="block w-full" id="BackendServerAddr-help">
-                            {{ 'settings.hostaddress.primaryip_desc' | translate }}
-                        </small>
-                    </div>
-
-                    <div *ngIf="BackendServerAddr.invalid && (BackendServerAddr.dirty || BackendServerAddr.touched)">
-                        <small class="p-error block">Primary IP address / DNS name is required</small>
-                    </div>
-                </p-fieldset>
-
-                <p-fieldset class="mb-6 w-full" legend="{{ 'settings.hostaddress.panel.masterbe' | translate }}">
-                    <div class="form-group field">
-                        <p-checkbox inputId="IsMasterBackend" [(ngModel)]="m_HostAddressData.IsMasterBackend"
-                            name="IsMasterBackend" #IsMasterBackend="ngModel" class="mb-2 w-full" [binary]="true"
-                            (onChange)="setMaster();" value="{{ 'settings.hostaddress.ismaster_label' | translate }}">
-                        </p-checkbox>
-                        <small class="block" id="IsMasterBackend-help">
-                            {{ 'settings.hostaddress.ismaster_desc' | translate }}
-                        </small>
-                        <div *ngIf="m_showChangeHint">
-                            <small id="IsMasterBackend-help" class="p-error block">
-                                {{ 'settings.hostaddress.ismaster_hint' | translate }}
-                            </small>
-                        </div>
-                    </div>
-                    <div class="form-group field">
-                        <label for="MasterServerName" class="label block">{{ 'settings.hostaddress.master_label' |
+                        <label for="BackendServerIP" class="label block">{{ 'settings.hostaddress.ipv4_label' |
                             translate }}</label>
-                        <input pInputText id="MasterServerName" type="text"
-                            [(ngModel)]="m_HostAddressData.MasterServerName" name="MasterServerName"
-                            #MasterServerName="ngModel" class="mb-2 form-control w-60 read-only"
-                            placeholder="Ex. masterbe" disabled="disabled" />
-                        <small class="block" id="MasterServerName-help">
-                            <div [innerHTML]="'settings.hostaddress.master_desc' | translate"></div>
+                        <p-select appendTo="body" [options]="m_IPsV4 " [(ngModel)]="m_HostAddressData.BackendServerIP"
+                            class="block w-60 mb-2" name="BackendServerIP" #BackendServerIP="ngModel"
+                            aria-describedby="BackendServerIP-help">
+                        </p-select>
+                        <small class="block" id="BackendServerIP-help">
+                            {{ 'settings.hostaddress.ipv4_desc' | translate }}
                         </small>
-                        <div *ngIf="MasterServerName.invalid && (MasterServerName.dirty || MasterServerName.touched)">
-                            <small id="MasterServerName-help" class="p-error block">Hostname of master backend is
-                                required</small>
+                        <div *ngIf="BackendServerIP.invalid && (BackendServerIP.dirty || BackendServerIP.touched)">
+                            <small id="LocalServerIP-help" class="p-error block">IPv4 address</small>
                         </div>
                     </div>
-                </p-fieldset>
-            </div>
+
+                    <div class=" form-group field">
+                        <label for="BackendServerIP6" class="label block">
+                            {{ 'settings.hostaddress.ipv6_label' | translate }}
+                        </label>
+                        <p-select appendTo="body" [options]="m_IPsV6 "
+                            [(ngModel)]="m_HostAddressData.BackendServerIP6" class="block w-60 mb-2"
+                            name="BackendServerIP6" #BackendServerIP6="ngModel"
+                            aria-describedby="BackendServerIP6-help">
+                        </p-select>
+                        <small class="block" id="BackendServerIP6-help">
+                            {{ 'settings.hostaddress.ipv6_desc' | translate }}
+                        </small>
+                        <div *ngIf="BackendServerIP6.invalid && (BackendServerIP6.dirty || BackendServerIP6.touched)">
+                            <small class="p-error block">IPv6 address</small>
+                        </div>
+                    </div>
+
+                    <div class="form-group field">
+                        <p-checkbox inputId="ListenOnAllIps" [(ngModel)]="m_HostAddressData.AllowLinkLocal"
+                            name="AllowLinkLocal" #AllowLinkLocal="ngModel" class="mb-2 w-full" [binary]="true" />
+                        <label for="ListenOnAllIps" class="label pl-2">{{ 'settings.hostaddress.listenlinklocal_label' |
+                            translate }}</label>
+                        <small class="block" id="AllowLinkLocal-help">
+                            {{ 'settings.hostaddress.listenlinklocal_desc' | translate }}
+                        </small>
+                    </div>
+                </div>
+            </p-fieldset>
+
+            <p-fieldset class="mb-6 w-full" legend="{{ 'settings.hostaddress.panel.primaryadd' | translate }}">
+                <div class="form-group field">
+                    <label for="BackendServerAddr" class="label block w-full">
+                        {{ 'settings.hostaddress.primaryip_label' | translate }}
+                    </label>
+                    <p-select appendTo="body" [options]="m_IPsAll " [(ngModel)]="m_HostAddressData.BackendServerAddr"
+                        [editable]="true" class="block mb-2 w-full" name="BackendServerAddr"
+                        #BackendServerAddr="ngModel" aria-describedby="BackendServerAddr-help">
+                    </p-select>
+                    <small class="block w-full" id="BackendServerAddr-help">
+                        {{ 'settings.hostaddress.primaryip_desc' | translate }}
+                    </small>
+                </div>
+
+                <div *ngIf="BackendServerAddr.invalid && (BackendServerAddr.dirty || BackendServerAddr.touched)">
+                    <small class="p-error block">Primary IP address / DNS name is required</small>
+                </div>
+            </p-fieldset>
+
+            <p-fieldset class="mb-6 w-full" legend="{{ 'settings.hostaddress.panel.masterbe' | translate }}">
+                <div class="form-group field">
+                    <p-checkbox inputId="IsMasterBackend" [(ngModel)]="m_HostAddressData.IsMasterBackend"
+                        name="IsMasterBackend" #IsMasterBackend="ngModel" class="mb-2 w-full" [binary]="true"
+                        (onChange)="setMaster();" />
+                    <label for="IsMasterBackend" class="label pl-2">{{ 'settings.hostaddress.ismaster_label' |
+                        translate }}</label>
+                    <small class="block" id="IsMasterBackend-help">
+                        {{ 'settings.hostaddress.ismaster_desc' | translate }}
+                    </small>
+                    <div *ngIf="m_showChangeHint">
+                        <small id="IsMasterBackend-help" class="p-error block">
+                            {{ 'settings.hostaddress.ismaster_hint' | translate }}
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group field">
+                    <label for="MasterServerName" class="label block">{{ 'settings.hostaddress.master_label' |
+                        translate }}</label>
+                    <input pInputText id="MasterServerName" type="text" [(ngModel)]="m_HostAddressData.MasterServerName"
+                        name="MasterServerName" #MasterServerName="ngModel" class="mb-2 form-control w-60 read-only"
+                        placeholder="Ex. masterbe" disabled="disabled" />
+                    <small class="block" id="MasterServerName-help">
+                        <div [innerHTML]="'settings.hostaddress.master_desc' | translate"></div>
+                    </small>
+                    <div *ngIf="MasterServerName.invalid && (MasterServerName.dirty || MasterServerName.touched)">
+                        <small id="MasterServerName-help" class="p-error block">Hostname of master backend is
+                            required</small>
+                    </div>
+                </div>
+            </p-fieldset>
+            <!-- </div> -->
         </ng-template>
 
         <ng-template pTemplate="footer">
@@ -198,7 +194,7 @@
                         text="{{ 'common.networkfail' | translate }}"></p-message>
                 </div>
                 <p-button class="col pr-1" label="{{'common.save' | translate}}" icon="pi pi-save" iconPos="left"
-                    (onClick)="saveForm(); hostaddress.form.markAsPristine()"
+                    (onClick)="saveForm(); markPristine()"
                     [disabled]="!hostaddress.dirty || setupService.schedulingEnabled"></p-button>
             </div>
         </ng-template>

@@ -1,18 +1,13 @@
 <span #top></span>
-<div class="content-section implementation">
+<div>
     <h1>{{ 'settings.main.title' | translate }}</h1>
-    <div class="card">
-        <div class="flex flex-row">
-            <button pButton pRipple icon="pi pi-angle-double-left" class="p-button-text p-button-primary"
-                (click)="menu.navBackward()" pTooltip="{{ 'dashboard.scrolltabsleft' | translate }}"></button>
-            <div class="col-span-11">
-                <p-tabMenu #menu [model]="wizardService.wizardItems" [activeItem]="activeItem"
-                    [scrollable]="false"></p-tabMenu>
-            </div>
-            <button pButton pRipple icon="pi pi-angle-double-right" class="p-button-text p-button-primary"
-                (click)="menu.navForward()" pTooltip="{{ 'dashboard.scrolltabsright' | translate }}"></button>
+    <!-- <div class="card"> -->
+    <div class="flex flex-row">
+        <div class="shrink overflow-auto">
+            <!-- tabMenu is deprecated, to be replaced by tabs. Tabs is very ugly and needs
+                styling to be done to be useful. So I am leving tabMenu for now -->
+            <p-tabMenu #menu [model]="fullMenu" [activeItem]="activeItem" [scrollable]="true" />
         </div>
-
     </div>
     <app-backend-warning></app-backend-warning>
     <router-outlet></router-outlet>

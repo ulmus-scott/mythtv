@@ -14,10 +14,10 @@ import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { FieldsetModule } from 'primeng/fieldset';
 import { NgIf, NgFor } from '@angular/common';
-import { DropdownModule } from 'primeng/dropdown';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { SharedModule } from 'primeng/api';
 import { CardModule } from 'primeng/card';
+import { Select, SelectModule } from "primeng/select";
 
 interface SwitchType {
   Name: string;
@@ -29,7 +29,7 @@ interface SwitchType {
     templateUrl: './switch.component.html',
     styleUrls: ['./switch.component.css'],
     standalone: true,
-    imports: [FormsModule, CardModule, SharedModule, InputNumberModule, DropdownModule, NgIf, NgFor, FieldsetModule, ButtonModule, DialogModule, LnbComponent, forwardRef(()=> RotorComponent), forwardRef(()=> UnicableComponent), ListboxModule, TranslateModule]
+    imports: [FormsModule, CardModule, SharedModule, InputNumberModule, SelectModule, NgIf, NgFor, FieldsetModule, ButtonModule, DialogModule, LnbComponent, forwardRef(() => RotorComponent), forwardRef(() => UnicableComponent), ListboxModule, TranslateModule, Select]
 })
 export class SwitchComponent implements OnInit, AfterViewInit, DiseqcSettingBase {
 
@@ -139,7 +139,6 @@ export class SwitchComponent implements OnInit, AfterViewInit, DiseqcSettingBase
     let ix = this.diseqcSubComponent.findIndex(x => x === object);
     if (ix < 0)
       this.diseqcSubComponent.push(object);
-    console.log("setDiseqcObject", this.diseqcSubComponent.length);
   }
 
   deleteDiseqc(ix: number): void {

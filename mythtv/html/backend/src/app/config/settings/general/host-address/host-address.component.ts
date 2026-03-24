@@ -1,25 +1,25 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms';
 import { ConfigService } from 'src/app/services/config.service';
-
 import { HostAddress } from 'src/app/services/interfaces/setup.interface';
 import { SetupService } from 'src/app/services/setup.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
-import { DropdownModule } from 'primeng/dropdown';
 import { CheckboxModule } from 'primeng/checkbox';
 import { NgClass, NgIf } from '@angular/common';
 import { FieldsetModule } from 'primeng/fieldset';
 import { SharedModule } from 'primeng/api';
 import { CardModule } from 'primeng/card';
+import { SelectModule } from 'primeng/select';
+import { SettingsComponent } from '../general-settings.component';
 
 @Component({
     selector: 'app-host-address',
     templateUrl: './host-address.component.html',
     styleUrls: ['./host-address.component.css'],
     standalone: true,
-    imports: [FormsModule, CardModule, SharedModule, FieldsetModule, NgClass, NgIf, CheckboxModule, DropdownModule, MessageModule, ButtonModule, TranslateModule]
+    imports: [FormsModule, CardModule, SharedModule, FieldsetModule, NgClass, NgIf, CheckboxModule, SelectModule, MessageModule, ButtonModule, TranslateModule]
 })
 export class HostAddressComponent implements OnInit, AfterViewInit {
     m_HostAddressData!: HostAddress;
@@ -29,8 +29,9 @@ export class HostAddressComponent implements OnInit, AfterViewInit {
     m_IPsV6!: string[];
     m_IsMasterBackend: boolean = false;
 
-    @ViewChild("hostaddress")
-    currentForm!: NgForm;
+    @ViewChild("hostaddress") currentForm!: NgForm;
+    @Input() parent!: SettingsComponent;
+    @Input() tabIndex!: number;
 
     constructor(public setupService: SetupService,
         private configService: ConfigService) {
@@ -46,10 +47,14 @@ export class HostAddressComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit(): void {
+        this.parent.children[this.tabIndex] = this;
     }
 
     ngAfterViewInit() {
-        this.setupService.setCurrentForm(this.currentForm);
+    }
+
+    dirty() {
+        return this.currentForm.dirty;
     }
 
     m_savedMaster!: string;
@@ -71,8 +76,14 @@ export class HostAddressComponent implements OnInit, AfterViewInit {
         }
     }
 
+    markPristine() {
+        setTimeout(() => {
+            this.currentForm.form.markAsPristine();
+            this.parent.showDirty();
+        },100);
+    }
+
     saveForm() {
-        console.log("save form clicked");
         this.setupService.saveHostAddressData(this.currentForm);
     }
 }

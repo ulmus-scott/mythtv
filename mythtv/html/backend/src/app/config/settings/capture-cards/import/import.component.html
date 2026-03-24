@@ -7,21 +7,16 @@
         <ng-template pTemplate="subtitle">
         </ng-template>
         <ng-template pTemplate="content">
-            <div class="grid grid-cols-12 gap-4">
-                <div class="mb-6 w-full">
-
-                    <div class="form-group field">
-                        <label for="VideoDevice" class="label block">{{ 'settings.capture.import.file_label' | translate
-                            }}</label>
-                        <input pInputText id="VideoDevice" [(ngModel)]="card.VideoDevice" name="VideoDevice"
-                            #VideoDevice="ngModel" class="mb-2 form-control w-full" />
-                        <small class="block">
-                            {{ 'settings.capture.import.file_desc' | translate }}
-                        </small>
-                    </div>
-
+            <div class="mb-6 w-full">
+                <div class="form-group field">
+                    <label for="VideoDevice" class="label block">{{ 'settings.capture.import.file_label' | translate
+                        }}</label>
+                    <input pInputText id="VideoDevice" [(ngModel)]="card.VideoDevice" name="VideoDevice"
+                        #VideoDevice="ngModel" class="mb-2 form-control w-full" />
+                    <small class="block">
+                        {{ 'settings.capture.import.file_desc' | translate }}
+                    </small>
                 </div>
-
             </div>
         </ng-template>
 
@@ -34,7 +29,7 @@
                         text="{{ 'common.networkfail' | translate }}"></p-message>
                 </div>
                 <p-button class="col pr-1" label="{{'common.save' | translate}}" icon="pi pi-save" iconPos="left"
-                    (onClick)="saveForm(); importform.form.markAsPristine()"
+                    (onClick)="saveForm(); markPristine()"
                     [disabled]="!importform.dirty || !card.VideoDevice || setupService.schedulingEnabled"></p-button>
             </div>
         </ng-template>

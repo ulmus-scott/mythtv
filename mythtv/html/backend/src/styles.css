@@ -5,6 +5,11 @@
 /* This is the usgae for when we get to tailwindcss V4 */
 /* @import "tailwindcss" source("./"); */
 
+h1 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
 h2 {
   font-size: x-large;
   font-weight: bold;

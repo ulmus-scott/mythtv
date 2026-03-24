@@ -1,22 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
-import { SetupService } from '../services/setup.service';
 import { RouterOutlet, RouterLink } from '@angular/router';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { TooltipModule } from 'primeng/tooltip';
 import { RippleModule } from 'primeng/ripple';
 import { ButtonModule } from 'primeng/button';
 import { NgIf } from '@angular/common';
-import { MenubarModule, Menubar } from 'primeng/menubar';
-import { TabsModule, Tabs, TabList } from 'primeng/tabs';
 
 @Component({
     selector: 'app-dashboard',
     templateUrl: './dashboard.component.html',
     styleUrls: ['./dashboard.component.css'],
     standalone: true,
-    imports: [NgIf, ButtonModule, RippleModule, TooltipModule, TabMenuModule, RouterOutlet, TranslateModule, Menubar, Tabs, TabList, RouterLink]
+    imports: [NgIf, ButtonModule, RippleModule, TooltipModule, TabMenuModule, RouterOutlet, TranslateModule, RouterLink]
 })
 export class DashboardComponent implements OnInit {
 
@@ -36,8 +33,8 @@ export class DashboardComponent implements OnInit {
 
   activeItem = this.fullMenu[0];
 
-  constructor(private translate: TranslateService, private setupService: SetupService) {
-    setupService.pageType = 'D';
+  constructor(private translate: TranslateService) {
+    // setupService.pageType = 'D';
     this.fullMenu.forEach(entry => {
       if (entry.label)
         this.translate.get(entry.label).subscribe(data => {

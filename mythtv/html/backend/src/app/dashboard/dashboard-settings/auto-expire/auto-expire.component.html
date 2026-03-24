@@ -95,7 +95,7 @@
                         text="{{ 'common.networkfail' | translate }}"></p-message>
                 </div>
                 <p-button class="col pr-1" label="{{'common.save' | translate}}" icon="pi pi-save" iconPos="left"
-                    (onClick)="saveForm(); autoexpire.form.markAsPristine()" [disabled]="!autoexpire.dirty"
+                    (onClick)="saveForm(); markPristine()" [disabled]="!autoexpire.dirty"
                     severity="success" />
             </div>
         </ng-template>

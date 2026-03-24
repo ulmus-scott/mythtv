@@ -17,10 +17,10 @@ import { ButtonModule } from 'primeng/button';
 import { FieldsetModule } from 'primeng/fieldset';
 import { TableModule } from 'primeng/table';
 import { NgIf } from '@angular/common';
-import { DropdownModule } from 'primeng/dropdown';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { SharedModule } from 'primeng/api';
 import { CardModule } from 'primeng/card';
+import { SelectModule } from 'primeng/select';
 
 interface RotorType {
   Name: string;
@@ -42,7 +42,7 @@ interface Fields {
     templateUrl: './rotor.component.html',
     styleUrls: ['./rotor.component.css'],
     standalone: true,
-    imports: [FormsModule, CardModule, SharedModule, InputNumberModule, DropdownModule, NgIf, TableModule, FieldsetModule, ButtonModule, DialogModule, ListboxModule, LnbComponent,  forwardRef(()=> SwitchComponent), UnicableComponent, TranslateModule]
+    imports: [FormsModule, CardModule, SharedModule, InputNumberModule, SelectModule, NgIf, TableModule, FieldsetModule, ButtonModule, DialogModule, ListboxModule, LnbComponent,  forwardRef(()=> SwitchComponent), UnicableComponent, TranslateModule]
 })
 export class RotorComponent implements OnInit, AfterViewInit, DiseqcSettingBase {
 

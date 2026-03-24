@@ -2,7 +2,6 @@ import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '
 import { MenuItem } from 'primeng/api';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { SetupWizardService } from 'src/app/services/setupwizard.service';
-import { SetupService } from 'src/app/services/setup.service';
 import { RouterOutlet } from '@angular/router';
 import { BackendWarningComponent } from '../backend-warning/backend-warning.component';
 import { TabMenuModule } from 'primeng/tabmenu';
@@ -22,9 +21,9 @@ export class SetupWizardComponent implements OnInit, AfterViewInit {
     @ViewChild("top") topElement!: ElementRef;
 
     constructor(public wizardService: SetupWizardService,
-        private setupService: SetupService,
         private translate: TranslateService) {
-        setupService.pageType = 'S';
+        // setupService.pageType = 'S';
+        // this.setup();
     }
     fullMenu: MenuItem[] = [];
     dbSetupMenu: MenuItem[] = [];
@@ -33,6 +32,8 @@ export class SetupWizardComponent implements OnInit, AfterViewInit {
     activeItem!: MenuItem;
 
     ngOnInit(): void {
+    // }
+    // setup() {
         this.translate.get('setupwizard.steps.selectlanguage').subscribe(
             (translated: string) => {
                 this.fullMenu = [

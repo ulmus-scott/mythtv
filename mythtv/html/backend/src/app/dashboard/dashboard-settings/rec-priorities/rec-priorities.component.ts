@@ -2,7 +2,6 @@ import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/cor
 import { NgForm, FormsModule } from '@angular/forms';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { MythService } from 'src/app/services/myth.service';
-import { SetupService } from 'src/app/services/setup.service';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
 import { NgIf } from '@angular/common';
@@ -46,14 +45,12 @@ export class RecPrioritiesComponent implements OnInit, AfterViewInit {
     AudioDescRecPriority = 0;
 
 
-    constructor(private mythService: MythService, private translate: TranslateService,
-        private setupService: SetupService) {
+    constructor(private mythService: MythService, private translate: TranslateService) {
     }
 
     ngOnInit(): void {
         this.loadTranslations();
         this.loadValues();
-        this.markPristine();
         this.parent.children[this.tabIndex] = this;
     }
 
@@ -63,7 +60,7 @@ export class RecPrioritiesComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this.setupService.setCurrentForm(this.currentForm);
+        this.markPristine();
     }
 
     dirty() {
@@ -120,7 +117,10 @@ export class RecPrioritiesComponent implements OnInit, AfterViewInit {
     }
 
     markPristine() {
-        setTimeout(() => this.currentForm.form.markAsPristine(), 200);
+        setTimeout(() => {
+            this.currentForm.form.markAsPristine();
+            this.parent.showDirty();
+        }, 100);
     }
 
     swObserver = {

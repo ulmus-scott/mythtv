@@ -9,9 +9,9 @@ import { DvbComponent } from '../dvb.component';
 import { Observable, Observer } from 'rxjs';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputNumberModule } from 'primeng/inputnumber';
-import { DropdownModule } from 'primeng/dropdown';
 import { SharedModule } from 'primeng/api';
 import { CardModule } from 'primeng/card';
+import { Select, SelectModule } from "primeng/select";
 
 interface LnbPreset {
   Name: string;
@@ -32,7 +32,7 @@ interface LnbSubType {
     templateUrl: './lnb.component.html',
     styleUrls: ['./lnb.component.css'],
     standalone: true,
-    imports: [FormsModule, CardModule, SharedModule, DropdownModule, InputNumberModule, CheckboxModule, TranslateModule]
+    imports: [FormsModule, CardModule, SharedModule, SelectModule, InputNumberModule, CheckboxModule, TranslateModule, Select]
 })
 export class LnbComponent implements OnInit, AfterViewInit, DiseqcSettingBase {
 

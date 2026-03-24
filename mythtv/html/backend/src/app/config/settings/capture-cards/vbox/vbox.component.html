@@ -7,89 +7,89 @@
         <ng-template pTemplate="subtitle">
         </ng-template>
         <ng-template pTemplate="content">
-            <div class="grid grid-cols-12 gap-4">
-                <div class="mb-6 w-full"u>
+            <div class="mb-6 w-full" u>
 
-                    <div class="form-group field">
-                        <label for="VideoDevicePrompt" class="label block">{{ 'settings.capture.satip.device_label' |
-                            translate
-                            }}</label>
-                        <p-dropdown *ngIf="isReady" [options]="captureDeviceList.CaptureDeviceList.CaptureDevices"
-                            [(ngModel)]="currentDevice" [editable]="false" optionLabel="VideoDevicePrompt"
-                            (onChange)="updateDevice();" [maxlength]="0" [style]="{'minWidth':'83%'}"
-                            name="VideoDevicePrompt" #VideoDevicePrompt="ngModel">
-                        </p-dropdown>
-                        <div *ngIf="warningMessage">
-                            <small class="p-error block">
-                                {{ warningMessage }}
-                            </small>
-                        </div>
-                        <small class="block">
-                            {{ 'settings.capture.vbox.device_desc' | translate }}
+                <div class="form-group field">
+                    <label for="VideoDevicePrompt" class="label block">{{ 'settings.capture.satip.device_label' |
+                        translate
+                        }}</label>
+                    <p-select *ngIf="isReady" [options]="captureDeviceList.CaptureDeviceList.CaptureDevices"
+                        [(ngModel)]="currentDevice" [editable]="false" optionLabel="VideoDevicePrompt"
+                        (onChange)="updateDevice();" [maxlength]="0" [style]="{'minWidth':'83%'}"
+                        name="VideoDevicePrompt" #VideoDevicePrompt="ngModel">
+                    </p-select>
+                    <div *ngIf="warningMessage">
+                        <small class="p-error block">
+                            {{ warningMessage }}
                         </small>
                     </div>
-
-                    <div class="form-group field">
-                        <label class="label block">{{ 'settings.capture.vbox.deviceid_label' | translate
-                            }}</label>
-                        <div class="col-span-10 bg-blue-100 text-gray-900">
-                            {{ card.VideoDevice}} &nbsp;
-                        </div>
-                        <small class="block">
-                            {{ 'settings.capture.vbox.deviceid_desc' | translate }}
-                        </small>
-                    </div>
-
-                    <div class="form-group field">
-                        <label class="label block">{{ 'settings.capture.vbox.description_label' | translate
-                            }}</label>
-                        <div class="col-span-10 bg-blue-100 text-gray-900">
-                            {{ currentDevice.Description}} &nbsp;
-                        </div>
-                        <small class="block">
-                        </small>
-                    </div>
-
-                    <div class="form-group field">
-                        <label for="ip" class="label block">{{ 'settings.capture.ceton.ipaddress_label' | translate }}</label>
-                        <input pInputText id="ip" [(ngModel)]="currentDevice.IPAddress" name="ip" #ipAddress="ngModel"
-                            class="mb-2 form-control w-full" [disabled]="currentDevice !== manualDevice" />
-                        <small class="block">
-                            {{ 'settings.capture.vbox.ipaddress_desc' | translate }}
-                        </small>
-                    </div>
-
-                    <div class="form-group field">
-                        <label for="tuner" class="label block">{{ 'settings.capture.ceton.tuner_label' | translate }}</label>
-                        <input pInputText id="tuner" [(ngModel)]="currentDevice.TunerNumber" name="tuner"
-                            #ipAddress="ngModel" class="mb-2 form-control w-full"
-                            [disabled]="currentDevice !== manualDevice" />
-                        <small class="block">
-                            {{ 'settings.capture.vbox.tuner_desc' | translate }}
-                        </small>
-                    </div>
-
-                    <div class="form-group field">
-                        <label for="SignalTimeout" class="label block">{{ 'settings.capture.sigtimeout_label' | translate
-                            }}</label>
-                        <p-inputNumber [(ngModel)]="card.SignalTimeout" name="SignalTimeout" id="SignalTimeout"
-                            [showButtons]="true" [min]="250" [max]="60000" [step]="250"></p-inputNumber>
-                        <small class="block">
-                            {{ 'settings.capture.sigtimeout_desc' | translate }}
-                        </small>
-                    </div>
-
-                    <div class="form-group field">
-                        <label for="ChannelTimeout" class="label block">{{ 'settings.capture.tunetimeout_label' | translate
-                            }}</label>
-                        <p-inputNumber [(ngModel)]="card.ChannelTimeout" name="ChannelTimeout" id="ChannelTimeout"
-                            [showButtons]="true" [min]="2000" [max]="65000" [step]="250"></p-inputNumber>
-                        <small class="block">
-                            {{ 'settings.capture.tunetimeout_desc' | translate }}
-                        </small>
-                    </div>
-
+                    <small class="block">
+                        {{ 'settings.capture.vbox.device_desc' | translate }}
+                    </small>
                 </div>
+
+                <div class="form-group field">
+                    <label class="label block">{{ 'settings.capture.vbox.deviceid_label' | translate
+                        }}</label>
+                    <div class="col-span-10 bg-blue-100 text-gray-900">
+                        {{ card.VideoDevice}} &nbsp;
+                    </div>
+                    <small class="block">
+                        {{ 'settings.capture.vbox.deviceid_desc' | translate }}
+                    </small>
+                </div>
+
+                <div class="form-group field">
+                    <label class="label block">{{ 'settings.capture.vbox.description_label' | translate
+                        }}</label>
+                    <div class="col-span-10 bg-blue-100 text-gray-900">
+                        {{ currentDevice.Description}} &nbsp;
+                    </div>
+                    <small class="block">
+                    </small>
+                </div>
+
+                <div class="form-group field">
+                    <label for="ip" class="label block">{{ 'settings.capture.ceton.ipaddress_label' | translate
+                        }}</label>
+                    <input pInputText id="ip" [(ngModel)]="currentDevice.IPAddress" name="ip" #ipAddress="ngModel"
+                        class="mb-2 form-control w-full" [disabled]="currentDevice !== manualDevice" />
+                    <small class="block">
+                        {{ 'settings.capture.vbox.ipaddress_desc' | translate }}
+                    </small>
+                </div>
+
+                <div class="form-group field">
+                    <label for="tuner" class="label block">{{ 'settings.capture.ceton.tuner_label' | translate
+                        }}</label>
+                    <input pInputText id="tuner" [(ngModel)]="currentDevice.TunerNumber" name="tuner"
+                        #ipAddress="ngModel" class="mb-2 form-control w-full"
+                        [disabled]="currentDevice !== manualDevice" />
+                    <small class="block">
+                        {{ 'settings.capture.vbox.tuner_desc' | translate }}
+                    </small>
+                </div>
+
+                <div class="form-group field">
+                    <label for="SignalTimeout" class="label block">{{ 'settings.capture.sigtimeout_label' | translate
+                        }}</label>
+                    <p-inputNumber [(ngModel)]="card.SignalTimeout" name="SignalTimeout" id="SignalTimeout"
+                        [showButtons]="true" [min]="250" [max]="60000" [step]="250"></p-inputNumber>
+                    <small class="block">
+                        {{ 'settings.capture.sigtimeout_desc' | translate }}
+                    </small>
+                </div>
+
+                <div class="form-group field">
+                    <label for="ChannelTimeout" class="label block">{{ 'settings.capture.tunetimeout_label' | translate
+                        }}</label>
+                    <p-inputNumber [(ngModel)]="card.ChannelTimeout" name="ChannelTimeout" id="ChannelTimeout"
+                        [showButtons]="true" [min]="2000" [max]="65000" [step]="250"></p-inputNumber>
+                    <small class="block">
+                        {{ 'settings.capture.tunetimeout_desc' | translate }}
+                    </small>
+                </div>
+
             </div>
         </ng-template>
 
@@ -102,7 +102,7 @@
                         text="{{ 'common.networkfail' | translate }}"></p-message>
                 </div>
                 <p-button class="col pr-1" label="{{'common.save' | translate}}" icon="pi pi-save" iconPos="left"
-                    (onClick)="saveForm(); vboxform.form.markAsPristine()"
+                    (onClick)="saveForm(); markPristine()"
                     [disabled]="!vboxform.dirty || !card.VideoDevice || setupService.schedulingEnabled"></p-button>
             </div>
         </ng-template>

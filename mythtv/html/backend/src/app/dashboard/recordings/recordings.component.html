@@ -183,8 +183,8 @@
                          + '&Download=' + getDownload(program) + authorization}}"
                             pTooltip="{{ 'dashboard.recordings.download' | translate }}" tooltipPosition="left">
                             <i class="pi pi-download text-primary" [id]="'download_'+ rowIndex"></i></a>
-                        <button pButton pRipple icon="pi pi-ellipsis-v" class="p-button-text p-button-primary"
-                            (click)="showContextMenu(program,$event)"></button>
+                        <p-button icon="pi pi-ellipsis-v" variant="text" severity="primary"
+                            (click)="showContextMenu(program,$event)"/>
                     </td>
                 </tr>
             </ng-template>

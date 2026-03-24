@@ -7,57 +7,55 @@
         <ng-template pTemplate="subtitle">
         </ng-template>
         <ng-template pTemplate="content">
-            <div class="grid grid-cols-12 gap-4">
-                <div class="mb-6 w-full">
+            <div class="mb-6 w-full">
+                <div class="form-group field">
+                    <label for="ip" class="label block">{{ 'settings.capture.ceton.ipaddress_label' | translate
+                        }}</label>
+                    <input pInputText id="ip" [(ngModel)]="work.ipAddress" name="ip" #ipAddress="ngModel"
+                        class="mb-2 form-control w-full" />
+                    <small class="block">
+                        {{ 'settings.capture.ceton.ipaddress_desc' | translate }}
+                    </small>
+                </div>
 
-                    <div class="form-group field">
-                        <label for="ip" class="label block">{{ 'settings.capture.ceton.ipaddress_label' | translate }}</label>
-                        <input pInputText id="ip" [(ngModel)]="work.ipAddress" name="ip" #ipAddress="ngModel"
-                            class="mb-2 form-control w-full" />
-                        <small class="block">
-                            {{ 'settings.capture.ceton.ipaddress_desc' | translate }}
-                        </small>
-                    </div>
+                <div class="form-group field">
+                    <label for="tuner" class="label block">{{ 'settings.capture.ceton.tuner_label' | translate
+                        }}</label>
+                    <input pInputText id="tuner" [(ngModel)]="work.tuner" name="tuner" #ipAddress="ngModel"
+                        class="mb-2 form-control w-full" />
+                    <small class="block">
+                        {{ 'settings.capture.ceton.tuner_desc' | translate }}
+                    </small>
+                </div>
 
-                    <div class="form-group field">
-                        <label for="tuner" class="label block">{{ 'settings.capture.ceton.tuner_label' | translate }}</label>
-                        <input pInputText id="tuner" [(ngModel)]="work.tuner" name="tuner" #ipAddress="ngModel"
-                            class="mb-2 form-control w-full" />
-                        <small class="block">
-                            {{ 'settings.capture.ceton.tuner_desc' | translate }}
-                        </small>
-                    </div>
+                <div class="form-group field">
+                    <label for="VideoDevice" class="label block">{{ 'settings.capture.ceton.deviceid_label' | translate
+                        }}</label>
+                    <input pInputText id="VideoDevice" [(ngModel)]="card.VideoDevice" name="VideoDevice" disabled="true"
+                        #VideoDevice="ngModel" class="mb-2 form-control w-full" />
+                    <small class="block">
+                        {{ 'settings.capture.ceton.deviceid_desc' | translate }}
+                    </small>
+                </div>
 
-                    <div class="form-group field">
-                        <label for="VideoDevice" class="label block">{{ 'settings.capture.ceton.deviceid_label' | translate
-                            }}</label>
-                        <input pInputText id="VideoDevice" [(ngModel)]="card.VideoDevice" name="VideoDevice"
-                            disabled="true" #VideoDevice="ngModel" class="mb-2 form-control w-full" />
-                        <small class="block">
-                            {{ 'settings.capture.ceton.deviceid_desc' | translate }}
-                        </small>
-                    </div>
+                <div class="form-group field">
+                    <label for="SignalTimeout" class="label block">{{ 'settings.capture.sigtimeout_label' | translate
+                        }}</label>
+                    <p-inputNumber [(ngModel)]="card.SignalTimeout" name="SignalTimeout" id="SignalTimeout"
+                        [showButtons]="true" [min]="250" [max]="60000" [step]="250"></p-inputNumber>
+                    <small class="block">
+                        {{ 'settings.capture.sigtimeout_desc' | translate }}
+                    </small>
+                </div>
 
-                    <div class="form-group field">
-                        <label for="SignalTimeout" class="label block">{{ 'settings.capture.sigtimeout_label' | translate
-                            }}</label>
-                        <p-inputNumber [(ngModel)]="card.SignalTimeout" name="SignalTimeout" id="SignalTimeout"
-                            [showButtons]="true" [min]="250" [max]="60000" [step]="250"></p-inputNumber>
-                        <small class="block">
-                            {{ 'settings.capture.sigtimeout_desc' | translate }}
-                        </small>
-                    </div>
-
-                    <div class="form-group field">
-                        <label for="ChannelTimeout" class="label block">{{ 'settings.capture.tunetimeout_label' | translate
-                            }}</label>
-                        <p-inputNumber [(ngModel)]="card.ChannelTimeout" name="ChannelTimeout" id="ChannelTimeout"
-                            [showButtons]="true" [min]="1750" [max]="65000" [step]="250"></p-inputNumber>
-                        <small class="block">
-                            {{ 'settings.capture.tunetimeout_desc' | translate }}
-                        </small>
-                    </div>
-
+                <div class="form-group field">
+                    <label for="ChannelTimeout" class="label block">{{ 'settings.capture.tunetimeout_label' | translate
+                        }}</label>
+                    <p-inputNumber [(ngModel)]="card.ChannelTimeout" name="ChannelTimeout" id="ChannelTimeout"
+                        [showButtons]="true" [min]="1750" [max]="65000" [step]="250"></p-inputNumber>
+                    <small class="block">
+                        {{ 'settings.capture.tunetimeout_desc' | translate }}
+                    </small>
                 </div>
 
             </div>
@@ -72,7 +70,7 @@
                         text="{{ 'common.networkfail' | translate }}"></p-message>
                 </div>
                 <p-button class="col pr-1" label="{{'common.save' | translate}}" icon="pi pi-save" iconPos="left"
-                    (onClick)="saveForm(); cetonform.form.markAsPristine()"
+                    (onClick)="saveForm(); markPristine()"
                     [disabled]="!cetonform.dirty || !card.VideoDevice || setupService.schedulingEnabled"></p-button>
             </div>
         </ng-template>

@@ -7,105 +7,110 @@
             {{ 'settings.misc.subtitle' | translate }}
         </ng-template>
         <ng-template pTemplate="content">
-            <div class="grid grid-cols-12 gap-4">
-                <!-- File Management Panel -->
-                <p-fieldset class="mb-6 w-full" legend="{{ 'settings.misc.panel_filemgmt' | translate }}"
-                    [toggleable]="true" [collapsed]="true">
+            <!-- File Management Panel -->
+            <p-fieldset class="mb-6 w-full" legend="{{ 'settings.misc.panel_filemgmt' | translate }}"
+                [toggleable]="true" [collapsed]="true">
 
-                    <div class="form-group field">
-                        <p-checkbox [(ngModel)]="MasterBackendOverride" name="MasterBackendOverride" class="mb-2 w-full label"
-                            [binary]="true" value="{{ 'settings.misc.mbo_label' | translate }}">
-                        </p-checkbox>
-                        <small class="block">
-                            {{ 'settings.misc.mbo_desc' | translate }}
-                        </small>
-                    </div>
-
-                    <div class="form-group field">
-                        <p-checkbox [(ngModel)]="DeletesFollowLinks" name="DeletesFollowLinks" class="mb-2 w-full label"
-                            [binary]="true" value="{{ 'settings.misc.follow_label' | translate }}">
-                        </p-checkbox>
-                        <small class="block">
-                            {{ 'settings.misc.follow_desc' | translate }}
-                        </small>
-                    </div>
-
-                    <div class="form-group field">
-                        <p-checkbox [(ngModel)]="TruncateDeletesSlowly" name="TruncateDeletesSlowly" class="mb-2 w-full label"
-                            [binary]="true" value="{{ 'settings.misc.slowly_label' | translate }}">
-                        </p-checkbox>
-                        <small class="block">
-                            {{ 'settings.misc.slowly_desc' | translate }}
-                        </small>
-                    </div>
-
-                    <div class="form-group field">
-                        <label for="HDRingbufferSize" class="label block">{{ 'settings.misc.ringbuf_label' | translate
-                            }}</label>
-                        <p-inputNumber [(ngModel)]="HDRingbufferSize" name="HDRingbufferSize" id="HDRingbufferSize"
-                            [showButtons]="true" [min]="4700" [max]="94000" [step]="4700"></p-inputNumber>
-                        <small class="block">
-                            {{ 'settings.misc.ringbuf_desc' | translate }}
-                        </small>
-                    </div>
-
-                    <div class="form-group field">
-                        <label for="StorageScheduler" class="label block">{{ 'settings.misc.sg_label' | translate }}</label>
-                        <p-dropdown  appendTo="body" [options]="soptions " [(ngModel)]="StorageScheduler" optionLabel="name"
-                            optionValue="code" class="block w-60 mb-2" name="StorageScheduler">
-                        </p-dropdown>
-                        <small class="block">
-                            {{ 'settings.misc.sg_desc' | translate }}
-                        </small>
-                    </div>
-                </p-fieldset>
-
-                <!-- UPnP Section -->
-                <p-fieldset class="mb-6 w-full" legend="{{ 'settings.misc.panel_upnp' | translate }}"
-                    [toggleable]="true" [collapsed]="true">
-                    <div class="form-group field">
-                        <label for="UPNPWmpSource" class="label block">{{ 'settings.misc.upnp_label' | translate }}</label>
-                        <p-dropdown  appendTo="body" [options]="uoptions" [(ngModel)]="UPNPWmpSource" optionLabel="name"
-                            optionValue="code" class="block w-60 mb-2" name="UPNPWmpSource">
-                        </p-dropdown>
-                        <small class="block">
-                            {{ 'settings.misc.upnp_desc' | translate }}
-                        </small>
-                    </div>
-                </p-fieldset>
-
-                <div class="mb-6 w-full">
-
-                    <div class="form-group field">
-                        <label for="MiscStatusScript" class="label block">{{ 'settings.misc.statapp_label' | translate
-                            }}</label>
-                        <input pInputText id="MiscStatusScript" [(ngModel)]="MiscStatusScript" name="MiscStatusScript"
-                            class="mb-2 form-control w-full" />
-                        <small class="block">
-                            {{ 'settings.misc.statapp_desc' | translate }}
-                            <a href="https://wiki.mythtv.org/wiki/Miscellaneous_Status_Information" target="_blank">Miscellaneous Status Information</a>
-                        </small>
-                    </div>
-
-                    <div class="form-group field">
-                        <p-checkbox [(ngModel)]="DisableAutomaticBackup" name="DisableAutomaticBackup"
-                            class="mb-2 w-full label" [binary]="true" value="{{ 'settings.misc.disback_label' | translate }}">
-                        </p-checkbox>
-                        <small class="block">
-                            {{ 'settings.misc.disback_desc' | translate }}
-                        </small>
-                    </div>
-
-                    <div class="form-group field">
-                        <p-checkbox [(ngModel)]="DisableFirewireReset" name="DisableFirewireReset" class="mb-2 w-full label"
-                            [binary]="true" value="{{ 'settings.misc.disfwr_label' | translate }}">
-                        </p-checkbox>
-                        <small class="block">
-                            {{ 'settings.misc.disfwr_desc' | translate }}
-                        </small>
-                    </div>
-
+                <div class="form-group field">
+                    <p-checkbox [(ngModel)]="MasterBackendOverride" inputId="MasterBackendOverride"
+                        name="MasterBackendOverride" [binary]="true" />
+                    <label for="MasterBackendOverride" class="label pl-2">{{ 'settings.misc.mbo_label' | translate
+                        }}</label>
+                    <small class="block">
+                        {{ 'settings.misc.mbo_desc' | translate }}
+                    </small>
                 </div>
+
+                <div class="form-group field">
+                    <p-checkbox [(ngModel)]="DeletesFollowLinks" inputId="DeletesFollowLinks" name="DeletesFollowLinks"
+                        class="mb-2 w-full label" [binary]="true" />
+                    <label for="DeletesFollowLinks" class="label pl-2">{{ 'settings.misc.follow_label' | translate
+                        }}</label>
+                    <small class="block">
+                        {{ 'settings.misc.follow_desc' | translate }}
+                    </small>
+                </div>
+
+                <div class="form-group field">
+                    <p-checkbox [(ngModel)]="TruncateDeletesSlowly" inputId="TruncateDeletesSlowly"
+                        name="TruncateDeletesSlowly" class="mb-2 w-full label" [binary]="true" />
+                    <label for="TruncateDeletesSlowly" class="label pl-2">{{ 'settings.misc.slowly_label' | translate
+                        }}</label>
+
+                    <small class="block">
+                        {{ 'settings.misc.slowly_desc' | translate }}
+                    </small>
+                </div>
+
+                <div class="form-group field">
+                    <label for="HDRingbufferSize" class="label block">{{ 'settings.misc.ringbuf_label' | translate
+                        }}</label>
+                    <p-inputNumber [(ngModel)]="HDRingbufferSize" name="HDRingbufferSize" id="HDRingbufferSize"
+                        [showButtons]="true" [min]="4700" [max]="94000" [step]="4700"></p-inputNumber>
+                    <small class="block">
+                        {{ 'settings.misc.ringbuf_desc' | translate }}
+                    </small>
+                </div>
+
+                <div class="form-group field"  *ngIf="loadedCount > 14">
+                    <label for="StorageScheduler" class="label block">{{ 'settings.misc.sg_label' | translate }}</label>
+                    <p-select appendTo="body" [options]="soptions " [(ngModel)]="StorageScheduler" optionLabel="name"
+                        optionValue="code" class="block w-60 mb-2" name="StorageScheduler">
+                    </p-select>
+                    <small class="block">
+                        {{ 'settings.misc.sg_desc' | translate }}
+                    </small>
+                </div>
+            </p-fieldset>
+
+            <!-- UPnP Section -->
+            <p-fieldset class="mb-6 w-full" legend="{{ 'settings.misc.panel_upnp' | translate }}" [toggleable]="true"
+                [collapsed]="true">
+                <div class="form-group field" *ngIf="loadedCount > 14">
+                    <label for="UPNPWmpSource" class="label block">{{ 'settings.misc.upnp_label' | translate }}</label>
+                    <p-select appendTo="body" [options]="uoptions" [(ngModel)]="UPNPWmpSource" optionLabel="name"
+                        optionValue="code" class="block w-60 mb-2" name="UPNPWmpSource">
+                    </p-select>
+                    <small class="block">
+                        {{ 'settings.misc.upnp_desc' | translate }}
+                    </small>
+                </div>
+            </p-fieldset>
+
+            <div class="mb-6 w-full">
+
+                <div class="form-group field">
+                    <label for="MiscStatusScript" class="label block">{{ 'settings.misc.statapp_label' | translate
+                        }}</label>
+                    <input pInputText id="MiscStatusScript" [(ngModel)]="MiscStatusScript" name="MiscStatusScript"
+                        class="mb-2 form-control w-full" />
+                    <small class="block">
+                        {{ 'settings.misc.statapp_desc' | translate }}
+                        <a href="https://wiki.mythtv.org/wiki/Miscellaneous_Status_Information"
+                            target="_blank">Miscellaneous Status Information</a>
+                    </small>
+                </div>
+
+                <div class="form-group field">
+                    <p-checkbox [(ngModel)]="DisableAutomaticBackup" inputId="DisableAutomaticBackup" name="DisableAutomaticBackup"
+                        class="mb-2 w-full label" [binary]="true"/>
+                    <label for="DisableAutomaticBackup" class="label pl-2">{{ 'settings.misc.disback_label' | translate
+                        }}</label>
+                    <small class="block">
+                        {{ 'settings.misc.disback_desc' | translate }}
+                    </small>
+                </div>
+
+                <div class="form-group field">
+                    <p-checkbox [(ngModel)]="DisableFirewireReset" inputId="DisableFirewireReset" name="DisableFirewireReset" class="mb-2 w-full label"
+                        [binary]="true"/>
+                    <label for="DisableFirewireReset" class="label pl-2">{{ 'settings.misc.disfwr_label' | translate
+                        }}</label>
+                    <small class="block">
+                        {{ 'settings.misc.disfwr_desc' | translate }}
+                    </small>
+                </div>
+
             </div>
         </ng-template>
 
@@ -118,7 +123,7 @@
                         text="{{ 'common.networkfail' | translate }}"></p-message>
                 </div>
                 <p-button class="col pr-1" label="{{'common.save' | translate}}" icon="pi pi-save" iconPos="left"
-                    (onClick)="saveForm(); miscsettings.form.markAsPristine()"
+                    (onClick)="saveForm(); markPristine()"
                     [disabled]="!miscsettings.dirty || setupService.schedulingEnabled"></p-button>
             </div>
         </ng-template>

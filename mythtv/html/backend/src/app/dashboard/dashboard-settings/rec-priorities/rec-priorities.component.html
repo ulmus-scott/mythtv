@@ -131,7 +131,7 @@
                         text="{{ 'common.networkfail' | translate }}"></p-message>
                 </div>
                 <p-button class="col pr-1" label="{{'common.save' | translate}}" icon="pi pi-save" iconPos="left"
-                    (onClick)="saveForm(); priorities.form.markAsPristine()" [disabled]="!priorities.dirty"></p-button>
+                    (onClick)="saveForm(); markPristine()" [disabled]="!priorities.dirty"></p-button>
             </div>
         </ng-template>
     </p-card>

@@ -1,10 +1,10 @@
-import { Component, isDevMode, OnInit } from '@angular/core';
+import { Component, isDevMode, OnInit, ViewChild } from '@angular/core';
 import { Language, MythLanguageList } from "src/app/services/interfaces/language.interface";
 import { Theme } from 'src/app/services/interfaces/theme.interface';
 import { ThemeService } from '../../services/theme.service';
 import { ConfigService } from '../../services/config.service';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
-import { SharedModule } from 'primeng/api';
+import { MenuItem, SharedModule } from 'primeng/api';
 import { PrimeNG } from 'primeng/config';
 import { DataService } from 'src/app/services/data.service';
 import { MythService } from 'src/app/services/myth.service';
@@ -19,17 +19,21 @@ import { TooltipModule } from 'primeng/tooltip';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { NgIf } from '@angular/common';
-import { PopoverModule } from 'primeng/popover';
-import { usePreset } from '@primeuix/themes';
+import { Popover, PopoverModule } from 'primeng/popover';
+import { Menu, MenuModule } from 'primeng/menu';
+
 
 @Component({
     selector: 'app-navbar',
     templateUrl: './navbar.component.html',
     styleUrls: ['./navbar.component.css'],
     standalone: true,
-    imports: [NgIf, RippleModule, ButtonModule, TooltipModule, PopoverModule, SharedModule, TableModule, FormsModule, DialogModule, PasswordModule, CheckboxModule, MessageModule, TranslateModule]
+    imports: [NgIf, RippleModule, ButtonModule, TooltipModule, PopoverModule, SharedModule, TableModule, FormsModule, DialogModule, PasswordModule, CheckboxModule, MessageModule, TranslateModule, MenuModule]
 })
 export class NavbarComponent implements OnInit {
+    @ViewChild("themePanel") themePanel!: Popover;
+    @ViewChild("languagePanel") languagePanel!: Popover;
+    @ViewChild("menu") menu!: Menu;
 
     m_themes$!: Theme[];
     m_selectedTheme!: Theme;
@@ -47,6 +51,14 @@ export class NavbarComponent implements OnInit {
     errorCount = 0;
     APIAuthReqd = false;
     keepLogin = false;
+    navMenu: MenuItem[] = [];
+    mnulogin: MenuItem = { id: 'login', label: 'navbar.login', command: (event) => this.showLogin() };
+    mnulogout: MenuItem = { id: 'logout', label: 'navbar.logout', command: (event) => this.logout() };
+    // { label: 'navbar.switchTheme', command: (event) => this.themePanel.toggle(event) },
+    mnulang: MenuItem = {
+        label: 'navbar.changeLanguage',
+        command: (event) => { this.languagePanel.toggle(event.originalEvent) }
+    };
 
     constructor(private themeService: ThemeService,
         private configService: ConfigService,
@@ -82,6 +94,12 @@ export class NavbarComponent implements OnInit {
                         router.navigate(['dashboard/status']);
                 });
 
+        [this.mnulogin,this.mnulogout,this.mnulang].forEach(entry => {
+            if (entry.label)
+                this.translateService.get(entry.label).subscribe(data =>
+                    entry.label = data
+                );
+        });
     }
 
     ngOnInit(): void {
@@ -137,6 +155,16 @@ export class NavbarComponent implements OnInit {
 
     toggleShowNavbar() {
         this.m_showNavbar = !this.m_showNavbar;
+    }
+
+    showMenu(event: any) {
+        this.navMenu = [];
+        if (this.dataService.loggedInUser)
+            this.navMenu.push(this.mnulogout);
+        else
+            this.navMenu.push(this.mnulogin);
+        this.navMenu.push(this.mnulang);
+        this.menu.show(event);
     }
 
     toggleShowSidebar() {

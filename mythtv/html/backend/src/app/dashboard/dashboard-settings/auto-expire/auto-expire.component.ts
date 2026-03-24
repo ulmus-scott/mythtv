@@ -2,7 +2,6 @@ import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/cor
 import { NgForm, FormsModule } from '@angular/forms';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { MythService } from 'src/app/services/myth.service';
-import { SetupService } from 'src/app/services/setup.service';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
 import { NgIf } from '@angular/common';
@@ -43,8 +42,7 @@ export class AutoExpireComponent implements OnInit, AfterViewInit {
     AutoExpireExtraSpace = 1;
     DeletedMaxAge = 0;
 
-    constructor(private mythService: MythService, private translate: TranslateService,
-        private setupService: SetupService) {
+    constructor(private mythService: MythService, private translate: TranslateService) {
     }
 
     ngOnInit(): void {
@@ -60,7 +58,6 @@ export class AutoExpireComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this.setupService.setCurrentForm(this.currentForm);
     }
 
     dirty() {
@@ -107,10 +104,9 @@ export class AutoExpireComponent implements OnInit, AfterViewInit {
 
     markPristine() {
         setTimeout(() => {
-            this.currentForm.form.markAsPristine(), 200;
+            this.currentForm.form.markAsPristine();
             this.parent.showDirty();
-        });
-
+        }, 100);
     }
 
     swObserver = {

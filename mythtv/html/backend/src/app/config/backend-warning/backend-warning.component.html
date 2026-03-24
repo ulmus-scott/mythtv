@@ -36,8 +36,7 @@
                 <div class="flex items-center" *ngIf="retryCount <= 0">
                     <p-button class="pr-8 pb-1 pt-0 m-0" label="{{
                         (rrAllowed ? 'settings.main.restart_label' :'settings.main.restart_label_short')
-                        | translate }}"
-                        icon="pi pi-save" iconPos="left" (onClick)="restart(false);"></p-button>
+                        | translate }}" icon="pi pi-save" iconPos="left" (onClick)="restart(false);"></p-button>
                 </div>
                 <small class="block">{{ 'settings.main.restart_desc' | translate }}<br>&nbsp;</small>
             </div>
@@ -60,14 +59,14 @@
                 <p>{{ 'settings.main.slave_warning' | translate }}
                 </p>
             </div>
-            <div>
-                <p-progressSpinner *ngIf="retryCount > 0"></p-progressSpinner>
-                <p-message *ngIf="retryCount > 0" severity="info"
-                    text="{{ 'settings.main.restarting' | translate }}"></p-message>
-                <p>
-                    <p-message *ngIf="!setupService.isDatabaseIgnored && this.errorCount > 0 && retryCount == 0"
-                        severity="error" text="{{ 'common.networkfail' | translate }}"></p-message>
-                </p>
-            </div>
+            <!-- The progressspinner no longer works -->
+            <!-- <p-progressSpinner *ngIf="retryCount > 0" /> -->
+            <i class="pi pi-spin pi-cog" style="font-size: 8rem" *ngIf="retryCount > 0"></i>
+            <p-message *ngIf="retryCount > 0" severity="info"
+                text="{{ 'settings.main.restarting' | translate }}"></p-message>
+            <p>
+                <p-message *ngIf="!setupService.isDatabaseIgnored && this.errorCount > 0 && retryCount == 0"
+                    severity="error" text="{{ 'common.networkfail' | translate }}"></p-message>
+            </p>
         </p-card>
     </div>

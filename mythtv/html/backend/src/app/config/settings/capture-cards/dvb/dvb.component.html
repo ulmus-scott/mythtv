@@ -7,223 +7,220 @@
         <ng-template pTemplate="subtitle">
         </ng-template>
         <ng-template pTemplate="content">
-            <div class="grid grid-cols-12 gap-4">
-                <div class="mb-6 w-full">
+            <div class="mb-6 w-full">
 
-                    <div class="form-group field">
-                        <label for="VideoDevice" class="label block">{{ 'settings.capture.dvb.device_label' | translate
-                            }}</label>
-                        <p-dropdown *ngIf="work.isReady" [options]="captureDeviceList.CaptureDeviceList.CaptureDevices"
-                            [(ngModel)]="currentDevice" [editable]="false" optionLabel="VideoDevice"
-                            (onChange)="updateDevice();" [maxlength]="0" [style]="{'minWidth':'80%'}" name="VideoDevice"
-                            #VideoDevice="ngModel">
-                        </p-dropdown>
-                        <div *ngIf="work.warningMessage">
-                            <small class="p-error block">
-                                {{ work.warningMessage }}
-                            </small>
-                        </div>
-
-                        <small class="block">
-                            {{ 'settings.capture.device_desc' | translate }}
+                <div class="form-group field">
+                    <label for="VideoDevice" class="label block">{{ 'settings.capture.dvb.device_label' | translate
+                        }}</label>
+                    <p-select *ngIf="work.isReady" [options]="captureDeviceList.CaptureDeviceList.CaptureDevices"
+                        [(ngModel)]="currentDevice" [editable]="false" optionLabel="VideoDevice"
+                        (onChange)="updateDevice();" [maxlength]="0" [style]="{'minWidth':'80%'}" name="VideoDevice"
+                        #VideoDevice="ngModel">
+                    </p-select>
+                    <div *ngIf="work.warningMessage">
+                        <small class="p-error block">
+                            {{ work.warningMessage }}
                         </small>
                     </div>
 
-                    <div class="form-group field">
-                        <label for="FrontendName" class="label block">{{ 'settings.capture.dvb.frontend_label' |
-                            translate
-                            }}</label>
-                        <input pInputText id="FrontendName" *ngIf="work.isReady"
-                            [(ngModel)]="this.currentDevice.FrontendName" name="FrontendName" disabled="true"
-                            #FrontendName="ngModel" class="mb-2 form-control w-full" />
-                        <small class="block">
-                            {{ 'settings.capture.frontend_desc' | translate }}
-                        </small>
-                    </div>
-
-                    <div class="form-group field">
-                        <label for="InputName" class="label block">{{ 'settings.capture.dvb.inputname_label' | translate
-                            }}</label>
-                        <p-dropdown *ngIf="work.isReady" [options]="this.currentDevice.InputNames"
-                            [(ngModel)]="card.InputName" name="InputName" #InputName="ngModel">
-                        </p-dropdown>
-                        <small class="block">
-                            {{ 'settings.capture.inputname_desc' | translate }}
-                        </small>
-                    </div>
-
-                    <div class="form-group field">
-                        <label for="SignalTimeout" class="label block">{{ 'settings.capture.sigtimeout_label' |
-                            translate
-                            }}</label>
-                        <p-inputNumber [(ngModel)]="card.SignalTimeout" name="SignalTimeout" id="SignalTimeout"
-                            [showButtons]="true" [min]="250" [max]="60000" [step]="250"></p-inputNumber>
-                        <small class="block">
-                            {{ 'settings.capture.sigtimeout_desc' | translate }}
-                        </small>
-                    </div>
-
-                    <div class="form-group field">
-                        <label for="ChannelTimeout" class="label block">{{ 'settings.capture.tunetimeout_label' |
-                            translate
-                            }}</label>
-                        <p-inputNumber [(ngModel)]="card.ChannelTimeout" name="ChannelTimeout" id="ChannelTimeout"
-                            [showButtons]="true" [min]="1750" [max]="65000" [step]="250"></p-inputNumber>
-                        <small class="block">
-                            {{ 'settings.capture.tunetimeout_desc' | translate }}
-                        </small>
-                    </div>
-
-                    <div class="form-group field">
-                        <p-checkbox inputId="DVBWaitForSeqStart" [(ngModel)]="card.DVBWaitForSeqStart"
-                            name="DVBWaitForSeqStart" #DVBWaitForSeqStart="ngModel" class="label mb-2 w-full"
-                            [binary]="true" value="{{ 'settings.capture.dvb.wait_label' | translate }}">
-                        </p-checkbox>
-                        <small class="block">
-                            {{ 'settings.capture.dvb.wait_desc' | translate }}
-                        </small>
-                    </div>
-
-                    <div class="form-group field">
-                        <p-checkbox inputId="DVBOnDemand" [(ngModel)]="card.DVBOnDemand" name="DVBOnDemand"
-                            #DVBOnDemand="ngModel" class="label mb-2 w-full" [binary]="true"
-                            value="{{ 'settings.capture.dvb.ondemand_label' | translate }}">
-                        </p-checkbox>
-                        <small class="block">
-                            {{ 'settings.capture.dvb.ondemand_desc' | translate }}
-                        </small>
-                    </div>
-
-                    <div class="form-group field">
-                        <p-checkbox inputId="DVBEITScan" [(ngModel)]="card.DVBEITScan" name="DVBEITScan"
-                            #DVBEITScan="ngModel" class="label mb-2 w-full" [binary]="true"
-                            value="{{ 'settings.capture.dvb.eitscan_label' | translate }}">
-                        </p-checkbox>
-                        <small class="block">
-                            {{ 'settings.capture.dvb.eitscan_desc' | translate }}
-                        </small>
-                    </div>
-
-                    <div class="form-group field">
-                        <label for="DVBTuningDelay" class="label block">{{ 'settings.capture.dvb.tuningdelay_label' |
-                            translate }}</label>
-                        <p-inputNumber [(ngModel)]="card.DVBTuningDelay" name="DVBTuningDelay" id="DVBTuningDelay"
-                            [showButtons]="true" [min]="0" [max]="2000" [step]="25"></p-inputNumber>
-                        <small class="block">
-                            {{ 'settings.capture.dvb.tuningdelay_desc' | translate }}
-                        </small>
-                    </div>
-
+                    <small class="block">
+                        {{ 'settings.capture.device_desc' | translate }}
+                    </small>
                 </div>
-                <!-- Satellite Panel -->
-                <p-fieldset class="mb-6 w-full" legend="{{ 'settings.capture.dvb.satellite_heading' | translate }}"
-                    [toggleable]="true" [collapsed]="true">
 
-                    <p-button label="{{ 'settings.capture.dvb.newsatellite_button' | translate }}" *ngIf="!diseqcTree"
-                        (onClick)="work.displayNewDiseqc = true" icon="pi pi-plus-circle" styleClass="p-button-plain">
-                    </p-button>
+                <div class="form-group field">
+                    <label for="FrontendName" class="label block">{{ 'settings.capture.dvb.frontend_label' |
+                        translate
+                        }}</label>
+                    <input pInputText id="FrontendName" *ngIf="work.isReady"
+                        [(ngModel)]="this.currentDevice.FrontendName" name="FrontendName" disabled="true"
+                        #FrontendName="ngModel" class="mb-2 form-control w-full" />
+                    <small class="block">
+                        {{ 'settings.capture.frontend_desc' | translate }}
+                    </small>
+                </div>
 
-                    <p-dialog header="{{ 'settings.capture.dvb.newsatellite_heading' | translate }}"
-                        [(visible)]="work.displayNewDiseqc" [modal]="true" [style]="{width: '50vw'}" [draggable]="false"
-                        [resizable]="false">
+                <div class="form-group field">
+                    <label for="InputName" class="label block">{{ 'settings.capture.dvb.inputname_label' | translate
+                        }}</label>
+                    <p-select *ngIf="work.isReady" [options]="this.currentDevice.InputNames"
+                        [(ngModel)]="card.InputName" name="InputName" #InputName="ngModel">
+                    </p-select>
+                    <small class="block">
+                        {{ 'settings.capture.inputname_desc' | translate }}
+                    </small>
+                </div>
 
-                        <label for="disenqcTypes" class="label block">{{ 'settings.capture.dvb.newsatellite_devtype' |
-                            translate }}</label>
-                        <p-listbox [options]="captureCardService.diseqcTypes" [(ngModel)]="selectedDiseqcType"
-                            optionLabel="description" name="disenqcTypes" optionDisabled="inactive"
-                            (onDblClick)="newDiseqc();"></p-listbox>
+                <div class="form-group field">
+                    <label for="SignalTimeout" class="label block">{{ 'settings.capture.sigtimeout_label' |
+                        translate
+                        }}</label>
+                    <p-inputNumber [(ngModel)]="card.SignalTimeout" name="SignalTimeout" id="SignalTimeout"
+                        [showButtons]="true" [min]="250" [max]="60000" [step]="250"></p-inputNumber>
+                    <small class="block">
+                        {{ 'settings.capture.sigtimeout_desc' | translate }}
+                    </small>
+                </div>
 
-                        <ng-template pTemplate="footer">
-                            <p-button icon="pi pi-times-circle" (onClick)="work.displayNewDiseqc=false"
-                                label="{{ 'common.cancel' | translate }}" styleClass="p-button-plain">
-                            </p-button>
-                            <p-button icon="pi pi-check-circle" (onClick)="newDiseqc();"
-                                label="{{ 'common.ok' | translate }}" styleClass="p-button-plain"
-                                [disabled]="selectedDiseqcType.inactive">
-                            </p-button>
-                        </ng-template>
-                    </p-dialog>
-                    &nbsp;
-                    <p-button label="{{ 'settings.capture.dvb.satellite_connect' | translate }}" *ngIf="!diseqcTree"
-                        (onClick)="setupRootTrees() ; work.displayConnectDevice = true" icon="pi pi-plus-circle"
-                        styleClass="p-button-plain"
-                        pTooltip="{{ 'settings.capture.dvb.satellite_connect_tooltip' | translate }}">
-                    </p-button>
+                <div class="form-group field">
+                    <label for="ChannelTimeout" class="label block">{{ 'settings.capture.tunetimeout_label' |
+                        translate
+                        }}</label>
+                    <p-inputNumber [(ngModel)]="card.ChannelTimeout" name="ChannelTimeout" id="ChannelTimeout"
+                        [showButtons]="true" [min]="1750" [max]="65000" [step]="250"></p-inputNumber>
+                    <small class="block">
+                        {{ 'settings.capture.tunetimeout_desc' | translate }}
+                    </small>
+                </div>
 
-                    <p-dialog header="{{ 'settings.capture.dvb.satellite_connect' | translate }}"
-                        [(visible)]="work.displayConnectDevice" [modal]="true" [style]="{width: '50vw'}"
-                        [draggable]="false" [resizable]="false">
+                <div class="form-group field">
+                    <p-checkbox inputId="DVBWaitForSeqStart" [(ngModel)]="card.DVBWaitForSeqStart"
+                        name="DVBWaitForSeqStart" #DVBWaitForSeqStart="ngModel" class="label mb-2 w-full"
+                        [binary]="true"/>
+                    <label for="DVBWaitForSeqStart" class="label pl-2">{{ 'settings.capture.dvb.wait_label' | translate
+                        }}</label>
+                    <small class="block">
+                        {{ 'settings.capture.dvb.wait_desc' | translate }}
+                    </small>
+                </div>
 
-                        <label for="diseqcRootTrees" class="label block">{{ 'settings.capture.dvb.satellite_select' |
-                            translate }}</label>
-                        <p-listbox [options]="diseqcRootTrees" [(ngModel)]="work.selectedDiseqcTree"
-                            optionLabel="Description" name="diseqcRootTrees" optionValue="DiSEqCId"
-                            (onDblClick)="selectDiseqc();"></p-listbox>
-                        <ng-template pTemplate="footer">
+                <div class="form-group field">
+                    <p-checkbox inputId="DVBOnDemand" [(ngModel)]="card.DVBOnDemand" name="DVBOnDemand"
+                        #DVBOnDemand="ngModel" class="label mb-2 w-full" [binary]="true"/>
+                    <label for="DVBOnDemand" class="label pl-2">{{ 'settings.capture.dvb.ondemand_label' | translate
+                        }}</label>
+                    <small class="block">
+                        {{ 'settings.capture.dvb.ondemand_desc' | translate }}
+                    </small>
+                </div>
 
-                            <p-button icon="pi pi-times-circle" (onClick)="work.displayConnectDevice=false"
-                                label="{{ 'common.cancel' | translate }}" styleClass="p-button-plain">
-                            </p-button>
-                            <p-button icon="pi pi-check-circle" (onClick)="selectDiseqc();"
-                                label="{{ 'common.ok' | translate }}" styleClass="p-button-plain"
-                                [disabled]="!work.selectedDiseqcTree">
-                            </p-button>
-                        </ng-template>
-                    </p-dialog>
+                <div class="form-group field">
+                    <p-checkbox inputId="DVBEITScan" [(ngModel)]="card.DVBEITScan" name="DVBEITScan"
+                        #DVBEITScan="ngModel" class="label mb-2 w-full" [binary]="true"/>
+                    <label for="DVBEITScan" class="label pl-2">{{ 'settings.capture.dvb.eitscan_label' | translate
+                        }}</label>
+                    <small class="block">
+                        {{ 'settings.capture.dvb.eitscan_desc' | translate }}
+                    </small>
+                </div>
 
-                    <p-button styleClass="p-button-warning" *ngIf="diseqcTree" label="Delete Satellite Devices"
-                        icon="pi pi-trash" (onClick)="canDeleteDiseqc()">
-                    </p-button>
-                    <p-dialog header="{{ 'settings.capture.dvb.satellite_delete_header' | translate }}"
-                        [(visible)]="work.displayDeleteDiseqc" [modal]="true" [style]="{width: '50vw'}"
-                        [draggable]="false" [resizable]="false">
-                        <h2>{{ 'settings.common.ru_sure' | translate }}</h2>
-                        <p>{{ 'settings.capture.dvb.satellite_delete_desc' | translate }}</p>
-                        <ng-template pTemplate="footer">
-                            <p-button icon="pi pi-times-circle" (click)="work.displayDeleteDiseqc=false"
-                                label="{{ 'common.no' | translate }}" styleClass="p-button-plain">
-                            </p-button>
-                            <p-button icon="pi pi-check-circle" (click)="deleteDiseqc()"
-                                label="{{ 'common.yes' | translate }}" styleClass="p-button-plain"></p-button>
-                        </ng-template>
-                    </p-dialog>
-                    &nbsp;
-                    <p-button label="{{ 'settings.capture.dvb.satellite_disconnect' | translate }}" *ngIf="diseqcTree"
-                        (onClick)="work.displayDisconnect = true" icon="pi pi-minus-circle"
-                        styleClass="p-button-warning">
-                    </p-button>
-                    <p-dialog header="{{ 'settings.capture.dvb.satellite_disconnect' | translate }}"
-                        [(visible)]="work.displayDisconnect" [modal]="true" [style]="{width: '50vw'}"
-                        [draggable]="false" [resizable]="false">
-                        <h2>{{ 'settings.common.ru_sure' | translate }}</h2>
-                        <p>{{ 'settings.capture.dvb.satellite_disconnect_warning' | translate }}</p>
-                        <ng-template pTemplate="footer">
-                            <p-button icon="pi pi-times-circle" (click)="work.displayDisconnect=false"
-                                label="{{ 'common.no' | translate }}" styleClass="p-button-plain">
-                            </p-button>
-                            <p-button icon="pi pi-check-circle" (click)="unSelectDiseqc()"
-                                label="{{ 'common.yes' | translate }}" styleClass="p-button-plain"></p-button>
-                        </ng-template>
-                    </p-dialog>
-                    <p-message *ngIf="this.work.diseqcError" severity="error"
-                        text="{{ 'settings.capture.dvb.satellite_disconnect_error' | translate }}"></p-message>
-
-                    <app-lnb *ngIf="this.diseqcTree && this.diseqcTree.Type == 'lnb'" [diseqcTree]="diseqcTree"
-                        [diseqcTreeList]="diseqcTreeList" (baseEvent)="setDiseqcObject($event)" [dvbComponent]="this">
-                    </app-lnb>
-                    <app-rotor *ngIf="this.diseqcTree && this.diseqcTree.Type == 'rotor'" [diseqcTree]="diseqcTree"
-                        [diseqcTreeList]="diseqcTreeList" (baseEvent)="setDiseqcObject($event)" [dvbComponent]="this">
-                    </app-rotor>
-                    <app-switch *ngIf="this.diseqcTree && this.diseqcTree.Type == 'switch'" [diseqcTree]="diseqcTree"
-                        [diseqcTreeList]="diseqcTreeList" (baseEvent)="setDiseqcObject($event)" [dvbComponent]="this">
-                    </app-switch>
-                    <app-unicable *ngIf="this.diseqcTree && this.diseqcTree.Type == 'scr'" [diseqcTree]="diseqcTree"
-                        [diseqcTreeList]="diseqcTreeList" (baseEvent)="setDiseqcObject($event)" [dvbComponent]="this">
-                    </app-unicable>
-
-                </p-fieldset>
+                <div class="form-group field">
+                    <label for="DVBTuningDelay" class="label block">{{ 'settings.capture.dvb.tuningdelay_label' |
+                        translate }}</label>
+                    <p-inputNumber [(ngModel)]="card.DVBTuningDelay" name="DVBTuningDelay" id="DVBTuningDelay"
+                        [showButtons]="true" [min]="0" [max]="2000" [step]="25"></p-inputNumber>
+                    <small class="block">
+                        {{ 'settings.capture.dvb.tuningdelay_desc' | translate }}
+                    </small>
+                </div>
 
             </div>
+            <!-- Satellite Panel -->
+            <p-fieldset class="mb-6 w-full" legend="{{ 'settings.capture.dvb.satellite_heading' | translate }}"
+                [toggleable]="true" [collapsed]="true">
+
+                <p-button label="{{ 'settings.capture.dvb.newsatellite_button' | translate }}" *ngIf="!diseqcTree"
+                    (onClick)="work.displayNewDiseqc = true" icon="pi pi-plus-circle" severity="primary">
+                </p-button>
+
+                <p-dialog header="{{ 'settings.capture.dvb.newsatellite_heading' | translate }}"
+                    [(visible)]="work.displayNewDiseqc" [modal]="true" [style]="{width: '50vw'}" [draggable]="false"
+                    [resizable]="false">
+
+                    <label for="disenqcTypes" class="label block">{{ 'settings.capture.dvb.newsatellite_devtype' |
+                        translate }}</label>
+                    <p-listbox [options]="captureCardService.diseqcTypes" [(ngModel)]="selectedDiseqcType"
+                        optionLabel="description" name="disenqcTypes" optionDisabled="inactive"
+                        (onDblClick)="newDiseqc();"></p-listbox>
+
+                    <ng-template pTemplate="footer">
+                        <p-button icon="pi pi-times-circle" (onClick)="work.displayNewDiseqc=false"
+                            label="{{ 'common.cancel' | translate }}" severity="warn">
+                        </p-button>
+                        <p-button icon="pi pi-check-circle" (onClick)="newDiseqc();"
+                            label="{{ 'common.ok' | translate }}" severity="primary"
+                            [disabled]="selectedDiseqcType.inactive">
+                        </p-button>
+                    </ng-template>
+                </p-dialog>
+                &nbsp;
+                <p-button label="{{ 'settings.capture.dvb.satellite_connect' | translate }}" *ngIf="!diseqcTree"
+                    (onClick)="setupRootTrees() ; work.displayConnectDevice = true" icon="pi pi-plus-circle"
+                    severity="primary"
+                    pTooltip="{{ 'settings.capture.dvb.satellite_connect_tooltip' | translate }}">
+                </p-button>
+
+                <p-dialog header="{{ 'settings.capture.dvb.satellite_connect' | translate }}"
+                    [(visible)]="work.displayConnectDevice" [modal]="true" [style]="{width: '50vw'}" [draggable]="false"
+                    [resizable]="false">
+
+                    <label for="diseqcRootTrees" class="label block">{{ 'settings.capture.dvb.satellite_select' |
+                        translate }}</label>
+                    <p-listbox [options]="diseqcRootTrees" [(ngModel)]="work.selectedDiseqcTree"
+                        optionLabel="Description" name="diseqcRootTrees" optionValue="DiSEqCId"
+                        (onDblClick)="selectDiseqc();"></p-listbox>
+                    <ng-template pTemplate="footer">
+
+                        <p-button icon="pi pi-times-circle" (onClick)="work.displayConnectDevice=false"
+                            label="{{ 'common.cancel' | translate }}" severity="warn">
+                        </p-button>
+                        <p-button icon="pi pi-check-circle" (onClick)="selectDiseqc();"
+                            label="{{ 'common.ok' | translate }}" severity="primary"
+                            [disabled]="!work.selectedDiseqcTree">
+                        </p-button>
+                    </ng-template>
+                </p-dialog>
+
+                <p-button severity="warn" *ngIf="diseqcTree" label="Delete Satellite Devices"
+                    icon="pi pi-trash" (onClick)="canDeleteDiseqc()">
+                </p-button>
+                <p-dialog header="{{ 'settings.capture.dvb.satellite_delete_header' | translate }}"
+                    [(visible)]="work.displayDeleteDiseqc" [modal]="true" [style]="{width: '50vw'}" [draggable]="false"
+                    [resizable]="false">
+                    <h2>{{ 'settings.common.ru_sure' | translate }}</h2>
+                    <p>{{ 'settings.capture.dvb.satellite_delete_desc' | translate }}</p>
+                    <ng-template pTemplate="footer">
+                        <p-button icon="pi pi-times-circle" (click)="work.displayDeleteDiseqc=false"
+                            label="{{ 'common.no' | translate }}" severity="warn">
+                        </p-button>
+                        <p-button icon="pi pi-check-circle" (click)="deleteDiseqc()"
+                            label="{{ 'common.yes' | translate }}" severity="primary"></p-button>
+                    </ng-template>
+                </p-dialog>
+                &nbsp;
+                <p-button label="{{ 'settings.capture.dvb.satellite_disconnect' | translate }}" *ngIf="diseqcTree"
+                    (onClick)="work.displayDisconnect = true" icon="pi pi-minus-circle" severity="warn">
+                </p-button>
+                <p-dialog header="{{ 'settings.capture.dvb.satellite_disconnect' | translate }}"
+                    [(visible)]="work.displayDisconnect" [modal]="true" [style]="{width: '50vw'}" [draggable]="false"
+                    [resizable]="false">
+                    <h2>{{ 'settings.common.ru_sure' | translate }}</h2>
+                    <p>{{ 'settings.capture.dvb.satellite_disconnect_warning' | translate }}</p>
+                    <ng-template pTemplate="footer">
+                        <p-button icon="pi pi-times-circle" (click)="work.displayDisconnect=false"
+                            label="{{ 'common.no' | translate }}" severity="warn">
+                        </p-button>
+                        <p-button icon="pi pi-check-circle" (click)="unSelectDiseqc()"
+                            label="{{ 'common.yes' | translate }}" severity="primary"></p-button>
+                    </ng-template>
+                </p-dialog>
+                <p-message *ngIf="this.work.diseqcError" severity="error"
+                    text="{{ 'settings.capture.dvb.satellite_disconnect_error' | translate }}"></p-message>
+
+                <app-lnb *ngIf="this.diseqcTree && this.diseqcTree.Type == 'lnb'" [diseqcTree]="diseqcTree"
+                    [diseqcTreeList]="diseqcTreeList" (baseEvent)="setDiseqcObject($event)" [dvbComponent]="this">
+                </app-lnb>
+                <app-rotor *ngIf="this.diseqcTree && this.diseqcTree.Type == 'rotor'" [diseqcTree]="diseqcTree"
+                    [diseqcTreeList]="diseqcTreeList" (baseEvent)="setDiseqcObject($event)" [dvbComponent]="this">
+                </app-rotor>
+                <app-switch *ngIf="this.diseqcTree && this.diseqcTree.Type == 'switch'" [diseqcTree]="diseqcTree"
+                    [diseqcTreeList]="diseqcTreeList" (baseEvent)="setDiseqcObject($event)" [dvbComponent]="this">
+                </app-switch>
+                <app-unicable *ngIf="this.diseqcTree && this.diseqcTree.Type == 'scr'" [diseqcTree]="diseqcTree"
+                    [diseqcTreeList]="diseqcTreeList" (baseEvent)="setDiseqcObject($event)" [dvbComponent]="this">
+                </app-unicable>
+
+            </p-fieldset>
         </ng-template>
 
         <ng-template pTemplate="footer">
@@ -235,7 +232,7 @@
                         text="{{ 'common.networkfail' | translate }}"></p-message>
                 </div>
                 <p-button class="col pr-1" label="{{'common.save' | translate}}" icon="pi pi-save" iconPos="left"
-                    (onClick)="saveForm(); dvbform.form.markAsPristine()"
+                    (onClick)="saveForm(); markPristine()"
                     [disabled]="!dvbform.dirty || !card.VideoDevice || setupService.schedulingEnabled"></p-button>
             </div>
         </ng-template>
