@@ -877,6 +877,7 @@ int lirc_readconfig(const struct lirc_state *state,
 		}
 		close(sockfd);
 		lirc_freeconfig(*config);
+		*config = nullptr;
 		return -1;
 	}
 	close(sockfd);
@@ -905,6 +906,7 @@ int lirc_readconfig(const struct lirc_state *state,
 	}
 	close(sockfd);
 	lirc_freeconfig(*config);
+	*config = nullptr;
 	return -1;
 }
 
