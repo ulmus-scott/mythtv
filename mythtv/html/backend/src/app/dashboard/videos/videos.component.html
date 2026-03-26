@@ -18,8 +18,7 @@
                     </p-button>
 
                     <span *ngFor="let dir of directory; index as ix">
-                        <p-button (onClick)="breadCrumb(ix+1)" label="{{ dir }}" class="px-1"
-                            severity="info">
+                        <p-button (onClick)="breadCrumb(ix+1)" label="{{ dir }}" class="px-1" severity="info">
                         </p-button>
                     </span>
                     &nbsp;&nbsp;&nbsp;
@@ -41,14 +40,17 @@
 
                     &nbsp;&nbsp;&nbsp; {{ 'dashboard.videos.category' | translate }}: &nbsp;
 
-                    <p-select [(ngModel)]="selectedCategory" [options]="catGroups" name="filter"
-                        (onChange)="onFilter()" placeholder="{{ 'settings.chanedit.all' | translate }}"
-                        [showClear]="true" optionLabel="Name" optionValue="Id" class="'px-3">
+                    <p-select [(ngModel)]="selectedCategory" [options]="catGroups" name="filter" (onChange)="onFilter()"
+                        placeholder="{{ 'settings.chanedit.all' | translate }}" [showClear]="true" optionLabel="Name"
+                        optionValue="Id" class="'px-3">
                     </p-select>
-
+                    <!-- The progressspinner no longer works -->
                     <div *ngIf="refreshing else refreshBn">
-                        <p-progressSpinner [style]="{width: '30px', height: '30px'}"></p-progressSpinner>
+                        <i class="pi pi-spin pi-cog px-3 text-primary"></i>
                     </div>
+                    <!-- <div *ngIf="refreshing else refreshBn">
+                        <p-progressSpinner [style]="{width: '30px', height: '30px'}"></p-progressSpinner>
+                    </div> -->
                     <ng-template #refreshBn>
                         <button pButton pRipple icon="pi pi-refresh" class="p-button-text .p-button-success"
                             (click)="refreshing=true;reLoadVideos()"
@@ -190,8 +192,8 @@
             <div class="form-group field">
                 <label for="ReleaseDate" class="label block">{{ 'dashboard.videos.releasedate' | translate
                     }}</label>
-                <p-datePicker [(ngModel)]="video.ReleaseDate" dateFormat="yy-mm-dd" name="ReleaseDate"
-                    id="ReleaseDate" appendTo="body"/>
+                <p-datePicker [(ngModel)]="video.ReleaseDate" dateFormat="yy-mm-dd" name="ReleaseDate" id="ReleaseDate"
+                    appendTo="body" />
             </div>
 
             <div class="form-group field">

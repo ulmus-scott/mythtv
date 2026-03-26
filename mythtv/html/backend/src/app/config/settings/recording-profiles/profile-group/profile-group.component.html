@@ -11,10 +11,10 @@
 
         <ng-template pTemplate="footer">
             <p-button icon="pi pi-times-circle" (onClick)="displayNewDialog=false"
-                label="{{ 'common.cancel' | translate }}" styleClass="p-button-plain">
+                label="{{ 'common.cancel' | translate }}" severity="warn">
             </p-button>
             <p-button icon="pi pi-check-circle" (onClick)="newProfile();" label="{{ 'common.ok' | translate }}"
-                styleClass="p-button-plain" [disabled]="rejectName()">
+                severity="primary" [disabled]="rejectName()">
             </p-button>
         </ng-template>
     </p-dialog>
@@ -35,7 +35,15 @@
     </div>
 
     <p-accordion class="col-span-12 w-full" (onClose)="onTabClose($event)" (onOpen)="onTabOpen($event)">
-        <p-accordionTab *ngFor="let profile of group.RecProfiles; index as ix; first as isFirst"
+        @for (profile of group.RecProfiles; track $index; let ix = $index) {
+        <p-accordion-panel [value]="ix">
+            <p-accordion-header (click)="onClick({index:ix})">
+                {{ profile.Name }}
+                {{dirtyMessages[ix]}}
+            </p-accordion-header>
+            <p-accordion-content>
+
+                <!-- <p-accordionTab *ngFor="let profile of group.RecProfiles; index as ix; first as isFirst"
             [disabled]="disabledTab[ix]" [(selected)]="activeTab[ix]">
             <ng-template pTemplate="header">
                 <div class="grid grid-cols-12 gap-4  w-full">
@@ -45,9 +53,10 @@
                     </div>
                 </div>
             </ng-template>
-            <ng-template pTemplate="content">
+            <ng-template pTemplate="content"> -->
                 <p-button styleClass="p-button-warning" label="{{ 'settings.rprofiles.delete_this' | translate }}"
-                    icon="pi pi-trash" (onClick)="displayDeleteThis[ix]=true" [disabled]="!group.RecProfiles[ix].Id || setupService.schedulingEnabled">
+                    icon="pi pi-trash" (onClick)="displayDeleteThis[ix]=true"
+                    [disabled]="!group.RecProfiles[ix].Id || setupService.schedulingEnabled">
                 </p-button>
                 <p-dialog header="{{ 'settings.rprofiles.delete_this' | translate }}"
                     [(visible)]="displayDeleteThis[ix]" [modal]="true" [style]="{width: '50vw'}" [draggable]="false"
@@ -58,14 +67,17 @@
                         GroupName: group.Name } }}</p>
                     <ng-template pTemplate="footer">
                         <p-button icon="pi pi-times-circle" (click)="displayDeleteThis[ix]=false"
-                            label="{{ 'common.no' | translate }}" styleClass="p-button-plain">
+                            label="{{ 'common.no' | translate }}" severity="primary">
                         </p-button>
                         <p-button icon="pi pi-check-circle" (click)="deleteThis(ix)"
-                            label="{{ 'common.yes' | translate }}" styleClass="p-button-plain"></p-button>
+                            label="{{ 'common.yes' | translate }}" severity="primary"></p-button>
                     </ng-template>
                 </p-dialog>
-                <app-recprofile [profile]="profile" [group]="group" [parentComponent]="this"></app-recprofile>
-            </ng-template>
-        </p-accordionTab>
+                <app-recprofile [profile]="profile" [group]="group" [parent]="this" [tabIndex]="ix"></app-recprofile>
+                <!-- </ng-template>
+                </p-accordionTab> -->
+            </p-accordion-content>
+        </p-accordion-panel>
+        }
     </p-accordion>
 </div>

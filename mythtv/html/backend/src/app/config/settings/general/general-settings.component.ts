@@ -52,11 +52,10 @@ export class SettingsComponent implements OnInit, CanComponentDeactivate {
     m_showHelp: boolean = false;
     currentTab: number = -1;
     // This allows for up to 16 tabs
-    dirtyMessages: string[] = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];
-    // forms: any[] = [, , , , , , , , , , , , , , , ,];
+    dirtyMessages: string[] = [];
     dirtyText = 'settings.common.unsaved';
     warningText = 'settings.common.warning';
-    children: any[] = [, , , , , , , , , , , , , , , ,];
+    children: any[] = [];
 
     constructor(private setupService: SetupService, private translate: TranslateService, public router: Router) {
         translate.get(this.dirtyText).subscribe(data => this.dirtyText = data);
@@ -72,7 +71,7 @@ export class SettingsComponent implements OnInit, CanComponentDeactivate {
         // console.log("onTabOpen");
         // console.log(e);
         // This line removes "Unsaved Changes" from current tab header.
-        this.dirtyMessages[this.currentTab] = "";
+        // this.dirtyMessages[this.currentTab] = "";
         // This line supports showing "Unsaved Changes" on current tab header,
         // and you must comment the above line,
         // but the "Unsaved Changes" text does not go away after save, so it
@@ -86,11 +85,11 @@ export class SettingsComponent implements OnInit, CanComponentDeactivate {
 
     // Temporary until onTabOpen and onTabClose are fixed
     onClick(e: { index: number }) {
-        this.showDirty();
+        this.onTabOpen(e);
     }
 
     showDirty() {
-        for (let ix = 0; ix < this.dirtyMessages.length; ix++) {
+        for (let ix = 0; ix < this.children.length; ix++) {
             if (this.children[ix]) {
                 if (this.children[ix].dirty())
                     this.dirtyMessages[ix] = this.dirtyText;
@@ -111,7 +110,7 @@ export class SettingsComponent implements OnInit, CanComponentDeactivate {
 
     canDeactivate(): Observable<boolean> | boolean {
         if (this.children[this.currentTab] && (this.children[this.currentTab]).dirty()
-            || this.dirtyMessages.find(element => element.length > 0)) {
+            || this.dirtyMessages.find(element => element && element.length > 0)) {
             return this.confirm(this.warningText);
         }
         return true;
@@ -120,7 +119,7 @@ export class SettingsComponent implements OnInit, CanComponentDeactivate {
     @HostListener('window:beforeunload', ['$event'])
     onWindowClose(event: any): void {
         if (this.children[this.currentTab] && (this.children[this.currentTab]).dirty()
-            || this.dirtyMessages.find(element => element.length > 0)) {
+            || this.dirtyMessages.find(element => element && element.length > 0)) {
             event.preventDefault();
             event.returnValue = false;
         }

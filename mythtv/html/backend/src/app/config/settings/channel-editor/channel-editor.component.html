@@ -1,26 +1,25 @@
 <h2>{{ 'settings.chanedit.title' | translate }}</h2>
 <div class="block card w-full" style="height: 90vh" *ngIf="(chansLoaded && transDone >= numTranslations) else loading">
-    <p-table [value]="allChannels" scrollHeight="flex" [scrollable]="true"
-        styleClass="p-datatable-sm p-datatable-striped" [rowHover]="true" (onFilter)="onFilter($event)"
-        responsiveLayout="scroll" [sortField]="sortField" [sortOrder]="sortOrder" (onSort)="onSort($event)"
-        size="small">
+    <p-table [value]="allChannels" scrollHeight="flex" [scrollable]="true" [rowHover]="true"
+        (onFilter)="onFilter($event)" responsiveLayout="scroll" [sortField]="sortField" [sortOrder]="sortOrder"
+        (onSort)="onSort($event)" size="small" [showGridlines]="true" [stripedRows]="true">
         <ng-template pTemplate="caption">
             <button pButton pRipple label="{{ 'settings.chanedit.new_channel' | translate }}" icon="pi pi-plus"
                 class="p-button-success mr-2" (click)="openNew()"
                 [disabled]="setupService.pageType == 'S' && setupService.schedulingEnabled"></button>
             <p-button icon="pi pi-trash" (onClick)="deleteSourceRequest()" *ngIf="setupService.pageType == 'S' "
                 pTooltip="{{ 'settings.chanedit.delete_source' | translate }}" tooltipPosition="top"
-                label="{{ 'common.delete' | translate }}" styleClass="p-button-danger"
-                [disabled]="setupService.schedulingEnabled" class="p-2">
+                label="{{ 'common.delete' | translate }}" severity="danger" [disabled]="setupService.schedulingEnabled"
+                class="p-2">
             </p-button>
             <p-button icon="pi pi-history" (onClick)="restoreDataRequest()"
                 pTooltip="{{ 'settings.chanedit.res_tooltip' | translate }}" tooltipPosition="top"
-                label="{{ 'settings.chanedit.res_title' | translate }}" styleClass="p-button-success" class="p-2"
+                label="{{ 'settings.chanedit.res_title' | translate }}" severity="warn" class="p-2"
                 [disabled]="videoSources.length == 0">
             </p-button>
             <p-button icon="pi pi-download" pTooltip="{{ 'settings.chanedit.icondld_tooltip' | translate }}"
                 tooltipPosition="top" (onClick)="downloadIconsRequest()"
-                label="{{ 'settings.chanedit.icondld_title' | translate }}" styleClass="p-button-success" class="p-2"
+                label="{{ 'settings.chanedit.icondld_title' | translate }}" severity="primary" class="p-2"
                 [disabled]="videoSources.length == 0">
             </p-button>
             <div *ngIf="setupService.pageType != 'S' " class="p-2">
@@ -59,14 +58,14 @@
                 <th>
                     <p-columnFilter field="Source" matchMode="equals" [showMenu]="false">
                         <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                            <p-dropdown [ngModel]="value" [options]="sourceNames" name="filter"
+                            <p-select [ngModel]="value" [options]="sourceNames" name="filter"
                                 (onChange)="filter($event.value)"
                                 placeholder="{{ 'settings.chanedit.all' | translate }}" [showClear]="true"
                                 appendTo="body">
                                 <ng-template let-option pTemplate="item">
                                     {{option}}
                                 </ng-template>
-                            </p-dropdown>
+                            </p-select>
                         </ng-template>
                     </p-columnFilter>
                 </th>
@@ -115,7 +114,9 @@
     </p-table>
 </div>
 <ng-template #loading>
-    <p-progressSpinner></p-progressSpinner>
+    <!-- The progressspinner no longer works -->
+    <!-- <p-progressSpinner></p-progressSpinner> -->
+    <i class="pi pi-spin pi-cog text-primary" style="font-size: 8rem"></i>
 </ng-template>
 
 <form class="ml-4 mr-4" name="chanform" #chanform="ngForm">
@@ -162,25 +163,23 @@
         <div class="form-group field">
             <label for="icon" class="label block">{{ 'settings.chanedit.icon_label' | translate
                 }}</label>
-            <p-dropdown [options]="icons" [(ngModel)]="channel.Icon" name="icon" appendTo="body">
+            <p-select [options]="icons" [(ngModel)]="channel.Icon" name="icon" appendTo="body">
                 <ng-template pTemplate="selectedItem">
-                    <div *ngIf="channel.Icon">
+                    <div *ngIf="channel.Icon" class="flex items-center h-8">
                         <img *ngIf="!channel.Icon.endsWith('\t')"
                             src="{{'./Guide/GetChannelIcon?Filename=' + channel.Icon + authorization }}"
-                            class="align-middle h-8" />
-                        &nbsp;&nbsp;{{channel.Icon}}
+                            class="items-center h-8" />&nbsp;&nbsp;{{channel.Icon}}
                     </div>
                 </ng-template>
                 <ng-template let-icon pTemplate="item">
-                    <div>
+                    <div class="flex items-center h-8">
                         <!-- Name ending with tab character is code for "no icon". -->
                         <img *ngIf="!icon.endsWith('\t')"
                             src="{{'./Guide/GetChannelIcon?Filename=' + icon + authorization }}"
-                            class="align-middle h-8" />
-                        &nbsp;&nbsp;{{icon}}
+                            class="items-center h-8" />&nbsp;&nbsp;{{icon}}
                     </div>
                 </ng-template>
-            </p-dropdown>
+            </p-select>
             <small class="block">
                 <div [innerHTML]="'settings.chanedit.icon_desc' |
                  translate: {iconDir: '<code>&quot;' + iconDir + '&quot;</code>'} "> </div>
@@ -189,7 +188,7 @@
 
         <div class="form-group field">
             <p-button icon="pi pi-search" (onClick)="searchIconRequest();"
-                label="{{ 'settings.chanedit.iconsrch_title' | translate }}" styleClass="p-button-success"></p-button>
+                label="{{ 'settings.chanedit.iconsrch_title' | translate }}" severity="primary"></p-button>
             <small class="block">
                 {{ 'settings.chanedit.iconsearch_desc' | translate }}
             </small>
@@ -198,10 +197,10 @@
         <div class="form-group field">
             <label for="ExtendedVisible" class="label block">{{ 'settings.chanedit.visible_label' | translate
                 }}</label>
-            <p-dropdown [options]="visibilities" [(ngModel)]="channel.ExtendedVisible" [editable]="false"
+            <p-select [options]="visibilities" [(ngModel)]="channel.ExtendedVisible" [editable]="false"
                 optionLabel="prompt" optionValue="value" [maxlength]="0" [style]="{'minWidth':'400px'}"
                 name="ExtendedVisible" #ExtendedVisible="ngModel" appendTo="body">
-            </p-dropdown>
+            </p-select>
             <small class="block">
                 {{ 'settings.chanedit.visible_desc' | translate }}
             </small>
@@ -210,10 +209,10 @@
         <div class="form-group field">
             <label for="SourceId" class="label block">{{ 'settings.chanedit.source_label' | translate
                 }}</label>
-            <p-dropdown [options]="videoSources" [(ngModel)]="channel.SourceId" [editable]="false"
+            <p-select [options]="videoSources" [(ngModel)]="channel.SourceId" [editable]="false"
                 optionLabel="SourceName" optionValue="Id" [maxlength]="0" [style]="{'minWidth':'400px'}" name="SourceId"
                 #SourceId="ngModel" appendTo="body">
-            </p-dropdown>
+            </p-select>
             <small class="block">
                 {{ 'settings.chanedit.source_desc' | translate }}
             </small>
@@ -222,10 +221,10 @@
         <div class="form-group field">
             <label for="Format" class="label block">{{ 'settings.chanedit.format_label' | translate
                 }}</label>
-            <p-dropdown [options]="tvFormats" [(ngModel)]="channel.Format" [editable]="false" optionLabel="prompt"
+            <p-select [options]="tvFormats" [(ngModel)]="channel.Format" [editable]="false" optionLabel="prompt"
                 optionValue="value" [maxlength]="0" [style]="{'minWidth':'400px'}" name="Format" #Format="ngModel"
                 appendTo="body">
-            </p-dropdown>
+            </p-select>
             <small class="block">
                 {{ 'settings.chanedit.format_desc' | translate }}
             </small>
@@ -243,8 +242,9 @@
 
         <div class="form-group field">
             <p-checkbox inputId="UseEIT" [(ngModel)]="channel.UseEIT" name="UseEIT" #UseEIT="ngModel"
-                class="label mb-2 w-full" [binary]="true" value="{{ 'settings.chanedit.eit_label' | translate }}">
-            </p-checkbox>
+                class="label mb-2 w-full" [binary]="true" />
+            <label for="UseEIT" class="label pl-2">{{ 'settings.chanedit.eit_label' | translate
+                }}</label>
             <small class="block">
                 {{ 'settings.chanedit.eit_desc' | translate }}
             </small>
@@ -272,41 +272,42 @@
         <div class="form-group field">
             <label for="CommMethod" class="label block">{{ 'settings.chanedit.commmethod_label' | translate
                 }}</label>
-            <p-dropdown [options]="commMethods" [(ngModel)]="channel.CommMethod" [editable]="false"
+            <p-select [options]="commMethods" [(ngModel)]="channel.CommMethod" [editable]="false"
                 optionLabel="LocalizedName" optionValue="CommMethod" [maxlength]="0" [style]="{'minWidth':'400px'}"
                 name="CommMethod" #CommMethod="ngModel" appendTo="body">
-            </p-dropdown>
+            </p-select>
             <small class="block">
                 {{ 'settings.chanedit.commmethod_desc' | translate }}
             </small>
         </div>
 
         <!-- Advanced Settings Panel -->
-        <p-accordion>
-            <p-accordionTab header="{{ 'settings.chanedit_advanced' | translate }}" [(selected)]="selectedAdvanced">
-                <div class="form-group field">
-                    <label for="MplexId" class="label block">{{ 'settings.chanedit.mplex_label' | translate
-                        }}</label>
-                    <p-dropdown [options]="multiplexes" [(ngModel)]="channel.MplexId" [editable]="false"
-                        optionLabel="Description" optionValue="MplexId" [maxlength]="0" [style]="{'minWidth':'400px'}"
-                        name="MplexId" #MplexId="ngModel" appendTo="body">
-                    </p-dropdown>
-                    <small class="block">
-                        {{ 'settings.chanedit.mplex_desc' | translate }}
-                    </small>
-                </div>
+        <br>
+        <p-panel header="{{ 'settings.chanedit_advanced' | translate }}" [toggleable]="true"
+            [(collapsed)]="collapseAdvanced">
+            <div class="form-group field">
+                <label for="MplexId" class="label block">{{ 'settings.chanedit.mplex_label' | translate
+                    }}</label>
+                <p-select [options]="multiplexes" [(ngModel)]="channel.MplexId" [editable]="false"
+                    optionLabel="Description" optionValue="MplexId" [maxlength]="0" [style]="{'minWidth':'400px'}"
+                    name="MplexId" #MplexId="ngModel" appendTo="body">
+                </p-select>
+                <small class="block">
+                    {{ 'settings.chanedit.mplex_desc' | translate }}
+                </small>
+            </div>
 
-                <div class="form-group field">
-                    <label for="ServiceId" class="label block">{{ 'settings.chanedit.serviceid_label' | translate
-                        }}</label>
-                    <p-inputNumber [(ngModel)]="channel.ServiceId" name="ServiceId" id="ServiceId" [showButtons]="true"
-                        [min]="-1" [max]="65535" [step]="1"></p-inputNumber>
-                    <small class="block">
-                        {{ 'settings.chanedit.serviceid_desc' | translate }}
-                    </small>
-                </div>
-            </p-accordionTab>
-        </p-accordion>
+            <div class="form-group field">
+                <label for="ServiceId" class="label block">{{ 'settings.chanedit.serviceid_label' | translate
+                    }}</label>
+                <p-inputNumber [(ngModel)]="channel.ServiceId" name="ServiceId" id="ServiceId" [showButtons]="true"
+                    [min]="-1" [max]="65535" [step]="1"></p-inputNumber>
+                <small class="block">
+                    {{ 'settings.chanedit.serviceid_desc' | translate }}
+                </small>
+            </div>
+        </p-panel>
+        <div *ngIf="collapseAdvanced"><br><br></div>
 
         <ng-template pTemplate="footer">
             <div class="col-span-12" style="text-align: left;">
@@ -316,10 +317,10 @@
                     text="{{ 'common.networkfail' | translate }}"></p-message>
             </div>
             <p-button icon="pi pi-times-circle" (onClick)="closeDialog()" label="{{ 'common.close' | translate }}"
-                styleClass="p-button-warning">
+                severity="warn">
             </p-button>
             <p-button icon="pi pi-save" (onClick)="saveChannel();" label="{{ 'common.save' | translate }}"
-                styleClass="p-button-success" [disabled]="!chanform.dirty || channel.ChannelName.trim() == ''
+                severity="primary" [disabled]="!chanform.dirty || channel.ChannelName.trim() == ''
                  || channel.ChanNum.trim() == '' || channel.CallSign.trim() == ''"></p-button>
         </ng-template>
     </p-dialog>
@@ -328,10 +329,10 @@
         <p>{{ 'common.unsaved_message' | translate }}</p>
         <ng-template pTemplate="footer">
             <p-button icon="pi pi-times-circle" (onClick)="closeDialog()" label="{{ 'common.nosave' | translate }}"
-                styleClass="p-button-danger">
+                severity="danger">
             </p-button>
             <p-button icon="pi pi-check-circle" (onClick)="displayUnsaved=false"
-                label="{{ 'common.continue' | translate }}" styleClass="p-button-success">
+                label="{{ 'common.continue' | translate }}" severity="primary">
             </p-button>
         </ng-template>
     </p-dialog>
@@ -349,10 +350,10 @@
                     text="{{ 'common.networkfail' | translate }}"></p-message>
             </div>
             <p-button icon="pi pi-times-circle" (onClick)="displayDelete=false; chanform.form.markAsPristine();"
-                label="{{ 'common.close' | translate }}" styleClass="p-button-warning">
+                label="{{ 'common.close' | translate }}" severity="warn">
             </p-button>
             <p-button icon="pi pi-check-circle" (onClick)="deleteChannel(channel)"
-                label="{{ 'common.delete' | translate }}" styleClass="p-button-danger"></p-button>
+                label="{{ 'common.delete' | translate }}" severity="danger"></p-button>
         </ng-template>
     </p-dialog>
 
@@ -375,10 +376,10 @@
             </div>
             <p-button icon="pi pi-times-circle"
                 (onClick)="displayDeleteSource=false; channelOperation = -1; chanform.form.markAsPristine();"
-                label="{{ 'common.cancel' | translate }}" styleClass="p-button-warning">
+                label="{{ 'common.cancel' | translate }}" severity="warn">
             </p-button>
             <p-button icon="pi pi-check-circle" (onClick)="deleteSource()" [disabled]="working"
-                label="{{ 'common.delete' | translate }}" styleClass="p-button-danger"></p-button>
+                label="{{ 'common.delete' | translate }}" severity="danger"></p-button>
         </ng-template>
     </p-dialog>
 
@@ -387,9 +388,9 @@
         <div class="form-group field">
             <label for="resSourceId" class="label block">{{ 'settings.chanedit.source_label' | translate
                 }}</label>
-            <p-dropdown [options]="resSources" [(ngModel)]="resSourceId" [editable]="false" optionLabel="SourceName"
+            <p-select [options]="resSources" [(ngModel)]="resSourceId" [editable]="false" optionLabel="SourceName"
                 optionValue="Id" [maxlength]="0" [style]="{'minWidth':'400px'}" name="resSourceId" appendTo="body">
-            </p-dropdown>
+            </p-select>
             <small class="block">
                 {{ 'settings.chanedit.res_source_desc' | translate }}
             </small>
@@ -397,8 +398,9 @@
 
         <div class="form-group field">
             <p-checkbox inputId="resXMLTV" [(ngModel)]="resXMLTV" name="resXMLTV" class="label mb-2 w-full"
-                [binary]="true" value="{{ 'settings.chanedit.res_xmltv_label' | translate }}">
-            </p-checkbox>
+                [binary]="true" />
+            <label for="resXMLTV" class="label pl-2">{{ 'settings.chanedit.res_xmltv_label' | translate
+                }}</label>
             <small class="block">
                 {{ 'settings.chanedit.res_xmltv_desc' | translate }}
             </small>
@@ -406,17 +408,19 @@
 
         <div class="form-group field">
             <p-checkbox inputId="resVisible" [(ngModel)]="resVisible" name="resVisible" class="label mb-2 w-full"
-                [binary]="true" value="{{ 'settings.chanedit.res_visible_label' | translate }}">
-            </p-checkbox>
+                [binary]="true" />
+            <label for="resVisible" class="label pl-2">{{ 'settings.chanedit.res_visible_label' | translate
+                }}</label>
             <small class="block">
                 {{ 'settings.chanedit.res_visible_desc' | translate }}
             </small>
         </div>
 
         <div class="form-group field">
-            <p-checkbox inputId="resIcon" [(ngModel)]="resIcon" name="resIcon" class="label mb-2 w-full" [binary]="true"
-                value="{{ 'settings.chanedit.res_icon_label' | translate }}">
-            </p-checkbox>
+            <p-checkbox inputId="resIcon" [(ngModel)]="resIcon" name="resIcon" class="label mb-2 w-full"
+                [binary]="true" />
+            <label for="resIcon" class="label pl-2">{{ 'settings.chanedit.res_icon_label' | translate
+                }}</label>
             <small class="block">
                 {{ 'settings.chanedit.res_icon_desc' | translate }}
             </small>
@@ -440,15 +444,14 @@
                     text="{{ 'common.networkfail' | translate }}"></p-message>
             </div>
             <p-button icon="pi pi-times-circle" (onClick)="closeDialog()" label="{{ 'common.close' | translate }}"
-                styleClass="p-button-warning">
+                severity="warn">
             </p-button>
 
             <p-button icon="pi pi-search" (onClick)="restoreSearch();" label="{{ 'common.search' | translate }}"
-                styleClass="p-button-success"
-                [disabled]="!resSourceId || (!resXMLTV && !resIcon && !resVisible)"></p-button>
+                severity="primary" [disabled]="!resSourceId || (!resXMLTV && !resIcon && !resVisible)"></p-button>
 
             <p-button icon="pi pi-save" (onClick)="restoreSave();" label="{{ 'common.save' | translate }}"
-                styleClass="p-button-success"
+                severity="primary"
                 [disabled]="!resSearchDone || !resResult.NumChannels || !chanform.pristine"></p-button>
 
         </ng-template>
@@ -499,15 +502,14 @@
                     text="{{ 'settings.chanedit.icondld_complete' | translate }}"></p-message>
             </div>
             <p-button icon="pi pi-times-circle" (onClick)="closeDialog()" label="{{ 'common.close' | translate }}"
-                styleClass="p-button-warning" [disabled]="icondldStatus == 1">
+                severity="warn" [disabled]="icondldStatus == 1">
             </p-button>
 
             <p-button icon="pi pi-play" (onClick)="startIcondld();" label="{{ 'common.start' | translate }}"
-                styleClass="p-button-success"
-                [disabled]="!icondldType || icondldStatus == 1 || icondldStatus == 2"></p-button>
+                severity="primary" [disabled]="!icondldType || icondldStatus == 1 || icondldStatus == 2"></p-button>
 
             <p-button icon="pi pi-stop" (onClick)="stopIcondld();" label="{{ 'common.stop' | translate }}"
-                styleClass="p-button-danger" [disabled]="!icondldType || icondldStatus != 1"></p-button>
+                severity="danger" [disabled]="!icondldType || icondldStatus != 1"></p-button>
         </ng-template>
     </p-dialog>
 
@@ -525,7 +527,7 @@
 
         <div class="form-group field">
             <p-button icon="pi pi-search" (onClick)="iconSearch();" label="{{ 'common.search' | translate }}"
-                styleClass="p-button-success"></p-button>
+                severity="primary"></p-button>
         </div>
 
         <div class="form-group field">
@@ -549,10 +551,10 @@
                 <p-message *ngIf="errorCount > 0" severity="error" text="Icon Download Failed"></p-message>
             </div>
             <p-button icon="pi pi-times-circle" (onClick)="iconsrchShowDialog=false"
-                label="{{ 'common.cancel' | translate }}" styleClass="p-button-warning">
+                label="{{ 'common.cancel' | translate }}" severity="warn">
             </p-button>
             <p-button icon="pi pi-save" (onClick)="iconsrchSave();" label="{{ 'common.save' | translate }}"
-                styleClass="p-button-success" [disabled]="!iconsrchSelect"></p-button>
+                severity="primary" [disabled]="!iconsrchSelect"></p-button>
         </ng-template>
     </p-dialog>
 

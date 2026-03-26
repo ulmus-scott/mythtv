@@ -16,7 +16,7 @@ import { NgIf } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { CheckboxModule } from 'primeng/checkbox';
 import { FormsModule } from '@angular/forms';
-import { DropdownModule } from 'primeng/dropdown';
+import { SelectModule } from 'primeng/select';
 
 
 interface ScanExt extends Scan {
@@ -60,7 +60,7 @@ class SatTuning {
     templateUrl: './channelscan.component.html',
     styleUrls: ['./channelscan.component.css'],
     standalone: true,
-    imports: [DropdownModule, FormsModule, CheckboxModule, ButtonModule, NgIf, FieldsetModule, InputNumberModule, TranslateModule, ProgressBarModule, ScrollPanelModule]
+    imports: [SelectModule, FormsModule, CheckboxModule, ButtonModule, NgIf, FieldsetModule, InputNumberModule, TranslateModule, ProgressBarModule, ScrollPanelModule]
 })
 export class ChannelscanComponent implements OnInit, AfterViewInit {
 

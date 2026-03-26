@@ -2,10 +2,10 @@
     <h2>{{ 'settings.vsource.title' | translate }}</h2>
 
     <p-button label="{{ 'settings.vsource.new_video_source' | translate }}" (onClick)="newSource();"
-        icon="pi pi-plus-circle" styleClass="p-button-plain"></p-button>
+        icon="pi pi-plus-circle" severity="primary"></p-button>
     &nbsp;
-    <p-button styleClass="p-button-danger" label="{{ 'settings.vsource.delete_all' | translate }}"
-        (click)="displayDeleteAll=true" icon="pi pi-trash" iconPos="left" [disabled]="setupService.schedulingEnabled">
+    <p-button severity="danger" label="{{ 'settings.vsource.delete_all' | translate }}" (click)="displayDeleteAll=true"
+        icon="pi pi-trash" iconPos="left" [disabled]="setupService.schedulingEnabled">
     </p-button>
     <p-dialog header="{{ 'settings.vsource.delete_all' | translate }}" [(visible)]="displayDeleteAll" [modal]="true"
         [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
@@ -34,20 +34,16 @@
         </div>
     </div>
     <p-accordion class="col-span-12 w-full" (onClose)="onTabClose($event)" (onOpen)="onTabOpen($event)">
-        <p-accordionTab *ngFor="let source of videoSourceList.VideoSourceList.VideoSources; index as ix; first as isFirst"
-            [disabled]="disabledTab[ix]" [(selected)]="activeTab[ix]">
-            <ng-template pTemplate="header">
-                <div class="grid grid-cols-12 gap-4  w-full">
-                    <div class="col-span-9 pr-1">
-                        {{videoSourceList.VideoSourceList.VideoSources[ix].SourceName}}
-                        ({{videoSourceList.VideoSourceList.VideoSources[ix].Grabber}})
-                        <b>&nbsp;{{ dirtyMessages[ix] }}</b>
-                    </div>
-                </div>
-            </ng-template>
-            <ng-template pTemplate="content">
-                <p-button styleClass="p-button-warning" label="{{ 'settings.vsource.delete_this' | translate }}"
-                    icon="pi pi-trash" (onClick)="displayDeleteThis[ix]=true"
+        @for (source of videoSourceList.VideoSourceList.VideoSources; track $index; let ix = $index) {
+        <p-accordion-panel [value]="ix" [disabled]="disabledTab[ix]">
+            <p-accordion-header (click)="onClick({index:ix})">
+                {{videoSourceList.VideoSourceList.VideoSources[ix].SourceName}}
+                ({{videoSourceList.VideoSourceList.VideoSources[ix].Grabber}})
+                {{dirtyMessages[ix]}}
+            </p-accordion-header>
+            <p-accordion-content>
+                <p-button severity="warn" label="{{ 'settings.vsource.delete_this' | translate }}" icon="pi pi-trash"
+                    (onClick)="displayDeleteThis[ix]=true"
                     [disabled]="!this.videoSourceList.VideoSourceList.VideoSources[ix].Id || setupService.schedulingEnabled">
                 </p-button>
                 <p-dialog header="{{ 'settings.vsource.delete_this' | translate }}" [(visible)]="displayDeleteThis[ix]"
@@ -58,16 +54,17 @@
                         DisplayName: videoSourceList.VideoSourceList.VideoSources[ix].SourceName} }}</p>
                     <ng-template pTemplate="footer">
                         <p-button icon="pi pi-times-circle" (click)="displayDeleteThis[ix]=false"
-                            label="{{ 'common.no' | translate }}" styleClass="p-button-plain">
+                            label="{{ 'common.no' | translate }}" severity="warn">
                         </p-button>
                         <p-button icon="pi pi-check-circle" (click)="deleteThis(ix)"
-                            label="{{ 'common.yes' | translate }}" styleClass="p-button-plain"></p-button>
+                            label="{{ 'common.yes' | translate }}" severity="primary"></p-button>
                     </ng-template>
                 </p-dialog>
                 <app-vsource [videoSource]="videoSourceList.VideoSourceList.VideoSources[ix]"
-                    [videoSourceList]="videoSourceList"></app-vsource>
-            </ng-template>
-        </p-accordionTab>
+                    [videoSourceList]="videoSourceList" [parent]="this" [tabIndex]="ix"></app-vsource>
+            </p-accordion-content>
+        </p-accordion-panel>
+        }
     </p-accordion>
 
     <div class="flex justify-end">
@@ -76,7 +73,8 @@
             iconPos="left"></p-button>
 
         <p-button class="p-4" label="{{ 'common.next' | translate }}"
-            (onClick)="router.navigate(['setupwizard/input-connections'])" icon="pi pi-angle-right" iconPos="right"></p-button>
+            (onClick)="router.navigate(['setupwizard/input-connections'])" icon="pi pi-angle-right"
+            iconPos="right"></p-button>
     </div>
 
 </p-card>

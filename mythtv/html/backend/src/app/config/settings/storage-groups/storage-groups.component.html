@@ -23,7 +23,19 @@
     </p-dialog>
     <br>
     <p-accordion class="col-span-12 w-full" (onClose)="onTabClose($event)" (onOpen)="onTabOpen($event)">
-        <p-accordionTab *ngFor="let group of storageGroups; index as ix; first as isFirst" [(selected)]="activeTab[ix]">
+
+        @for (group of storageGroups; track $index; let ix = $index) {
+        <p-accordion-panel [value]="ix">
+            <p-accordion-header (click)="onClick({index:ix})">
+                <span *ngIf="storageGroups[ix].DirNames.length == 0; else onlyName"
+                    [translate]="'settings.sgroups.tab_create_title'"
+                    [translateParams]="{name: storageGroups[ix].LocalizedName}"></span>
+                <ng-template #onlyName> {{storageGroups[ix].LocalizedName}} </ng-template>
+                {{dirtyMessages[ix]}}
+            </p-accordion-header>
+            <p-accordion-content>
+
+                <!-- <p-accordionTab *ngFor="let group of storageGroups; index as ix; first as isFirst" [(selected)]="activeTab[ix]">
             <ng-template pTemplate="header">
                 <div class="grid grid-cols-12 gap-4  w-full">
                     <div class="col-span-9 pr-1">
@@ -36,10 +48,13 @@
                     </div>
                 </div>
             </ng-template>
-            <ng-template pTemplate="content">
-                <app-sgroup [sgroup]="storageGroups[ix]" [hostName]="hostName"></app-sgroup>
-            </ng-template>
-        </p-accordionTab>
+            <ng-template pTemplate="content"> -->
+                <app-sgroup [sgroup]="storageGroups[ix]" [hostName]="hostName" [parent]="this" [tabIndex]="ix"></app-sgroup>
+                <!-- </ng-template>
+                </p-accordionTab> -->
+            </p-accordion-content>
+        </p-accordion-panel>
+        }
     </p-accordion>
 
     <div class="flex justify-end">
@@ -48,7 +63,8 @@
             iconPos="left"></p-button>
 
         <p-button class="p-4" label="{{ 'common.next' | translate }}"
-            (onClick)="router.navigate(['setupwizard/system-events'])" icon="pi pi-angle-right" iconPos="right"></p-button>
+            (onClick)="router.navigate(['setupwizard/system-events'])" icon="pi pi-angle-right"
+            iconPos="right"></p-button>
     </div>
 
 </p-card>

@@ -22,7 +22,7 @@ import { DvbComponent } from './dvb/dvb.component';
 import { CetonComponent } from './ceton/ceton.component';
 import { AccordionModule } from 'primeng/accordion';
 import { MessageModule } from 'primeng/message';
-import { NgIf, NgFor, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
+import { NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
 import { SharedModule } from 'primeng/api';
 import { ListboxModule } from 'primeng/listbox';
 import { DialogModule } from 'primeng/dialog';
@@ -45,7 +45,6 @@ import { CardModule } from 'primeng/card';
         NgIf,
         MessageModule,
         AccordionModule,
-        NgFor,
         NgSwitch,
         NgSwitchCase,
         CetonComponent,
@@ -83,9 +82,8 @@ export class CaptureCardsComponent implements OnInit, CanComponentDeactivate {
 
     currentTab: number = -1;
     deletedTab = -1;
-    dirtyMessages: string[] = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];
-    // forms: any[] = [];
-    children: any[] = [, , , , , , , , , , , , , , , ,];
+    dirtyMessages: string[] = [];
+    children: any[] = [];
     disabledTab: boolean[] = [];
     activeTab: boolean[] = [];
     displayDeleteThis: boolean[] = [];
@@ -165,11 +163,11 @@ export class CaptureCardsComponent implements OnInit, CanComponentDeactivate {
 
     // Temporary until onTabOpen and onTabClose are fixed
     onClick(e: { index: number }) {
-        this.showDirty();
+        this.onTabOpen(e);
     }
 
     showDirty() {
-        for (let ix = 0; ix < this.dirtyMessages.length; ix++) {
+        for (let ix = 0; ix < this.children.length; ix++) {
             if (this.children[ix]) {
                 if (this.children[ix].dirty())
                     this.dirtyMessages[ix] = this.dirtyText;
@@ -206,7 +204,7 @@ export class CaptureCardsComponent implements OnInit, CanComponentDeactivate {
         this.showDirty();
         this.currentTab = e.index;
         // This line removes "Unsaved Changes" from current tab header.
-        this.dirtyMessages[this.currentTab] = "";
+        // this.dirtyMessages[this.currentTab] = "";
         // This line supports showing "Unsaved Changes" on current tab header,
         // and you must comment the above line,
         // but the "Unsaved Changes" text does not go away after save, so it
@@ -218,18 +216,6 @@ export class CaptureCardsComponent implements OnInit, CanComponentDeactivate {
         this.showDirty();
         this.currentTab = -1;
     }
-
-    // showDirty() {
-    //     if (this.currentTab == -1 || !this.forms[this.currentTab]
-    //         || this.disabledTab[this.currentTab])
-    //         return;
-    //     if ((<NgForm>this.forms[this.currentTab]).dirty)
-    //         this.dirtyMessages[this.currentTab] = this.dirtyText;
-    //     else if (!this.m_CaptureCardsFiltered[this.currentTab].CardId)
-    //         this.dirtyMessages[this.currentTab] = this.newText;
-    //     else
-    //         this.dirtyMessages[this.currentTab] = "";
-    // }
 
     newCard() {
         this.displayModal = false;
@@ -364,40 +350,18 @@ export class CaptureCardsComponent implements OnInit, CanComponentDeactivate {
         return of(confirmation);
     };
 
-    // canDeactivate(): Observable<boolean> | boolean {
-    //     let currentForm = this.setupService.getCurrentForm();
-    //     if (this.forms[this.currentTab] && (<NgForm>this.forms[this.currentTab]).dirty
-    //         || this.dirtyMessages.find(element => element == this.dirtyText)
-    //         || currentForm && currentForm.dirty) {
-    //         return this.confirm(this.warningText);
-    //     }
-    //     return true;
-    // }
-
     canDeactivate(): Observable<boolean> | boolean {
         if (this.children[this.currentTab] && (this.children[this.currentTab]).dirty()
-            || this.dirtyMessages.find(element => element.length > 0)) {
+            || this.dirtyMessages.find(element => element && element.length > 0)) {
             return this.confirm(this.warningText);
         }
         return true;
     }
 
-
-    // @HostListener('window:beforeunload', ['$event'])
-    // onWindowClose(event: any): void {
-    //     let currentForm = this.setupService.getCurrentForm();
-    //     if (this.forms[this.currentTab] && (<NgForm>this.forms[this.currentTab]).dirty
-    //         || this.dirtyMessages.find(element => element == this.dirtyText)
-    //         || currentForm && currentForm.dirty) {
-    //         event.preventDefault();
-    //         event.returnValue = false;
-    //     }
-    // }
-
     @HostListener('window:beforeunload', ['$event'])
     onWindowClose(event: any): void {
         if (this.children[this.currentTab] && (this.children[this.currentTab]).dirty()
-            || this.dirtyMessages.find(element => element.length > 0)) {
+            || this.dirtyMessages.find(element => element && element.length > 0)) {
             event.preventDefault();
             event.returnValue = false;
         }

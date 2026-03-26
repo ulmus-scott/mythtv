@@ -44,6 +44,7 @@ export class DemoComponent implements OnInit, AfterViewInit {
 
     ngAfterViewInit(): void {
         this.topElement.nativeElement.scrollIntoView({ behavior: "smooth", block: "start" });
+        this.markPristine();
     }
 
     // good response to add: {"int": 19}

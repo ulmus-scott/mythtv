@@ -34,10 +34,13 @@
                             (onChange)="onFilter()" placeholder="{{ 'settings.chanedit.all' | translate }}"
                             [showClear]="true" class="'px-3">
                         </p-select>
-
                         <!-- Refresh button and number of rows. -->
-                        <div *ngIf="refreshing else refreshBn"><p-progressSpinner
-                                [style]="{width: '2rem', height: '2rem'}"></p-progressSpinner></div>
+                        <!-- The progressspinner no longer works -->
+                        <div *ngIf="refreshing else refreshBn">
+                            <i class="pi pi-spin pi-cog px-3 text-primary"></i>
+                        </div>
+                        <!-- <div *ngIf="refreshing else refreshBn"><p-progressSpinner
+                                [style]="{width: '2rem', height: '2rem'}"></p-progressSpinner></div> -->
                         <ng-template #refreshBn>
                             <button pButton pRipple icon="pi pi-refresh" class="p-button-text .p-button-success"
                                 (click)="reload()" pTooltip="{{ 'common.refresh' | translate }}"></button>

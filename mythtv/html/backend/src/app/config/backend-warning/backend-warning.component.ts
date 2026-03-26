@@ -6,7 +6,6 @@ import { ScheduleOrProgram } from 'src/app/services/interfaces/program.interface
 import { MythService } from 'src/app/services/myth.service';
 import { SetupService } from 'src/app/services/setup.service';
 import { SetupWizardService } from 'src/app/services/setupwizard.service';
-import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
 import { NgIf } from '@angular/common';
@@ -18,7 +17,7 @@ import { CardModule } from 'primeng/card';
     styleUrls: ['./backend-warning.component.css'],
     providers: [MessageService],
     standalone: true,
-    imports: [CardModule, NgIf, MessageModule, ButtonModule, ProgressSpinnerModule, TranslateModule]
+    imports: [CardModule, NgIf, MessageModule, ButtonModule, TranslateModule]
 })
 export class BackendWarningComponent implements OnInit {
 

@@ -49,19 +49,23 @@
             <input type="text" pInputText id="searchValue" [(ngModel)]="searchValue" name="searchValue" class="text-xl"
                 placeholder="{{ 'common.search_placeholder' | translate }}" (keydown)="keydown($event)" />
             <button pButton pRipple icon="pi pi-search" class="p-button-text w-8" (click)="titleSearch()"
-                pTooltip="{{ 'dashboard.guide.title_search' | translate }}" tooltipPosition="top" severity="primary"></button>
+                pTooltip="{{ 'dashboard.guide.title_search' | translate }}" tooltipPosition="top"
+                severity="primary"></button>
             <button pButton pRipple icon="pi pi-user" class="p-button-text w-8" (click)="peopleSearch()"
-                pTooltip="{{ 'dashboard.guide.people_search' | translate }}" tooltipPosition="top" severity="primary"></button>
+                pTooltip="{{ 'dashboard.guide.people_search' | translate }}" tooltipPosition="top"
+                severity="primary"></button>
             <button pButton pRipple icon="pi pi-search-plus" class="p-button-text w-8" (click)="fullSearch()"
-                pTooltip="{{ 'dashboard.guide.full_search' | translate }}" tooltipPosition="top" severity="primary"></button>
+                pTooltip="{{ 'dashboard.guide.full_search' | translate }}" tooltipPosition="top"
+                severity="primary"></button>
             <button pButton pRipple icon="pi pi-bell" class="p-button-text w-8" (click)="catSearch()"
-                pTooltip="{{ 'dashboard.guide.cat_search' | translate }}" tooltipPosition="top" severity="primary"></button>
+                pTooltip="{{ 'dashboard.guide.cat_search' | translate }}" tooltipPosition="top"
+                severity="primary"></button>
             <button pButton pRipple icon="pi pi-sun" class="p-button-text w-8" (click)="newSearch()"
                 *ngIf="displayType == GRID" pTooltip="{{ 'dashboard.guide.new_search' | translate }}"
                 tooltipPosition="top" severity="primary"></button>
             <button pButton pRipple icon="pi pi-video" class="p-button-text w-8" (click)="movieSearch()"
-                *ngIf="displayType == GRID" pTooltip="{{ 'dashboard.guide.movies' | translate }}"
-                tooltipPosition="top" severity="primary"></button>
+                *ngIf="displayType == GRID" pTooltip="{{ 'dashboard.guide.movies' | translate }}" tooltipPosition="top"
+                severity="primary"></button>
             <p-checkbox inputId="OnlyNew" [(ngModel)]="onlyNew" name="OnlyNew" #OnlyNew="ngModel" class="mx-1"
                 *ngIf="displayType != GRID" [binary]="true" checkboxIcon="pi pi-check" (onChange)="newSearch()"
                 pTooltip="{{ 'dashboard.guide.new_search' | translate }}" tooltipPosition="top" />
@@ -78,12 +82,16 @@
         <div class="flex items-center"
             *ngIf="[CHANNEL,TITLESEARCH,PEOPLESEARCH,FULLSEARCH,CATSEARCH,ANYSEARCH].indexOf(displayType) > -1">
             <button pButton pRipple icon="pi pi-table" class="p-button-text"
-                pTooltip="{{ 'dashboard.guide.retgrid' | translate }}" (click)="onGrid()"
-                tooltipPosition="top" severity="primary"></button>
+                pTooltip="{{ 'dashboard.guide.retgrid' | translate }}" (click)="onGrid()" tooltipPosition="top"
+                severity="primary"></button>
         </div>
         <div class="flex items-center">
-            <div *ngIf="refreshing else refreshBn"><p-progressSpinner
-                    [style]="{width: '30px', height: '30px'}"></p-progressSpinner></div>
+            <!-- The progressspinner no longer works -->
+            <!-- <div *ngIf="refreshing else refreshBn"><p-progressSpinner
+                    [style]="{width: '30px', height: '30px'}"></p-progressSpinner></div> -->
+            <div *ngIf="refreshing else refreshBn">
+                <i class="pi pi-spin pi-cog px-3 text-primary"></i>
+            </div>
             <ng-template #refreshBn>
                 <div *ngIf="[CHANNEL,GRID].indexOf(displayType) > -1 ">
                     <button pButton pRipple icon="pi pi-refresh" class="p-button-text"
@@ -152,7 +160,9 @@
 <app-schedule [inter]="inter"></app-schedule>
 
 <ng-template #loading>
-    <p-progressSpinner></p-progressSpinner>
+    <!-- The progressspinner no longer works -->
+    <!-- <p-progressSpinner></p-progressSpinner> -->
+    <i class="pi pi-spin pi-cog text-primary" style="font-size: 8rem"></i>
 </ng-template>
 
 <p-dialog header="{{ 'dashboard.guide.colors' | translate }}" [(visible)]="showLegend" [style]="{width: '80vw'}"

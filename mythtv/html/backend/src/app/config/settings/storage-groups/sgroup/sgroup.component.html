@@ -7,58 +7,56 @@
         <ng-template pTemplate="subtitle">
         </ng-template>
         <ng-template pTemplate="content">
-            <div class="grid grid-cols-12 gap-4">
-                <div class="mb-6 w-full">
-                    <table>
-                        <tr *ngFor="let dirname of editDirs; index as ix">
-                            <td class="items-center bg-blue-100 text-gray-900" style="font-family: monospace;">
-                                {{editDirs[ix]}}
-                            <td class="items-center">
-                                <button pButton pRipple type="button" icon="pi pi-pencil"
-                                    class="p-button-rounded p-button-text" [disabled]="!editDirs[ix]"
-                                    (click)="editDirectory(ix)" pTooltip="Edit"></button>
-                            </td>
-                            <td class="items-center">
-                                <button pButton pRipple type="button" icon="pi pi-trash"
-                                    class="p-button-rounded p-button-text" [disabled]="!editDirs[ix]"
-                                    (click)="deleteDirectory(ix)" pTooltip="Delete"></button>
-                            </td>
-                            <td>
-                                <div *ngIf="!editDirs[ix]">
-                                    <b>{{ 'settings.sgroups.deleted_label' | translate }}</b>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
 
-                    <p-dialog header="{{ 'settings.sgroups.seldir_title' | translate }}" [(visible)]="showEditDlg"
-                        [modal]="true" [draggable]="false" [resizable]="false" [style]="{width: '50vw'}">
-                        <div class="form-group field">
-                            <label for="DirName" class="label block">{{ 'settings.sgroups.dirname_label' | translate
-                                }}</label>
-                            <input pInputText id="DirName" [(ngModel)]="editDirName" name="DirName" #DirName="ngModel"
-                                class="mb-2 form-control w-full" style="font-family: monospace;"
-                                (change)="textChange()" />
-                        </div>
-                        <p-listbox [options]="dirSelect" [(ngModel)]="selectedDir" name="ListDirs"
-                            (onClick)="selectDir();" #ListDirs="ngModel" [listStyle]="{'height':'50vh'}" >
-                        </p-listbox>
-                        <ng-template pTemplate="footer">
-                            <p-button icon="pi pi-times-circle" (onClick)="showEditDlg=false"
-                                label="{{ 'common.cancel' | translate }}" styleClass="p-button-plain">
-                            </p-button>
-                            <p-button icon="pi pi-check-circle"
-                                (onClick)="editDirs[editDlgNum]=editDirName;showEditDlg=false"
-                                label="{{ 'common.ok' | translate }}" styleClass="p-button-plain">
-                            </p-button>
-                        </ng-template>
-                    </p-dialog>
-                    <br>
-                    <p-button label="{{ 'settings.sgroups.adddir_button' | translate }}" (onClick)="addDirectory()"
-                        icon="pi pi-plus-circle" styleClass="p-button-plain"></p-button>
+            <div class="mb-6 w-full">
+                <table>
+                    <tr *ngFor="let dirname of editDirs; index as ix">
+                        <td class="items-center bg-blue-100 text-gray-900" style="font-family: monospace;">
+                            {{editDirs[ix]}}
+                        <td class="items-center">
+                            <button pButton pRipple type="button" icon="pi pi-pencil"
+                                class="p-button-rounded p-button-text" [disabled]="!editDirs[ix]"
+                                (click)="editDirectory(ix)" pTooltip="Edit"></button>
+                        </td>
+                        <td class="items-center">
+                            <button pButton pRipple type="button" icon="pi pi-trash"
+                                class="p-button-rounded p-button-text" [disabled]="!editDirs[ix]"
+                                (click)="deleteDirectory(ix)" pTooltip="Delete"></button>
+                        </td>
+                        <td>
+                            <div *ngIf="!editDirs[ix]">
+                                <b>{{ 'settings.sgroups.deleted_label' | translate }}</b>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+                <p-dialog header="{{ 'settings.sgroups.seldir_title' | translate }}" [(visible)]="showEditDlg"
+                    [modal]="true" [draggable]="false" [resizable]="false" [style]="{width: '50vw'}">
+                    <div class="form-group field">
+                        <label for="DirName" class="label block">{{ 'settings.sgroups.dirname_label' | translate
+                            }}</label>
+                        <input pInputText id="DirName" [(ngModel)]="editDirName" name="DirName" #DirName="ngModel"
+                            class="mb-2 form-control w-full" style="font-family: monospace;" (change)="textChange()" />
+                    </div>
+                    <p-listbox [options]="dirSelect" [(ngModel)]="selectedDir" name="ListDirs" (onChange)="selectDir();"
+                        #ListDirs="ngModel" [listStyle]="{'height':'50vh'}" focusOnHover="false">
+                    </p-listbox>
+                    <ng-template pTemplate="footer">
+                        <p-button icon="pi pi-times-circle" (onClick)="showEditDlg=false"
+                            label="{{ 'common.cancel' | translate }}" severity="primary">
+                        </p-button>
+                        <p-button icon="pi pi-check-circle"
+                            (onClick)="editDirs[editDlgNum]=editDirName;showEditDlg=false"
+                            label="{{ 'common.ok' | translate }}" severity="primary">
+                        </p-button>
+                    </ng-template>
+                </p-dialog>
+                <br>
+                <p-button label="{{ 'settings.sgroups.adddir_button' | translate }}" (onClick)="addDirectory()"
+                    icon="pi pi-plus-circle" severity="primary"></p-button>
 
 
-                </div>
             </div>
         </ng-template>
 
@@ -71,7 +69,8 @@
                         text="{{ 'common.networkfail' | translate }}"></p-message>
                 </div>
                 <p-button class="col pr-1" label="{{'common.save' | translate}}" icon="pi pi-save" iconPos="left"
-                    (onClick)="saveForm(); sgroupform.form.markAsPristine()" [disabled]="!sgroupform.dirty || setupService.schedulingEnabled">
+                    (onClick)="saveForm(); sgroupform.form.markAsPristine()"
+                    [disabled]="!sgroupform.dirty || setupService.schedulingEnabled">
                 </p-button>
             </div>
         </ng-template>

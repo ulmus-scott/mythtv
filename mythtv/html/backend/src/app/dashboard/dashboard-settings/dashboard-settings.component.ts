@@ -28,12 +28,10 @@ export class DashboardSettingsComponent implements OnInit, CanComponentDeactivat
     // @ViewChild("accordion") accordion!: Accordion;
     m_showHelp: boolean = false;
     currentTab: number = -1;
-    // This allows for up to 16 tabs
-    dirtyMessages: string[] = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];
-    // forms: any[] = [, , , , , , , , , , , , , , , ,];
+    dirtyMessages: string[] = [];
     dirtyText = 'settings.common.unsaved';
     warningText = 'settings.common.warning';
-    children: any[] = [, , , , , , , , , , , , , , , ,];
+    children: any[] = [];
 
     constructor(private translate: TranslateService, public router: Router,
         private cdRef: ChangeDetectorRef) {
@@ -49,12 +47,11 @@ export class DashboardSettingsComponent implements OnInit, CanComponentDeactivat
     }
 
     onTabOpen(e: { index: number }) {
-
         this.showDirty();
         // if (typeof this.forms[e.index] == 'undefined')
         this.currentTab = e.index;
         // This line removes "Unsaved Changes" from current tab header.
-        this.dirtyMessages[this.currentTab] = "";
+        // this.dirtyMessages[this.currentTab] = "";
         // This line supports showing "Unsaved Changes" on current tab header,
         // and you must comment the above line,
         // but the "Unsaved Changes" text does not go away after save, so it
@@ -64,7 +61,7 @@ export class DashboardSettingsComponent implements OnInit, CanComponentDeactivat
 
     // Temporary until onTabOpen and onTabClose are fixed
     onClick(e: { index: number }) {
-        this.showDirty();
+        this.onTabOpen(e);
     }
 
     onTabClose(e: any) {
@@ -73,7 +70,7 @@ export class DashboardSettingsComponent implements OnInit, CanComponentDeactivat
     }
 
     showDirty() {
-        for (let ix = 0; ix < this.dirtyMessages.length; ix++) {
+        for (let ix = 0; ix < this.children.length; ix++) {
             if (this.children[ix]) {
                 if (this.children[ix].dirty())
                     this.dirtyMessages[ix] = this.dirtyText;
@@ -100,7 +97,7 @@ export class DashboardSettingsComponent implements OnInit, CanComponentDeactivat
 
     canDeactivate(): Observable<boolean> | boolean {
         if (this.children[this.currentTab] && (this.children[this.currentTab]).dirty()
-            || this.dirtyMessages.find(element => element.length > 0)) {
+            || this.dirtyMessages.find(element => element && element.length > 0)) {
             return this.confirm(this.warningText);
         }
         return true;
@@ -109,7 +106,7 @@ export class DashboardSettingsComponent implements OnInit, CanComponentDeactivat
     @HostListener('window:beforeunload', ['$event'])
     onWindowClose(event: any): void {
         if (this.children[this.currentTab] && (this.children[this.currentTab]).dirty()
-            || this.dirtyMessages.find(element => element.length > 0)) {
+            || this.dirtyMessages.find(element => element && element.length > 0)) {
             event.preventDefault();
             event.returnValue = false;
         }

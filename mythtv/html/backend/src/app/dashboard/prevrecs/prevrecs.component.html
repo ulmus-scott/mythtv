@@ -43,8 +43,12 @@
                 <button pButton pRipple icon="pi pi-search" class="p-button-text w-8" (click)="onFilter()"
                     pTooltip="{{ 'dashboard.guide.title_search' | translate }}" tooltipPosition="top"></button>
                 <!-- Refresh button and number of rows. -->
-                <div *ngIf="refreshing else refreshBn"><p-progressSpinner
-                        [style]="{width: '2rem', height: '2rem'}"></p-progressSpinner></div>
+                <!-- The progressspinner no longer works -->
+                <div *ngIf="refreshing else refreshBn">
+                    <i class="pi pi-spin pi-cog px-3 text-primary"></i>
+                </div>
+                <!-- <div *ngIf="refreshing else refreshBn"><p-progressSpinner
+                        [style]="{width: '2rem', height: '2rem'}"></p-progressSpinner></div> -->
                 <ng-template #refreshBn>
                     <button pButton pRipple icon="pi pi-refresh" class="p-button-text .p-button-success"
                         (click)="refresh()" pTooltip="{{ 'common.refresh' | translate }}"></button>

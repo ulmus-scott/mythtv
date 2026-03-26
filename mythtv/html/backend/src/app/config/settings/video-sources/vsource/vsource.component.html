@@ -7,158 +7,152 @@
         <ng-template pTemplate="subtitle">
         </ng-template>
         <ng-template pTemplate="content">
-            <div class="grid grid-cols-12 gap-4">
-                <div class="mb-6 w-full">
-
-                    <div class="form-group field">
-                        <label for="SourceName" class="label block">{{ 'settings.vsource.source_label' | translate }}</label>
-                        <input pInputText id="SourceName" [(ngModel)]="videoSource.SourceName" name="SourceName"
-                            #SourceName="ngModel" class="mb-2 form-control w-full" [disabled]="videoSource.Id>0"
-                            (change)="checkName()" [maxlength]="50" />
-                        <div *ngIf="work.errorMessage">
-                            <small class="p-error block">
-                                {{ work.errorMessage }}
-                            </small>
-                        </div>
-                        <small class="block">
-                            {{ 'settings.vsource.source_desc' | translate }}
+            <div class="mb-6 w-full">
+                <div class="form-group field">
+                    <label for="SourceName" class="label block">{{ 'settings.vsource.source_label' | translate
+                        }}</label>
+                    <input pInputText id="SourceName" [(ngModel)]="videoSource.SourceName" name="SourceName"
+                        #SourceName="ngModel" class="mb-2 form-control w-full" [disabled]="videoSource.Id>0"
+                        (change)="checkName()" [maxlength]="50" />
+                    <div *ngIf="work.errorMessage">
+                        <small class="p-error block">
+                            {{ work.errorMessage }}
                         </small>
                     </div>
-
-                    <div class="form-group field">
-                        <label for="Grabber" class="label block">
-                            {{ 'settings.vsource.grabber_label' | translate }}
-                        </label>
-                        <p-dropdown *ngIf="grabberList.GrabberList.Grabbers.length > 0"
-                            [options]="grabberList.GrabberList.Grabbers" [(ngModel)]="videoSource.Grabber"
-                            [editable]="false" optionLabel="DisplayName" optionValue="Program"
-                            [style]="{'minWidth':'80%'}" name="Grabber" #Grabber="ngModel" (onChange)="checkName()">
-                        </p-dropdown>
-                        <small class="block">
-                            {{ 'settings.vsource.grabber_desc' | translate }}
-                        </small>
-                    </div>
-
-                    <div class="form-group field" *ngIf="configCommand2.length>0">
-                        <label for="configure" class="label block">
-                            {{ 'settings.vsource.grabberconfig_label' | translate }}
-                        </label>
-                        <p>
-                            {{ 'settings.vsource.grabberconfig_desc' | translate }}
-                            <a href="https://wiki.mythtv.org/wiki/XMLTV" target="_blank">XMLTV</a>
-                        </p>
-                        <table>
-                            <tr *ngIf="configCommand1">
-                                <td class="items-center bg-blue-100 text-gray-900"
-                                    style="font-family: monospace;">
-                                    {{ configCommand1 }}
-                                </td>
-                                <td class="items-center">
-                                    <button pButton pRipple type="button" icon="pi pi-copy"
-                                        class="p-button-rounded p-button-text" (click)="copyConfigure1()"
-                                        pTooltip="{{ 'settings.common.clipboard_tooltip' | translate }}"></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="items-center bg-blue-100 text-gray-900"
-                                    style="font-family: monospace;">
-                                    {{ configCommand2 }}
-                                </td>
-                                <td class="items-center">
-                                    <button pButton pRipple type="button" icon="pi pi-copy"
-                                        class="p-button-rounded p-button-text" (click)="copyConfigure2()"
-                                        pTooltip="{{ 'settings.common.clipboard_tooltip' | translate }}"></button>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-
-                    <div class="form-group field">
-                        <p-checkbox inputId="UseEIT" [(ngModel)]="videoSource.UseEIT" name="UseEIT" #UseEIT="ngModel"
-                            class="label mb-2 w-full" [binary]="true"
-                            value="{{ 'settings.vsource.eit_label' | translate }}">
-                        </p-checkbox>
-                        <small class="block">
-                            {{ 'settings.vsource.eit_desc' | translate }}
-                        </small>
-                    </div>
-
-                    <div class="form-group field">
-                        <label for="FreqTable" class="label block">
-                            {{ 'settings.vsource.freqtable_label' | translate }}
-                        </label>
-                        <p-dropdown *ngIf="freqTableList.FreqTableList.length > 0"
-                            [options]="freqTableList.FreqTableList" [(ngModel)]="videoSource.FreqTable"
-                            [editable]="false" [style]="{'minWidth':'80%'}" name="FreqTable" #FreqTable="ngModel">
-                        </p-dropdown>
-                        <small class="block">
-                            {{ 'settings.vsource.freqtable_desc' | translate }}
-                        </small>
-                    </div>
-
-                    <div class="form-group field">
-                        <label for="ScanFrequency" class="label block">
-                            {{ 'settings.vsource.scanfreq_label' | translate }}
-                        </label>
-                        <p-inputNumber [(ngModel)]="videoSource.ScanFrequency" name="ScanFrequency" id="ScanFrequency"
-                            [min]="0" [max]="999999999">
-                        </p-inputNumber>
-                        <small class="block">
-                            {{ 'settings.vsource.scanfreq_desc' | translate }}
-                        </small>
-                    </div>
-
-                    <div class="form-group field">
-                        <label for="NITId" class="label block">
-                            {{ 'settings.vsource.netid_label' | translate }}
-                        </label>
-                        <p-inputNumber [(ngModel)]="videoSource.NITId" name="NITId" id="NITId" [showButtons]="true"
-                            [min]="-1" [max]="65535" [step]="1" [useGrouping]="false"></p-inputNumber>
-                        <small class="block">
-                            {{ 'settings.vsource.netid_desc' | translate }}
-                        </small>
-                    </div>
-
-                    <div class="form-group field">
-                        <label for="BouquetId" class="label block">
-                            {{ 'settings.vsource.bouquet_label' | translate }}
-                        </label>
-                        <p-inputNumber [(ngModel)]="videoSource.BouquetId" name="BouquetId" id="BouquetId"
-                            [showButtons]="true" [min]="0" [max]="65535" [step]="1" [useGrouping]="false">
-                        </p-inputNumber>
-                        <small class="block">
-                        {{'settings.vsource.bouquet_desc' | translate}}
-                            <a href="https://wiki.mythtv.org/wiki/DVB_UK" target="_blank">DVB UK</a>
-                        </small>
-                    </div>
-
-                    <div class="form-group field">
-                        <label for="RegionId" class="label block">
-                            {{ 'settings.vsource.region_label' | translate }}
-                        </label>
-                        <p-inputNumber [(ngModel)]="videoSource.RegionId" name="RegionId" id="RegionId"
-                            [showButtons]="true" [min]="0" [max]="100" [step]="1" [useGrouping]="false">
-                        </p-inputNumber>
-                        <small class="block">
-                            {{'settings.vsource.region_desc' | translate}}
-                            <a href="https://wiki.mythtv.org/wiki/DVB_UK" target="_blank">DVB UK</a>
-                        </small>
-                    </div>
-
-                    <div class="form-group field">
-                        <label for="LCNOffset" class="label block">
-                            {{ 'settings.vsource.lcnoffset_label' | translate }}
-                        </label>
-                        <p-inputNumber [(ngModel)]="videoSource.LCNOffset" name="LCNOffset" id="LCNOffset"
-                            [showButtons]="true" [min]="0" [max]="20000" [step]="100" [useGrouping]="false">
-                        </p-inputNumber>
-                        <small class="block">
-                            {{ 'settings.vsource.lcnoffset_desc' | translate }}
-                        </small>
-                    </div>
-
+                    <small class="block">
+                        {{ 'settings.vsource.source_desc' | translate }}
+                    </small>
                 </div>
 
+                <div class="form-group field">
+                    <label for="Grabber" class="label block">
+                        {{ 'settings.vsource.grabber_label' | translate }}
+                    </label>
+                    <p-select *ngIf="grabberList.GrabberList.Grabbers.length > 0"
+                        [options]="grabberList.GrabberList.Grabbers" [(ngModel)]="videoSource.Grabber"
+                        [editable]="false" optionLabel="DisplayName" optionValue="Program" [style]="{'minWidth':'80%'}"
+                        name="Grabber" #Grabber="ngModel" (onChange)="checkName()">
+                    </p-select>
+                    <small class="block">
+                        {{ 'settings.vsource.grabber_desc' | translate }}
+                    </small>
+                </div>
+
+                <div class="form-group field" *ngIf="configCommand2.length>0">
+                    <label for="configure" class="label block">
+                        {{ 'settings.vsource.grabberconfig_label' | translate }}
+                    </label>
+                    <p>
+                        {{ 'settings.vsource.grabberconfig_desc' | translate }}
+                        <a href="https://wiki.mythtv.org/wiki/XMLTV" target="_blank">XMLTV</a>
+                    </p>
+                    <table>
+                        <tr *ngIf="configCommand1">
+                            <td class="items-center bg-blue-100 text-gray-900" style="font-family: monospace;">
+                                {{ configCommand1 }}
+                            </td>
+                            <td class="items-center">
+                                <button pButton pRipple type="button" icon="pi pi-copy"
+                                    class="p-button-rounded p-button-text" (click)="copyConfigure1()"
+                                    pTooltip="{{ 'settings.common.clipboard_tooltip' | translate }}"></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="items-center bg-blue-100 text-gray-900" style="font-family: monospace;">
+                                {{ configCommand2 }}
+                            </td>
+                            <td class="items-center">
+                                <button pButton pRipple type="button" icon="pi pi-copy"
+                                    class="p-button-rounded p-button-text" (click)="copyConfigure2()"
+                                    pTooltip="{{ 'settings.common.clipboard_tooltip' | translate }}"></button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="form-group field">
+                    <p-checkbox inputId="UseEIT" [(ngModel)]="videoSource.UseEIT" name="UseEIT" #UseEIT="ngModel"
+                        class="label mb-2 w-full" [binary]="true"/>
+                    <label for="UseEIT" class="label pl-2">{{ 'settings.vsource.eit_label' | translate
+                        }}</label>
+                    <small class="block">
+                        {{ 'settings.vsource.eit_desc' | translate }}
+                    </small>
+                </div>
+
+                <div class="form-group field">
+                    <label for="FreqTable" class="label block">
+                        {{ 'settings.vsource.freqtable_label' | translate }}
+                    </label>
+                    <p-select *ngIf="freqTableList.FreqTableList.length > 0" [options]="freqTableList.FreqTableList"
+                        [(ngModel)]="videoSource.FreqTable" [editable]="false" [style]="{'minWidth':'80%'}"
+                        name="FreqTable" #FreqTable="ngModel">
+                    </p-select>
+                    <small class="block">
+                        {{ 'settings.vsource.freqtable_desc' | translate }}
+                    </small>
+                </div>
+
+                <div class="form-group field">
+                    <label for="ScanFrequency" class="label block">
+                        {{ 'settings.vsource.scanfreq_label' | translate }}
+                    </label>
+                    <p-inputNumber [(ngModel)]="videoSource.ScanFrequency" name="ScanFrequency" id="ScanFrequency"
+                        [min]="0" [max]="999999999">
+                    </p-inputNumber>
+                    <small class="block">
+                        {{ 'settings.vsource.scanfreq_desc' | translate }}
+                    </small>
+                </div>
+
+                <div class="form-group field">
+                    <label for="NITId" class="label block">
+                        {{ 'settings.vsource.netid_label' | translate }}
+                    </label>
+                    <p-inputNumber [(ngModel)]="videoSource.NITId" name="NITId" id="NITId" [showButtons]="true"
+                        [min]="-1" [max]="65535" [step]="1" [useGrouping]="false"></p-inputNumber>
+                    <small class="block">
+                        {{ 'settings.vsource.netid_desc' | translate }}
+                    </small>
+                </div>
+
+                <div class="form-group field">
+                    <label for="BouquetId" class="label block">
+                        {{ 'settings.vsource.bouquet_label' | translate }}
+                    </label>
+                    <p-inputNumber [(ngModel)]="videoSource.BouquetId" name="BouquetId" id="BouquetId"
+                        [showButtons]="true" [min]="0" [max]="65535" [step]="1" [useGrouping]="false">
+                    </p-inputNumber>
+                    <small class="block">
+                        {{'settings.vsource.bouquet_desc' | translate}}
+                        <a href="https://wiki.mythtv.org/wiki/DVB_UK" target="_blank">DVB UK</a>
+                    </small>
+                </div>
+
+                <div class="form-group field">
+                    <label for="RegionId" class="label block">
+                        {{ 'settings.vsource.region_label' | translate }}
+                    </label>
+                    <p-inputNumber [(ngModel)]="videoSource.RegionId" name="RegionId" id="RegionId" [showButtons]="true"
+                        [min]="0" [max]="100" [step]="1" [useGrouping]="false">
+                    </p-inputNumber>
+                    <small class="block">
+                        {{'settings.vsource.region_desc' | translate}}
+                        <a href="https://wiki.mythtv.org/wiki/DVB_UK" target="_blank">DVB UK</a>
+                    </small>
+                </div>
+
+                <div class="form-group field">
+                    <label for="LCNOffset" class="label block">
+                        {{ 'settings.vsource.lcnoffset_label' | translate }}
+                    </label>
+                    <p-inputNumber [(ngModel)]="videoSource.LCNOffset" name="LCNOffset" id="LCNOffset"
+                        [showButtons]="true" [min]="0" [max]="20000" [step]="100" [useGrouping]="false">
+                    </p-inputNumber>
+                    <small class="block">
+                        {{ 'settings.vsource.lcnoffset_desc' | translate }}
+                    </small>
+                </div>
             </div>
         </ng-template>
 
@@ -171,7 +165,7 @@
                         text="{{ 'common.networkfail' | translate }}"></p-message>
                 </div>
                 <p-button class="col pr-1" label="{{'common.save' | translate}}" icon="pi pi-save" iconPos="left"
-                    (onClick)="saveForm(); vsourceform.form.markAsPristine()"
+                    (onClick)="saveForm(); markPristine()"
                     [disabled]="!vsourceform.dirty || !videoSource.SourceName || this.work.validateError || setupService.schedulingEnabled"></p-button>
             </div>
         </ng-template>

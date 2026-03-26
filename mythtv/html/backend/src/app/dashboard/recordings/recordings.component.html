@@ -56,7 +56,7 @@
         <!-- [rowsPerPageOptions]="[20, 50, 100, 200, 1000, 10000]" [showGridlines]="true" [stripedRows]="true" -->
         <!-- scrollHeight="flex" [scrollable]="true"> -->
 
-        <p-table #table *ngIf="showTable" [value]="programs" styleClass="p-datatable-gridlines" [rowHover]="true"
+        <p-table #table *ngIf="showTable" [value]="programs" [rowHover]="true"
             selectionMode="multiple" [(selection)]="selection" [metaKeySelection]="true" dataKey="Recording.RecordedId"
             (onRowSelect)="onSelectChange()" (onRowUnselect)="onSelectChange()" [showGridlines]="true"
             [stripedRows]="true" scrollHeight="83vh" [scrollable]="true"

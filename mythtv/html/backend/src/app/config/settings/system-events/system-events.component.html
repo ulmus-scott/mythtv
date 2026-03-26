@@ -2,14 +2,10 @@
     <h2>{{ 'settings.sysevents.title' | translate }}</h2>
     <p-card class="m-8">
         <ng-template pTemplate="content">
-            <div class="grid grid-cols-12 gap-4">
-                <div class="mb-6 w-full" *ngFor="let event of events; index as ix; first as isFirst">
-                    <div class="form-group field">
-                        <label for="{{event.Key}}" class="label block">{{ event.LocalizedName }}</label>
-                        <input pInputText id="{{event.Key}}" [(ngModel)]="event.Value" name="{{event.Key}}"
-                            class="mb-2 form-control w-full" />
-                    </div>
-                </div>
+            <div class="w-full" *ngFor="let event of events; index as ix; first as isFirst">
+                <label for="{{event.Key}}" class="label block">{{ event.LocalizedName }}</label>
+                <input pInputText id="{{event.Key}}" [(ngModel)]="event.Value" name="{{event.Key}}"
+                    class="mb-2 form-control w-full" />
             </div>
         </ng-template>
 

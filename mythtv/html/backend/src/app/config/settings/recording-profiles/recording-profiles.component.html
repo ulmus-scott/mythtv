@@ -1,21 +1,18 @@
 <p-card class="md:m-8">
     <h2>{{ 'settings.rprofiles.title' | translate }}</h2>
 
-    <p-accordion class="col-span-12 w-full" (onOpen)="onTabOpen($event)" (onClose)="onTabClose($event)" >
-        <p-accordionTab *ngFor="let group of groups; index as ix; first as isFirst" [(selected)]="activeTab[ix]">
-            <ng-template pTemplate="header">
-                <div class="grid grid-cols-12 gap-4  w-full" *ngIf="readyCount > 0">
-                    <div class="col-span-9 pr-1">
-                        {{group.Name}}
-                        <b>&nbsp;{{ dirtyMessages[ix] }}</b>
-                    </div>
-                </div>
-            </ng-template>
-            <ng-template pTemplate="content">
-                <app-profile-group [group]="group"
-                    [parentComponent]="this"></app-profile-group>
-            </ng-template>
-        </p-accordionTab>
+    <p-accordion class="col-span-12 w-full" (onOpen)="onTabOpen($event)" (onClose)="onTabClose($event)">
+        @for (group of groups; track $index; let ix = $index) {
+        <p-accordion-panel [value]="ix">
+            <p-accordion-header (click)="onClick({index:ix})">
+                {{group.Name}}
+                {{dirtyMessages[ix]}}
+            </p-accordion-header>
+            <p-accordion-content>
+                <app-profile-group [group]="group" [parent]="this" [tabIndex]="ix"></app-profile-group>
+            </p-accordion-content>
+        </p-accordion-panel>
+        }
     </p-accordion>
 
     <div class="flex justify-end">
@@ -24,7 +21,8 @@
             iconPos="left"></p-button>
 
         <p-button class="p-4" label="{{ 'common.next' | translate }}"
-            (onClick)="router.navigate(['setupwizard/video-sources'])" icon="pi pi-angle-right" iconPos="right"></p-button>
+            (onClick)="router.navigate(['setupwizard/video-sources'])" icon="pi pi-angle-right"
+            iconPos="right"></p-button>
     </div>
 
 </p-card>
