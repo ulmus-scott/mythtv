@@ -1727,11 +1727,15 @@ bool ExternalStreamHandler::CheckForError(void)
                     elements["command"] == "STATUS")
                 {
                     LogLevel_t level { LOG_INFO };
-                    QString status = elements["status"].toString();
+                    QString status  = elements["status"].toString();
+                    QString message = elements["message"].toString();
+                    if (status.startsWith("crit", Qt::CaseInsensitive))
+                    {
+                        level = LOG_CRIT;
+                    }
                     if (status.startsWith("err", Qt::CaseInsensitive))
                     {
                         level = LOG_ERR;
-                        err |= true;
                     }
                     else if (status.startsWith("warn",
                                                Qt::CaseInsensitive))
@@ -1744,9 +1748,16 @@ bool ExternalStreamHandler::CheckForError(void)
                         level = LOG_WARNING;
                         m_damaged |= true;
                     }
+
+                    if (message.trimmed().startsWith("damage",
+                                                     Qt::CaseInsensitive))
+                    {
+                        m_damaged |= true;
+                    }
+
                     LOG(VB_RECORD, level,
                         LOC + QString("%1:%2%3")
-                        .arg(status, elements["message"].toString(),
+                        .arg(status, message,
                              m_damaged ? " (Damaged)" : ""));
                 }
             }
