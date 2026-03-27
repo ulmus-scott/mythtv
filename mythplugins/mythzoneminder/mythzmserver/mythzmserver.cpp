@@ -95,7 +95,7 @@ int main(int argc, char **argv)
 
                 if (port < 1 || port > 65534)
                 {
-                    std::cout << "Bad port number: " << port << std::endl;
+                    std::cout << "Bad port number: " << port << '\n';
                     return EXIT_INVALID_CMDLINE;
                 }
                 ++argpos;
@@ -173,15 +173,15 @@ int main(int argc, char **argv)
         }
         else
         {
-            std::cerr << "Invalid argument: " << argv[argpos] << std::endl <<
-                    "Valid options are: " << std::endl <<
-                    "-p or --port number        A port number to listen on (default is 6548) " << std::endl <<
-                    "-d or --daemon             Runs mythzmserver as a daemon " << std::endl <<
-                    "-n or --nodaemon           Does not run mythzmserver as a daemon (default)" << std::endl <<
-                    "-c or --zmconfig           Location of zoneminders default config file (default is " << ZM_CONFIG << ")" << std::endl <<
-                    "-o or --zmoverrideconfig   Location of zoneminders override config file (default is " << ZM_OVERRIDECONFIG << ")" << std::endl <<
-                    "-l or --logfile filename   Writes STDERR and STDOUT messages to filename" << std::endl <<
-                    "-v or --verbose            Prints more debug output" << std::endl;
+            std::cerr << "Invalid argument: " << argv[argpos] << '\n' <<
+                    "Valid options are: \n" <<
+                    "-p or --port number        A port number to listen on (default is 6548) \n" <<
+                    "-d or --daemon             Runs mythzmserver as a daemon \n" <<
+                    "-n or --nodaemon           Does not run mythzmserver as a daemon (default)\n" <<
+                    "-c or --zmconfig           Location of zoneminders default config file (default is " << ZM_CONFIG << ")\n" <<
+                    "-o or --zmoverrideconfig   Location of zoneminders override config file (default is " << ZM_OVERRIDECONFIG << ")\n" <<
+                    "-l or --logfile filename   Writes STDERR and STDOUT messages to filename\n" <<
+                    "-v or --verbose            Prints more debug output\n";
             return EXIT_INVALID_CMDLINE;
         }
     }
@@ -222,7 +222,7 @@ int main(int argc, char **argv)
             std::cout << "Failed to run as a daemon. Bailing out.\n";
             return EXIT_DAEMONIZING_ERROR;
         }
-        std::cout << std::endl;
+        std::cout << '\n';
     }
 
     std::map<int, ZMServer*> serverList; // list of ZMServers
@@ -236,7 +236,7 @@ int main(int argc, char **argv)
     // check we have a version (default to 1.34.16 if not found)
     if (g_zmversion.empty())
     {
-        std::cout << "ZM version not found. Assuming at least v1.34.16 is installed" << std::endl;
+        std::cout << "ZM version not found. Assuming at least v1.34.16 is installed\n";
         g_majorVersion = 1;
         g_minorVersion = 34;
         g_revisionVersion = 16;
@@ -248,11 +248,11 @@ int main(int argc, char **argv)
         // we support version 1.24.0 or later
         if (checkVersion(1, 24, 0))
         {
-            std::cout << "ZM is version '" << g_zmversion << "'" << std::endl;
+            std::cout << "ZM is version '" << g_zmversion << "'\n";
         }
         else
         {
-            std::cout << "This version of ZM is to old you need 1.24.0 or later '" << g_zmversion << "'" << std::endl;
+            std::cout << "This version of ZM is to old you need 1.24.0 or later '" << g_zmversion << "'\n";
             return EXIT_VERSION_ERROR;
         }
     }
@@ -298,7 +298,7 @@ int main(int argc, char **argv)
         return EXIT_SOCKET_ERROR;
     }
 
-    std::cout << "Listening on port: " << port << std::endl;
+    std::cout << "Listening on port: " << port << '\n';
 
     // add the listener to the master set
     FD_SET(listener, &master);

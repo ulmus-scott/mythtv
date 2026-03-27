@@ -342,9 +342,9 @@ uint ChannelImporter::DeleteChannels(
         return 0;
 
     // List of off-air channels (in database but not in the scan)
-    std::cout << std::endl << "Off-air channels (" << SimpleCountChannels(off_air_transports) << "):" << std::endl;
+    std::cout << "\nOff-air channels (" << SimpleCountChannels(off_air_transports) << "):\n";
     ChannelImporterBasicStats infoA = CollectStats(off_air_transports);
-    std::cout << FormatChannels(off_air_transports, &infoA).toLatin1().constData() << std::endl;
+    std::cout << FormatChannels(off_air_transports, &infoA).toLatin1().constData() << '\n';
 
     // Ask user whether to delete all or some of these stale channels
     // if some is selected ask about each individually
@@ -1960,16 +1960,16 @@ ChannelImporter::QueryUserDelete(const QString &msg)
     else if (m_isInteractive)
     {
         std::cout << msg.toLatin1().constData()
-             << std::endl
+             << '\n'
              << tr("Do you want to:").toLatin1().constData()
-             << std::endl
+             << '\n'
              << tr("1. Delete All").toLatin1().constData()
-             << std::endl
+             << '\n'
              << tr("2. Set all invisible").toLatin1().constData()
-             << std::endl
+             << '\n'
 //        cout << "3. Handle manually" << endl;
              << tr("4. Ignore All").toLatin1().constData()
-             << std::endl;
+             << '\n';
         while (true)
         {
             std::string ret;
@@ -1987,7 +1987,7 @@ ChannelImporter::QueryUserDelete(const QString &msg)
 
             //cout << "Please enter either 1, 2, 3 or 4:" << endl;
             std::cout << tr("Please enter either 1, 2 or 4:")
-                .toLatin1().constData() << std::endl;
+                .toLatin1().constData() << '\n';
         }
     }
 
@@ -2047,15 +2047,15 @@ ChannelImporter::QueryUserInsert(const QString &msg)
     else if (m_isInteractive)
     {
         std::cout << msg.toLatin1().constData()
-             << std::endl
+             << '\n'
              << tr("Do you want to:").toLatin1().constData()
-             << std::endl
+             << '\n'
              << tr("1. Insert All").toLatin1().constData()
-             << std::endl
+             << '\n'
              << tr("2. Insert Manually").toLatin1().constData()
-             << std::endl
+             << '\n'
              << tr("3. Ignore All").toLatin1().constData()
-             << std::endl;
+             << '\n';
         while (true)
         {
             std::string ret;
@@ -2071,7 +2071,7 @@ ChannelImporter::QueryUserInsert(const QString &msg)
             }
 
             std::cout << tr("Please enter either 1, 2, or 3:")
-                .toLatin1().constData() << std::endl;
+                .toLatin1().constData() << '\n';
         }
     }
 
@@ -2130,15 +2130,15 @@ ChannelImporter::QueryUserUpdate(const QString &msg)
     else if (m_isInteractive)
     {
         std::cout << msg.toLatin1().constData()
-             << std::endl
+             << '\n'
              << tr("Do you want to:").toLatin1().constData()
-             << std::endl
+             << '\n'
              << tr("1. Update All").toLatin1().constData()
-             << std::endl
+             << '\n'
              << tr("2. Update Manually").toLatin1().constData()
-             << std::endl
+             << '\n'
              << tr("3. Ignore All").toLatin1().constData()
-             << std::endl;
+             << '\n';
         while (true)
         {
             std::string ret;
@@ -2154,7 +2154,7 @@ ChannelImporter::QueryUserUpdate(const QString &msg)
             }
 
             std::cout << tr("Please enter either 1, 2, or 3:")
-                .toLatin1().constData() << std::endl;
+                .toLatin1().constData() << '\n';
         }
     }
     m_functorRetval = 0;    // Reset default menu choice to first item for next menu
@@ -2402,7 +2402,7 @@ OkCancelType ChannelImporter::QueryUserResolve(
     }
     else if (m_isInteractive)
     {
-        std::cout << msg.toLatin1().constData() << std::endl;
+        std::cout << msg.toLatin1().constData() << '\n';
 
         QString cancelStr = QCoreApplication::translate("(Common)",
                                                         "Cancel").toLower();
@@ -2414,7 +2414,7 @@ OkCancelType ChannelImporter::QueryUserResolve(
 
         while (true)
         {
-            std::cout << msg2.toLatin1().constData() << std::endl;
+            std::cout << msg2.toLatin1().constData() << '\n';
             std::string sret;
             std::cin >> sret;
             QString val = QString(sret.c_str());
@@ -2480,7 +2480,7 @@ OkCancelType ChannelImporter::QueryUserInsert(
     }
     else if (m_isInteractive)
     {
-        std::cout << msg.toLatin1().constData() << std::endl;
+        std::cout << msg.toLatin1().constData() << '\n';
 
         QString cancelStr    = QCoreApplication::translate("(Common)", "Cancel").toLower();
         QString cancelAllStr = QCoreApplication::translate("(Common)", "Cancel All").toLower();
@@ -2492,7 +2492,7 @@ OkCancelType ChannelImporter::QueryUserInsert(
 
         while (true)
         {
-            std::cout << msg2.toLatin1().constData() << std::endl;
+            std::cout << msg2.toLatin1().constData() << '\n';
             std::string sret;
             std::cin >> sret;
             QString val = QString(sret.c_str());

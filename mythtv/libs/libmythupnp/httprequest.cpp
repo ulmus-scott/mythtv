@@ -382,7 +382,7 @@ qint64 HTTPRequest::SendResponse( void )
     // ----------------------------------------------------------------------
     // DEBUGGING
     if (qEnvironmentVariableIsSet("HTTPREQUEST_DEBUG"))
-        std::cout << m_response.buffer().constData() << std::endl;
+        std::cout << m_response.buffer().constData() << '\n';
     // ----------------------------------------------------------------------
 
     LOG(VB_HTTP, LOG_DEBUG, QString("Reponse Content Length: %1").arg(nContentLen));

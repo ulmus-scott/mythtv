@@ -28,22 +28,22 @@ static int RunCCExtract(ProgramInfo &program_info, const QString & destdir)
         QString msg =
             QString("Only locally accessible files are supported (%1).")
             .arg(program_info.GetPathname());
-        std::cerr << qPrintable(msg) << std::endl;
+        std::cerr << qPrintable(msg) << '\n';
         return GENERIC_EXIT_INVALID_CMDLINE;
     }
 
     if (!QFile::exists(filename))
     {
         std::cerr << qPrintable(
-            QString("Could not open input file (%1).").arg(filename)) << std::endl;
+            QString("Could not open input file (%1).\n").arg(filename));
         return GENERIC_EXIT_INVALID_CMDLINE;
     }
 
     MythMediaBuffer *tmprbuf = MythMediaBuffer::Create(filename, false);
     if (!tmprbuf)
     {
-        std::cerr << qPrintable(QString("Unable to create RingBuffer for %1")
-                                .arg(filename)) << std::endl;
+        std::cerr << qPrintable(QString("Unable to create RingBuffer for %1\n")
+                                .arg(filename));
         return GENERIC_EXIT_PERMISSIONS_ERROR;
     }
 
@@ -51,7 +51,7 @@ static int RunCCExtract(ProgramInfo &program_info, const QString & destdir)
     {
         std::cout << "Program will end @ "
                   << qPrintable(program_info.GetRecordingEndTime(MythDate::ISODate))
-                  << std::endl;
+                  << '\n';
         tmprbuf->SetWaitForWrite();
     }
 
@@ -66,12 +66,12 @@ static int RunCCExtract(ProgramInfo &program_info, const QString & destdir)
     ctx->SetPlayer(ccp);
     if (ccp->OpenFile() < 0)
     {
-        std::cerr << "Failed to open " << qPrintable(filename) << std::endl;
+        std::cerr << "Failed to open " << qPrintable(filename) << '\n';
         return GENERIC_EXIT_NOT_OK;
     }
     if (!ccp->run())
     {
-        std::cerr << "Failed to decode " << qPrintable(filename) << std::endl;
+        std::cerr << "Failed to decode " << qPrintable(filename) << '\n';
         return GENERIC_EXIT_NOT_OK;
     }
 
@@ -112,7 +112,7 @@ int main(int argc, char *argv[])
     QString infile = cmdline.toString("inputfile");
     if (infile.isEmpty())
     {
-        std::cerr << "The input file --infile is required" << std::endl;
+        std::cerr << "The input file --infile is required\n";
         return GENERIC_EXIT_INVALID_CMDLINE;
     }
 
@@ -125,7 +125,7 @@ int main(int argc, char *argv[])
             false/*use gui*/, false/*prompt for backend*/,
             false/*bypass auto discovery*/, !useDB/*ignoreDB*/))
     {
-        std::cerr << "Failed to init MythContext, exiting." << std::endl;
+        std::cerr << "Failed to init MythContext, exiting.\n";
         return GENERIC_EXIT_NO_MYTHCONTEXT;
     }
 

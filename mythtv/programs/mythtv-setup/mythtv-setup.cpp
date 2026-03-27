@@ -397,15 +397,14 @@ int main(int argc, char *argv[])
 
         if (!okCardID)
         {
-            std::cerr << "You must enter a valid cardid to scan." << std::endl;
+            std::cerr << "You must enter a valid cardid to scan.\n";
             std::vector<unsigned int> cardids = CardUtil::GetInputIDs();
             if (cardids.empty())
             {
-                std::cerr << "But no cards have been defined on this host"
-                          << std::endl;
+                std::cerr << "But no cards have been defined on this host\n";
                 return GENERIC_EXIT_INVALID_CMDLINE;
             }
-            std::cerr << "Valid cards: " << std::endl;
+            std::cerr << "Valid cards:\n";
             for (uint id : cardids)
             {
                 fprintf(stderr, "%5u: %s %s\n", id,
@@ -417,11 +416,10 @@ int main(int argc, char *argv[])
 
         if (!okInputName)
         {
-            std::cerr << "You must enter a valid input to scan this card."
-                      << std::endl;
+            std::cerr << "You must enter a valid input to scan this card.\n";
             std::cerr << "Valid input: "
                       << CardUtil::GetInputName(scanCardId).toLatin1().constData()
-                      << std::endl;
+                      << '\n';
             return GENERIC_EXIT_INVALID_CMDLINE;
         }
     }
@@ -482,7 +480,7 @@ int main(int argc, char *argv[])
     {
         std::vector<ScanInfo> scans = LoadScanList();
 
-        std::cout<<" scanid cardid sourceid processed        date"<<std::endl;
+        std::cout<<" scanid cardid sourceid processed        date\n";
         for (auto & scan : scans)
         {
             printf("%5i %6i %8i %8s    %20s\n",
@@ -491,14 +489,14 @@ int main(int argc, char *argv[])
                    scan.m_scandate.toString(Qt::ISODate)
                    .toLatin1().constData());
         }
-        std::cout<<std::endl;
+        std::cout<<'\n';
 
         return GENERIC_EXIT_OK;
     }
 
     if (scanImport)
     {
-        std::cout<<"*** SCAN IMPORT START ***"<<std::endl;
+        std::cout<<"*** SCAN IMPORT START ***\n";
         {
             ScanDTVTransportList list = LoadScan(scanImport);
             ChannelImporter ci(false, true, true, true, false,
@@ -509,7 +507,7 @@ int main(int argc, char *argv[])
                                scanServiceRequirements);
             ci.Process(list);
         }
-        std::cout<<"*** SCAN IMPORT END ***"<<std::endl;
+        std::cout<<"*** SCAN IMPORT END ***\n";
         return GENERIC_EXIT_OK;
     }
 

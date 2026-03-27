@@ -191,7 +191,7 @@ bool MythCommFlagPlayer::RebuildSeekTable(bool ShowPercentage, StatusCallback Ca
             (GetEof() != kEofStateNone || (frames > 1000 && frames < 1100)) &&
             !m_decoder->HasPositionMap())
         {
-            std::cout << "No I-frames found, rewinding..." << std::endl;
+            std::cout << "No I-frames found, rewinding...\n";
             m_decoder->DoRewind(0);
             m_decoder->Reset(true, true, true);
             pmap_first = pmap_last = myFramesPlayed = 0;

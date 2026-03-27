@@ -318,8 +318,8 @@ int main(int argc, char *argv[])
         }
         else if (cmdline.toBool("inversecut"))
         {
-            std::cerr << "Cutlist inversion requires an external cutlist be" << std::endl
-                      << "provided using the --honorcutlist option." << std::endl;
+            std::cerr << "Cutlist inversion requires an external cutlist be\n"
+                      << "provided using the --honorcutlist option.\n";
             return GENERIC_EXIT_INVALID_CMDLINE;
         }
     }
@@ -353,7 +353,7 @@ int main(int argc, char *argv[])
         {
             std::cerr << "Invalid 'ostream' type: "
                       << cmdline.toString("ostream").toLocal8Bit().constData()
-                      << std::endl;
+                      << '\n';
             return GENERIC_EXIT_INVALID_CMDLINE;
         }
     }
@@ -386,7 +386,7 @@ int main(int argc, char *argv[])
         else
         {
             std::cerr << "mythtranscode: ERROR: Unable to find DB info for "
-                      << "JobQueue ID# " << jobID << std::endl;
+                      << "JobQueue ID# " << jobID << '\n';
             return GENERIC_EXIT_NO_RECORDING_DATA;
         }
     }
@@ -395,48 +395,47 @@ int main(int argc, char *argv[])
          (found_infile && (found_chanid || found_starttime))) &&
         (!cmdline.toBool("hls")))
     {
-         std::cerr << "Must specify -i OR -c AND -s options!" << std::endl;
+         std::cerr << "Must specify -i OR -c AND -s options!\n";
          return GENERIC_EXIT_INVALID_CMDLINE;
     }
     if (isVideo && !found_infile && !cmdline.toBool("hls"))
     {
-         std::cerr << "Must specify --infile to use --video" << std::endl;
+         std::cerr << "Must specify --infile to use --video\n";
          return GENERIC_EXIT_INVALID_CMDLINE;
     }
     if (jobID >= 0 && (found_infile || build_index))
     {
-         std::cerr << "Can't specify -j with --buildindex, --video or --infile"
-                   << std::endl;
+         std::cerr << "Can't specify -j with --buildindex, --video or --infile\n";
          return GENERIC_EXIT_INVALID_CMDLINE;
     }
     if ((jobID >= 0) && build_index)
     {
-         std::cerr << "Can't specify both -j and --buildindex" << std::endl;
+         std::cerr << "Can't specify both -j and --buildindex\n";
          return GENERIC_EXIT_INVALID_CMDLINE;
     }
     if (keyframesonly && !fifodir.isEmpty())
     {
-         std::cerr << "Cannot specify both --fifodir and --allkeys" << std::endl;
+         std::cerr << "Cannot specify both --fifodir and --allkeys\n";
          return GENERIC_EXIT_INVALID_CMDLINE;
     }
     if (fifosync && fifodir.isEmpty())
     {
-         std::cerr << "Must specify --fifodir to use --fifosync" << std::endl;
+         std::cerr << "Must specify --fifodir to use --fifosync\n";
          return GENERIC_EXIT_INVALID_CMDLINE;
     }
     if (fifo_info && !fifodir.isEmpty())
     {
-        std::cerr << "Cannot specify both --fifodir and --fifoinfo" << std::endl;
+        std::cerr << "Cannot specify both --fifodir and --fifoinfo\n";
         return GENERIC_EXIT_INVALID_CMDLINE;
     }
     if (cleanCut && fifodir.isEmpty() && !fifo_info)
     {
-        std::cerr << "Clean cutting works only in fifodir mode" << std::endl;
+        std::cerr << "Clean cutting works only in fifodir mode\n";
         return GENERIC_EXIT_INVALID_CMDLINE;
     }
     if (cleanCut && !useCutlist)
     {
-        std::cerr << "--cleancut is pointless without --honorcutlist" << std::endl;
+        std::cerr << "--cleancut is pointless without --honorcutlist\n";
         return GENERIC_EXIT_INVALID_CMDLINE;
     }
 

@@ -2474,7 +2474,7 @@ void ClassicCommDetector::PrintFullMap(
     if (verbose)
     {
         QByteArray tmp = FrameInfoEntry::GetHeader().toLatin1();
-        out << tmp.constData() << " mark" << std::endl;
+        out << tmp.constData() << " mark\n";
     }
 
     for (long long i = 1; i < m_curFrameNumber; i++)

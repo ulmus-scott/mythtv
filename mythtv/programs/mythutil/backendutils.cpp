@@ -99,13 +99,13 @@ static int ParseVideoFilename(const MythUtilCommandLineParser &cmdline)
 {
     QString filename = cmdline.toString("parsevideo");
     cout << "Title:    " << VideoMetadata::FilenameToMeta(filename, 1)
-                                            .toLocal8Bit().constData() << endl
+                                            .toLocal8Bit().constData() << '\n'
          << "Season:   " << VideoMetadata::FilenameToMeta(filename, 2)
-                                            .toLocal8Bit().constData() << endl
+                                            .toLocal8Bit().constData() << '\n'
          << "Episode:  " << VideoMetadata::FilenameToMeta(filename, 3)
-                                            .toLocal8Bit().constData() << endl
+                                            .toLocal8Bit().constData() << '\n'
          << "Subtitle: " << VideoMetadata::FilenameToMeta(filename, 4)
-                                            .toLocal8Bit().constData() << endl;
+                                            .toLocal8Bit().constData() << '\n';
 
     return GENERIC_EXIT_OK;
 }

@@ -99,8 +99,8 @@ int main(int argc, char *argv[])
         if (!cmdline.toBool("sourceid") ||
             !cmdline.toBool("xmlfile"))
         {
-            std::cerr << "The --file option must be used in combination" << std::endl
-                      << "with both --sourceid and --xmlfile." << std::endl;
+            std::cerr << "The --file option must be used in combination\n"
+                      << "with both --sourceid and --xmlfile.\n";
             return GENERIC_EXIT_INVALID_CMDLINE;
         }
 
@@ -124,8 +124,8 @@ int main(int argc, char *argv[])
     {
         if (!cmdline.toBool("sourceid"))
         {
-            std::cerr << "The --cardtype option must be used in combination" << std::endl
-                      << "with a --sourceid option." << std::endl;
+            std::cerr << "The --cardtype option must be used in combination\n"
+                      << "with a --sourceid option.\n";
             return GENERIC_EXIT_INVALID_CMDLINE;
         }
 
@@ -165,20 +165,20 @@ int main(int argc, char *argv[])
                 uint lower = r[0].toUInt(&ok);
                 if (!ok)
                 {
-                    std::cerr << warn.toLocal8Bit().constData() << std::endl;
+                    std::cerr << warn.toLocal8Bit().constData() << '\n';
                     return 0;
                 }
 
                 uint upper = r[1].toUInt(&ok);
                 if (!ok)
                 {
-                    std::cerr << warn.toLocal8Bit().constData() << std::endl;
+                    std::cerr << warn.toLocal8Bit().constData() << '\n';
                     return 0;
                 }
 
                 if (lower > upper)
                 {
-                    std::cerr << warn.toLocal8Bit().constData() << std::endl;
+                    std::cerr << warn.toLocal8Bit().constData() << '\n';
                     return 0;
                 }
 
@@ -191,7 +191,7 @@ int main(int argc, char *argv[])
                 uint day = item.toUInt(&ok);
                 if (!ok)
                 {
-                    std::cerr << warn.toLocal8Bit().constData() << std::endl;
+                    std::cerr << warn.toLocal8Bit().constData() << '\n';
                     return 0;
                 }
 

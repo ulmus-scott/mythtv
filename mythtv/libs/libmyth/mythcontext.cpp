@@ -731,7 +731,7 @@ bool MythContext::Impl::PromptForDatabaseParams(const QString &error)
         QString        response;
         std::this_thread::sleep_for(1s);
         // give user chance to skip config
-        std::cout << std::endl << error.toLocal8Bit().constData() << std::endl << std::endl;
+        std::cout << '\n' << error.toLocal8Bit().constData() << "\n\n";
         response = getResponse("Would you like to configure the database "
                                "connection now?",
                                "no");

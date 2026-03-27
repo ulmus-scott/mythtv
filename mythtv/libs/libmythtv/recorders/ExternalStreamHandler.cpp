@@ -424,7 +424,7 @@ void ExternIO::Fork(void)
     {
         std::cerr << "ExternIO: "
              << "setpgid() failed: "
-             << strerror(errno) << std::endl;
+             << strerror(errno) << '\n';
     }
 
     /* run command */
@@ -445,13 +445,13 @@ void ExternIO::Fork(void)
         // Can't use LOG due to locking fun.
         std::cerr << "ExternIO: "
              << "execv() failed: "
-             << strerror(errno) << std::endl;
+             << strerror(errno) << '\n';
     }
     else
     {
         std::cerr << "ExternIO: "
                   << "execv() should not be here?: "
-                  << strerror(errno) << std::endl;
+                  << strerror(errno) << '\n';
     }
 
 #endif // !defined( Q_OS_WINDOWS )

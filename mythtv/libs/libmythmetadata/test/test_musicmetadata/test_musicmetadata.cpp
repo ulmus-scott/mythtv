@@ -29,37 +29,37 @@ void TestMusicMetadata::initTestCase()
 
 void TestMusicMetadata::dump(MusicMetadata *data)
 {
-    std::cerr << "Artist:                   " << qPrintable(data->Artist())                << std::endl;
-    std::cerr << "Artist Sort:              " << qPrintable(data->ArtistSort())            << std::endl;
-    std::cerr << "Compilation Artrist:      " << qPrintable(data->CompilationArtist())     << std::endl;
-    std::cerr << "Compilation Artrist Sort: " << qPrintable(data->CompilationArtistSort()) << std::endl;
-    std::cerr << "Album:                    " << qPrintable(data->Album())                 << std::endl;
-    std::cerr << "Album Sort:               " << qPrintable(data->AlbumSort())             << std::endl;
-    std::cerr << "Title:                    " << qPrintable(data->Title())                 << std::endl;
-    std::cerr << "Title Sort:               " << qPrintable(data->TitleSort())             << std::endl;
-    std::cerr << "Format Artist:            " << qPrintable(data->FormatArtist())          << std::endl;
-    std::cerr << "Format Title:             " << qPrintable(data->FormatTitle())           << std::endl;
-    std::cerr << "Genre:                    " << qPrintable(data->Genre())                 << std::endl;
-    std::cerr << "Directory Id:             " << data->getDirectoryId()                    << std::endl;
-    std::cerr << "Artist Id:                " << data->getArtistId()                       << std::endl;
-    std::cerr << "Compilation Artist Id:    " << data->getCompilationArtistId()            << std::endl;
-    std::cerr << "Album Id:                 " << data->getArtistId()                       << std::endl;
-    std::cerr << "Genre Id:                 " << data->getGenreId()                        << std::endl;
-    std::cerr << "Year:                     " << data->Year()                              << std::endl;
-    std::cerr << "Track:                    " << data->Track()                             << std::endl;
-    std::cerr << "Track Count:              " << data->GetTrackCount()                     << std::endl;
-    std::cerr << "Length:                   " << data->Length().count()                    << std::endl;
-    std::cerr << "Disc Number:              " << data->DiscNumber()                        << std::endl;
-    std::cerr << "Disc Count:               " << data->DiscCount()                         << std::endl;
-    std::cerr << "Play Count:               " << data->PlayCount()                         << std::endl;
-    std::cerr << "Id:                       " << data->ID()                                << std::endl;
-    std::cerr << "Filename:                 " << qPrintable(data->Filename())              << std::endl;
-    std::cerr << "Hostname:                 " << qPrintable(data->Hostname())              << std::endl;
-    std::cerr << "File Size:                " << data->FileSize()                          << std::endl;
-    std::cerr << "Format:                   " << qPrintable(data->Format())                << std::endl;
-    std::cerr << "Rating:                   " << data->Rating()                            << std::endl;
-    std::cerr << "LastPlay:                 " << qPrintable(data->LastPlay().toString(Qt::ISODate)) << std::endl;
-    std::cerr << "Compilation:              " << (data->Compilation() ? "true" : "false")  << std::endl;
+    std::cerr << "Artist:                   " << qPrintable(data->Artist())                << '\n';
+    std::cerr << "Artist Sort:              " << qPrintable(data->ArtistSort())            << '\n';
+    std::cerr << "Compilation Artrist:      " << qPrintable(data->CompilationArtist())     << '\n';
+    std::cerr << "Compilation Artrist Sort: " << qPrintable(data->CompilationArtistSort()) << '\n';
+    std::cerr << "Album:                    " << qPrintable(data->Album())                 << '\n';
+    std::cerr << "Album Sort:               " << qPrintable(data->AlbumSort())             << '\n';
+    std::cerr << "Title:                    " << qPrintable(data->Title())                 << '\n';
+    std::cerr << "Title Sort:               " << qPrintable(data->TitleSort())             << '\n';
+    std::cerr << "Format Artist:            " << qPrintable(data->FormatArtist())          << '\n';
+    std::cerr << "Format Title:             " << qPrintable(data->FormatTitle())           << '\n';
+    std::cerr << "Genre:                    " << qPrintable(data->Genre())                 << '\n';
+    std::cerr << "Directory Id:             " << data->getDirectoryId()                    << '\n';
+    std::cerr << "Artist Id:                " << data->getArtistId()                       << '\n';
+    std::cerr << "Compilation Artist Id:    " << data->getCompilationArtistId()            << '\n';
+    std::cerr << "Album Id:                 " << data->getArtistId()                       << '\n';
+    std::cerr << "Genre Id:                 " << data->getGenreId()                        << '\n';
+    std::cerr << "Year:                     " << data->Year()                              << '\n';
+    std::cerr << "Track:                    " << data->Track()                             << '\n';
+    std::cerr << "Track Count:              " << data->GetTrackCount()                     << '\n';
+    std::cerr << "Length:                   " << data->Length().count()                    << '\n';
+    std::cerr << "Disc Number:              " << data->DiscNumber()                        << '\n';
+    std::cerr << "Disc Count:               " << data->DiscCount()                         << '\n';
+    std::cerr << "Play Count:               " << data->PlayCount()                         << '\n';
+    std::cerr << "Id:                       " << data->ID()                                << '\n';
+    std::cerr << "Filename:                 " << qPrintable(data->Filename())              << '\n';
+    std::cerr << "Hostname:                 " << qPrintable(data->Hostname())              << '\n';
+    std::cerr << "File Size:                " << data->FileSize()                          << '\n';
+    std::cerr << "Format:                   " << qPrintable(data->Format())                << '\n';
+    std::cerr << "Rating:                   " << data->Rating()                            << '\n';
+    std::cerr << "LastPlay:                 " << qPrintable(data->LastPlay().toString(Qt::ISODate)) << '\n';
+    std::cerr << "Compilation:              " << (data->Compilation() ? "true" : "false")  << '\n';
 }
 
 void TestMusicMetadata::test_flac(void)

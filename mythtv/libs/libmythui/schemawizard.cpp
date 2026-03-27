@@ -442,22 +442,21 @@ SchemaUpgradeWizard::PromptForUpgrade(const char *name,
     // We are not in a GUI environment, so try to prompt the user in the shell
     QString resp;
 
-    cout << endl << message.toLocal8Bit().constData() << endl << endl;
+    cout << '\n' << message.toLocal8Bit().constData() << "\n\n";
 
     if (returnValue == MYTH_SCHEMA_ERROR)
         return MYTH_SCHEMA_ERROR;
 
     if (m_backupStatus == kDB_Backup_Failed)
     {
-        cout << "WARNING: MythTV was unable to backup your database."
-             << endl << endl;
+        cout << "WARNING: MythTV was unable to backup your database.\n\n";
     }
     else if ((m_backupStatus == kDB_Backup_Completed) &&
              (m_backupResult != ""))
     {
         cout << "If your system becomes unstable, "
                 "a database backup is located in "
-             << m_backupResult.toLocal8Bit().constData() << endl << endl;
+             << m_backupResult.toLocal8Bit().constData() << "\n\n";
     }
 
     if (m_expertMode)
@@ -472,7 +471,7 @@ SchemaUpgradeWizard::PromptForUpgrade(const char *name,
         return MYTH_SCHEMA_EXIT;
 
     if (connections)
-        cout << endl << warnOtherCl.toLocal8Bit().constData() << endl;
+        cout << '\n' << warnOtherCl.toLocal8Bit().constData() << '\n';
 
     if ((m_backupStatus != kDB_Backup_Completed) &&
         (m_backupStatus != kDB_Backup_Empty_DB))

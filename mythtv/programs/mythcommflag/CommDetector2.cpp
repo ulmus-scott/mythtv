@@ -807,13 +807,13 @@ void CommDetector2::PrintFullMap(
     if (m_sceneChangeDetector)
         sceneMap = m_sceneChangeDetector->GetMap(0);
 
-    out << "Logo Break Map" << std::endl;
+    out << "Logo Break Map\n";
     PrintReportMap(out, logoMap);
-    out << "Blank Break Map" << std::endl;
+    out << "Blank Break Map\n";
     PrintReportMap(out, blankBreakMap);
-    out << "Blank Map" << std::endl;
+    out << "Blank Map\n";
     PrintReportMap(out, blankMap);
-    out << "Scene Break Map" << std::endl;
+    out << "Scene Break Map\n";
     PrintReportMap(out, sceneMap);
 }
 

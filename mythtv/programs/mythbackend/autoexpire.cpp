@@ -814,7 +814,7 @@ void AutoExpire::PrintExpireList(const QString& expHost)
     if (expHost != "ALL")
         msg += QString("for '%1' ").arg(expHost);
     msg += "(programs listed in order of expiration)";
-    std::cout << msg.toLocal8Bit().constData() << std::endl;
+    std::cout << msg.toLocal8Bit().constData() << '\n';
 
     for (auto *first : expireList)
     {
@@ -834,7 +834,7 @@ void AutoExpire::PrintExpireList(const QString& expHost)
                  .rightJustified(3, ' ', true));
         QByteArray out = outstr.toLocal8Bit();
 
-        std::cout << out.constData() << std::endl;
+        std::cout << out.constData() << '\n';
     }
 
     ClearExpireList(expireList);

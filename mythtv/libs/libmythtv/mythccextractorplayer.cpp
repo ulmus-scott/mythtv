@@ -191,7 +191,7 @@ bool MythCCExtractorPlayer::run(void)
             m_myFramesPlayed = m_totalFrames;
         }
         QString str = progress_string(flagTime, m_myFramesPlayed, m_totalFrames);
-        std::cout << qPrintable(str) << std::endl;
+        std::cout << qPrintable(str) << '\n';
     }
 
     Process608Captions(kProcessFinalize);

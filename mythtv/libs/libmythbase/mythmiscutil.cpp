@@ -467,8 +467,8 @@ QString getResponse(const QString &query, const QString &def)
 
     if (!isatty(fileno(stdin)) || !isatty(fileno(stdout)))
     {
-        std::cout << std::endl << "[console is not interactive, using default '"
-             << tmp.constData() << "']" << std::endl;
+        std::cout << "\n[console is not interactive, using default '"
+             << tmp.constData() << "']\n";
         return def;
     }
 

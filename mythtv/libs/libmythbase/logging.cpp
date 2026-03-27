@@ -883,10 +883,10 @@ void verboseHelp(void)
         if (item->helpText.isEmpty())
             continue;
         std::cerr << name.toLocal8Bit().constData() << " - "
-                  << item->helpText.toLocal8Bit().constData() << std::endl;
+                  << item->helpText.toLocal8Bit().constData() << '\n';
     }
 
-    std::cerr << std::endl <<
+    std::cerr << '\n' <<
       "The default for this program appears to be: '-v " <<
       m_verbose.toLocal8Bit().constData() << "'\n\n"
       "Most options are additive except for 'none' and 'all'.\n"
@@ -905,7 +905,7 @@ void verboseHelp(void)
          << "to the component.\n"
          << "    For example: -v gui:debug,channel:notice,record\n\n";
 
-    std::cerr << "Some debug levels may not apply to this program.\n" << std::endl;
+    std::cerr << "Some debug levels may not apply to this program.\n\n";
 }
 
 /// \brief  Parse the --verbose commandline argument and set the verbose level
@@ -1016,7 +1016,7 @@ int verboseArgParse(const QString& arg)
             else
             {
                 std::cerr << "Unknown argument for -v/--verbose: " <<
-                        option.toLocal8Bit().constData() << std::endl;;
+                        option.toLocal8Bit().constData() << '\n';
                 return GENERIC_EXIT_INVALID_CMDLINE;
             }
         }

@@ -84,14 +84,14 @@ SignalHandler::SignalHandler(QObject *parent) :
     // Carry on without the signal stack if it fails
     if (sigaltstack(&stack, nullptr) == -1)
     {
-        std::cerr << "Couldn't create signal stack!" << std::endl;
+        std::cerr << "Couldn't create signal stack!\n";
         delete [] m_sigStack;
         m_sigStack = nullptr;
     }
 
     if (::socketpair(AF_UNIX, SOCK_STREAM, 0, s_sigFd.data()))
     {
-        std::cerr << "Couldn't create socketpair" << std::endl;
+        std::cerr << "Couldn't create socketpair\n";
         return;
     }
     m_notifier = new QSocketNotifier(s_sigFd[1], QSocketNotifier::Read, this);

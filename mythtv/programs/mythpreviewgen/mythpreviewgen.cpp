@@ -155,9 +155,9 @@ int main(int argc, char **argv)
     if ((!cmdline.toBool("chanid") || !cmdline.toBool("starttime")) &&
         !cmdline.toBool("inputfile"))
     {
-        std::cerr << "--generate-preview must be accompanied by either " <<std::endl
-                  << "\nboth --chanid and --starttime parameters, " << std::endl
-                  << "\nor the --infile parameter." << std::endl;
+        std::cerr << "--generate-preview must be accompanied by either\n"
+                  << "\nboth --chanid and --starttime parameters,\n"
+                  << "\nor the --infile parameter.\n";
         return GENERIC_EXIT_INVALID_CMDLINE;
     }
 

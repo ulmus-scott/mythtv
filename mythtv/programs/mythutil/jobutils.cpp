@@ -69,14 +69,14 @@ static int QueueJob(const MythUtilCommandLineParser &cmdline)
             .arg(cmdline.toString("queuejob"))
             .arg(pginfo.GetChanID())
             .arg(pginfo.GetRecordingStartTime().toString());
-        std::cerr << tmp.toLocal8Bit().constData() << std::endl;
+        std::cerr << tmp.toLocal8Bit().constData() << '\n';
         return GENERIC_EXIT_OK;
     }
 
     QString tmp = QString("Error queueing job for chanid %1 @ %2")
         .arg(pginfo.GetChanID())
         .arg(pginfo.GetRecordingStartTime().toString());
-    std::cerr << tmp.toLocal8Bit().constData() << std::endl;
+    std::cerr << tmp.toLocal8Bit().constData() << '\n';
     return GENERIC_EXIT_DB_ERROR;
 }
 

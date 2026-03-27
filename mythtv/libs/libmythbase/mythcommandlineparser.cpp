@@ -568,8 +568,8 @@ bool CommandLineArg::Set(const QString& opt)
         break;
 
       default:
-        std::cerr << "Command line option did not receive value:" << std::endl
-                  << "    " << opt.toLocal8Bit().constData() << std::endl;
+        std::cerr << "Command line option did not receive value:\n"
+                  << "    " << opt.toLocal8Bit().constData() << '\n';
         return false;
     }
 
@@ -589,8 +589,8 @@ bool CommandLineArg::Set(const QString& opt, const QByteArray& val)
     switch (m_type)
     {
       case QMetaType::Bool:
-        std::cerr << "Boolean type options do not accept values:" << std::endl
-                  << "    " << opt.toLocal8Bit().constData() << std::endl;
+        std::cerr << "Boolean type options do not accept values:\n"
+                  << "    " << opt.toLocal8Bit().constData() << '\n';
         return false;
 
       case QMetaType::QString:
@@ -628,7 +628,7 @@ bool CommandLineArg::Set(const QString& opt, const QByteArray& val)
         if (!val.contains('='))
         {
             std::cerr << "Command line option did not get expected "
-                      << "key/value pair" << std::endl;
+                      << "key/value pair\n";
             return false;
         }
 
@@ -644,7 +644,7 @@ bool CommandLineArg::Set(const QString& opt, const QByteArray& val)
         if (!val.contains('x'))
         {
             std::cerr << "Command line option did not get expected "
-                      << "XxY pair" << std::endl;
+                      << "XxY pair\n";
             return false;
         }
 
@@ -1074,11 +1074,11 @@ bool CommandLineArg::TestLinks(void) const
     if (!passes && !m_parents.isEmpty())
     {
         std::cerr << "ERROR: " << m_usedKeyword.toLocal8Bit().constData()
-                  << " requires at least one of the following arguments" << std::endl;
+                  << " requires at least one of the following arguments\n";
         for (i = m_parents.constBegin(); i != m_parents.constEnd(); ++i)
             std::cerr << " "
                       << (*i)->GetPreferredKeyword().toLocal8Bit().constData();
-        std::cerr << std::endl << std::endl;
+        std::cerr << "\n\n";
         return false;
     }
 
@@ -1090,15 +1090,14 @@ bool CommandLineArg::TestLinks(void) const
         if (!(*i)->m_given)
         {
             std::cerr << "ERROR: " << m_usedKeyword.toLocal8Bit().constData()
-                      << " requires all of the following be defined as well"
-                      << std::endl;
+                      << " requires all of the following be defined as well\n";
             for (i = m_requires.constBegin(); i != m_requires.constEnd(); ++i)
             {
                 std::cerr << " "
                      << (*i)->GetPreferredKeyword().toLocal8Bit()
                                                    .constData();
             }
-            std::cerr << std::endl << std::endl;
+            std::cerr << "\n\n";
             return false;
         }
     }
@@ -1109,14 +1108,14 @@ bool CommandLineArg::TestLinks(void) const
         if ((*i)->m_given)
         {
             std::cerr << "ERROR: " << m_usedKeyword.toLocal8Bit().constData()
-                      << " requires that none of the following be defined" << std::endl;
+                      << " requires that none of the following be defined\n";
             for (i = m_blocks.constBegin(); i != m_blocks.constEnd(); ++i)
             {
                 std::cerr << " "
                      << (*i)->GetPreferredKeyword().toLocal8Bit()
                                                    .constData();
             }
-            std::cerr << std::endl << std::endl;
+            std::cerr << "\n\n";
             return false;
         }
     }
@@ -1163,35 +1162,35 @@ void CommandLineArg::PrintVerbose(void) const
     switch (m_type)
     {
       case QMetaType::Bool:
-        std::cerr << (m_stored.toBool() ? "True" : "False") << std::endl;
+        std::cerr << (m_stored.toBool() ? "True" : "False") << '\n';
         break;
 
       case QMetaType::Int:
-        std::cerr << m_stored.toInt() << std::endl;
+        std::cerr << m_stored.toInt() << '\n';
         break;
 
       case QMetaType::UInt:
-        std::cerr << m_stored.toUInt() << std::endl;
+        std::cerr << m_stored.toUInt() << '\n';
         break;
 
       case QMetaType::LongLong:
-        std::cerr << m_stored.toLongLong() << std::endl;
+        std::cerr << m_stored.toLongLong() << '\n';
         break;
 
       case QMetaType::Double:
-        std::cerr << m_stored.toDouble() << std::endl;
+        std::cerr << m_stored.toDouble() << '\n';
         break;
 
       case QMetaType::QSize:
         tmpsize = m_stored.toSize();
         std::cerr <<  "x=" << tmpsize.width()
                   << " y=" << tmpsize.height()
-                  << std::endl;
+                  << '\n';
         break;
 
       case QMetaType::QString:
         std::cerr << '"' << m_stored.toByteArray().constData()
-                  << '"' << std::endl;
+                  << '"' << '\n';
         break;
 
       case QMetaType::QStringList:
@@ -1203,7 +1202,7 @@ void CommandLineArg::PrintVerbose(void) const
                       << str.constData()
                       << '"';
         }
-        std::cerr << std::endl;
+        std::cerr << '\n';
         break;
 
       case QMetaType::QVariantMap:
@@ -1219,7 +1218,7 @@ void CommandLineArg::PrintVerbose(void) const
             std::cerr << it.key().toLocal8Bit().constData()
                       << '='
                       << it->toByteArray().constData()
-                      << std::endl;
+                      << '\n';
         }
 
         break;
@@ -1227,11 +1226,11 @@ void CommandLineArg::PrintVerbose(void) const
       case QMetaType::QDateTime:
         std::cerr << m_stored.toDateTime().toString(Qt::ISODate)
                              .toLocal8Bit().constData()
-             << std::endl;
+             << '\n';
         break;
 
       default:
-        std::cerr << std::endl;
+        std::cerr << '\n';
     }
 }
 
@@ -1281,7 +1280,7 @@ MythCommandLineParser::MythCommandLineParser(QString appname)
 {
     if (qEnvironmentVariableIsSet("VERBOSE_PARSER"))
     {
-        std::cerr << "MythCommandLineParser is now operating verbosely." << std::endl;
+        std::cerr << "MythCommandLineParser is now operating verbosely.\n";
         m_verbose = true;
     }
 
@@ -1375,7 +1374,7 @@ CommandLineArg* MythCommandLineParser::add(QStringList arglist,
 #else
                           << QMetaType(type).name()
 #endif
-                          << "'" << std::endl;
+                          << "'\n";
             }
             arg->IncrRef();
             m_optionedArgs.insert(str, arg);
@@ -1389,15 +1388,15 @@ CommandLineArg* MythCommandLineParser::add(QStringList arglist,
  */
 void MythCommandLineParser::PrintVersion(void)
 {
-    std::cout << "Please attach all output as a file in bug reports." << std::endl;
-    std::cout << "MythTV Version : " << GetMythSourceVersion() << std::endl;
-    std::cout << "MythTV Branch : " << GetMythSourcePath() << std::endl;
-    std::cout << "Network Protocol : " << MYTH_PROTO_VERSION << std::endl;
-    std::cout << "Library API : " << MYTH_BINARY_VERSION << std::endl;
-    std::cout << "QT Version : " << QT_VERSION_STR << std::endl;
+    std::cout << "Please attach all output as a file in bug reports.\n";
+    std::cout << "MythTV Version : " << GetMythSourceVersion() << '\n';
+    std::cout << "MythTV Branch : " << GetMythSourcePath() << '\n';
+    std::cout << "Network Protocol : " << MYTH_PROTO_VERSION << '\n';
+    std::cout << "Library API : " << MYTH_BINARY_VERSION << '\n';
+    std::cout << "QT Version : " << QT_VERSION_STR << '\n';
 #ifdef MYTH_BUILD_CONFIG
-    std::cout << "Options compiled in:" <<std::endl;
-    std::cout << MYTH_BUILD_CONFIG << std::endl;
+    std::cout << "Options compiled in:\n";
+    std::cout << MYTH_BUILD_CONFIG << '\n';
 #endif
 }
 
@@ -1579,15 +1578,15 @@ bool MythCommandLineParser::Parse(int argc, const char * const * argv)
 
         if (m_verbose)
         {
-            std::cerr << "res: " << NamedOptType(res) << std::endl
-                      << "opt:  " << opt.toLocal8Bit().constData() << std::endl
-                      << "val:  " << val.constData() << std::endl << std::endl;
+            std::cerr << "res: " << NamedOptType(res) << '\n'
+                      << "opt:  " << opt.toLocal8Bit().constData() << '\n'
+                      << "val:  " << val.constData() << "\n\n";
         }
 
         // '--' found on command line, enable passthrough mode
         if (res == Result::kPassthrough && !m_namedArgs.contains("_passthrough"))
         {
-            std::cerr << "Received '--' but passthrough has not been enabled" << std::endl;
+            std::cerr << "Received '--' but passthrough has not been enabled\n";
             SetValue("showhelp", "");
             return false;
         }
@@ -1604,7 +1603,7 @@ bool MythCommandLineParser::Parse(int argc, const char * const * argv)
         // more than one equal found in key/value pair, fault out
         if (res == Result::kInvalid)
         {
-            std::cerr << "Invalid option received:" << std::endl << "    "
+            std::cerr << "Invalid option received:\n    "
                  << opt.toLocal8Bit().constData();
             SetValue("showhelp", "");
             return false;
@@ -1624,8 +1623,7 @@ bool MythCommandLineParser::Parse(int argc, const char * const * argv)
             {
                 std::cerr << "Received '"
                           << val.constData()
-                          << "' but unassociated arguments have not been enabled"
-                          << std::endl;
+                          << "' but unassociated arguments have not been enabled\n";
                 SetValue("showhelp", "");
                 return false;
             }
@@ -1637,8 +1635,7 @@ bool MythCommandLineParser::Parse(int argc, const char * const * argv)
         // this line should not be passed once arguments have started collecting
         if (toBool("_args"))
         {
-            std::cerr << "Command line arguments received out of sequence"
-                      << std::endl;
+            std::cerr << "Command line arguments received out of sequence\n";
             SetValue("showhelp", "");
             return false;
         }
@@ -1668,8 +1665,8 @@ bool MythCommandLineParser::Parse(int argc, const char * const * argv)
             else
             {
                 // arbitrary not allowed, fault out
-                std::cerr << "Unhandled option given on command line:" << std::endl
-                          << "    " << opt.toLocal8Bit().constData() << std::endl;
+                std::cerr << "Unhandled option given on command line:\n"
+                          << "    " << opt.toLocal8Bit().constData() << '\n';
                 SetValue("showhelp", "");
                 return false;
             }
@@ -1693,7 +1690,7 @@ bool MythCommandLineParser::Parse(int argc, const char * const * argv)
 
         if (m_verbose)
             std::cerr << "name: " << argdef->GetName().toLocal8Bit().constData()
-                      << std::endl;
+                      << '\n';
 
         // argument is keyword only, no value
         if (res == Result::kOptOnly)
@@ -1729,30 +1726,30 @@ bool MythCommandLineParser::Parse(int argc, const char * const * argv)
 
         if (m_verbose)
             std::cerr << "value: " << argdef->m_stored.toString().toLocal8Bit().constData()
-                      << std::endl;
+                      << '\n';
     }
 
     if (m_verbose)
     {
-        std::cerr << "Processed option list:" << std::endl;
+        std::cerr << "Processed option list:\n";
         for (auto * cmdarg : std::as_const(m_namedArgs))
             cmdarg->PrintVerbose();
 
         if (m_namedArgs.contains("_args"))
         {
-            std::cerr << std::endl << "Extra argument list:" << std::endl;
+            std::cerr << "\nExtra argument list:\n";
             QStringList slist = toStringList("_args");
             for (const auto& lopt : std::as_const(slist))
-                std::cerr << "  " << (lopt).toLocal8Bit().constData() << std::endl;
+                std::cerr << "  " << (lopt).toLocal8Bit().constData() << '\n';
         }
 
         if (m_namedArgs.contains("_passthrough"))
         {
-            std::cerr << std::endl << "Passthrough string:" << std::endl;
-            std::cerr << "  " << GetPassthrough().toLocal8Bit().constData() << std::endl;
+            std::cerr << "\nPassthrough string:\n";
+            std::cerr << "  " << GetPassthrough().toLocal8Bit().constData() << '\n';
         }
 
-        std::cerr << std::endl;
+        std::cerr << '\n';
     }
 
     // make sure all interdependencies are fulfilled
@@ -1923,7 +1920,7 @@ CommandLineArg* MythCommandLineParser::add(QStringList arglist, const QString& n
 bool MythCommandLineParser::ReconcileLinks(void)
 {
     if (m_verbose)
-        std::cerr << "Reconciling links for option interdependencies." << std::endl;
+        std::cerr << "Reconciling links for option interdependencies.\n";
 
     QMap<QString,CommandLineArg*>::iterator args_it;
     for (args_it = m_namedArgs.begin(); args_it != m_namedArgs.end(); ++args_it)
@@ -1938,12 +1935,12 @@ bool MythCommandLineParser::ReconcileLinks(void)
             if (!m_namedArgs.contains((*links_it)->m_name))
             {
                 // not found
-                std::cerr << "ERROR: could not reconcile linked argument." << std::endl
+                std::cerr << "ERROR: could not reconcile linked argument.\n"
                      << "  '" << (*args_it)->m_name.toLocal8Bit().constData()
                      << "' could not find '"
                      << (*links_it)->m_name.toLocal8Bit().constData()
-                     << "'." << std::endl
-                     << "  Please resolve dependency and recompile." << std::endl;
+                     << "'.\n"
+                     << "  Please resolve dependency and recompile.\n";
                 return false;
             }
 
@@ -1953,7 +1950,7 @@ bool MythCommandLineParser::ReconcileLinks(void)
                 std::cerr << QString("  Setting %1 as child of %2")
                                  .arg((*args_it)->m_name, (*links_it)->m_name)
                                  .toLocal8Bit().constData()
-                          << std::endl;
+                          << '\n';
             }
             (*args_it)->SetChildOf(m_namedArgs[(*links_it)->m_name]);
         }
@@ -1967,12 +1964,12 @@ bool MythCommandLineParser::ReconcileLinks(void)
             if (!m_namedArgs.contains((*links_it)->m_name))
             {
                 // not found
-                std::cerr << "ERROR: could not reconcile linked argument." << std::endl
+                std::cerr << "ERROR: could not reconcile linked argument.\n"
                           << "  '" << (*args_it)->m_name.toLocal8Bit().constData()
                           << "' could not find '"
                           << (*links_it)->m_name.toLocal8Bit().constData()
-                          << "'." << std::endl
-                          << "  Please resolve dependency and recompile." << std::endl;
+                          << "'.\n"
+                          << "  Please resolve dependency and recompile.\n";
                 return false;
             }
 
@@ -1982,7 +1979,7 @@ bool MythCommandLineParser::ReconcileLinks(void)
                 std::cerr << QString("  Setting %1 as parent of %2")
                                  .arg((*args_it)->m_name, (*links_it)->m_name)
                                  .toLocal8Bit().constData()
-                     << std::endl;
+                     << '\n';
             }
             (*args_it)->SetParentOf(m_namedArgs[(*links_it)->m_name]);
         }
@@ -1996,12 +1993,12 @@ bool MythCommandLineParser::ReconcileLinks(void)
             if (!m_namedArgs.contains((*links_it)->m_name))
             {
                 // not found
-                std::cerr << "ERROR: could not reconcile linked argument." << std::endl
+                std::cerr << "ERROR: could not reconcile linked argument.\n"
                           << "  '" << (*args_it)->m_name.toLocal8Bit().constData()
                           << "' could not find '"
                           << (*links_it)->m_name.toLocal8Bit().constData()
-                          << "'." << std::endl
-                          << "  Please resolve dependency and recompile." << std::endl;
+                          << "'.\n"
+                          << "  Please resolve dependency and recompile.\n";
                 return false;
             }
 
@@ -2011,7 +2008,7 @@ bool MythCommandLineParser::ReconcileLinks(void)
                 std::cerr << QString("  Setting %1 as requiring %2")
                                  .arg((*args_it)->m_name, (*links_it)->m_name)
                                  .toLocal8Bit().constData()
-                     << std::endl;
+                     << '\n';
             }
             (*args_it)->SetRequires(m_namedArgs[(*links_it)->m_name]);
         }
@@ -2032,7 +2029,7 @@ bool MythCommandLineParser::ReconcileLinks(void)
                                          .arg((*args_it)->m_name,
                                               (*req_it)->m_name)
                                          .toLocal8Bit().constData()
-                                  << std::endl;
+                                  << '\n';
                     }
                 }
             }
@@ -2064,7 +2061,7 @@ bool MythCommandLineParser::ReconcileLinks(void)
                 std::cerr << QString("  Setting %1 as blocking %2")
                                  .arg((*args_it)->m_name, (*block_it)->m_name)
                                  .toLocal8Bit().constData()
-                          << std::endl;
+                          << '\n';
             }
             (*args_it)->SetBlocks(m_namedArgs[(*block_it)->m_name]);
             ++block_it;
@@ -2159,7 +2156,7 @@ QMap<QString,QString> MythCommandLineParser::GetSettingsOverride(void)
                 {
                     QByteArray tmp = filename.toLatin1();
                     std::cerr << "Failed to open the override settings file: '"
-                              << tmp.constData() << "'" << std::endl;
+                              << tmp.constData() << "'\n";
                 }
             }
         }
@@ -2188,11 +2185,11 @@ QMap<QString,QString> MythCommandLineParser::GetSettingsOverride(void)
 
     if (m_verbose)
     {
-        std::cerr << "Option Overrides:" << std::endl;
+        std::cerr << "Option Overrides:\n";
         QMap<QString, QString>::const_iterator it;
         for (it = smap.constBegin(); it != smap.constEnd(); ++it)
             std::cerr << QString("    %1 - %2").arg(it.key(), 30).arg(*it)
-                        .toLocal8Bit().constData() << std::endl;
+                        .toLocal8Bit().constData() << '\n';
     }
 
     return smap;
@@ -2835,7 +2832,7 @@ LogLevel_t MythCommandLineParser::GetLogLevel(void) const
     LogLevel_t level = logLevelGet(setting);
     if (level == LOG_UNKNOWN)
         std::cerr << "Unknown log level: " << setting.toLocal8Bit().constData()
-                  << std::endl;
+                  << '\n';
 
     return level;
 }
@@ -2951,7 +2948,7 @@ int MythCommandLineParser::ConfigureLogging(const QString& mask, bool progress)
 void MythCommandLineParser::ApplySettingsOverride(void)
 {
     if (m_verbose)
-        std::cerr << "Applying settings override" << std::endl;
+        std::cerr << "Applying settings override\n";
 
     QMap<QString, QString> override = GetSettingsOverride();
     if (!override.empty())
@@ -2974,7 +2971,7 @@ static bool openPidfile(std::ofstream &pidfs, const QString &pidfile)
         pidfs.open(pidfile.toLatin1().constData());
         if (!pidfs)
         {
-            std::cerr << "Could not open pid file: " << ENO_STR << std::endl;
+            std::cerr << "Could not open pid file: " << ENO_STR << '\n';
             return false;
         }
     }
@@ -3002,7 +2999,7 @@ static bool setUser(const QString &username)
 
     if (user_id && (!user_info || user_id != user_info->pw_uid))
     {
-        std::cerr << "You must be running as root to use the --user switch." << std::endl;
+        std::cerr << "You must be running as root to use the --user switch.\n";
         return false;
     }
     if (user_info && user_id == user_info->pw_uid)
@@ -3014,22 +3011,22 @@ static bool setUser(const QString &username)
     {
         if (setenv("HOME", user_info->pw_dir,1) == -1)
         {
-            std::cerr << "Error setting home directory." << std::endl;
+            std::cerr << "Error setting home directory.\n";
             return false;
         }
         if (setgid(user_info->pw_gid) == -1)
         {
-            std::cerr << "Error setting effective group." << std::endl;
+            std::cerr << "Error setting effective group.\n";
             return false;
         }
         if (initgroups(user_info->pw_name, user_info->pw_gid) == -1)
         {
-            std::cerr << "Error setting groups." << std::endl;
+            std::cerr << "Error setting groups.\n";
             return false;
         }
         if (setuid(user_info->pw_uid) == -1)
         {
-            std::cerr << "Error setting effective user." << std::endl;
+            std::cerr << "Error setting effective user.\n";
             return false;
         }
 #ifdef Q_OS_LINUX
@@ -3044,7 +3041,7 @@ static bool setUser(const QString &username)
     else
     {
         std::cerr << QString("Invalid user '%1' specified with --user")
-                    .arg(username).toLocal8Bit().constData() << std::endl;
+                    .arg(username).toLocal8Bit().constData() << '\n';
         return false;
     }
     return true;
@@ -3072,7 +3069,7 @@ int MythCommandLineParser::Daemonize(void) const
 #else
     if (toBool("daemon") && (daemon(0, 1) < 0))
     {
-        std::cerr << "Failed to daemonize: " << ENO_STR << std::endl;
+        std::cerr << "Failed to daemonize: " << ENO_STR << '\n';
         return GENERIC_EXIT_DAEMONIZING_ERROR;
     }
 #endif
@@ -3083,7 +3080,7 @@ int MythCommandLineParser::Daemonize(void) const
 
     if (pidfs)
     {
-        pidfs << getpid() << std::endl;
+        pidfs << getpid() << '\n';
         pidfs.close();
     }
 

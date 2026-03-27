@@ -31,7 +31,7 @@ void TestLyrics::dump(const LyricsLineMap* lyrics)
     {
         auto *value = lyrics->value(key);
         QString valuestr = QString("%1:%2").arg(value->m_time.count()).arg(value->m_lyric);
-        std::cerr << "Key: " << key.count() << " value: " << qPrintable(valuestr) << std::endl;
+        std::cerr << "Key: " << key.count() << " value: " << qPrintable(valuestr) << '\n';
     }
 }
 

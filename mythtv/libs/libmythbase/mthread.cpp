@@ -154,13 +154,13 @@ void MThread::Cleanup(void)
         return;
 
     // logging has been stopped so we need to use iostream...
-    std::cerr<<"Error: Not all threads were shut down properly: "<<std::endl;
+    std::cerr<<"Error: Not all threads were shut down properly:\n";
     for (auto *thread : std::as_const(badGuys))
     {
         std::cerr<<"Thread "<<qPrintable(thread->objectName())
-                 <<" is still running"<<std::endl;
+                 <<" is still running\n";
     }
-    std::cerr<<std::endl;
+    std::cerr<<'\n';
 
     static constexpr std::chrono::milliseconds kTimeout { 5s };
     MythTimer t;
