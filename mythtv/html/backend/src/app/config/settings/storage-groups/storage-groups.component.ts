@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit, ViewEncapsulation } from '@angular/core';
-import { NgForm, FormsModule } from '@angular/forms';
+import {  FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
@@ -8,7 +8,7 @@ import { StorageGroupDir } from 'src/app/services/interfaces/storagegroup.interf
 import { MythService } from 'src/app/services/myth.service';
 import { SetupService } from 'src/app/services/setup.service';
 import { SgroupComponent } from './sgroup/sgroup.component';
-import { NgFor, NgIf } from '@angular/common';
+import {  NgIf } from '@angular/common';
 import { AccordionModule } from 'primeng/accordion';
 import { SharedModule } from 'primeng/api';
 import { DialogModule } from 'primeng/dialog';
@@ -35,7 +35,6 @@ interface GroupCard {
         FormsModule,
         SharedModule,
         AccordionModule,
-        NgFor,
         NgIf,
         TranslateModule,
         SgroupComponent,
