@@ -56,15 +56,18 @@
                 <th><p-columnFilter type="text" field="CallSign"></p-columnFilter></th>
                 <th><p-columnFilter type="text" field="ChannelName"></p-columnFilter></th>
                 <th>
+                    <!-- Placeholder not working in PrimeNG V18 - set placeholder to value -->
+                    <!-- placeholder="{{ 'settings.chanedit.all' | translate }}"  -->
                     <p-columnFilter field="Source" matchMode="equals" [showMenu]="false">
                         <ng-template pTemplate="filter" let-value let-filter="filterCallback">
                             <p-select [ngModel]="value" [options]="sourceNames" name="filter"
-                                (onChange)="filter($event.value)"
-                                placeholder="{{ 'settings.chanedit.all' | translate }}" [showClear]="true"
+                                [placeholder]="value" [showClear]="true"
+                                (onChange)="filter($event.value)" [checkmark]="true"
                                 appendTo="body">
-                                <ng-template let-option pTemplate="item">
-                                    {{option}}
-                                </ng-template>
+                                <!-- <ng-template let-option pTemplate="item"> -->
+                                    <!-- {{ option }} -->
+                                    <!-- <p-tag [value]="option" [severity]="'info'"/> -->
+                                <!-- </ng-template> -->
                             </p-select>
                         </ng-template>
                     </p-columnFilter>
