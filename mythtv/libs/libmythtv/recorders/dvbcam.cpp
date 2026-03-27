@@ -157,30 +157,30 @@ void DVBCam::HandleUserIO(void)
     cCiEnquiry* enq = m_ciHandler->GetEnquiry();
     if (enq != nullptr)
     {
-        if (enq->Text() != nullptr)
+        if (!enq->Text().empty())
             LOG(VB_DVBCAM, LOG_INFO, LOC + QString("CAM: Received message: %1")
-                    .arg(enq->Text()));
+                    .arg(enq->Text().data()));
         delete enq;
     }
 
     cCiMenu* menu = m_ciHandler->GetMenu();
     if (menu != nullptr)
     {
-        if (menu->TitleText() != nullptr)
+        if (!menu->TitleText().empty())
             LOG(VB_DVBCAM, LOG_INFO, LOC + QString("CAM: Menu Title: %1")
-                    .arg(menu->TitleText()));
-        if (menu->SubTitleText() != nullptr)
+                    .arg(menu->TitleText().data()));
+        if (!menu->SubTitleText().empty())
             LOG(VB_DVBCAM, LOG_INFO, LOC + QString("CAM: Menu SubTitle: %1")
-                    .arg(menu->SubTitleText()));
-        if (menu->BottomText() != nullptr)
+                    .arg(menu->SubTitleText().data()));
+        if (!menu->BottomText().empty())
             LOG(VB_DVBCAM, LOG_INFO, LOC + QString("CAM: Menu BottomText: %1")
-                    .arg(menu->BottomText()));
+                    .arg(menu->BottomText().data()));
 
         for (int i=0; i<menu->NumEntries(); i++)
         {
-            if (menu->Entry(i) != nullptr)
+            if (!menu->Entry(i).empty())
                 LOG(VB_DVBCAM, LOG_INFO, LOC + QString("CAM: Menu Entry: %1")
-                        .arg(menu->Entry(i)));
+                        .arg(menu->Entry(i).data()));
         }
 
         if (menu->Selectable())

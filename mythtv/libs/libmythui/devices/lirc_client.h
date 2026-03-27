@@ -1,3 +1,4 @@
+// -*- mode: C++ ; indent-tabs-mode: t; c-basic-offset: 8 -*-
 /* NOTE: Extracted from LIRC release 0.8.4a -- dtk */
 
 /****************************************************************************
@@ -23,7 +24,7 @@
 #define LIRC_RET_SUCCESS  (0)
 #define LIRC_RET_ERROR   (-1)
 
-#define LIRC_ALL ((char *) (-1))
+#define LIRC_ALL "ALL"
 
 enum lirc_flags {none=0x00,
 		 once=0x01,
@@ -38,49 +39,48 @@ struct lirc_state
 {
 	int lirc_lircd;
 	int lirc_verbose;
-	char *lirc_prog;
-	char *lirc_buffer;
-	char *lircrc_root_file;
-	char *lircrc_user_file;
+	std::string lirc_prog;
+	std::string lircrc_root_file;
+	std::string lircrc_user_file;
 };
 
 struct lirc_list
 {
-	char *string;
-	struct lirc_list *next;
+	std::string string;
+	struct lirc_list *next {nullptr};
 };
 
 struct lirc_code
 {
-	char *remote;
-	char *button;
-	struct lirc_code *next;
+	std::string remote;
+	std::string button;
+	struct lirc_code *next { nullptr };
 };
 
 struct lirc_config
 {
-	char *current_mode;
-	struct lirc_config_entry *next;
-	struct lirc_config_entry *first;
+	std::string current_mode;
+	struct lirc_config_entry *next  { nullptr };
+	struct lirc_config_entry *first { nullptr };
 	
 	int sockfd;
 };
 
 struct lirc_config_entry
 {
-	char *prog;
-	struct lirc_code *code;
-	unsigned int rep_delay;
-	unsigned int rep;
-	struct lirc_list *config;
-	char *change_mode;
-	unsigned int flags;
+	std::string prog;
+	struct lirc_code *code 	       { nullptr };
+	unsigned int rep_delay         { 0 };
+	unsigned int rep               { 0 };
+	struct lirc_list *config       { nullptr };
+	std::string change_mode;
+	unsigned int flags             { none };
 	
-	char *mode;
-	struct lirc_list *next_config;
-	struct lirc_code *next_code;
+	std::string mode;
+	struct lirc_list *next_config  { nullptr };
+	struct lirc_code *next_code    { nullptr };
 
-	struct lirc_config_entry *next;
+	struct lirc_config_entry *next { nullptr };
 };
 
 struct lirc_state *lirc_init(const char *lircrc_root_file,
@@ -89,29 +89,19 @@ struct lirc_state *lirc_init(const char *lircrc_root_file,
 int lirc_deinit(struct lirc_state *state);
 
 int lirc_readconfig(const struct lirc_state *state,
-                    const char *file,struct lirc_config **config,
-                    int (check)(char *s));
+                    const std::string& file,struct lirc_config **config,
+                    int (check)(std::string& s));
 void lirc_freeconfig(struct lirc_config *config);
 
-#if 0
-/* obsolete */
-char *lirc_nextir(struct lirc_state *state);
-/* obsolete */
-char *lirc_ir2char(const struct lirc_state *state, struct lirc_config *config,char *code);
-#endif
-
-int lirc_nextcode(struct lirc_state *state, char **code);
-int lirc_code2char(const struct lirc_state *state, struct lirc_config *config,const char *code,char **string);
+int lirc_code2char(const struct lirc_state *state, struct lirc_config *config,
+		   const std::string& code,std::string& string);
 
 /* new interface for client daemon */
 int lirc_readconfig_only(const struct lirc_state *state,
-                         const char *file, struct lirc_config **config,
-                         int (check)(char *s));
-int lirc_code2charprog(struct lirc_state *state,
-                       struct lirc_config *config,char *code,char **string,
-                       char **prog);
-size_t lirc_getsocketname(const char *filename, char *buf, size_t size);
-const char *lirc_getmode(const struct lirc_state *state, struct lirc_config *config);
-const char *lirc_setmode(const struct lirc_state *state, struct lirc_config *config, const char *mode);
+                         const std::string& file, struct lirc_config **config,
+                         int (check)(std::string& s));
+size_t lirc_getsocketname(const std::string& filename, char *buf, size_t size);
+std::string lirc_getmode(const struct lirc_state *state, struct lirc_config *config);
+std::string lirc_setmode(const struct lirc_state *state, struct lirc_config *config, const std::string& mode);
 
 #endif

@@ -1010,7 +1010,7 @@ static void pes_es_out(pes_in_t *p)
 		p->type = 0xE0;
 		p->ini_pos = ring_wpos(&rx->vrbuffer);
 
-		if (ring_write(&rx->vrbuffer, p->buf+9+p->hlength, len)<0){
+		if (ring_write(&rx->vrbuffer, p->buf.data()+9+p->hlength, len)<0){
 			LOG(VB_GENERAL, LOG_ERR,
 			    "video ring buffer overrun error");
 			exit(1);
@@ -1034,7 +1034,7 @@ static void pes_es_out(pes_in_t *p)
 				l = i;
 		if (l < 0) break;
 		p->ini_pos = ring_wpos(&rx->arbuffer[l]);
-		if (ring_write(&rx->arbuffer[l], p->buf+9+p->hlength, len)<0){
+		if (ring_write(&rx->arbuffer[l], p->buf.data()+9+p->hlength, len)<0){
 			LOG(VB_GENERAL, LOG_ERR,
 			    "video ring buffer overrun error");
 			exit(1);
@@ -1077,7 +1077,7 @@ static void pes_es_out(pes_in_t *p)
 		len -= hl;
 		p->ini_pos = ring_wpos(&rx->ac3rbuffer[l]);
 	
-		if (ring_write(&rx->ac3rbuffer[l], p->buf+9+hl+p->hlength, len)<0){
+		if (ring_write(&rx->ac3rbuffer[l], p->buf.data()+9+hl+p->hlength, len)<0){
 			LOG(VB_GENERAL, LOG_ERR,
 			    "video ring buffer overrun error");
 			exit(1);
@@ -1547,7 +1547,7 @@ static void pes_id_out(pes_in_t *p)
 				fframe |= (p->buf[9+p->hlength+2]<<8);
 				
 				if (fframe < p->plength){
-					if ((c=find_audio_s(p->buf,
+					if ((c=find_audio_s(p->buf.data(),
 							    9+p->hlength+4+fframe, 
 							    AC3, p->plength+6)) >= 0){
 						rx->scan_found = id;
@@ -1556,8 +1556,8 @@ static void pes_id_out(pes_in_t *p)
 						    QString("0x%1  0x%2 \n")
 						    .arg(c-9-p->hlength-4, 4,16,QChar('0'))
 						    .arg(fframe,	   4,16,QChar('0')));
-						if (id>0x80)show_buf(p->buf+9+p->hlength,8);
-						if (id>0x80)show_buf(p->buf+c,8);
+						if (id>0x80)show_buf(p->buf.data()+9+p->hlength,8);
+						if (id>0x80)show_buf(p->buf.data()+c,8);
 #endif
 					}
 				}
@@ -1570,7 +1570,7 @@ static void pes_id_out(pes_in_t *p)
 		p->cid = 0;
 		p->type = 0;
 		rx->scan_found=0;
-		memset(p->buf,0,MAX_PLENGTH*sizeof(uint8_t));
+		memset(p->buf.data(),0,MAX_PLENGTH*sizeof(uint8_t));
 		return;
 	}
 }
@@ -2356,11 +2356,9 @@ static void do_replex(struct replex *rx)
 	int video_ok = 0;
 	aok_arr ext_ok {};
 	int start=1;
-	multiplex_t mx;
-
+	multiplex_t mx {};
 
 	LOG(VB_GENERAL, LOG_INFO, "STARTING REPLEX");
-	memset(&mx, 0, sizeof(mx));
 
 	while (!replex_all_set(rx)){
 		if (replex_fill_buffers(rx, nullptr)< 0) {
@@ -2444,9 +2442,7 @@ int main(int argc, char **argv)
 	const char *type = "SVCD";
 	const char *inpt = "TS";
 
-	struct replex rx;
-
-	memset(&rx, 0, sizeof(struct replex));
+	struct replex rx {};
 
 	while (1) {
 		int option_index = 0;

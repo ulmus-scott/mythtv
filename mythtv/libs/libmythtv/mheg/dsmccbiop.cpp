@@ -13,28 +13,24 @@
 #include "dsmccobjcarousel.h"
 #include "dsmcc.h"
 
-BiopNameComp::~BiopNameComp()
-{
-    if (m_id)
-        free(m_id);
-    if (m_kind)
-        free(m_kind);
-}
-
 int BiopNameComp::Process(const unsigned char *data)
 {
     int off = 0;
 
-    m_idLen     = data[off++];
-    m_id        = (char*) malloc(m_idLen);
-    memcpy(m_id, data + off, m_idLen);
+    uint len    = data[off++];
+    m_id        = std::string((char*)data + off, len);
 
-    off        += m_idLen;
-    m_kindLen   = data[off++];
-    m_kind      = (char*) malloc(m_kindLen);
-    memcpy(m_kind, data + off, m_kindLen);
+    off        += len;
+    len         = data[off++];
+    m_kind      = std::string((char*)data + off, len);
 
-    off        += m_kindLen;
+    off        += len;
+
+    // Remove any NUL characters at the end
+    while (!m_id.empty() && (m_id.back() == 0))
+        m_id.pop_back();
+    while (!m_kind.empty() && (m_kind.back() == 0))
+        m_kind.pop_back();
 
     return off;
 }
@@ -84,27 +80,17 @@ int BiopBinding::Process(const unsigned char *data)
     else
         return ret; // Error
 
-    m_objInfoLen = (data[off] << 8) | data[off + 1];
+    uint len = (data[off] << 8) | data[off + 1];
     off += 2;
 
-    if (m_objInfoLen > 0)
-    {
-        m_objInfo = (char*) malloc(m_objInfoLen);
-        memcpy(m_objInfo, data + off, m_objInfoLen);
-    }
+    if (len > 0)
+        m_objInfo = std::vector<uint8_t>(data + off, data + off + len);
     else
-    {
-        m_objInfo = nullptr;
-    }
+        m_objInfo.clear();
 
-    off += m_objInfoLen;
+    off += len;
 
     return off;
-}
-
-BiopBinding::~BiopBinding()
-{
-    free(m_objInfo);
 }
 
 bool BiopMessage::Process(DSMCCCacheModuleData *cachep, DSMCCCache *filecache,
@@ -121,17 +107,17 @@ bool BiopMessage::Process(DSMCCCacheModuleData *cachep, DSMCCCache *filecache,
     }
 
     // Handle each message type
-    if (strcmp(m_objKind, "fil") == 0)
+    if (m_objKind == "fil")
     {
         LOG(VB_DSMCC, LOG_DEBUG, "[biop] Processing file");
         return ProcessFile(cachep, filecache, data, curp);
     }
-    if (strcmp(m_objKind, "dir") == 0)
+    if (m_objKind == "dir")
     {
         LOG(VB_DSMCC, LOG_DEBUG, "[biop] Processing directory");
         return ProcessDir(false, cachep, filecache, data, curp);
     }
-    if (strcmp(m_objKind, "srg") == 0)
+    if (m_objKind == "srg")
     {
         LOG(VB_DSMCC, LOG_DEBUG, "[biop] Processing gateway");
         return ProcessDir(true, cachep, filecache, data, curp);
@@ -142,12 +128,6 @@ bool BiopMessage::Process(DSMCCCacheModuleData *cachep, DSMCCCache *filecache,
         .arg(m_objKind[0]).arg(m_objKind[1])
         .arg(m_objKind[2]).arg(m_objKind[3]));
     return false;
-}
-
-BiopMessage::~BiopMessage()
-{
-    free(m_objInfo);
-    free(m_objKind);
 }
 
 bool BiopMessage::ProcessMsgHdr(const unsigned char *data, unsigned long *curp)
@@ -184,21 +164,22 @@ bool BiopMessage::ProcessMsgHdr(const unsigned char *data, unsigned long *curp)
     m_messageSize = COMBINE32(buf, off);
     off += 4;
 
-    uint nObjLen = buf[off++];
-    m_objKey = DSMCCCacheKey((const char*)buf + off, nObjLen);
-    off += nObjLen;
+    uint len = buf[off++];
+    m_objKey = DSMCCCacheKey((const char*)buf + off, len);
+    off += len;
 
-    m_objKindLen = COMBINE32(buf, off);
+    len = COMBINE32(buf, off);
     off += 4;
-    m_objKind = (char*) malloc(m_objKindLen);
-    memcpy(m_objKind, buf + off, m_objKindLen);
-    off += m_objKindLen;
+    m_objKind = std::string((char*)buf + off, len);
+    // Strip NUL characters from the end
+    while (!m_objKind.empty() && (m_objKind.back() == 0))
+        m_objKind.pop_back();
+    off += len;
 
-    m_objInfoLen = buf[off] << 8 | buf[off + 1];
+    len = buf[off] << 8 | buf[off + 1];
     off += 2;
-    m_objInfo = (char*) malloc(m_objInfoLen);
-    memcpy(m_objInfo, buf + off, m_objInfoLen);
-    off += m_objInfoLen;
+    m_objInfo = std::vector<uint8_t>(buf + off, buf + off + len);
+    off += len;
 
     (*curp) += off;
 
@@ -221,7 +202,7 @@ bool BiopMessage::ProcessDir(
     int off = 0;
     const unsigned char * const buf = data + (*curp);
 
-    if (m_objInfoLen)
+    if (!m_objInfo.empty())
         LOG(VB_DSMCC, LOG_WARNING, "[biop] ProcessDir non-zero objectInfo_length");
 
     const unsigned serviceContextList_count = buf[off++];
@@ -264,13 +245,13 @@ bool BiopMessage::ProcessDir(
 
         if (pDir && binding.m_name.m_compCount >= 1)
         {
-            if (strcmp("fil", binding.m_name.m_comps[0].m_kind) == 0)
+            if ("fil" == binding.m_name.m_comps[0].m_kind)
                 DSMCCCache::AddFileInfo(pDir, &binding);
-            else if (strcmp("dir", binding.m_name.m_comps[0].m_kind) == 0)
+            else if ("dir" == binding.m_name.m_comps[0].m_kind)
                 DSMCCCache::AddDirInfo(pDir, &binding);
             else
                 LOG(VB_DSMCC, LOG_WARNING, QString("[biop] ProcessDir unknown kind %1")
-                    .arg(binding.m_name.m_comps[0].m_kind));
+                    .arg(QString::fromStdString(binding.m_name.m_comps[0].m_kind)));
         }
     }
 
@@ -288,9 +269,9 @@ bool BiopMessage::ProcessFile(DSMCCCacheModuleData *cachep, DSMCCCache *filecach
     int off = 0;
     const unsigned char *buf = data + (*curp);
 
-    if (m_objInfoLen != 8)
+    if (m_objInfo.size() != 8)
         LOG(VB_DSMCC, LOG_WARNING, QString("[biop] ProcessFile objectInfo_length = %1")
-            .arg(m_objInfoLen));
+            .arg(m_objInfo.size()));
 
     const unsigned serviceContextList_count = buf[off++];
     if (serviceContextList_count)
@@ -394,13 +375,12 @@ int BiopTap::Process(const unsigned char *data)
     off += 2;
     m_assocTag = (data[off] << 8) | data[off + 1];
     off += 2;
-    m_selectorLen = data[off++];
-    m_selectorData = (char*) malloc(m_selectorLen);
-    memcpy(m_selectorData, data + off, m_selectorLen);
+    uint selectorLen = data[off++];
+    m_selector = std::vector<uint8_t>(data + off, data + off + selectorLen);
     if (m_use == 0x0016) // BIOP_DELIVERY_PARA_USE
     {
         unsigned selector_type = (data[off] << 8) | data[off + 1];
-        if (m_selectorLen >= 10 && selector_type == 0x0001)
+        if (selectorLen >= 10 && selector_type == 0x0001)
         {
             off += 2;
             unsigned long transactionId = COMBINE32(data, off);
@@ -409,11 +389,11 @@ int BiopTap::Process(const unsigned char *data)
             LOG(VB_DSMCC, LOG_DEBUG, QString("[biop] BIOP_DELIVERY_PARA_USE tag %1 id 0x%2 timeout %3uS")
                 .arg(m_assocTag).arg(transactionId,0,16).arg(timeout));
             off += 4;
-            m_selectorLen -= 10;
+            selectorLen -= 10;
         }
     }
 
-    off += m_selectorLen;
+    off += selectorLen;
     return off;
 }
 
@@ -529,11 +509,13 @@ int ProfileBodyFull::Process(const unsigned char *data)
 int BiopIor::Process(const unsigned char *data)
 {
     int off = 0;
-    m_typeIdLen = COMBINE32(data, 0);
-    m_typeId = (char*) malloc(m_typeIdLen);
+    uint len = COMBINE32(data, 0);
     off += 4;
-    memcpy(m_typeId, data + off, m_typeIdLen);
-    off += m_typeIdLen;
+    m_typeId = std::string((char*)data + off, len);
+    // Strip NUL characters from the end
+    while (!m_typeId.empty() && (m_typeId.back() == 0))
+        m_typeId.pop_back();
+    off += len;
 
     m_taggedProfilesCount = COMBINE32(data, off);
     if (m_taggedProfilesCount < 1)
@@ -579,9 +561,4 @@ void BiopIor::AddTap(Dsmcc *pStatus) const
     DSMCCCacheReference *ref = m_profileBody->GetReference();
     if (ref != nullptr)
         pStatus->AddTap(ref->m_nStreamTag, ref->m_nCarouselId);
-}
-
-BiopTap::~BiopTap()
-{
-    free(m_selectorData);
 }

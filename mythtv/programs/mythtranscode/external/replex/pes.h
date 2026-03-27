@@ -56,8 +56,8 @@ struct ps_packet {
 	uint8_t scr[6];
 	uint8_t mux_rate[3];
 	uint8_t stuff_length;
-	uint8_t *data;
-	uint8_t sheader_llength[2];
+	std::vector<uint8_t> sheader; // length is here
+	uint8_t sheader_llength[2];   // here in network byte order
 	int sheader_length;
 	uint8_t rate_bound[3];
 	uint8_t audio_bound;
@@ -71,7 +71,7 @@ struct pes_in_t {
 	int type;
 	unsigned int found;
 	int withbuf;
-	uint8_t *buf;
+	std::vector<uint8_t> buf;
 	ringbuffer *rbuf;
 	uint8_t hbuf[260];
 	int ini_pos;

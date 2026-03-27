@@ -168,9 +168,6 @@ Checks: '-*,
         # As of 2023-05-22, there are 374 unique warnings. ,
        -cppcoreguidelines-narrowing-conversions,
 
-        # As of 2024-08-02, there are 210 unique warnings. ,
-       -cppcoreguidelines-no-malloc,
-
         # As of 2024-08-02, there are 4624 unique warnings. ,
        -cppcoreguidelines-pro-bounds-pointer-arithmetic,
 

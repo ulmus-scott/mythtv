@@ -304,8 +304,8 @@ bool LIRC::Init(void)
     if (!d->m_lircConfig)
     {
         QMutexLocker static_lock(&s_lirclibLock);
-        QByteArray cfg = m_configFile.toLocal8Bit();
-        if (lirc_readconfig(d->m_lircState, cfg.constData(), &d->m_lircConfig, nullptr))
+        if (lirc_readconfig(d->m_lircState, m_configFile.toStdString(),
+                            &d->m_lircConfig, nullptr))
         {
             LOG(vtype, LOG_ERR, LOC +
                 QString("Failed to read config file '%1'").arg(m_configFile));
@@ -348,14 +348,14 @@ void LIRC::Process(const QByteArray &data)
     QMutexLocker static_lock(&s_lirclibLock);
 
     // lirc_code2char will make code point to a static datafer..
-    char *code = nullptr;
+    std::string code;
     int ret = lirc_code2char(
-        d->m_lircState, d->m_lircConfig, data.data(), &code);
+        d->m_lircState, d->m_lircConfig, data.data(), code);
 
-    while ((0 == ret) && code)
+    while ((0 == ret) && !code.empty())
     {
-        QString lirctext(code);
-        QString qtcode = code;
+        QString lirctext = QString::fromStdString(code);
+        QString qtcode = QString::fromStdString(code);
         qtcode.replace("ctrl-",  "ctrl+",  Qt::CaseInsensitive);
         qtcode.replace("alt-",   "alt+",   Qt::CaseInsensitive);
         qtcode.replace("shift-", "shift+", Qt::CaseInsensitive);
@@ -410,7 +410,7 @@ void LIRC::Process(const QByteArray &data)
             QCoreApplication::postEvent(m_mainWindow, keyReleases[i]);
 
         ret = lirc_code2char(
-            d->m_lircState, d->m_lircConfig, data.data(), &code);
+            d->m_lircState, d->m_lircConfig, data.data(), code);
     }
 }
 

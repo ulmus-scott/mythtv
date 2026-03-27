@@ -20,14 +20,12 @@ class BiopNameComp
 {
   public:
     BiopNameComp() = default;
-    ~BiopNameComp();
+    ~BiopNameComp() = default;
 
     int Process(const unsigned char *data);
 
-    unsigned char  m_idLen    {0};
-    unsigned char  m_kindLen  {0};
-    char          *m_id       {nullptr};
-    char          *m_kind     {nullptr};
+    std::string    m_id;
+    std::string    m_kind;
 };
 
 class BiopName
@@ -46,7 +44,7 @@ class BiopTap
 {
   public:
     BiopTap() = default;
-    ~BiopTap();
+    ~BiopTap() = default;
 
     int Process(const unsigned char *data);
 
@@ -54,8 +52,7 @@ class BiopTap
     unsigned short  m_use           {0};
     // Only the association tag is currently used.
     unsigned short  m_assocTag      {0};
-    unsigned short  m_selectorLen   {0};
-    char           *m_selectorData  {nullptr};
+    std::vector<uint8_t> m_selector;
 };
 
 class BiopConnbinder
@@ -132,15 +129,13 @@ class BiopIor
     BiopIor() = default;
     ~BiopIor()
     {
-        free(m_typeId);
         delete m_profileBody;
     }
  
     int Process(const unsigned char *data);
     void AddTap(Dsmcc *pStatus) const;
 
-    unsigned long  m_typeIdLen            {0};
-    char          *m_typeId               {nullptr};
+    std::string    m_typeId;
     unsigned long  m_taggedProfilesCount  {0};
     unsigned long  m_profileIdTag         {0};
     ProfileBody   *m_profileBody          {nullptr};
@@ -152,15 +147,14 @@ class BiopBinding
 {
   public:
     BiopBinding() = default;
-    ~BiopBinding();
+    ~BiopBinding() = default;
 
     int Process(const unsigned char *data);
 
     BiopName      m_name;
     char          m_bindingType  {0};
     BiopIor       m_ior;
-    unsigned int  m_objInfoLen   {0};
-    char         *m_objInfo      {nullptr};
+    std::vector<uint8_t> m_objInfo;
 };
 
 class ObjCarousel;
@@ -169,7 +163,7 @@ class BiopMessage
 {
   public:
     BiopMessage() = default;
-    ~BiopMessage();
+    ~BiopMessage() = default;
 
     bool Process(DSMCCCacheModuleData *cachep, DSMCCCache *cache,
                  unsigned char *data, unsigned long *curp);
@@ -190,12 +184,10 @@ class BiopMessage
     unsigned char  m_versionMinor {0};
     unsigned int   m_messageSize  {0};
     DSMCCCacheKey  m_objKey;
-    unsigned long  m_objKindLen   {0};
-    unsigned int   m_objInfoLen   {0};
-    char          *m_objInfo      {nullptr};
+    std::vector<uint8_t> m_objInfo;
 
   public:
-    char          *m_objKind       {nullptr};
+    std::string    m_objKind;
 };
 
 // Data extracted from the descriptors in a BiopModuleInfo message

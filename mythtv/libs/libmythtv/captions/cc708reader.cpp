@@ -14,25 +14,13 @@ CC708Reader::CC708Reader()
 {
     for (uint i=0; i < k708MaxServices; i++)
     {
-        m_bufAlloc[i]  = 512;
-        m_buf[i]       = (unsigned char*) malloc(m_bufAlloc[i]);
-        m_bufSize[i]   = 0;
+        m_buf[i].resize(0);
+        m_buf[i].reserve(512);
         m_delayed[i]   = false;
 
-        m_tempStrAlloc[i]  = 512;
-        m_tempStrSize[i]   = 0;
-        m_tempStr[i]       = (int16_t*) malloc(m_tempStrAlloc[i] * sizeof(int16_t));
+        m_tempStr[i].reserve(512);
     }
     m_cc708DelayedDeletes.fill(0);
-}
-
-CC708Reader::~CC708Reader()
-{
-    for (uint i=0; i < k708MaxServices; i++)
-    {
-        free(m_buf[i]);
-        free(m_tempStr[i]);
-    }
 }
 
 void CC708Reader::ClearBuffers(void)
@@ -274,14 +262,14 @@ void CC708Reader::Reset(uint service_num)
 }
 
 void CC708Reader::TextWrite(uint service_num,
-                            int16_t* unicode_string, int16_t len)
+                            std::u16string& unicode_string)
 {
     CHECKENABLED;
     QString debug = QString();
-    for (uint i = 0; i < (uint)len; i++)
+    for (auto ch : unicode_string)
     {
-        GetCCWin(service_num).AddChar(QChar(unicode_string[i]));
-        debug += QChar(unicode_string[i]);
+        GetCCWin(service_num).AddChar(QChar(ch));
+        debug += QChar(ch);
     }
     LOG(VB_VBI, LOG_DEBUG, LOC + QString("AddText to %1->%2 |%3|")
         .arg(service_num).arg(m_cc708services[service_num].m_currentWindow).arg(debug));

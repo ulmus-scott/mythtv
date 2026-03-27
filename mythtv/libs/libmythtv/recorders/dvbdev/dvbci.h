@@ -75,20 +75,18 @@ private:
   enum { MAX_CIMENU_ENTRIES = 64 }; ///< XXX is there a specified maximum?
   cCiMMI *m_mmi          {nullptr};
   bool    m_selectable;
-  char   *m_titleText    {nullptr};
-  char   *m_subTitleText {nullptr};
-  char   *m_bottomText   {nullptr};
-  char   *m_entries[MAX_CIMENU_ENTRIES] {};
-  int     m_numEntries   {0};
-  bool AddEntry(char *s);
+  std::string m_titleText;
+  std::string m_subTitleText;
+  std::string m_bottomText;
+  std::vector<std::string> m_entries;
   cCiMenu(cCiMMI *MMI, bool Selectable);
 public:
-  ~cCiMenu();
-  const char *TitleText(void) { return m_titleText; }
-  const char *SubTitleText(void) { return m_subTitleText; }
-  const char *BottomText(void) { return m_bottomText; }
-  const char *Entry(int n) { return n < m_numEntries ? m_entries[n] : nullptr; }
-  int NumEntries(void) const { return m_numEntries; }
+  const std::string TitleText(void) { return m_titleText; }
+  const std::string SubTitleText(void) { return m_subTitleText; }
+  const std::string BottomText(void) { return m_bottomText; }
+  const std::string Entry(int n)
+        { if (n < static_cast<int>(m_entries.size())) return m_entries[n]; return {}; }
+  int NumEntries(void) const { return m_entries.size(); }
   bool Selectable(void) const { return m_selectable; }
   bool Select(int Index);
   bool Cancel(void);
@@ -98,13 +96,12 @@ class cCiEnquiry {
   friend class cCiMMI;
 private:
   cCiMMI *m_mmi            {nullptr};
-  char   *m_text           {nullptr};
+  std::string m_text;
   bool    m_blind          {false};
   int     m_expectedLength {0};
   explicit cCiEnquiry(cCiMMI *MMI) : m_mmi(MMI) {}
 public:
-  ~cCiEnquiry();
-  const char *Text(void) { return m_text; }
+  const std::string Text(void) { return m_text; }
   bool Blind(void) const { return m_blind; }
   int ExpectedLength(void) const { return m_expectedLength; }
   bool Reply(const char *s);

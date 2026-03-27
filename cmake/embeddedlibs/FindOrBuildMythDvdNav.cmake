@@ -35,6 +35,7 @@ function(find_or_build_mythdvdnav)
       ${CMAKE_COMMAND} -E echo "Using libmythdvdnav in <SOURCE_DIR>"
     CMAKE_ARGS --no-warn-unused-cli ${CMDLINE_ARGS_MYTHDVDNAV} ${PLATFORM_ARGS}
     CMAKE_CACHE_ARGS
+      -DSUPER_SOURCE_DIR:PATH=${CMAKE_CURRENT_SOURCE_DIR}
       -DCMAKE_FIND_ROOT_PATH:STRING=${CMAKE_FIND_ROOT_PATH}
       -DCMAKE_JOB_POOL_COMPILE:STRING=compile
       -DCMAKE_JOB_POOL_LINK:STRING=link

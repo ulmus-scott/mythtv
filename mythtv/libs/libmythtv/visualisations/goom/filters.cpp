@@ -33,8 +33,6 @@ static constexpr int8_t EFFECT_DISTORS_SL { 2 };
 extern volatile uint32_t resolx;
 extern volatile uint32_t c_resoly;
 
-void c_zoom (unsigned int *expix1, unsigned int *expix2, unsigned int prevX, unsigned int prevY, const signed int *brutS, const signed int *brutD);
-
 /* Prototype to keep gcc from spewing warnings */
 static void select_zoom_filter (void);
 
@@ -78,9 +76,9 @@ uint32_t mmx_zoom_size;
 
 unsigned int *coeffs = nullptr, *freecoeffs = nullptr;
 
-signed int *brutS = nullptr, *freebrutS = nullptr;	// source
-signed int *brutD = nullptr, *freebrutD = nullptr;	// dest
-signed int *brutT = nullptr, *freebrutT = nullptr;	// temp (en cours de génération)
+sintvec brutS;	// source
+sintvec brutD;	// dest
+sintvec brutT;	// temp (en cours de génération)
 
 // TODO : virer
 uint32_t *expix1 = nullptr;				// pointeur exporte vers p1
@@ -117,7 +115,7 @@ static constexpr int8_t PERTEMASK { 0xf };
 // faire : a / sqrtperte <=> a >> PERTEDEC
 static constexpr uint8_t PERTEDEC { 4 };
 
-static int *firedec = nullptr;
+static std::vector<int> firedec;
 
 
 // retourne x>>s , en testant le signe de x
@@ -376,9 +374,10 @@ getPixelRGB_ (const unsigned int * buffer, unsigned int x, Color * c)
 }
 
 
+static
 void c_zoom (unsigned int *lexpix1, unsigned int *lexpix2,
              unsigned int lprevX, unsigned int lprevY,
-             const signed int *lbrutS, const signed int *lbrutD)
+             const sintvec& lbrutS, const sintvec& lbrutD)
 {
 	Color   couleur {};
 //	unsigned int coefv, coefh;
@@ -465,22 +464,14 @@ zoomFilterFastRGB (unsigned int * pix1, unsigned int * pix2, ZoomFilterData * zf
 		prevX = resx;
 		prevY = resy;
 
-		if (brutS)
-			free (freebrutS);
-		brutS = nullptr;
-		if (brutD)
-			free (freebrutD);
-		brutD = nullptr;
-		if (brutT)
-			free (freebrutT);
-		brutT = nullptr;
+		brutS.clear();
+		brutD.clear();
+		brutT.clear();
 
 		middleX = resx / 2;
 		middleY = resy - 1;
 		s_firstTime = 1;
-		if (firedec)
-			free (firedec);
-		firedec = nullptr;
+		firedec.clear();
 	}
 
 	if (s_interlaceStart != -2)
@@ -513,14 +504,9 @@ zoomFilterFastRGB (unsigned int * pix1, unsigned int * pix2, ZoomFilterData * zf
 			generatePrecalCoef ();
 			select_zoom_filter ();
 
-			freebrutS = (signed int *) calloc ((resx * resy * 2) + 128, sizeof(signed int));
-			brutS = (signed int *) ((1 + ((uintptr_t) (freebrutS)) / 128) * 128);
-
-			freebrutD = (signed int *) calloc ((resx * resy * 2) + 128, sizeof(signed int));
-			brutD = (signed int *) ((1 + ((uintptr_t) (freebrutD)) / 128) * 128);
-
-			freebrutT = (signed int *) calloc ((resx * resy * 2) + 128, sizeof(signed int));
-			brutT = (signed int *) ((1 + ((uintptr_t) (freebrutT)) / 128) * 128);
+			brutS.resize(resx * resy * 2);
+			brutD.resize(resx * resy * 2);
+			brutT.resize(resx * resy * 2);
 
 			/** modif here by jeko : plus de multiplications **/
 			{
@@ -549,7 +535,7 @@ zoomFilterFastRGB (unsigned int * pix1, unsigned int * pix2, ZoomFilterData * zf
 			}
 
 			{
-				firedec = (int *) malloc (prevY * sizeof (int));
+				firedec.resize(prevY);
 
 				for (int loopv = prevY; loopv != 0;) {
 					static int s_decc = 0;
@@ -610,12 +596,7 @@ zoomFilterFastRGB (unsigned int * pix1, unsigned int * pix2, ZoomFilterData * zf
 			}
 			buffratio = 0;
 
-            signed int * tmp = brutD;
-            brutD=brutT;
-            brutT=tmp;
-            tmp = freebrutD;
-            freebrutD=freebrutT;
-            freebrutT=tmp;
+            brutD.swap(brutT);
             s_interlaceStart = -2;
         }
 
