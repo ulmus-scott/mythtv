@@ -7,16 +7,16 @@ import { SetupService } from 'src/app/services/setup.service';
 import { CaptureCardsComponent } from '../capture-cards.component';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
-import { DropdownModule } from 'primeng/dropdown';
 import { NgIf } from '@angular/common';
 import { SharedModule } from 'primeng/api';
 import { CardModule } from 'primeng/card';
+import { SelectModule } from 'primeng/select';
 
 @Component({
     selector: 'app-v4l2',
     templateUrl: './v4l2.component.html',
     styleUrls: ['./v4l2.component.css'],
-    imports: [FormsModule, CardModule, SharedModule, NgIf, DropdownModule, MessageModule, ButtonModule, TranslateModule]
+    imports: [FormsModule, CardModule, SharedModule, NgIf, SelectModule, MessageModule, ButtonModule, TranslateModule]
 })
 export class V4l2Component implements OnInit, AfterViewInit {
 

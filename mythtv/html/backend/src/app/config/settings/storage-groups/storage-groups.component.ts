@@ -77,7 +77,7 @@ export class StorageGroupsComponent implements OnInit, CanComponentDeactivate {
 
     constructor(private setupService: SetupService, private translate: TranslateService,
         private mythService: MythService, public router: Router) {
-        this.setupService.setCurrentForm(null);
+        // this.setupService.setCurrentForm(null);
         this.mythService.GetHostName().subscribe(data => {
             this.hostName = data.String;
             this.loadGroups();
@@ -130,11 +130,6 @@ export class StorageGroupsComponent implements OnInit, CanComponentDeactivate {
     onTabClose(e: any) {
         this.showDirty();
         this.currentTab = -1;
-    }
-
-    // Temporary until onTabOpen and onTabClose are fixed
-    onClick(e: { index: number }) {
-        this.onTabOpen(e);
     }
 
     showDirty() {

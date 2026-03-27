@@ -3,7 +3,6 @@ import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
 import { CaptureCardService } from 'src/app/services/capture-card.service';
 import { RecProfileGroup } from 'src/app/services/interfaces/recprofile.interface';
-import { SetupService } from 'src/app/services/setup.service';
 import { ProfileGroupComponent } from './profile-group/profile-group.component';
 import { Router } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
@@ -33,8 +32,7 @@ export class RecordingProfilesComponent implements OnInit {
     groups: RecProfileGroup[] = [];
 
     constructor(private captureCardService: CaptureCardService, public router: Router,
-        private translate: TranslateService, private setupService: SetupService) {
-        this.setupService.setCurrentForm(null);
+        private translate: TranslateService) {
         this.loadGroups();
         translate.get(this.dirtyText).subscribe(data => this.dirtyText = data);
         translate.get(this.warningText).subscribe(data => this.warningText = data);
@@ -54,11 +52,6 @@ export class RecordingProfilesComponent implements OnInit {
 
     ngOnInit(): void {
     }
-
-    onClick(e: { index: number }) {
-        this.onTabOpen(e);
-    }
-
 
     onTabOpen(e: { index: number }) {
         this.currentTab = e.index;
@@ -80,15 +73,6 @@ export class RecordingProfilesComponent implements OnInit {
             }
         }
     }
-
-    // showDirty() {
-    //     if (this.currentTab == -1 || !this.children[this.currentTab])
-    //         return;
-    //     if (!(this.children[this.currentTab]).allClean())
-    //         this.dirtyMessages[this.currentTab] = this.dirtyText;
-    //     else
-    //         this.dirtyMessages[this.currentTab] = "";
-    // }
 
     confirm(message?: string): Observable<boolean> {
         const confirmation = window.confirm(message);
@@ -119,8 +103,5 @@ export class RecordingProfilesComponent implements OnInit {
             event.returnValue = false;
         }
     }
-
-
-
 
 }

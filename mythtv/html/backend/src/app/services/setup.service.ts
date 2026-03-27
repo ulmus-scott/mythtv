@@ -327,15 +327,15 @@ export class SetupService {
         }
     }
 
-    currentForm: NgForm | null = null;
+    // currentForm: NgForm | null = null;
 
-    getCurrentForm(): NgForm | null {
-        return this.currentForm;
-    }
+    // getCurrentForm(): NgForm | null {
+    //     return this.currentForm;
+    // }
 
-    setCurrentForm(form: NgForm | null) {
-        this.currentForm = form;
-    }
+    // setCurrentForm(form: NgForm | null) {
+    //     this.currentForm = form;
+    // }
 
     // This is here to be shared among tabs on an accordian
     schedulingEnabled = true;

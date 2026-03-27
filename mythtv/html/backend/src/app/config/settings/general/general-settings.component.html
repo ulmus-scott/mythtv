@@ -2,7 +2,7 @@
     <h2>{{ 'settings.general.title' | translate }}</h2>
     <p-accordion #accordion class="col-span-12 w-full p-0" (onClose)="onTabClose($event)" (onOpen)="onTabOpen($event)">
         <p-accordion-panel value="0">
-            <p-accordion-header (click)="onClick({index:0})">{{ 'settings.hostaddress.title' | translate }}
+            <p-accordion-header>{{ 'settings.hostaddress.title' | translate }}
                 {{ dirtyMessages[0] }}</p-accordion-header>
             <p-accordion-content>
                 <app-host-address [parent]="this" [tabIndex]="0"></app-host-address>
@@ -10,7 +10,7 @@
         </p-accordion-panel>
 
         <p-accordion-panel value="1">
-            <p-accordion-header (click)="onClick({index:1})">{{ 'settings.locale.title' | translate }}
+            <p-accordion-header>{{ 'settings.locale.title' | translate }}
                 {{ dirtyMessages[1] }}</p-accordion-header>
             <p-accordion-content>
                 <app-locale [parent]="this" [tabIndex]="1"></app-locale>
@@ -18,7 +18,7 @@
         </p-accordion-panel>
 
         <p-accordion-panel value="2">
-            <p-accordion-header (click)="onClick({index:2})">{{ 'settings.misc.title' | translate }}
+            <p-accordion-header>{{ 'settings.misc.title' | translate }}
                 {{ dirtyMessages[2] }}</p-accordion-header>
             <p-accordion-content>
                 <app-misc-settings [parent]="this" [tabIndex]="2"></app-misc-settings>
@@ -26,7 +26,7 @@
         </p-accordion-panel>
 
         <p-accordion-panel value="3">
-            <p-accordion-header (click)="onClick({index:3})">{{ 'settings.eit.title' | translate }}
+            <p-accordion-header>{{ 'settings.eit.title' | translate }}
                 {{ dirtyMessages[3] }}</p-accordion-header>
             <p-accordion-content>
                 <app-eit-scanner [parent]="this" [tabIndex]="3"></app-eit-scanner>
@@ -34,7 +34,7 @@
         </p-accordion-panel>
 
         <p-accordion-panel value="4">
-            <p-accordion-header (click)="onClick({index:4})">{{ 'settings.shutwake.title' | translate }}
+            <p-accordion-header>{{ 'settings.shutwake.title' | translate }}
                 {{ dirtyMessages[4] }}</p-accordion-header>
             <p-accordion-content>
                 <app-shutdown-wakeup [parent]="this" [tabIndex]="4"></app-shutdown-wakeup>
@@ -42,7 +42,7 @@
         </p-accordion-panel>
 
         <p-accordion-panel value="5">
-            <p-accordion-header (click)="onClick({index:5})">{{ 'settings.backendwake.title' | translate }}
+            <p-accordion-header>{{ 'settings.backendwake.title' | translate }}
                 {{ dirtyMessages[5] }}</p-accordion-header>
             <p-accordion-content>
                 <app-backend-wakeup [parent]="this" [tabIndex]="5"></app-backend-wakeup>
@@ -50,7 +50,7 @@
         </p-accordion-panel>
 
         <p-accordion-panel value="6">
-            <p-accordion-header (click)="onClick({index:6})">{{ 'settings.backendctrl.title' | translate }}
+            <p-accordion-header>{{ 'settings.backendctrl.title' | translate }}
                 {{ dirtyMessages[6] }}</p-accordion-header>
             <p-accordion-content>
                 <app-backend-control [parent]="this" [tabIndex]="6"></app-backend-control>
@@ -58,7 +58,7 @@
         </p-accordion-panel>
 
         <p-accordion-panel value="7">
-            <p-accordion-header (click)="onClick({index:7})">{{ 'settings.jobqbackend.title' | translate }}
+            <p-accordion-header>{{ 'settings.jobqbackend.title' | translate }}
                 {{ dirtyMessages[7] }}</p-accordion-header>
             <p-accordion-content>
                 <app-jobqueue-backend [parent]="this" [tabIndex]="7"></app-jobqueue-backend>
@@ -66,7 +66,7 @@
         </p-accordion-panel>
 
         <p-accordion-panel value="8">
-            <p-accordion-header (click)="onClick({index:8})">{{ 'settings.jobqglobal.title' | translate }}
+            <p-accordion-header>{{ 'settings.jobqglobal.title' | translate }}
                 {{ dirtyMessages[8] }}</p-accordion-header>
             <p-accordion-content>
                 <app-jobqueue-global [parent]="this" [tabIndex]="8"></app-jobqueue-global>
@@ -74,7 +74,7 @@
         </p-accordion-panel>
 
         <p-accordion-panel value="9">
-            <p-accordion-header (click)="onClick({index:9})">{{ 'settings.jobqcommands.title' | translate }}
+            <p-accordion-header>{{ 'settings.jobqcommands.title' | translate }}
                 {{ dirtyMessages[9] }}</p-accordion-header>
             <p-accordion-content>
                 <app-jobqueue-commands [parent]="this" [tabIndex]="9"></app-jobqueue-commands>
@@ -82,7 +82,7 @@
         </p-accordion-panel>
 
         <p-accordion-panel value="10">
-            <p-accordion-header (click)="onClick({index:10})">{{ 'settings.epgdownload.title' | translate }}
+            <p-accordion-header>{{ 'settings.epgdownload.title' | translate }}
                 {{ dirtyMessages[10] }}</p-accordion-header>
             <p-accordion-content>
                 <app-epg-downloading [parent]="this" [tabIndex]="10"></app-epg-downloading>

@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit, ViewEncapsulation } from '@angular/core';
-import { NgForm, FormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
@@ -159,12 +159,6 @@ export class CaptureCardsComponent implements OnInit, CanComponentDeactivate {
         this.loadDiseqc();
     }
 
-
-    // Temporary until onTabOpen and onTabClose are fixed
-    onClick(e: { index: number }) {
-        this.onTabOpen(e);
-    }
-
     showDirty() {
         for (let ix = 0; ix < this.children.length; ix++) {
             if (this.children[ix]) {
@@ -202,13 +196,6 @@ export class CaptureCardsComponent implements OnInit, CanComponentDeactivate {
         }
         this.showDirty();
         this.currentTab = e.index;
-        // This line removes "Unsaved Changes" from current tab header.
-        // this.dirtyMessages[this.currentTab] = "";
-        // This line supports showing "Unsaved Changes" on current tab header,
-        // and you must comment the above line,
-        // but the "Unsaved Changes" text does not go away after save, so it
-        // is no good until we solve that problem.
-        // (<NgForm>this.forms[e.index]).valueChanges!.subscribe(() => this.showDirty())
     }
 
     onTabClose(e: any) {
@@ -365,6 +352,5 @@ export class CaptureCardsComponent implements OnInit, CanComponentDeactivate {
             event.returnValue = false;
         }
     }
-
 
 }

@@ -1,5 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, HostListener, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { AfterViewInit, ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
@@ -24,7 +23,6 @@ import { CardModule } from 'primeng/card';
     imports: [CardModule, AccordionModule, SharedModule, AutoExpireComponent, JobsComponent, RecQualityComponent, RecPrioritiesComponent, CustomPrioritiesComponent, ChannelGroupsComponent, PlaybackGroupsComponent, DataSourcesComponent, UsersComponent, TranslateModule]
 })
 export class DashboardSettingsComponent implements OnInit, CanComponentDeactivate, AfterViewInit {
-    // @ViewChild("accordion") accordion!: Accordion;
     m_showHelp: boolean = false;
     currentTab: number = -1;
     dirtyMessages: string[] = [];
@@ -47,20 +45,7 @@ export class DashboardSettingsComponent implements OnInit, CanComponentDeactivat
 
     onTabOpen(e: { index: number }) {
         this.showDirty();
-        // if (typeof this.forms[e.index] == 'undefined')
         this.currentTab = e.index;
-        // This line removes "Unsaved Changes" from current tab header.
-        // this.dirtyMessages[this.currentTab] = "";
-        // This line supports showing "Unsaved Changes" on current tab header,
-        // and you must comment the above line,
-        // but the "Unsaved Changes" text does not go away after save, so it
-        // is no good until we solve that problem.
-        // (<NgForm>this.forms[e.index]).valueChanges!.subscribe(() => this.showDirty())
-    }
-
-    // Temporary until onTabOpen and onTabClose are fixed
-    onClick(e: { index: number }) {
-        this.onTabOpen(e);
     }
 
     onTabClose(e: any) {
@@ -77,12 +62,6 @@ export class DashboardSettingsComponent implements OnInit, CanComponentDeactivat
                     this.dirtyMessages[ix] = '';
             }
         }
-        // if (this.currentTab == -1)
-        //     return;
-        // if (this.children[this.currentTab].dirty())
-        //     this.dirtyMessages[this.currentTab] = this.dirtyText;
-        // else
-        //     this.dirtyMessages[this.currentTab] = "";
     }
 
     showHelp() {

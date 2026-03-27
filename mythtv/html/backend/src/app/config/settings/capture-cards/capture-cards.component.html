@@ -65,7 +65,7 @@
     <p-accordion class="col-span-12 w-full" (onClose)="onTabClose($event)" (onOpen)="onTabOpen($event)">
         @for (card of m_CaptureCardsFiltered; track $index; let ix = $index) {
         <p-accordion-panel [value]="ix" [disabled]="disabledTab[ix]">
-            <p-accordion-header (click)="onClick({index:ix})">
+            <p-accordion-header>
                 {{m_CaptureCardsFiltered[ix].CardType}}
                 {{m_CaptureCardsFiltered[ix].VideoDevice}}
                 ({{m_CaptureCardsFiltered[ix].DisplayName}})

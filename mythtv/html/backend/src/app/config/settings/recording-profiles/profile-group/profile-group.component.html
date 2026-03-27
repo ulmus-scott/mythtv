@@ -37,23 +37,11 @@
     <p-accordion class="col-span-12 w-full" (onClose)="onTabClose($event)" (onOpen)="onTabOpen($event)">
         @for (profile of group.RecProfiles; track $index; let ix = $index) {
         <p-accordion-panel [value]="ix">
-            <p-accordion-header (click)="onClick({index:ix})">
+            <p-accordion-header>
                 {{ profile.Name }}
                 {{dirtyMessages[ix]}}
             </p-accordion-header>
             <p-accordion-content>
-
-                <!-- <p-accordionTab *ngFor="let profile of group.RecProfiles; index as ix; first as isFirst"
-            [disabled]="disabledTab[ix]" [(selected)]="activeTab[ix]">
-            <ng-template pTemplate="header">
-                <div class="grid grid-cols-12 gap-4  w-full">
-                    <div class="col-span-9 pr-1">
-                        {{ profile.Name }}
-                        <b>&nbsp;{{ dirtyMessages[ix] }}</b>
-                    </div>
-                </div>
-            </ng-template>
-            <ng-template pTemplate="content"> -->
                 <p-button styleClass="p-button-warning" label="{{ 'settings.rprofiles.delete_this' | translate }}"
                     icon="pi pi-trash" (onClick)="displayDeleteThis[ix]=true"
                     [disabled]="!group.RecProfiles[ix].Id || setupService.schedulingEnabled">
@@ -74,8 +62,6 @@
                     </ng-template>
                 </p-dialog>
                 <app-recprofile [profile]="profile" [group]="group" [parent]="this" [tabIndex]="ix"></app-recprofile>
-                <!-- </ng-template>
-                </p-accordionTab> -->
             </p-accordion-content>
         </p-accordion-panel>
         }

@@ -327,21 +327,25 @@ export class RecprofileComponent implements OnInit, AfterViewInit {
             case 2:
                 // 2. Save profile parameters
                 this.saveParams(this.params.Param);
-                let vParams = this.videoParamList.find(entry => entry.Codec == this.profile.VideoCodec);
-                if (vParams)
-                    this.saveParams(vParams.Param);
-                else {
-                    console.log("ERROR videoparams not found");
-                    this.errorCount++;
-                    this.currentForm.form.markAsDirty();
+                if (this.profile.VideoCodec) {
+                    let vParams = this.videoParamList.find(entry => entry.Codec == this.profile.VideoCodec);
+                    if (vParams)
+                        this.saveParams(vParams.Param);
+                    else {
+                        console.log("ERROR videoparams not found", this.profile.VideoCodec);
+                        this.errorCount++;
+                        this.currentForm.form.markAsDirty();
+                    }
                 }
-                let aParams = this.audioParamList.find(entry => entry.Codec == this.profile.AudioCodec);
-                if (aParams)
-                    this.saveParams(aParams.Param);
-                else {
-                    console.log("ERROR audioparams not found");
-                    this.errorCount++;
-                    this.currentForm.form.markAsDirty();
+                if (this.profile.AudioCodec) {
+                    let aParams = this.audioParamList.find(entry => entry.Codec == this.profile.AudioCodec);
+                    if (aParams)
+                        this.saveParams(aParams.Param);
+                    else {
+                        console.log("ERROR audioparams not found", this.profile.AudioCodec);
+                        this.errorCount++;
+                        this.currentForm.form.markAsDirty();
+                    }
                 }
         }
     }

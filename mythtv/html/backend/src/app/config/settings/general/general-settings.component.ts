@@ -1,5 +1,4 @@
 import { Component, HostListener, OnInit, ViewEncapsulation } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
@@ -67,24 +66,10 @@ export class SettingsComponent implements OnInit, CanComponentDeactivate {
     onTabOpen(e: { index: number }) {
         this.showDirty();
         this.currentTab = e.index;
-        // console.log("onTabOpen");
-        // console.log(e);
-        // This line removes "Unsaved Changes" from current tab header.
-        // this.dirtyMessages[this.currentTab] = "";
-        // This line supports showing "Unsaved Changes" on current tab header,
-        // and you must comment the above line,
-        // but the "Unsaved Changes" text does not go away after save, so it
-        // is no good until we solve that problem.
-        // (<NgForm>this.forms[e.index]).valueChanges!.subscribe(() => this.showDirty())
     }
 
     onTabClose(e: any) {
         this.showDirty();
-    }
-
-    // Temporary until onTabOpen and onTabClose are fixed
-    onClick(e: { index: number }) {
-        this.onTabOpen(e);
     }
 
     showDirty() {

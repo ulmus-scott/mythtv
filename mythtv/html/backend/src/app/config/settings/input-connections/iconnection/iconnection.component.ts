@@ -328,13 +328,7 @@ export class IconnectionComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit(): void {
-        this.setupService.setCurrentForm(this.currentForm);
-        // This is needed tp prevent ExpressionChangedAfterItHasBeenCheckedError
-        // Previous value for 'ng-pristine': 'true'. Current value: 'false'.
         this.markPristine();
-        setTimeout(() => {
-            this.currentForm.form.markAsPristine();
-        }, 0);
     }
 
     fetchChannels(): void {

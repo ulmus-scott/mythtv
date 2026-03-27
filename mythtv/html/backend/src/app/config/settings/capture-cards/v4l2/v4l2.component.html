@@ -11,11 +11,11 @@
                 <div class="form-group field">
                     <label for="VideoDevice" class="label block">{{ 'settings.capture.v4l2.device_label' | translate
                         }}</label>
-                    <p-dropdown appendTo="body" *ngIf="isReady"
+                    <p-select appendTo="body" *ngIf="isReady"
                         [options]="captureDeviceList.CaptureDeviceList.CaptureDevices" [(ngModel)]="currentDevice"
                         [editable]="false" optionLabel="VideoDevice" (onChange)="updateDevice();" [maxlength]="0"
                         [style]="{'minWidth':'80%'}" name="VideoDevice" #VideoDevice="ngModel">
-                    </p-dropdown>
+                    </p-select>
                     <div *ngIf="warningMessage">
                         <small class="p-error block">
                             {{ warningMessage }}

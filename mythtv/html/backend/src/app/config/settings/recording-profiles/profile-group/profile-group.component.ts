@@ -1,5 +1,5 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
-import { NgForm, FormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
 import { CaptureCardService } from 'src/app/services/capture-card.service';
@@ -9,7 +9,7 @@ import { RecordingProfilesComponent } from '../recording-profiles.component';
 import { RecprofileComponent } from './recprofile/recprofile.component';
 import { AccordionModule } from 'primeng/accordion';
 import { MessageModule } from 'primeng/message';
-import { NgIf, NgFor } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { SharedModule } from 'primeng/api';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
@@ -18,7 +18,7 @@ import { ButtonModule } from 'primeng/button';
     selector: 'app-profile-group',
     templateUrl: './profile-group.component.html',
     styleUrls: ['./profile-group.component.css'],
-    imports: [ButtonModule, DialogModule, FormsModule, SharedModule, NgIf, MessageModule, AccordionModule, NgFor, RecprofileComponent, TranslateModule]
+    imports: [ButtonModule, DialogModule, FormsModule, SharedModule, NgIf, MessageModule, AccordionModule, RecprofileComponent, TranslateModule]
 })
 export class ProfileGroupComponent implements OnInit {
 
@@ -60,26 +60,10 @@ export class ProfileGroupComponent implements OnInit {
         this.parent.children[this.tabIndex] = this;
     }
 
-    onClick(e: { index: number }) {
-        console.log("onclick",e.index);
-        this.onTabOpen(e);
-    }
-
     onTabOpen(e: { index: number }) {
         // Get rid of successful delete when opening a new tab
         this.showDirty();
-        // let form = this.setupService.getCurrentForm();
-        // if (form != null)
-        //     this.forms[e.index] = form;
-        // this.setupService.setCurrentForm(null);
         this.currentTab = e.index;
-        // This line removes "Unsaved Changes" from current tab header.
-        // this.dirtyMessages[this.currentTab] = "";
-        // This line supports showing "Unsaved Changes" on current tab header,
-        // and you must comment the above line,
-        // but the "Unsaved Changes" text does not go away after save, so it
-        // is no good until we solve that problem.
-        // (<NgForm>this.forms[e.index]).valueChanges!.subscribe(() => this.showDirty())
     }
 
     onTabClose(e: any) {
@@ -97,18 +81,6 @@ export class ProfileGroupComponent implements OnInit {
             }
         }
     }
-
-    // showDirty() {
-    //     if (this.currentTab == -1
-    //         || this.disabledTab[this.currentTab])
-    //         return;
-    //     if (this.forms[this.currentTab] && (<NgForm>this.forms[this.currentTab]).dirty)
-    //         this.dirtyMessages[this.currentTab] = this.dirtyText;
-    //     else if (!this.group.RecProfiles[this.currentTab].Id)
-    //         this.dirtyMessages[this.currentTab] = this.newText;
-    //     else
-    //         this.dirtyMessages[this.currentTab] = "";
-    // }
 
     newProfile() {
         this.displayNewDialog = false;
@@ -171,7 +143,6 @@ export class ProfileGroupComponent implements OnInit {
     };
 
     allClean(): boolean {
-        // let currentForm = this.setupService.getCurrentForm();
         if (this.children[this.currentTab] && (this.children[this.currentTab]).dirty()
             || this.dirtyMessages.find(element => element && element.length > 0)) {
             return false;

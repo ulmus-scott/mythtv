@@ -4,7 +4,7 @@
     <p-accordion class="col-span-12 w-full" (onOpen)="onTabOpen($event)" (onClose)="onTabClose($event)">
         @for (group of groups; track $index; let ix = $index) {
         <p-accordion-panel [value]="ix">
-            <p-accordion-header (click)="onClick({index:ix})">
+            <p-accordion-header>
                 {{group.Name}}
                 {{dirtyMessages[ix]}}
             </p-accordion-header>

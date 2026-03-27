@@ -2,63 +2,63 @@
     <h2>{{ 'dashboard.settings.heading' | translate }}</h2>
     <p-accordion #accordion class="col-span-12 w-full p-0" (onClose)="onTabClose($event)" (onOpen)="onTabOpen($event)">
         <p-accordion-panel value="0">
-            <p-accordion-header (click)="onClick({index:0})">{{ 'dashboard.autoexpire.heading' | translate }}
+            <p-accordion-header>{{ 'dashboard.autoexpire.heading' | translate }}
                 {{ dirtyMessages[0] }}</p-accordion-header>
             <p-accordion-content>
                 <app-auto-expire [parent]="this" [tabIndex]="0"></app-auto-expire>
             </p-accordion-content>
         </p-accordion-panel>
         <p-accordion-panel value="1">
-            <p-accordion-header (click)="onClick({index:1})">{{ 'dashboard.jobs.heading' | translate }}
+            <p-accordion-header>{{ 'dashboard.jobs.heading' | translate }}
                 {{ dirtyMessages[1] }}</p-accordion-header>
             <p-accordion-content>
                 <app-jobs [parent]="this" [tabIndex]="1"></app-jobs>
             </p-accordion-content>
         </p-accordion-panel>
         <p-accordion-panel value="2">
-            <p-accordion-header (click)="onClick({index:2})">{{ 'dashboard.quality.heading' | translate }}
+            <p-accordion-header>{{ 'dashboard.quality.heading' | translate }}
                 {{ dirtyMessages[2] }}</p-accordion-header>
             <p-accordion-content>
                 <app-rec-quality [parent]="this" [tabIndex]="2"></app-rec-quality>
             </p-accordion-content>
         </p-accordion-panel>
         <p-accordion-panel value="3">
-            <p-accordion-header (click)="onClick({index:3})">{{ 'dashboard.priorities.heading' | translate }}
+            <p-accordion-header>{{ 'dashboard.priorities.heading' | translate }}
                 {{ dirtyMessages[3] }}</p-accordion-header>
             <p-accordion-content>
                 <app-rec-priorities [parent]="this" [tabIndex]="3"></app-rec-priorities>
             </p-accordion-content>
         </p-accordion-panel>
         <p-accordion-panel value="4">
-            <p-accordion-header (click)="onClick({index:4})">{{ 'dashboard.custom.heading' | translate }}
+            <p-accordion-header>{{ 'dashboard.custom.heading' | translate }}
                 {{ dirtyMessages[4] }}</p-accordion-header>
             <p-accordion-content>
                 <app-custom-priorities></app-custom-priorities>
             </p-accordion-content>
         </p-accordion-panel>
         <p-accordion-panel value="5">
-            <p-accordion-header (click)="onClick({index:5})">{{ 'dashboard.channelgroup.heading' | translate }}
+            <p-accordion-header>{{ 'dashboard.channelgroup.heading' | translate }}
                 {{ dirtyMessages[5] }}</p-accordion-header>
             <p-accordion-content>
                 <app-channel-groups></app-channel-groups>
             </p-accordion-content>
         </p-accordion-panel>
         <p-accordion-panel value="6">
-            <p-accordion-header (click)="onClick({index:6})">{{ 'dashboard.playgroup.heading' | translate }}
+            <p-accordion-header>{{ 'dashboard.playgroup.heading' | translate }}
                 {{ dirtyMessages[6] }}</p-accordion-header>
             <p-accordion-content>
                 <app-playback-groups></app-playback-groups>
             </p-accordion-content>
         </p-accordion-panel>
         <p-accordion-panel value="7">
-            <p-accordion-header (click)="onClick({index:7})">{{ 'dashboard.datasources.heading' | translate }}
+            <p-accordion-header>{{ 'dashboard.datasources.heading' | translate }}
                 {{ dirtyMessages[7] }}</p-accordion-header>
             <p-accordion-content>
                 <app-data-sources [parent]="this" [tabIndex]="7"></app-data-sources>
             </p-accordion-content>
         </p-accordion-panel>
         <p-accordion-panel value="8">
-            <p-accordion-header (click)="onClick({index:8})">{{ 'dashboard.users.heading' | translate }}
+            <p-accordion-header>{{ 'dashboard.users.heading' | translate }}
                 {{ dirtyMessages[8] }}</p-accordion-header>
             <p-accordion-content>
                 <app-users></app-users>

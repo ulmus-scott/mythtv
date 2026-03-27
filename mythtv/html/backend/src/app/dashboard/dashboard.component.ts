@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
-import { RouterOutlet, RouterLink } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { TooltipModule } from 'primeng/tooltip';
 import { RippleModule } from 'primeng/ripple';
@@ -12,7 +12,7 @@ import { NgIf } from '@angular/common';
     selector: 'app-dashboard',
     templateUrl: './dashboard.component.html',
     styleUrls: ['./dashboard.component.css'],
-    imports: [NgIf, ButtonModule, RippleModule, TooltipModule, TabMenuModule, RouterOutlet, TranslateModule, RouterLink]
+    imports: [NgIf, ButtonModule, RippleModule, TooltipModule, TabMenuModule, RouterOutlet, TranslateModule]
 })
 export class DashboardComponent implements OnInit {
 

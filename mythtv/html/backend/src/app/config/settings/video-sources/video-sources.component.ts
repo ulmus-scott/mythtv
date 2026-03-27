@@ -1,5 +1,4 @@
 import { Component, HostListener, OnInit, ViewEncapsulation } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
@@ -63,7 +62,7 @@ export class VideoSourcesComponent implements OnInit, CanComponentDeactivate {
 
     constructor(public setupService: SetupService, private translate: TranslateService,
         private channelService: ChannelService, public router: Router) {
-        this.setupService.setCurrentForm(null);
+        // this.setupService.setCurrentForm(null);
         this.loadSources();
         translate.get(this.dirtyText).subscribe(data => this.dirtyText = data);
         translate.get(this.warningText).subscribe(data => this.warningText = data);
@@ -89,11 +88,6 @@ export class VideoSourcesComponent implements OnInit, CanComponentDeactivate {
     }
 
     ngOnInit(): void {
-    }
-
-    // Temporary until onTabOpen and onTabClose are fixed
-    onClick(e: { index: number }) {
-        this.onTabOpen(e);
     }
 
     onTabOpen(e: { index: number }) {

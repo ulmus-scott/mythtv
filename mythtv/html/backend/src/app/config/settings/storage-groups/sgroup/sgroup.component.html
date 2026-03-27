@@ -69,7 +69,7 @@
                         text="{{ 'common.networkfail' | translate }}"></p-message>
                 </div>
                 <p-button class="col pr-1" label="{{'common.save' | translate}}" icon="pi pi-save" iconPos="left"
-                    (onClick)="saveForm(); sgroupform.form.markAsPristine()"
+                    (onClick)="saveForm(); markPristine()"
                     [disabled]="!sgroupform.dirty || setupService.schedulingEnabled">
                 </p-button>
             </div>

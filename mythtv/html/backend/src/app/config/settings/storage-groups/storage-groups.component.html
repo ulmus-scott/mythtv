@@ -23,10 +23,9 @@
     </p-dialog>
     <br>
     <p-accordion class="col-span-12 w-full" (onClose)="onTabClose($event)" (onOpen)="onTabOpen($event)">
-
         @for (group of storageGroups; track $index; let ix = $index) {
         <p-accordion-panel [value]="ix">
-            <p-accordion-header (click)="onClick({index:ix})">
+            <p-accordion-header>
                 <span *ngIf="storageGroups[ix].DirNames.length == 0; else onlyName"
                     [translate]="'settings.sgroups.tab_create_title'"
                     [translateParams]="{name: storageGroups[ix].LocalizedName}"></span>
@@ -34,24 +33,8 @@
                 {{dirtyMessages[ix]}}
             </p-accordion-header>
             <p-accordion-content>
-
-                <!-- <p-accordionTab *ngFor="let group of storageGroups; index as ix; first as isFirst" [(selected)]="activeTab[ix]">
-            <ng-template pTemplate="header">
-                <div class="grid grid-cols-12 gap-4  w-full">
-                    <div class="col-span-9 pr-1">
-
-                        <span *ngIf="storageGroups[ix].DirNames.length == 0; else onlyName"
-                            [translate]="'settings.sgroups.tab_create_title'"
-                            [translateParams]="{name: storageGroups[ix].LocalizedName}"></span>
-                        <ng-template #onlyName> {{storageGroups[ix].LocalizedName}} </ng-template>
-                        <b>&nbsp;{{ dirtyMessages[ix] }}</b>
-                    </div>
-                </div>
-            </ng-template>
-            <ng-template pTemplate="content"> -->
-                <app-sgroup [sgroup]="storageGroups[ix]" [hostName]="hostName" [parent]="this" [tabIndex]="ix"></app-sgroup>
-                <!-- </ng-template>
-                </p-accordionTab> -->
+                <app-sgroup [sgroup]="storageGroups[ix]" [hostName]="hostName" [parent]="this"
+                    [tabIndex]="ix"></app-sgroup>
             </p-accordion-content>
         </p-accordion-panel>
         }

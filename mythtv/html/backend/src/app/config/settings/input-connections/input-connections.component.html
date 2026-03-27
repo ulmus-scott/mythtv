@@ -4,7 +4,7 @@
 
         @for (card of m_CaptureCardsFiltered; track $index; let ix = $index) {
         <p-accordion-panel [value]="ix">
-            <p-accordion-header (click)="onClick({index:ix})">
+            <p-accordion-header>
                 {{card.CardType}}
                 {{card.VideoDevice}}
                 ({{card.DisplayName}})
@@ -12,25 +12,9 @@
                 {{dirtyMessages[ix]}}
             </p-accordion-header>
             <p-accordion-content>
-                <!-- <p-accordionTab *ngFor="let card of m_CaptureCardsFiltered; index as ix; first as isFirst"
-            [(selected)]="activeTab[ix]">
-            <ng-template pTemplate="header">
-                <div class="grid grid-cols-12 gap-4  w-full" *ngIf="readyCount > 1">
-                    <div class="col-span-9 pr-1">
-                        {{card.CardType}}
-                        {{card.VideoDevice}}
-                        ({{card.DisplayName}})
-                        =&gt; {{videoSourceLookup[card.SourceId].SourceName}}
-                        <b>&nbsp;{{ dirtyMessages[ix] }}</b>
-                    </div>
-                </div>
-            </ng-template>
-            <ng-template pTemplate="content"> -->
                 <app-iconnection [card]="m_CaptureCardsFiltered[ix]" [cardList]="m_CaptureCardList"
                     [videoSourceLookup]="videoSourceLookup" [videoSourceList]="videoSourceList"
                     [parent]="this" [tabIndex]="ix"></app-iconnection>
-                <!-- </ng-template>
-                </p-accordionTab> -->
             </p-accordion-content>
         </p-accordion-panel>
         }
