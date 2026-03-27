@@ -227,6 +227,7 @@ export class GuideComponent implements OnInit, SchedulerSummary {
       return;
     this.m_startDate = new Date(this.m_pickerDate);
     this.timeChange = true;
+    this.runningTime = new Date(this.m_startDate);
     this.refresh();
   }
 
