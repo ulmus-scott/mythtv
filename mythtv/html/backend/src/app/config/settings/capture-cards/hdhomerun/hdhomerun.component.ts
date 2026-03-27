@@ -18,7 +18,6 @@ import { CaptureCardsComponent } from '../capture-cards.component';
     selector: 'app-hdhomerun',
     templateUrl: './hdhomerun.component.html',
     styleUrls: ['./hdhomerun.component.css'],
-    standalone: true,
     imports: [FormsModule, CardModule, SharedModule, NgIf, ListboxModule, InputNumberModule, CheckboxModule, MessageModule, ButtonModule, TranslateModule]
 })
 export class HdhomerunComponent implements OnInit, AfterViewInit {

@@ -15,7 +15,6 @@ import { CaptureCardsComponent } from '../capture-cards.component';
     selector: 'app-demo',
     templateUrl: './demo.component.html',
     styleUrls: ['./demo.component.css'],
-    standalone: true,
     imports: [FormsModule, CardModule, SharedModule, NgIf, MessageModule, ButtonModule, TranslateModule]
 })
 export class DemoComponent implements OnInit, AfterViewInit {

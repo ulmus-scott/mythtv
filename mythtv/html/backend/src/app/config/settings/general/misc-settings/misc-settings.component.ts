@@ -20,7 +20,6 @@ import { SettingsComponent } from '../general-settings.component';
     selector: 'app-misc-settings',
     templateUrl: './misc-settings.component.html',
     styleUrls: ['./misc-settings.component.css'],
-    standalone: true,
     imports: [FormsModule, CardModule, SharedModule, FieldsetModule, CheckboxModule, InputNumberModule, SelectModule, NgIf, MessageModule, ButtonModule, TranslateModule]
 })
 

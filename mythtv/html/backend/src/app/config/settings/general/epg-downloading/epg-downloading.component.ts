@@ -17,7 +17,6 @@ import { SettingsComponent } from '../general-settings.component';
     selector: 'app-epg-downloading',
     templateUrl: './epg-downloading.component.html',
     styleUrls: ['./epg-downloading.component.css'],
-    standalone: true,
     imports: [FormsModule, CardModule, SharedModule, CheckboxModule, NgIf, InputNumberModule, MessageModule, ButtonModule, TranslateModule]
 })
 

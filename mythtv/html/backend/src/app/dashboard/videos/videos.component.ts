@@ -26,7 +26,6 @@ import { DatePicker, DatePickerModule } from "primeng/datepicker";
     templateUrl: './videos.component.html',
     styleUrls: ['./videos.component.css'],
     providers: [MessageService],
-    standalone: true,
     imports: [ToastModule, MenuModule, NgIf, TableModule, SharedModule, ButtonModule, NgFor, CheckboxModule, FormsModule, TooltipModule, RippleModule, SelectModule, DialogModule, TextareaModule, InputNumberModule, DatePickerModule, MessageModule, TranslateModule, DatePicker]
 })
 export class VideosComponent implements OnInit {

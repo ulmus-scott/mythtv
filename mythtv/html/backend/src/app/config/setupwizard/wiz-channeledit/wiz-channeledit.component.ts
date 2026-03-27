@@ -9,7 +9,6 @@ import { CardModule } from 'primeng/card';
     selector: 'app-wiz-channeledit',
     templateUrl: './wiz-channeledit.component.html',
     styleUrls: ['./wiz-channeledit.component.css'],
-    standalone: true,
     imports: [CardModule, ChannelEditorComponent, ButtonModule, TranslateModule]
 })
 export class WizChanneleditComponent implements OnInit {

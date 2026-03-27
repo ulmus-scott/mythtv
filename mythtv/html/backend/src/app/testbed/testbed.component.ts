@@ -29,7 +29,6 @@ import { NgIf, NgFor, AsyncPipe, KeyValuePipe } from '@angular/common';
     selector: 'app-testbed',
     templateUrl: './testbed.component.html',
     styleUrls: ['./testbed.component.css'],
-    standalone: true,
     imports: [NgIf, AccordionModule, NgFor, SharedModule, ButtonModule, AsyncPipe, KeyValuePipe, TranslateModule]
 })
 

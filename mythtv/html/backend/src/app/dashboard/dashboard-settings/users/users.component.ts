@@ -30,7 +30,6 @@ interface MyUser {
     selector: 'app-users',
     templateUrl: './users.component.html',
     styleUrls: ['./users.component.css'],
-    standalone: true,
     imports: [NgIf, RadioButtonModule, FormsModule, MessageModule, TableModule, SharedModule, ButtonModule, RippleModule, TooltipModule, DialogModule, PasswordModule, TranslateModule]
 })
 export class UsersComponent implements OnInit {

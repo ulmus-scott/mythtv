@@ -27,7 +27,6 @@ import { Menu, MenuModule } from 'primeng/menu';
     selector: 'app-navbar',
     templateUrl: './navbar.component.html',
     styleUrls: ['./navbar.component.css'],
-    standalone: true,
     imports: [NgIf, RippleModule, ButtonModule, TooltipModule, PopoverModule, SharedModule, TableModule, FormsModule, DialogModule, PasswordModule, CheckboxModule, MessageModule, TranslateModule, MenuModule]
 })
 export class NavbarComponent implements OnInit {

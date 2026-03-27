@@ -26,7 +26,6 @@ interface ddParm {
     selector: 'app-jobqueue-backend',
     templateUrl: './jobqueue-backend.component.html',
     styleUrls: ['./jobqueue-backend.component.css'],
-    standalone: true,
     imports: [FormsModule, CardModule, SharedModule, InputNumberModule, DatePickerModule, SelectModule, CheckboxModule, NgIf, MessageModule, ButtonModule, TranslateModule]
 })
 

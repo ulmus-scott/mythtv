@@ -26,7 +26,6 @@ import { VideoSourcesComponent } from '../video-sources.component';
     selector: 'app-vsource',
     templateUrl: './vsource.component.html',
     styleUrls: ['./vsource.component.css'],
-    standalone: true,
     imports: [FormsModule, CardModule, SharedModule, NgIf, SelectModule, ButtonModule, RippleModule, TooltipModule, CheckboxModule, InputNumberModule, MessageModule, TranslateModule]
 })
 export class VsourceComponent implements OnInit, AfterViewInit {

@@ -19,7 +19,6 @@ import { CaptureCardsComponent } from '../capture-cards.component';
     selector: 'app-vbox',
     templateUrl: './vbox.component.html',
     styleUrls: ['./vbox.component.css'],
-    standalone: true,
     imports: [FormsModule, CardModule, SharedModule, NgIf, SelectModule, InputNumberModule, MessageModule, ButtonModule, TranslateModule]
 })
 export class VboxComponent implements OnInit, AfterViewInit {

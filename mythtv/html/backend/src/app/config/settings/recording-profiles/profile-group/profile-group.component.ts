@@ -18,7 +18,6 @@ import { ButtonModule } from 'primeng/button';
     selector: 'app-profile-group',
     templateUrl: './profile-group.component.html',
     styleUrls: ['./profile-group.component.css'],
-    standalone: true,
     imports: [ButtonModule, DialogModule, FormsModule, SharedModule, NgIf, MessageModule, AccordionModule, NgFor, RecprofileComponent, TranslateModule]
 })
 export class ProfileGroupComponent implements OnInit {

@@ -31,7 +31,6 @@ interface RuleListEntry {
     templateUrl: './upcoming.component.html',
     styleUrls: ['./upcoming.component.css'],
     providers: [MessageService],
-    standalone: true,
     imports: [ToastModule, NgIf, TableModule, SharedModule, SelectModule, FormsModule, ButtonModule, RippleModule, TooltipModule, NgClass, DialogModule, MessageModule, ScheduleComponent, DecimalPipe, TranslateModule]
 })
 export class UpcomingComponent implements OnInit, SchedulerSummary {

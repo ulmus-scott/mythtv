@@ -18,7 +18,6 @@ import { SettingsComponent } from '../general-settings.component';
     selector: 'app-host-address',
     templateUrl: './host-address.component.html',
     styleUrls: ['./host-address.component.css'],
-    standalone: true,
     imports: [FormsModule, CardModule, SharedModule, FieldsetModule, NgClass, NgIf, CheckboxModule, SelectModule, MessageModule, ButtonModule, TranslateModule]
 })
 export class HostAddressComponent implements OnInit, AfterViewInit {

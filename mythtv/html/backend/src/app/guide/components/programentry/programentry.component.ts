@@ -12,7 +12,6 @@ import { NgIf, NgClass } from '@angular/common';
     selector: 'app-guide-programentry',
     templateUrl: './programentry.component.html',
     styleUrls: ['./programentry.component.css'],
-    standalone: true,
     imports: [NgIf, NgClass, TooltipModule]
 })
 export class ProgramEntryComponent implements OnInit {

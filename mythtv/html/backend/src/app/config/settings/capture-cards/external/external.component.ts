@@ -16,7 +16,6 @@ import { CaptureCardsComponent } from '../capture-cards.component';
     selector: 'app-external',
     templateUrl: './external.component.html',
     styleUrls: ['./external.component.css'],
-    standalone: true,
     imports: [FormsModule, CardModule, SharedModule, InputNumberModule, NgIf, MessageModule, ButtonModule, TranslateModule]
 })
 export class ExternalComponent implements OnInit, AfterViewInit {

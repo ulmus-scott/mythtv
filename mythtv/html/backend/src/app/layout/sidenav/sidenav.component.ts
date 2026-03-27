@@ -9,7 +9,6 @@ import { RouterLink, RouterOutlet } from '@angular/router';
     selector: 'app-sidenav',
     templateUrl: './sidenav.component.html',
     styleUrls: ['./sidenav.component.css'],
-    standalone: true,
     imports: [RouterLink, TooltipModule, RippleModule, RouterOutlet, TranslateModule]
 })
 

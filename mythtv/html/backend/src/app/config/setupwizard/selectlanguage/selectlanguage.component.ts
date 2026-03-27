@@ -22,7 +22,6 @@ import { CardModule } from 'primeng/card';
     templateUrl: './selectlanguage.component.html',
     styleUrls: ['./selectlanguage.component.css'],
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         FormsModule,
         CardModule,
@@ -32,7 +31,7 @@ import { CardModule } from 'primeng/card';
         MessageModule,
         ButtonModule,
         TranslateModule,
-    ],
+    ]
 })
 
 export class SelectLanguageComponent implements OnInit, AfterViewInit {

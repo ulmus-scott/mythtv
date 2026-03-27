@@ -20,7 +20,6 @@ import { SelectModule } from 'primeng/select';
     selector: 'app-recprofile',
     templateUrl: './recprofile.component.html',
     styleUrls: ['./recprofile.component.css'],
-    standalone: true,
     imports: [FormsModule, CardModule, SharedModule, NgIf, CheckboxModule, InputNumberModule, SelectModule, FieldsetModule, MessageModule, ButtonModule, TranslateModule]
 })
 export class RecprofileComponent implements OnInit, AfterViewInit {

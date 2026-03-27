@@ -8,7 +8,6 @@ import { NgIf, NgFor } from '@angular/common';
     selector: 'app-status-jobqueue',
     templateUrl: './jobqueue.component.html',
     styleUrls: ['./jobqueue.component.css', '../../status.component.css'],
-    standalone: true,
     imports: [NgIf, NgFor, TranslateModule]
 })
 export class JobqueueComponent implements OnInit {

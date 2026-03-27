@@ -18,7 +18,6 @@ import { CardModule } from 'primeng/card';
     templateUrl: './system-events.component.html',
     styleUrls: ['./system-events.component.css'],
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         FormsModule,
         CardModule,
@@ -28,7 +27,7 @@ import { CardModule } from 'primeng/card';
         MessageModule,
         ButtonModule,
         TranslateModule,
-    ],
+    ]
 })
 
 export class SystemEventsComponent implements OnInit {

@@ -9,7 +9,6 @@ import { NgIf, NgFor } from '@angular/common';
     selector: 'app-status-scheduled',
     templateUrl: './scheduled.component.html',
     styleUrls: ['./scheduled.component.css', '../../status.component.css'],
-    standalone: true,
     imports: [NgIf, NgFor, TooltipModule, TranslateModule]
 })
 export class ScheduledComponent implements OnInit {

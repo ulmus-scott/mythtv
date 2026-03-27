@@ -12,7 +12,6 @@ import { NgIf } from '@angular/common';
     selector: 'app-dashboard',
     templateUrl: './dashboard.component.html',
     styleUrls: ['./dashboard.component.css'],
-    standalone: true,
     imports: [NgIf, ButtonModule, RippleModule, TooltipModule, TabMenuModule, RouterOutlet, TranslateModule, RouterLink]
 })
 export class DashboardComponent implements OnInit {

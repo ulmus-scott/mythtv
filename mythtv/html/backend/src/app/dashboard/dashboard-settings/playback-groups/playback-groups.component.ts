@@ -18,7 +18,6 @@ import { NgIf } from "@angular/common";
     selector: 'app-playback-groups',
     templateUrl: './playback-groups.component.html',
     styleUrls: ['./playback-groups.component.css'],
-    standalone: true,
     imports: [NgIf, TableModule, SharedModule, ButtonModule, RippleModule, TooltipModule, FormsModule, DialogModule, InputNumberModule, MessageModule, TranslateModule]
 })
 export class PlaybackGroupsComponent implements OnInit {

@@ -18,7 +18,6 @@ import { NgIf } from '@angular/common';
     selector: 'app-custom-priorities',
     templateUrl: './custom-priorities.component.html',
     styleUrls: ['./custom-priorities.component.css'],
-    standalone: true,
     imports: [NgIf, TableModule, SharedModule, ButtonModule, RippleModule, TooltipModule, FormsModule, DialogModule, InputNumberModule, MessageModule, TranslateModule]
 })
 export class CustomPrioritiesComponent implements OnInit {

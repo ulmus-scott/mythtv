@@ -7,7 +7,6 @@ import { NgIf, NgFor } from '@angular/common';
     selector: 'app-status-frontends',
     templateUrl: './frontends.component.html',
     styleUrls: ['./frontends.component.css', '../../status.component.css'],
-    standalone: true,
     imports: [NgIf, NgFor, TranslateModule]
 })
 export class FrontendsComponent implements OnInit {

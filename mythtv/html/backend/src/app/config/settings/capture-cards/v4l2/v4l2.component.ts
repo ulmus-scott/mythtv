@@ -16,7 +16,6 @@ import { CardModule } from 'primeng/card';
     selector: 'app-v4l2',
     templateUrl: './v4l2.component.html',
     styleUrls: ['./v4l2.component.css'],
-    standalone: true,
     imports: [FormsModule, CardModule, SharedModule, NgIf, DropdownModule, MessageModule, ButtonModule, TranslateModule]
 })
 export class V4l2Component implements OnInit, AfterViewInit {

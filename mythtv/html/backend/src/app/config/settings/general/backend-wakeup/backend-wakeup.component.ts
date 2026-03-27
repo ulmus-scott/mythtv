@@ -17,7 +17,6 @@ import { SettingsComponent } from '../general-settings.component';
     selector: 'app-backend-wakeup',
     templateUrl: './backend-wakeup.component.html',
     styleUrls: ['./backend-wakeup.component.css'],
-    standalone: true,
     imports: [FormsModule, CardModule, SharedModule, FieldsetModule, InputNumberModule, NgIf, MessageModule, ButtonModule, TranslateModule]
 })
 export class BackendWakeupComponent implements OnInit, AfterViewInit {

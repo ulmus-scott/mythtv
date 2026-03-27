@@ -16,7 +16,6 @@ import { CardModule } from 'primeng/card';
     templateUrl: './backend-warning.component.html',
     styleUrls: ['./backend-warning.component.css'],
     providers: [MessageService],
-    standalone: true,
     imports: [CardModule, NgIf, MessageModule, ButtonModule, TranslateModule]
 })
 export class BackendWarningComponent implements OnInit {

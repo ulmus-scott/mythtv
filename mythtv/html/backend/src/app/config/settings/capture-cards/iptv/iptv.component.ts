@@ -17,7 +17,6 @@ import { CaptureCardsComponent } from '../capture-cards.component';
     selector: 'app-iptv',
     templateUrl: './iptv.component.html',
     styleUrls: ['./iptv.component.css'],
-    standalone: true,
     imports: [FormsModule, CardModule, SharedModule, InputNumberModule, NgIf, MessageModule, ButtonModule, TranslateModule]
 })
 export class IptvComponent implements OnInit, AfterViewInit {

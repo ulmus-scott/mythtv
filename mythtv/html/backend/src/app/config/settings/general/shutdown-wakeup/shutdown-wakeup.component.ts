@@ -17,7 +17,6 @@ import { SettingsComponent } from '../general-settings.component';
     selector: 'app-shutdown-wakeup',
     templateUrl: './shutdown-wakeup.component.html',
     styleUrls: ['./shutdown-wakeup.component.css'],
-    standalone: true,
     imports: [FormsModule, CardModule, SharedModule, CheckboxModule, InputNumberModule, NgIf, MessageModule, ButtonModule, TranslateModule]
 })
 export class ShutdownWakeupComponent implements OnInit, AfterViewInit {

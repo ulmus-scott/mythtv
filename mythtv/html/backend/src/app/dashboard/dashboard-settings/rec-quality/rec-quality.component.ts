@@ -17,7 +17,6 @@ import { DashboardSettingsComponent } from '../dashboard-settings.component';
     selector: 'app-rec-quality',
     templateUrl: './rec-quality.component.html',
     styleUrls: ['./rec-quality.component.css'],
-    standalone: true,
     imports: [FormsModule, CardModule, SharedModule, InputNumberModule, FieldsetModule, SelectModule, NgIf, MessageModule, ButtonModule, TranslateModule, Select]
 })
 export class RecQualityComponent implements OnInit, AfterViewInit {

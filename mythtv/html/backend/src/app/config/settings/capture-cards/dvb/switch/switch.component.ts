@@ -28,7 +28,6 @@ interface SwitchType {
     selector: 'app-switch',
     templateUrl: './switch.component.html',
     styleUrls: ['./switch.component.css'],
-    standalone: true,
     imports: [FormsModule, CardModule, SharedModule, InputNumberModule, SelectModule, NgIf, NgFor, FieldsetModule, ButtonModule, DialogModule, LnbComponent, forwardRef(() => RotorComponent), forwardRef(() => UnicableComponent), ListboxModule, TranslateModule, Select]
 })
 export class SwitchComponent implements OnInit, AfterViewInit, DiseqcSettingBase {

@@ -54,7 +54,6 @@ interface MyChannel extends Channel {
     selector: 'app-schedule',
     templateUrl: './schedule.component.html',
     styleUrls: ['./schedule.component.css'],
-    standalone: true,
     imports: [FormsModule, NgIf, DialogModule, SelectModule, NgSwitch, NgSwitchCase, NgSwitchDefault, DividerModule, CalendarModule, InputNumberModule, CheckboxModule, MultiSelectModule, RadioButtonModule, SharedModule, MessageModule, PopoverModule, ScrollPanelModule, ButtonModule, TranslateModule]
 })
 export class ScheduleComponent implements OnInit {

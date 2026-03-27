@@ -27,7 +27,6 @@ import { SelectModule } from 'primeng/select';
     selector: 'app-iconnection',
     templateUrl: './iconnection.component.html',
     styleUrls: ['./iconnection.component.css'],
-    standalone: true,
     imports: [FormsModule, CardModule, SharedModule, NgIf, NgSwitch, NgSwitchCase, InputNumberModule, RadioButtonModule, SelectModule, CheckboxModule, FieldsetModule, ChannelscanComponent, ButtonModule, DialogModule, MessageModule, TranslateModule]
 })
 export class IconnectionComponent implements OnInit, AfterViewInit {

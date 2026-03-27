@@ -12,7 +12,6 @@ import { NgFor } from '@angular/common';
     selector: 'app-legend',
     templateUrl: './legend.component.html',
     styleUrls: ['./legend.component.css'],
-    standalone: true,
     imports: [DataViewModule, SharedModule, NgClass, TranslateModule, NgFor]
 })
 export class LegendComponent implements OnInit {

@@ -15,7 +15,6 @@ import { SettingsComponent } from '../general-settings.component';
     selector: 'app-jobqueue-commands',
     templateUrl: './jobqueue-commands.component.html',
     styleUrls: ['./jobqueue-commands.component.css'],
-    standalone: true,
     imports: [FormsModule, CardModule, SharedModule, NgFor, TranslateModule, NgIf, MessageModule, ButtonModule]
 })
 export class JobqueueCommandsComponent implements OnInit, AfterViewInit {

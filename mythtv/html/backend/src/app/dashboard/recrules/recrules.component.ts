@@ -22,7 +22,6 @@ interface MyRecRule extends RecRule {
     selector: 'app-recrules',
     templateUrl: './recrules.component.html',
     styleUrls: ['./recrules.component.css'],
-    standalone: true,
     imports: [NgIf, TableModule, SharedModule, ButtonModule, RippleModule, TooltipModule, DialogModule, MessageModule, ScheduleComponent, TranslateModule]
 })
 export class RecrulesComponent implements OnInit, SchedulerSummary {

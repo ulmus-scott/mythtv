@@ -14,7 +14,6 @@ interface myEncoder extends Encoder {
     selector: 'app-status-encoders',
     templateUrl: './encoders.component.html',
     styleUrls: ['./encoders.component.css', '../../status.component.css'],
-    standalone: true,
     imports: [NgIf, NgFor, TranslateModule]
 })
 

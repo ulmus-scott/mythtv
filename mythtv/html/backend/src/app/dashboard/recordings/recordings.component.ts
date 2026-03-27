@@ -29,7 +29,6 @@ import { DatePickerModule } from 'primeng/datepicker';
     templateUrl: './recordings.component.html',
     styleUrls: ['./recordings.component.css'],
     providers: [MessageService],
-    standalone: true,
     imports: [FormsModule, ToastModule, MenuModule, ButtonModule, RippleModule, TooltipModule, NgIf, SelectModule, TableModule, SharedModule, NgClass, DialogModule, TextareaModule, InputNumberModule, DatePickerModule, MessageModule, ListboxModule, DecimalPipe, TranslateModule]
 })
 export class RecordingsComponent implements OnInit {

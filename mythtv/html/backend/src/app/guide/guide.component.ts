@@ -30,7 +30,6 @@ import { SelectModule } from 'primeng/select';
     selector: 'app-guide',
     templateUrl: './guide.component.html',
     styleUrls: ['./guide.component.css'],
-    standalone: true,
     imports: [NgIf, FormsModule, TooltipModule, ButtonModule, RippleModule, CheckboxModule, DataViewModule, SharedModule, TimebarComponent, ChannelIconComponent, NgFor, ProgramEntryComponent, ProgramsComponent, ScheduleComponent, DialogModule, LegendComponent, TranslateModule, DatePicker, SelectModule]
 })
 export class GuideComponent implements OnInit, SchedulerSummary {

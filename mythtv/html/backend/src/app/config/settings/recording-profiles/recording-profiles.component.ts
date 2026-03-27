@@ -16,8 +16,7 @@ import { CardModule } from 'primeng/card';
     templateUrl: './recording-profiles.component.html',
     styleUrls: ['./recording-profiles.component.css'],
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
-    imports: [CardModule, AccordionModule, SharedModule, ProfileGroupComponent, ButtonModule, TranslateModule,],
+    imports: [CardModule, AccordionModule, SharedModule, ProfileGroupComponent, ButtonModule, TranslateModule,]
 })
 export class RecordingProfilesComponent implements OnInit {
 

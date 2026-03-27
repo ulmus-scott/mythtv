@@ -16,7 +16,6 @@ import { NgIf, AsyncPipe } from '@angular/common';
     selector: 'app-status',
     templateUrl: './status.component.html',
     styleUrls: ['./status.component.css'],
-    standalone: true,
     imports: [NgIf, EncodersComponent, ScheduledComponent, JobqueueComponent, MachineinfoComponent, BackendsComponent, FrontendsComponent, AsyncPipe, TranslateModule]
 })
 export class StatusComponent implements OnInit {

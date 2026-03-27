@@ -31,7 +31,6 @@ interface LnbSubType {
     selector: 'app-lnb',
     templateUrl: './lnb.component.html',
     styleUrls: ['./lnb.component.css'],
-    standalone: true,
     imports: [FormsModule, CardModule, SharedModule, SelectModule, InputNumberModule, CheckboxModule, TranslateModule, Select]
 })
 export class LnbComponent implements OnInit, AfterViewInit, DiseqcSettingBase {

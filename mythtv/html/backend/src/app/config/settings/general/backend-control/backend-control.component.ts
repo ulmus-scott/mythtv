@@ -15,7 +15,6 @@ import { SettingsComponent } from '../general-settings.component';
     selector: 'app-backend-control',
     templateUrl: './backend-control.component.html',
     styleUrls: ['./backend-control.component.css'],
-    standalone: true,
     imports: [FormsModule, CardModule, SharedModule, NgIf, MessageModule, ButtonModule, TranslateModule]
 })
 export class BackendControlComponent implements OnInit, AfterViewInit {

@@ -18,7 +18,6 @@ import { CaptureCardsComponent } from '../capture-cards.component';
     selector: 'app-satip',
     templateUrl: './satip.component.html',
     styleUrls: ['./satip.component.css'],
-    standalone: true,
     imports: [FormsModule, CardModule, SharedModule, NgIf, SelectModule, InputNumberModule, CheckboxModule, MessageModule, ButtonModule, TranslateModule]
 })
 export class SatipComponent implements OnInit, AfterViewInit {

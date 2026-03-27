@@ -28,7 +28,6 @@ import { ToastModule } from 'primeng/toast';
     styleUrls: ['./dbsetup.component.css'],
     providers: [MessageService],
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         ToastModule,
         FormsModule,
@@ -44,7 +43,7 @@ import { ToastModule } from 'primeng/toast';
         RippleModule,
         TooltipModule,
         TranslateModule,
-    ],
+    ]
 })
 export class DbsetupComponent implements OnInit {
 

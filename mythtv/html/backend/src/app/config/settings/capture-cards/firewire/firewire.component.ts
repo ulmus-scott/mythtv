@@ -17,7 +17,6 @@ import { CaptureCardsComponent } from '../capture-cards.component';
     selector: 'app-firewire',
     templateUrl: './firewire.component.html',
     styleUrls: ['./firewire.component.css'],
-    standalone: true,
     imports: [FormsModule, CardModule, SharedModule, NgIf, SelectModule, InputNumberModule, MessageModule, ButtonModule, TranslateModule]
 })
 export class FirewireComponent implements OnInit, AfterViewInit {

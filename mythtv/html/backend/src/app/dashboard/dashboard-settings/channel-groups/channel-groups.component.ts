@@ -34,7 +34,6 @@ interface MyChannelGroup extends ChannelGroup {
     selector: 'app-channel-groups',
     templateUrl: './channel-groups.component.html',
     styleUrls: ['./channel-groups.component.css'],
-    standalone: true,
     imports: [NgIf, TableModule, SharedModule, ButtonModule, RippleModule, TooltipModule, FormsModule, DialogModule, CheckboxModule, MessageModule, TranslateModule]
 })
 export class ChannelGroupsComponent implements OnInit, AfterViewInit {

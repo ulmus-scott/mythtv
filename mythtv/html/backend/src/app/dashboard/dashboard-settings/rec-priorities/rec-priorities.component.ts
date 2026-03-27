@@ -16,7 +16,6 @@ import { SelectModule } from 'primeng/select';
     selector: 'app-rec-priorities',
     templateUrl: './rec-priorities.component.html',
     styleUrls: ['./rec-priorities.component.css'],
-    standalone: true,
     imports: [FormsModule, CardModule, SharedModule, FieldsetModule, SelectModule, InputNumberModule, NgIf, MessageModule, ButtonModule, TranslateModule]
 })
 export class RecPrioritiesComponent implements OnInit, AfterViewInit {

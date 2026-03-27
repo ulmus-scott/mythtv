@@ -24,7 +24,6 @@ interface GroupCard {
     selector: 'app-sgroup',
     templateUrl: './sgroup.component.html',
     styleUrls: ['./sgroup.component.css'],
-    standalone: true,
     imports: [FormsModule, CardModule, SharedModule, TranslateModule, NgFor, ButtonModule, RippleModule, TooltipModule, NgIf, DialogModule, ListboxModule, MessageModule]
 })
 export class SgroupComponent implements OnInit, AfterViewInit {

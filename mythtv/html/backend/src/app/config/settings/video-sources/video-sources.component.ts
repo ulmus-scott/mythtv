@@ -21,7 +21,6 @@ import { CardModule } from 'primeng/card';
     templateUrl: './video-sources.component.html',
     styleUrls: ['./video-sources.component.css'],
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         CardModule,
         ButtonModule,
@@ -32,7 +31,7 @@ import { CardModule } from 'primeng/card';
         AccordionModule,
         VsourceComponent,
         TranslateModule,
-    ],
+    ]
 })
 export class VideoSourcesComponent implements OnInit, CanComponentDeactivate {
 

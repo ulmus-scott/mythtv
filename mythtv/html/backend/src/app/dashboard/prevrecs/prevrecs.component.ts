@@ -23,7 +23,6 @@ import { DatePickerModule } from 'primeng/datepicker';
     templateUrl: './prevrecs.component.html',
     styleUrls: ['./prevrecs.component.css'],
     providers: [ConfirmationService, MessageService],
-    standalone: true,
     imports: [ToastModule, ConfirmDialogModule, MenuModule, ButtonModule, RippleModule, TooltipModule, DatePickerModule, FormsModule, NgIf, TableModule, SharedModule, NgClass, ScheduleComponent, DecimalPipe, TranslateModule]
 })
 

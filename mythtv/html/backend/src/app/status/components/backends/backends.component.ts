@@ -8,7 +8,6 @@ import { NgIf, NgFor } from '@angular/common';
     selector: 'app-status-backends',
     templateUrl: './backends.component.html',
     styleUrls: ['./backends.component.css', '../../status.component.css'],
-    standalone: true,
     imports: [NgIf, NgFor, TranslateModule]
 })
 export class BackendsComponent implements OnInit {

@@ -41,8 +41,7 @@ interface Fields {
     selector: 'app-rotor',
     templateUrl: './rotor.component.html',
     styleUrls: ['./rotor.component.css'],
-    standalone: true,
-    imports: [FormsModule, CardModule, SharedModule, InputNumberModule, SelectModule, NgIf, TableModule, FieldsetModule, ButtonModule, DialogModule, ListboxModule, LnbComponent,  forwardRef(()=> SwitchComponent), UnicableComponent, TranslateModule]
+    imports: [FormsModule, CardModule, SharedModule, InputNumberModule, SelectModule, NgIf, TableModule, FieldsetModule, ButtonModule, DialogModule, ListboxModule, LnbComponent, forwardRef(() => SwitchComponent), UnicableComponent, TranslateModule]
 })
 export class RotorComponent implements OnInit, AfterViewInit, DiseqcSettingBase {
 

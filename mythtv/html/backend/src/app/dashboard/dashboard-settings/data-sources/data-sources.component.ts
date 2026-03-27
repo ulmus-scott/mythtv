@@ -15,7 +15,6 @@ import { DashboardSettingsComponent } from '../dashboard-settings.component';
     selector: 'app-data-sources',
     templateUrl: './data-sources.component.html',
     styleUrls: ['./data-sources.component.css'],
-    standalone: true,
     imports: [FormsModule, CardModule, SharedModule, SelectModule, CheckboxModule, NgIf, MessageModule, ButtonModule, TranslateModule]
 })
 export class DataSourcesComponent implements OnInit, AfterViewInit {

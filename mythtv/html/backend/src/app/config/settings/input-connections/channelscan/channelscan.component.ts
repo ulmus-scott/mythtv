@@ -59,7 +59,6 @@ class SatTuning {
     selector: 'app-channelscan',
     templateUrl: './channelscan.component.html',
     styleUrls: ['./channelscan.component.css'],
-    standalone: true,
     imports: [SelectModule, FormsModule, CheckboxModule, ButtonModule, NgIf, FieldsetModule, InputNumberModule, TranslateModule, ProgressBarModule, ScrollPanelModule]
 })
 export class ChannelscanComponent implements OnInit, AfterViewInit {

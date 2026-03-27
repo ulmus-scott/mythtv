@@ -21,7 +21,6 @@ import { CardModule } from 'primeng/card';
     selector: 'app-dashboard-settings',
     templateUrl: './dashboard-settings.component.html',
     styleUrls: ['./dashboard-settings.component.css'],
-    standalone: true,
     imports: [CardModule, AccordionModule, SharedModule, AutoExpireComponent, JobsComponent, RecQualityComponent, RecPrioritiesComponent, CustomPrioritiesComponent, ChannelGroupsComponent, PlaybackGroupsComponent, DataSourcesComponent, UsersComponent, TranslateModule]
 })
 export class DashboardSettingsComponent implements OnInit, CanComponentDeactivate, AfterViewInit {

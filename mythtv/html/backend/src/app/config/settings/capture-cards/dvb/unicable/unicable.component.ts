@@ -22,7 +22,6 @@ import { CardModule } from 'primeng/card';
     selector: 'app-unicable',
     templateUrl: './unicable.component.html',
     styleUrls: ['./unicable.component.css'],
-    standalone: true,
     imports: [FormsModule, CardModule, SharedModule, InputNumberModule, FieldsetModule, NgIf, ButtonModule, DialogModule, ListboxModule, LnbComponent, RotorComponent, SwitchComponent, TranslateModule]
 })
 export class UnicableComponent implements OnInit, AfterViewInit, DiseqcSettingBase {

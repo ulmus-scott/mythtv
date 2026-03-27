@@ -16,7 +16,6 @@ import { SettingsComponent } from '../general-settings.component';
     selector: 'app-eit-scanner',
     templateUrl: './eit-scanner.component.html',
     styleUrls: ['./eit-scanner.component.css'],
-    standalone: true,
     imports: [FormsModule, CardModule, SharedModule, InputNumberModule, NgIf, MessageModule, ButtonModule, TranslateModule]
 })
 export class EitScannerComponent implements OnInit, AfterViewInit {

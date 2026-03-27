@@ -34,7 +34,6 @@ interface MyChannel extends Channel {
     selector: 'app-channel-editor',
     templateUrl: './channel-editor.component.html',
     styleUrls: ['./channel-editor.component.css'],
-    standalone: true,
     imports: [NgIf, TableModule, SharedModule, ButtonModule, RippleModule, TooltipModule, SelectModule, FormsModule, NgClass, DialogModule, InputNumberModule, CheckboxModule, MessageModule, RadioButtonModule, ListboxModule, TranslateModule, PanelModule]
 })
 export class ChannelEditorComponent implements OnInit {

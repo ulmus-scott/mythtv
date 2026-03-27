@@ -18,7 +18,6 @@ import { CaptureCardsComponent } from '../capture-cards.component';
     selector: 'app-hdpvr',
     templateUrl: './hdpvr.component.html',
     styleUrls: ['./hdpvr.component.css'],
-    standalone: true,
     imports: [FormsModule, CardModule, SharedModule, NgIf, SelectModule, InputNumberModule, MessageModule, ButtonModule, TranslateModule]
 })
 

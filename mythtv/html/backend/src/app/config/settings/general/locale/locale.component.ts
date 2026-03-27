@@ -16,7 +16,6 @@ import { SettingsComponent } from '../general-settings.component';
     selector: 'app-locale',
     templateUrl: './locale.component.html',
     styleUrls: ['./locale.component.css'],
-    standalone: true,
     imports: [FormsModule, CardModule, SharedModule, FieldsetModule, SelectModule, NgIf, MessageModule, ButtonModule, TranslateModule]
 })
 

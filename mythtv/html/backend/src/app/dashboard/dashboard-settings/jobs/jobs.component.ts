@@ -16,7 +16,6 @@ import { DashboardSettingsComponent } from '../dashboard-settings.component';
     selector: 'app-jobs',
     templateUrl: './jobs.component.html',
     styleUrls: ['./jobs.component.css'],
-    standalone: true,
     imports: [FormsModule, CardModule, SharedModule, SelectModule, CheckboxModule, InputNumberModule, NgIf, MessageModule, ButtonModule, TranslateModule]
 })
 export class JobsComponent implements OnInit, AfterViewInit {

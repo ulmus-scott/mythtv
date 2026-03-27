@@ -13,7 +13,6 @@ import { ButtonModule } from 'primeng/button';
     selector: 'app-settings',
     templateUrl: './setupwizard.component.html',
     styleUrls: ['./setupwizard.component.css'],
-    standalone: true,
     imports: [ButtonModule, RippleModule, TooltipModule, TabMenuModule, BackendWarningComponent, RouterOutlet, TranslateModule]
 })
 export class SetupWizardComponent implements OnInit, AfterViewInit {

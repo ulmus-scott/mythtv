@@ -20,7 +20,6 @@ import { CardModule } from 'primeng/card';
     templateUrl: './input-connections.component.html',
     styleUrls: ['./input-connections.component.css'],
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         CardModule,
         AccordionModule,
@@ -28,7 +27,7 @@ import { CardModule } from 'primeng/card';
         IconnectionComponent,
         ButtonModule,
         TranslateModule,
-    ],
+    ]
 })
 export class InputConnectionsComponent implements OnInit {
 

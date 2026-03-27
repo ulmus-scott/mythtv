@@ -28,7 +28,6 @@ import { SelectModule } from 'primeng/select';
     selector: 'app-dvb',
     templateUrl: './dvb.component.html',
     styleUrls: ['./dvb.component.css'],
-    standalone: true,
     imports: [FormsModule, CardModule, SharedModule, NgIf, SelectModule, InputNumberModule, CheckboxModule, FieldsetModule, ButtonModule, DialogModule, ListboxModule, TooltipModule, MessageModule, LnbComponent, RotorComponent, SwitchComponent, UnicableComponent, TranslateModule]
 })
 export class DvbComponent implements OnInit, AfterViewInit {

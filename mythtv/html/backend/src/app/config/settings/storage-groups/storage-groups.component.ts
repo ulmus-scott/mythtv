@@ -27,7 +27,6 @@ interface GroupCard {
     templateUrl: './storage-groups.component.html',
     styleUrls: ['./storage-groups.component.css'],
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         CardModule,
         ButtonModule,
@@ -38,7 +37,7 @@ interface GroupCard {
         NgIf,
         TranslateModule,
         SgroupComponent,
-    ],
+    ]
 })
 
 export class StorageGroupsComponent implements OnInit, CanComponentDeactivate {

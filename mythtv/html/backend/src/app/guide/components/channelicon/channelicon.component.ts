@@ -8,7 +8,6 @@ import { TooltipModule } from 'primeng/tooltip';
     selector: 'app-guide-channelicon',
     templateUrl: './channelicon.component.html',
     styleUrls: ['./channelicon.component.css'],
-    standalone: true,
     imports: [TooltipModule, NgIf]
 })
 export class ChannelIconComponent implements OnInit {

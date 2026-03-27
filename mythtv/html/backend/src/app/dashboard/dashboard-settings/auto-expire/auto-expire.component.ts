@@ -16,7 +16,6 @@ import { SelectModule } from 'primeng/select';
     selector: 'app-auto-expire',
     templateUrl: './auto-expire.component.html',
     styleUrls: ['./auto-expire.component.css'],
-    standalone: true,
     imports: [FormsModule, CardModule, SharedModule, SelectModule, CheckboxModule, InputNumberModule, NgIf, MessageModule, ButtonModule, TranslateModule]
 })
 export class AutoExpireComponent implements OnInit, AfterViewInit {

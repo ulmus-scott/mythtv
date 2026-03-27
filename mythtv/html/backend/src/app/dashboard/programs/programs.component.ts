@@ -19,7 +19,6 @@ import { TableModule } from 'primeng/table';
     selector: 'app-programs',
     templateUrl: './programs.component.html',
     styleUrls: ['./programs.component.css'],
-    standalone: true,
     imports: [TableModule, SharedModule, ButtonModule, RippleModule, NgClass, TooltipModule, NgIf, DialogModule, MessageModule, DecimalPipe, TranslateModule]
 })
 export class ProgramsComponent implements OnInit {

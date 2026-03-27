@@ -17,7 +17,6 @@ import { CaptureCardsComponent } from '../capture-cards.component';
     selector: 'app-ceton',
     templateUrl: './ceton.component.html',
     styleUrls: ['./ceton.component.css'],
-    standalone: true,
     imports: [FormsModule, CardModule, SharedModule, InputNumberModule, NgIf, MessageModule, ButtonModule, TranslateModule]
 })
 

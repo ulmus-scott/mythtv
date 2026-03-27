@@ -27,7 +27,6 @@ import { CardModule } from 'primeng/card';
     templateUrl: './general-settings.component.html',
     styleUrls: ['./general-settings.component.css'],
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         CardModule,
         AccordionModule,
@@ -45,7 +44,7 @@ import { CardModule } from 'primeng/card';
         EpgDownloadingComponent,
         ButtonModule,
         TranslateModule,
-    ],
+    ]
 })
 export class SettingsComponent implements OnInit, CanComponentDeactivate {
 

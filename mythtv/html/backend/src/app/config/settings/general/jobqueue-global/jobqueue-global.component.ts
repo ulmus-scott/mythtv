@@ -16,7 +16,6 @@ import { SettingsComponent } from '../general-settings.component';
     selector: 'app-jobqueue-global',
     templateUrl: './jobqueue-global.component.html',
     styleUrls: ['./jobqueue-global.component.css'],
-    standalone: true,
     imports: [FormsModule, CardModule, SharedModule, CheckboxModule, NgIf, MessageModule, ButtonModule, TranslateModule]
 })
 export class JobqueueGlobalComponent implements OnInit, AfterViewInit {

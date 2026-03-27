@@ -34,7 +34,6 @@ import { CardModule } from 'primeng/card';
     templateUrl: './capture-cards.component.html',
     styleUrls: ['./capture-cards.component.css'],
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         CardModule,
         ButtonModule,
@@ -61,7 +60,7 @@ import { CardModule } from 'primeng/card';
         FirewireComponent,
         NgSwitchDefault,
         TranslateModule,
-    ],
+    ]
 })
 export class CaptureCardsComponent implements OnInit, CanComponentDeactivate {
 

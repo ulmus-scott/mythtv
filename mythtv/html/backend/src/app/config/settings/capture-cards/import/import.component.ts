@@ -15,7 +15,6 @@ import { CaptureCardsComponent } from '../capture-cards.component';
     selector: 'app-import',
     templateUrl: './import.component.html',
     styleUrls: ['./import.component.css'],
-    standalone: true,
     imports: [FormsModule, CardModule, SharedModule, NgIf, MessageModule, ButtonModule, TranslateModule]
 })
 export class ImportComponent implements OnInit, AfterViewInit {

@@ -9,7 +9,6 @@ import { NgIf, NgFor, NgTemplateOutlet } from '@angular/common';
     selector: 'app-status-machineinfo',
     templateUrl: './machineinfo.component.html',
     styleUrls: ['./machineinfo.component.css', '../../status.component.css'],
-    standalone: true,
     imports: [NgIf, NgFor, NgTemplateOutlet, TranslateModule]
 })
 export class MachineinfoComponent implements OnInit {
