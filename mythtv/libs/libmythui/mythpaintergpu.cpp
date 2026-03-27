@@ -11,7 +11,6 @@ MythPainterGPU::MythPainterGPU(MythMainWindow* Parent)
   : m_parent(Parent)
 {
     MythDisplay* display = m_parent->GetDisplay();
-    QScreen *screen = display->GetCurrentScreen();
 
     DisplayChanged();
     connect(display, &MythDisplay::DisplayChanged, this,
