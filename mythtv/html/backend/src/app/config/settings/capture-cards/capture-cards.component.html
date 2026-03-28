@@ -49,18 +49,22 @@
     </p-dialog>
     <br>
     <div class="grid grid-cols-12 gap-4 nogutter">
-        <div class="col-span-12" *ngIf="this.expectedCount && this.successCount == this.expectedCount">
+        @if (this.expectedCount && this.successCount == this.expectedCount) {
+        <div class="col-span-12">
             <br>
             <p-message severity="success" text="{{ 'settings.common.successful_delete' | translate }}">
             </p-message>
             <br>
         </div>
-        <div class="col-span-12" *ngIf="this.errorCount > 0">
+        }
+        @if (this.errorCount > 0) {
+        <div class="col-span-12">
             <br>
             <p-message severity="error" text="{{ 'common.networkfail' | translate }}">
             </p-message>
             <br>
         </div>
+        }
     </div>
     <p-accordion class="col-span-12 w-full" (onClose)="onTabClose($event)" (onOpen)="onTabOpen($event)">
         @for (card of m_CaptureCardsFiltered; track $index; let ix = $index) {
@@ -91,38 +95,66 @@
                             label="{{ 'common.yes' | translate }}" severity="danger"></p-button>
                     </ng-template>
                 </p-dialog>
-                <div [ngSwitch]="m_CaptureCardsFiltered[ix].CardType">
-                    <app-ceton *ngSwitchCase="'CETON'" [card]="m_CaptureCardsFiltered[ix]"
-                        [cardList]="m_CaptureCardList" [parent]="this" [tabIndex]="ix"></app-ceton>
-                    <app-dvb *ngSwitchCase="'DVB'" [card]="m_CaptureCardsFiltered[ix]" [cardList]="m_CaptureCardList"
+                <div>
+                    @switch (m_CaptureCardsFiltered[ix].CardType) {
+                    @case ('CETON') {
+                    <app-ceton [card]="m_CaptureCardsFiltered[ix]" [cardList]="m_CaptureCardList" [parent]="this"
+                        [tabIndex]="ix"></app-ceton>
+                    }
+                    @case ('DVB') {
+                    <app-dvb [card]="m_CaptureCardsFiltered[ix]" [cardList]="m_CaptureCardList"
                         [diseqcTreeList]="diseqcTreeList" [parent]="this" [tabIndex]="ix"></app-dvb>
-                    <app-external *ngSwitchCase="'EXTERNAL'" [card]="m_CaptureCardsFiltered[ix]"
-                        [cardList]="m_CaptureCardList" [parent]="this" [tabIndex]="ix"></app-external>
-                    <app-hdhomerun *ngSwitchCase="'HDHOMERUN'" [card]="m_CaptureCardsFiltered[ix]"
-                        [cardList]="m_CaptureCardList" [parent]="this" [tabIndex]="ix"></app-hdhomerun>
-                    <app-iptv *ngSwitchCase="'FREEBOX'" [card]="m_CaptureCardsFiltered[ix]"
-                        [cardList]="m_CaptureCardList" [parent]="this" [tabIndex]="ix"></app-iptv>
-                    <app-import *ngSwitchCase="'IMPORT'" [card]="m_CaptureCardsFiltered[ix]"
-                        [cardList]="m_CaptureCardList" [parent]="this" [tabIndex]="ix"></app-import>
-                    <app-demo *ngSwitchCase="'DEMO'" [card]="m_CaptureCardsFiltered[ix]" [cardList]="m_CaptureCardList"
-                        [parent]="this" [tabIndex]="ix">
+                    }
+                    @case ('EXTERNAL') {
+                    <app-external [card]="m_CaptureCardsFiltered[ix]" [cardList]="m_CaptureCardList" [parent]="this"
+                        [tabIndex]="ix"></app-external>
+                    }
+                    @case ('HDHOMERUN') {
+                    <app-hdhomerun [card]="m_CaptureCardsFiltered[ix]" [cardList]="m_CaptureCardList" [parent]="this"
+                        [tabIndex]="ix"></app-hdhomerun>
+                    }
+                    @case ('FREEBOX') {
+                    <app-iptv [card]="m_CaptureCardsFiltered[ix]" [cardList]="m_CaptureCardList" [parent]="this"
+                        [tabIndex]="ix"></app-iptv>
+                    }
+                    @case ('IMPORT') {
+                    <app-import [card]="m_CaptureCardsFiltered[ix]" [cardList]="m_CaptureCardList" [parent]="this"
+                        [tabIndex]="ix"></app-import>
+                    }
+                    @case ('DEMO') {
+                    <app-demo [card]="m_CaptureCardsFiltered[ix]" [cardList]="m_CaptureCardList" [parent]="this"
+                        [tabIndex]="ix">
                     </app-demo>
-                    <app-v4l2 *ngSwitchCase="'V4L2ENC'" [card]="m_CaptureCardsFiltered[ix]"
-                        [cardList]="m_CaptureCardList" [parent]="this" [tabIndex]="ix">
+                    }
+                    @case ('V4L2ENC') {
+                    <app-v4l2 [card]="m_CaptureCardsFiltered[ix]" [cardList]="m_CaptureCardList" [parent]="this"
+                        [tabIndex]="ix">
                     </app-v4l2>
-                    <app-hdpvr *ngSwitchCase="'HDPVR'" [card]="m_CaptureCardsFiltered[ix]"
-                        [cardList]="m_CaptureCardList" [parent]="this" [tabIndex]="ix">
+                    }
+                    @case ('HDPVR') {
+                    <app-hdpvr [card]="m_CaptureCardsFiltered[ix]" [cardList]="m_CaptureCardList" [parent]="this"
+                        [tabIndex]="ix">
                     </app-hdpvr>
-                    <app-satip *ngSwitchCase="'SATIP'" [card]="m_CaptureCardsFiltered[ix]"
-                        [cardList]="m_CaptureCardList" [parent]="this" [tabIndex]="ix">
+                    }
+                    @case ('SATIP') {
+                    <app-satip [card]="m_CaptureCardsFiltered[ix]" [cardList]="m_CaptureCardList" [parent]="this"
+                        [tabIndex]="ix">
                     </app-satip>
-                    <app-vbox *ngSwitchCase="'VBOX'" [card]="m_CaptureCardsFiltered[ix]" [cardList]="m_CaptureCardList"
-                        [parent]="this" [tabIndex]="ix">
+                    }
+                    @case ('VBOX') {
+                    <app-vbox [card]="m_CaptureCardsFiltered[ix]" [cardList]="m_CaptureCardList" [parent]="this"
+                        [tabIndex]="ix">
                     </app-vbox>
-                    <app-firewire *ngSwitchCase="'FIREWIRE'" [card]="m_CaptureCardsFiltered[ix]"
-                        [cardList]="m_CaptureCardList" [parent]="this" [tabIndex]="ix">
+                    }
+                    @case ('FIREWIRE') {
+                    <app-firewire [card]="m_CaptureCardsFiltered[ix]" [cardList]="m_CaptureCardList" [parent]="this"
+                        [tabIndex]="ix">
                     </app-firewire>
-                    <div *ngSwitchDefault><br>Not Supported </div>
+                    }
+                    @default {
+                    <div><br>Not Supported </div>
+                    }
+                    }
                 </div>
             </p-accordion-content>
         </p-accordion-panel>

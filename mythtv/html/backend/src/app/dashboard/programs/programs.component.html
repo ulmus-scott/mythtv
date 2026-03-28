@@ -40,7 +40,9 @@
                     tooltipPosition="top">
                     {{program.SubTitle.slice(0,50)}}</td>
                 <td style="flex-basis: 4%" class="p-1">
-                    <div *ngIf="program.Season>0 || program.Episode>0"> {{program.Season}}x{{program.Episode}}</div>
+                    @if (program.Season>0 || program.Episode>0) {
+                    <div> {{program.Season}}x{{program.Episode}}</div>
+                    }
                 </td>
                 <td style="flex-basis: 8%" class="justify-end p-1">
                     <div [innerHTML]="formatAirDate(program)"></div>
@@ -49,10 +51,12 @@
                     {{program.Channel.ChanNum}} {{program.Channel.CallSign}}</td>
                 <td style="flex-basis: 7%" class="p-1">
                     <!-- Recorded = -3, Recording = -2, WillRecord = -1, -->
-                    <div *ngIf="program.Recording" [ngClass]="[-3,-2,-1].indexOf(program.Recording.Status)>-1?
+                    @if (program.Recording) {
+                    <div [ngClass]="[-3,-2,-1].indexOf(program.Recording.Status)>-1?
                         'bg-green-500' : 'bg-pink-500'" class="text-white">
                         <b>{{program.Recording.StatusName}}</b>
                     </div>
+                    }
                 </td>
                 <td style="flex-basis: 2%; background: var(--surface-card);" class="p-1">
                     <button pButton pRipple icon="pi pi-pencil" class="p-button-text p-button-primary"
@@ -71,8 +75,9 @@
             translate }} <br><b> {{ program?.Title }}: {{ program?.SubTitle }}</b></p>
         <ng-template pTemplate="footer">
             <div class="col-span-12" style="text-align: left;">
-                <p-message *ngIf="errorCount > 0" severity="error"
-                    text="{{ 'common.networkfail' | translate }}"></p-message>
+                @if (errorCount > 0) {
+                <p-message severity="error" text="{{ 'common.networkfail' | translate }}"></p-message>
+                }
             </div>
             <p-button icon="pi pi-times-circle" (onClick)="displayStop=false" label="{{ 'common.close' | translate }}"
                 styleClass="p-button-warning">

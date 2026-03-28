@@ -3,21 +3,21 @@ import { ScheduleOrProgram } from 'src/app/services/interfaces/program.interface
 import { UtilityService } from 'src/app/services/utility.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { TooltipModule } from 'primeng/tooltip';
-import { NgIf, NgFor } from '@angular/common';
+
 
 @Component({
     selector: 'app-status-scheduled',
     templateUrl: './scheduled.component.html',
     styleUrls: ['./scheduled.component.css', '../../status.component.css'],
-    imports: [NgIf, NgFor, TooltipModule, TranslateModule]
+    imports: [TooltipModule, TranslateModule]
 })
 export class ScheduledComponent implements OnInit {
-  @Input() scheduled?: ScheduleOrProgram[];
+    @Input() scheduled?: ScheduleOrProgram[];
 
-  constructor(public utility: UtilityService) { }
+    constructor(public utility: UtilityService) { }
 
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {
+    }
 
 
 }

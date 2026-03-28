@@ -19,7 +19,7 @@ import { ButtonModule } from 'primeng/button';
 import { FieldsetModule } from 'primeng/fieldset';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputNumberModule } from 'primeng/inputnumber';
-import { NgIf } from '@angular/common';
+
 import { SharedModule } from 'primeng/api';
 import { CardModule } from 'primeng/card';
 import { SelectModule } from 'primeng/select';
@@ -28,7 +28,7 @@ import { SelectModule } from 'primeng/select';
     selector: 'app-dvb',
     templateUrl: './dvb.component.html',
     styleUrls: ['./dvb.component.css'],
-    imports: [FormsModule, CardModule, SharedModule, NgIf, SelectModule, InputNumberModule, CheckboxModule, FieldsetModule, ButtonModule, DialogModule, ListboxModule, TooltipModule, MessageModule, LnbComponent, RotorComponent, SwitchComponent, UnicableComponent, TranslateModule]
+    imports: [FormsModule, CardModule, SharedModule, SelectModule, InputNumberModule, CheckboxModule, FieldsetModule, ButtonModule, DialogModule, ListboxModule, TooltipModule, MessageModule, LnbComponent, RotorComponent, SwitchComponent, UnicableComponent, TranslateModule]
 })
 export class DvbComponent implements OnInit, AfterViewInit {
 

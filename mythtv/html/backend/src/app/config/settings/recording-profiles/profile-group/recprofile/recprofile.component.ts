@@ -11,7 +11,7 @@ import { MessageModule } from 'primeng/message';
 import { FieldsetModule } from 'primeng/fieldset';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { CheckboxModule } from 'primeng/checkbox';
-import { NgIf } from '@angular/common';
+
 import { SharedModule } from 'primeng/api';
 import { CardModule } from 'primeng/card';
 import { SelectModule } from 'primeng/select';
@@ -20,7 +20,7 @@ import { SelectModule } from 'primeng/select';
     selector: 'app-recprofile',
     templateUrl: './recprofile.component.html',
     styleUrls: ['./recprofile.component.css'],
-    imports: [FormsModule, CardModule, SharedModule, NgIf, CheckboxModule, InputNumberModule, SelectModule, FieldsetModule, MessageModule, ButtonModule, TranslateModule]
+    imports: [FormsModule, CardModule, SharedModule, CheckboxModule, InputNumberModule, SelectModule, FieldsetModule, MessageModule, ButtonModule, TranslateModule]
 })
 export class RecprofileComponent implements OnInit, AfterViewInit {
 

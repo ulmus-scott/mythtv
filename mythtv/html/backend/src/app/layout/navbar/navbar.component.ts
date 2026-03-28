@@ -18,7 +18,7 @@ import { TableModule } from 'primeng/table';
 import { TooltipModule } from 'primeng/tooltip';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
-import { NgIf } from '@angular/common';
+
 import { Popover, PopoverModule } from 'primeng/popover';
 import { Menu, MenuModule } from 'primeng/menu';
 
@@ -27,7 +27,7 @@ import { Menu, MenuModule } from 'primeng/menu';
     selector: 'app-navbar',
     templateUrl: './navbar.component.html',
     styleUrls: ['./navbar.component.css'],
-    imports: [NgIf, RippleModule, ButtonModule, TooltipModule, PopoverModule, SharedModule, TableModule, FormsModule, DialogModule, PasswordModule, CheckboxModule, MessageModule, TranslateModule, MenuModule]
+    imports: [RippleModule, ButtonModule, TooltipModule, PopoverModule, SharedModule, TableModule, FormsModule, DialogModule, PasswordModule, CheckboxModule, MessageModule, TranslateModule, MenuModule]
 })
 export class NavbarComponent implements OnInit {
     @ViewChild("themePanel") themePanel!: Popover;
@@ -93,7 +93,7 @@ export class NavbarComponent implements OnInit {
                         router.navigate(['dashboard/status']);
                 });
 
-        [this.mnulogin,this.mnulogout,this.mnulang].forEach(entry => {
+        [this.mnulogin, this.mnulogout, this.mnulang].forEach(entry => {
             if (entry.label)
                 this.translateService.get(entry.label).subscribe(data =>
                     entry.label = data

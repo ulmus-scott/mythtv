@@ -1,21 +1,27 @@
 <div class="block card w-full">
     <div class="block">
         <p-card class="m-8">
-            <div class="flex mb-4" *ngIf="retryCount == 0 && setupService.WebOnlyStartup != 'NONE'">
+            @if (retryCount == 0 && setupService.WebOnlyStartup != 'NONE') {
+            <div class="flex mb-4">
                 <p-message severity="warn" [styleClass]="'font-bold'"
                     text="{{ 'settings.main.webonly.'+ setupService.WebOnlyStartup | translate }}"></p-message>
             </div>
-            <div class="flex mb-4" *ngIf="retryCount == 0">
-                <p-message *ngIf="setupService.schedulingEnabled; else mustrestart" severity="warn"
-                    [styleClass]="'font-bold'" text="{{ 'settings.main.mustenable' | translate }}">
+            }
+            @if (retryCount == 0) {
+            <div class="flex mb-4">
+                @if (setupService.schedulingEnabled) {
+                <p-message severity="warn" [styleClass]="'font-bold'"
+                    text="{{ 'settings.main.mustenable' | translate }}">
                 </p-message>
-                <ng-template #mustrestart>
-                    <p-message severity="warn" [styleClass]="'font-bold'"
-                        text="{{ 'settings.main.mustrestart' | translate }}">
-                    </p-message>
-                </ng-template>
+                } @else {
+                <p-message severity="warn" [styleClass]="'font-bold'"
+                    text="{{ 'settings.main.mustrestart' | translate }}">
+                </p-message>
+                }
             </div>
-            <div class="block" *ngIf="setupService.schedulingEnabled && retryCount == 0">
+            }
+            @if (setupService.schedulingEnabled && retryCount == 0) {
+            <div class="block">
                 <div class="flex items-center">
                     <p-button class="pr-8 pb-1 pt-0 m-0" label="{{ 'settings.main.enableupdates_label' | translate }}"
                         icon="pi pi-save" iconPos="left" (onClick)="disableSched();"></p-button>
@@ -24,49 +30,67 @@
                 <small class="block">{{ 'settings.main.enableupdates_desc' | translate }}<br>&nbsp;</small>
                 <!-- </div> -->
             </div>
+            }
             <!-- <div class="flex" *ngIf="!setupService.schedulingEnabled && retryCount == 0"> -->
-            <div class="block" *ngIf="retryCount <= 0 && rrAllowed">
+            @if (retryCount <= 0 && rrAllowed) { <div class="block">
                 <div class="flex items-center">
                     <p-button class="pr-8 pb-1 pt-0 m-0" label="{{ 'settings.main.restart_webonly_label' | translate }}"
                         icon="pi pi-save" iconPos="left" (onClick)="restart(true);"></p-button>
                 </div>
                 <small class="block">{{ 'settings.main.restart_webonly_desc' | translate }}<br>&nbsp;</small>
-            </div>
-            <div class="block" *ngIf="retryCount <= 0">
-                <div class="flex items-center" *ngIf="retryCount <= 0">
-                    <p-button class="pr-8 pb-1 pt-0 m-0" label="{{
+    </div>
+    }
+    @if (retryCount <= 0) { <div class="block">
+        @if (retryCount <= 0) { <div class="flex items-center">
+            <p-button class="pr-8 pb-1 pt-0 m-0" label="{{
                         (rrAllowed ? 'settings.main.restart_label' :'settings.main.restart_label_short')
                         | translate }}" icon="pi pi-save" iconPos="left" (onClick)="restart(false);"></p-button>
-                </div>
-                <small class="block">{{ 'settings.main.restart_desc' | translate }}<br>&nbsp;</small>
-            </div>
-            <div class="flex items-center" *ngIf="!masterServerName || !hostName || masterServerName == hostName">
-                <div class="text-pink-500" *ngIf="!setupService.schedulingEnabled && retryCount == 0">{{
-                    'settings.main.disabled' | translate }}</div>
-            </div>
-            <div class="flex items-center" *ngIf="masterServerName && hostName && masterServerName != hostName">
-                {{ 'settings.main.slave_enabled' | translate }}</div>
-            <!-- </div> -->
-            <div>
-                <small *ngIf="upComing.length > 0" class="pb-0 m-0">
-                    {{ 'settings.main.upcomingrec' |
-                    translate: { Title: upComing[0].Title, StartTime: recStartTime, Status: recStatusDesc } }}
-                </small>
-            </div>
-            <div *ngIf="masterServerName && hostName && masterServerName != hostName && retryCount == 0">
-                <p>{{ 'settings.main.slave_instructions' | translate }}
-                </p>
-                <p>{{ 'settings.main.slave_warning' | translate }}
-                </p>
-            </div>
-            <!-- The progressspinner no longer works -->
-            <!-- <p-progressSpinner *ngIf="retryCount > 0" /> -->
-            <i class="pi pi-spin pi-cog" style="font-size: 8rem" *ngIf="retryCount > 0"></i>
-            <p-message *ngIf="retryCount > 0" severity="info"
-                text="{{ 'settings.main.restarting' | translate }}"></p-message>
-            <p>
-                <p-message *ngIf="!setupService.isDatabaseIgnored && this.errorCount > 0 && retryCount == 0"
-                    severity="error" text="{{ 'common.networkfail' | translate }}"></p-message>
-            </p>
-        </p-card>
-    </div>
+</div>
+}
+<small class="block">{{ 'settings.main.restart_desc' | translate }}<br>&nbsp;</small>
+</div>
+}
+@if (!masterServerName || !hostName || masterServerName == hostName) {
+<div class="flex items-center">
+    @if (!setupService.schedulingEnabled && retryCount == 0) {
+    <div class="text-pink-500">{{
+        'settings.main.disabled' | translate }}</div>
+    }
+</div>
+}
+@if (masterServerName && hostName && masterServerName != hostName) {
+<div class="flex items-center">
+    {{ 'settings.main.slave_enabled' | translate }}</div>
+}
+<!-- </div> -->
+<div>
+    @if (upComing.length > 0) {
+    <small class="pb-0 m-0">
+        {{ 'settings.main.upcomingrec' |
+        translate: { Title: upComing[0].Title, StartTime: recStartTime, Status: recStatusDesc } }}
+    </small>
+    }
+</div>
+@if (masterServerName && hostName && masterServerName != hostName && retryCount == 0) {
+<div>
+    <p>{{ 'settings.main.slave_instructions' | translate }}
+    </p>
+    <p>{{ 'settings.main.slave_warning' | translate }}
+    </p>
+</div>
+}
+<!-- The progressspinner no longer works -->
+<!-- <p-progressSpinner *ngIf="retryCount > 0" /> -->
+@if (retryCount > 0) {
+<i class="pi pi-spin pi-cog" style="font-size: 8rem"></i>
+}
+@if (retryCount > 0) {
+<p-message severity="info" text="{{ 'settings.main.restarting' | translate }}"></p-message>
+}
+<p>
+    @if (!setupService.isDatabaseIgnored && this.errorCount > 0 && retryCount == 0) {
+    <p-message severity="error" text="{{ 'common.networkfail' | translate }}"></p-message>
+    }
+</p>
+</p-card>
+</div>

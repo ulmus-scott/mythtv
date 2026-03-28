@@ -4,7 +4,7 @@ import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { MythService } from 'src/app/services/myth.service';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
-import { NgIf } from '@angular/common';
+
 import { InputNumberModule } from 'primeng/inputnumber';
 import { CheckboxModule } from 'primeng/checkbox';
 import { SharedModule } from 'primeng/api';
@@ -16,7 +16,7 @@ import { DashboardSettingsComponent } from '../dashboard-settings.component';
     selector: 'app-jobs',
     templateUrl: './jobs.component.html',
     styleUrls: ['./jobs.component.css'],
-    imports: [FormsModule, CardModule, SharedModule, SelectModule, CheckboxModule, InputNumberModule, NgIf, MessageModule, ButtonModule, TranslateModule]
+    imports: [FormsModule, CardModule, SharedModule, SelectModule, CheckboxModule, InputNumberModule, MessageModule, ButtonModule, TranslateModule]
 })
 export class JobsComponent implements OnInit, AfterViewInit {
 

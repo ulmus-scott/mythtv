@@ -56,14 +56,14 @@ export interface VideoMetadataInfoList {
 }
 
 export interface VideoCategoryList {
-  VideoCategoryList: {
-  VideoCategories: VideoCategories[];
-  };
+    VideoCategoryList: {
+        VideoCategories: VideoCategories[];
+    };
 }
 
 export interface VideoCategories {
-  Id?: number;
-  Name?: string;
+    Id?: number;
+    Name?: string;
 }
 
 export interface GetVideoListRequest {

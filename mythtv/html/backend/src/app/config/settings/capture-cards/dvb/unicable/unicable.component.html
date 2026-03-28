@@ -65,10 +65,11 @@
                 <!-- Next Device Panel -->
                 <p-fieldset class="mb-6 w-full" legend="{{ 'settings.capture.dvb.satellite_heading' | translate }}"
                     [toggleable]="true" [collapsed]="true">
+                    @if (!diseqcSubTree) {
                     <p-button label="{{ 'settings.capture.dvb.newsatellite_button' | translate }}"
-                        *ngIf="!diseqcSubTree" (onClick)="work.displayNewDiseqc = true" icon="pi pi-plus-circle"
-                        severity="primary">
+                        (onClick)="work.displayNewDiseqc = true" icon="pi pi-plus-circle" severity="primary">
                     </p-button>
+                    }
                     <p-dialog header="{{ 'settings.capture.dvb.newsatellite_heading' | translate }}"
                         [(visible)]="work.displayNewDiseqc" [modal]="true" [style]="{width: '50vw'}" [draggable]="false"
                         [resizable]="false">
@@ -88,9 +89,11 @@
                         </ng-template>
                     </p-dialog>
 
-                    <p-button severity="warn" *ngIf="diseqcSubTree" label="Delete Satellite Devices"
-                        icon="pi pi-trash" (onClick)="work.displayDeleteDiseqc=true" [disabled]="!diseqcSubTree">
+                    @if (diseqcSubTree) {
+                    <p-button severity="warn" label="Delete Satellite Devices" icon="pi pi-trash"
+                        (onClick)="work.displayDeleteDiseqc=true" [disabled]="!diseqcSubTree">
                     </p-button>
+                    }
                     <p-dialog header="{{ 'settings.capture.dvb.satellite_delete_header' | translate }}"
                         [(visible)]="work.displayDeleteDiseqc" [modal]="true" [style]="{width: '50vw'}"
                         [draggable]="false" [resizable]="false">
@@ -105,22 +108,26 @@
                         </ng-template>
                     </p-dialog>
 
-                    <app-lnb *ngIf="this.diseqcSubTree && this.diseqcSubTree.Type == 'lnb'" [diseqcTree]="diseqcSubTree"
-                        [diseqcTreeList]="diseqcTreeList" (baseEvent)="setDiseqcObject($event)"
-                        [dvbComponent]="dvbComponent">
+                    @if (this.diseqcSubTree && this.diseqcSubTree.Type == 'lnb') {
+                    <app-lnb [diseqcTree]="diseqcSubTree" [diseqcTreeList]="diseqcTreeList"
+                        (baseEvent)="setDiseqcObject($event)" [dvbComponent]="dvbComponent">
                     </app-lnb>
-                    <app-rotor *ngIf="this.diseqcSubTree && this.diseqcSubTree.Type == 'rotor'"
-                        [diseqcTree]="diseqcSubTree" [diseqcTreeList]="diseqcTreeList"
+                    }
+                    @if (this.diseqcSubTree && this.diseqcSubTree.Type == 'rotor') {
+                    <app-rotor [diseqcTree]="diseqcSubTree" [diseqcTreeList]="diseqcTreeList"
                         (baseEvent)="setDiseqcObject($event)" [dvbComponent]="dvbComponent">
                     </app-rotor>
-                    <app-switch *ngIf="this.diseqcSubTree && this.diseqcSubTree.Type == 'switch'"
-                        [diseqcTree]="diseqcSubTree" [diseqcTreeList]="diseqcTreeList"
+                    }
+                    @if (this.diseqcSubTree && this.diseqcSubTree.Type == 'switch') {
+                    <app-switch [diseqcTree]="diseqcSubTree" [diseqcTreeList]="diseqcTreeList"
                         (baseEvent)="setDiseqcObject($event)" [dvbComponent]="dvbComponent">
                     </app-switch>
-                    <app-unicable *ngIf="this.diseqcSubTree && this.diseqcSubTree.Type == 'scr'"
-                        [diseqcTree]="diseqcSubTree" [diseqcTreeList]="diseqcTreeList"
+                    }
+                    @if (this.diseqcSubTree && this.diseqcSubTree.Type == 'scr') {
+                    <app-unicable [diseqcTree]="diseqcSubTree" [diseqcTreeList]="diseqcTreeList"
                         (baseEvent)="setDiseqcObject($event)" [dvbComponent]="dvbComponent">
                     </app-unicable>
+                    }
 
                 </p-fieldset>
 

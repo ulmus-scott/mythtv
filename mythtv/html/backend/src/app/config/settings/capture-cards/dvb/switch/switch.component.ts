@@ -13,235 +13,235 @@ import { LnbComponent } from '../lnb/lnb.component';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { FieldsetModule } from 'primeng/fieldset';
-import { NgIf, NgFor } from '@angular/common';
+
 import { InputNumberModule } from 'primeng/inputnumber';
 import { SharedModule } from 'primeng/api';
 import { CardModule } from 'primeng/card';
 import { Select, SelectModule } from "primeng/select";
 
 interface SwitchType {
-  Name: string;
-  SubType: string;
+    Name: string;
+    SubType: string;
 }
 
 @Component({
     selector: 'app-switch',
     templateUrl: './switch.component.html',
     styleUrls: ['./switch.component.css'],
-    imports: [FormsModule, CardModule, SharedModule, InputNumberModule, SelectModule, NgIf, NgFor, FieldsetModule, ButtonModule, DialogModule, LnbComponent, forwardRef(() => RotorComponent), forwardRef(() => UnicableComponent), ListboxModule, TranslateModule, Select]
+    imports: [FormsModule, CardModule, SharedModule, InputNumberModule, SelectModule, FieldsetModule, ButtonModule, DialogModule, LnbComponent, forwardRef(() => RotorComponent), forwardRef(() => UnicableComponent), ListboxModule, TranslateModule, Select]
 })
 export class SwitchComponent implements OnInit, AfterViewInit, DiseqcSettingBase {
 
-  @Input() diseqcTree!: DiseqcTree;
-  @Input() diseqcTreeList!: DiseqcTreeList;
-  @Input() dvbComponent!: DvbComponent;
-  @ViewChild("switchform")
-  currentForm!: NgForm;
-  diseqcSubComponent: DiseqcSettingBase[] = [];
+    @Input() diseqcTree!: DiseqcTree;
+    @Input() diseqcTreeList!: DiseqcTreeList;
+    @Input() dvbComponent!: DvbComponent;
+    @ViewChild("switchform")
+    currentForm!: NgForm;
+    diseqcSubComponent: DiseqcSettingBase[] = [];
 
-  @Output() baseEvent = new EventEmitter<DiseqcSettingBase>();
+    @Output() baseEvent = new EventEmitter<DiseqcSettingBase>();
 
-  switchSubTypes: SwitchType[] = [
-    { Name: "settings.capture.diseqc.switch.tone", SubType: "tone" },
-    { Name: "settings.capture.diseqc.switch.voltage", SubType: "voltage" },
-    { Name: "settings.capture.diseqc.switch.mini_diseqc", SubType: "mini_diseqc" },
-    { Name: "settings.capture.diseqc.switch.diseqc", SubType: "diseqc" },
-    { Name: "settings.capture.diseqc.switch.diseqc_uncom", SubType: "diseqc_uncom" },
-    { Name: "settings.capture.diseqc.switch.legacy_sw21", SubType: "legacy_sw21" },
-    { Name: "settings.capture.diseqc.switch.legacy_sw42", SubType: "legacy_sw42" },
-    { Name: "settings.capture.diseqc.switch.legacy_sw64", SubType: "legacy_sw64" },
-  ]
+    switchSubTypes: SwitchType[] = [
+        { Name: "settings.capture.diseqc.switch.tone", SubType: "tone" },
+        { Name: "settings.capture.diseqc.switch.voltage", SubType: "voltage" },
+        { Name: "settings.capture.diseqc.switch.mini_diseqc", SubType: "mini_diseqc" },
+        { Name: "settings.capture.diseqc.switch.diseqc", SubType: "diseqc" },
+        { Name: "settings.capture.diseqc.switch.diseqc_uncom", SubType: "diseqc_uncom" },
+        { Name: "settings.capture.diseqc.switch.legacy_sw21", SubType: "legacy_sw21" },
+        { Name: "settings.capture.diseqc.switch.legacy_sw42", SubType: "legacy_sw42" },
+        { Name: "settings.capture.diseqc.switch.legacy_sw64", SubType: "legacy_sw64" },
+    ]
 
-  currentSubType!: SwitchType;
+    currentSubType!: SwitchType;
 
-  diseqcSubTree: (DiseqcTree | null)[] = [];
-  diseqcSubTreeCount = 0;
+    diseqcSubTree: (DiseqcTree | null)[] = [];
+    diseqcSubTreeCount = 0;
 
-  work = {
-    addressText: "",
-    displayNewDiseqc: false,
-    enableAddrAndPorts: false
-  }
-  displayDeleteThis: boolean[] = [];
-  selectedDiseqcType: DiseqcParm = { description: "", type: "", inactive: true };
-
-  constructor(public captureCardService: CaptureCardService, private translate: TranslateService) {
-    this.switchSubTypes.forEach(x => translate.get(x.Name).subscribe(data => x.Name = data));
-  }
-
-  ngOnInit(): void {
-    if (this.diseqcTree.DiSEqCId) {
-      // convert address to hexadecimal
-      this.work.addressText = "0x" + this.diseqcTree.Address.toString(16);
-    } else {
-      // default values
-      this.diseqcTree.Address = 16;
-      this.work.addressText = "0x10";
-      this.diseqcTree.SwitchPorts = 2;
-      this.diseqcTree.SubType = 'tone';
-      this.diseqcTree.CmdRepeat = 1;
+    work = {
+        addressText: "",
+        displayNewDiseqc: false,
+        enableAddrAndPorts: false
     }
-    if (this.diseqcTree.SubType) {
-      let subtype = this.switchSubTypes.find(x => x.SubType == this.diseqcTree.SubType);
-      if (subtype)
-        this.currentSubType = subtype;
+    displayDeleteThis: boolean[] = [];
+    selectedDiseqcType: DiseqcParm = { description: "", type: "", inactive: true };
+
+    constructor(public captureCardService: CaptureCardService, private translate: TranslateService) {
+        this.switchSubTypes.forEach(x => translate.get(x.Name).subscribe(data => x.Name = data));
     }
-    this.updateSubType();
-    // Populate sub-trees
-    this.displayDeleteThis = [];
-    this.diseqcTreeList.DiseqcTreeList.DiseqcTrees.forEach
-      (x => {
-        if (x.ParentId == this.diseqcTree.DiSEqCId) {
-          this.diseqcSubTree.push(x)
-          this.displayDeleteThis.push(false);
-          this.diseqcSubTreeCount++;
+
+    ngOnInit(): void {
+        if (this.diseqcTree.DiSEqCId) {
+            // convert address to hexadecimal
+            this.work.addressText = "0x" + this.diseqcTree.Address.toString(16);
+        } else {
+            // default values
+            this.diseqcTree.Address = 16;
+            this.work.addressText = "0x10";
+            this.diseqcTree.SwitchPorts = 2;
+            this.diseqcTree.SubType = 'tone';
+            this.diseqcTree.CmdRepeat = 1;
         }
-      });
-  }
+        if (this.diseqcTree.SubType) {
+            let subtype = this.switchSubTypes.find(x => x.SubType == this.diseqcTree.SubType);
+            if (subtype)
+                this.currentSubType = subtype;
+        }
+        this.updateSubType();
+        // Populate sub-trees
+        this.displayDeleteThis = [];
+        this.diseqcTreeList.DiseqcTreeList.DiseqcTrees.forEach
+            (x => {
+                if (x.ParentId == this.diseqcTree.DiSEqCId) {
+                    this.diseqcSubTree.push(x)
+                    this.displayDeleteThis.push(false);
+                    this.diseqcSubTreeCount++;
+                }
+            });
+    }
 
-  setupDone = false;
-  ngAfterViewInit(): void {
-    this.baseEvent.emit(this);
-    this.currentForm.valueChanges!.subscribe(
-      (x) => {
-        if (this.setupDone && this.currentForm.dirty)
-          this.dvbComponent.currentForm.form.markAsDirty()
-      });
-    let obs = new Observable(x => {
-      setTimeout(() => {
-        x.next(1);
-        x.complete();
-      }, 100)
-    })
-    obs.subscribe(x => {
-      this.setupDone = true;
-      if (this.diseqcTree.DiSEqCId) {
-        this.currentForm.form.markAsPristine();
-      } else {
-        this.currentForm.form.markAsDirty()
-        this.dvbComponent.currentForm.form.markAsDirty()
-      }
-    });
-  }
-
-  newDiseqc(): void {
-    this.work.displayNewDiseqc = false;
-    this.diseqcSubTree.push(<DiseqcTree>{
-      Type: this.selectedDiseqcType.type,
-      Description: this.selectedDiseqcType.description,
-    });
-    this.displayDeleteThis.push(false);
-    this.diseqcSubTreeCount++;
-  }
-
-  setDiseqcObject(object: any): void {
-    let ix = this.diseqcSubComponent.findIndex(x => x === object);
-    if (ix < 0)
-      this.diseqcSubComponent.push(object);
-  }
-
-  deleteDiseqc(ix: number): void {
-    this.displayDeleteThis[ix] = false;
-    this.dvbComponent.work.errorCount = 0;
-    console.log("Delete", ix);
-    if (this.diseqcSubTree[ix] == null)
-      return;
-    if (this.diseqcSubTree[ix]!.DiSEqCId) {
-      this.captureCardService.DeleteDiseqcTree(this.diseqcSubTree[ix]!.DiSEqCId)
-        .subscribe({
-          next: (x: any) => {
-            if (!x.bool) {
-              console.log("DeleteDiseqcTree", x);
-              this.dvbComponent.work.errorCount++;
+    setupDone = false;
+    ngAfterViewInit(): void {
+        this.baseEvent.emit(this);
+        this.currentForm.valueChanges!.subscribe(
+            (x) => {
+                if (this.setupDone && this.currentForm.dirty)
+                    this.dvbComponent.currentForm.form.markAsDirty()
+            });
+        let obs = new Observable(x => {
+            setTimeout(() => {
+                x.next(1);
+                x.complete();
+            }, 100)
+        })
+        obs.subscribe(x => {
+            this.setupDone = true;
+            if (this.diseqcTree.DiSEqCId) {
+                this.currentForm.form.markAsPristine();
+            } else {
+                this.currentForm.form.markAsDirty()
+                this.dvbComponent.currentForm.form.markAsDirty()
             }
-          },
-          error: (err: any) => {
-            console.log("DeleteDiseqcTree", err);
-            this.dvbComponent.work.errorCount++;
-          }
         });
     }
-    if (this.dvbComponent.work.errorCount == 0) {
-      this.diseqcSubTree[ix] = null;
-      this.diseqcSubTreeCount--;
+
+    newDiseqc(): void {
+        this.work.displayNewDiseqc = false;
+        this.diseqcSubTree.push(<DiseqcTree>{
+            Type: this.selectedDiseqcType.type,
+            Description: this.selectedDiseqcType.description,
+        });
+        this.displayDeleteThis.push(false);
+        this.diseqcSubTreeCount++;
     }
-  }
 
-
-  updateSubType(): void {
-    this.diseqcTree.SubType = this.currentSubType.SubType;
-    switch (this.diseqcTree.SubType) {
-
-      case "tone":
-      case "voltage":
-      case "mini_diseqc":
-      case "legacy_sw21":
-      case "legacy_sw42":
-        this.work.addressText = "0x10";
-        this.diseqcTree.SwitchPorts = 2;
-        this.work.enableAddrAndPorts = false;
-        break;
-
-      case "legacy_sw64":
-        this.work.addressText = "0x10";
-        this.diseqcTree.SwitchPorts = 3;
-        this.work.enableAddrAndPorts = false;
-        break;
-
-      case "diseqc_uncom":
-      case "diseqc":
-        this.work.enableAddrAndPorts = true;
-        break;
+    setDiseqcObject(object: any): void {
+        let ix = this.diseqcSubComponent.findIndex(x => x === object);
+        if (ix < 0)
+            this.diseqcSubComponent.push(object);
     }
-  }
 
-  saveForm(parent: number, observer: Observer<any>): void {
-
-    this.diseqcTree.ParentId = parent;
-
-    // get address from hexadecimal text
-    this.diseqcTree.Address = Number.parseInt(this.work.addressText);
-
-    if (this.diseqcTree.DiSEqCId) {
-      this.captureCardService.UpdateDiseqcTree(this.diseqcTree).subscribe(observer);
-      // save sub trees
-      this.diseqcSubComponent.forEach(x => {
-        if (x)
-          x.saveForm(this.diseqcTree.DiSEqCId, {
-            error: (err: any) => {
-              observer.error(err);
-            }
-          });
-      });
+    deleteDiseqc(ix: number): void {
+        this.displayDeleteThis[ix] = false;
+        this.dvbComponent.work.errorCount = 0;
+        console.log("Delete", ix);
+        if (this.diseqcSubTree[ix] == null)
+            return;
+        if (this.diseqcSubTree[ix]!.DiSEqCId) {
+            this.captureCardService.DeleteDiseqcTree(this.diseqcSubTree[ix]!.DiSEqCId)
+                .subscribe({
+                    next: (x: any) => {
+                        if (!x.bool) {
+                            console.log("DeleteDiseqcTree", x);
+                            this.dvbComponent.work.errorCount++;
+                        }
+                    },
+                    error: (err: any) => {
+                        console.log("DeleteDiseqcTree", err);
+                        this.dvbComponent.work.errorCount++;
+                    }
+                });
+        }
+        if (this.dvbComponent.work.errorCount == 0) {
+            this.diseqcSubTree[ix] = null;
+            this.diseqcSubTreeCount--;
+        }
     }
-    else
-      this.captureCardService.AddDiseqcTree(this.diseqcTree).subscribe({
-        next: (x: any) => {
-          if (x.int && x.int > 0) {
-            this.diseqcTree.DiSEqCId = x.int;
-            if (observer.next)
-              observer.next(x);
+
+
+    updateSubType(): void {
+        this.diseqcTree.SubType = this.currentSubType.SubType;
+        switch (this.diseqcTree.SubType) {
+
+            case "tone":
+            case "voltage":
+            case "mini_diseqc":
+            case "legacy_sw21":
+            case "legacy_sw42":
+                this.work.addressText = "0x10";
+                this.diseqcTree.SwitchPorts = 2;
+                this.work.enableAddrAndPorts = false;
+                break;
+
+            case "legacy_sw64":
+                this.work.addressText = "0x10";
+                this.diseqcTree.SwitchPorts = 3;
+                this.work.enableAddrAndPorts = false;
+                break;
+
+            case "diseqc_uncom":
+            case "diseqc":
+                this.work.enableAddrAndPorts = true;
+                break;
+        }
+    }
+
+    saveForm(parent: number, observer: Observer<any>): void {
+
+        this.diseqcTree.ParentId = parent;
+
+        // get address from hexadecimal text
+        this.diseqcTree.Address = Number.parseInt(this.work.addressText);
+
+        if (this.diseqcTree.DiSEqCId) {
+            this.captureCardService.UpdateDiseqcTree(this.diseqcTree).subscribe(observer);
             // save sub trees
             this.diseqcSubComponent.forEach(x => {
-              if (x)
-                x.saveForm(this.diseqcTree.DiSEqCId, {
-                  next: (x: any) => { },
-                  error: (err: any) => {
-                    observer.error(err);
-                  }
-                });
-            })
-          }
-          else {
-            console.log("UpdateDiseqcTree", x)
-            observer.error(x);
-          }
-        },
-        error: (err: any) => {
-          console.log("UpdateDiseqcTree", err);
-          observer.error(err);
+                if (x)
+                    x.saveForm(this.diseqcTree.DiSEqCId, {
+                        error: (err: any) => {
+                            observer.error(err);
+                        }
+                    });
+            });
         }
-      });
-  }
+        else
+            this.captureCardService.AddDiseqcTree(this.diseqcTree).subscribe({
+                next: (x: any) => {
+                    if (x.int && x.int > 0) {
+                        this.diseqcTree.DiSEqCId = x.int;
+                        if (observer.next)
+                            observer.next(x);
+                        // save sub trees
+                        this.diseqcSubComponent.forEach(x => {
+                            if (x)
+                                x.saveForm(this.diseqcTree.DiSEqCId, {
+                                    next: (x: any) => { },
+                                    error: (err: any) => {
+                                        observer.error(err);
+                                    }
+                                });
+                        })
+                    }
+                    else {
+                        console.log("UpdateDiseqcTree", x)
+                        observer.error(x);
+                    }
+                },
+                error: (err: any) => {
+                    console.log("UpdateDiseqcTree", err);
+                    observer.error(err);
+                }
+            });
+    }
 
 }

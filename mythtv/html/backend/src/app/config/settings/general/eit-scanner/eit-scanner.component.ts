@@ -6,7 +6,7 @@ import { SetupService } from 'src/app/services/setup.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
-import { NgIf } from '@angular/common';
+
 import { InputNumberModule } from 'primeng/inputnumber';
 import { SharedModule } from 'primeng/api';
 import { CardModule } from 'primeng/card';
@@ -16,7 +16,7 @@ import { SettingsComponent } from '../general-settings.component';
     selector: 'app-eit-scanner',
     templateUrl: './eit-scanner.component.html',
     styleUrls: ['./eit-scanner.component.css'],
-    imports: [FormsModule, CardModule, SharedModule, InputNumberModule, NgIf, MessageModule, ButtonModule, TranslateModule]
+    imports: [FormsModule, CardModule, SharedModule, InputNumberModule, MessageModule, ButtonModule, TranslateModule]
 })
 export class EitScannerComponent implements OnInit, AfterViewInit {
 
@@ -31,7 +31,7 @@ export class EitScannerComponent implements OnInit, AfterViewInit {
     EITCrawIdleStart = 60;
     EITScanPeriod = 15;
 
-  constructor(public setupService: SetupService, private mythService: MythService) {
+    constructor(public setupService: SetupService, private mythService: MythService) {
         this.getEITScanner();
     }
 

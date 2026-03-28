@@ -1,15 +1,17 @@
 <h2>{{ 'dashboard.programguide' | translate }} </h2>
-<div *ngIf="loaded; else loading" style="min-width: 960px;">
+@if (loaded) {
+<div style="min-width: 960px;">
     <div class="block pt-4"></div>
     <div class="flex">
-        <div class="flex items-center pr-4" *ngIf="displayType == GRID">
+        @if (displayType == GRID) {
+        <div class="flex items-center pr-4">
             <p-select [(ngModel)]="channelGroup" [options]="channelGroups" name="channelGroup" (onChange)="refresh()"
                 optionLabel="Name" pTooltip="{{ 'dashboard.guide.channel_group' | translate }}" tooltipPosition="top">
             </p-select>
         </div>
-
-        <div class="flex items-center pr-4"
-            *ngIf="[TITLESEARCH,PEOPLESEARCH,FULLSEARCH,CATSEARCH,ANYSEARCH].indexOf(displayType) > -1">
+        }
+        @if ([TITLESEARCH,PEOPLESEARCH,FULLSEARCH,CATSEARCH,ANYSEARCH].indexOf(displayType) > -1) {
+        <div class="flex items-center pr-4">
             <span class="p-float-label">
                 <p-select [(ngModel)]="groupBy" [options]="groupByList" name="groupBy" (onChange)="refresh()"
                     optionLabel="Name">
@@ -17,7 +19,7 @@
                 <label for="float-label" class="whitespace-nowrap">{{ 'dashboard.guide.group_by' | translate }}</label>
             </span>
         </div>
-
+        }
         <div class="flex items-center">
             <p-datePicker [(ngModel)]="m_pickerDate" [showTime]="true" [stepMinute]="30" [dateFormat]="'yy/mm/dd'"
                 (onClose)="onDateChange()" (keyup.enter)="onDateChange()" (onBlur)="onDateChange()"
@@ -26,26 +28,34 @@
                 tooltipPosition="top">
             </p-datePicker>
         </div>
-
-        <div class="flex items-center p-4" *ngIf="displayType == CHANNEL">
+        @if (displayType == CHANNEL) {
+        <div class="flex items-center p-4">
             <b> {{ 'dashboard.guide.channel' | translate }} {{channel.ChanNum}} {{channel.CallSign}}
                 {{channel.ChannelName}}</b>
         </div>
-        <div class="flex items-center p-4" *ngIf="displayType == PEOPLESEARCH">
+        }
+        @if (displayType == PEOPLESEARCH) {
+        <div class="flex items-center p-4">
             <b> {{ 'dashboard.guide.people_search' | translate }} </b>
         </div>
-        <div class="flex items-center p-4" *ngIf="displayType == TITLESEARCH">
+        }
+        @if (displayType == TITLESEARCH) {
+        <div class="flex items-center p-4">
             <b> {{ 'dashboard.guide.title_search' | translate }} </b>
         </div>
-        <div class="flex items-center p-4" *ngIf="displayType == FULLSEARCH">
+        }
+        @if (displayType == FULLSEARCH) {
+        <div class="flex items-center p-4">
             <b> {{ 'dashboard.guide.full_search' | translate }} </b>
         </div>
-        <div class="flex items-center p-4" *ngIf="displayType == CATSEARCH">
+        }
+        @if (displayType == CATSEARCH) {
+        <div class="flex items-center p-4">
             <b> {{ 'dashboard.guide.cat_search' | translate }} </b>
         </div>
-
-        <div class="flex items-center pl-8"
-            *ngIf="[GRID,TITLESEARCH,PEOPLESEARCH,FULLSEARCH,CATSEARCH,ANYSEARCH].indexOf(displayType) > -1">
+        }
+        @if ([GRID,TITLESEARCH,PEOPLESEARCH,FULLSEARCH,CATSEARCH,ANYSEARCH].indexOf(displayType) > -1) {
+        <div class="flex items-center pl-8">
             <input type="text" pInputText id="searchValue" [(ngModel)]="searchValue" name="searchValue" class="text-xl"
                 placeholder="{{ 'common.search_placeholder' | translate }}" (keydown)="keydown($event)" />
             <button pButton pRipple icon="pi pi-search" class="p-button-text w-8" (click)="titleSearch()"
@@ -60,45 +70,59 @@
             <button pButton pRipple icon="pi pi-bell" class="p-button-text w-8" (click)="catSearch()"
                 pTooltip="{{ 'dashboard.guide.cat_search' | translate }}" tooltipPosition="top"
                 severity="primary"></button>
+            @if (displayType == GRID) {
             <button pButton pRipple icon="pi pi-sun" class="p-button-text w-8" (click)="newSearch()"
-                *ngIf="displayType == GRID" pTooltip="{{ 'dashboard.guide.new_search' | translate }}"
-                tooltipPosition="top" severity="primary"></button>
-            <button pButton pRipple icon="pi pi-video" class="p-button-text w-8" (click)="movieSearch()"
-                *ngIf="displayType == GRID" pTooltip="{{ 'dashboard.guide.movies' | translate }}" tooltipPosition="top"
+                pTooltip="{{ 'dashboard.guide.new_search' | translate }}" tooltipPosition="top"
                 severity="primary"></button>
+            }
+            @if (displayType == GRID) {
+            <button pButton pRipple icon="pi pi-video" class="p-button-text w-8" (click)="movieSearch()"
+                pTooltip="{{ 'dashboard.guide.movies' | translate }}" tooltipPosition="top" severity="primary"></button>
+            }
+            @if (displayType != GRID) {
             <p-checkbox inputId="OnlyNew" [(ngModel)]="onlyNew" name="OnlyNew" #OnlyNew="ngModel" class="mx-1"
-                *ngIf="displayType != GRID" [binary]="true" checkboxIcon="pi pi-check" (onChange)="newSearch()"
+                [binary]="true" checkboxIcon="pi pi-check" (onChange)="newSearch()"
                 pTooltip="{{ 'dashboard.guide.new_search' | translate }}" tooltipPosition="top" />
-            <label for="OnlyNew" class="label pl-2 pt-2 pr-2" *ngIf="displayType != GRID">
+            }
+            @if (displayType != GRID) {
+            <label for="OnlyNew" class="label pl-2 pt-2 pr-2">
                 {{ 'dashboard.guide.new' |
                 translate }}</label>
+            }
+            @if (displayType != GRID) {
             <p-checkbox inputId="Movies" [(ngModel)]="onlyMovies" name="OnlyMovies" #OnlyMovies="ngModel" class="mx-1"
-                *ngIf="displayType != GRID" [binary]="true" checkboxIcon="pi pi-check" (onChange)="newSearch()"
+                [binary]="true" checkboxIcon="pi pi-check" (onChange)="newSearch()"
                 pTooltip="{{ 'dashboard.guide.movies' | translate }}" tooltipPosition="top" />
-            <label for="Movies" class="label pl-2 pt-2" *ngIf="displayType != GRID">
+            }
+            @if (displayType != GRID) {
+            <label for="Movies" class="label pl-2 pt-2">
                 {{ 'dashboard.guide.movies' | translate }}</label>
+            }
         </div>
-
-        <div class="flex items-center"
-            *ngIf="[CHANNEL,TITLESEARCH,PEOPLESEARCH,FULLSEARCH,CATSEARCH,ANYSEARCH].indexOf(displayType) > -1">
+        }
+        @if ([CHANNEL,TITLESEARCH,PEOPLESEARCH,FULLSEARCH,CATSEARCH,ANYSEARCH].indexOf(displayType) > -1) {
+        <div class="flex items-center">
             <button pButton pRipple icon="pi pi-table" class="p-button-text"
                 pTooltip="{{ 'dashboard.guide.retgrid' | translate }}" (click)="onGrid()" tooltipPosition="top"
                 severity="primary"></button>
         </div>
+        }
         <div class="flex items-center">
             <!-- The progressspinner no longer works -->
             <!-- <div *ngIf="refreshing else refreshBn"><p-progressSpinner
-                    [style]="{width: '30px', height: '30px'}"></p-progressSpinner></div> -->
-            <div *ngIf="refreshing else refreshBn">
+      [style]="{width: '30px', height: '30px'}"></p-progressSpinner></div> -->
+            @if (refreshing) {
+            <div>
                 <i class="pi pi-spin pi-cog px-3 text-primary"></i>
             </div>
-            <ng-template #refreshBn>
-                <div *ngIf="[CHANNEL,GRID].indexOf(displayType) > -1 ">
-                    <button pButton pRipple icon="pi pi-refresh" class="p-button-text"
-                        (click)="refreshing=true;refresh()" pTooltip="{{ 'common.refresh' | translate }}"
-                        tooltipPosition="top" severity="primary"></button>
-                </div>
-            </ng-template>
+            } @else {
+            @if ([CHANNEL,GRID].indexOf(displayType) > -1 ) {
+            <div>
+                <button pButton pRipple icon="pi pi-refresh" class="p-button-text" (click)="refreshing=true;refresh()"
+                    pTooltip="{{ 'common.refresh' | translate }}" tooltipPosition="top" severity="primary"></button>
+            </div>
+            }
+            }
         </div>
         <div class="flex items-center">
             <button type="text" pButton label="{{ 'dashboard.guide.colors' | translate }}" (click)="showLegend = true"
@@ -111,7 +135,8 @@
             </a>
         </div>
     </div>
-    <div *ngIf="displayType == GRID">
+    @if (displayType == GRID) {
+    <div>
         <div style="width:100%; height: 90vh; overflow-y: auto;">
             <p-dataView [value]="m_programGuide.ProgramGuide.Channels"
                 [totalRecords]="m_programGuide.ProgramGuide.TotalAvailable">
@@ -119,51 +144,52 @@
                 </ng-template>
                 <ng-template #list let-channels>
                     <div class="grid grid-cols-12 gap-4 grid-nogutter">
-                        <div class="col-span-12" *ngFor="let channelrow of channels;let i = index">
-                            <ng-container *ngIf="( i % 5 ) == 0">
-                                <div class="col-span-12">
-                                    <app-guide-timebar [guide]="this"></app-guide-timebar>
-                                </div>
-                            </ng-container>
+                        @for (channelrow of channels; track channelrow; let i = $index) {
+                        <div class="col-span-12">
+                            @if (( i % 5 ) == 0) {
+                            <div class="col-span-12">
+                                <app-guide-timebar [guide]="this"></app-guide-timebar>
+                            </div>
+                            }
                             <div class="grid grid-cols-12 gap-4 grow">
                                 <div class="col-span-1">
                                     <app-guide-channelicon [channel]=channelrow
                                         [guideComponent]="this"></app-guide-channelicon>
                                 </div>
                                 <div class="col-span-11">
-                                    <ng-container *ngFor="let program of channelrow.Programs">
-                                        <ng-container
-                                            *ngIf="!timeChange && inDisplayWindow(program.StartTime, program.EndTime)">
-                                            <app-guide-programentry [program]="program"
-                                                [guideStartTime]="m_programGuide.ProgramGuide.StartTime"
-                                                [guideEndTime]="m_programGuide.ProgramGuide.EndTime"
-                                                [guideComponent]="this" [channel]="channelrow"
-                                                [runningTime]="runningTime">
-                                            </app-guide-programentry>
-                                        </ng-container>
-                                    </ng-container>
+                                    @for (program of channelrow.Programs; track program) {
+                                    @if (!timeChange && inDisplayWindow(program.StartTime, program.EndTime)) {
+                                    <app-guide-programentry [program]="program"
+                                        [guideStartTime]="m_programGuide.ProgramGuide.StartTime"
+                                        [guideEndTime]="m_programGuide.ProgramGuide.EndTime" [guideComponent]="this"
+                                        [channel]="channelrow" [runningTime]="runningTime">
+                                    </app-guide-programentry>
+                                    }
+                                    }
                                 </div>
                             </div>
                         </div>
+                        }
                     </div>
                 </ng-template>
             </p-dataView>
         </div>
     </div>
-
-    <div *ngIf="[CHANNEL,TITLESEARCH,PEOPLESEARCH,FULLSEARCH,CATSEARCH,ANYSEARCH].indexOf(displayType) > -1 ">
+    }
+    @if ([CHANNEL,TITLESEARCH,PEOPLESEARCH,FULLSEARCH,CATSEARCH,ANYSEARCH].indexOf(displayType) > -1 ) {
+    <div>
         <app-programs [inter]="inter" [programs]="listPrograms"></app-programs>
     </div>
-
+    }
 </div>
+} @else {
+<!-- The progressspinner no longer works -->
+<!-- <p-progressSpinner></p-progressSpinner> -->
+<i class="pi pi-spin pi-cog text-primary" style="font-size: 8rem"></i>
+}
 
 <app-schedule [inter]="inter"></app-schedule>
 
-<ng-template #loading>
-    <!-- The progressspinner no longer works -->
-    <!-- <p-progressSpinner></p-progressSpinner> -->
-    <i class="pi pi-spin pi-cog text-primary" style="font-size: 8rem"></i>
-</ng-template>
 
 <p-dialog header="{{ 'dashboard.guide.colors' | translate }}" [(visible)]="showLegend" [style]="{width: '80vw'}"
     [modal]="true">

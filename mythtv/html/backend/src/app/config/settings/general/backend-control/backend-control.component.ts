@@ -6,7 +6,7 @@ import { SetupService } from 'src/app/services/setup.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
-import { NgIf } from '@angular/common';
+
 import { SharedModule } from 'primeng/api';
 import { CardModule } from 'primeng/card';
 import { SettingsComponent } from '../general-settings.component';
@@ -15,7 +15,7 @@ import { SettingsComponent } from '../general-settings.component';
     selector: 'app-backend-control',
     templateUrl: './backend-control.component.html',
     styleUrls: ['./backend-control.component.css'],
-    imports: [FormsModule, CardModule, SharedModule, NgIf, MessageModule, ButtonModule, TranslateModule]
+    imports: [FormsModule, CardModule, SharedModule, MessageModule, ButtonModule, TranslateModule]
 })
 export class BackendControlComponent implements OnInit, AfterViewInit {
 

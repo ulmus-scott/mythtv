@@ -21,7 +21,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { RippleModule } from 'primeng/ripple';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
-import { NgIf, NgClass } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { SelectModule } from 'primeng/select';
 import { PanelModule } from 'primeng/panel';
 
@@ -34,7 +34,7 @@ interface MyChannel extends Channel {
     selector: 'app-channel-editor',
     templateUrl: './channel-editor.component.html',
     styleUrls: ['./channel-editor.component.css'],
-    imports: [NgIf, TableModule, SharedModule, ButtonModule, RippleModule, TooltipModule, SelectModule, FormsModule, NgClass, DialogModule, InputNumberModule, CheckboxModule, MessageModule, RadioButtonModule, ListboxModule, TranslateModule, PanelModule]
+    imports: [TableModule, SharedModule, ButtonModule, RippleModule, TooltipModule, SelectModule, FormsModule, NgClass, DialogModule, InputNumberModule, CheckboxModule, MessageModule, RadioButtonModule, ListboxModule, TranslateModule, PanelModule]
 })
 export class ChannelEditorComponent implements OnInit {
 

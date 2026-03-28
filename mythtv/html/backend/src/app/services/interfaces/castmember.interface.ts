@@ -1,8 +1,8 @@
 
 export interface CastMember {
-    Name:           string;
-    CharacterName:  string;
-    Role:           string;
+    Name: string;
+    CharacterName: string;
+    Role: string;
     TranslatedRole: string;
 }
 

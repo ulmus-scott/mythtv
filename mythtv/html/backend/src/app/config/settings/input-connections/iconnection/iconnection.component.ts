@@ -18,7 +18,7 @@ import { FieldsetModule } from 'primeng/fieldset';
 import { CheckboxModule } from 'primeng/checkbox';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { InputNumberModule } from 'primeng/inputnumber';
-import { NgIf, NgSwitch, NgSwitchCase } from '@angular/common';
+
 import { SharedModule } from 'primeng/api';
 import { CardModule } from 'primeng/card';
 import { SelectModule } from 'primeng/select';
@@ -27,7 +27,7 @@ import { SelectModule } from 'primeng/select';
     selector: 'app-iconnection',
     templateUrl: './iconnection.component.html',
     styleUrls: ['./iconnection.component.css'],
-    imports: [FormsModule, CardModule, SharedModule, NgIf, NgSwitch, NgSwitchCase, InputNumberModule, RadioButtonModule, SelectModule, CheckboxModule, FieldsetModule, ChannelscanComponent, ButtonModule, DialogModule, MessageModule, TranslateModule]
+    imports: [FormsModule, CardModule, SharedModule, InputNumberModule, RadioButtonModule, SelectModule, CheckboxModule, FieldsetModule, ChannelscanComponent, ButtonModule, DialogModule, MessageModule, TranslateModule]
 })
 export class IconnectionComponent implements OnInit, AfterViewInit {
 

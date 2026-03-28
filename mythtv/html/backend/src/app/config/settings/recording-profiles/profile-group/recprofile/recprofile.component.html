@@ -8,7 +8,8 @@
         </ng-template>
         <ng-template pTemplate="content">
             <div class="mb-6 w-full">
-                <div class="form-group field" *ngIf="params.Param.includes('autotranscode')">
+                @if (params.Param.includes('autotranscode')) {
+                <div class="form-group field">
                     <p-checkbox inputId="autotranscode"
                         [(ngModel)]="profile.RecProfParams[findIx('autotranscode',false)].Value" name="autotranscode"
                         #autotranscode="ngModel" class="label mb-2 w-full" [binary]="true" />
@@ -19,8 +20,10 @@
                         {{ 'settings.rprofiles.autotranscode_desc' | translate }}
                     </small>
                 </div>
+                }
 
-                <div class="form-group field" *ngIf="params.Param.includes('width')">
+                @if (params.Param.includes('width')) {
+                <div class="form-group field">
                     <label for="width" class="label block">{{ 'settings.rprofiles.width_label' | translate }}</label>
                     <p-inputNumber [(ngModel)]="profile.RecProfParams[findIx('width', '480')].Value" name="width"
                         id="width" [showButtons]="true" [min]="160" [max]="720" [step]="16"></p-inputNumber>
@@ -28,8 +31,10 @@
                         {{ 'settings.rprofiles.width_desc' | translate }}
                     </small>
                 </div>
+                }
 
-                <div class="form-group field" *ngIf="params.Param.includes('height')">
+                @if (params.Param.includes('height')) {
+                <div class="form-group field">
                     <label for="height" class="label block">{{ 'settings.rprofiles.height_label' | translate }}</label>
                     <p-inputNumber [(ngModel)]="profile.RecProfParams[findIx('height', '480')].Value" name="height"
                         id="height" [showButtons]="true" [min]="160" [max]="480" [step]="16"></p-inputNumber>
@@ -37,8 +42,10 @@
                         {{ 'settings.rprofiles.height_desc' | translate }}
                     </small>
                 </div>
+                }
 
-                <div class="form-group field" *ngIf="params.Param.includes('recordingtype')">
+                @if (params.Param.includes('recordingtype')) {
+                <div class="form-group field">
                     <label for="recordingtype" class="label block">{{ 'settings.rprofiles.recordingtype_label' |
                         translate
                         }}</label>
@@ -51,8 +58,10 @@
                         {{ 'settings.rprofiles.recordingtype_desc' | translate }}
                     </small>
                 </div>
+                }
 
-                <div class="form-group field" *ngIf="params.Param.includes('recordmpts')">
+                @if (params.Param.includes('recordmpts')) {
+                <div class="form-group field">
                     <p-checkbox inputId="recordmpts"
                         [(ngModel)]="profile.RecProfParams[findIx('recordmpts', false)].Value" name="recordmpts"
                         #recordmpts="ngModel" class="label mb-2 w-full" [binary]="true" />
@@ -62,12 +71,14 @@
                         {{ 'settings.rprofiles.recordmpts_desc' | translate }}
                     </small>
                 </div>
+                }
 
                 <!-- Video Compression Panel -->
-                <p-fieldset class="mb-6 w-full" *ngIf="params.Video.length > 0"
-                    legend="{{ 'settings.rprofiles.video_label' | translate }}" [toggleable]="true" [collapsed]="true">
-
-                    <div class="form-group field" *ngIf="params.Video.length > 0">
+                @if (params.Video.length > 0) {
+                <p-fieldset class="mb-6 w-full" legend="{{ 'settings.rprofiles.video_label' | translate }}"
+                    [toggleable]="true" [collapsed]="true">
+                    @if (params.Video.length > 0) {
+                    <div class="form-group field">
                         <label for="VideoCodec" class="label block">{{ 'settings.rprofiles.videocodec_label' | translate
                             }}</label>
                         <p-select [options]="params.Video" [(ngModel)]="profile.VideoCodec" [editable]="false"
@@ -76,8 +87,9 @@
                         <small class="block">
                         </small>
                     </div>
-
-                    <div class="form-group field" *ngIf="profile.VideoCodec == 'RTjpeg'">
+                    }
+                    @if (profile.VideoCodec == 'RTjpeg') {
+                    <div class="form-group field">
                         <label for="rtjpegquality" class="label block">{{ 'settings.rprofiles.rtjpegquality_label' |
                             translate }}</label>
                         <p-inputNumber [(ngModel)]="profile.RecProfParams[findIx('rtjpegquality','170')].Value"
@@ -87,8 +99,9 @@
                             {{ 'settings.rprofiles.rtjpegquality_desc' | translate }}
                         </small>
                     </div>
-
-                    <div class="form-group field" *ngIf="profile.VideoCodec == 'RTjpeg'">
+                    }
+                    @if (profile.VideoCodec == 'RTjpeg') {
+                    <div class="form-group field">
                         <label for="rtjpeglumafilter" class="label block">{{ 'settings.rprofiles.rtjpeglumafilter_label'
                             |
                             translate }}</label>
@@ -99,8 +112,9 @@
                             {{ 'settings.rprofiles.rtjpegfilter_desc' | translate }}
                         </small>
                     </div>
-
-                    <div class="form-group field" *ngIf="profile.VideoCodec == 'RTjpeg'">
+                    }
+                    @if (profile.VideoCodec == 'RTjpeg') {
+                    <div class="form-group field">
                         <label for="rtjpegchromafilter" class="label block">{{
                             'settings.rprofiles.rtjpegchromafilter_label' | translate
                             }}</label>
@@ -111,8 +125,9 @@
                             {{ 'settings.rprofiles.rtjpegfilter_desc' | translate }}
                         </small>
                     </div>
-
-                    <div class="form-group field" *ngIf="profile.VideoCodec == 'MPEG-4'">
+                    }
+                    @if (profile.VideoCodec == 'MPEG-4') {
+                    <div class="form-group field">
                         <label for="mpeg4bitrate" class="label block">{{ 'settings.rprofiles.mpeg4bitrate_label' |
                             translate }}</label>
                         <p-inputNumber [(ngModel)]="profile.RecProfParams[findIx('mpeg4bitrate','2200')].Value"
@@ -122,8 +137,9 @@
                             {{ 'settings.rprofiles.mpeg4bitrate_desc' | translate }}
                         </small>
                     </div>
-
-                    <div class="form-group field" *ngIf="profile.VideoCodec == 'MPEG-4'">
+                    }
+                    @if (profile.VideoCodec == 'MPEG-4') {
+                    <div class="form-group field">
                         <label for="mpeg4maxquality" class="label block">{{ 'settings.rprofiles.mpeg4maxquality_label' |
                             translate }}</label>
                         <p-inputNumber [(ngModel)]="profile.RecProfParams[findIx('mpeg4maxquality','2')].Value"
@@ -133,8 +149,9 @@
                             {{ 'settings.rprofiles.mpeg4quality_desc' | translate }}
                         </small>
                     </div>
-
-                    <div class="form-group field" *ngIf="profile.VideoCodec == 'MPEG-4'">
+                    }
+                    @if (profile.VideoCodec == 'MPEG-4') {
+                    <div class="form-group field">
                         <label for="mpeg4minquality" class="label block">{{ 'settings.rprofiles.mpeg4minquality_label' |
                             translate }}</label>
                         <p-inputNumber [(ngModel)]="profile.RecProfParams[findIx('mpeg4minquality','15')].Value"
@@ -144,8 +161,9 @@
                             {{ 'settings.rprofiles.mpeg4quality_desc' | translate }}
                         </small>
                     </div>
-
-                    <div class="form-group field" *ngIf="profile.VideoCodec == 'Hardware MJPEG'">
+                    }
+                    @if (profile.VideoCodec == 'Hardware MJPEG') {
+                    <div class="form-group field">
                         <label for="hardwaremjpegquality" class="label block">{{
                             'settings.rprofiles.hardwaremjpegquality_label' |
                             translate }}</label>
@@ -156,8 +174,9 @@
                             <!-- No Description -->
                         </small>
                     </div>
-
-                    <div class="form-group field" *ngIf="profile.VideoCodec == 'Hardware MJPEG'">
+                    }
+                    @if (profile.VideoCodec == 'Hardware MJPEG') {
+                    <div class="form-group field">
                         <label for="hardwaremjpeghdecimation" class="label block">{{
                             'settings.rprofiles.hardwaremjpeghdecimation_label' | translate
                             }}</label>
@@ -170,8 +189,9 @@
                             <!-- No Description -->
                         </small>
                     </div>
-
-                    <div class="form-group field" *ngIf="profile.VideoCodec == 'Hardware MJPEG'">
+                    }
+                    @if (profile.VideoCodec == 'Hardware MJPEG') {
+                    <div class="form-group field">
                         <label for="hardwaremjpegvdecimation" class="label block">{{
                             'settings.rprofiles.hardwaremjpegvdecimation_label' | translate
                             }}</label>
@@ -184,8 +204,9 @@
                             <!-- No Description -->
                         </small>
                     </div>
-
-                    <div class="form-group field" *ngIf="profile.VideoCodec == 'MPEG-4'">
+                    }
+                    @if (profile.VideoCodec == 'MPEG-4') {
+                    <div class="form-group field">
                         <label for="mpeg4qualdiff" class="label block">{{ 'settings.rprofiles.mpeg4qualdiff_label' |
                             translate }}</label>
                         <p-inputNumber [(ngModel)]="profile.RecProfParams[findIx('mpeg4qualdiff','3')].Value"
@@ -195,8 +216,9 @@
                             {{ 'settings.rprofiles.mpeg4quality_desc' | translate }}
                         </small>
                     </div>
-
-                    <div class="form-group field" *ngIf="profile.VideoCodec == 'MPEG-2 Hardware Encoder'">
+                    }
+                    @if (profile.VideoCodec == 'MPEG-2 Hardware Encoder') {
+                    <div class="form-group field">
                         <label for="mpeg2streamtype" class="label block">{{ 'settings.rprofiles.mpeg2streamtype_label' |
                             translate }}</label>
                         <p-select [options]="streamTypeOptions"
@@ -208,8 +230,9 @@
                             {{ 'settings.rprofiles.mpeg2streamtype_desc' | translate }}
                         </small>
                     </div>
-
-                    <div class="form-group field" *ngIf="profile.VideoCodec == 'MPEG-2 Hardware Encoder'">
+                    }
+                    @if (profile.VideoCodec == 'MPEG-2 Hardware Encoder') {
+                    <div class="form-group field">
                         <label for="mpeg2aspectratio" class="label block">{{ 'settings.rprofiles.mpeg2aspectratio_label'
                             |
                             translate }}</label>
@@ -222,9 +245,9 @@
                             {{ 'settings.rprofiles.mpeg2aspectratio_desc' | translate }}
                         </small>
                     </div>
-
-                    <div class="form-group field"
-                        *ngIf="profile.VideoCodec == 'MPEG-2' || profile.VideoCodec == 'MPEG-2 Hardware Encoder' ">
+                    }
+                    @if (profile.VideoCodec == 'MPEG-2' || profile.VideoCodec == 'MPEG-2 Hardware Encoder' ) {
+                    <div class="form-group field">
                         <label for="mpeg2bitrate" class="label block">{{ 'settings.rprofiles.mpeg2bitrate_label' |
                             translate }}</label>
                         <p-inputNumber [(ngModel)]="profile.RecProfParams[findIx('mpeg2bitrate','6000')].Value"
@@ -234,8 +257,9 @@
                             {{ 'settings.rprofiles.mpeg2bitrate_desc' | translate }}
                         </small>
                     </div>
-
-                    <div class="form-group field" *ngIf="profile.VideoCodec == 'MPEG-2 Hardware Encoder' ">
+                    }
+                    @if (profile.VideoCodec == 'MPEG-2 Hardware Encoder' ) {
+                    <div class="form-group field">
                         <label for="mpeg2maxbitrate" class="label block">{{ 'settings.rprofiles.mpeg2maxbitrate_label' |
                             translate }}</label>
                         <p-inputNumber [(ngModel)]="profile.RecProfParams[findIx('mpeg2maxbitrate','4500')].Value"
@@ -245,12 +269,11 @@
                             {{ 'settings.rprofiles.mpeg2maxbitrate_desc' | translate }}
                         </small>
                     </div>
-
+                    }
                     <!-- Low Resolution Panel -->
-                    <p-fieldset class="mb-6 w-full" *ngIf="profile.VideoCodec == 'MPEG-4 AVC Hardware Encoder'"
-                        legend="{{ 'settings.rprofiles.lowres_label' | translate }}" [toggleable]="true"
-                        [collapsed]="true">
-
+                    @if (profile.VideoCodec == 'MPEG-4 AVC Hardware Encoder') {
+                    <p-fieldset class="mb-6 w-full" legend="{{ 'settings.rprofiles.lowres_label' | translate }}"
+                        [toggleable]="true" [collapsed]="true">
                         <div class="form-group field">
                             <label for="low_mpeg4avgbitrate" class="label block">{{
                                 'settings.rprofiles.mpeg2bitrate_label' | translate }}</label>
@@ -262,7 +285,6 @@
                                 {{ 'settings.rprofiles.mpeg2bitrate_desc' | translate }}
                             </small>
                         </div>
-
                         <div class="form-group field">
                             <label for="low_mpeg4peakbitrate" class="label block">{{
                                 'settings.rprofiles.mpeg2maxbitrate_label' | translate }}</label>
@@ -275,12 +297,11 @@
                             </small>
                         </div>
                     </p-fieldset>
-
+                    }
                     <!-- Medium Resolution Panel -->
-                    <p-fieldset class="mb-6 w-full" *ngIf="profile.VideoCodec == 'MPEG-4 AVC Hardware Encoder'"
-                        legend="{{ 'settings.rprofiles.medres_label' | translate }}" [toggleable]="true"
-                        [collapsed]="true">
-
+                    @if (profile.VideoCodec == 'MPEG-4 AVC Hardware Encoder') {
+                    <p-fieldset class="mb-6 w-full" legend="{{ 'settings.rprofiles.medres_label' | translate }}"
+                        [toggleable]="true" [collapsed]="true">
                         <div class="form-group field">
                             <label for="medium_mpeg4avgbitrate" class="label block">{{
                                 'settings.rprofiles.mpeg2bitrate_label' | translate }}</label>
@@ -292,7 +313,6 @@
                                 {{ 'settings.rprofiles.mpeg2bitrate_desc' | translate }}
                             </small>
                         </div>
-
                         <div class="form-group field">
                             <label for="medium_mpeg4peakbitrate" class="label block">{{
                                 'settings.rprofiles.mpeg2maxbitrate_label' | translate }}</label>
@@ -305,12 +325,11 @@
                             </small>
                         </div>
                     </p-fieldset>
-
+                    }
                     <!-- High Resolution Panel -->
-                    <p-fieldset class="mb-6 w-full" *ngIf="profile.VideoCodec == 'MPEG-4 AVC Hardware Encoder'"
-                        legend="{{ 'settings.rprofiles.highres_label' | translate }}" [toggleable]="true"
-                        [collapsed]="true">
-
+                    @if (profile.VideoCodec == 'MPEG-4 AVC Hardware Encoder') {
+                    <p-fieldset class="mb-6 w-full" legend="{{ 'settings.rprofiles.highres_label' | translate }}"
+                        [toggleable]="true" [collapsed]="true">
                         <div class="form-group field">
                             <label for="high_mpeg4avgbitrate" class="label block">{{
                                 'settings.rprofiles.mpeg2bitrate_label' | translate }}</label>
@@ -322,7 +341,6 @@
                                 {{ 'settings.rprofiles.mpeg2bitrate_desc' | translate }}
                             </small>
                         </div>
-
                         <div class="form-group field">
                             <label for="high_mpeg4peakbitrate" class="label block">{{
                                 'settings.rprofiles.mpeg2maxbitrate_label' | translate }}</label>
@@ -335,66 +353,75 @@
                             </small>
                         </div>
                     </p-fieldset>
-
-
-                    <div class="form-group field"
-                        *ngIf="profile.VideoCodec == 'MPEG-4' || profile.VideoCodec == 'MPEG-2'">
+                    }
+                    @if (profile.VideoCodec == 'MPEG-4' || profile.VideoCodec == 'MPEG-2') {
+                    <div class="form-group field">
                         <p-checkbox inputId="scalebitrate"
                             [(ngModel)]="profile.RecProfParams[findIx('scalebitrate',true)].Value" name="scalebitrate"
-                            #scalebitrate="ngModel" class="label mb-2 w-full" [binary]="true"/>
-                        <label for="scalebitrate" class="label pl-2">{{ 'settings.rprofiles.scalebitrate_label' | translate
+                            #scalebitrate="ngModel" class="label mb-2 w-full" [binary]="true" />
+                        <label for="scalebitrate" class="label pl-2">{{ 'settings.rprofiles.scalebitrate_label' |
+                            translate
                             }}</label>
                         <small class="block">
                             {{ 'settings.rprofiles.scalebitrate_desc' | translate }}
                         </small>
                     </div>
-
-                    <div class="form-group field" *ngIf="profile.VideoCodec == 'MPEG-4'">
+                    }
+                    @if (profile.VideoCodec == 'MPEG-4') {
+                    <div class="form-group field">
                         <p-checkbox inputId="mpeg4optionvhq"
                             [(ngModel)]="profile.RecProfParams[findIx('mpeg4optionvhq',false)].Value"
-                            name="mpeg4optionvhq" #mpeg4optionvhq="ngModel" class="label mb-2 w-full" [binary]="true"/>
-                        <label for="mpeg4optionvhq" class="label pl-2">{{ 'settings.rprofiles.mpeg4optionvhq_label' | translate
+                            name="mpeg4optionvhq" #mpeg4optionvhq="ngModel" class="label mb-2 w-full" [binary]="true" />
+                        <label for="mpeg4optionvhq" class="label pl-2">{{ 'settings.rprofiles.mpeg4optionvhq_label' |
+                            translate
                             }}</label>
                         <small class="block">
                             {{ 'settings.rprofiles.mpeg4optionvhq_desc' | translate }}
                         </small>
                     </div>
-
-                    <div class="form-group field" *ngIf="profile.VideoCodec == 'MPEG-4'">
+                    }
+                    @if (profile.VideoCodec == 'MPEG-4') {
+                    <div class="form-group field">
                         <p-checkbox inputId="mpeg4option4mv"
                             [(ngModel)]="profile.RecProfParams[findIx('mpeg4option4mv',false)].Value"
-                            name="mpeg4option4mv" #mpeg4option4mv="ngModel" class="label mb-2 w-full" [binary]="true"/>
-                        <label for="mpeg4option4mv" class="label pl-2">{{ 'settings.rprofiles.mpeg4option4mv_label' | translate
+                            name="mpeg4option4mv" #mpeg4option4mv="ngModel" class="label mb-2 w-full" [binary]="true" />
+                        <label for="mpeg4option4mv" class="label pl-2">{{ 'settings.rprofiles.mpeg4option4mv_label' |
+                            translate
                             }}</label>
                         <small class="block">
                             {{ 'settings.rprofiles.mpeg4option4mv_desc' | translate }}
                         </small>
                     </div>
-
-                    <div class="form-group field" *ngIf="profile.VideoCodec == 'MPEG-4'">
+                    }
+                    @if (profile.VideoCodec == 'MPEG-4') {
+                    <div class="form-group field">
                         <p-checkbox inputId="mpeg4optionidct"
                             [(ngModel)]="profile.RecProfParams[findIx('mpeg4optionidct',false)].Value"
-                            name="mpeg4optionidct" #mpeg4optionidct="ngModel" class="label mb-2 w-full" [binary]="true"/>
-                        <label for="mpeg4optionidct" class="label pl-2">{{ 'settings.rprofiles.mpeg4optionidct_label' | translate
+                            name="mpeg4optionidct" #mpeg4optionidct="ngModel" class="label mb-2 w-full"
+                            [binary]="true" />
+                        <label for="mpeg4optionidct" class="label pl-2">{{ 'settings.rprofiles.mpeg4optionidct_label' |
+                            translate
                             }}</label>
                         <small class="block">
                             {{ 'settings.rprofiles.mpeg4optionidct_desc' | translate }}
                         </small>
                     </div>
-
-                    <div class="form-group field" *ngIf="profile.VideoCodec == 'MPEG-4'">
+                    }
+                    @if (profile.VideoCodec == 'MPEG-4') {
+                    <div class="form-group field">
                         <p-checkbox inputId="mpeg4optionime"
                             [(ngModel)]="profile.RecProfParams[findIx('mpeg4optionime',false)].Value"
-                            name="mpeg4optionime" #mpeg4optionime="ngModel" class="label mb-2 w-full" [binary]="true"/>
-                        <label for="mpeg4optionime" class="label pl-2">{{ 'settings.rprofiles.mpeg4optionime_label' | translate
+                            name="mpeg4optionime" #mpeg4optionime="ngModel" class="label mb-2 w-full" [binary]="true" />
+                        <label for="mpeg4optionime" class="label pl-2">{{ 'settings.rprofiles.mpeg4optionime_label' |
+                            translate
                             }}</label>
                         <small class="block">
                             {{ 'settings.rprofiles.mpeg4optionime_desc' | translate }}
                         </small>
                     </div>
-
-                    <div class="form-group field"
-                        *ngIf="profile.VideoCodec == 'MPEG-4' || profile.VideoCodec == 'MPEG-2'">
+                    }
+                    @if (profile.VideoCodec == 'MPEG-4' || profile.VideoCodec == 'MPEG-2') {
+                    <div class="form-group field">
                         <label for="encodingthreadcount" class="label block">{{
                             'settings.rprofiles.encodingthreadcount_label' |
                             translate
@@ -406,14 +433,16 @@
                             {{ 'settings.rprofiles.encodingthreadcount_desc' | translate }}
                         </small>
                     </div>
-
-                </p-fieldset> <!-- Video Compression Panel -->
+                    }
+                </p-fieldset>
+                } <!-- Video Compression Panel -->
 
                 <!-- Audio Quality Panel -->
-                <p-fieldset class="mb-6 w-full" *ngIf="params.Audio.length > 0"
-                    legend="{{ 'settings.rprofiles.audio_label' | translate }}" [toggleable]="true" [collapsed]="true">
-
-                    <div class="form-group field" *ngIf="params.Audio.length > 0">
+                @if (params.Audio.length > 0) {
+                <p-fieldset class="mb-6 w-full" legend="{{ 'settings.rprofiles.audio_label' | translate }}"
+                    [toggleable]="true" [collapsed]="true">
+                    @if (params.Audio.length > 0) {
+                    <div class="form-group field">
                         <label for="AudioCodec" class="label block">{{ 'settings.rprofiles.audiocodec_label' | translate
                             }}</label>
                         <p-select [options]="params.Audio" [(ngModel)]="profile.AudioCodec" [editable]="false"
@@ -422,9 +451,10 @@
                         <small class="block">
                         </small>
                     </div>
-
-                    <div class="form-group field" *ngIf="profile.AudioCodec == 'MP3' || profile.AudioCodec == 'MPEG-2 Hardware Encoder'
-                            || profile.AudioCodec == 'Uncompressed' ">
+                    }
+                    @if (profile.AudioCodec == 'MP3' || profile.AudioCodec == 'MPEG-2 Hardware Encoder'
+                    || profile.AudioCodec == 'Uncompressed' ) {
+                    <div class="form-group field">
                         <label for="samplerate" class="label block">{{ 'settings.rprofiles.samplerate_label' | translate
                             }}</label>
                         <p-select [options]="samplerateOptions"
@@ -435,8 +465,9 @@
                             {{ 'settings.rprofiles.samplerate_desc' | translate }}
                         </small>
                     </div>
-
-                    <div class="form-group field" *ngIf=" profile.AudioCodec == 'MPEG-2 Hardware Encoder'">
+                    }
+                    @if ( profile.AudioCodec == 'MPEG-2 Hardware Encoder') {
+                    <div class="form-group field">
                         <label for="mpeg2language" class="label block">{{ 'settings.rprofiles.mpeg2language_label' |
                             translate
                             }}</label>
@@ -449,8 +480,9 @@
                             {{ 'settings.rprofiles.mpeg2language_desc' | translate }}
                         </small>
                     </div>
-
-                    <div class="form-group field" *ngIf="profile.AudioCodec == 'MP3'">
+                    }
+                    @if (profile.AudioCodec == 'MP3') {
+                    <div class="form-group field">
                         <label for="mp3quality" class="label block">{{ 'settings.rprofiles.mp3quality_label' | translate
                             }}</label>
                         <p-inputNumber [(ngModel)]="profile.RecProfParams[findIx('mp3quality','1')].Value"
@@ -460,9 +492,9 @@
                             {{ 'settings.rprofiles.mp3quality_desc' | translate }}
                         </small>
                     </div>
-
-                    <div class="form-group field"
-                        *ngIf="profile.AudioCodec == 'MP3' || profile.AudioCodec == 'Uncompressed'">
+                    }
+                    @if (profile.AudioCodec == 'MP3' || profile.AudioCodec == 'Uncompressed') {
+                    <div class="form-group field">
                         <label for="volume" class="label block">{{ 'settings.rprofiles.volume_label' | translate
                             }}</label>
                         <p-inputNumber [(ngModel)]="profile.RecProfParams[findIx('volume','90')].Value" name="volume"
@@ -471,8 +503,9 @@
                             {{ 'settings.rprofiles.volume_desc' | translate }}
                         </small>
                     </div>
-
-                    <div class="form-group field" *ngIf="profile.AudioCodec == 'MPEG-2 Hardware Encoder'">
+                    }
+                    @if (profile.AudioCodec == 'MPEG-2 Hardware Encoder') {
+                    <div class="form-group field">
                         <label for="mpeg2audvolume" class="label block">{{ 'settings.rprofiles.volume_label' | translate
                             }}</label>
                         <p-inputNumber [(ngModel)]="profile.RecProfParams[findIx('mpeg2audvolume','90')].Value"
@@ -482,7 +515,9 @@
                             {{ 'settings.rprofiles.mpeg2audvolume_desc' | translate }}
                         </small>
                     </div>
-                </p-fieldset> <!-- Audio Quality Panel -->
+                    }
+                </p-fieldset>
+                } <!-- Audio Quality Panel -->
 
             </div>
         </ng-template>
@@ -490,10 +525,12 @@
         <ng-template pTemplate="footer">
             <div class="grid grid-cols-12 gap-4 nogutter">
                 <div class="col-span-12">
-                    <p-message *ngIf="successCount > 0 && errorCount == 0 && !recprofform.dirty" severity="success"
-                        text="{{ 'common.savesuccess' | translate }}"></p-message>
-                    <p-message *ngIf="errorCount > 0" severity="error"
-                        text="{{ 'common.networkfail' | translate }}"></p-message>
+                    @if (successCount > 0 && errorCount == 0 && !recprofform.dirty) {
+                    <p-message severity="success" text="{{ 'common.savesuccess' | translate }}"></p-message>
+                    }
+                    @if (errorCount > 0) {
+                    <p-message severity="error" text="{{ 'common.networkfail' | translate }}"></p-message>
+                    }
                 </div>
                 <p-button class="col pr-1" label="{{'common.save' | translate}}" icon="pi pi-save" iconPos="left"
                     (onClick)="saveForm(1); markPristine()"

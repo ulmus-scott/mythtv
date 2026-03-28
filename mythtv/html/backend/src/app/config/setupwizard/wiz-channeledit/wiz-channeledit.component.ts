@@ -13,9 +13,9 @@ import { CardModule } from 'primeng/card';
 })
 export class WizChanneleditComponent implements OnInit {
 
-  constructor(public router: Router) { }
+    constructor(public router: Router) { }
 
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {
+    }
 
 }

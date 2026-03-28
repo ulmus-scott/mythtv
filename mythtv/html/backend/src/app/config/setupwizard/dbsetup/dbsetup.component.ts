@@ -18,7 +18,7 @@ import { MessageModule } from 'primeng/message';
 import { ButtonModule } from 'primeng/button';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { CheckboxModule } from 'primeng/checkbox';
-import { NgClass, NgIf } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { CardModule } from 'primeng/card';
 import { ToastModule } from 'primeng/toast';
 
@@ -34,7 +34,6 @@ import { ToastModule } from 'primeng/toast';
         CardModule,
         SharedModule,
         NgClass,
-        NgIf,
         CheckboxModule,
         InputNumberModule,
         ButtonModule,
@@ -42,7 +41,7 @@ import { ToastModule } from 'primeng/toast';
         RadioButtonModule,
         RippleModule,
         TooltipModule,
-        TranslateModule,
+        TranslateModule
     ]
 })
 export class DbsetupComponent implements OnInit {
@@ -100,7 +99,7 @@ export class DbsetupComponent implements OnInit {
     }
 
     copyToclipboard(value: string): void {
-        this.clipboard.copy(value.replace(/<br>/g,'\n'));
+        this.clipboard.copy(value.replace(/<br>/g, '\n'));
     }
 
     saveObserver = {
@@ -166,7 +165,7 @@ export class DbsetupComponent implements OnInit {
             `CREATE USER IF NOT EXISTS '${this.database.UserName}'@'%' IDENTIFIED ${pwType} by '${this.database.Password}';<br>` +
             `GRANT ALL ON ${this.database.Name}.* TO '${this.database.UserName}'@'localhost';<br>` +
             `GRANT ALL ON ${this.database.Name}.* TO '${this.database.UserName}'@'%';`
-   }
+    }
 
     confirm(message?: string): Observable<boolean> {
         const confirmation = window.confirm(message);

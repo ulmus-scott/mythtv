@@ -14,29 +14,29 @@ export enum TVState {
     kState_ChangingState,
 }
 export interface EncoderInput {
-    CardId:         number;
-    DisplayName:    string;
-    Id:             number;
-    InputName:      string;
-    LiveTVOrder:    number;
-    QuickTune:      boolean;
-    RecPriority:    number;
-    ScheduleOrder:  number;
-    SourceId:       number;
+    CardId: number;
+    DisplayName: string;
+    Id: number;
+    InputName: string;
+    LiveTVOrder: number;
+    QuickTune: boolean;
+    RecPriority: number;
+    ScheduleOrder: number;
+    SourceId: number;
 }
 
 export interface Encoder {
-    Connected:      boolean;
-    HostName:       string;
-    Id:             number;
-    Inputs:         EncoderInput[];
-    Local:          boolean;
+    Connected: boolean;
+    HostName: string;
+    Id: number;
+    Inputs: EncoderInput[];
+    Local: boolean;
     LowOnFreeSpace: boolean;
-    Recording:      ScheduleOrProgram;
-    SleepStatus:    number;
-    State:          number;
+    Recording: ScheduleOrProgram;
+    SleepStatus: number;
+    State: number;
 }
 
 export interface EncoderList {
-    Encoders:       Encoder[];
+    Encoders: Encoder[];
 }

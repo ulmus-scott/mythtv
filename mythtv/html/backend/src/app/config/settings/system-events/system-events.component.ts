@@ -9,7 +9,7 @@ import { MythService } from 'src/app/services/myth.service';
 import { SetupService } from 'src/app/services/setup.service';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
-import { NgFor, NgIf } from '@angular/common';
+
 import { SharedModule } from 'primeng/api';
 import { CardModule } from 'primeng/card';
 
@@ -22,11 +22,9 @@ import { CardModule } from 'primeng/card';
         FormsModule,
         CardModule,
         SharedModule,
-        NgFor,
-        NgIf,
         MessageModule,
         ButtonModule,
-        TranslateModule,
+        TranslateModule
     ]
 })
 

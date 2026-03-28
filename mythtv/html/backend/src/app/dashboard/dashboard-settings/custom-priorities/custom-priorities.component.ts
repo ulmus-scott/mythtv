@@ -12,13 +12,13 @@ import { RippleModule } from 'primeng/ripple';
 import { ButtonModule } from 'primeng/button';
 import { SharedModule } from 'primeng/api';
 import { TableModule } from 'primeng/table';
-import { NgIf } from '@angular/common';
+
 
 @Component({
     selector: 'app-custom-priorities',
     templateUrl: './custom-priorities.component.html',
     styleUrls: ['./custom-priorities.component.css'],
-    imports: [NgIf, TableModule, SharedModule, ButtonModule, RippleModule, TooltipModule, FormsModule, DialogModule, InputNumberModule, MessageModule, TranslateModule]
+    imports: [TableModule, SharedModule, ButtonModule, RippleModule, TooltipModule, FormsModule, DialogModule, InputNumberModule, MessageModule, TranslateModule]
 })
 export class CustomPrioritiesComponent implements OnInit {
 

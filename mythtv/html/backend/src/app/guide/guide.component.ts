@@ -22,7 +22,7 @@ import { RippleModule } from 'primeng/ripple';
 import { ButtonModule } from 'primeng/button';
 import { TooltipModule } from 'primeng/tooltip';
 import { FormsModule } from '@angular/forms';
-import { NgIf, NgFor } from '@angular/common';
+
 import { DatePicker } from "primeng/datepicker";
 import { SelectModule } from 'primeng/select';
 
@@ -30,7 +30,7 @@ import { SelectModule } from 'primeng/select';
     selector: 'app-guide',
     templateUrl: './guide.component.html',
     styleUrls: ['./guide.component.css'],
-    imports: [NgIf, FormsModule, TooltipModule, ButtonModule, RippleModule, CheckboxModule, DataViewModule, SharedModule, TimebarComponent, ChannelIconComponent, NgFor, ProgramEntryComponent, ProgramsComponent, ScheduleComponent, DialogModule, LegendComponent, TranslateModule, DatePicker, SelectModule]
+    imports: [FormsModule, TooltipModule, ButtonModule, RippleModule, CheckboxModule, DataViewModule, SharedModule, TimebarComponent, ChannelIconComponent, ProgramEntryComponent, ProgramsComponent, ScheduleComponent, DialogModule, LegendComponent, TranslateModule, DatePicker, SelectModule]
 })
 export class GuideComponent implements OnInit, SchedulerSummary {
 

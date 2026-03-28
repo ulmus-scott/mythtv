@@ -29,7 +29,7 @@ export class SetupService {
     m_HostAddressData: HostAddress = {
         successCount: 0,
         errorCount: 0,
-        thisHostName:  this.m_hostName,
+        thisHostName: this.m_hostName,
         BackendServerPort: 6543,
         BackendStatusPort: 6544,
         SecurityPin: '0000',
@@ -56,8 +56,8 @@ export class SetupService {
         return this.m_HostAddressData;
     }
 
-    getHostSettings () {
-        this.mythService.GetSetting({ HostName: this.m_hostName, Key: "BackendServerPort", Default:"6543" })
+    getHostSettings() {
+        this.mythService.GetSetting({ HostName: this.m_hostName, Key: "BackendServerPort", Default: "6543" })
             .subscribe({
                 next: data => this.m_HostAddressData.BackendServerPort = Number(data.String),
                 error: () => this.m_HostAddressData.errorCount++
@@ -67,7 +67,7 @@ export class SetupService {
                 next: data => this.m_HostAddressData.BackendStatusPort = Number(data.String),
                 error: () => this.m_HostAddressData.errorCount++
             });
-        this.mythService.GetSetting({ HostName: this.m_hostName, Key: "SecurityPin", Default: "0000"})
+        this.mythService.GetSetting({ HostName: this.m_hostName, Key: "SecurityPin", Default: "0000" })
             .subscribe({
                 next: data => this.m_HostAddressData.SecurityPin = data.String,
                 error: () => this.m_HostAddressData.errorCount++

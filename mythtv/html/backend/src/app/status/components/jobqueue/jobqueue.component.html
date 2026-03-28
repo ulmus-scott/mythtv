@@ -1,17 +1,20 @@
 <div class="statusBox">
     <h2>{{ 'dashboard.status.jobs_title' | translate }}</h2>
-    <div *ngIf="jobqueue?.length != 0; else noJobs">
+    @if (jobqueue?.length != 0) {
+    <div>
         <p>{{ 'dashboard.status.jobs_text' | translate }}:</p>
         <ul class="list-disc list-inside ml-4">
-            <div *ngFor="let job of jobqueue">
+            @for (job of jobqueue; track job) {
+            <div>
                 <p>{{ utility.formatDate(job.StatusTime) }} {{ utility.formatTime(job.StatusTime) }} - {{
                     job.Program.Title }} - {{ job.LocalizedJobName }} -
                     {{ 'dashboard.status.jobs_status' | translate }}: {{ job.LocalizedStatus }} </p>
                 <!-- Add details of failed job -->
             </div>
+            }
         </ul>
     </div>
-</div>
-<ng-template #noJobs>
+    } @else {
     <p>{{ 'dashboard.status.jobs_none' | translate }}</p>
-</ng-template>
+    }
+</div>

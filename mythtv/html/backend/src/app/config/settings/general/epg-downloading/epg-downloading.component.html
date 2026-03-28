@@ -18,8 +18,8 @@
                     </small>
                 </div>
 
-                <div *ngIf="MythFillEnabled">
-
+                @if (MythFillEnabled) {
+                <div>
                     <div class="form-group field">
                         <label for="MythFillDatabasePath" class="label block">{{ 'settings.epgdownload.path_label' |
                             translate
@@ -30,7 +30,6 @@
                             {{ 'settings.epgdownload.path_desc' | translate }}
                         </small>
                     </div>
-
                     <div class="form-group field">
                         <label for="MythFillDatabaseArgs" class="label block">{{ 'settings.epgdownload.args_label' |
                             translate
@@ -41,7 +40,6 @@
                             {{ 'settings.epgdownload.args_desc' | translate }}
                         </small>
                     </div>
-
                     <div class="form-group field">
                         <label for="MythFillMinHour" class="label block">{{ 'settings.epgdownload.minhr_label' |
                             translate
@@ -52,7 +50,6 @@
                             {{ 'settings.epgdownload.minhr_desc' | translate }}
                         </small>
                     </div>
-
                     <div class="form-group field">
                         <label for="MythFillMaxHour" class="label block">{{ 'settings.epgdownload.maxhr_label' |
                             translate
@@ -63,20 +60,19 @@
                             {{ 'settings.epgdownload.maxhr_desc' | translate }}
                         </small>
                     </div>
-
                     <div class="form-group field">
                         <p-checkbox inputId="MythFillGrabberSuggestsTime" [(ngModel)]="MythFillGrabberSuggestsTime"
-                            name="MythFillGrabberSuggestsTime" class="label mb-2 w-full" [binary]="true"/>
-                        <label for="MythFillGrabberSuggestsTime" class="label pl-2">{{ 'settings.epgdownload.suggest_label' |
+                            name="MythFillGrabberSuggestsTime" class="label mb-2 w-full" [binary]="true" />
+                        <label for="MythFillGrabberSuggestsTime" class="label pl-2">{{
+                            'settings.epgdownload.suggest_label' |
                             translate
                             }}</label>
                         <small class="block">
                             {{ 'settings.epgdownload.suggest_desc' | translate }}
                         </small>
                     </div>
-
-
                 </div>
+                }
 
 
             </div>
@@ -85,10 +81,12 @@
         <ng-template pTemplate="footer">
             <div class="grid grid-cols-12 gap-4 nogutter">
                 <div class="col-span-12">
-                    <p-message *ngIf="this.successCount > 0 && this.errorCount == 0 && !epgdownload.dirty"
-                        severity="success" text="{{ 'common.savesuccess' | translate }}"></p-message>
-                    <p-message *ngIf="this.errorCount > 0" severity="error"
-                        text="{{ 'common.networkfail' | translate }}"></p-message>
+                    @if (this.successCount > 0 && this.errorCount == 0 && !epgdownload.dirty) {
+                    <p-message severity="success" text="{{ 'common.savesuccess' | translate }}"></p-message>
+                    }
+                    @if (this.errorCount > 0) {
+                    <p-message severity="error" text="{{ 'common.networkfail' | translate }}"></p-message>
+                    }
                 </div>
                 <p-button class="col pr-1" label="{{'common.save' | translate}}" icon="pi pi-save" iconPos="left"
                     (onClick)="saveForm(); markPristine()"

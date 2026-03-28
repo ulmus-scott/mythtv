@@ -12,7 +12,7 @@ import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { MythService } from 'src/app/services/myth.service';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
-import { NgIf } from '@angular/common';
+
 import { ListboxModule } from 'primeng/listbox';
 import { SharedModule } from 'primeng/api';
 import { CardModule } from 'primeng/card';
@@ -27,10 +27,9 @@ import { CardModule } from 'primeng/card';
         CardModule,
         SharedModule,
         ListboxModule,
-        NgIf,
         MessageModule,
         ButtonModule,
-        TranslateModule,
+        TranslateModule
     ]
 })
 

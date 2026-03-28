@@ -8,7 +8,7 @@ import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputNumberModule } from 'primeng/inputnumber';
-import { NgIf } from '@angular/common';
+
 import { SharedModule } from 'primeng/api';
 import { CardModule } from 'primeng/card';
 import { SelectModule } from 'primeng/select';
@@ -18,7 +18,7 @@ import { CaptureCardsComponent } from '../capture-cards.component';
     selector: 'app-satip',
     templateUrl: './satip.component.html',
     styleUrls: ['./satip.component.css'],
-    imports: [FormsModule, CardModule, SharedModule, NgIf, SelectModule, InputNumberModule, CheckboxModule, MessageModule, ButtonModule, TranslateModule]
+    imports: [FormsModule, CardModule, SharedModule, SelectModule, InputNumberModule, CheckboxModule, MessageModule, ButtonModule, TranslateModule]
 })
 export class SatipComponent implements OnInit, AfterViewInit {
     @Input() card!: CardAndInput;

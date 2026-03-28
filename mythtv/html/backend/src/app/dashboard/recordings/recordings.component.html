@@ -14,12 +14,14 @@
 
         <!-- Menu, Refresh button and number of rows. -->
         <div class="flex items-center p-1 font-bold">
-            <button pButton pRipple icon="pi pi-bars" class="p-button-text"
-                (click)="showContextMenu(null, $event)" pTooltip="{{ 'common.selected_menu' | translate }}"
-                tooltipPosition="top" severity="info"></button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button pButton pRipple icon="pi pi-bars" class="p-button-text" (click)="showContextMenu(null, $event)"
+                pTooltip="{{ 'common.selected_menu' | translate }}" tooltipPosition="top" severity="info"></button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
             <span class="p-input-icon-right">
-                <i class="pi pi-times" (click)="resetSearch()" *ngIf="searchValue"></i>
+                @if (searchValue) {
+                <i class="pi pi-times" (click)="resetSearch()"></i>
+                }
                 <input type="text" pInputText id="searchValue" [(ngModel)]="searchValue" name="searchValue"
                     class="text-xl" placeholder="{{ 'common.search_placeholder' | translate }}"
                     pTooltip="{{ 'dashboard.recordings.regex' | translate }}" tooltipPosition="top"
@@ -27,7 +29,8 @@
             </span>
 
             <button pButton pRipple icon="pi pi-search" class="p-button-text w-8" (click)="onFilter()"
-                pTooltip="{{ 'dashboard.guide.title_search' | translate }}" tooltipPosition="top" severity="info"></button>
+                pTooltip="{{ 'dashboard.guide.title_search' | translate }}" tooltipPosition="top"
+                severity="info"></button>
 
             &nbsp;&nbsp;&nbsp; {{ 'dashboard.recordings.recgrp' | translate }}: &nbsp;
 
@@ -35,9 +38,8 @@
                 placeholder="{{ 'settings.chanedit.all' | translate }}" [showClear]="true" class="'px-3">
             </p-select>
 
-            <button pButton pRipple icon="pi pi-refresh" class="p-button-text"
-                (click)="refreshing=true;refresh()" pTooltip="{{ 'common.refresh' | translate }}"
-                tooltipPosition="top" severity="info"></button>
+            <button pButton pRipple icon="pi pi-refresh" class="p-button-text" (click)="refreshing=true;refresh()"
+                pTooltip="{{ 'common.refresh' | translate }}" tooltipPosition="top" severity="info"></button>
             &nbsp;&nbsp;&nbsp;{{ programs.length }} {{ 'common.rows' | translate }}
         </div>
 
@@ -56,11 +58,11 @@
         <!-- [rowsPerPageOptions]="[20, 50, 100, 200, 1000, 10000]" [showGridlines]="true" [stripedRows]="true" -->
         <!-- scrollHeight="flex" [scrollable]="true"> -->
 
-        <p-table #table *ngIf="showTable" [value]="programs" [rowHover]="true"
-            selectionMode="multiple" [(selection)]="selection" [metaKeySelection]="true" dataKey="Recording.RecordedId"
-            (onRowSelect)="onSelectChange()" (onRowUnselect)="onSelectChange()" [showGridlines]="true"
-            [stripedRows]="true" scrollHeight="83vh" [scrollable]="true"
-            [sortField]="sortField" [sortOrder]="sortOrder" (onSort)="onSort($event)"
+        @if (showTable) {
+        <p-table #table [value]="programs" [rowHover]="true" selectionMode="multiple" [(selection)]="selection"
+            [metaKeySelection]="true" dataKey="Recording.RecordedId" (onRowSelect)="onSelectChange()"
+            (onRowUnselect)="onSelectChange()" [showGridlines]="true" [stripedRows]="true" scrollHeight="83vh"
+            [scrollable]="true" [sortField]="sortField" [sortOrder]="sortOrder" (onSort)="onSort($event)"
             (onLazyLoad)="loadLazy($event)" [rows]="100" [lazy]="true" [virtualScroll]="true" size="small">
             <ng-template pTemplate="header">
                 <tr>
@@ -75,12 +77,13 @@
                         translate }}
                         <!-- lazy - SeasEp, page - *remove* -->
                         <!-- <p-sortIcon field="SeasEp"></p-sortIcon>    -->
-                         <p-sortIcon field="SeasEp"></p-sortIcon>
+                        <p-sortIcon field="SeasEp"></p-sortIcon>
                     </th>
                     <!-- lazy - originalairdate, page - Airdate -->
                     <th style="width: 9%" class="justify-end p-1" pSortableColumn="originalairdate"
                         pTooltip="{{ 'dashboard.recordings.orig_airdate_desc' | translate }}" tooltipPosition="top">
-                        {{ 'dashboard.recordings.orig_airdate' | translate }}<p-sortIcon field="originalairdate"></p-sortIcon>
+                        {{ 'dashboard.recordings.orig_airdate' | translate }}<p-sortIcon
+                            field="originalairdate"></p-sortIcon>
                     </th>
                     <th style="width: 9%" class="justify-end p-1" pSortableColumn="StartTime">
                         {{ 'dashboard.recordings.airdate' | translate }}<p-sortIcon field="StartTime"></p-sortIcon>
@@ -91,18 +94,16 @@
                         translate }}<p-sortIcon field="ChanNum"></p-sortIcon></th>
                     <!-- lazy - RecGroup, page - Recording.RecGroup -->
                     <th style="width: 9%" class="p-1" pSortableColumn="RecGroup">
-                        {{ 'dashboard.recordings.recgrp' | translate }}<p-sortIcon
-                            field="RecGroup"></p-sortIcon> </th>
+                        {{ 'dashboard.recordings.recgrp' | translate }}<p-sortIcon field="RecGroup"></p-sortIcon> </th>
                     <th style="width: 7%" class="justify-end p-1" pSortableColumn="duration">
                         {{ 'dashboard.recordings.duration' | translate }}
                         <!-- lazy - duration, page - *remove* -->
                         <!-- <p-sortIcon field="duration"></p-sortIcon> -->
-                         <p-sortIcon field="duration"></p-sortIcon>
+                        <p-sortIcon field="duration"></p-sortIcon>
                     </th>
                     <!-- lazy - filesize, page - Recording.FileSize -->
                     <th style="width: 9%" class="justify-end p-1" pSortableColumn="filesize">{{
-                        'dashboard.recordings.file_size' | translate }}<p-sortIcon
-                            field="filesize"></p-sortIcon></th>
+                        'dashboard.recordings.file_size' | translate }}<p-sortIcon field="filesize"></p-sortIcon></th>
                     <th style="width: 5%; white-space: nowrap; background: var(--surface-card);" class="p-1">
                         <a target="_blank">
                             <i class="pi pi-download"></i></a>
@@ -118,17 +119,20 @@
                     <td class="p-1 overflow-hidden">
                         <div class="mycell">
                             <div class="mytext" [ngClass]="{'line-through' : program.Recording.RecGroup == 'Deleted'}">
+                                @if (program.VideoPropNames.indexOf('DAMAGED') > -1) {
                                 <i class="pi pi-exclamation-triangle p-1"
-                                    *ngIf="program.VideoPropNames.indexOf('DAMAGED') > -1"
                                     pTooltip="{{ 'dashboard.recordings.damaged' | translate }}"
                                     tooltipPosition="top"></i>
+                                }
                                 {{program.Title}}
                             </div>
                         </div>
                     </td>
                     <td class="p-1">
-                        <i class="pi pi-eye" *ngIf="program.ProgramFlagNames.indexOf('WATCHED') > -1"
-                            pTooltip="{{ 'dashboard.recordings.watched' | translate }}" tooltipPosition="top"></i>
+                        @if (program.ProgramFlagNames.indexOf('WATCHED') > -1) {
+                        <i class="pi pi-eye" pTooltip="{{ 'dashboard.recordings.watched' | translate }}"
+                            tooltipPosition="top"></i>
+                        }
                     </td>
                     <td class="p-1 overflow-hidden" pTooltip="{{program.Description}}" tooltipPosition="top">
                         <div class="mycell">
@@ -137,18 +141,22 @@
                         </div>
                     </td>
                     <td class="p-1">
-                        <div *ngIf="program.Season>0 || program.Episode>0"> {{program.Season}}x{{program.Episode}}
+                        @if (program.Season>0 || program.Episode>0) {
+                        <div> {{program.Season}}x{{program.Episode}}
                         </div>
+                        }
                     </td>
                     <td class="justify-end p-1 overflow-hidden">
                         <div class="mycell">
-                            <div *ngIf="program.Airdate" class="mytext"
-                                [ngClass]="{'line-through' : program.Recording.RecGroup == 'Deleted'}"
+                            @if (program.Airdate) {
+                            <div class="mytext" [ngClass]="{'line-through' : program.Recording.RecGroup == 'Deleted'}"
                                 [innerHTML]="utility.formatDate(program.Airdate,true)"></div>
-                            <div *ngIf="program.ReleaseYear && !program.Airdate" class="mytext"
-                                [ngClass]="{'line-through' : program.Recording.RecGroup == 'Deleted'}">
+                            }
+                            @if (program.ReleaseYear && !program.Airdate) {
+                            <div class="mytext" [ngClass]="{'line-through' : program.Recording.RecGroup == 'Deleted'}">
                                 {{program.ReleaseYear}}
                             </div>
+                            }
                         </div>
                     </td>
                     <td class="justify-end p-1 overflow-hidden">
@@ -184,12 +192,12 @@
                             pTooltip="{{ 'dashboard.recordings.download' | translate }}" tooltipPosition="left">
                             <i class="pi pi-download text-primary" [id]="'download_'+ rowIndex"></i></a>
                         <p-button icon="pi pi-ellipsis-v" variant="text" severity="primary"
-                            (click)="showContextMenu(program,$event)"/>
+                            (click)="showContextMenu(program,$event)" />
                     </td>
                 </tr>
             </ng-template>
-
         </p-table>
+        }
 
         <!-- Edit Metadata Dialog -->
         <p-dialog header="{{ 'dashboard.recordings.edit_metadata' | translate }}" [(visible)]="displayMetadataDlg"
@@ -258,17 +266,18 @@
 
             <ng-template pTemplate="footer">
                 <div class="col-span-12" style="text-align: left;">
-                    <p-message *ngIf="successCount > 0 && errorCount == 0 && !recsform.dirty" severity="success"
-                        text="{{ 'common.savesuccess' | translate }}"></p-message>
-                    <p-message *ngIf="errorCount > 0" severity="error"
-                        text="{{ 'common.networkfail' | translate }}"></p-message>
+                    @if (successCount > 0 && errorCount == 0 && !recsform.dirty) {
+                    <p-message severity="success" text="{{ 'common.savesuccess' | translate }}"></p-message>
+                    }
+                    @if (errorCount > 0) {
+                    <p-message severity="error" text="{{ 'common.networkfail' | translate }}"></p-message>
+                    }
                 </div>
                 <p-button icon="pi pi-times-circle" (onClick)="closeDialog()" label="{{ 'common.close' | translate }}"
                     severity="warn">
                 </p-button>
                 <p-button icon="pi pi-check-circle" (onClick)="saveProgram();" label="{{ 'common.save' | translate }}"
-                    severity="success"
-                    [disabled]="!recsform.dirty || program.Title.trim() == '' "></p-button>
+                    severity="success" [disabled]="!recsform.dirty || program.Title.trim() == '' "></p-button>
             </ng-template>
         </p-dialog>
 

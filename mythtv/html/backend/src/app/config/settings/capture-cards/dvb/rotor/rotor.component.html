@@ -41,7 +41,8 @@
                     </small>
                 </div>
 
-                <div class="form-group field" *ngIf="diseqcTree.SubType == 'diseqc_1_2'">
+                @if (diseqcTree.SubType == 'diseqc_1_2') {
+                <div class="form-group field">
                     <label for="RotorPositions" class="label block">{{ 'settings.capture.diseqc.rotor.positions_label' |
                         translate }}</label>
                     <div [style]="{'width':'25rem'}">
@@ -66,128 +67,139 @@
                                                 </p-inputNumber>
                                             </ng-template>
                                             <ng-template pTemplate="output">
-                                                <div *ngIf="position.Angle < 0">{{position.Angle}} (W)</div>
-                                                <div *ngIf="position.Angle!=null && position.Angle >= 0">
-                                                    {{position.Angle}} (E)</div>
-                                            </ng-template>
-                                        </p-cellEditor>
-                                    </td>
-                                </tr>
-                            </ng-template>
-                        </p-table>
+                                                @if (position.Angle < 0) { <div>{{position.Angle}} (W)
                     </div>
-                    <small class="block">
-                        {{ 'settings.capture.diseqc.rotor.positions_desc' | translate }}
-                    </small>
-                </div>
+                    }
+                    @if (position.Angle!=null && position.Angle >= 0) {
+                    <div>
+                        {{position.Angle}} (E)</div>
+                    }
+        </ng-template>
+        </p-cellEditor>
+        </td>
+        </tr>
+        </ng-template>
+        </p-table>
+        </div>
+        <small class="block">
+            {{ 'settings.capture.diseqc.rotor.positions_desc' | translate }}
+        </small>
+        </div>
+        }
 
-                <div class="form-group field">
-                    <label for="RotorLoSpeed" class="label block">{{ 'settings.capture.diseqc.rotor.lospeed_label' |
-                        translate }}</label>
-                    <p-inputNumber [(ngModel)]="diseqcTree.RotorLoSpeed" name="RotorLoSpeed" id="RotorLoSpeed"
-                        mode="decimal" [maxFractionDigits]="5">
-                    </p-inputNumber>
-                    <small class="block">
-                        {{ 'settings.capture.diseqc.rotor.lospeed_desc' | translate }}
-                    </small>
-                </div>
+        <div class="form-group field">
+            <label for="RotorLoSpeed" class="label block">{{ 'settings.capture.diseqc.rotor.lospeed_label' |
+                translate }}</label>
+            <p-inputNumber [(ngModel)]="diseqcTree.RotorLoSpeed" name="RotorLoSpeed" id="RotorLoSpeed" mode="decimal"
+                [maxFractionDigits]="5">
+            </p-inputNumber>
+            <small class="block">
+                {{ 'settings.capture.diseqc.rotor.lospeed_desc' | translate }}
+            </small>
+        </div>
 
-                <div class="form-group field">
-                    <label for="RotorHiSpeed" class="label block">{{ 'settings.capture.diseqc.rotor.hispeed_label' |
-                        translate }}</label>
-                    <p-inputNumber [(ngModel)]="diseqcTree.RotorHiSpeed" name="RotorHiSpeed" id="RotorHiSpeed"
-                        mode="decimal" [maxFractionDigits]="5">
-                    </p-inputNumber>
-                    <small class="block">
-                        {{ 'settings.capture.diseqc.rotor.hispeed_desc' | translate }}
-                    </small>
-                </div>
+        <div class="form-group field">
+            <label for="RotorHiSpeed" class="label block">{{ 'settings.capture.diseqc.rotor.hispeed_label' |
+                translate }}</label>
+            <p-inputNumber [(ngModel)]="diseqcTree.RotorHiSpeed" name="RotorHiSpeed" id="RotorHiSpeed" mode="decimal"
+                [maxFractionDigits]="5">
+            </p-inputNumber>
+            <small class="block">
+                {{ 'settings.capture.diseqc.rotor.hispeed_desc' | translate }}
+            </small>
+        </div>
 
-                <div class="form-group field">
-                    <label for="Latitude" class="label block">{{ 'settings.capture.diseqc.rotor.latitude_label' |
-                        translate }}</label>
-                    <p-inputNumber [(ngModel)]="fields.Latitude" name="Latitude" id="Latitude" mode="decimal"
-                        [maxFractionDigits]="5">
-                    </p-inputNumber>
-                    <small class="block">
-                        {{ 'settings.capture.diseqc.rotor.latitude_desc' | translate }}
-                    </small>
-                </div>
+        <div class="form-group field">
+            <label for="Latitude" class="label block">{{ 'settings.capture.diseqc.rotor.latitude_label' |
+                translate }}</label>
+            <p-inputNumber [(ngModel)]="fields.Latitude" name="Latitude" id="Latitude" mode="decimal"
+                [maxFractionDigits]="5">
+            </p-inputNumber>
+            <small class="block">
+                {{ 'settings.capture.diseqc.rotor.latitude_desc' | translate }}
+            </small>
+        </div>
 
-                <div class="form-group field">
-                    <label for="Longitude" class="label block">{{ 'settings.capture.diseqc.rotor.longitude_label' |
-                        translate }}</label>
-                    <p-inputNumber [(ngModel)]="fields.Longitude" name="Longitude" id="Longitude" mode="decimal"
-                        [maxFractionDigits]="5">
-                    </p-inputNumber>
-                    <small class="block">
-                        {{ 'settings.capture.diseqc.rotor.longitude_desc' | translate }}
-                    </small>
-                </div>
+        <div class="form-group field">
+            <label for="Longitude" class="label block">{{ 'settings.capture.diseqc.rotor.longitude_label' |
+                translate }}</label>
+            <p-inputNumber [(ngModel)]="fields.Longitude" name="Longitude" id="Longitude" mode="decimal"
+                [maxFractionDigits]="5">
+            </p-inputNumber>
+            <small class="block">
+                {{ 'settings.capture.diseqc.rotor.longitude_desc' | translate }}
+            </small>
+        </div>
 
-                <!-- Next Device Panel -->
-                <p-fieldset class="mb-6 w-full" legend="{{ 'settings.capture.dvb.satellite_heading' | translate }}"
-                    [toggleable]="true" [collapsed]="true">
-                    <p-button label="{{ 'settings.capture.dvb.newsatellite_button' | translate }}"
-                        *ngIf="!diseqcSubTree" (onClick)="work.displayNewDiseqc = true" icon="pi pi-plus-circle"
-                        severity="primary">
+        <!-- Next Device Panel -->
+        <p-fieldset class="mb-6 w-full" legend="{{ 'settings.capture.dvb.satellite_heading' | translate }}"
+            [toggleable]="true" [collapsed]="true">
+            @if (!diseqcSubTree) {
+            <p-button label="{{ 'settings.capture.dvb.newsatellite_button' | translate }}"
+                (onClick)="work.displayNewDiseqc = true" icon="pi pi-plus-circle" severity="primary">
+            </p-button>
+            }
+            <p-dialog header="{{ 'settings.capture.dvb.newsatellite_heading' | translate }}"
+                [(visible)]="work.displayNewDiseqc" [modal]="true" [style]="{width: '50vw'}" [draggable]="false"
+                [resizable]="false">
+                <label for="disenqcTypes" class="label block">{{ 'settings.capture.dvb.newsatellite_devtype' |
+                    translate }}</label>
+                <p-listbox [options]="captureCardService.diseqcTypes" [(ngModel)]="selectedDiseqcType"
+                    optionLabel="description" name="disenqcTypes" optionDisabled="inactive"
+                    (onDblClick)="newDiseqc();"></p-listbox>
+                <ng-template pTemplate="footer">
+                    <p-button icon="pi pi-times-circle" (onClick)="work.displayNewDiseqc=false"
+                        label="{{ 'common.cancel' | translate }}" severity="warn">
                     </p-button>
-                    <p-dialog header="{{ 'settings.capture.dvb.newsatellite_heading' | translate }}"
-                        [(visible)]="work.displayNewDiseqc" [modal]="true" [style]="{width: '50vw'}" [draggable]="false"
-                        [resizable]="false">
-                        <label for="disenqcTypes" class="label block">{{ 'settings.capture.dvb.newsatellite_devtype' |
-                            translate }}</label>
-                        <p-listbox [options]="captureCardService.diseqcTypes" [(ngModel)]="selectedDiseqcType"
-                            optionLabel="description" name="disenqcTypes" optionDisabled="inactive"
-                            (onDblClick)="newDiseqc();"></p-listbox>
-                        <ng-template pTemplate="footer">
-                            <p-button icon="pi pi-times-circle" (onClick)="work.displayNewDiseqc=false"
-                                label="{{ 'common.cancel' | translate }}" severity="warn">
-                            </p-button>
-                            <p-button icon="pi pi-check-circle" (onClick)="newDiseqc();"
-                                label="{{ 'common.ok' | translate }}" severity="primary"
-                                [disabled]="selectedDiseqcType.inactive">
-                            </p-button>
-                        </ng-template>
-                    </p-dialog>
-
-                    <p-button severity="warn" *ngIf="diseqcSubTree" label="Delete Satellite Devices"
-                        icon="pi pi-trash" (onClick)="work.displayDeleteDiseqc=true" [disabled]="!diseqcSubTree">
+                    <p-button icon="pi pi-check-circle" (onClick)="newDiseqc();" label="{{ 'common.ok' | translate }}"
+                        severity="primary" [disabled]="selectedDiseqcType.inactive">
                     </p-button>
-                    <p-dialog header="{{ 'settings.capture.dvb.satellite_delete_header' | translate }}"
-                        [(visible)]="work.displayDeleteDiseqc" [modal]="true" [style]="{width: '50vw'}"
-                        [draggable]="false" [resizable]="false">
-                        <h2>{{ 'settings.common.ru_sure' | translate }}</h2>
-                        <p>{{ 'settings.capture.dvb.satellite_delete_desc' | translate }}</p>
-                        <ng-template pTemplate="footer">
-                            <p-button icon="pi pi-times-circle" (click)="work.displayDeleteDiseqc=false"
-                                label="{{ 'common.no' | translate }}" severity="warn">
-                            </p-button>
-                            <p-button icon="pi pi-check-circle" (click)="deleteDiseqc()"
-                                label="{{ 'common.yes' | translate }}" severity="primary"></p-button>
-                        </ng-template>
-                    </p-dialog>
+                </ng-template>
+            </p-dialog>
 
-                    <app-lnb *ngIf="this.diseqcSubTree && this.diseqcSubTree.Type == 'lnb'" [diseqcTree]="diseqcSubTree"
-                        [diseqcTreeList]="diseqcTreeList" (baseEvent)="setDiseqcObject($event)"
-                        [dvbComponent]="dvbComponent">
-                    </app-lnb>
-                    <app-rotor *ngIf="this.diseqcSubTree && this.diseqcSubTree.Type == 'rotor'"
-                        [diseqcTree]="diseqcSubTree" [diseqcTreeList]="diseqcTreeList"
-                        (baseEvent)="setDiseqcObject($event)" [dvbComponent]="dvbComponent">
-                    </app-rotor>
-                    <app-switch *ngIf="this.diseqcSubTree && this.diseqcSubTree.Type == 'switch'"
-                        [diseqcTree]="diseqcSubTree" [diseqcTreeList]="diseqcTreeList"
-                        (baseEvent)="setDiseqcObject($event)" [dvbComponent]="dvbComponent">
-                    </app-switch>
-                    <app-unicable *ngIf="this.diseqcSubTree && this.diseqcSubTree.Type == 'scr'"
-                        [diseqcTree]="diseqcSubTree" [diseqcTreeList]="diseqcTreeList"
-                        (baseEvent)="setDiseqcObject($event)" [dvbComponent]="dvbComponent">
-                    </app-unicable>
+            @if (diseqcSubTree) {
+            <p-button severity="warn" label="Delete Satellite Devices" icon="pi pi-trash"
+                (onClick)="work.displayDeleteDiseqc=true" [disabled]="!diseqcSubTree">
+            </p-button>
+            }
+            <p-dialog header="{{ 'settings.capture.dvb.satellite_delete_header' | translate }}"
+                [(visible)]="work.displayDeleteDiseqc" [modal]="true" [style]="{width: '50vw'}" [draggable]="false"
+                [resizable]="false">
+                <h2>{{ 'settings.common.ru_sure' | translate }}</h2>
+                <p>{{ 'settings.capture.dvb.satellite_delete_desc' | translate }}</p>
+                <ng-template pTemplate="footer">
+                    <p-button icon="pi pi-times-circle" (click)="work.displayDeleteDiseqc=false"
+                        label="{{ 'common.no' | translate }}" severity="warn">
+                    </p-button>
+                    <p-button icon="pi pi-check-circle" (click)="deleteDiseqc()" label="{{ 'common.yes' | translate }}"
+                        severity="primary"></p-button>
+                </ng-template>
+            </p-dialog>
 
-                </p-fieldset>
+            @if (this.diseqcSubTree && this.diseqcSubTree.Type == 'lnb') {
+            <app-lnb [diseqcTree]="diseqcSubTree" [diseqcTreeList]="diseqcTreeList"
+                (baseEvent)="setDiseqcObject($event)" [dvbComponent]="dvbComponent">
+            </app-lnb>
+            }
+            @if (this.diseqcSubTree && this.diseqcSubTree.Type == 'rotor') {
+            <app-rotor [diseqcTree]="diseqcSubTree" [diseqcTreeList]="diseqcTreeList"
+                (baseEvent)="setDiseqcObject($event)" [dvbComponent]="dvbComponent">
+            </app-rotor>
+            }
+            @if (this.diseqcSubTree && this.diseqcSubTree.Type == 'switch') {
+            <app-switch [diseqcTree]="diseqcSubTree" [diseqcTreeList]="diseqcTreeList"
+                (baseEvent)="setDiseqcObject($event)" [dvbComponent]="dvbComponent">
+            </app-switch>
+            }
+            @if (this.diseqcSubTree && this.diseqcSubTree.Type == 'scr') {
+            <app-unicable [diseqcTree]="diseqcSubTree" [diseqcTreeList]="diseqcTreeList"
+                (baseEvent)="setDiseqcObject($event)" [dvbComponent]="dvbComponent">
+            </app-unicable>
+            }
 
-            </div>
+        </p-fieldset>
+
+        </div>
         </ng-template>
     </p-card>
 </form>

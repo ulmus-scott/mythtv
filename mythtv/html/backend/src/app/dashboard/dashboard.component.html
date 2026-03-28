@@ -1,21 +1,23 @@
-<div *ngIf="translateDone">
-  <h1></h1>
-  <div class="flex flex-row">
-    <div class="shrink overflow-auto">
-      <!-- tabMenu is deprecated, to be replaced by tabs. Tabs is very ugly and needs
-      styling to be done to be useful. So I am leving tabMenu for now -->
-      <p-tabMenu #menu [model]="fullMenu" [activeItem]="activeItem" [scrollable]="true"/>
-      <!-- This is ugly tabs alternative -->
-      <!-- <p-tabs [scrollable]="true" [selectOnFocus]="true">
+@if (translateDone) {
+<div>
+    <h1></h1>
+    <div class="flex flex-row">
+        <div class="shrink overflow-auto">
+            <!-- tabMenu is deprecated, to be replaced by tabs. Tabs is very ugly and needs
+        styling to be done to be useful. So I am leving tabMenu for now -->
+            <p-tabMenu #menu [model]="fullMenu" [activeItem]="activeItem" [scrollable]="true" />
+            <!-- This is ugly tabs alternative -->
+            <!-- <p-tabs [scrollable]="true" [selectOnFocus]="true">
         <p-tablist>
           @for (tab of fullMenu; track tab.routerLink ) {
             <p-tab [routerLink]="tab.routerLink">
               <span>{{tab.label}}</span>
             </p-tab>
-          } 
+          }
         </p-tablist>
       </p-tabs> -->
+        </div>
     </div>
-  </div>
-  <router-outlet></router-outlet>
+    <router-outlet></router-outlet>
 </div>
+}

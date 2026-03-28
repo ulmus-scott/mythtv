@@ -17,10 +17,12 @@
                         [ngClass]="{'is-invalid': host.invalid }" placeholder="Ex. 127.0.0.1 or localhost" required
                         (blur)="setCommandList()" />
                     <small id="ipaddress-help">{{ 'setupwizard.ipaddress_help' | translate }}</small>
-                    <div *ngIf="host.invalid && (host.dirty || host.touched)">
+                    @if (host.invalid && (host.dirty || host.touched)) {
+                    <div>
                         <small id="address-help" class="p-error block">{{ 'setupwizard.IPorAddressRequired' | translate
                             }}</small>
                     </div>
+                    }
                 </div>
 
                 <div class="field col-span-12 md:col-span-6">
@@ -29,9 +31,11 @@
                         name="port" #port="ngModel" class=" mb-2 form-control w-full" placeholder="Ex. 3306" min="0"
                         max="65536" (blur)="setCommandList()" />
                     <small id="port-help">{{ 'setupwizard.port_help' | translate }}</small>
-                    <div *ngIf="port.invalid && (port.dirty || port.touched)">
+                    @if (port.invalid && (port.dirty || port.touched)) {
+                    <div>
                         <small class="p-error block">{{ 'setupwizard.portRequired' | translate }}</small>
                     </div>
+                    }
                 </div>
 
                 <div class="field col-span-12 md:col-span-6">
@@ -40,9 +44,11 @@
                         name="user" #user="ngModel" class="mb-2 form-control w-full" placeholder="Ex. mythtv" required
                         (blur)="setCommandList()" />
                     <small id="user-help">{{ 'setupwizard.user_help' | translate }}</small>
-                    <div *ngIf="user.invalid && (user.dirty || user.touched)">
+                    @if (user.invalid && (user.dirty || user.touched)) {
+                    <div>
                         <small class="p-error block">{{ 'setupwizard.userRequired' | translate }}</small>
                     </div>
+                    }
                 </div>
                 <div class="field col-span-12 md:col-span-6">
                     <label for="password" class="label block">{{ 'setupwizard.MySQLPassword' | translate }}</label>
@@ -50,9 +56,11 @@
                         [(ngModel)]="database.Password" name="password" #password="ngModel"
                         class="mb-2 form-control w-full" placeholder="Ex. mythtv" required (blur)="setCommandList()" />
                     <small id="password-help">{{ 'setupwizard.password_help' | translate }}</small>
-                    <div *ngIf="password.invalid && (password.dirty || password.touched)">
+                    @if (password.invalid && (password.dirty || password.touched)) {
+                    <div>
                         <small class="p-error block">{{ 'setupwizard.passwordRequired' | translate }}</small>
                     </div>
+                    }
                 </div>
 
                 <div class="field col-span-12 md:col-span-6">
@@ -61,9 +69,11 @@
                         name="dbname" #dbname="ngModel" class="mb-2 form-control w-full" placeholder="Ex. mythconverg"
                         required (blur)="setCommandList()" />
                     <small id="dbname-help">{{ 'setupwizard.dbname_help' | translate }}</small>
-                    <div *ngIf="dbname.invalid && (dbname.dirty || dbname.touched)">
+                    @if (dbname.invalid && (dbname.dirty || dbname.touched)) {
+                    <div>
                         <small class="p-error block">{{ 'setupwizard.databaseNameRequired' | translate }}</small>
                     </div>
+                    }
                 </div>
 
                 <div class="field col-span-12">
@@ -76,7 +86,8 @@
                     </small>
                 </div>
 
-                <div class="field col-span-12" *ngIf="database.LocalEnabled">
+                @if (database.LocalEnabled) {
+                <div class="field col-span-12">
                     <label for="LocalHostName" class="label block">{{ 'setupwizard.LocalHostName_label' | translate
                         }}</label>
                     <input pInputText id="LocalHostName" type="text" aria-describedby="LocalHostName-help"
@@ -84,6 +95,7 @@
                         class="mb-2 form-control w-full" />
                     <small id="LocalHostName-help">{{ 'setupwizard.LocalHostName_desc' | translate }}</small>
                 </div>
+                }
 
                 <div class="field col-span-12">
                     <p-checkbox [(ngModel)]="database.WOLEnabled" name="WOLEnabled" class="mb-2" [binary]="true" />
@@ -94,7 +106,8 @@
                     </small>
                 </div>
 
-                <div class="field col-span-12 md:col-span-6" *ngIf="database.WOLEnabled">
+                @if (database.WOLEnabled) {
+                <div class="field col-span-12 md:col-span-6">
                     <label for="WOLReconnect" class="label block">
                         {{ 'settings.vsource.WOLReconnect_label' | translate }}
                     </label>
@@ -105,8 +118,10 @@
                         {{ 'settings.vsource.WOLReconnect_desc' | translate }}
                     </small>
                 </div>
+                }
 
-                <div class="field col-span-12 md:col-span-6" *ngIf="database.WOLEnabled">
+                @if (database.WOLEnabled) {
+                <div class="field col-span-12 md:col-span-6">
                     <label for="WOLRetry" class="label block">
                         {{ 'settings.vsource.WOLRetry_label' | translate }}
                     </label>
@@ -117,14 +132,17 @@
                         {{ 'settings.vsource.WOLRetry_desc' | translate }}
                     </small>
                 </div>
+                }
 
-                <div class="field col-span-12" *ngIf="database.WOLEnabled">
+                @if (database.WOLEnabled) {
+                <div class="field col-span-12">
                     <label for="WOLCommand" class="label block">{{ 'setupwizard.WOLCommand_label' | translate }}</label>
                     <input pInputText id="WOLCommand" type="text" aria-describedby="WOLCommand-help"
                         [(ngModel)]="database.WOLCommand" name="WOLCommand" #WOLCommand="ngModel"
                         class="mb-2 form-control w-full" />
                     <small id="WOLCommand-help">{{ 'setupwizard.WOLCommand_desc' | translate }}</small>
                 </div>
+                }
 
             </div>
             <div class="form-group">
@@ -135,34 +153,36 @@
 
             <div class="pt-6" style="display: flex">
                 <!-- connected -->
-                <div *ngIf="m_wizardData.DatabaseStatus.DatabaseStatus.Connected else notconnected">
+                @if (m_wizardData.DatabaseStatus.DatabaseStatus.Connected) {
+                <div>
                     <p-message class="pr-2" severity="success"
                         text="{{ 'setupwizard.connectedToDatabase' | translate }}"></p-message>
                 </div>
+                } @else {
+                <div #notconnected class="pr-2 notconnected">
+                    <p-message class="" severity="error"
+                        text="{{ 'setupwizard.notConnectedToDatabase' | translate }}"></p-message>
+                </div>
+                }
 
-                <ng-template #notconnected>
-                    <div #notconnected class="pr-2 notconnected">
-                        <p-message class="" severity="error"
-                            text="{{ 'setupwizard.notConnectedToDatabase' | translate }}"></p-message>
-                    </div>
-                </ng-template>
 
                 <!-- schema version -->
-                <div
-                    *ngIf="m_wizardData.DatabaseStatus.DatabaseStatus.Connected && m_wizardData.DatabaseStatus.DatabaseStatus.SchemaVersion else noschema">
+                @if (m_wizardData.DatabaseStatus.DatabaseStatus.Connected &&
+                m_wizardData.DatabaseStatus.DatabaseStatus.SchemaVersion) {
+                <div>
                     <p-message class="pr-2" severity="info"
                         text="{{ 'setupwizard.dbsetup.schemaver'
                         | translate: {SchemaVersion: m_wizardData.DatabaseStatus.DatabaseStatus.SchemaVersion} }}"></p-message>
                 </div>
+                } @else {
+                <div #nodatabase class="pr-2 noschema">
+                    <p-message severity="info" text="{{ 'setupwizard.databaseSchemaUnknown' | translate }}"></p-message>
+                </div>
+                }
 
-                <ng-template #noschema>
-                    <div #nodatabase class="pr-2 noschema">
-                        <p-message severity="info"
-                            text="{{ 'setupwizard.databaseSchemaUnknown' | translate }}"></p-message>
-                    </div>
-                </ng-template>
             </div>
-            <div *ngIf="setupService.isDatabaseIgnored">
+            @if (setupService.isDatabaseIgnored) {
+            <div>
                 <h2>{{ 'common.instructions' | translate }}</h2>
                 <div class="flex pb-4">
                     <div class="flex-none flex items-center label block pr-8">
@@ -179,11 +199,11 @@
                         <label for="mariadb">MariaDB</label>
                     </div>
                 </div>
-                <div *ngIf="connectionFail || !m_wizardData.DatabaseStatus.DatabaseStatus.Connected">
+                @if (connectionFail || !m_wizardData.DatabaseStatus.DatabaseStatus.Connected) {
+                <div>
                     <p>
                         {{ 'setupwizard.sqlinstructions' | translate }}
                     </p>
-
                     <table style="white-space: 'pre-line'">
                         <tr>
                             <td class="items-center bg-blue-100 text-gray-900" style="font-family: monospace;">
@@ -210,7 +230,7 @@
                         </tr>
                     </table>
                 </div>
-
+                }
                 <p class=>{{ 'setupwizard.tztables' | translate }}</p>
                 <table>
                     <tr>
@@ -229,6 +249,7 @@
                 <p>{{ 'setupwizard.savethis' | translate }}</p>
                 <p>{{ 'setupwizard.restartbe' | translate }}</p>
             </div>
+            }
 
 
         </ng-template>
@@ -236,13 +257,15 @@
         <ng-template pTemplate="footer">
             <div class="grid grid-cols-12 gap-4 nogutter m-8">
                 <div class="col-span-12">
-                    <p-message
-                        *ngIf="successCount > 0 && successCount == expectedCount && errorCount == 0 && !databaseForm.dirty"
-                        severity="success" text="{{ 'common.savesuccess' | translate }}"></p-message>
-                    <p-message *ngIf="errorCount > 0" severity="error"
-                        text="{{ 'common.networkfail' | translate }}"></p-message>
-                    <p-message *ngIf="connectionFail" severity="error"
-                        text="{{ 'setupwizard.connectionfail' | translate }}"></p-message>
+                    @if (successCount > 0 && successCount == expectedCount && errorCount == 0 && !databaseForm.dirty) {
+                    <p-message severity="success" text="{{ 'common.savesuccess' | translate }}"></p-message>
+                    }
+                    @if (errorCount > 0) {
+                    <p-message severity="error" text="{{ 'common.networkfail' | translate }}"></p-message>
+                    }
+                    @if (connectionFail) {
+                    <p-message severity="error" text="{{ 'setupwizard.connectionfail' | translate }}"></p-message>
+                    }
                 </div>
             </div>
             <div class="col-span-12 flex">

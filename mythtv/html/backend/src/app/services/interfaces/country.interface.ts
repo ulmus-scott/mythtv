@@ -1,8 +1,8 @@
 export interface Country {
-    Code:           string;
-    Country:        string;
+    Code: string;
+    Country: string;
     NativeCountry?: string;
-    Image?:         string;
+    Image?: string;
 }
 
 export interface MythCountryList {
@@ -12,5 +12,5 @@ export interface MythCountryList {
 }
 
 export interface CountryList {
-    Countries:      Country[];
+    Countries: Country[];
 }

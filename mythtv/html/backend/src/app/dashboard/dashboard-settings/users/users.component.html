@@ -1,8 +1,7 @@
-<div class="block card w-full" *ngIf="loaded">
-
+@if (loaded) {
+<div class="block card w-full">
     <div class="form-group field">
         <h3>{{ 'dashboard.users.auth_title' | translate }}</h3>
-
         <div class="field-radiobutton flex pt-2">
             <p-radioButton name="APIAuthReqd" value="NONE" [(ngModel)]="apiAuthReqd" inputId="authNone"
                 [disabled]="dataService.loggedInUser!='admin'" (onClick)="saveapiAuthReqd()"></p-radioButton>
@@ -22,24 +21,22 @@
         <small class="block pt-2">
             {{ 'dashboard.users.auth_desc' | translate }}
         </small>
-        <p-message *ngIf="authReqFail > 0" severity="error"
-            text="{{ 'dashboard.users.authreq_fail' | translate }}"></p-message>
-
+        @if (authReqFail > 0) {
+        <p-message severity="error" text="{{ 'dashboard.users.authreq_fail' | translate }}"></p-message>
+        }
     </div>
-
     <p-table [value]="users" scrollHeight="flex" [scrollable]="true" sortField="Name"
         styleClass="p-datatable-sm p-datatable-striped" [rowHover]="true" responsiveLayout="scroll">
         <ng-template pTemplate="caption">
-            <p-button label="{{ 'dashboard.users.new' | translate }}" icon="pi pi-plus"
-                class="mr-2" (click)="openNew()" severity="success"
-                [disabled]="dataService.loggedInUser && dataService.loggedInUser!='admin'"/>
+            <p-button label="{{ 'dashboard.users.new' | translate }}" icon="pi pi-plus" class="mr-2" (click)="openNew()"
+                severity="success" [disabled]="dataService.loggedInUser && dataService.loggedInUser!='admin'" />
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
                 <th>{{ 'dashboard.users.name_label' | translate }}</th>
                 <th style="width:  7%; white-space: nowrap;">
                     <!-- These are disabled buttons to ensure the spacing of the heading
-                     matches the spacing of the rows -->
+            matches the spacing of the rows -->
                     <button pButton pRipple icon="pi pi-pencil" class="p-button-text" disabled="true"></button>
                     <button pButton pRipple icon="pi pi-trash" class="p-button-text p-button-danger"
                         disabled="true"></button>
@@ -61,6 +58,7 @@
         </ng-template>
     </p-table>
 </div>
+}
 
 <form class="ml-4 mr-4" name="userform" #userform="ngForm">
 
@@ -73,12 +71,13 @@
                 class="mb-2 form-control w-full" [disabled]="!user.newUser" (change)="checkName()" />
         </div>
 
-        <div *ngIf="dataService.loggedInUser && dataService.loggedInUser!='admin' && !user.newUser"
-            class="form-group field">
+        @if (dataService.loggedInUser && dataService.loggedInUser!='admin' && !user.newUser) {
+        <div class="form-group field">
             <label for="OldPassword" class="label block">{{ 'navbar.users.old_password' | translate }}</label>
             <p-password id="OldPassword" [(ngModel)]="user.oldPassword" name="OldPassword" #UserName="ngModel"
                 class="mb-2 form-control w-full" [feedback]="false" [toggleMask]="true"></p-password>
         </div>
+        }
 
         <div class="form-group field">
             <label for="NewPassword" class="label block">{{ 'navbar.users.new_password' | translate }}</label>
@@ -95,11 +94,15 @@
 
         <ng-template pTemplate="footer">
             <div class="col-span-12" style="text-align: left;">
-                <p-message *ngIf="successCount > 0 && errorCount == 0 && !userform.dirty" severity="success"
-                    text="{{ 'common.savesuccess' | translate }}"></p-message>
-                <p-message *ngIf="errorCount > 0" severity="error"
-                    text="{{ 'common.networkfail' | translate }}"></p-message>
-                <p-message *ngIf="errorMsg" severity="error" text="{{ errorMsg }}"></p-message>
+                @if (successCount > 0 && errorCount == 0 && !userform.dirty) {
+                <p-message severity="success" text="{{ 'common.savesuccess' | translate }}"></p-message>
+                }
+                @if (errorCount > 0) {
+                <p-message severity="error" text="{{ 'common.networkfail' | translate }}"></p-message>
+                }
+                @if (errorMsg) {
+                <p-message severity="error" text="{{ errorMsg }}"></p-message>
+                }
             </div>
             <p-button icon="pi pi-times-circle" (onClick)="closeDialog()" label="{{ 'common.close' | translate }}"
                 severity="warn">
@@ -119,8 +122,9 @@
             translate: {Name: user.Name} }}</p>
         <ng-template pTemplate="footer">
             <div class="col-span-12" style="text-align: left;">
-                <p-message *ngIf="errorCount > 0" severity="error"
-                    text="{{ 'common.networkfail' | translate }}"></p-message>
+                @if (errorCount > 0) {
+                <p-message severity="error" text="{{ 'common.networkfail' | translate }}"></p-message>
+                }
             </div>
             <p-button icon="pi pi-times-circle" (onClick)="displayDelete=false; userform.form.markAsPristine();"
                 label="{{ 'common.close' | translate }}" severity="warn">

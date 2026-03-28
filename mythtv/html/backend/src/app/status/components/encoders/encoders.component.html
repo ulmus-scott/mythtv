@@ -1,25 +1,30 @@
 <div class="statusBox">
     <h2>{{ 'dashboard.status.encoder_title' | translate }}</h2>
-    <div *ngIf="encoders?.length != 0; else noEncoders">
-        <div *ngFor="let encoder of encoders">
+    @if (encoders?.length != 0) {
+    <div>
+        @for (encoder of encoders; track encoder) {
+        <div>
             <ul class="list-disc list-inside ml-4">
-                <li *ngIf="encoder.ParentId == 0">
+                @if (encoder.ParentId == 0) {
+                <li>
                     <span [innerHTML]="'dashboard.status.encoder_text' 
                         | translate: { DisplayName: encoder.Inputs[0].DisplayName, CardDetails: cardDetails(encoder.Id),
                         HostName: encoder.HostName, State: encoderStatuses(encoder.Id)}"></span>
-                    <ng-container *ngFor="let sub of encoders">
-                        <ng-container *ngIf="sub.Recording && (sub.Id == encoder.Id || sub.ParentId == encoder.Id)">
-                            '{{ sub.Recording.Title }}' on {{ sub.Recording.Channel.CallSign }}.
-                            {{ 'dashboard.status.endtime_text' |
-                            translate: { EndTime: utility.formatTime(sub.Recording.Recording.EndTs) } }}
-                            <br>
-                        </ng-container>
-                    </ng-container>
+                    @for (sub of encoders; track sub) {
+                    @if (sub.Recording && (sub.Id == encoder.Id || sub.ParentId == encoder.Id)) {
+                    '{{ sub.Recording.Title }}' on {{ sub.Recording.Channel.CallSign }}.
+                    {{ 'dashboard.status.endtime_text' |
+                    translate: { EndTime: utility.formatTime(sub.Recording.Recording.EndTs) } }}
+                    <br>
+                    }
+                    }
                 </li>
+                }
             </ul>
         </div>
+        }
     </div>
-</div>
-<ng-template #noEncoders>
+    } @else {
     <div>{{ 'dashboard.status.no_encoders' | translate }}</div>
-</ng-template>
+    }
+</div>

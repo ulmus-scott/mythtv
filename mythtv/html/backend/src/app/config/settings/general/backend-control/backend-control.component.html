@@ -7,38 +7,40 @@
             {{ 'settings.backendctrl.subtitle' | translate }}
         </ng-template>
         <ng-template pTemplate="content">
-                <div class="mb-6 w-full">
-                    <div class="form-group field">
-                        <label for="BackendStopCommand" class="label block">{{ 'settings.backendctrl.stop_label' | translate
-                            }}</label>
-                        <input pInputText id="BackendStopCommand" [(ngModel)]="BackendStopCommand"
-                            name="BackendStopCommand" #MiscStatusScript="ngModel" class="mb-2 form-control w-full" />
-                        <small class="block">
-                            {{ 'settings.backendctrl.stop_desc' | translate }}
-                        </small>
-                    </div>
-
-                    <div class="form-group field">
-                        <label for="BackendStartCommand" class="label block">{{ 'settings.backendctrl.start_label' | translate
-                            }}</label>
-                        <input pInputText id="BackendStartCommand" [(ngModel)]="BackendStartCommand"
-                            name="BackendStartCommand" #MiscStatusScript="ngModel" class="mb-2 form-control w-full" />
-                        <small class="block">
-                            {{ 'settings.backendctrl.start_desc' | translate }}
-                        </small>
-                    </div>
-
+            <div class="mb-6 w-full">
+                <div class="form-group field">
+                    <label for="BackendStopCommand" class="label block">{{ 'settings.backendctrl.stop_label' | translate
+                        }}</label>
+                    <input pInputText id="BackendStopCommand" [(ngModel)]="BackendStopCommand" name="BackendStopCommand"
+                        #MiscStatusScript="ngModel" class="mb-2 form-control w-full" />
+                    <small class="block">
+                        {{ 'settings.backendctrl.stop_desc' | translate }}
+                    </small>
                 </div>
+
+                <div class="form-group field">
+                    <label for="BackendStartCommand" class="label block">{{ 'settings.backendctrl.start_label' |
+                        translate
+                        }}</label>
+                    <input pInputText id="BackendStartCommand" [(ngModel)]="BackendStartCommand"
+                        name="BackendStartCommand" #MiscStatusScript="ngModel" class="mb-2 form-control w-full" />
+                    <small class="block">
+                        {{ 'settings.backendctrl.start_desc' | translate }}
+                    </small>
+                </div>
+
+            </div>
         </ng-template>
 
         <ng-template pTemplate="footer">
             <div class="grid grid-cols-12 gap-4 nogutter">
                 <div class="col-span-12">
-                    <p-message
-                        *ngIf="this.successCount > 0 && this.errorCount == 0 && !backendcontrol.dirty"
-                        severity="success" text="{{ 'common.savesuccess' | translate }}"></p-message>
-                    <p-message *ngIf="this.errorCount > 0" severity="error"
-                        text="{{ 'common.networkfail' | translate }}"></p-message>
+                    @if (this.successCount > 0 && this.errorCount == 0 && !backendcontrol.dirty) {
+                    <p-message severity="success" text="{{ 'common.savesuccess' | translate }}"></p-message>
+                    }
+                    @if (this.errorCount > 0) {
+                    <p-message severity="error" text="{{ 'common.networkfail' | translate }}"></p-message>
+                    }
                 </div>
                 <p-button class="col pr-1" label="{{'common.save' | translate}}" icon="pi pi-save" iconPos="left"
                     (onClick)="saveForm(); markPristine()"

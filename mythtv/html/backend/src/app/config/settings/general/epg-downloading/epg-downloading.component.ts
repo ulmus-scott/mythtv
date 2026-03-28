@@ -7,7 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
 import { InputNumberModule } from 'primeng/inputnumber';
-import { NgIf } from '@angular/common';
+
 import { CheckboxModule } from 'primeng/checkbox';
 import { SharedModule } from 'primeng/api';
 import { CardModule } from 'primeng/card';
@@ -17,7 +17,7 @@ import { SettingsComponent } from '../general-settings.component';
     selector: 'app-epg-downloading',
     templateUrl: './epg-downloading.component.html',
     styleUrls: ['./epg-downloading.component.css'],
-    imports: [FormsModule, CardModule, SharedModule, CheckboxModule, NgIf, InputNumberModule, MessageModule, ButtonModule, TranslateModule]
+    imports: [FormsModule, CardModule, SharedModule, CheckboxModule, InputNumberModule, MessageModule, ButtonModule, TranslateModule]
 })
 
 export class EpgDownloadingComponent implements OnInit, AfterViewInit {

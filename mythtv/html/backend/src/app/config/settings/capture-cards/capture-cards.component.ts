@@ -22,7 +22,7 @@ import { DvbComponent } from './dvb/dvb.component';
 import { CetonComponent } from './ceton/ceton.component';
 import { AccordionModule } from 'primeng/accordion';
 import { MessageModule } from 'primeng/message';
-import { NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
+
 import { SharedModule } from 'primeng/api';
 import { ListboxModule } from 'primeng/listbox';
 import { DialogModule } from 'primeng/dialog';
@@ -41,11 +41,8 @@ import { CardModule } from 'primeng/card';
         ListboxModule,
         FormsModule,
         SharedModule,
-        NgIf,
         MessageModule,
         AccordionModule,
-        NgSwitch,
-        NgSwitchCase,
         CetonComponent,
         DvbComponent,
         ExternalComponent,
@@ -58,8 +55,7 @@ import { CardModule } from 'primeng/card';
         SatipComponent,
         VboxComponent,
         FirewireComponent,
-        NgSwitchDefault,
-        TranslateModule,
+        TranslateModule
     ]
 })
 export class CaptureCardsComponent implements OnInit, CanComponentDeactivate {

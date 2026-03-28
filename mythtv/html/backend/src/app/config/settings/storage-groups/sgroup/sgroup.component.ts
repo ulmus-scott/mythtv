@@ -9,7 +9,7 @@ import { DialogModule } from 'primeng/dialog';
 import { TooltipModule } from 'primeng/tooltip';
 import { RippleModule } from 'primeng/ripple';
 import { ButtonModule } from 'primeng/button';
-import { NgFor, NgIf } from '@angular/common';
+
 import { SharedModule } from 'primeng/api';
 import { CardModule } from 'primeng/card';
 import { StorageGroupsComponent } from '../storage-groups.component';
@@ -24,7 +24,7 @@ interface GroupCard {
     selector: 'app-sgroup',
     templateUrl: './sgroup.component.html',
     styleUrls: ['./sgroup.component.css'],
-    imports: [FormsModule, CardModule, SharedModule, TranslateModule, NgFor, ButtonModule, RippleModule, TooltipModule, NgIf, DialogModule, ListboxModule, MessageModule]
+    imports: [FormsModule, CardModule, SharedModule, TranslateModule, ButtonModule, RippleModule, TooltipModule, DialogModule, ListboxModule, MessageModule]
 })
 export class SgroupComponent implements OnInit, AfterViewInit {
 

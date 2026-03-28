@@ -23,17 +23,17 @@
                                 </div>
                             </ng-template>
                         </p-listbox>
-                        <div class="pt-8" *ngIf="((m_wizardData.Country.Code != '')) else noCountry">
+                        @if (((m_wizardData.Country.Code != ''))) {
+                        <div class="pt-8">
                             <p-message severity="success"
                                 text="{{ 'setupwizard.selectedCountry' | translate }} {{m_wizardData.Country.Country}}">
                             </p-message>
                         </div>
-                        <ng-template #noCountry>
-                            <div class="pt-8">
-                                <p-message severity="error"
-                                    text="{{ 'setupwizard.noCountry' | translate }}"></p-message>
-                            </div>
-                        </ng-template>
+                        } @else {
+                        <div class="pt-8">
+                            <p-message severity="error" text="{{ 'setupwizard.noCountry' | translate }}"></p-message>
+                        </div>
+                        }
                     </div>
 
                     <div class="col-span-12 md:col-span-6">
@@ -51,17 +51,18 @@
                             </ng-template>
                         </p-listbox>
 
-                        <div class="pt-8" *ngIf="(m_wizardData.Language.Code != '') else noLanguage">
+                        @if ((m_wizardData.Language.Code != '')) {
+                        <div class="pt-8">
                             <p-message severity="success"
                                 text="{{ 'setupwizard.selectedLanguage' | translate }} {{m_wizardData.Language.NativeLanguage}}">
                             </p-message>
                         </div>
-                        <ng-template #noLanguage>
-                            <div class="pt-8">
-                                <p-message class="pt-2" severity="error"
-                                    text="{{ 'setupwizard.noLanguage' | translate }}"></p-message>
-                            </div>
-                        </ng-template>
+                        } @else {
+                        <div class="pt-8">
+                            <p-message class="pt-2" severity="error"
+                                text="{{ 'setupwizard.noLanguage' | translate }}"></p-message>
+                        </div>
+                        }
                     </div>
                 </div>
             </ng-template>
@@ -69,11 +70,12 @@
             <ng-template pTemplate="footer">
                 <div class="grid grid-cols-12 gap-4 nogutter m-8">
                     <div class="col-span-12">
-                        <p-message
-                            *ngIf="successCount > 0 && successCount == expectedCount && errorCount == 0 && !langform.dirty"
-                            severity="success" text="{{ 'common.savesuccess' | translate }}"></p-message>
-                        <p-message *ngIf="this.errorCount > 0" severity="error"
-                            text="{{ 'common.networkfail' | translate }}"></p-message>
+                        @if (successCount > 0 && successCount == expectedCount && errorCount == 0 && !langform.dirty) {
+                        <p-message severity="success" text="{{ 'common.savesuccess' | translate }}"></p-message>
+                        }
+                        @if (this.errorCount > 0) {
+                        <p-message severity="error" text="{{ 'common.networkfail' | translate }}"></p-message>
+                        }
                     </div>
                     <div class="col-span-12 flex">
                         <p-button class="flex-none pr-1" label="{{'common.save' | translate}}" icon="pi pi-save"

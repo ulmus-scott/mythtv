@@ -6,7 +6,7 @@ import { SetupService } from 'src/app/services/setup.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
-import { NgIf } from '@angular/common';
+
 import { InputNumberModule } from 'primeng/inputnumber';
 import { CheckboxModule } from 'primeng/checkbox';
 import { SharedModule } from 'primeng/api';
@@ -17,7 +17,7 @@ import { SettingsComponent } from '../general-settings.component';
     selector: 'app-shutdown-wakeup',
     templateUrl: './shutdown-wakeup.component.html',
     styleUrls: ['./shutdown-wakeup.component.css'],
-    imports: [FormsModule, CardModule, SharedModule, CheckboxModule, InputNumberModule, NgIf, MessageModule, ButtonModule, TranslateModule]
+    imports: [FormsModule, CardModule, SharedModule, CheckboxModule, InputNumberModule, MessageModule, ButtonModule, TranslateModule]
 })
 export class ShutdownWakeupComponent implements OnInit, AfterViewInit {
 

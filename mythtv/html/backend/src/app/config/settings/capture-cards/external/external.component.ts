@@ -6,7 +6,7 @@ import { SetupService } from 'src/app/services/setup.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
-import { NgIf } from '@angular/common';
+
 import { InputNumberModule } from 'primeng/inputnumber';
 import { SharedModule } from 'primeng/api';
 import { CardModule } from 'primeng/card';
@@ -16,7 +16,7 @@ import { CaptureCardsComponent } from '../capture-cards.component';
     selector: 'app-external',
     templateUrl: './external.component.html',
     styleUrls: ['./external.component.css'],
-    imports: [FormsModule, CardModule, SharedModule, InputNumberModule, NgIf, MessageModule, ButtonModule, TranslateModule]
+    imports: [FormsModule, CardModule, SharedModule, InputNumberModule, MessageModule, ButtonModule, TranslateModule]
 })
 export class ExternalComponent implements OnInit, AfterViewInit {
 

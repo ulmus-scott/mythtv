@@ -6,7 +6,7 @@ import { MythService } from 'src/app/services/myth.service';
 import { SetupService } from 'src/app/services/setup.service';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
-import { NgIf } from '@angular/common';
+
 import { InputNumberModule } from 'primeng/inputnumber';
 import { CheckboxModule } from 'primeng/checkbox';
 import { FieldsetModule } from 'primeng/fieldset';
@@ -20,7 +20,7 @@ import { SettingsComponent } from '../general-settings.component';
     selector: 'app-misc-settings',
     templateUrl: './misc-settings.component.html',
     styleUrls: ['./misc-settings.component.css'],
-    imports: [FormsModule, CardModule, SharedModule, FieldsetModule, CheckboxModule, InputNumberModule, SelectModule, NgIf, MessageModule, ButtonModule, TranslateModule]
+    imports: [FormsModule, CardModule, SharedModule, FieldsetModule, CheckboxModule, InputNumberModule, SelectModule, MessageModule, ButtonModule, TranslateModule]
 })
 
 export class MiscSettingsComponent implements OnInit, AfterViewInit {
@@ -127,7 +127,7 @@ export class MiscSettingsComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-       this.pristineStart();
+        this.pristineStart();
     }
 
     pristineStart() {
@@ -136,7 +136,7 @@ export class MiscSettingsComponent implements OnInit, AfterViewInit {
                 this.markPristine();
             else
                 this.pristineStart();
-        },100);
+        }, 100);
     }
 
     dirty() {

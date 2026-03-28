@@ -1,9 +1,10 @@
-<div class="block card w-full" *ngIf="loaded">
+@if (loaded) {
+<div class="block card w-full">
     <p-table [value]="playGroups" scrollHeight="flex" [scrollable]="true" sortField="Name"
         styleClass="p-datatable-sm p-datatable-striped" [rowHover]="true" responsiveLayout="scroll">
         <ng-template pTemplate="caption">
-            <p-button label="{{ 'dashboard.playgroup.new' | translate }}" icon="pi pi-plus"
-                class="mr-2" severity="success" (click)="openNew()"/>
+            <p-button label="{{ 'dashboard.playgroup.new' | translate }}" icon="pi pi-plus" class="mr-2"
+                severity="success" (click)="openNew()" />
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
@@ -16,7 +17,7 @@
                 <th>{{ 'dashboard.playgroup.timestretch_label' | translate }}</th>
                 <th style="width:  7%; white-space: nowrap;">
                     <!-- These are disabled buttons to ensure the spacing of the heading
-                         matches the spacing of the rows -->
+            matches the spacing of the rows -->
                     <button pButton pRipple icon="pi pi-pencil" class="p-button-text" disabled="true"></button>
                     <button pButton pRipple icon="pi pi-trash" class="p-button-text p-button-danger"
                         disabled="true"></button>
@@ -42,6 +43,7 @@
         </ng-template>
     </p-table>
 </div>
+}
 
 <form class="ml-4 mr-4" name="groupform" #groupform="ngForm">
 
@@ -50,7 +52,7 @@
         <div class="form-group field">
             <label for="GrpName" class="label block">{{ 'dashboard.playgroup.name_label' | translate }}</label>
             <input pInputText id="GrpName" [(ngModel)]="group.Name" name="Name" #Name="ngModel"
-                class="mb-2 form-control w-full" [disabled]="operation == 0"/>
+                class="mb-2 form-control w-full" [disabled]="operation == 0" />
             <small class="block">
             </small>
         </div>
@@ -66,8 +68,8 @@
 
         <div class="form-group field">
             <label for="SkipAhead" class="label block">{{ 'dashboard.playgroup.skipahead_label' | translate }}</label>
-            <p-inputNumber [(ngModel)]="group.SkipAhead" name="SkipAhead" id="SkipAhead" [showButtons]="true"
-                [min]="0" [max]="600" [step]="1"></p-inputNumber>
+            <p-inputNumber [(ngModel)]="group.SkipAhead" name="SkipAhead" id="SkipAhead" [showButtons]="true" [min]="0"
+                [max]="600" [step]="1"></p-inputNumber>
             <small class="block">
                 {{ 'dashboard.playgroup.skipahead_desc' | translate }}
             </small>
@@ -75,8 +77,8 @@
 
         <div class="form-group field">
             <label for="SkipBack" class="label block">{{ 'dashboard.playgroup.skipback_label' | translate }}</label>
-            <p-inputNumber [(ngModel)]="group.SkipBack" name="SkipBack" id="SkipBack" [showButtons]="true"
-                [min]="0" [max]="600" [step]="1"></p-inputNumber>
+            <p-inputNumber [(ngModel)]="group.SkipBack" name="SkipBack" id="SkipBack" [showButtons]="true" [min]="0"
+                [max]="600" [step]="1"></p-inputNumber>
             <small class="block">
                 {{ 'dashboard.playgroup.skipback_desc' | translate }}
             </small>
@@ -84,15 +86,16 @@
 
         <div class="form-group field">
             <label for="Jump" class="label block">{{ 'dashboard.playgroup.jump_label' | translate }}</label>
-            <p-inputNumber [(ngModel)]="group.Jump" name="Jump" id="Jump" [showButtons]="true"
-                [min]="0" [max]="30" [step]="1"></p-inputNumber>
+            <p-inputNumber [(ngModel)]="group.Jump" name="Jump" id="Jump" [showButtons]="true" [min]="0" [max]="30"
+                [step]="1"></p-inputNumber>
             <small class="block">
                 {{ 'dashboard.playgroup.jump_desc' | translate }}
             </small>
         </div>
 
         <div class="form-group field">
-            <label for="TimeStretch" class="label block">{{ 'dashboard.playgroup.timestretch_label' | translate }}</label>
+            <label for="TimeStretch" class="label block">{{ 'dashboard.playgroup.timestretch_label' | translate
+                }}</label>
             <p-inputNumber [(ngModel)]="group.TimeStretch" name="TimeStretch" id="TimeStretch" [showButtons]="true"
                 [min]="50" [max]="200" [step]="5"></p-inputNumber>
             <small class="block">
@@ -102,16 +105,19 @@
 
         <ng-template pTemplate="footer">
             <div class="col-span-12" style="text-align: left;">
-                <p-message *ngIf="successCount > 0 && errorCount == 0 && !groupform.dirty" severity="success"
-                    text="{{ 'common.savesuccess' | translate }}"></p-message>
-                <p-message *ngIf="errorCount > 0" severity="error"
-                    text="{{ 'common.networkfail' | translate }}"></p-message>
+                @if (successCount > 0 && errorCount == 0 && !groupform.dirty) {
+                <p-message severity="success" text="{{ 'common.savesuccess' | translate }}"></p-message>
+                }
+                @if (errorCount > 0) {
+                <p-message severity="error" text="{{ 'common.networkfail' | translate }}"></p-message>
+                }
             </div>
             <p-button icon="pi pi-times-circle" (onClick)="closeDialog()" label="{{ 'common.close' | translate }}"
                 severity="warn">
             </p-button>
             <p-button icon="pi pi-save" (onClick)="saveGroup();" label="{{ 'common.save' | translate }}"
-                severity="success" [disabled]="!groupform.dirty || group.Name.trim() == '' || (operation == 1 && groupNames.includes( group.Name.trim()) )"></p-button>
+                severity="success"
+                [disabled]="!groupform.dirty || group.Name.trim() == '' || (operation == 1 && groupNames.includes( group.Name.trim()) )"></p-button>
         </ng-template>
     </p-dialog>
 
@@ -134,8 +140,9 @@
             translate: {Name: group.Name} }}</p>
         <ng-template pTemplate="footer">
             <div class="col-span-12" style="text-align: left;">
-                <p-message *ngIf="errorCount > 0" severity="error"
-                    text="{{ 'common.networkfail' | translate }}"></p-message>
+                @if (errorCount > 0) {
+                <p-message severity="error" text="{{ 'common.networkfail' | translate }}"></p-message>
+                }
             </div>
             <p-button icon="pi pi-times-circle" (onClick)="displayDelete=false; groupform.form.markAsPristine();"
                 label="{{ 'common.close' | translate }}" severity="warn">

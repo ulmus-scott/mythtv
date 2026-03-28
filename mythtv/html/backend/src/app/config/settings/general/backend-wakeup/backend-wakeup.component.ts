@@ -6,7 +6,7 @@ import { SetupService } from 'src/app/services/setup.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
-import { NgIf } from '@angular/common';
+
 import { InputNumberModule } from 'primeng/inputnumber';
 import { FieldsetModule } from 'primeng/fieldset';
 import { SharedModule } from 'primeng/api';
@@ -17,7 +17,7 @@ import { SettingsComponent } from '../general-settings.component';
     selector: 'app-backend-wakeup',
     templateUrl: './backend-wakeup.component.html',
     styleUrls: ['./backend-wakeup.component.css'],
-    imports: [FormsModule, CardModule, SharedModule, FieldsetModule, InputNumberModule, NgIf, MessageModule, ButtonModule, TranslateModule]
+    imports: [FormsModule, CardModule, SharedModule, FieldsetModule, InputNumberModule, MessageModule, ButtonModule, TranslateModule]
 })
 export class BackendWakeupComponent implements OnInit, AfterViewInit {
 

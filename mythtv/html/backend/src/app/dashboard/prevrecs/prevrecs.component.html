@@ -25,7 +25,9 @@
                 </div>
 
                 <span class="p-input-icon-right">
-                    <i class="pi pi-times" (click)="resetSearch()" *ngIf="searchValue"></i>
+                    @if (searchValue) {
+                    <i class="pi pi-times" (click)="resetSearch()"></i>
+                    }
                     <input type="text" pInputText id="searchValue" [(ngModel)]="searchValue" name="searchValue"
                         class="text-xl" placeholder="{{ 'dashboard.guide.title_search' | translate }}"
                         pTooltip="{{ 'dashboard.recordings.regex' | translate }}" tooltipPosition="top"
@@ -33,7 +35,9 @@
                 </span>
                 &nbsp;&nbsp;
                 <span class="p-input-icon-right">
-                    <i class="pi pi-times" (click)="resetSubSearch()" *ngIf="subSearchValue"></i>
+                    @if (subSearchValue) {
+                    <i class="pi pi-times" (click)="resetSubSearch()"></i>
+                    }
                     <input type="text" pInputText id="subSearchValue" [(ngModel)]="subSearchValue" name="subSearchValue"
                         class="text-xl" placeholder="{{ 'dashboard.guide.subtitle_search' | translate }}"
                         pTooltip="{{ 'dashboard.recordings.regex' | translate }}" tooltipPosition="top"
@@ -44,26 +48,26 @@
                     pTooltip="{{ 'dashboard.guide.title_search' | translate }}" tooltipPosition="top"></button>
                 <!-- Refresh button and number of rows. -->
                 <!-- The progressspinner no longer works -->
-                <div *ngIf="refreshing else refreshBn">
+                @if (refreshing) {
+                <div>
                     <i class="pi pi-spin pi-cog px-3 text-primary"></i>
                 </div>
+                } @else {
+                <button pButton pRipple icon="pi pi-refresh" class="p-button-text .p-button-success" (click)="refresh()"
+                    pTooltip="{{ 'common.refresh' | translate }}"></button>
+                &nbsp;&nbsp;&nbsp;{{ programs.length }} {{ 'common.rows' | translate }}
+                }
                 <!-- <div *ngIf="refreshing else refreshBn"><p-progressSpinner
-                        [style]="{width: '2rem', height: '2rem'}"></p-progressSpinner></div> -->
-                <ng-template #refreshBn>
-                    <button pButton pRipple icon="pi pi-refresh" class="p-button-text .p-button-success"
-                        (click)="refresh()" pTooltip="{{ 'common.refresh' | translate }}"></button>
-                    &nbsp;&nbsp;&nbsp;{{ programs.length }} {{ 'common.rows' | translate }}
-                </ng-template>
+      [style]="{width: '2rem', height: '2rem'}"></p-progressSpinner></div> -->
 
             </div>
             <!-- styleClass="p-datatable-gridlines p-datatable-sm  p-datatable-striped" -->
-            <p-table #table *ngIf="showTable" [value]="programs" scrollHeight="83vh" [scrollable]="true"
-                [totalRecords]="totalRecords" [virtualScroll]="true" [rows]="100" [lazy]="true"
-                (onLazyLoad)="loadLazy($event)" [rowHover]="true" [sortField]="sortField" [sortOrder]="sortOrder"
-                selectionMode="multiple" [metaKeySelection]="true" [(selection)]="selection"
-                (onRowSelect)="onSelectChange()" (onRowUnselect)="onSelectChange()" (onSort)="onSort($event)"
-                [showGridlines]="true" [stripedRows]="true" size="small">
-
+            @if (showTable) {
+            <p-table #table [value]="programs" scrollHeight="83vh" [scrollable]="true" [totalRecords]="totalRecords"
+                [virtualScroll]="true" [rows]="100" [lazy]="true" (onLazyLoad)="loadLazy($event)" [rowHover]="true"
+                [sortField]="sortField" [sortOrder]="sortOrder" selectionMode="multiple" [metaKeySelection]="true"
+                [(selection)]="selection" (onRowSelect)="onSelectChange()" (onRowUnselect)="onSelectChange()"
+                (onSort)="onSort($event)" [showGridlines]="true" [stripedRows]="true" size="small">
                 <ng-template pTemplate="header">
                     <tr>
                         <!-- Column Headings -->
@@ -95,7 +99,6 @@
                         </th>
                     </tr>
                 </ng-template>
-
                 <ng-template pTemplate="body" let-program let-rowIndex="rowIndex">
                     <tr #row [pSelectableRow]="program" [pSelectableRowIndex]="rowIndex"
                         (contextmenu)="onContextMenu(program,$event)">
@@ -125,9 +128,11 @@
                             </div>
                         </td>
                         <td class="p-1">
-                            <div *ngIf="program.Season>0 || program.Episode>0">
+                            @if (program.Season>0 || program.Episode>0) {
+                            <div>
                                 {{program.Season}}x{{program.Episode}}
                             </div>
+                            }
                         </td>
                         <td class="p-1">
                             <div class="mycell">
@@ -136,10 +141,12 @@
                         </td>
                         <td class="p-1">
                             <div class="mycell">
-                                <div class="mytext" *ngIf="program.Recording" [ngClass]="['WillRecord','Recording','Recorded', 'PreviousRecording'].indexOf(program.Recording.StatusName)>-1 ?
+                                @if (program.Recording) {
+                                <div class="mytext" [ngClass]="['WillRecord','Recording','Recorded', 'PreviousRecording'].indexOf(program.Recording.StatusName)>-1 ?
                                 'text-green-500' : 'text-pink-500'">
                                     {{program.Recording.RecTypeStatus}}
                                 </div>
+                                }
                             </div>
                         </td>
                         <td class="pt-1 pb-0" style="background: var(--surface-card); white-space: nowrap;">
@@ -149,6 +156,7 @@
                     </tr>
                 </ng-template>
             </p-table>
+            }
             <app-schedule [inter]="inter"></app-schedule>
         </div>
 

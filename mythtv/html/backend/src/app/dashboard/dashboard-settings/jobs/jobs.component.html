@@ -34,7 +34,7 @@
 
                 <div class="form-group field">
                     <p-checkbox inputId="AggressiveCommDetect" [(ngModel)]="AggressiveCommDetect"
-                        name="AggressiveCommDetect" class="mb-2 w-full label" [binary]="true"/>
+                        name="AggressiveCommDetect" class="mb-2 w-full label" [binary]="true" />
                     <label for="CommFlagFast" class="label pl-2">{{ 'dashboard.jobs.strict_label' | translate
                         }}</label>
                     <small class="block">
@@ -58,13 +58,15 @@
         <ng-template pTemplate="footer">
             <div class="grid grid-cols-12 gap-4 nogutter">
                 <div class="col-span-12">
-                    <p-message *ngIf="successCount > 0 && errorCount == 0 && !jobs.dirty" severity="success"
-                        text="{{ 'common.savesuccess' | translate }}"></p-message>
-                    <p-message *ngIf="this.errorCount > 0" severity="error"
-                        text="{{ 'common.networkfail' | translate }}"></p-message>
+                    @if (successCount > 0 && errorCount == 0 && !jobs.dirty) {
+                    <p-message severity="success" text="{{ 'common.savesuccess' | translate }}"></p-message>
+                    }
+                    @if (this.errorCount > 0) {
+                    <p-message severity="error" text="{{ 'common.networkfail' | translate }}"></p-message>
+                    }
                 </div>
                 <p-button class="col pr-1" label="{{'common.save' | translate}}" icon="pi pi-save" iconPos="left"
-                    (onClick)="saveForm(); markPristine()" [disabled]="!jobs.dirty" severity="success"/>
+                    (onClick)="saveForm(); markPristine()" [disabled]="!jobs.dirty" severity="success" />
             </div>
         </ng-template>
     </p-card>

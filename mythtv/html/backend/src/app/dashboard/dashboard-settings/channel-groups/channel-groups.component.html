@@ -1,16 +1,17 @@
-<div class="block card w-full" *ngIf="loaded">
+@if (loaded) {
+<div class="block card w-full">
     <p-table [value]="chanGroups" scrollHeight="flex" [scrollable]="true" sortField="Name"
         styleClass="p-datatable-sm p-datatable-striped" [rowHover]="true" responsiveLayout="scroll">
         <ng-template pTemplate="caption">
-            <p-button pRipple label="{{ 'dashboard.channelgroup.new' | translate }}" icon="pi pi-plus"
-                class="mr-2" severity="success" (click)="openNew()"/>
+            <p-button pRipple label="{{ 'dashboard.channelgroup.new' | translate }}" icon="pi pi-plus" class="mr-2"
+                severity="success" (click)="openNew()" />
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
                 <th>{{ 'dashboard.channelgroup.name_label' | translate }}</th>
                 <th style="width:  7%; white-space: nowrap;">
                     <!-- These are disabled buttons to ensure the spacing of the heading
-                     matches the spacing of the rows -->
+            matches the spacing of the rows -->
                     <button pButton pRipple icon="pi pi-pencil" class="p-button-text" disabled="true"></button>
                     <button pButton pRipple icon="pi pi-trash" class="p-button-text p-button-danger"
                         disabled="true"></button>
@@ -33,6 +34,7 @@
         </ng-template>
     </p-table>
 </div>
+}
 
 <form class="ml-4 mr-4" name="changrpform" #changrpform="ngForm">
 
@@ -42,7 +44,8 @@
         <div class="form-group field">
             <label for="GroupName" class="label block">{{ 'dashboard.channelgroup.name_label' | translate }}</label>
             <input pInputText id="GroupName" [(ngModel)]="group.Name" name="GroupName" #GroupName="ngModel"
-                class="mb-2 form-control w-full" [disabled]="!group.canRename || !group.canUpdate" (change)="checkName()" />
+                class="mb-2 form-control w-full" [disabled]="!group.canRename || !group.canUpdate"
+                (change)="checkName()" />
             <small class="block">
                 {{ 'dashboard.channelgroup.name_desc' | translate }}
             </small>
@@ -64,19 +67,20 @@
             <ng-template pTemplate="body" let-channel>
                 <tr>
                     <td class="pt-1 pb-0">
+                        @if (channel.Icon) {
                         <img src="{{'./Guide/GetChannelIcon?Filename=' + channel.Icon
-                            + authorization }}" height="32" width="42"
-                            *ngIf="channel.Icon; else nullIcon"
-                            style="background-color:#000000"
+                            + authorization }}" height="32" width="42" style="background-color:#000000"
                             onerror="this.height='0'">
-                        <ng-template #nullIcon><img height="32" width="42"></ng-template>
+                        } @else {
+                        <img height="32" width="42">
+                        }
                     </td>
                     <td>{{ channel.ChanNum }}</td>
                     <td>{{ channel.CallSign }}</td>
                     <td>{{ channel.ChannelName }}</td>
                     <td class="pt-1 pb-0" style="white-space: nowrap;">
-                        <p-checkbox [(ngModel)]="channel.selected" [binary]="true"
-                            [name]="'selected'+channel.ChanId" [disabled]="!group.canUpdate"></p-checkbox>
+                        <p-checkbox [(ngModel)]="channel.selected" [binary]="true" [name]="'selected'+channel.ChanId"
+                            [disabled]="!group.canUpdate"></p-checkbox>
                     </td>
                 </tr>
             </ng-template>
@@ -84,10 +88,12 @@
 
         <ng-template pTemplate="footer">
             <div class="col-span-12" style="text-align: left;">
-                <p-message *ngIf="successCount > 0 && errorCount == 0 && !changrpform.dirty" severity="success"
-                    text="{{ 'common.savesuccess' | translate }}"></p-message>
-                <p-message *ngIf="errorCount > 0" severity="error"
-                    text="{{ 'common.networkfail' | translate }}"></p-message>
+                @if (successCount > 0 && errorCount == 0 && !changrpform.dirty) {
+                <p-message severity="success" text="{{ 'common.savesuccess' | translate }}"></p-message>
+                }
+                @if (errorCount > 0) {
+                <p-message severity="error" text="{{ 'common.networkfail' | translate }}"></p-message>
+                }
             </div>
             <p-button icon="pi pi-times-circle" (onClick)="closeDialog()" label="{{ 'common.close' | translate }}"
                 severity="warn">
@@ -119,8 +125,9 @@
             translate: {Name: group.Name} }}</p>
         <ng-template pTemplate="footer">
             <div class="col-span-12" style="text-align: left;">
-                <p-message *ngIf="errorCount > 0" severity="error"
-                    text="{{ 'common.networkfail' | translate }}"></p-message>
+                @if (errorCount > 0) {
+                <p-message severity="error" text="{{ 'common.networkfail' | translate }}"></p-message>
+                }
             </div>
             <p-button icon="pi pi-times-circle" (onClick)="displayDelete=false; changrpform.form.markAsPristine();"
                 label="{{ 'common.close' | translate }}" severity="warn">

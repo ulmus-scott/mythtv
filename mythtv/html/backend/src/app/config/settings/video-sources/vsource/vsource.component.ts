@@ -16,7 +16,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { TooltipModule } from 'primeng/tooltip';
 import { RippleModule } from 'primeng/ripple';
 import { ButtonModule } from 'primeng/button';
-import { NgIf } from '@angular/common';
+
 import { SharedModule } from 'primeng/api';
 import { CardModule } from 'primeng/card';
 import { SelectModule } from 'primeng/select';
@@ -26,7 +26,7 @@ import { VideoSourcesComponent } from '../video-sources.component';
     selector: 'app-vsource',
     templateUrl: './vsource.component.html',
     styleUrls: ['./vsource.component.css'],
-    imports: [FormsModule, CardModule, SharedModule, NgIf, SelectModule, ButtonModule, RippleModule, TooltipModule, CheckboxModule, InputNumberModule, MessageModule, TranslateModule]
+    imports: [FormsModule, CardModule, SharedModule, SelectModule, ButtonModule, RippleModule, TooltipModule, CheckboxModule, InputNumberModule, MessageModule, TranslateModule]
 })
 export class VsourceComponent implements OnInit, AfterViewInit {
 

@@ -57,8 +57,8 @@ export class DataService {
             this.translate.get('data.recstatus.' + key).subscribe(data => {
                 Object.defineProperty(this.recStatusText, key, { value: data });
                 let seq = 3;
-                if (key == 'Default') seq=1;
-                if (key == 'All') seq=2;
+                if (key == 'Default') seq = 1;
+                if (key == 'All') seq = 2;
                 if (key == 'Unknown') return;
                 this.recStatusList.push({ Status: key, Name: data, Sequence: seq });
                 if (key == 'Offline')

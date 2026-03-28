@@ -5,32 +5,32 @@ import { Observable } from 'rxjs';
 import { BoolResponse } from './interfaces/common.interface';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class VideoService {
 
-  constructor(private httpClient: HttpClient) { }
+    constructor(private httpClient: HttpClient) { }
 
-  // All parameters are optional
-  public GetVideoList(request: GetVideoListRequest):
-    Observable<{ VideoMetadataInfoList: VideoMetadataInfoList }> {
-    let params = new HttpParams();
-    for (const [key, value] of Object.entries(request))
-      params = params.set(key, value);
-    return this.httpClient.get<{ VideoMetadataInfoList: VideoMetadataInfoList }>
-      ('./Video/GetVideoList', { params });
-  }
+    // All parameters are optional
+    public GetVideoList(request: GetVideoListRequest):
+        Observable<{ VideoMetadataInfoList: VideoMetadataInfoList }> {
+        let params = new HttpParams();
+        for (const [key, value] of Object.entries(request))
+            params = params.set(key, value);
+        return this.httpClient.get<{ VideoMetadataInfoList: VideoMetadataInfoList }>
+            ('./Video/GetVideoList', { params });
+    }
 
-  public GetCategoryList(): Observable<VideoCategoryList> {
-    return this.httpClient.get<VideoCategoryList>('./Video/GetCategoryList');
-  }
+    public GetCategoryList(): Observable<VideoCategoryList> {
+        return this.httpClient.get<VideoCategoryList>('./Video/GetCategoryList');
+    }
 
-  public UpdateVideoWatchedStatus(id: number, watched: boolean) : Observable<BoolResponse> {
-    return this.httpClient.post<BoolResponse>('./Video/UpdateVideoWatchedStatus', {Id: id, Watched: watched});
-  }
+    public UpdateVideoWatchedStatus(id: number, watched: boolean): Observable<BoolResponse> {
+        return this.httpClient.post<BoolResponse>('./Video/UpdateVideoWatchedStatus', { Id: id, Watched: watched });
+    }
 
-  public UpdateVideoMetadata(request: UpdateVideoMetadataRequest) : Observable<BoolResponse> {
-    return this.httpClient.post<BoolResponse>('./Video/UpdateVideoMetadata', request);
-  }
+    public UpdateVideoMetadata(request: UpdateVideoMetadataRequest): Observable<BoolResponse> {
+        return this.httpClient.post<BoolResponse>('./Video/UpdateVideoMetadata', request);
+    }
 
 }

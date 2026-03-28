@@ -1,18 +1,21 @@
 <h2>{{ 'dashboard.backendStatus' | translate }} </h2>
-<div class="no-style" *ngIf="(m_status$ | async)?.BackendStatus as st; else loading">
+@if ((m_status$ | async)?.BackendStatus; as st) {
+<div class="no-style">
     <app-status-encoders [encoders]="st.Encoders"></app-status-encoders>
     <app-status-scheduled [scheduled]="st.Scheduled"></app-status-scheduled>
     <app-status-jobqueue [jobqueue]="st.JobQueue"></app-status-jobqueue>
     <app-status-machineinfo [machineinfo]="st.MachineInfo" [status]="st"></app-status-machineinfo>
     <app-status-backends [backends]="st.Backends"></app-status-backends>
     <app-status-frontends [frontends]="st.Frontends"></app-status-frontends>
-    <div class="statusBox" *ngIf="st.Miscellaneous">
+    @if (st.Miscellaneous) {
+    <div class="statusBox">
         <h2>{{ 'dashboard.status.misc_title' | translate }}</h2>
         <div>
             {{st.Miscellaneous}}
         </div>
     </div>
+    }
 </div>
-<ng-template #loading>
-    <div>Loading...</div>
-</ng-template>
+} @else {
+<div>Loading...</div>
+}

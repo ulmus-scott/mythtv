@@ -1,5 +1,5 @@
-import { Inject, Injectable } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import { Inject, Injectable, DOCUMENT } from '@angular/core';
+
 import { Theme } from './interfaces/theme.interface';
 import { HttpClient } from '@angular/common/http';
 
@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
     providedIn: 'root',
 })
 export class ThemeService {
-    
+
     constructor(private http: HttpClient, @Inject(DOCUMENT) private document: Document) { }
 
     switchTheme(theme: string) {
@@ -20,8 +20,8 @@ export class ThemeService {
 
     getThemes() {
         return this.http.get<any>('assets/themes/themes.json')
-        .toPromise()
-        .then(res => <Theme[]>res.data)
-        .then(data => { return data; });
+            .toPromise()
+            .then(res => <Theme[]>res.data)
+            .then(data => { return data; });
     }
 }

@@ -1,11 +1,11 @@
 export interface BoolResponse {
-    bool:           boolean;
+    bool: boolean;
 }
 
 export interface StringListResponse {
-    StringList:     String[];
+    StringList: String[];
 }
 
 export interface StringResponse {
-    String:         string;
+    String: string;
 }

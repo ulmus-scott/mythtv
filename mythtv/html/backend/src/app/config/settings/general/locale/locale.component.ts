@@ -5,7 +5,7 @@ import { SetupService } from 'src/app/services/setup.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
-import { NgIf } from '@angular/common';
+
 import { FieldsetModule } from 'primeng/fieldset';
 import { SharedModule } from 'primeng/api';
 import { CardModule } from 'primeng/card';
@@ -16,7 +16,7 @@ import { SettingsComponent } from '../general-settings.component';
     selector: 'app-locale',
     templateUrl: './locale.component.html',
     styleUrls: ['./locale.component.css'],
-    imports: [FormsModule, CardModule, SharedModule, FieldsetModule, SelectModule, NgIf, MessageModule, ButtonModule, TranslateModule]
+    imports: [FormsModule, CardModule, SharedModule, FieldsetModule, SelectModule, MessageModule, ButtonModule, TranslateModule]
 })
 
 export class LocaleComponent implements OnInit, AfterViewInit {

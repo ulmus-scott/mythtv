@@ -26,10 +26,12 @@
         @for (group of storageGroups; track $index; let ix = $index) {
         <p-accordion-panel [value]="ix">
             <p-accordion-header>
-                <span *ngIf="storageGroups[ix].DirNames.length == 0; else onlyName"
-                    [translate]="'settings.sgroups.tab_create_title'"
+                @if (storageGroups[ix].DirNames.length == 0) {
+                <span [translate]="'settings.sgroups.tab_create_title'"
                     [translateParams]="{name: storageGroups[ix].LocalizedName}"></span>
-                <ng-template #onlyName> {{storageGroups[ix].LocalizedName}} </ng-template>
+                } @else {
+                {{storageGroups[ix].LocalizedName}}
+                }
                 {{dirtyMessages[ix]}}
             </p-accordion-header>
             <p-accordion-content>

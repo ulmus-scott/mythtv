@@ -31,8 +31,8 @@ export class SetupWizardComponent implements OnInit, AfterViewInit {
     activeItem!: MenuItem;
 
     ngOnInit(): void {
-    // }
-    // setup() {
+        // }
+        // setup() {
         this.translate.get('setupwizard.steps.selectlanguage').subscribe(
             (translated: string) => {
                 this.fullMenu = [

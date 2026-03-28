@@ -1,6 +1,6 @@
 export interface Theme {
-    Category:      string;
-    Name:          string;
-    CSS:           string;
-    Image:         string;
+    Category: string;
+    Name: string;
+    CSS: string;
+    Image: string;
 }

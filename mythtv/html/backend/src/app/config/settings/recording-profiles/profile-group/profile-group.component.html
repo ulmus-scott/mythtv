@@ -20,18 +20,22 @@
     </p-dialog>
 
     <div class="grid grid-cols-12 gap-4 nogutter">
-        <div class="col-span-12" *ngIf="this.expectedCount && this.successCount == this.expectedCount">
+        @if (this.expectedCount && this.successCount == this.expectedCount) {
+        <div class="col-span-12">
             <br>
             <p-message severity="success" text="{{ 'settings.common.successful_delete' | translate }}">
             </p-message>
             <br>
         </div>
-        <div class="col-span-12" *ngIf="this.errorCount > 0">
+        }
+        @if (this.errorCount > 0) {
+        <div class="col-span-12">
             <br>
             <p-message severity="error" text="{{ 'common.networkfail' | translate }}">
             </p-message>
             <br>
         </div>
+        }
     </div>
 
     <p-accordion class="col-span-12 w-full" (onClose)="onTabClose($event)" (onOpen)="onTabOpen($event)">

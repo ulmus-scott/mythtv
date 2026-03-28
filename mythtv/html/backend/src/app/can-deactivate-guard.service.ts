@@ -3,17 +3,17 @@ import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/r
 import { Observable } from 'rxjs';
 
 export interface CanComponentDeactivate {
-  canDeactivate: () => Observable<boolean> | Promise<boolean> | boolean;
+    canDeactivate: () => Observable<boolean> | Promise<boolean> | boolean;
 }
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
-export class CanDeactivateGuardService  {
+export class CanDeactivateGuardService {
 
-  constructor() { }
+    constructor() { }
 
-  canDeactivate(component: CanComponentDeactivate, currentRoute: ActivatedRouteSnapshot, currentState: RouterStateSnapshot, nextState?: RouterStateSnapshot){
-    return component.canDeactivate ? component.canDeactivate() : true;
-  }
+    canDeactivate(component: CanComponentDeactivate, currentRoute: ActivatedRouteSnapshot, currentState: RouterStateSnapshot, nextState?: RouterStateSnapshot) {
+        return component.canDeactivate ? component.canDeactivate() : true;
+    }
 }

@@ -4,7 +4,7 @@ import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { MythService } from 'src/app/services/myth.service';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
-import { NgIf } from '@angular/common';
+
 import { CheckboxModule } from 'primeng/checkbox';
 import { SharedModule } from 'primeng/api';
 import { CardModule } from 'primeng/card';
@@ -15,7 +15,7 @@ import { DashboardSettingsComponent } from '../dashboard-settings.component';
     selector: 'app-data-sources',
     templateUrl: './data-sources.component.html',
     styleUrls: ['./data-sources.component.css'],
-    imports: [FormsModule, CardModule, SharedModule, SelectModule, CheckboxModule, NgIf, MessageModule, ButtonModule, TranslateModule]
+    imports: [FormsModule, CardModule, SharedModule, SelectModule, CheckboxModule, MessageModule, ButtonModule, TranslateModule]
 })
 export class DataSourcesComponent implements OnInit, AfterViewInit {
 

@@ -127,12 +127,12 @@ export interface RecStorageGroupList {
 
 export interface GetUpcomingRequest {
     StartIndex?: number;
-    Count?:      number;
-    ShowAll?:    boolean;
-    RecordId?:   number;
-    RecStatus?:  string;
-    Sort?:       string;
-    RecGroup?:   string;
+    Count?: number;
+    ShowAll?: boolean;
+    RecordId?: number;
+    RecStatus?: string;
+    Sort?: string;
+    RecGroup?: string;
 }
 
 export interface UpcomingList {
@@ -162,80 +162,80 @@ export interface GetRecordedRequest {
 }
 
 export interface GetRecordedListRequest {
-    Descending?:    boolean;
-    StartIndex?:    number;
-    Count?:         number;
-    TitleRegEx?:    string;
-    RecGroup?:      string;
-    StorageGroup?:  string;
-    Category?:      string;
-    Sort?:          string;
-    IgnoreLiveTV?:  boolean;
+    Descending?: boolean;
+    StartIndex?: number;
+    Count?: number;
+    TitleRegEx?: string;
+    RecGroup?: string;
+    StorageGroup?: string;
+    Category?: string;
+    Sort?: string;
+    IgnoreLiveTV?: boolean;
     IgnoreDeleted?: boolean;
-    IncChannel?:    boolean;
-    Details?:       boolean;
-    IncCast?:       boolean;
-    IncArtWork?:    boolean;
-    IncRecording?:  boolean;
+    IncChannel?: boolean;
+    Details?: boolean;
+    IncCast?: boolean;
+    IncArtWork?: boolean;
+    IncRecording?: boolean;
 }
 
 export interface UpdateRecordedMetadataRequest {
-    RecordedId:               number;
-    AutoExpire?:              boolean;
-    BookmarkOffset?:          number;
-    BookmarkOffsetType?:      string;
-    Damaged?:                 boolean;
-    Description?:             string;
-    Episode?:                 number;
-    Inetref?:                 string;
-    OriginalAirDate?:         Date;
-    Preserve?:                boolean;
-    Season?:                  number;
-    Stars?:                   number;
-    SubTitle?:                string;
-    Title?:                   string;
-    Watched?:                 boolean;
-    RecGroup?:                string;
+    RecordedId: number;
+    AutoExpire?: boolean;
+    BookmarkOffset?: number;
+    BookmarkOffsetType?: string;
+    Damaged?: boolean;
+    Description?: string;
+    Episode?: number;
+    Inetref?: string;
+    OriginalAirDate?: Date;
+    Preserve?: boolean;
+    Season?: number;
+    Stars?: number;
+    SubTitle?: string;
+    Title?: string;
+    Watched?: boolean;
+    RecGroup?: string;
 }
 
 export interface ManageJobQueueRequest {
-    Action:         string;
-    JobName:        string;
-    JobId?:         number;
-    RecordedId:     number;
-    JobStartTime?:  Date;
-    RemoteHost?:    string;
-    JobArgs?:       string;
+    Action: string;
+    JobName: string;
+    JobId?: number;
+    RecordedId: number;
+    JobStartTime?: Date;
+    RemoteHost?: string;
+    JobArgs?: string;
 }
 
 export interface PlayGroup {
-    Name:        string;
-    TitleMatch:  string;
-    SkipAhead:   number;
-    SkipBack:    number;
-    Jump:        number;
+    Name: string;
+    TitleMatch: string;
+    SkipAhead: number;
+    SkipBack: number;
+    Jump: number;
     TimeStretch: number;
 }
 
 export interface PowerPriority {
-    PriorityName:   string;
-    RecPriority:    number;
-    SelectClause:   string;
+    PriorityName: string;
+    RecPriority: number;
+    SelectClause: string;
 }
 
 export interface PowerPriorityList {
-    PowerPriorities : PowerPriority []; 
+    PowerPriorities: PowerPriority[];
 }
 
 export interface UpdateOldRecordedRequest {
-    Chanid:number;
-    StartTime:Date;
-    Duplicate:boolean;
-    Reschedule?:boolean
+    Chanid: number;
+    StartTime: Date;
+    Duplicate: boolean;
+    Reschedule?: boolean
 }
 
 export interface RemoveOldRecordedRequest {
-    Chanid:number;
-    StartTime:Date;
-    Reschedule?:boolean
+    Chanid: number;
+    StartTime: Date;
+    Reschedule?: boolean
 }

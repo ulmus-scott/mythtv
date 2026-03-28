@@ -1,5 +1,5 @@
 export interface ChannelIcon {
-    ChanId:     number;
-    Width:      number;
-    Height:     number;
+    ChanId: number;
+    Width: number;
+    Height: number;
 }

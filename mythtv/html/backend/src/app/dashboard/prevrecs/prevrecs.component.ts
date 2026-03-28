@@ -9,7 +9,7 @@ import { GetOldRecordedListRequest, RemoveOldRecordedRequest, UpdateOldRecordedR
 import { ScheduleOrProgram } from 'src/app/services/interfaces/program.interface';
 import { UtilityService } from 'src/app/services/utility.service';
 import { ScheduleComponent } from '../../schedule/schedule.component';
-import { NgIf, NgClass, DecimalPipe } from '@angular/common';
+import { NgClass, DecimalPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TooltipModule } from 'primeng/tooltip';
 import { RippleModule } from 'primeng/ripple';
@@ -23,7 +23,7 @@ import { DatePickerModule } from 'primeng/datepicker';
     templateUrl: './prevrecs.component.html',
     styleUrls: ['./prevrecs.component.css'],
     providers: [ConfirmationService, MessageService],
-    imports: [ToastModule, ConfirmDialogModule, MenuModule, ButtonModule, RippleModule, TooltipModule, DatePickerModule, FormsModule, NgIf, TableModule, SharedModule, NgClass, ScheduleComponent, DecimalPipe, TranslateModule]
+    imports: [ToastModule, ConfirmDialogModule, MenuModule, ButtonModule, RippleModule, TooltipModule, DatePickerModule, FormsModule, TableModule, SharedModule, NgClass, ScheduleComponent, DecimalPipe, TranslateModule]
 })
 
 export class PrevrecsComponent implements OnInit {

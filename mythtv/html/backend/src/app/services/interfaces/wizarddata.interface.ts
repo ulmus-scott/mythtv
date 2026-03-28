@@ -4,7 +4,7 @@ import { Country } from "./country.interface";
 import { Database } from "./myth.interface";
 
 export interface WizardData {
-    Country:   Country;
+    Country: Country;
     Language: Language;
     Database: Database;
     DatabaseStatus: MythDatabaseStatus;

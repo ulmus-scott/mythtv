@@ -1,6 +1,7 @@
 <div class="statusBox">
     <h2>{{ 'dashboard.status.mach.title' | translate }}</h2>
-    <div *ngIf="machineinfo; else noMachineInfo">
+    @if (machineinfo) {
+    <div>
         <div>
             <p>{{ 'dashboard.status.mach.load' | translate }}</p>
             <ul class="list-disc list-inside ml-4">
@@ -11,7 +12,8 @@
                 </li>
             </ul>
         </div>
-        <div *ngIf="getStorageGroupTotal(machineinfo.StorageGroups) as sg; else noDiskInfo">
+        @if (getStorageGroupTotal(machineinfo.StorageGroups); as sg) {
+        <div>
             <br>
             <p>{{ 'dashboard.status.mach.disk_summ' | translate }}:</p>
             <ul class="list-disc list-inside ml-4">
@@ -34,12 +36,17 @@
                 </ul>
             </ul>
         </div>
+        } @else {
+        <p>{{ 'dashboard.status.mach.disk_none' | translate }}</p>
+        }
         <div>
             <br>
             <p>{{ 'dashboard.status.mach.disk_details' | translate }}:</p>
-            <div *ngFor="let sg of getStorageGroupDetails(machineinfo.StorageGroups)">
+            @for (sg of getStorageGroupDetails(machineinfo.StorageGroups); track sg) {
+            <div>
                 <ng-container *ngTemplateOutlet="printStorageGroup; context: sg"></ng-container>
             </div>
+            }
         </div>
         <div>
             <br>
@@ -56,17 +63,13 @@
                 | translate: {GuideThru: utility.formatDateTime(machineinfo.GuideThru),
                 GuideDays: machineinfo.GuideDays} }}
             </p>
-
         </div>
     </div>
+    } @else {
+    <p>{{ 'dashboard.status.mach.none' | translate }}</p>
+    }
 </div>
 
-<ng-template #noMachineInfo>
-    <p>{{ 'dashboard.status.mach.none' | translate }}</p>
-</ng-template>
-<ng-template #noDiskInfo>
-    <p>{{ 'dashboard.status.mach.disk_none' | translate }}</p>
-</ng-template>
 <ng-template #printStorageGroup let-Id=Id let-Directory=Directory let-Total=Total let-Used=Used let-Free=Free>
     <ul class="list-disc list-inside ml-4">
         <li>{{ 'dashboard.status.mach.myth_drive' | translate }} #{{ Id }}</li>

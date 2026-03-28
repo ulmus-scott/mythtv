@@ -5,7 +5,7 @@ import { MythService } from 'src/app/services/myth.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
-import { NgIf } from '@angular/common';
+
 import { FieldsetModule } from 'primeng/fieldset';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { SharedModule } from 'primeng/api';
@@ -17,7 +17,7 @@ import { DashboardSettingsComponent } from '../dashboard-settings.component';
     selector: 'app-rec-quality',
     templateUrl: './rec-quality.component.html',
     styleUrls: ['./rec-quality.component.css'],
-    imports: [FormsModule, CardModule, SharedModule, InputNumberModule, FieldsetModule, SelectModule, NgIf, MessageModule, ButtonModule, TranslateModule, Select]
+    imports: [FormsModule, CardModule, SharedModule, InputNumberModule, FieldsetModule, SelectModule, MessageModule, ButtonModule, TranslateModule, Select]
 })
 export class RecQualityComponent implements OnInit, AfterViewInit {
 

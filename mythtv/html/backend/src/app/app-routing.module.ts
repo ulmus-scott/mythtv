@@ -5,13 +5,13 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { CanDeactivateGuardService } from './can-deactivate-guard.service';
 
 const routes: Routes = [
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'setupwizard', component: SetupWizardComponent },
+    { path: 'dashboard', component: DashboardComponent },
+    { path: 'setupwizard', component: SetupWizardComponent },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
-  providers: [CanDeactivateGuardService]
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule],
+    providers: [CanDeactivateGuardService]
 })
 export class AppRoutingModule { }

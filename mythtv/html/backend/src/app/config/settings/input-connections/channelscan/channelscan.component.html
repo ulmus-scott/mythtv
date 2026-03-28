@@ -104,10 +104,11 @@
 </div>
 
 <!-- Full Scan Panel -->
+@if (scanRequest.ScanType == 'FULL') {
 <p-fieldset class="mb-6 w-full" legend="{{ 'settings.channelscan.type.full' | translate }}" [toggleable]="false"
-    [collapsed]="false" *ngIf="scanRequest.ScanType == 'FULL'">
-
-    <div class="form-group field" *ngIf="scanSubType == 'ATSC'">
+    [collapsed]="false">
+    @if (scanSubType == 'ATSC') {
+    <div class="form-group field">
         <label for="FreqTable" class="label block">{{ 'settings.channelscan.freqtable_label' | translate
             }}</label>
         <p-select [options]="freqTableSelect" [(ngModel)]="scanRequest.FreqTable" [editable]="false" optionLabel="label"
@@ -118,8 +119,9 @@
             {{ 'settings.channelscan.freqtable_desc' | translate }}
         </small>
     </div>
-
-    <div class="form-group field" *ngIf="['DVBT','DVBT2'].includes(scanSubType)">
+    }
+    @if (['DVBT','DVBT2'].includes(scanSubType)) {
+    <div class="form-group field">
         <label for="Country" class="label block">{{ 'settings.channelscan.country_label' | translate
             }}</label>
         <p-select [options]="countryTable" [(ngModel)]="scanRequest.FreqTable" [editable]="false" optionLabel="label"
@@ -130,8 +132,9 @@
             {{ 'settings.channelscan.scantype_dvbt_desc' | translate }}
         </small>
     </div>
-
-    <div class="form-group field" *ngIf="'DVBC' == scanSubType">
+    }
+    @if ('DVBC' == scanSubType) {
+    <div class="form-group field">
         <label for="Country" class="label block">{{ 'settings.channelscan.country_label' | translate
             }}</label>
         <p-select [options]="networkTable" [(ngModel)]="scanRequest.FreqTable" [editable]="false" optionLabel="label"
@@ -141,8 +144,9 @@
         <small class="block">
         </small>
     </div>
-
-    <div class="form-group field" *ngIf="scanSubType == 'ATSC'">
+    }
+    @if (scanSubType == 'ATSC') {
+    <div class="form-group field">
         <label for="atscModulation" class="label block">{{ 'settings.channelscan.modulation_label' | translate
             }}</label>
         <p-select [options]="atscModulationTable" [(ngModel)]="scanRequest.Modulation" [editable]="false"
@@ -153,8 +157,9 @@
             {{ 'settings.channelscan.atscmodulation_desc' | translate }}
         </small>
     </div>
-
-    <div class="form-group field" *ngIf="scanSubType == 'ATSC'">
+    }
+    @if (scanSubType == 'ATSC') {
+    <div class="form-group field">
         <label for="FirstChan" class="label block">{{ 'settings.channelscan.firstchan_label' | translate
             }}</label>
         <p-select [options]="channels" [(ngModel)]="scanRequest.FirstChan" [editable]="false" [maxlength]="0"
@@ -163,12 +168,14 @@
         <small class="block">
             {{ 'settings.channelscan.firstchan_desc' | translate }}
         </small>
-        <div *ngIf="channelCount < 1">
+        @if (channelCount < 1) { <div>
             <small class="p-error block">{{ 'settings.channelscan.invalid_range' | translate }}</small>
-        </div>
     </div>
-
-    <div class="form-group field" *ngIf="scanSubType == 'ATSC'">
+    }
+    </div>
+    }
+    @if (scanSubType == 'ATSC') {
+    <div class="form-group field">
         <label for="LastChan" class="label block">{{ 'settings.channelscan.lastchan_label' | translate
             }}</label>
         <p-select [options]="channels" [(ngModel)]="scanRequest.LastChan" [editable]="false" [maxlength]="0"
@@ -177,12 +184,14 @@
         <small class="block">
             {{ 'settings.channelscan.lastchan_desc' | translate }}
         </small>
-        <div *ngIf="channelCount < 1">
+        @if (channelCount < 1) { <div>
             <small class="p-error block">{{ 'settings.channelscan.invalid_range' | translate }}</small>
-        </div>
     </div>
-
-    <div class="form-group field" *ngIf="scanSubType == 'ATSC'">
+    }
+    </div>
+    }
+    @if (scanSubType == 'ATSC') {
+    <div class="form-group field">
         <label class="label block">{{ 'settings.channelscan.chancount_label' | translate
             }}</label>
         <div class="col-span-10 bg-blue-100 text-gray-900">
@@ -192,14 +201,16 @@
             {{ 'settings.channelscan.chancount_desc' | translate }}
         </small>
     </div>
-
+    }
 </p-fieldset>
+}
 
 <!-- Full Scan (Tuned) Panel -->
+@if (scanRequest.ScanType == 'FULLTUNED') {
 <p-fieldset class="mb-6 w-full" legend="{{ 'settings.channelscan.type.fulltuned' | translate }}" [toggleable]="false"
-    [collapsed]="false" *ngIf="scanRequest.ScanType == 'FULLTUNED'">
-
-    <div class="form-group field" *ngIf="'DVBS2' == scanSubType">
+    [collapsed]="false">
+    @if ('DVBS2' == scanSubType) {
+    <div class="form-group field">
         <label for="SatTuning" class="label block">{{ 'settings.channelscan.sattuning_label' | translate
             }}</label>
         <p-select [options]="satTuningTable" [(ngModel)]="satTuning" [editable]="false" [maxlength]="0"
@@ -210,7 +221,7 @@
             {{ 'settings.channelscan.sattuning_desc' | translate }}
         </small>
     </div>
-
+    }
     <div class="form-group field">
         <label for="Frequency" class="label block">{{ 'settings.channelscan.frequency_label' | translate
             }}</label>
@@ -222,8 +233,8 @@
             </div>
         </small>
     </div>
-
-    <div class="form-group field" *ngIf="['DVBT','DVBT2'].includes(scanSubType)">
+    @if (['DVBT','DVBT2'].includes(scanSubType)) {
+    <div class="form-group field">
         <label for="Bandwidth" class="label block">{{ 'settings.channelscan.bandwidth_label' | translate
             }}</label>
         <p-select [options]="bandwidthTable" [(ngModel)]="scanRequest.Bandwidth" [editable]="false" [maxlength]="0"
@@ -234,8 +245,9 @@
             {{ 'settings.channelscan.bandwidth_desc' | translate }}
         </small>
     </div>
-
-    <div class="form-group field" *ngIf="['DVBS','DVBS2'].includes(scanSubType)">
+    }
+    @if (['DVBS','DVBS2'].includes(scanSubType)) {
+    <div class="form-group field">
         <label for="Polarity" class="label block">{{ 'settings.channelscan.polarity_label' | translate
             }}</label>
         <p-select [options]="polarityTable" [(ngModel)]="scanRequest.Polarity" [editable]="false" [maxlength]="0"
@@ -245,8 +257,9 @@
             {{ 'settings.channelscan.polarity_desc' | translate }}
         </small>
     </div>
-
-    <div class="form-group field" *ngIf="'DVBC' == scanSubType">
+    }
+    @if ('DVBC' == scanSubType) {
+    <div class="form-group field">
         <label for="dvbcSymbolRate" class="label block">{{ 'settings.channelscan.symbolrate_label' | translate
             }}</label>
         <p-select [options]="dvbcSymbolRateTable" [(ngModel)]="scanRequest.SymbolRate" [editable]="true" [maxlength]="8"
@@ -257,8 +270,9 @@
             {{ 'settings.channelscan.dvbcsymbolrate_desc' | translate }}
         </small>
     </div>
-
-    <div class="form-group field" *ngIf="['DVBS','DVBS2'].includes(scanSubType)">
+    }
+    @if (['DVBS','DVBS2'].includes(scanSubType)) {
+    <div class="form-group field">
         <label for="dvbsSymbolRate" class="label block">{{ 'settings.channelscan.symbolrate_label' | translate
             }}</label>
         <p-select [options]="dvbsSymbolRateTable" [(ngModel)]="scanRequest.SymbolRate" [editable]="true" [maxlength]="8"
@@ -269,7 +283,7 @@
             {{ 'settings.channelscan.dvbssymbolrate_desc' | translate }}
         </small>
     </div>
-
+    }
     <div class="form-group field">
         <label for="Inversion" class="label block">{{ 'settings.channelscan.inversion_label' | translate
             }}</label>
@@ -281,8 +295,8 @@
             {{ 'settings.channelscan.inversion_desc' | translate }}
         </small>
     </div>
-
-    <div class="form-group field" *ngIf="['DVBT','DVBT2'].includes(scanSubType)">
+    @if (['DVBT','DVBT2'].includes(scanSubType)) {
+    <div class="form-group field">
         <label for="Constellation" class="label block">{{ 'settings.channelscan.constellation_label' | translate
             }}</label>
         <p-select [options]="modulationTable" [(ngModel)]="scanRequest.Constellation" [editable]="false" [maxlength]="0"
@@ -293,8 +307,9 @@
             {{ 'settings.channelscan.constellation_desc' | translate }}
         </small>
     </div>
-
-    <div class="form-group field" *ngIf="'DVBC' ==scanSubType">
+    }
+    @if ('DVBC' ==scanSubType) {
+    <div class="form-group field">
         <label for="Modulation" class="label block">{{ 'settings.channelscan.modulation_label' | translate
             }}</label>
         <p-select [options]="modulationTable" [(ngModel)]="scanRequest.Modulation" [editable]="false" [maxlength]="0"
@@ -305,8 +320,9 @@
             {{ 'settings.channelscan.Modulation_desc' | translate }}
         </small>
     </div>
-
-    <div class="form-group field" *ngIf="'DVBS2' ==scanSubType">
+    }
+    @if ('DVBS2' ==scanSubType) {
+    <div class="form-group field">
         <label for="DVBSModulation" class="label block">{{ 'settings.channelscan.modulation_label' | translate
             }}</label>
         <p-select [options]="dvbsModulationTable" [(ngModel)]="scanRequest.Modulation" [editable]="false"
@@ -317,8 +333,9 @@
             {{ 'settings.channelscan.dvbsmodulation_desc' | translate }}
         </small>
     </div>
-
-    <div class="form-group field" *ngIf="'DVBT2' == scanSubType">
+    }
+    @if ('DVBT2' == scanSubType) {
+    <div class="form-group field">
         <label for="DVBTModSys" class="label block">{{ 'settings.channelscan.modsys_label' | translate
             }}</label>
         <p-select [options]="dvbtModSysTable" [(ngModel)]="scanRequest.ModSys" [editable]="false" [maxlength]="0"
@@ -329,8 +346,9 @@
             {{ 'settings.channelscan.dvbtmodsys_desc' | translate }}
         </small>
     </div>
-
-    <div class="form-group field" *ngIf="'DVBC' == scanSubType">
+    }
+    @if ('DVBC' == scanSubType) {
+    <div class="form-group field">
         <label for="DVBCModSys" class="label block">{{ 'settings.channelscan.modsys_label' | translate
             }}</label>
         <p-select [options]="dvbcModSysTable" [(ngModel)]="scanRequest.ModSys" [editable]="false" [maxlength]="0"
@@ -341,8 +359,9 @@
             {{ 'settings.channelscan.dvbcmodsys_desc' | translate }}
         </small>
     </div>
-
-    <div class="form-group field" *ngIf="'DVBS2' == scanSubType">
+    }
+    @if ('DVBS2' == scanSubType) {
+    <div class="form-group field">
         <label for="DVBSModSys" class="label block">{{ 'settings.channelscan.modsys_label' | translate
             }}</label>
         <p-select [options]="dvbsModSysTable" [(ngModel)]="scanRequest.ModSys" [editable]="false" [maxlength]="0"
@@ -353,9 +372,9 @@
             {{ 'settings.channelscan.dvbsmodsys_desc' | translate }}
         </small>
     </div>
-
-
-    <div class="form-group field" *ngIf="['DVBT','DVBT2'].includes(scanSubType)">
+    }
+    @if (['DVBT','DVBT2'].includes(scanSubType)) {
+    <div class="form-group field">
         <label for="CodeRateLP" class="label block">{{ 'settings.channelscan.coderatelp_label' | translate
             }}</label>
         <p-select [options]="fecTable" [(ngModel)]="scanRequest.CodeRateLP" [editable]="false" [maxlength]="0"
@@ -366,8 +385,9 @@
             {{ 'settings.channelscan.coderatelp_desc' | translate }}
         </small>
     </div>
-
-    <div class="form-group field" *ngIf="['DVBT','DVBT2'].includes(scanSubType)">
+    }
+    @if (['DVBT','DVBT2'].includes(scanSubType)) {
+    <div class="form-group field">
         <label for="CodeRateHP" class="label block">{{ 'settings.channelscan.coderatehp_label' | translate
             }}</label>
         <p-select [options]="fecTable" [(ngModel)]="scanRequest.CodeRateHP" [editable]="false" [maxlength]="0"
@@ -378,8 +398,9 @@
             {{ 'settings.channelscan.coderatehp_desc' | translate }}
         </small>
     </div>
-
-    <div class="form-group field" *ngIf="['DVBC','DVBS','DVBS2'].includes(scanSubType)">
+    }
+    @if (['DVBC','DVBS','DVBS2'].includes(scanSubType)) {
+    <div class="form-group field">
         <label for="FEC" class="label block">{{ 'settings.channelscan.FEC_label' | translate
             }}</label>
         <p-select [options]="fecTable" [(ngModel)]="scanRequest.FEC" [editable]="false" [maxlength]="0"
@@ -389,8 +410,9 @@
             {{ 'settings.channelscan.FEC_desc' | translate }}
         </small>
     </div>
-
-    <div class="form-group field" *ngIf="['DVBT','DVBT2'].includes(scanSubType)">
+    }
+    @if (['DVBT','DVBT2'].includes(scanSubType)) {
+    <div class="form-group field">
         <label for="TransmissionMode" class="label block">{{ 'settings.channelscan.transmissionmode_label' | translate
             }}</label>
         <p-select [options]="transmissionModeTable" [(ngModel)]="scanRequest.TransmissionMode" [editable]="false"
@@ -401,8 +423,9 @@
             {{ 'settings.channelscan.transmissionmode_desc' | translate }}
         </small>
     </div>
-
-    <div class="form-group field" *ngIf="['DVBT','DVBT2'].includes(scanSubType)">
+    }
+    @if (['DVBT','DVBT2'].includes(scanSubType)) {
+    <div class="form-group field">
         <label for="GuardInterval" class="label block">{{ 'settings.channelscan.guardinterval_label' | translate
             }}</label>
         <p-select [options]="guardIntervalTable" [(ngModel)]="scanRequest.GuardInterval" [editable]="false"
@@ -413,8 +436,9 @@
             {{ 'settings.channelscan.guardinterval_desc' | translate }}
         </small>
     </div>
-
-    <div class="form-group field" *ngIf="['DVBT','DVBT2'].includes(scanSubType)">
+    }
+    @if (['DVBT','DVBT2'].includes(scanSubType)) {
+    <div class="form-group field">
         <label for="Hierarchy" class="label block">{{ 'settings.channelscan.hierarchy_label' | translate
             }}</label>
         <p-select [options]="hierarchyTable" [(ngModel)]="scanRequest.Hierarchy" [editable]="false" [maxlength]="0"
@@ -425,8 +449,9 @@
             {{ 'settings.channelscan.hierarchy_desc' | translate }}
         </small>
     </div>
-
-    <div class="form-group field" *ngIf="'DVBS2' == scanSubType">
+    }
+    @if ('DVBS2' == scanSubType) {
+    <div class="form-group field">
         <label for="RollOff" class="label block">{{ 'settings.channelscan.rolloff_label' | translate
             }}</label>
         <p-select [options]="rollOffTable" [(ngModel)]="scanRequest.RollOff" [editable]="false" [maxlength]="0"
@@ -436,14 +461,15 @@
             {{ 'settings.channelscan.rolloff_desc' | translate }}
         </small>
     </div>
-
+    }
 </p-fieldset>
+}
 
 
 <!-- Import Existing Scan Panel -->
+@if (scanRequest.ScanType == 'IMPORT') {
 <p-fieldset class="mb-6 w-full" legend="{{ 'settings.channelscan.type.import' | translate }}" [toggleable]="false"
-    [collapsed]="false" *ngIf="scanRequest.ScanType == 'IMPORT'">
-
+    [collapsed]="false">
     <div class="form-group field">
         <label for="ScanId" class="label block">{{ 'settings.channelscan.scanimport_label' | translate
             }}</label>
@@ -454,14 +480,15 @@
         <small class="block">
         </small>
     </div>
-
 </p-fieldset>
+}
 
 <!-- Scan Existing Transports Panel -->
+@if (scanRequest.ScanType == 'ALLTRANSPORT' || scanRequest.ScanType == 'ONETRANSPORT') {
 <p-fieldset class="mb-6 w-full" legend="{{ 'settings.channelscan.type.transports' | translate }}" [toggleable]="false"
-    [collapsed]="false" *ngIf="scanRequest.ScanType == 'ALLTRANSPORT' || scanRequest.ScanType == 'ONETRANSPORT'">
-
-    <div class="form-group field" *ngIf="scanRequest.ScanType == 'ONETRANSPORT'">
+    [collapsed]="false">
+    @if (scanRequest.ScanType == 'ONETRANSPORT') {
+    <div class="form-group field">
         <label for="MplexId" class="label block">{{ 'settings.channelscan.transport_label' | translate
             }}</label>
         <p-select [options]="multiplex" [(ngModel)]="scanRequest.MplexId" [editable]="false" optionLabel="Description"
@@ -471,7 +498,7 @@
         <small class="block">
         </small>
     </div>
-
+    }
     <div class="form-group field">
         <p-checkbox inputId="IgnoreSignalTimeout" [(ngModel)]="scanRequest.IgnoreSignalTimeout"
             name="IgnoreSignalTimeout" #IgnoreSignalTimeout="ngModel" class="label mb-2 w-full" [binary]="true" />
@@ -482,7 +509,6 @@
             {{ 'settings.channelscan.ignoresignaltimeout_desc' | translate }}
         </small>
     </div>
-
     <div class="form-group field">
         <p-checkbox inputId="FollowNITSetting" [(ngModel)]="scanRequest.FollowNITSetting" name="FollowNITSetting"
             #FollowNITSetting="ngModel" class="label mb-2 w-full" [binary]="true" />
@@ -492,8 +518,8 @@
             {{ 'settings.channelscan.follownitsetting_desc' | translate }}
         </small>
     </div>
-
 </p-fieldset>
+}
 
 <br><br>
 
@@ -504,9 +530,11 @@
                   || !card.SourceId">
         </p-button>
     </div>
-    <small class="block" *ngIf="(iconnection.currentForm && iconnection.currentForm.form.dirty) || !card.SourceId">
+    @if ((iconnection.currentForm && iconnection.currentForm.form.dirty) || !card.SourceId) {
+    <small class="block">
         {{ 'settings.channelscan.scan_desc' | translate }}
     </small>
+    }
 </div>
 
 <!-- Scanning progress panel -->
@@ -564,31 +592,39 @@
 
             <br>
 
-            <div class="form-group field" *ngIf="scanStatus.DialogMsg">
+            @if (scanStatus.DialogMsg) {
+            <div class="form-group field">
                 <div class="col-span-10" style="color:black; background-color:pink">
                     <b>{{ scanStatus.DialogMsg }}</b> &nbsp;
                 </div>
                 <br>
             </div>
+            }
 
-            <div class="form-group field" *ngIf="scanStatus.DialogInputReq">
+            @if (scanStatus.DialogInputReq) {
+            <div class="form-group field">
                 <input pInputText id="DialogString" [(ngModel)]="dialogResponse.DialogString" name="DialogString"
                     #InputName="ngModel" class="mb-2 form-control w-full" />
             </div>
+            }
 
 
-            <div class="form-group field" *ngIf="scanStatus.DialogButtons.length > 0">
+            @if (scanStatus.DialogButtons.length > 0) {
+            <div class="form-group field">
                 <label for="DialogButtons" class="label block">{{ 'settings.channelscan.scanimport_option' | translate
                     }}</label>
                 <p-select [options]="scanStatus.DialogButtons" [(ngModel)]="buttonText" [editable]="false"
                     [maxlength]="0" [style]="{'minWidth':'400px'}" name="DialogButtons" #DesiredServices="ngModel">
                 </p-select>
             </div>
+            }
 
-            <div class="form-group field" *ngIf="scanStatus.DialogButtons.length > 0 || scanStatus.DialogInputReq">
+            @if (scanStatus.DialogButtons.length > 0 || scanStatus.DialogInputReq) {
+            <div class="form-group field">
                 <p-button label="{{ 'common.submit' | translate }}" (onClick)="respondDialog()" class="gap-4">
                 </p-button>
             </div>
+            }
             <br>
             <div class="form-group field">
                 <div style="display:flex; align-items:center;">

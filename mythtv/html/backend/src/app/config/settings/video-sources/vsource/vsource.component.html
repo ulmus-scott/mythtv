@@ -14,11 +14,13 @@
                     <input pInputText id="SourceName" [(ngModel)]="videoSource.SourceName" name="SourceName"
                         #SourceName="ngModel" class="mb-2 form-control w-full" [disabled]="videoSource.Id>0"
                         (change)="checkName()" [maxlength]="50" />
-                    <div *ngIf="work.errorMessage">
+                    @if (work.errorMessage) {
+                    <div>
                         <small class="p-error block">
                             {{ work.errorMessage }}
                         </small>
                     </div>
+                    }
                     <small class="block">
                         {{ 'settings.vsource.source_desc' | translate }}
                     </small>
@@ -28,17 +30,19 @@
                     <label for="Grabber" class="label block">
                         {{ 'settings.vsource.grabber_label' | translate }}
                     </label>
-                    <p-select *ngIf="grabberList.GrabberList.Grabbers.length > 0"
-                        [options]="grabberList.GrabberList.Grabbers" [(ngModel)]="videoSource.Grabber"
+                    @if (grabberList.GrabberList.Grabbers.length > 0) {
+                    <p-select [options]="grabberList.GrabberList.Grabbers" [(ngModel)]="videoSource.Grabber"
                         [editable]="false" optionLabel="DisplayName" optionValue="Program" [style]="{'minWidth':'80%'}"
                         name="Grabber" #Grabber="ngModel" (onChange)="checkName()">
                     </p-select>
+                    }
                     <small class="block">
                         {{ 'settings.vsource.grabber_desc' | translate }}
                     </small>
                 </div>
 
-                <div class="form-group field" *ngIf="configCommand2.length>0">
+                @if (configCommand2.length>0) {
+                <div class="form-group field">
                     <label for="configure" class="label block">
                         {{ 'settings.vsource.grabberconfig_label' | translate }}
                     </label>
@@ -47,7 +51,8 @@
                         <a href="https://wiki.mythtv.org/wiki/XMLTV" target="_blank">XMLTV</a>
                     </p>
                     <table>
-                        <tr *ngIf="configCommand1">
+                        @if (configCommand1) {
+                        <tr>
                             <td class="items-center bg-blue-100 text-gray-900" style="font-family: monospace;">
                                 {{ configCommand1 }}
                             </td>
@@ -57,6 +62,7 @@
                                     pTooltip="{{ 'settings.common.clipboard_tooltip' | translate }}"></button>
                             </td>
                         </tr>
+                        }
                         <tr>
                             <td class="items-center bg-blue-100 text-gray-900" style="font-family: monospace;">
                                 {{ configCommand2 }}
@@ -69,10 +75,11 @@
                         </tr>
                     </table>
                 </div>
+                }
 
                 <div class="form-group field">
                     <p-checkbox inputId="UseEIT" [(ngModel)]="videoSource.UseEIT" name="UseEIT" #UseEIT="ngModel"
-                        class="label mb-2 w-full" [binary]="true"/>
+                        class="label mb-2 w-full" [binary]="true" />
                     <label for="UseEIT" class="label pl-2">{{ 'settings.vsource.eit_label' | translate
                         }}</label>
                     <small class="block">
@@ -84,10 +91,11 @@
                     <label for="FreqTable" class="label block">
                         {{ 'settings.vsource.freqtable_label' | translate }}
                     </label>
-                    <p-select *ngIf="freqTableList.FreqTableList.length > 0" [options]="freqTableList.FreqTableList"
-                        [(ngModel)]="videoSource.FreqTable" [editable]="false" [style]="{'minWidth':'80%'}"
-                        name="FreqTable" #FreqTable="ngModel">
+                    @if (freqTableList.FreqTableList.length > 0) {
+                    <p-select [options]="freqTableList.FreqTableList" [(ngModel)]="videoSource.FreqTable"
+                        [editable]="false" [style]="{'minWidth':'80%'}" name="FreqTable" #FreqTable="ngModel">
                     </p-select>
+                    }
                     <small class="block">
                         {{ 'settings.vsource.freqtable_desc' | translate }}
                     </small>
@@ -159,10 +167,12 @@
         <ng-template pTemplate="footer">
             <div class="grid grid-cols-12 gap-4 nogutter">
                 <div class="col-span-12">
-                    <p-message *ngIf="this.work.successCount > 0 && this.work.errorCount == 0 && !vsourceform.dirty"
-                        severity="success" text="{{ 'common.savesuccess' | translate }}"></p-message>
-                    <p-message *ngIf="this.work.errorCount > 0" severity="error"
-                        text="{{ 'common.networkfail' | translate }}"></p-message>
+                    @if (this.work.successCount > 0 && this.work.errorCount == 0 && !vsourceform.dirty) {
+                    <p-message severity="success" text="{{ 'common.savesuccess' | translate }}"></p-message>
+                    }
+                    @if (this.work.errorCount > 0) {
+                    <p-message severity="error" text="{{ 'common.networkfail' | translate }}"></p-message>
+                    }
                 </div>
                 <p-button class="col pr-1" label="{{'common.save' | translate}}" icon="pi pi-save" iconPos="left"
                     (onClick)="saveForm(); markPristine()"

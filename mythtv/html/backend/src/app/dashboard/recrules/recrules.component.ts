@@ -12,7 +12,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { RippleModule } from 'primeng/ripple';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
-import { NgIf } from '@angular/common';
+
 
 interface MyRecRule extends RecRule {
     TitleSort?: number;
@@ -22,7 +22,7 @@ interface MyRecRule extends RecRule {
     selector: 'app-recrules',
     templateUrl: './recrules.component.html',
     styleUrls: ['./recrules.component.css'],
-    imports: [NgIf, TableModule, SharedModule, ButtonModule, RippleModule, TooltipModule, DialogModule, MessageModule, ScheduleComponent, TranslateModule]
+    imports: [TableModule, SharedModule, ButtonModule, RippleModule, TooltipModule, DialogModule, MessageModule, ScheduleComponent, TranslateModule]
 })
 export class RecrulesComponent implements OnInit, SchedulerSummary {
 

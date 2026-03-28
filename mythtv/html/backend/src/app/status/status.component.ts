@@ -10,21 +10,21 @@ import { MachineinfoComponent } from './components/machineinfo/machineinfo.compo
 import { JobqueueComponent } from './components/jobqueue/jobqueue.component';
 import { ScheduledComponent } from './components/scheduled/scheduled.component';
 import { EncodersComponent } from './components/encoders/encoders.component';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-status',
     templateUrl: './status.component.html',
     styleUrls: ['./status.component.css'],
-    imports: [NgIf, EncodersComponent, ScheduledComponent, JobqueueComponent, MachineinfoComponent, BackendsComponent, FrontendsComponent, AsyncPipe, TranslateModule]
+    imports: [EncodersComponent, ScheduledComponent, JobqueueComponent, MachineinfoComponent, BackendsComponent, FrontendsComponent, AsyncPipe, TranslateModule]
 })
 export class StatusComponent implements OnInit {
-  m_status$!: Observable<BackendStatusResponse>;
-  status?: BackendStatusResponse;
+    m_status$!: Observable<BackendStatusResponse>;
+    status?: BackendStatusResponse;
 
-  constructor(private statusService: StatusService) { }
+    constructor(private statusService: StatusService) { }
 
-  ngOnInit(): void {
-    this.m_status$ = this.statusService.GetBackendStatus();
-  }
+    ngOnInit(): void {
+        this.m_status$ = this.statusService.GetBackendStatus();
+    }
 }

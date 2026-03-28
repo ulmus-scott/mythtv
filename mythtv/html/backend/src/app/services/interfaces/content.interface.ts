@@ -1,79 +1,79 @@
 export interface DownloadFileRequest {
-    URL:            string;
-    StorageGroup:   string;
+    URL: string;
+    StorageGroup: string;
 }
 
 export interface StorageGroupRequest {
-    StorageGroup:   string;
+    StorageGroup: string;
 }
 
 export interface StorageGroupFileNameRequest {
-    StorageGroup:   string;
-    FileName:       string;
+    StorageGroup: string;
+    FileName: string;
 }
 
 export interface GetAlbumArtRequest {
-    Id:             number;
-    Width:          number;
-    Height:         number;
+    Id: number;
+    Width: number;
+    Height: number;
 }
 
 export interface GetImageFileRequest {
-    StorageGroup:   string;
-    FileName:       string;
-    Width:          number;
-    Height:         number;
+    StorageGroup: string;
+    FileName: string;
+    Width: number;
+    Height: number;
 }
 
 export interface GetPreviewImageRequest {
-    RecordedId:     number;
-    ChanId:         number;
-    StartTime:      string; // dateTime
-    Width:          number;
-    Height:         number;
-    SecsIn:         number;
-    Format:         string;
+    RecordedId: number;
+    ChanId: number;
+    StartTime: string; // dateTime
+    Width: number;
+    Height: number;
+    SecsIn: number;
+    Format: string;
 }
 
 export interface GetProgramArtworkListRequest {
-    Inetref:        string;
-    Season:         number;
+    Inetref: string;
+    Season: number;
 }
 
 export interface GetRecordingRequest {
-    RecordedId:     number;
-    ChanId:         number;
-    StartTime:      string; // dateTime
+    RecordedId: number;
+    ChanId: number;
+    StartTime: string; // dateTime
 }
 
 export interface GetRecordingArtworkRequest {
-    Type:           string;
-    Inetref:        string;
-    Season:         number;
-    Width:          number;
-    Height:         number;
+    Type: string;
+    Inetref: string;
+    Season: number;
+    Width: number;
+    Height: number;
 }
 
 export interface GetRecordingArtworkListRequest {
-    RecordedId:     number;
-    ChanId:         number;
-    StartTime:      string; // dateTime
+    RecordedId: number;
+    ChanId: number;
+    StartTime: string; // dateTime
 }
 
 export interface GetVideoArtworkRequest {
-    Type:           string;
-    Id:             number;
-    Width:          number;
-    Height:         number;
+    Type: string;
+    Id: number;
+    Width: number;
+    Height: number;
 }
 export interface GetDirListResponse {
-    DirList:        String[];
+    DirList: String[];
 }
 
 export interface GetFileListResponse {
-    FileList:       String[];
+    FileList: String[];
 }
 
 export interface GetHashResponse {
-    Hash:           string;
+    Hash: string;
 }

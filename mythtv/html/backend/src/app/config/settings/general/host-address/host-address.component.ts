@@ -7,7 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
 import { CheckboxModule } from 'primeng/checkbox';
-import { NgClass, NgIf } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { FieldsetModule } from 'primeng/fieldset';
 import { SharedModule } from 'primeng/api';
 import { CardModule } from 'primeng/card';
@@ -18,7 +18,7 @@ import { SettingsComponent } from '../general-settings.component';
     selector: 'app-host-address',
     templateUrl: './host-address.component.html',
     styleUrls: ['./host-address.component.css'],
-    imports: [FormsModule, CardModule, SharedModule, FieldsetModule, NgClass, NgIf, CheckboxModule, SelectModule, MessageModule, ButtonModule, TranslateModule]
+    imports: [FormsModule, CardModule, SharedModule, FieldsetModule, NgClass, CheckboxModule, SelectModule, MessageModule, ButtonModule, TranslateModule]
 })
 export class HostAddressComponent implements OnInit, AfterViewInit {
     m_HostAddressData!: HostAddress;
@@ -79,7 +79,7 @@ export class HostAddressComponent implements OnInit, AfterViewInit {
         setTimeout(() => {
             this.currentForm.form.markAsPristine();
             this.parent.showDirty();
-        },100);
+        }, 100);
     }
 
     saveForm() {

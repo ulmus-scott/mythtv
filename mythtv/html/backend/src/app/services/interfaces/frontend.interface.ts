@@ -6,5 +6,5 @@ export interface Frontend {
 }
 
 export interface FrontendList {
-    Frontends:      Frontend[];
+    Frontends: Frontend[];
 }

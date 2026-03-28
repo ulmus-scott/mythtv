@@ -1,52 +1,52 @@
 export interface ChannelGroupRequest {
-    ChannelGroupId:     number;
-    ChanId:             number;
+    ChannelGroupId: number;
+    ChanId: number;
 }
 
 export interface GetCategoryListResponse {
-    CategoryList:       string[];
+    CategoryList: string[];
 }
 
 export interface GetChannelIconRequest {
-    ChanId:             number;
-    Width:              number;
-    Height:             number;
+    ChanId: number;
+    Width: number;
+    Height: number;
 }
 
 export interface GetProgramDetailsRequest {
-    ChanId:             number;
-    StartTime:          string; // dateTime
+    ChanId: number;
+    StartTime: string; // dateTime
 }
 
 export interface GetProgramGuideRequest {
-    StartTime:          string;
-    EndTime:            string;
-    Details?:           boolean; // really a boolean
-    ChannelGroupId?:    number;
-    StartIndex?:        number;
-    Count?:             number;
-    WithInvisible?:     boolean;
+    StartTime: string;
+    EndTime: string;
+    Details?: boolean; // really a boolean
+    ChannelGroupId?: number;
+    StartIndex?: number;
+    Count?: number;
+    WithInvisible?: boolean;
 }
 
 export interface GetProgramListRequest {
-    StartIndex?:        number;
-    Count?:             number;
-    StartTime?:         string; // dateTime
-    EndTime?:           string; // dateTime
-    ChanId?:            number;
-    TitleFilter?:       string;
-    CategoryFilter?:    string;
-    PersonFilter?:      string;
-    KeywordFilter?:     string;
-    OnlyNew?:           boolean;
-    Details?:           boolean;
-    Sort?:              string;
-    Descending?:        boolean;
-    WithInvisible?:     boolean;
-    CatType?:           string;
-    GroupBy?:           string;
+    StartIndex?: number;
+    Count?: number;
+    StartTime?: string; // dateTime
+    EndTime?: string; // dateTime
+    ChanId?: number;
+    TitleFilter?: string;
+    CategoryFilter?: string;
+    PersonFilter?: string;
+    KeywordFilter?: string;
+    OnlyNew?: boolean;
+    Details?: boolean;
+    Sort?: string;
+    Descending?: boolean;
+    WithInvisible?: boolean;
+    CatType?: string;
+    GroupBy?: string;
 }
 
 export interface GetStoredSearchesResponse {
-    StoredSearches:     String[];
+    StoredSearches: String[];
 }

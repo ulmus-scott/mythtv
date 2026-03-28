@@ -9,7 +9,7 @@ import { SetupService } from 'src/app/services/setup.service';
 import { VsourceComponent } from './vsource/vsource.component';
 import { AccordionModule } from 'primeng/accordion';
 import { MessageModule } from 'primeng/message';
-import { NgIf } from '@angular/common';
+
 import { SharedModule } from 'primeng/api';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
@@ -25,11 +25,10 @@ import { CardModule } from 'primeng/card';
         ButtonModule,
         DialogModule,
         SharedModule,
-        NgIf,
         MessageModule,
         AccordionModule,
         VsourceComponent,
-        TranslateModule,
+        TranslateModule
     ]
 })
 export class VideoSourcesComponent implements OnInit, CanComponentDeactivate {

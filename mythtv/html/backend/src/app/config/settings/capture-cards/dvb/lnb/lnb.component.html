@@ -33,9 +33,9 @@
                 <div class="form-group field">
                     <label for="SubType" class="label block">{{ 'settings.capture.diseqc.lnb.type_label' | translate
                         }}</label>
-                    <p-select [options]="lnbSubTypes" [(ngModel)]="currentSubType" [editable]="false"
-                        optionLabel="Name" (onChange)="updateSubType();" [maxlength]="0" [style]="{'minWidth':'80%'}"
-                        name="SubType" #SubType="ngModel" [disabled]="currentPreset.SubType != 'custom'">
+                    <p-select [options]="lnbSubTypes" [(ngModel)]="currentSubType" [editable]="false" optionLabel="Name"
+                        (onChange)="updateSubType();" [maxlength]="0" [style]="{'minWidth':'80%'}" name="SubType"
+                        #SubType="ngModel" [disabled]="currentPreset.SubType != 'custom'">
                     </p-select>
                     <small class="block">
                         {{ 'settings.capture.diseqc.lnb.type_desc' | translate }}
@@ -80,8 +80,9 @@
                 <div class="form-group field">
                     <p-checkbox inputId="LnbPolInv" [(ngModel)]="diseqcTree.LnbPolInv" name="LnbPolInv"
                         #LnbPolInv="ngModel" class="label mb-2 w-full" [binary]="true"
-                        [disabled]="currentPreset.SubType != 'custom'"/>
-                    <label for="LnbPolInv" class="label pl-2">{{ 'settings.capture.diseqc.lnb.reversed_label' | translate
+                        [disabled]="currentPreset.SubType != 'custom'" />
+                    <label for="LnbPolInv" class="label pl-2">{{ 'settings.capture.diseqc.lnb.reversed_label' |
+                        translate
                         }}</label>
                     <small class="block">
                         {{ 'settings.capture.diseqc.lnb.reversed_desc' | translate }}

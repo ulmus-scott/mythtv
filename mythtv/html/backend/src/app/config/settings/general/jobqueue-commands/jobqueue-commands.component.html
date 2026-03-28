@@ -7,49 +7,50 @@
             {{ 'settings.jobqcommands.subtitle' | translate }}
         </ng-template>
         <ng-template pTemplate="content">
-                <div class="mb-6 w-full">
+            <div class="mb-6 w-full">
 
-                    <div *ngFor="let item of items">
-
-                        <div class="form-group field">
-                            <label for="UserJobDesc{{item}}" class="label block">
-                                <div [translate]="'settings.jobqcommands.job_label'"
-                                    [translateParams]="{num: (item+1)}"></div>
-                            </label>
-                            <input pInputText id="UserJobDesc{{item}}" [(ngModel)]="JobQCommandsData.UserJobDesc[item]"
-                                name="UserJobDesc{{item}}" #UserJobDesc{{item}}="ngModel"
-                                class="mb-2 form-control w-full" />
-                            <small class="block">
-                                {{ 'settings.jobqcommands.job_desc' | translate }}
-                            </small>
-                        </div>
-
-                        <div class="form-group field">
-                            <label for="UserJob{{item}}" class="label block">
-                                <div [translate]="'settings.jobqcommands.command_label'"
-                                    [translateParams]="{num: (item+1)}"></div>
-                                <!-- {{ 'settings.jobqcommands.command_label' | translate }} -->
-                            </label>
-                            <input pInputText id="UserJob{{item}}" [(ngModel)]="JobQCommandsData.UserJob[item]"
-                                name="UserJob{{item}}" #UserJob{{item}}="ngModel" class="mb-2 form-control w-full" />
-                            <small class="block">
-                                {{ 'settings.jobqcommands.command_desc' | translate }}
-                            </small>
-                        </div>
-
+                @for (item of items; track item) {
+                <div>
+                    <div class="form-group field">
+                        <label for="UserJobDesc{{item}}" class="label block">
+                            <div [translate]="'settings.jobqcommands.job_label'" [translateParams]="{num: (item+1)}">
+                            </div>
+                        </label>
+                        <input pInputText id="UserJobDesc{{item}}" [(ngModel)]="JobQCommandsData.UserJobDesc[item]"
+                            name="UserJobDesc{{item}}" #UserJobDesc{{item}}="ngModel"
+                            class="mb-2 form-control w-full" />
+                        <small class="block">
+                            {{ 'settings.jobqcommands.job_desc' | translate }}
+                        </small>
                     </div>
-
+                    <div class="form-group field">
+                        <label for="UserJob{{item}}" class="label block">
+                            <div [translate]="'settings.jobqcommands.command_label'"
+                                [translateParams]="{num: (item+1)}"></div>
+                            <!-- {{ 'settings.jobqcommands.command_label' | translate }} -->
+                        </label>
+                        <input pInputText id="UserJob{{item}}" [(ngModel)]="JobQCommandsData.UserJob[item]"
+                            name="UserJob{{item}}" #UserJob{{item}}="ngModel" class="mb-2 form-control w-full" />
+                        <small class="block">
+                            {{ 'settings.jobqcommands.command_desc' | translate }}
+                        </small>
+                    </div>
                 </div>
+                }
+
+            </div>
         </ng-template>
 
         <ng-template pTemplate="footer">
             <div class="grid grid-cols-12 gap-4 nogutter">
                 <div class="col-span-12">
-                    <p-message
-                        *ngIf="this.JobQCommandsData.successCount > 0 && this.JobQCommandsData.errorCount == 0 && !jobqcommands.dirty"
-                        severity="success" text="{{ 'common.savesuccess' | translate }}"></p-message>
-                    <p-message *ngIf="this.JobQCommandsData.errorCount > 0" severity="error"
-                        text="{{ 'common.networkfail' | translate }}"></p-message>
+                    @if (this.JobQCommandsData.successCount > 0 && this.JobQCommandsData.errorCount == 0 &&
+                    !jobqcommands.dirty) {
+                    <p-message severity="success" text="{{ 'common.savesuccess' | translate }}"></p-message>
+                    }
+                    @if (this.JobQCommandsData.errorCount > 0) {
+                    <p-message severity="error" text="{{ 'common.networkfail' | translate }}"></p-message>
+                    }
                 </div>
                 <p-button class="col pr-1" label="{{'common.save' | translate}}" icon="pi pi-save" iconPos="left"
                     (onClick)="saveForm(); markPristine()"

@@ -1,15 +1,18 @@
 <div class="statusBox">
     <h2>{{ 'dashboard.status.frontends_title' | translate }}</h2>
-    <div *ngIf="frontends?.length != 0; else noFrontends">
+    @if (frontends?.length != 0) {
+    <div>
         <ul class="list-disc list-inside ml-4">
-            <div *ngFor="let frontend of frontends">
+            @for (frontend of frontends; track frontend) {
+            <div>
                 <li>{{ 'dashboard.status.frontends_detail' |
                     translate: { Name: frontend.Name, IP: frontend.IP, Port: frontend.Port, OnLine: frontend.OnLine } }}
                 </li>
             </div>
+            }
         </ul>
     </div>
-</div>
-<ng-template #noFrontends>
+    } @else {
     <p>{{ 'dashboard.status.frontends_none' | translate }}</p>
-</ng-template>
+    }
+</div>

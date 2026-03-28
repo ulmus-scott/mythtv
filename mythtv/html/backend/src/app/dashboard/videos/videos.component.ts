@@ -16,7 +16,7 @@ import { RippleModule } from 'primeng/ripple';
 import { TooltipModule } from 'primeng/tooltip';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ButtonModule } from 'primeng/button';
-import { NgIf, NgFor } from '@angular/common';
+
 import { ToastModule } from 'primeng/toast';
 import { SelectModule } from 'primeng/select';
 import { DatePicker, DatePickerModule } from "primeng/datepicker";
@@ -26,7 +26,7 @@ import { DatePicker, DatePickerModule } from "primeng/datepicker";
     templateUrl: './videos.component.html',
     styleUrls: ['./videos.component.css'],
     providers: [MessageService],
-    imports: [ToastModule, MenuModule, NgIf, TableModule, SharedModule, ButtonModule, NgFor, CheckboxModule, FormsModule, TooltipModule, RippleModule, SelectModule, DialogModule, TextareaModule, InputNumberModule, DatePickerModule, MessageModule, TranslateModule, DatePicker]
+    imports: [ToastModule, MenuModule, TableModule, SharedModule, ButtonModule, CheckboxModule, FormsModule, TooltipModule, RippleModule, SelectModule, DialogModule, TextareaModule, InputNumberModule, DatePickerModule, MessageModule, TranslateModule, DatePicker]
 })
 export class VideosComponent implements OnInit {
 

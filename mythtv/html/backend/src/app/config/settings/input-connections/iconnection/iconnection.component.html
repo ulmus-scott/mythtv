@@ -9,8 +9,11 @@
         <ng-template pTemplate="content">
             <div class="mb-6 w-full">
 
-                <div *ngIf="diseqcTree" [ngSwitch]="diseqcTree.Type">
-                    <div class="form-group field" *ngSwitchCase="'switch'">
+                @if (diseqcTree) {
+                <div>
+                    @switch (diseqcTree.Type) {
+                    @case ('switch') {
+                    <div class="form-group field">
                         <label for="Port" class="label block">{{ 'settings.iconnection.switchport_label' | translate
                             }}</label>
                         <p-inputNumber [(ngModel)]="work.switchPort" name="Port" id="Port" [showButtons]="true"
@@ -19,7 +22,9 @@
                             {{ 'settings.iconnection.switchport_desc' | translate }}
                         </small>
                     </div>
-                    <div *ngSwitchCase="'rotor'">
+                    }
+                    @case ('rotor') {
+                    <div>
                         <div class="form-group field">
                             <label for="Degrees" class="label block">{{ 'settings.iconnection.longitude_label' |
                                 translate
@@ -42,10 +47,11 @@
                             <small class="block">
                                 {{ 'settings.iconnection.longitude_desc' | translate }}
                             </small>
-
                         </div>
                     </div>
-                    <div *ngSwitchCase="'scr'" class="form-group field">
+                    }
+                    @case ('scr') {
+                    <div class="form-group field">
                         <label class="label block">{{ 'settings.iconnection.unicablepos_label' | translate }}</label>
                         <div class="field-radiobutton">
                             <p-radioButton name="scrPort" value="A" [(ngModel)]="work.scrPort" inputId="portA">
@@ -62,11 +68,14 @@
                         <small class="block">
                             {{ 'settings.iconnection.unicablepos_desc' | translate }}
                         </small>
-
                     </div>
+                    }
+                    }
                 </div>
+                }
 
-                <div class="form-group field" *ngIf="card.CardType == 'DVB'">
+                @if (card.CardType == 'DVB') {
+                <div class="form-group field">
                     <label for="Delivery" class="label block">{{ 'settings.iconnection.delivery_label' | translate
                         }}</label>
                     <input pInputText id="Delivery" [(ngModel)]="card.InputName" name="Delivery" disabled="true"
@@ -75,17 +84,22 @@
                         {{ 'settings.iconnection.delivery_desc' | translate }}
                     </small>
                 </div>
+                }
 
-                <div class="form-group field" *ngIf="card.CardType != 'DVB'">
+                @if (card.CardType != 'DVB') {
+                <div class="form-group field">
                     <label for="InputName" class="label block">{{ 'settings.iconnection.input_label' | translate
                         }}</label>
-                    <p-select *ngIf="work.isReady" [options]="this.currentDevice.InputNames"
-                        [(ngModel)]="card.InputName" name="InputName" #InputName="ngModel">
+                    @if (work.isReady) {
+                    <p-select [options]="this.currentDevice.InputNames" [(ngModel)]="card.InputName" name="InputName"
+                        #InputName="ngModel">
                     </p-select>
+                    }
                     <small class="block">
                         {{ 'settings.capture.inputname_desc' | translate }}
                     </small>
                 </div>
+                }
 
                 <div class="form-group field">
                     <label for="DisplayName" class="label block">{{ 'settings.iconnection.displayname_label' | translate
@@ -110,7 +124,8 @@
                     </small>
                 </div>
 
-                <div class="form-group field" *ngIf="work.isEncoder || work.isUnscanable">
+                @if (work.isEncoder || work.isUnscanable) {
+                <div class="form-group field">
                     <label for="ExternalCommand" class="label block">{{ 'settings.iconnection.externalcmd_label' |
                         translate }}</label>
                     <input pInputText id="ExternalCommand" [(ngModel)]="card.ExternalCommand" name="ExternalCommand"
@@ -119,8 +134,10 @@
                         {{ 'settings.iconnection.externalcmd_desc' | translate }}
                     </small>
                 </div>
+                }
 
-                <div class="form-group field" *ngIf="work.showPresetTuner">
+                @if (work.showPresetTuner) {
+                <div class="form-group field">
                     <label for="TuneChannel" class="label block">{{ 'settings.iconnection.tunechan_label' | translate
                         }}</label>
                     <input pInputText id="TuneChannel" [(ngModel)]="card.TuneChannel" name="TuneChannel"
@@ -129,8 +146,10 @@
                         {{ 'settings.iconnection.tunechan_desc' | translate }}
                     </small>
                 </div>
+                }
 
-                <div class="form-group field" *ngIf="!work.isEncoder && !work.isUnscanable">
+                @if (!work.isEncoder && !work.isUnscanable) {
+                <div class="form-group field">
                     <label for="Quicktune" class="label block">{{ 'settings.iconnection.quicktune_label' | translate
                         }}</label>
                     <p-select [options]="quickTuneValues" [(ngModel)]="card.Quicktune" [editable]="false"
@@ -141,23 +160,28 @@
                         {{ 'settings.iconnection.quicktune_desc' | translate }}
                     </small>
                 </div>
+                }
 
-                <div class="form-group field" *ngIf="card.CardType == 'DVB'">
+                @if (card.CardType == 'DVB') {
+                <div class="form-group field">
                     <p-checkbox inputId="DishnetEIT" [(ngModel)]="card.DishnetEIT" name="DishnetEIT"
-                        #DishnetEIT="ngModel" class="label mb-2 w-full" [binary]="true"/>
+                        #DishnetEIT="ngModel" class="label mb-2 w-full" [binary]="true" />
                     <label for="DishnetEIT" class="label pl-2">{{ 'settings.iconnection.dishneteit_label' | translate
                         }}</label>
                     <small class="block">
                         {{ 'settings.iconnection.dishneteit_desc' | translate }}
                     </small>
                 </div>
+                }
 
                 <!-- Scan Panel -->
+                @if (!work.isUnscanable) {
                 <p-fieldset class="mb-6 w-full" legend="{{ 'settings.iconnection.scan_title' | translate }}"
-                    [collapsed]="true" [toggleable]="true" *ngIf="!work.isUnscanable">
+                    [collapsed]="true" [toggleable]="true">
                     <app-channelscan [card]="card" [cardList]="cardList" [iconnection]="this"
                         [videoSourceLookup]="videoSourceLookup"></app-channelscan>
                 </p-fieldset>
+                }
 
                 <br><br>
 
@@ -280,10 +304,12 @@
         <ng-template pTemplate="footer">
             <div class="grid grid-cols-12 gap-4 nogutter">
                 <div class="col-span-12">
-                    <p-message *ngIf="this.work.successCount > 0 && this.work.errorCount == 0 && !connform.dirty"
-                        severity="success" text="{{ 'common.savesuccess' | translate }}"></p-message>
-                    <p-message *ngIf="this.work.errorCount > 0" severity="error"
-                        text="{{ 'common.networkfail' | translate }}"></p-message>
+                    @if (this.work.successCount > 0 && this.work.errorCount == 0 && !connform.dirty) {
+                    <p-message severity="success" text="{{ 'common.savesuccess' | translate }}"></p-message>
+                    }
+                    @if (this.work.errorCount > 0) {
+                    <p-message severity="error" text="{{ 'common.networkfail' | translate }}"></p-message>
+                    }
                 </div>
                 <p-button class="col pr-1" label="{{'common.save' | translate}}" icon="pi pi-save" iconPos="left"
                     (onClick)="saveForm(); markPristine()"

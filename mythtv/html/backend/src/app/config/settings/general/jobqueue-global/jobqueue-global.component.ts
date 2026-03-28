@@ -6,7 +6,7 @@ import { SetupService } from 'src/app/services/setup.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
-import { NgIf } from '@angular/common';
+
 import { CheckboxModule } from 'primeng/checkbox';
 import { SharedModule } from 'primeng/api';
 import { CardModule } from 'primeng/card';
@@ -16,7 +16,7 @@ import { SettingsComponent } from '../general-settings.component';
     selector: 'app-jobqueue-global',
     templateUrl: './jobqueue-global.component.html',
     styleUrls: ['./jobqueue-global.component.css'],
-    imports: [FormsModule, CardModule, SharedModule, CheckboxModule, NgIf, MessageModule, ButtonModule, TranslateModule]
+    imports: [FormsModule, CardModule, SharedModule, CheckboxModule, MessageModule, ButtonModule, TranslateModule]
 })
 export class JobqueueGlobalComponent implements OnInit, AfterViewInit {
 

@@ -7,7 +7,7 @@ import { SetupService } from 'src/app/services/setup.service';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
 import { InputNumberModule } from 'primeng/inputnumber';
-import { NgIf } from '@angular/common';
+
 import { SharedModule } from 'primeng/api';
 import { CardModule } from 'primeng/card';
 import { SelectModule } from 'primeng/select';
@@ -17,7 +17,7 @@ import { CaptureCardsComponent } from '../capture-cards.component';
     selector: 'app-firewire',
     templateUrl: './firewire.component.html',
     styleUrls: ['./firewire.component.css'],
-    imports: [FormsModule, CardModule, SharedModule, NgIf, SelectModule, InputNumberModule, MessageModule, ButtonModule, TranslateModule]
+    imports: [FormsModule, CardModule, SharedModule, SelectModule, InputNumberModule, MessageModule, ButtonModule, TranslateModule]
 })
 export class FirewireComponent implements OnInit, AfterViewInit {
     @Input() card!: CardAndInput;

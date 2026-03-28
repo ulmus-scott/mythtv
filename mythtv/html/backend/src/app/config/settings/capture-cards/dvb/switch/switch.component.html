@@ -62,20 +62,26 @@
                     <small class="block">
                         <div [innerHTML]="'settings.capture.diseqc.switchports_desc' | translate"></div>
                     </small>
-                    <div *ngIf="diseqcSubTreeCount > diseqcTree.SwitchPorts">
+                    @if (diseqcSubTreeCount > diseqcTree.SwitchPorts) {
+                    <div>
                         <small class="p-error block">{{ 'settings.capture.diseqc.switchports_error' | translate
                             }}</small>
                     </div>
+                    }
 
                 </div>
 
                 <!-- Sub Device Panels -->
-                <div *ngFor="let subtree of diseqcSubTree; index as ix">
+                @for (subtree of diseqcSubTree; track subtree; let ix = $index) {
+                <div>
+                    @if (subtree) {
                     <p-fieldset class="mb-6 w-full" legend="{{ 'settings.capture.dvb.satellite_heading' | translate }}"
-                        [toggleable]="true" [collapsed]="true" *ngIf="subtree">
-                        <p-button styleClass="p-button-warning" *ngIf="subtree" label="Delete Satellite Devices"
-                            icon="pi pi-trash" (onClick)="displayDeleteThis[ix]=true" [disabled]="!subtree">
+                        [toggleable]="true" [collapsed]="true">
+                        @if (subtree) {
+                        <p-button styleClass="p-button-warning" label="Delete Satellite Devices" icon="pi pi-trash"
+                            (onClick)="displayDeleteThis[ix]=true" [disabled]="!subtree">
                         </p-button>
+                        }
                         <p-dialog header="{{ 'settings.capture.dvb.satellite_delete_header' | translate }}"
                             [(visible)]="displayDeleteThis[ix]" [modal]="true" [style]="{width: '50vw'}"
                             [draggable]="false" [resizable]="false">
@@ -89,34 +95,38 @@
                                     label="{{ 'common.yes' | translate }}" styleClass="p-button-plain"></p-button>
                             </ng-template>
                         </p-dialog>
-
-                        <app-lnb *ngIf="subtree && subtree.Type == 'lnb'" [diseqcTree]="subtree"
-                            [diseqcTreeList]="diseqcTreeList" (baseEvent)="setDiseqcObject($event)"
-                            [dvbComponent]="dvbComponent">
+                        @if (subtree && subtree.Type == 'lnb') {
+                        <app-lnb [diseqcTree]="subtree" [diseqcTreeList]="diseqcTreeList"
+                            (baseEvent)="setDiseqcObject($event)" [dvbComponent]="dvbComponent">
                         </app-lnb>
-                        <app-rotor *ngIf="subtree && subtree.Type == 'rotor'" [diseqcTree]="subtree"
-                            [diseqcTreeList]="diseqcTreeList" (baseEvent)="setDiseqcObject($event)"
-                            [dvbComponent]="dvbComponent">
+                        }
+                        @if (subtree && subtree.Type == 'rotor') {
+                        <app-rotor [diseqcTree]="subtree" [diseqcTreeList]="diseqcTreeList"
+                            (baseEvent)="setDiseqcObject($event)" [dvbComponent]="dvbComponent">
                         </app-rotor>
-                        <app-switch *ngIf="subtree && subtree.Type == 'switch'" [diseqcTree]="subtree"
-                            [diseqcTreeList]="diseqcTreeList" (baseEvent)="setDiseqcObject($event)"
-                            [dvbComponent]="dvbComponent">
+                        }
+                        @if (subtree && subtree.Type == 'switch') {
+                        <app-switch [diseqcTree]="subtree" [diseqcTreeList]="diseqcTreeList"
+                            (baseEvent)="setDiseqcObject($event)" [dvbComponent]="dvbComponent">
                         </app-switch>
-                        <app-unicable *ngIf="subtree && subtree.Type == 'scr'" [diseqcTree]="subtree"
-                            [diseqcTreeList]="diseqcTreeList" (baseEvent)="setDiseqcObject($event)"
-                            [dvbComponent]="dvbComponent">
+                        }
+                        @if (subtree && subtree.Type == 'scr') {
+                        <app-unicable [diseqcTree]="subtree" [diseqcTreeList]="diseqcTreeList"
+                            (baseEvent)="setDiseqcObject($event)" [dvbComponent]="dvbComponent">
                         </app-unicable>
-
+                        }
                     </p-fieldset>
+                    }
                 </div>
+                }
 
                 <!-- New Device Panel -->
-                <p-fieldset class="mb-6 w-full" legend="{{ 'settings.capture.dvb.satellite_heading' | translate }}"
-                    [toggleable]="true" [collapsed]="false" *ngIf="diseqcSubTreeCount < diseqcTree.SwitchPorts">
+                @if (diseqcSubTreeCount < diseqcTree.SwitchPorts) { <p-fieldset class="mb-6 w-full"
+                    legend="{{ 'settings.capture.dvb.satellite_heading' | translate }}" [toggleable]="true"
+                    [collapsed]="false">
                     <p-button label="{{ 'settings.capture.dvb.newsatellite_button' | translate }}"
                         (onClick)="work.displayNewDiseqc = true" icon="pi pi-plus-circle" severity="primary">
                     </p-button>
-
                     <p-dialog header="{{ 'settings.capture.dvb.newsatellite_heading' | translate }}"
                         [(visible)]="work.displayNewDiseqc" [modal]="true" [style]="{width: '50vw'}" [draggable]="false"
                         [resizable]="false">
@@ -136,8 +146,8 @@
                             </p-button>
                         </ng-template>
                     </p-dialog>
-
-                </p-fieldset>
+                    </p-fieldset>
+                    }
 
             </div>
         </ng-template>

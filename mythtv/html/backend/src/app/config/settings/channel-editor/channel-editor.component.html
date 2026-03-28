@@ -1,5 +1,6 @@
 <h2>{{ 'settings.chanedit.title' | translate }}</h2>
-<div class="block card w-full" style="height: 90vh" *ngIf="(chansLoaded && transDone >= numTranslations) else loading">
+@if ((chansLoaded && transDone >= numTranslations)) {
+<div class="block card w-full" style="height: 90vh">
     <p-table [value]="allChannels" scrollHeight="flex" [scrollable]="true" [rowHover]="true"
         (onFilter)="onFilter($event)" responsiveLayout="scroll" [sortField]="sortField" [sortOrder]="sortOrder"
         (onSort)="onSort($event)" size="small" [showGridlines]="true" [stripedRows]="true">
@@ -7,11 +8,13 @@
             <button pButton pRipple label="{{ 'settings.chanedit.new_channel' | translate }}" icon="pi pi-plus"
                 class="p-button-success mr-2" (click)="openNew()"
                 [disabled]="setupService.pageType == 'S' && setupService.schedulingEnabled"></button>
-            <p-button icon="pi pi-trash" (onClick)="deleteSourceRequest()" *ngIf="setupService.pageType == 'S' "
+            @if (setupService.pageType == 'S' ) {
+            <p-button icon="pi pi-trash" (onClick)="deleteSourceRequest()"
                 pTooltip="{{ 'settings.chanedit.delete_source' | translate }}" tooltipPosition="top"
                 label="{{ 'common.delete' | translate }}" severity="danger" [disabled]="setupService.schedulingEnabled"
                 class="p-2">
             </p-button>
+            }
             <p-button icon="pi pi-history" (onClick)="restoreDataRequest()"
                 pTooltip="{{ 'settings.chanedit.res_tooltip' | translate }}" tooltipPosition="top"
                 label="{{ 'settings.chanedit.res_title' | translate }}" severity="warn" class="p-2"
@@ -22,9 +25,11 @@
                 label="{{ 'settings.chanedit.icondld_title' | translate }}" severity="primary" class="p-2"
                 [disabled]="videoSources.length == 0">
             </p-button>
-            <div *ngIf="setupService.pageType != 'S' " class="p-2">
+            @if (setupService.pageType != 'S' ) {
+            <div class="p-2">
                 {{ 'settings.chanedit.delete_message' | translate }}
             </div>
+            }
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
@@ -43,10 +48,12 @@
                 <th style="width:  6%">{{ 'settings.chanedit.col_commfree' | translate }}</th>
                 <th style="width:  7%; white-space: nowrap;">
                     <!-- These are disabled buttons to ensure the spacing of the heading
-                         matches the spacing of the rows -->
+              matches the spacing of the rows -->
                     <button pButton pRipple icon="pi pi-pencil" class="p-button-text" disabled="true"></button>
+                    @if (setupService.pageType == 'S') {
                     <button pButton pRipple icon="pi pi-trash" class="p-button-text p-button-danger"
-                        *ngIf="setupService.pageType == 'S'" disabled="true"></button>
+                        disabled="true"></button>
+                    }
                 </th>
             </tr>
             <tr>
@@ -60,13 +67,11 @@
                     <!-- placeholder="{{ 'settings.chanedit.all' | translate }}"  -->
                     <p-columnFilter field="Source" matchMode="equals" [showMenu]="false">
                         <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                            <p-select [ngModel]="value" [options]="sourceNames" name="filter"
-                                [placeholder]="value" [showClear]="true"
-                                (onChange)="filter($event.value)" [checkmark]="true"
-                                appendTo="body">
+                            <p-select [ngModel]="value" [options]="sourceNames" name="filter" [placeholder]="value"
+                                [showClear]="true" (onChange)="filter($event.value)" [checkmark]="true" appendTo="body">
                                 <!-- <ng-template let-option pTemplate="item"> -->
-                                    <!-- {{ option }} -->
-                                    <!-- <p-tag [value]="option" [severity]="'info'"/> -->
+                                <!-- {{ option }} -->
+                                <!-- <p-tag [value]="option" [severity]="'info'"/> -->
                                 <!-- </ng-template> -->
                             </p-select>
                         </ng-template>
@@ -82,10 +87,12 @@
         <ng-template pTemplate="body" let-channel>
             <tr [ngClass]="{'line-through' : channel.ChanId < 0}">
                 <td class="pt-1 pb-0">
+                    @if (channel.Icon) {
                     <img src="{{'./Guide/GetChannelIcon?Filename=' + channel.Icon + authorization}}" height="32"
-                        width="42" *ngIf="channel.Icon; else nullIcon" style="background-color:#000000"
-                        onerror="this.height='0'">
-                    <ng-template #nullIcon><img height="32" width="42"></ng-template>
+                        width="42" style="background-color:#000000" onerror="this.height='0'">
+                    } @else {
+                    <img height="32" width="42">
+                    }
                 </td>
                 <td>{{ channel.ChanNum }}</td>
                 <td>{{ channel.FrequencyId }}</td>
@@ -95,32 +102,40 @@
                 <td>{{ channel.RecPriority }}</td>
                 <td>{{ getVisibility(channel) }}</td>
                 <td>
-                    <i *ngIf="channel.UseEIT;else eit" class="pi pi-circle-fill"></i>
-                    <ng-template #eit><i class="pi pi-circle"></i></ng-template>
+                    @if (channel.UseEIT) {
+                    <i class="pi pi-circle-fill"></i>
+                    } @else {
+                    <i class="pi pi-circle"></i>
+                    }
                 </td>
                 <td>
-                    <i *ngIf="channel.CommMethod == COMM_DETECT_COMMFREE;else commer" class="pi pi-circle-fill"></i>
-                    <ng-template #commer><i class="pi pi-circle"></i></ng-template>
+                    @if (channel.CommMethod == COMM_DETECT_COMMFREE) {
+                    <i class="pi pi-circle-fill"></i>
+                    } @else {
+                    <i class="pi pi-circle"></i>
+                    }
                 </td>
                 <td class="pt-1 pb-0" style="white-space: nowrap;">
                     <button pButton pRipple icon="pi pi-pencil" class="p-button-text" (click)="editChannel(channel)"
                         [disabled]="channel.ChanId < 0
                         || (setupService.pageType == 'S' && setupService.schedulingEnabled)"
                         pTooltip="{{ 'settings.chanedit.editchan' | translate }}" tooltipPosition="left"></button>
+                    @if (setupService.pageType == 'S') {
                     <button pButton pRipple icon="pi pi-trash" class="p-button-text p-button-danger"
-                        *ngIf="setupService.pageType == 'S'" (click)="deleteRequest(channel)"
-                        pTooltip="{{ 'settings.chanedit.deletechan' | translate }}" tooltipPosition="left"
+                        (click)="deleteRequest(channel)" pTooltip="{{ 'settings.chanedit.deletechan' | translate }}"
+                        tooltipPosition="left"
                         [disabled]="channel.ChanId < 0 || setupService.schedulingEnabled"></button>
+                    }
                 </td>
             </tr>
         </ng-template>
     </p-table>
 </div>
-<ng-template #loading>
-    <!-- The progressspinner no longer works -->
-    <!-- <p-progressSpinner></p-progressSpinner> -->
-    <i class="pi pi-spin pi-cog text-primary" style="font-size: 8rem"></i>
-</ng-template>
+} @else {
+<!-- The progressspinner no longer works -->
+<!-- <p-progressSpinner></p-progressSpinner> -->
+<i class="pi pi-spin pi-cog text-primary" style="font-size: 8rem"></i>
+}
 
 <form class="ml-4 mr-4" name="chanform" #chanform="ngForm">
 
@@ -168,18 +183,22 @@
                 }}</label>
             <p-select [options]="icons" [(ngModel)]="channel.Icon" name="icon" appendTo="body">
                 <ng-template pTemplate="selectedItem">
-                    <div *ngIf="channel.Icon" class="flex items-center h-8">
-                        <img *ngIf="!channel.Icon.endsWith('\t')"
-                            src="{{'./Guide/GetChannelIcon?Filename=' + channel.Icon + authorization }}"
-                            class="items-center h-8" />&nbsp;&nbsp;{{channel.Icon}}
+                    @if (channel.Icon) {
+                    <div class="flex items-center h-8">
+                        @if (!channel.Icon.endsWith('\t')) {
+                        <img src="{{'./Guide/GetChannelIcon?Filename=' + channel.Icon + authorization }}"
+                            class="items-center h-8" />
+                        }&nbsp;&nbsp;{{channel.Icon}}
                     </div>
+                    }
                 </ng-template>
                 <ng-template let-icon pTemplate="item">
                     <div class="flex items-center h-8">
                         <!-- Name ending with tab character is code for "no icon". -->
-                        <img *ngIf="!icon.endsWith('\t')"
-                            src="{{'./Guide/GetChannelIcon?Filename=' + icon + authorization }}"
-                            class="items-center h-8" />&nbsp;&nbsp;{{icon}}
+                        @if (!icon.endsWith('\t')) {
+                        <img src="{{'./Guide/GetChannelIcon?Filename=' + icon + authorization }}"
+                            class="items-center h-8" />
+                        }&nbsp;&nbsp;{{icon}}
                     </div>
                 </ng-template>
             </p-select>
@@ -310,14 +329,18 @@
                 </small>
             </div>
         </p-panel>
-        <div *ngIf="collapseAdvanced"><br><br></div>
+        @if (collapseAdvanced) {
+        <div><br><br></div>
+        }
 
         <ng-template pTemplate="footer">
             <div class="col-span-12" style="text-align: left;">
-                <p-message *ngIf="successCount > 0 && errorCount == 0 && !chanform.dirty" severity="success"
-                    text="{{ 'common.savesuccess' | translate }}"></p-message>
-                <p-message *ngIf="errorCount > 0" severity="error"
-                    text="{{ 'common.networkfail' | translate }}"></p-message>
+                @if (successCount > 0 && errorCount == 0 && !chanform.dirty) {
+                <p-message severity="success" text="{{ 'common.savesuccess' | translate }}"></p-message>
+                }
+                @if (errorCount > 0) {
+                <p-message severity="error" text="{{ 'common.networkfail' | translate }}"></p-message>
+                }
             </div>
             <p-button icon="pi pi-times-circle" (onClick)="closeDialog()" label="{{ 'common.close' | translate }}"
                 severity="warn">
@@ -349,8 +372,9 @@
             Source: getSource(channel)} }}</p>
         <ng-template pTemplate="footer">
             <div class="col-span-12" style="text-align: left;">
-                <p-message *ngIf="errorCount > 0" severity="error"
-                    text="{{ 'common.networkfail' | translate }}"></p-message>
+                @if (errorCount > 0) {
+                <p-message severity="error" text="{{ 'common.networkfail' | translate }}"></p-message>
+                }
             </div>
             <p-button icon="pi pi-times-circle" (onClick)="displayDelete=false; chanform.form.markAsPristine();"
                 label="{{ 'common.close' | translate }}" severity="warn">
@@ -363,19 +387,23 @@
     <p-dialog header="{{ 'settings.chanedit.delete_source' | translate }}" [(visible)]="displayDeleteSource"
         [modal]="true" [draggable]="false" [resizable]="false">
         <h2>{{ 'settings.common.ru_sure' | translate }}</h2>
-        <p *ngIf="filterEvent.filters.Source.value else all"><b>{{ 'settings.chanedit.delete_source_details' |
+        @if (filterEvent.filters.Source.value) {
+        <p><b>{{ 'settings.chanedit.delete_source_details' |
                 translate: {
                 Source: filterEvent.filters.Source.value} }}</b></p>
-        <ng-template #all>
-            <p><b>{{ 'settings.chanedit.delete_all_details' | translate }}</b></p>
-        </ng-template>
-        <div *ngIf="channel.ChanId != 0">
+        } @else {
+        <p><b>{{ 'settings.chanedit.delete_all_details' | translate }}</b></p>
+        }
+        @if (channel.ChanId != 0) {
+        <div>
             <p> {{ 'common.delete' | translate }} {{channel.ChanNum}} {{channel.ChannelName}}</p>
         </div>
+        }
         <ng-template pTemplate="footer">
             <div class="col-span-12" style="text-align: left;">
-                <p-message *ngIf="errorCount > 0" severity="error"
-                    text="{{ 'common.networkfail' | translate }}"></p-message>
+                @if (errorCount > 0) {
+                <p-message severity="error" text="{{ 'common.networkfail' | translate }}"></p-message>
+                }
             </div>
             <p-button icon="pi pi-times-circle"
                 (onClick)="displayDeleteSource=false; channelOperation = -1; chanform.form.markAsPristine();"
@@ -431,20 +459,24 @@
 
         <ng-template pTemplate="footer">
             <div class="col-span-12" style="text-align: left;">
-                <p-message *ngIf="resSearchDone && !chanform.dirty" severity="info" text="{{ 'settings.chanedit.restore_details' |
+                @if (resSearchDone && !chanform.dirty) {
+                <p-message severity="info" text="{{ 'settings.chanedit.restore_details' |
                     translate: {NumChannels: resResult.NumChannels,
                      NumXLMTVID: resResult.NumXLMTVID,
                      NumVisible: resResult.NumVisible,
                      NumIcon: resResult.NumIcon} }}">
                 </p-message>
+                }
             </div>
             <div class="col-span-12" style="text-align: left;">
-                <p-message *ngIf="successCount > 0 && errorCount == 0 && !chanform.dirty" severity="success"
-                    text="{{ 'common.savesuccess' | translate }}"></p-message>
+                @if (successCount > 0 && errorCount == 0 && !chanform.dirty) {
+                <p-message severity="success" text="{{ 'common.savesuccess' | translate }}"></p-message>
+                }
             </div>
             <div class="col-span-12" style="text-align: left;">
-                <p-message *ngIf="errorCount > 0" severity="error"
-                    text="{{ 'common.networkfail' | translate }}"></p-message>
+                @if (errorCount > 0) {
+                <p-message severity="error" text="{{ 'common.networkfail' | translate }}"></p-message>
+                }
             </div>
             <p-button icon="pi pi-times-circle" (onClick)="closeDialog()" label="{{ 'common.close' | translate }}"
                 severity="warn">
@@ -475,7 +507,8 @@
         </div>
 
         <ng-template pTemplate="footer">
-            <div class="col-span-12" style="text-align: left;" *ngIf="icondldStatus > 0">
+            @if (icondldStatus > 0) {
+            <div class="col-span-12" style="text-align: left;">
                 {{ 'settings.chanedit.icondld_details' |
                 translate: {Count: icondldCount,
                 Max: icondldMax} }}
@@ -500,9 +533,11 @@
                     </tr>
                 </table>
             </div>
+            }
             <div class="col-span-12" style="text-align: left;">
-                <p-message *ngIf="icondldStatus == 2" severity="success"
-                    text="{{ 'settings.chanedit.icondld_complete' | translate }}"></p-message>
+                @if (icondldStatus == 2) {
+                <p-message severity="success" text="{{ 'settings.chanedit.icondld_complete' | translate }}"></p-message>
+                }
             </div>
             <p-button icon="pi pi-times-circle" (onClick)="closeDialog()" label="{{ 'common.close' | translate }}"
                 severity="warn" [disabled]="icondldStatus == 1">
@@ -534,10 +569,13 @@
         </div>
 
         <div class="form-group field">
-            <label *ngIf="iconsrchResult.length > 0" for="srchicon" class="label block">{{
+            @if (iconsrchResult.length > 0) {
+            <label for="srchicon" class="label block">{{
                 'settings.chanedit.iconsrch_select' | translate }}</label>
-            <label *ngIf="iconsrchResult.length == 0 && (successCount>0 || errorCount>0)" for="srchicon"
-                class="label block">{{'primeng.emptyMessage' | translate}}</label>
+            }
+            @if (iconsrchResult.length == 0 && (successCount>0 || errorCount>0)) {
+            <label for="srchicon" class="label block">{{'primeng.emptyMessage' | translate}}</label>
+            }
             <p-listbox [options]="iconsrchResult" [(ngModel)]="iconsrchSelect" name="srchicon" optionlabel="name"
                 [listStyle]="{'max-height':'18rem'}">
                 <ng-template let-icon pTemplate="item">
@@ -551,7 +589,9 @@
 
         <ng-template pTemplate="footer">
             <div class="col-span-12" style="text-align: left;">
-                <p-message *ngIf="errorCount > 0" severity="error" text="Icon Download Failed"></p-message>
+                @if (errorCount > 0) {
+                <p-message severity="error" text="Icon Download Failed"></p-message>
+                }
             </div>
             <p-button icon="pi pi-times-circle" (onClick)="iconsrchShowDialog=false"
                 label="{{ 'common.cancel' | translate }}" severity="warn">

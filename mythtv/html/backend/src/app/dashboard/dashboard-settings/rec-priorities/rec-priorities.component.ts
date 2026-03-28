@@ -4,7 +4,7 @@ import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { MythService } from 'src/app/services/myth.service';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
-import { NgIf } from '@angular/common';
+
 import { InputNumberModule } from 'primeng/inputnumber';
 import { FieldsetModule } from 'primeng/fieldset';
 import { SharedModule } from 'primeng/api';
@@ -16,7 +16,7 @@ import { SelectModule } from 'primeng/select';
     selector: 'app-rec-priorities',
     templateUrl: './rec-priorities.component.html',
     styleUrls: ['./rec-priorities.component.css'],
-    imports: [FormsModule, CardModule, SharedModule, FieldsetModule, SelectModule, InputNumberModule, NgIf, MessageModule, ButtonModule, TranslateModule]
+    imports: [FormsModule, CardModule, SharedModule, FieldsetModule, SelectModule, InputNumberModule, MessageModule, ButtonModule, TranslateModule]
 })
 export class RecPrioritiesComponent implements OnInit, AfterViewInit {
 

@@ -21,9 +21,11 @@
                     <small class="block" id="backendserverport-help">
                         {{ 'settings.hostaddress.backendport_desc' | translate }}
                     </small>
-                    <div *ngIf="backendserverport.invalid && (backendserverport.dirty || backendserverport.touched)">
+                    @if (backendserverport.invalid && (backendserverport.dirty || backendserverport.touched)) {
+                    <div>
                         <small class="p-error block">{{ 'setupwizard.portRequired' | translate }}</small>
                     </div>
+                    }
                 </div>
 
                 <div class="form-group field">
@@ -37,9 +39,11 @@
                         max="65536" />
                     <small class="block" id="backendstatusport-help">{{ 'settings.hostaddress.statusport_desc' |
                         translate }}</small>
-                    <div *ngIf="backendstatusport.invalid && (backendstatusport.dirty || backendstatusport.touched)">
+                    @if (backendstatusport.invalid && (backendstatusport.dirty || backendstatusport.touched)) {
+                    <div>
                         <small class="p-error block">{{ 'setupwizard.portRequired' | translate }}</small>
                     </div>
+                    }
                 </div>
             </p-fieldset>
 
@@ -54,11 +58,13 @@
                     <small class="block" id="securitypin-help">
                         {{ 'settings.hostaddress.pin_desc' | translate }}
                     </small>
-                    <div *ngIf="securitypin.invalid && (securitypin.dirty || securitypin.touched)">
+                    @if (securitypin.invalid && (securitypin.dirty || securitypin.touched)) {
+                    <div>
                         <small class="p-error block">
                             {{ 'settings.hostaddress.pin_reqd' | translate }}
                         </small>
                     </div>
+                    }
                 </div>
             </p-fieldset>
 
@@ -86,7 +92,8 @@
                     </small>
                 </div>
 
-                <div *ngIf="!m_HostAddressData.ListenOnAllIps">
+                @if (!m_HostAddressData.ListenOnAllIps) {
+                <div>
                     <div class="form-group field">
                         <label for="BackendServerIP" class="label block">{{ 'settings.hostaddress.ipv4_label' |
                             translate }}</label>
@@ -97,28 +104,29 @@
                         <small class="block" id="BackendServerIP-help">
                             {{ 'settings.hostaddress.ipv4_desc' | translate }}
                         </small>
-                        <div *ngIf="BackendServerIP.invalid && (BackendServerIP.dirty || BackendServerIP.touched)">
+                        @if (BackendServerIP.invalid && (BackendServerIP.dirty || BackendServerIP.touched)) {
+                        <div>
                             <small id="LocalServerIP-help" class="p-error block">IPv4 address</small>
                         </div>
+                        }
                     </div>
-
                     <div class=" form-group field">
                         <label for="BackendServerIP6" class="label block">
                             {{ 'settings.hostaddress.ipv6_label' | translate }}
                         </label>
-                        <p-select appendTo="body" [options]="m_IPsV6 "
-                            [(ngModel)]="m_HostAddressData.BackendServerIP6" class="block w-60 mb-2"
-                            name="BackendServerIP6" #BackendServerIP6="ngModel"
+                        <p-select appendTo="body" [options]="m_IPsV6 " [(ngModel)]="m_HostAddressData.BackendServerIP6"
+                            class="block w-60 mb-2" name="BackendServerIP6" #BackendServerIP6="ngModel"
                             aria-describedby="BackendServerIP6-help">
                         </p-select>
                         <small class="block" id="BackendServerIP6-help">
                             {{ 'settings.hostaddress.ipv6_desc' | translate }}
                         </small>
-                        <div *ngIf="BackendServerIP6.invalid && (BackendServerIP6.dirty || BackendServerIP6.touched)">
+                        @if (BackendServerIP6.invalid && (BackendServerIP6.dirty || BackendServerIP6.touched)) {
+                        <div>
                             <small class="p-error block">IPv6 address</small>
                         </div>
+                        }
                     </div>
-
                     <div class="form-group field">
                         <p-checkbox inputId="ListenOnAllIps" [(ngModel)]="m_HostAddressData.AllowLinkLocal"
                             name="AllowLinkLocal" #AllowLinkLocal="ngModel" class="mb-2 w-full" [binary]="true" />
@@ -129,6 +137,7 @@
                         </small>
                     </div>
                 </div>
+                }
             </p-fieldset>
 
             <p-fieldset class="mb-6 w-full" legend="{{ 'settings.hostaddress.panel.primaryadd' | translate }}">
@@ -145,9 +154,11 @@
                     </small>
                 </div>
 
-                <div *ngIf="BackendServerAddr.invalid && (BackendServerAddr.dirty || BackendServerAddr.touched)">
+                @if (BackendServerAddr.invalid && (BackendServerAddr.dirty || BackendServerAddr.touched)) {
+                <div>
                     <small class="p-error block">Primary IP address / DNS name is required</small>
                 </div>
+                }
             </p-fieldset>
 
             <p-fieldset class="mb-6 w-full" legend="{{ 'settings.hostaddress.panel.masterbe' | translate }}">
@@ -160,11 +171,13 @@
                     <small class="block" id="IsMasterBackend-help">
                         {{ 'settings.hostaddress.ismaster_desc' | translate }}
                     </small>
-                    <div *ngIf="m_showChangeHint">
+                    @if (m_showChangeHint) {
+                    <div>
                         <small id="IsMasterBackend-help" class="p-error block">
                             {{ 'settings.hostaddress.ismaster_hint' | translate }}
                         </small>
                     </div>
+                    }
                 </div>
                 <div class="form-group field">
                     <label for="MasterServerName" class="label block">{{ 'settings.hostaddress.master_label' |
@@ -175,10 +188,12 @@
                     <small class="block" id="MasterServerName-help">
                         <div [innerHTML]="'settings.hostaddress.master_desc' | translate"></div>
                     </small>
-                    <div *ngIf="MasterServerName.invalid && (MasterServerName.dirty || MasterServerName.touched)">
+                    @if (MasterServerName.invalid && (MasterServerName.dirty || MasterServerName.touched)) {
+                    <div>
                         <small id="MasterServerName-help" class="p-error block">Hostname of master backend is
                             required</small>
                     </div>
+                    }
                 </div>
             </p-fieldset>
             <!-- </div> -->
@@ -187,11 +202,13 @@
         <ng-template pTemplate="footer">
             <div class="grid grid-cols-12 gap-4 nogutter">
                 <div class="col-span-12">
-                    <p-message
-                        *ngIf="this.m_HostAddressData.successCount > 0 && this.m_HostAddressData.errorCount == 0 && !hostaddress.dirty"
-                        severity="success" text="{{ 'common.savesuccess' | translate }}"></p-message>
-                    <p-message *ngIf="this.m_HostAddressData.errorCount > 0" severity="error"
-                        text="{{ 'common.networkfail' | translate }}"></p-message>
+                    @if (this.m_HostAddressData.successCount > 0 && this.m_HostAddressData.errorCount == 0 &&
+                    !hostaddress.dirty) {
+                    <p-message severity="success" text="{{ 'common.savesuccess' | translate }}"></p-message>
+                    }
+                    @if (this.m_HostAddressData.errorCount > 0) {
+                    <p-message severity="error" text="{{ 'common.networkfail' | translate }}"></p-message>
+                    }
                 </div>
                 <p-button class="col pr-1" label="{{'common.save' | translate}}" icon="pi pi-save" iconPos="left"
                     (onClick)="saveForm(); markPristine()"

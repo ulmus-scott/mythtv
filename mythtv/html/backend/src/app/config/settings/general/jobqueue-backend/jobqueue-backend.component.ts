@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 import { MythService } from 'src/app/services/myth.service';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
-import { NgIf } from '@angular/common';
+
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { SharedModule } from 'primeng/api';
@@ -26,7 +26,7 @@ interface ddParm {
     selector: 'app-jobqueue-backend',
     templateUrl: './jobqueue-backend.component.html',
     styleUrls: ['./jobqueue-backend.component.css'],
-    imports: [FormsModule, CardModule, SharedModule, InputNumberModule, DatePickerModule, SelectModule, CheckboxModule, NgIf, MessageModule, ButtonModule, TranslateModule]
+    imports: [FormsModule, CardModule, SharedModule, InputNumberModule, DatePickerModule, SelectModule, CheckboxModule, MessageModule, ButtonModule, TranslateModule]
 })
 
 export class JobqueueBackendComponent implements OnInit, AfterViewInit {
@@ -81,9 +81,9 @@ export class JobqueueBackendComponent implements OnInit, AfterViewInit {
 
         this.JobQCmds = this.setupService.getJobQCommands();
 
-    translate.get(this.cpuOptions[0].name).subscribe(data => {this.cpuOptions[0].name = data; this.loadedCount++;});
-    translate.get(this.cpuOptions[1].name).subscribe(data => {this.cpuOptions[1].name = data; this.loadedCount++;});
-    translate.get(this.cpuOptions[2].name).subscribe(data => {this.cpuOptions[2].name = data; this.loadedCount++;});
+        translate.get(this.cpuOptions[0].name).subscribe(data => { this.cpuOptions[0].name = data; this.loadedCount++; });
+        translate.get(this.cpuOptions[1].name).subscribe(data => { this.cpuOptions[1].name = data; this.loadedCount++; });
+        translate.get(this.cpuOptions[2].name).subscribe(data => { this.cpuOptions[2].name = data; this.loadedCount++; });
     }
 
     ngOnInit(): void {
@@ -95,7 +95,7 @@ export class JobqueueBackendComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-       this.pristineStart();
+        this.pristineStart();
     }
 
     pristineStart() {
@@ -104,7 +104,7 @@ export class JobqueueBackendComponent implements OnInit, AfterViewInit {
                 this.markPristine();
             else
                 this.pristineStart();
-        },100);
+        }, 100);
     }
 
     getJobQBackend() {
@@ -125,12 +125,12 @@ export class JobqueueBackendComponent implements OnInit, AfterViewInit {
     getSettings() {
         this.mythService.GetSetting({ HostName: this.hostName, Key: "JobQueueMaxSimultaneousJobs", Default: "1" })
             .subscribe({
-                next: data => {this.JobQueueMaxSimultaneousJobs = Number(data.String); this.loadedCount++;},
+                next: data => { this.JobQueueMaxSimultaneousJobs = Number(data.String); this.loadedCount++; },
                 error: () => this.errorCount++
             });
         this.mythService.GetSetting({ HostName: this.hostName, Key: "JobQueueCheckFrequency", Default: "60" })
             .subscribe({
-                next: data => {this.JobQueueCheckFrequency = Number(data.String); this.loadedCount++;},
+                next: data => { this.JobQueueCheckFrequency = Number(data.String); this.loadedCount++; },
                 error: () => this.errorCount++
             });
         this.JobQueueWindowStartHT$ = this.mythService.GetSetting({
@@ -159,47 +159,47 @@ export class JobqueueBackendComponent implements OnInit, AfterViewInit {
             });
         this.mythService.GetSetting({ HostName: this.hostName, Key: "JobQueueCPU", Default: "0" })
             .subscribe({
-                next: data => {this.JobQueueCPU = data.String; this.loadedCount++;},
+                next: data => { this.JobQueueCPU = data.String; this.loadedCount++; },
                 error: () => this.errorCount++
             });
         this.mythService.GetSetting({ HostName: this.hostName, Key: "JobAllowMetadata", Default: "1" })
             .subscribe({
-                next: data => {this.JobAllowMetadata = (data.String == '1'); this.loadedCount++;},
+                next: data => { this.JobAllowMetadata = (data.String == '1'); this.loadedCount++; },
                 error: () => this.errorCount++
             });
         this.mythService.GetSetting({ HostName: this.hostName, Key: "JobAllowCommFlag", Default: "1" })
             .subscribe({
-                next: data => {this.JobAllowCommFlag = (data.String == '1'); this.loadedCount++;},
+                next: data => { this.JobAllowCommFlag = (data.String == '1'); this.loadedCount++; },
                 error: () => this.errorCount++
             });
         this.mythService.GetSetting({ HostName: this.hostName, Key: "JobAllowTranscode", Default: "1" })
             .subscribe({
-                next: data => {this.JobAllowTranscode = (data.String == '1'); this.loadedCount++;},
+                next: data => { this.JobAllowTranscode = (data.String == '1'); this.loadedCount++; },
                 error: () => this.errorCount++
             });
         this.mythService.GetSetting({ HostName: this.hostName, Key: "JobAllowPreview", Default: "1" })
             .subscribe({
-                next: data => {this.JobAllowPreview = (data.String == '1'); this.loadedCount++;},
+                next: data => { this.JobAllowPreview = (data.String == '1'); this.loadedCount++; },
                 error: () => this.errorCount++
             });
         this.mythService.GetSetting({ HostName: this.hostName, Key: "JobAllowUserJob1", Default: "0" })
             .subscribe({
-                next: data => {this.JobAllowUserJob1 = (data.String == '1'); this.loadedCount++;},
+                next: data => { this.JobAllowUserJob1 = (data.String == '1'); this.loadedCount++; },
                 error: () => this.errorCount++
             });
         this.mythService.GetSetting({ HostName: this.hostName, Key: "JobAllowUserJob2", Default: "0" })
             .subscribe({
-                next: data => {this.JobAllowUserJob2 = (data.String == '1'); this.loadedCount++;},
+                next: data => { this.JobAllowUserJob2 = (data.String == '1'); this.loadedCount++; },
                 error: () => this.errorCount++
             });
         this.mythService.GetSetting({ HostName: this.hostName, Key: "JobAllowUserJob3", Default: "0" })
             .subscribe({
-                next: data => {this.JobAllowUserJob3 = (data.String == '1'); this.loadedCount++;},
+                next: data => { this.JobAllowUserJob3 = (data.String == '1'); this.loadedCount++; },
                 error: () => this.errorCount++
             });
         this.mythService.GetSetting({ HostName: this.hostName, Key: "JobAllowUserJob4", Default: "0" })
             .subscribe({
-                next: data => {this.JobAllowUserJob4 = (data.String == '1'); this.loadedCount++;},
+                next: data => { this.JobAllowUserJob4 = (data.String == '1'); this.loadedCount++; },
                 error: () => this.errorCount++
             });
     }

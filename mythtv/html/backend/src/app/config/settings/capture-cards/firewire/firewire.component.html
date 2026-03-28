@@ -11,16 +11,19 @@
                 <div class="form-group field">
                     <label for="VideoDevice" class="label block">{{ 'settings.capture.firewire.device_label' | translate
                         }}</label>
-                    <p-select *ngIf="isReady" [options]="captureDeviceList.CaptureDeviceList.CaptureDevices"
-                        [(ngModel)]="currentDevice" [editable]="false" optionLabel="VideoDevice"
-                        (onChange)="updateDevice();" [maxlength]="0" [style]="{'minWidth':'83%'}" name="VideoDevice"
-                        #VideoDevice="ngModel">
+                    @if (isReady) {
+                    <p-select [options]="captureDeviceList.CaptureDeviceList.CaptureDevices" [(ngModel)]="currentDevice"
+                        [editable]="false" optionLabel="VideoDevice" (onChange)="updateDevice();" [maxlength]="0"
+                        [style]="{'minWidth':'83%'}" name="VideoDevice" #VideoDevice="ngModel">
                     </p-select>
-                    <div *ngIf="warningMessage">
+                    }
+                    @if (warningMessage) {
+                    <div>
                         <small class="p-error block">
                             {{ warningMessage }}
                         </small>
                     </div>
+                    }
                     <small class="block">
                     </small>
                 </div>
@@ -39,9 +42,9 @@
                     <label for="FirewireModel" class="label block">{{ 'settings.capture.firewire.model_label' |
                         translate
                         }}</label>
-                    <p-select [options]="models" [(ngModel)]="card.FirewireModel" [editable]="false"
-                        optionLabel="name" optionValue="value" [maxlength]="0" [style]="{'minWidth':'83%'}"
-                        name="FirewireModel" #FirewireModel="ngModel">
+                    <p-select [options]="models" [(ngModel)]="card.FirewireModel" [editable]="false" optionLabel="name"
+                        optionValue="value" [maxlength]="0" [style]="{'minWidth':'83%'}" name="FirewireModel"
+                        #FirewireModel="ngModel">
                     </p-select>
                     <small class="block">
                         {{ 'settings.capture.firewire.model_desc' | translate }}
@@ -66,9 +69,9 @@
                     <label for="FirewireSpeed" class="label block">{{ 'settings.capture.firewire.speed_label' |
                         translate
                         }}</label>
-                    <p-select [options]="speeds" [(ngModel)]="card.FirewireSpeed" [editable]="false"
-                        optionLabel="name" optionValue="value" [maxlength]="0" [style]="{'minWidth':'83%'}"
-                        name="FirewireSpeed" #FirewireSpeed="ngModel">
+                    <p-select [options]="speeds" [(ngModel)]="card.FirewireSpeed" [editable]="false" optionLabel="name"
+                        optionValue="value" [maxlength]="0" [style]="{'minWidth':'83%'}" name="FirewireSpeed"
+                        #FirewireSpeed="ngModel">
                     </p-select>
                     <small class="block">
                     </small>
@@ -100,10 +103,12 @@
         <ng-template pTemplate="footer">
             <div class="grid grid-cols-12 gap-4 nogutter">
                 <div class="col-span-12">
-                    <p-message *ngIf="this.successCount > 0 && this.errorCount == 0 && !firewireform.dirty"
-                        severity="success" text="{{ 'common.savesuccess' | translate }}"></p-message>
-                    <p-message *ngIf="this.errorCount > 0" severity="error"
-                        text="{{ 'common.networkfail' | translate }}"></p-message>
+                    @if (this.successCount > 0 && this.errorCount == 0 && !firewireform.dirty) {
+                    <p-message severity="success" text="{{ 'common.savesuccess' | translate }}"></p-message>
+                    }
+                    @if (this.errorCount > 0) {
+                    <p-message severity="error" text="{{ 'common.networkfail' | translate }}"></p-message>
+                    }
                 </div>
                 <p-button class="col pr-1" label="{{'common.save' | translate}}" icon="pi pi-save" iconPos="left"
                     (onClick)="saveForm(); markPristine()"

@@ -9,7 +9,7 @@ import { RecordingProfilesComponent } from '../recording-profiles.component';
 import { RecprofileComponent } from './recprofile/recprofile.component';
 import { AccordionModule } from 'primeng/accordion';
 import { MessageModule } from 'primeng/message';
-import { NgIf } from '@angular/common';
+
 import { SharedModule } from 'primeng/api';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
@@ -18,7 +18,7 @@ import { ButtonModule } from 'primeng/button';
     selector: 'app-profile-group',
     templateUrl: './profile-group.component.html',
     styleUrls: ['./profile-group.component.css'],
-    imports: [ButtonModule, DialogModule, FormsModule, SharedModule, NgIf, MessageModule, AccordionModule, RecprofileComponent, TranslateModule]
+    imports: [ButtonModule, DialogModule, FormsModule, SharedModule, MessageModule, AccordionModule, RecprofileComponent, TranslateModule]
 })
 export class ProfileGroupComponent implements OnInit {
 

@@ -1,13 +1,14 @@
 <form class="ml-4 mr-4" name="schedform" #schedform="ngForm">
-    <div #dlg *ngIf="recRule">
+    @if (recRule) {
+    <div #dlg>
         <p-dialog header="{{ 'dashboard.sched.heading' | translate }}" [(visible)]="displayDlg" [modal]="true"
             [style]="{height: '90vw', width: '700px'}" [closable]="false" [closeOnEscape]="false">
             <p> {{ recRule.CallSign }}</p>
             <p> {{ utility.formatDate(recRule.StartTime) }} {{ utility.formatTime(recRule.StartTime) }} -
                 {{ utility.formatTime(recRule.EndTime )}}
             </p>
-
-            <div class="form-group field" *ngIf="recRule.Type != 'Recording Template'">
+            @if (recRule.Type != 'Recording Template') {
+            <div class="form-group field">
                 <label for="Template" class="label block">{{ 'dashboard.sched.template_label' | translate
                     }}</label>
                 <p-select [options]="templates" [(ngModel)]="templateId" [editable]="false" optionLabel="Title"
@@ -16,7 +17,7 @@
                     appendTo="body">
                 </p-select>
             </div>
-
+            }
             <div class="form-group field">
                 <label for="SearchType" class="label block">{{ 'dashboard.sched.srchtype_label' | translate
                     }}</label>
@@ -26,54 +27,75 @@
                     (onChange)="onSearchTypeChange()" appendTo="body">
                 </p-select>
             </div>
-
             <div class="form-group field">
                 <label for="Title" class="label block">{{ 'dashboard.sched.title_label' | translate }}</label>
                 <textarea pTextArea id="Title" [(ngModel)]="recRule.Title" name="Title"
                     class="text-lg mb-2 form-control w-full"
                     [disabled]="['Power Search','Manual Search'].indexOf(recRule.SearchType) == -1 && recRule.Type != 'Recording Template' || recRule.Id == defaultTemplate?.Id"
                     (focusout)="onTitleBlur()" [rows]="titleRows">
-                </textarea>
+          </textarea>
             </div>
-
-            <div class="form-group field" *ngIf="recRule.Type != 'Recording Template'">
-                <label *ngIf="recRule.SearchType == 'None'" for="SubTitle" class="label block">
+            @if (recRule.Type != 'Recording Template') {
+            <div class="form-group field">
+                @if (recRule.SearchType == 'None') {
+                <label for="SubTitle" class="label block">
                     {{ 'dashboard.sched.subtitle_label' | translate }}</label>
-                <label *ngIf="recRule.SearchType == 'Power Search'" for="SubTitle" class="label block">
+                }
+                @if (recRule.SearchType == 'Power Search') {
+                <label for="SubTitle" class="label block">
                     {{ 'dashboard.sched.add_tables_label' | translate }}</label>
-                <textarea *ngIf="['None','Power Search'].indexOf(recRule.SearchType)>-1" pTextArea id="SubTitle"
-                    [(ngModel)]="recRule.SubTitle" name="SubTitle" class="text-lg mb-2 form-control w-full"
-                    [disabled]="recRule.SearchType!='Power Search'" [rows]="subTitleRows">
-                </textarea>
+                }
+                @if (['None','Power Search'].indexOf(recRule.SearchType)>-1) {
+                <textarea pTextArea id="SubTitle" [(ngModel)]="recRule.SubTitle" name="SubTitle"
+                    class="text-lg mb-2 form-control w-full" [disabled]="recRule.SearchType!='Power Search'"
+                    [rows]="subTitleRows">
+              </textarea>
+                }
             </div>
-
-            <p> <span *ngIf="recRule.Season && recRule.Episode">S{{ recRule.Season }} E{{recRule.Episode}}</span>
+            }
+            <p> @if (recRule.Season && recRule.Episode) {
+                <span>S{{ recRule.Season }} E{{recRule.Episode}}</span>
+                }
             </p>
-
-            <div class="form-group field" *ngIf="recRule.Type != 'Recording Template'">
-                <div [ngSwitch]="recRule.SearchType">
-                    <label *ngSwitchCase="'None'" for="Description" class="label block mb-2">
+            @if (recRule.Type != 'Recording Template') {
+            <div class="form-group field">
+                <div>
+                    @switch (recRule.SearchType) {
+                    @case ('None') {
+                    <label for="Description" class="label block mb-2">
                         {{ 'dashboard.sched.description_label' | translate }}</label>
-                    <label *ngSwitchCase="'Power Search'" for="Description" class="label block mb-2">
+                    }
+                    @case ('Power Search') {
+                    <label for="Description" class="label block mb-2">
                         {{ 'dashboard.sched.sqlwhere_label' | translate }}</label>
-                    <label *ngSwitchCase="'Manual Search'" for="Description" class="label block mb-2">
+                    }
+                    @case ('Manual Search') {
+                    <label for="Description" class="label block mb-2">
                         {{ 'dashboard.sched.description_label' | translate }}</label>
-                    <label *ngSwitchDefault for="Description" class="label block mb-2">
+                    }
+                    @default {
+                    <label for="Description" class="label block mb-2">
                         {{ 'dashboard.sched.srchValue_label' | translate }}</label>
+                    }
+                    }
                 </div>
                 <textarea pTextArea id="Description" [(ngModel)]="recRule.Description" name="Description"
                     class="text-lg mb-2 form-control w-full" (focusout)="onDescriptionBlur()"
                     [disabled]="['None','Manual Search'].indexOf(recRule.SearchType) > -1" [rows]="descriptionRows">
-                </textarea>
+          </textarea>
             </div>
-            <div *ngIf="recRule.SearchType == 'Power Search'">
+            }
+            @if (recRule.SearchType == 'Power Search') {
+            <div>
                 {{ 'dashboard.sched.powersearch_desc' | translate }}
                 <br>
                 <!-- Leave Power Search untranslated because the wiki article linked is only in Engliush -->
                 <a href="https://wiki.mythtv.org/wiki/Power_Search" target="_blank">Power Search</a>
             </div>
+            }
             <!-- Manual Search Settings - Only display on new rule, backend cannot handle an update of starttime -->
-            <div *ngIf="recRule.SearchType == 'Manual Search' && !recRule.Id && !recRule.ParentId">
+            @if (recRule.SearchType == 'Manual Search' && !recRule.Id && !recRule.ParentId) {
+            <div>
                 <p-divider></p-divider>
                 <div class="form-group field">
                     <label for="ChanId" class="label block">{{ 'dashboard.sched.channel_label' | translate
@@ -92,7 +114,6 @@
                         [clearButtonStyleClass]="'hidden'" name="StartTime">
                     </p-calendar>
                 </div>
-
                 <div class="form-group field">
                     <label for="Duration" class="label block">{{ 'dashboard.sched.duration_label' | translate
                         }}</label>
@@ -100,9 +121,8 @@
                         [min]="5" [max]="1440" [step]="5" (ngModelChange)="onDurationChange()"></p-inputNumber>
                 </div>
             </div>
-
+            }
             <p-divider></p-divider>
-
             <div class="form-group field">
                 <label for="Type" class="label block">{{ 'dashboard.sched.type_label' | translate
                     }}</label>
@@ -111,7 +131,6 @@
                     [disabled]="schedTypeDisabled" appendTo="body">
                 </p-select>
             </div>
-
             <div class="form-group field">
                 <label for="RecGroup" class="label block">{{ 'dashboard.sched.recgroup_label' | translate
                     }}</label>
@@ -119,7 +138,6 @@
                     [style]="{'minWidth':'400px'}" name="RecGroup" #RecGroup="ngModel" appendTo="body">
                 </p-select>
             </div>
-
             <div class="form-group field">
                 <p-checkbox inputId="Active" [(ngModel)]="recRule.Inactive" name="Active" #Active="ngModel"
                     class="label mb-2 w-full" [binary]="true" [trueValue]="false" [falseValue]="true"
@@ -127,7 +145,6 @@
                 <label for="Active" class="label pl-2">{{ 'dashboard.sched.active_label' | translate
                     }}</label>
             </div>
-
             <div class="form-group field">
                 <label for="PlayGroup" class="label block">{{ 'dashboard.sched.playgroup_label' | translate
                     }}</label>
@@ -136,36 +153,30 @@
                     appendTo="body">
                 </p-select>
             </div>
-
             <div class="form-group field">
                 <label for="StartOffset" class="label block">{{ 'dashboard.sched.startoffset_label' | translate
                     }}</label>
                 <p-inputNumber [(ngModel)]="recRule.StartOffset" name="StartOffset" id="StartOffset"
                     [showButtons]="true" [min]="-480" [max]="480" [step]="1"></p-inputNumber>
             </div>
-
             <div class="form-group field">
                 <label for="EndOffset" class="label block">{{ 'dashboard.sched.endoffset_label' | translate
                     }}</label>
                 <p-inputNumber [(ngModel)]="recRule.EndOffset" name="EndOffset" id="EndOffset" [showButtons]="true"
                     [min]="-480" [max]="480" [step]="1"></p-inputNumber>
             </div>
-
             <div class="form-group field">
                 <p-checkbox inputId="NewEpisOnly" [(ngModel)]="recRule.NewEpisOnly" name="NewEpisOnly" #UseEIT="ngModel"
                     class="label mb-2 w-full" [binary]="true" />
                 <label for="NewEpisOnly" class="label pl-2">{{ 'dashboard.sched.newepis_label' | translate
                     }}</label>
-
             </div>
-
             <div class="form-group field">
                 <label for="RecPriority" class="label block">{{ 'dashboard.sched.priority_label' | translate
                     }}</label>
                 <p-inputNumber [(ngModel)]="recRule.RecPriority" name="RecPriority" id="RecPriority"
                     [showButtons]="true" [min]="-100" [max]="100" [step]="1"></p-inputNumber>
             </div>
-
             <div class="form-group field">
                 <label for="PreferredInput" class="label block">{{ 'dashboard.sched.prefinput_label' | translate
                     }}</label>
@@ -174,7 +185,6 @@
                     name="PreferredInput" #PreferredInput="ngModel" appendTo="body">
                 </p-select>
             </div>
-
             <div class="form-group field">
                 <label for="DupMethod" class="label block">{{ 'dashboard.sched.dupmethod_label' | translate
                     }}</label>
@@ -183,7 +193,6 @@
                     name="DupMethod" #DupMethod="ngModel" appendTo="body">
                 </p-select>
             </div>
-
             <div class="form-group field">
                 <label for="DupIn" class="label block">{{ 'dashboard.sched.dupin_label' | translate
                     }}</label>
@@ -192,7 +201,6 @@
                     appendTo="body">
                 </p-select>
             </div>
-
             <div class="form-group field">
                 <label for="AutoExtend" class="label block">{{ 'dashboard.sched.autoextend_label' | translate
                     }}</label>
@@ -201,7 +209,6 @@
                     name="AutoExtend" #AutoExtend="ngModel" appendTo="body">
                 </p-select>
             </div>
-
             <div class="form-group field">
                 <label for="Filters" class="label block">{{ 'dashboard.sched.filters_label' | translate
                     }}</label>
@@ -209,7 +216,6 @@
                     optionValue="Id" [style]="{'minWidth':'400px', maxHeight:'400px', maxWidth: '640px'}" name="Filters"
                     #Filters="ngModel" (onChange)="filterToRec(recRule)"></p-multiSelect>
             </div>
-
             <div class="form-group field">
                 <label for="RecProfile" class="label block">{{ 'dashboard.sched.recprofile_label' | translate
                     }}</label>
@@ -218,7 +224,6 @@
                     name="RecProfile" #RecProfile="ngModel" appendTo="body">
                 </p-select>
             </div>
-
             <div class="form-group field">
                 <label for="StorageGroup" class="label block">{{ 'dashboard.sched.sgroup_label' | translate
                     }}</label>
@@ -227,14 +232,12 @@
                     appendTo="body">
                 </p-select>
             </div>
-
             <div class="form-group field">
                 <label for="MaxEpisodes" class="label block">{{ 'dashboard.sched.maxeps_label' | translate
                     }}</label>
                 <p-inputNumber [(ngModel)]="recRule.MaxEpisodes" name="MaxEpisodes" id="MaxEpisodes"
                     [showButtons]="true" [min]="0" [max]="100" [step]="1"></p-inputNumber>
             </div>
-
             <div class="form-group field">
                 <p-checkbox inputId="MaxNewest" [(ngModel)]="recRule.MaxNewest" name="MaxNewest" #MaxNewest="ngModel"
                     class="label mb-2 w-full" [binary]="true" />
@@ -244,14 +247,12 @@
                     {{ 'dashboard.sched.maxnewest_desc' | translate }}
                 </small>
             </div>
-
             <div class="form-group field">
                 <p-checkbox inputId="AutoExpire" [(ngModel)]="recRule.AutoExpire" name="AutoExpire"
-                    #AutoExpire="ngModel" class="label mb-2 w-full" [binary]="true"/>
+                    #AutoExpire="ngModel" class="label mb-2 w-full" [binary]="true" />
                 <label for="AutoExpire" class="label pl-2">{{ 'dashboard.sched.autoexpire_label' | translate
                     }}</label>
             </div>
-
             <div class="form-group field">
                 <label for="PostProc" class="label block">{{ 'dashboard.sched.postproc_label' | translate
                     }}</label>
@@ -260,8 +261,8 @@
                     name="PostProc" #PostProc="ngModel" [filter]="true"
                     (onChange)="postProcToRec(recRule)"></p-multiSelect>
             </div>
-
-            <div class="form-group field" *ngIf="recRule.Type != 'Recording Template'">
+            @if (recRule.Type != 'Recording Template') {
+            <div class="form-group field">
                 <label for="Inetref" class="label block">{{ 'dashboard.sched.inetref_label' | translate }}</label>
                 <div class="grid grid-cols-12 gap-4 p-0">
                     <div class="col-span-5 flex items-center">
@@ -306,22 +307,27 @@
                     {{ 'dashboard.sched.inetref_desc' | translate }}<br>
                 </small>
             </div>
-
+            }
             <ng-template pTemplate="footer">
                 <div class="col-span-12" style="text-align: left;">
-                    <p-message *ngIf="successCount > 0 && errorCount == 0 && !schedform.dirty" severity="success"
-                        text="{{ 'common.savesuccess' | translate }}"></p-message>
-                    <p-message *ngIf="errorCount > 0" severity="error"
+                    @if (successCount > 0 && errorCount == 0 && !schedform.dirty) {
+                    <p-message severity="success" text="{{ 'common.savesuccess' | translate }}"></p-message>
+                    }
+                    @if (errorCount > 0) {
+                    <p-message severity="error"
                         text="{{ 'common.backenderror' | translate }}:  {{errortext}}"></p-message>
+                    }
                 </div>
                 <p-popover #overlay>
                     <p-scrollPanel [style]="{ width: '650px', height: '70vh' }" [step]="100">
                         <div [innerHTML]='fullDetails'></div>
                     </p-scrollPanel>
                 </p-popover>
-                <p-button icon="pi pi-list" (onClick)="detailsreq($event)" *ngIf="recRule.Type != 'Recording Template'"
+                @if (recRule.Type != 'Recording Template') {
+                <p-button icon="pi pi-list" (onClick)="detailsreq($event)"
                     label="{{ 'dashboard.sched.fulldetails' | translate }}" severity="info">
                 </p-button>
+                }
                 <p-button icon="pi pi-times-circle" (onClick)="close()" label="{{ 'common.close' | translate }}"
                     severity="warn">
                 </p-button>
@@ -329,9 +335,7 @@
                     severity="success"
                     [disabled]="!schedform.dirty || recRule.Id == 0 && recRule.Type == 'Not Recording' || !recRule.Title || schedTypeDisabled"></p-button>
             </ng-template>
-
         </p-dialog>
-
         <p-dialog header="{{ 'common.unsaved_heading' | translate }}" [(visible)]="displayUnsaved" [modal]="true">
             <p>{{ 'common.unsaved_message' | translate }}</p>
             <ng-template pTemplate="footer">
@@ -344,4 +348,5 @@
             </ng-template>
         </p-dialog>
     </div>
+    }
 </form>
