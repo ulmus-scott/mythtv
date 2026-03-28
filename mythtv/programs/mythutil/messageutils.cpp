@@ -1,8 +1,5 @@
 // C++ includes
-#include <iostream> // for cerr, cout
-using std::cerr;
-using std::cout;
-using std::endl;
+#include <iostream> // for std::cerr, std::cout
 
 // Qt headers
 #include <QFile>
@@ -41,13 +38,13 @@ const QString kNotification =
 
 static int PrintMTemplate(const MythUtilCommandLineParser &/*cmdline*/)
 {
-    cerr << kMessage.toLocal8Bit().constData() << '\n';
+    std::cerr << kMessage.toLocal8Bit().constData() << '\n';
     return GENERIC_EXIT_OK;
 }
 
 static int PrintNTemplate(const MythUtilCommandLineParser &/*cmdline*/)
 {
-    cerr << kNotification.toLocal8Bit().constData() << '\n';
+    std::cerr << kNotification.toLocal8Bit().constData() << '\n';
     return GENERIC_EXIT_OK;
 }
 
@@ -126,7 +123,7 @@ static int SendMessage(const MythUtilCommandLineParser &cmdline)
         const QString& kv_value = i.value();
 
         kv_name.replace("--", "");
-        cerr << "name: " << kv_name.toLocal8Bit().constData()
+        std::cerr << "name: " << kv_name.toLocal8Bit().constData()
              << " -- value: " << kv_value.toLocal8Bit().constData() << '\n';
 
         kv_name.append("%");
@@ -134,7 +131,7 @@ static int SendMessage(const MythUtilCommandLineParser &cmdline)
         message.replace(kv_name, kv_value);
     }
 
-    cout << "output:\n" << message.toLocal8Bit().constData() << '\n';
+    std::cout << "output:\n" << message.toLocal8Bit().constData() << '\n';
 
     auto *sock = new QUdpSocket();
     QByteArray utf8 = message.toUtf8();
@@ -142,12 +139,12 @@ static int SendMessage(const MythUtilCommandLineParser &cmdline)
     int result = GENERIC_EXIT_OK;
     if (sock->writeDatagram(utf8, address, port) < 0)
     {
-        cout << "Failed to send UDP/XML packet\n";
+        std::cout << "Failed to send UDP/XML packet\n";
         result = GENERIC_EXIT_NOT_OK;
     }
     else
     {
-        cout << "Sent UDP/XML packet to IP "
+        std::cout << "Sent UDP/XML packet to IP "
              << address.toString().toLocal8Bit().constData()
              << " and port: " << port << '\n';
     }

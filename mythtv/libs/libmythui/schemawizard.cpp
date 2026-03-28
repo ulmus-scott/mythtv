@@ -1,6 +1,4 @@
-#include <iostream> // for cout
-using std::cout;
-using std::endl;
+#include <iostream> // for std::cout
 
 #include <unistd.h>      // for isatty() on Windows
 
@@ -442,19 +440,19 @@ SchemaUpgradeWizard::PromptForUpgrade(const char *name,
     // We are not in a GUI environment, so try to prompt the user in the shell
     QString resp;
 
-    cout << '\n' << message.toLocal8Bit().constData() << "\n\n";
+    std::cout << '\n' << message.toLocal8Bit().constData() << "\n\n";
 
     if (returnValue == MYTH_SCHEMA_ERROR)
         return MYTH_SCHEMA_ERROR;
 
     if (m_backupStatus == kDB_Backup_Failed)
     {
-        cout << "WARNING: MythTV was unable to backup your database.\n\n";
+        std::cout << "WARNING: MythTV was unable to backup your database.\n\n";
     }
     else if ((m_backupStatus == kDB_Backup_Completed) &&
              (m_backupResult != ""))
     {
-        cout << "If your system becomes unstable, "
+        std::cout << "If your system becomes unstable, "
                 "a database backup is located in "
              << m_backupResult.toLocal8Bit().constData() << "\n\n";
     }
@@ -471,7 +469,7 @@ SchemaUpgradeWizard::PromptForUpgrade(const char *name,
         return MYTH_SCHEMA_EXIT;
 
     if (connections)
-        cout << '\n' << warnOtherCl.toLocal8Bit().constData() << '\n';
+        std::cout << '\n' << warnOtherCl.toLocal8Bit().constData() << '\n';
 
     if ((m_backupStatus != kDB_Backup_Completed) &&
         (m_backupStatus != kDB_Backup_Empty_DB))

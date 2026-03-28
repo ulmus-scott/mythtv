@@ -1,8 +1,6 @@
 
 // C++ includes
-#include <iostream> // for cout
-using std::cout;
-using std::endl;
+#include <iostream> // for std::cout
 
 // MythTV
 #include "libmythbase/exitcodes.h"
@@ -98,7 +96,7 @@ static int ScanVideos(const MythUtilCommandLineParser &/*cmdline*/)
 static int ParseVideoFilename(const MythUtilCommandLineParser &cmdline)
 {
     QString filename = cmdline.toString("parsevideo");
-    cout << "Title:    " << VideoMetadata::FilenameToMeta(filename, 1)
+    std::cout << "Title:    " << VideoMetadata::FilenameToMeta(filename, 1)
                                             .toLocal8Bit().constData() << '\n'
          << "Season:   " << VideoMetadata::FilenameToMeta(filename, 2)
                                             .toLocal8Bit().constData() << '\n'

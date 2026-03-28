@@ -44,8 +44,7 @@ class MythAVBufferRef {
 
     friend void swap(MythAVBufferRef& a, MythAVBufferRef& b) noexcept
     {
-        using std::swap;
-        swap(a.m_buffer, b.m_buffer);
+        std::swap(a.m_buffer, b.m_buffer);
     }
 
     bool has_buffer()       { return m_buffer != nullptr; }

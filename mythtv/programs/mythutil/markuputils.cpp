@@ -1,7 +1,6 @@
 
 // C++ includes
-#include <iostream> // for cout
-using std::cout;
+#include <iostream> // for std::cout
 
 // QT
 #include <QFile>
@@ -59,10 +58,10 @@ static int GetMarkupList(const MythUtilCommandLineParser &cmdline,
     }
 
     if (type == "cutlist")
-        cout << QString("Cutlist: %1\n").arg(result).toLocal8Bit().constData();
+        std::cout << QString("Cutlist: %1\n").arg(result).toLocal8Bit().constData();
     else
     {
-        cout << QString("Commercial Skip List: %1\n")
+        std::cout << QString("Commercial Skip List: %1\n")
             .arg(result).toLocal8Bit().constData();
     }
 
@@ -104,14 +103,14 @@ static int SetMarkupList(const MythUtilCommandLineParser &cmdline,
     if (isCutlist)
     {
         pginfo.SaveCutList(markuplist);
-        cout << QString("Cutlist set to: %1\n")
+        std::cout << QString("Cutlist set to: %1\n")
             .arg(newList).toLocal8Bit().constData();
         LOG(VB_GENERAL, LOG_NOTICE, QString("Cutlist set to: %1").arg(newList));
     }
     else
     {
         pginfo.SaveCommBreakList(markuplist);
-        cout << QString("Commercial Skip List set to: %1\n")
+        std::cout << QString("Commercial Skip List set to: %1\n")
             .arg(newList).toLocal8Bit().constData();
         LOG(VB_GENERAL, LOG_NOTICE, QString("Commercial Skip List set to: %1").arg(newList));
     }
@@ -154,7 +153,7 @@ static int CopySkipListToCutList(const MythUtilCommandLineParser &cmdline)
     }
     pginfo.SaveCutList(cutlist);
 
-    cout << "Commercial Skip List copied to Cutlist\n";
+    std::cout << "Commercial Skip List copied to Cutlist\n";
     LOG(VB_GENERAL, LOG_NOTICE, "Commercial Skip List copied to Cutlist");
 
     return GENERIC_EXIT_OK;
@@ -182,7 +181,7 @@ static int ClearSeekTable(const MythUtilCommandLineParser &cmdline)
     if (!GetProgramInfo(cmdline, pginfo))
         return GENERIC_EXIT_NO_RECORDING_DATA;
 
-    cout << "Clearing Seek Table\n";
+    std::cout << "Clearing Seek Table\n";
     LOG(VB_GENERAL, LOG_NOTICE, pginfo.IsVideo() ?
         QString("Clearing Seek Table for Video %1").arg(pginfo.GetPathname()) :
         QString("Clearing Seek Table for Channel ID %1 @ %2")
@@ -204,7 +203,7 @@ static int ClearBookmarks(const MythUtilCommandLineParser &cmdline)
     if (!GetProgramInfo(cmdline, pginfo))
         return GENERIC_EXIT_NO_RECORDING_DATA;
 
-    cout << "Clearing bookmarks\n";
+    std::cout << "Clearing bookmarks\n";
     LOG(VB_GENERAL, LOG_NOTICE, pginfo.IsVideo() ?
         QString("Clearing bookmarks for video %1").arg(pginfo.GetPathname()) :
         QString("Clearing bookmarks for channel id %1 @ %2")
