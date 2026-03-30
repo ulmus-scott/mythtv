@@ -108,11 +108,11 @@
                 <div class="form-group field">
                     <label for="StartTime" class="label block">{{ 'dashboard.sched.starttime_label' | translate
                         }}</label>
-                    <p-calendar [(ngModel)]="this.reqDate" [showTime]="true" [stepMinute]="5" [dateFormat]="'yy/mm/dd'"
-                        (onClose)="onDateChange()" (keyup.enter)="onDateChange()" (onBlur)="onDateChange()"
-                        [selectOtherMonths]="true" [showIcon]="true" [showOnFocus]="false" [showButtonBar]="true"
-                        [clearButtonStyleClass]="'hidden'" name="StartTime">
-                    </p-calendar>
+                    <p-datepicker [(ngModel)]="this.reqDate" [showTime]="true" [stepMinute]="5"
+                        [dateFormat]="'yy/mm/dd'" (onClose)="onDateChange()" (keyup.enter)="onDateChange()"
+                        (onBlur)="onDateChange()" [selectOtherMonths]="true" [showIcon]="true" [showOnFocus]="false"
+                        [showButtonBar]="true" [clearButtonStyleClass]="'hidden'" name="StartTime">
+                    </p-datepicker>
                 </div>
                 <div class="form-group field">
                     <label for="Duration" class="label block">{{ 'dashboard.sched.duration_label' | translate
@@ -268,34 +268,36 @@
                     <div class="col-span-5 flex items-center">
                         <p-radioButton name="prefix" value="ttvdb4.py_" [(ngModel)]="metaPrefix" inputId="ttvdb"
                             (ngModelChange)="iCheckbox(recRule)"></p-radioButton>
-                        <label for="ttvdb"><img class="pl-1 " src="images/metadata/thetvdb.png" alt="thtvdb"
-                                height="40"></label>
+                        <label for="ttvdb"><img src="images/metadata/thetvdb.png" alt="thtvdb"
+                                class="h-10 pl-2"></label>
                     </div>
                     <div class="col-span-7 flex items-center">
-                        <a href="{{ URLencode('https://thetvdb.com/search?query='+recRule.Title) }}" target="_blank">
+                        <a href="{{ URLencode('https://thetvdb.com/search?query='+recRule.Title) }}" target="_blank"
+                            class="font-medium text-blue-600 hover:underline visited:text-purple-600">
                             {{ 'dashboard.sched.isearch' | translate }} thetvdb.com</a>
                         <br>
                     </div>
                     <div class="col-span-5 flex items-center">
                         <p-radioButton name="prefix" value="tvmaze.py_" [(ngModel)]="metaPrefix" inputId="tvmaze"
                             (ngModelChange)="iCheckbox(recRule)"></p-radioButton>
-                        <label for="tvmaze"><img class="pl-1 " src="images/metadata/tvmaze.png" alt="tvmaze"
-                                height="40"></label>
+                        <label for="tvmaze"><img src="images/metadata/tvmaze.png" alt="tvmaze"
+                                class="h-10 pl-2"></label>
                     </div>
                     <div class="col-span-7 flex items-center">
-                        <a href="{{ URLencode('https://www.tvmaze.com/search?q='+recRule.Title) }}" target="_blank">
+                        <a href="{{ URLencode('https://www.tvmaze.com/search?q='+recRule.Title) }}" target="_blank"
+                            class="font-medium text-blue-600 hover:underline visited:text-purple-600">
                             {{ 'dashboard.sched.isearch' | translate }} tvmaze.com</a>
                         <br>
                     </div>
                     <div class="col-span-5 flex items-center">
                         <p-radioButton name="prefix" value="tmdb3.py_" [(ngModel)]="metaPrefix" inputId="tmdb"
                             (ngModelChange)="iCheckbox(recRule)"></p-radioButton>
-                        <label for="tmdb"><img class="pl-1 " src="images/metadata/themoviedb.svg" alt="themoviedb"
-                                height="40"></label>
+                        <label for="tmdb"><img src="images/metadata/themoviedb.svg" alt="themoviedb"
+                                class="h-10 pl-2"></label>
                     </div>
                     <div class="col-span-7 flex items-center">
                         <a href="{{ URLencode('https://www.themoviedb.org/search?query='+recRule.Title) }}"
-                            target="_blank">
+                            target="_blank" class="font-medium text-blue-600 hover:underline visited:text-purple-600">
                             {{ 'dashboard.sched.isearch' | translate }} themoviedb.org</a>
                         <br>
                     </div>

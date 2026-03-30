@@ -6,8 +6,8 @@
     <div class="block card w-full">
         <div style="height: 90vh">
             @if (showTable) {
-            <p-table #table [value]="programs" scrollHeight="83vh" [scrollable]="true" [totalRecords]="totalRecords"
-                styleClass="p-datatable-gridlines p-datatable-sm" [virtualScroll]="true" [rows]="100" [lazy]="true"
+            <p-table #table [value]="programs" scrollHeight="flex" [scrollable]="true" [totalRecords]="totalRecords"
+                 [virtualScroll]="true" [rows]="100" [lazy]="true"
                 (onLazyLoad)="loadLazy($event)" [rowHover]="true" [sortField]="sortField" [sortOrder]="sortOrder"
                 (onSort)="onSort($event)" [showGridlines]="true" [stripedRows]="true" size="small">
                 <ng-template pTemplate="caption">
@@ -55,16 +55,16 @@
                         <th style="width: 7%" class="justify-end pl-1 pr-4 pt-1 pb-1" pSortableColumn="Length">
                             {{ 'dashboard.upcoming.length' | translate }}<p-sortIcon field="Length"></p-sortIcon>
                         </th>
-                        <th style="width: 8%" class="p-1">{{ 'dashboard.upcoming.encoder' |
+                        <th style="width: 4%" class="p-1">{{ 'dashboard.upcoming.encoder' |
                             translate }} </th>
-                        <th style="width: 11%" class="p-1" pSortableColumn="Title">
+                        <th style="width: 17%" class="p-1" pSortableColumn="Title">
                             {{ 'dashboard.recordings.title' | translate }}<p-sortIcon field="Title"></p-sortIcon>
                         </th>
                         <th style="width: 17%" class="p-1">{{ 'dashboard.recordings.subtitle' | translate
                             }}</th>
                         <th style="width: 4%" class="p-1">{{ 'dashboard.recordings.seas_ep' | translate
                             }}</th>
-                        <th style="width: 8%" class="justify-end p-1">
+                        <th style="width: 6%" class="justify-end p-1">
                             {{ 'dashboard.recordings.orig_airdate' | translate }}
                         </th>
                         <th style="width: 9%" class="p-1" pSortableColumn="Channel.ChanNum">{{

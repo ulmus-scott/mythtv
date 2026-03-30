@@ -20,12 +20,11 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputNumberModule } from 'primeng/inputnumber';
-import { CalendarModule } from 'primeng/calendar';
 import { DividerModule } from 'primeng/divider';
 import { DialogModule } from 'primeng/dialog';
-
 import { SelectModule } from 'primeng/select';
 import { Popover, PopoverModule } from 'primeng/popover';
+import { DatePicker } from 'primeng/datepicker';
 
 export interface SchedulerSummary {
     refresh(): void;
@@ -54,7 +53,7 @@ interface MyChannel extends Channel {
     selector: 'app-schedule',
     templateUrl: './schedule.component.html',
     styleUrls: ['./schedule.component.css'],
-    imports: [FormsModule, DialogModule, SelectModule, DividerModule, CalendarModule, InputNumberModule, CheckboxModule, MultiSelectModule, RadioButtonModule, SharedModule, MessageModule, PopoverModule, ScrollPanelModule, ButtonModule, TranslateModule]
+    imports: [FormsModule, DialogModule, SelectModule, DividerModule, DatePicker, InputNumberModule, CheckboxModule, MultiSelectModule, RadioButtonModule, SharedModule, MessageModule, PopoverModule, ScrollPanelModule, ButtonModule, TranslateModule]
 })
 export class ScheduleComponent implements OnInit {
     @Input() inter!: ScheduleLink;

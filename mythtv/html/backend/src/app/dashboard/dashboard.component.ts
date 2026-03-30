@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
-import { RouterOutlet } from '@angular/router';
-import { TabMenuModule } from 'primeng/tabmenu';
+import { RouterOutlet, RouterLink } from '@angular/router';
 import { TooltipModule } from 'primeng/tooltip';
 import { RippleModule } from 'primeng/ripple';
 import { ButtonModule } from 'primeng/button';
-
+import { TabsModule } from 'primeng/tabs';
+import { NgClass } from '@angular/common';
+// import { NgClass } from "../../../node_modules/@angular/common/common_module.d";
 
 @Component({
     selector: 'app-dashboard',
     templateUrl: './dashboard.component.html',
     styleUrls: ['./dashboard.component.css'],
-    imports: [ButtonModule, RippleModule, TooltipModule, TabMenuModule, RouterOutlet, TranslateModule]
+    imports: [ButtonModule, RippleModule, TooltipModule, TabsModule, RouterOutlet, TranslateModule, RouterLink, NgClass]
 })
 export class DashboardComponent implements OnInit {
 
@@ -30,7 +31,7 @@ export class DashboardComponent implements OnInit {
         { label: 'dashboard.settings.heading', routerLink: 'settings' },
     ]
 
-    activeItem = this.fullMenu[0];
+    tabClass: string [] = [];
 
     constructor(private translate: TranslateService) {
         // setupService.pageType = 'D';
@@ -44,6 +45,16 @@ export class DashboardComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        let url = window.location.href;
+        let parts = url.split('/');
+        let route = parts[parts.length - 1].split('?');
+        let tab = this.fullMenu.findIndex( (el) => el.routerLink == route[0]);
+        this.onClick(tab);
+    }
+
+    onClick(tab:number) {
+        this.tabClass = [];
+        this.tabClass[tab] = 'tabselected';
     }
 
 }

@@ -5,17 +5,17 @@
         <div class="shrink overflow-auto">
             <!-- tabMenu is deprecated, to be replaced by tabs. Tabs is very ugly and needs
         styling to be done to be useful. So I am leving tabMenu for now -->
-            <p-tabMenu #menu [model]="fullMenu" [activeItem]="activeItem" [scrollable]="true" />
+            <!-- <p-tabMenu #menu [model]="fullMenu" [activeItem]="activeItem" [scrollable]="true" /> -->
             <!-- This is ugly tabs alternative -->
-            <!-- <p-tabs [scrollable]="true" [selectOnFocus]="true">
-        <p-tablist>
-          @for (tab of fullMenu; track tab.routerLink ) {
-            <p-tab [routerLink]="tab.routerLink">
-              <span>{{tab.label}}</span>
-            </p-tab>
-          }
-        </p-tablist>
-      </p-tabs> -->
+            <p-tabs [scrollable]="true" [selectOnFocus]="true">
+                <p-tablist>
+                    @for (tab of fullMenu; track tab.routerLink; let ix = $index) {
+                    <p-tab [routerLink]="tab.routerLink" (click)="onClick(ix)">
+                        <span [ngClass]="tabClass[ix]">{{tab.label}}</span>
+                    </p-tab>
+                    }
+                </p-tablist>
+            </p-tabs>
         </div>
     </div>
     <router-outlet></router-outlet>

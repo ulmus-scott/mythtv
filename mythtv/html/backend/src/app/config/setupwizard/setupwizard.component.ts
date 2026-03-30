@@ -2,18 +2,19 @@ import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '
 import { MenuItem } from 'primeng/api';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { SetupWizardService } from 'src/app/services/setupwizard.service';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, RouterLink } from '@angular/router';
 import { BackendWarningComponent } from '../backend-warning/backend-warning.component';
-import { TabMenuModule } from 'primeng/tabmenu';
 import { TooltipModule } from 'primeng/tooltip';
 import { RippleModule } from 'primeng/ripple';
 import { ButtonModule } from 'primeng/button';
+import { TabsModule } from 'primeng/tabs';
+import { NgClass } from '@angular/common';
 
 @Component({
     selector: 'app-settings',
     templateUrl: './setupwizard.component.html',
     styleUrls: ['./setupwizard.component.css'],
-    imports: [ButtonModule, RippleModule, TooltipModule, TabMenuModule, BackendWarningComponent, RouterOutlet, TranslateModule]
+    imports: [ButtonModule, RippleModule, TooltipModule, TabsModule, BackendWarningComponent, RouterOutlet, TranslateModule, RouterLink, NgClass]
 })
 export class SetupWizardComponent implements OnInit, AfterViewInit {
 
@@ -26,8 +27,7 @@ export class SetupWizardComponent implements OnInit, AfterViewInit {
     }
     fullMenu: MenuItem[] = [];
     dbSetupMenu: MenuItem[] = [];
-
-    activeIndex = 0;
+    tabClass: string[] = [];
     activeItem!: MenuItem;
 
     ngOnInit(): void {
@@ -82,6 +82,16 @@ export class SetupWizardComponent implements OnInit, AfterViewInit {
                 this.wizardService.dbSetupMenu = this.dbSetupMenu;
                 this.wizardService.wizardItems = this.wizardService.fullMenu;
             });
+        let url = window.location.href;
+        let parts = url.split('/');
+        let route = parts[parts.length - 1].split('?');
+        let tab = this.fullMenu.findIndex((el) => el.routerLink == route[0]);
+        this.onClick(tab);
+    }
+
+    onClick(tab: number) {
+        this.tabClass = [];
+        this.tabClass[tab] = 'tabselected';
     }
 
     ngAfterViewInit(): void {

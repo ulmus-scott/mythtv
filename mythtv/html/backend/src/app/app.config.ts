@@ -12,7 +12,7 @@ import { ErrorInterceptor } from "./services/error.interceptor";
 import { TokenInterceptor } from "./services/token.interceptor";
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from "primeng/config";
-import Aura from '@primeuix/themes/aura';
+import { MyPreset } from "./mypreset";
 
 export const appConfig: ApplicationConfig = {
     providers: [
@@ -31,7 +31,8 @@ export const appConfig: ApplicationConfig = {
         provideAnimationsAsync(),
         providePrimeNG({
             theme: {
-                preset: Aura
+                // preset: Aura
+                preset: MyPreset
             }
         })
     ]

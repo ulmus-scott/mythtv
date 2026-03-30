@@ -8,16 +8,19 @@
 h1 {
   font-size: 2rem;
   font-weight: bold;
+  color: var(--p-text-color)
 }
 
 h2 {
   font-size: x-large;
   font-weight: bold;
+  color: var(--p-text-color)
 }
 
 h3 {
   font-size: large;
   font-weight: bold;
+  color: var(--p-text-color)
 }
 
 input {
@@ -35,7 +38,7 @@ body {
 	background-color: var(--surface-a);
 	font-family: var(--font-family);
 	font-weight: normal;
-	color: var(--text-color);
+	color: var(--p-text-color);
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }

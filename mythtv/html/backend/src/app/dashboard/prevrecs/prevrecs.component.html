@@ -15,7 +15,7 @@
                 <button pButton pRipple icon="pi pi-bars" class="p-button-text .p-button-success"
                     (click)="showContextMenu(null, $event)" pTooltip="{{ 'common.selected_menu' | translate }}"
                     tooltipPosition="top"></button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <div class="flex items-center  pr-4" style="width:200px">
+                <div class="flex items-center  pr-4" >
                     <p-datePicker [(ngModel)]="dateValue" [dateFormat]="'M yy'" (onClose)="onFilter()"
                         [selectOtherMonths]="true" [showIcon]="true" [showOnFocus]="true" [showButtonBar]="true"
                         [todayButtonStyleClass]="'hidden'" [readonlyInput]="true" [placeholder]="displayDate"
@@ -63,7 +63,7 @@
             </div>
             <!-- styleClass="p-datatable-gridlines p-datatable-sm  p-datatable-striped" -->
             @if (showTable) {
-            <p-table #table [value]="programs" scrollHeight="83vh" [scrollable]="true" [totalRecords]="totalRecords"
+            <p-table #table [value]="programs" scrollHeight="flex" [scrollable]="true" [totalRecords]="totalRecords"
                 [virtualScroll]="true" [rows]="100" [lazy]="true" (onLazyLoad)="loadLazy($event)" [rowHover]="true"
                 [sortField]="sortField" [sortOrder]="sortOrder" selectionMode="multiple" [metaKeySelection]="true"
                 [(selection)]="selection" (onRowSelect)="onSelectChange()" (onRowUnselect)="onSelectChange()"
