@@ -5794,6 +5794,7 @@ echo '#### MythTV CONFIGURATION ####'
 echo "# Basic Settings"
 echo "Qt minimum version        $QT_MIN_VERSION_STR"
 echo "Qt installed version      `$qmake -query QT_VERSION`"
+echo "Compiler                  $cc_ident"
 echo "Compile type              $compile_type"
 echo "Compiler cache            $ccache$ccache_txt"
 echo "DistCC                    $distcc$distcc_txt"
