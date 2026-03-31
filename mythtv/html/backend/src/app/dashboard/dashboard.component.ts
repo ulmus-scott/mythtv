@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
-import { RouterOutlet, RouterLink } from '@angular/router';
+import { RouterOutlet, RouterLink, Router, NavigationEnd } from '@angular/router';
 import { TooltipModule } from 'primeng/tooltip';
 import { RippleModule } from 'primeng/ripple';
 import { ButtonModule } from 'primeng/button';
 import { TabsModule } from 'primeng/tabs';
 import { NgClass } from '@angular/common';
-// import { NgClass } from "../../../node_modules/@angular/common/common_module.d";
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-dashboard',
@@ -15,7 +15,7 @@ import { NgClass } from '@angular/common';
     styleUrls: ['./dashboard.component.css'],
     imports: [ButtonModule, RippleModule, TooltipModule, TabsModule, RouterOutlet, TranslateModule, RouterLink, NgClass]
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
 
     translateDone = false;
 
@@ -31,10 +31,10 @@ export class DashboardComponent implements OnInit {
         { label: 'dashboard.settings.heading', routerLink: 'settings' },
     ]
 
-    tabClass: string [] = [];
+    tabClass: string[] = [];
+    sub?: Subscription;
 
-    constructor(private translate: TranslateService) {
-        // setupService.pageType = 'D';
+    constructor(private translate: TranslateService, private router: Router) {
         this.fullMenu.forEach(entry => {
             if (entry.label)
                 this.translate.get(entry.label).subscribe(data => {
@@ -42,17 +42,26 @@ export class DashboardComponent implements OnInit {
                     this.translateDone = true;
                 });
         });
+        this.sub = this.router.events.subscribe((event) => {
+            if (event instanceof NavigationEnd) {
+                this.UpdateMenu();
+            }
+        });
     }
 
+    ngOnDestroy(): void {
+        this.sub?.unsubscribe();
+    }
+
+
     ngOnInit(): void {
+    }
+
+    UpdateMenu() {
         let url = window.location.href;
         let parts = url.split('/');
         let route = parts[parts.length - 1].split('?');
-        let tab = this.fullMenu.findIndex( (el) => el.routerLink == route[0]);
-        this.onClick(tab);
-    }
-
-    onClick(tab:number) {
+        let tab = this.fullMenu.findIndex((el) => el.routerLink == route[0]);
         this.tabClass = [];
         this.tabClass[tab] = 'tabselected';
     }

@@ -1,14 +1,15 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { SetupWizardService } from 'src/app/services/setupwizard.service';
-import { RouterOutlet, RouterLink } from '@angular/router';
+import { RouterOutlet, RouterLink, Router, NavigationEnd } from '@angular/router';
 import { BackendWarningComponent } from '../backend-warning/backend-warning.component';
 import { TooltipModule } from 'primeng/tooltip';
 import { RippleModule } from 'primeng/ripple';
 import { ButtonModule } from 'primeng/button';
 import { TabsModule } from 'primeng/tabs';
 import { NgClass } from '@angular/common';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-settings',
@@ -16,19 +17,23 @@ import { NgClass } from '@angular/common';
     styleUrls: ['./setupwizard.component.css'],
     imports: [ButtonModule, RippleModule, TooltipModule, TabsModule, BackendWarningComponent, RouterOutlet, TranslateModule, RouterLink, NgClass]
 })
-export class SetupWizardComponent implements OnInit, AfterViewInit {
+export class SetupWizardComponent implements OnInit, AfterViewInit, OnDestroy {
 
     @ViewChild("top") topElement!: ElementRef;
 
-    constructor(public wizardService: SetupWizardService,
-        private translate: TranslateService) {
-        // setupService.pageType = 'S';
-        // this.setup();
-    }
     fullMenu: MenuItem[] = [];
     dbSetupMenu: MenuItem[] = [];
     tabClass: string[] = [];
-    activeItem!: MenuItem;
+    sub?: Subscription;
+
+    constructor(public wizardService: SetupWizardService, private router: Router,
+        private translate: TranslateService) {
+        this.sub = this.router.events.subscribe((event) => {
+            if (event instanceof NavigationEnd) {
+                this.UpdateMenu();
+            }
+        });
+    }
 
     ngOnInit(): void {
         // }
@@ -77,25 +82,28 @@ export class SetupWizardComponent implements OnInit, AfterViewInit {
                         routerLink: 'system-events'
                     }];
                 this.wizardService.fullMenu = this.fullMenu;
-                this.activeItem = this.fullMenu[0];
                 this.dbSetupMenu = [this.fullMenu[0]];
                 this.wizardService.dbSetupMenu = this.dbSetupMenu;
                 this.wizardService.wizardItems = this.wizardService.fullMenu;
+                this.UpdateMenu();
             });
-        let url = window.location.href;
-        let parts = url.split('/');
-        let route = parts[parts.length - 1].split('?');
-        let tab = this.fullMenu.findIndex((el) => el.routerLink == route[0]);
-        this.onClick(tab);
-    }
-
-    onClick(tab: number) {
-        this.tabClass = [];
-        this.tabClass[tab] = 'tabselected';
     }
 
     ngAfterViewInit(): void {
         this.wizardService.m_topElement = this.topElement;
     }
 
+    ngOnDestroy(): void {
+        this.sub?.unsubscribe();
+    }
+
+    UpdateMenu() {
+        let url = window.location.href;
+        let parts = url.split('/');
+        let route = parts[parts.length - 1].split('?');
+        let tab = this.fullMenu.findIndex((el) => el.routerLink == route[0]);
+        this.tabClass = [];
+        this.tabClass[tab] = 'tabselected';
+        console.log("updateMenu", url, tab, route[0], this.fullMenu, this.tabClass)
+    }
 }

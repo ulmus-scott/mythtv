@@ -248,6 +248,7 @@ export class GuideComponent implements OnInit, SchedulerSummary {
     }
 
     refresh(): void {
+        this.runningTime.setTime(0);
         this.refreshing = true;
         localStorage.setItem("ChannelGroup", this.channelGroup.Name);
         localStorage.setItem("GuideGroupBy", this.groupBy.Value);

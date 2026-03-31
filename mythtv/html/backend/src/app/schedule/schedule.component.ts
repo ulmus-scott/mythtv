@@ -283,6 +283,8 @@ export class ScheduleComponent implements OnInit {
         this.errorCount = 0;
         this.errortext = '';
         this.metaPrefix = '';
+        if (recRule)
+            this.iText(recRule);
         if (program || recRule) {
             this.srchTypeDisabled = true;
             this.srchTypeList[0].inactive = false;

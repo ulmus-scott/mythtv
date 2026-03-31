@@ -10,7 +10,7 @@
             <p-tabs [scrollable]="true" [selectOnFocus]="true">
                 <p-tablist>
                     @for (tab of fullMenu; track tab.routerLink; let ix = $index) {
-                    <p-tab [routerLink]="tab.routerLink" (click)="onClick(ix)">
+                    <p-tab [routerLink]="tab.routerLink">
                         <span [ngClass]="tabClass[ix]">{{tab.label}}</span>
                     </p-tab>
                     }

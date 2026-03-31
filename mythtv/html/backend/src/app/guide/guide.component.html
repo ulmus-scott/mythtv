@@ -22,7 +22,7 @@
         }
         <div class="flex items-center">
             <p-datePicker [(ngModel)]="m_pickerDate" [showTime]="true" [stepMinute]="30" [dateFormat]="'yy/mm/dd'"
-                (onClose)="onDateChange()" (keyup.enter)="onDateChange()" (onBlur)="onDateChange()"
+                (onClose)="onDateChange()" 
                 [selectOtherMonths]="true" [showIcon]="true" [showOnFocus]="true" [showButtonBar]="true"
                 [clearButtonStyleClass]="'hidden'" pTooltip="{{ 'dashboard.guide.calendar_tip' | translate }}"
                 tooltipPosition="top">
