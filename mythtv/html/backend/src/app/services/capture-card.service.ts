@@ -88,7 +88,6 @@ export class CaptureCardService {
     }
 
     public DeleteDiseqcConfig(CardId: number): Observable<BoolResponse> {
-        console.log(CardId)
         return this.httpClient.post<BoolResponse>('./Capture/RemoveDiseqcConfig',
             { CardId: CardId });
     }

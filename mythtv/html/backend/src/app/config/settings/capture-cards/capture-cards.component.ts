@@ -281,7 +281,6 @@ export class CaptureCardsComponent implements OnInit, CanComponentDeactivate {
         // input setup or automatically during recording.
         this.m_CaptureCardList.CaptureCardList.CaptureCards.forEach(card => {
             if (card.ParentId == cardId) {
-                console.log("DeleteThis (parent):", card.CardId);
                 this.expectedCount++;
                 this.captureCardService.DeleteCaptureCard(card.CardId)
                     .subscribe(this.delObserver);
@@ -292,7 +291,6 @@ export class CaptureCardsComponent implements OnInit, CanComponentDeactivate {
         this.m_CaptureCardsFiltered[index].DiSEqCId = 0;
         // Delete this card. Needs to be separate in case this card was added
         // during this session, then it would not be in the m_CaptureCardList.
-        console.log("DeleteThis:", cardId);
         this.expectedCount++;
         this.captureCardService.DeleteCaptureCard(cardId)
             .subscribe(this.delObserver);

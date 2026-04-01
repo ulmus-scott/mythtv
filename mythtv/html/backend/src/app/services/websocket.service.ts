@@ -20,7 +20,6 @@ export class WebsocketService {
 
     public connect(): void {
         if (!this.socket$ || this.socket$.closed) {
-            console.log("websocket url: " + this.ws_url)
             this.socket$ = webSocket({
                 url: this.ws_url,
                 binaryType: 'arraybuffer',

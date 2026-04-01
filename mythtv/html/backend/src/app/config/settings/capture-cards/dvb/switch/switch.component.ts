@@ -143,7 +143,6 @@ export class SwitchComponent implements OnInit, AfterViewInit, DiseqcSettingBase
     deleteDiseqc(ix: number): void {
         this.displayDeleteThis[ix] = false;
         this.dvbComponent.work.errorCount = 0;
-        console.log("Delete", ix);
         if (this.diseqcSubTree[ix] == null)
             return;
         if (this.diseqcSubTree[ix]!.DiSEqCId) {

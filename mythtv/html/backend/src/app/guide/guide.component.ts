@@ -85,7 +85,6 @@ export class GuideComponent implements OnInit, SchedulerSummary {
     constructor(private guideService: GuideService, private route: ActivatedRoute,
         private translate: TranslateService) {
         this.translate.onLangChange.subscribe((event: TranslationChangeEvent) => {
-            console.log("Event: language change, new language (" + event.lang + ")");
             this.switchLanguage(event.lang);
         });
         this.groupByList.forEach(element => {
