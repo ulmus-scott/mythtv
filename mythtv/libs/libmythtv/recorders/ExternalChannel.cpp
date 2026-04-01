@@ -137,6 +137,7 @@ bool ExternalChannel::Tune(const QString &channum)
 
         cmd["command"] = "TuneChannel";
         cmd["channum"] = channum;
+        cmd["value"]   = channum;
         cmd["inputid"] = GetInputID();
         cmd["sourceid"] = m_sourceId;
 
