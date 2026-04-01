@@ -24,6 +24,7 @@ export class RecordingProfilesComponent implements OnInit {
     dirtyMessages: string[] = [];
     children: ProfileGroupComponent[] = [];
     activeTab: boolean[] = [];
+    isLoaded: boolean[] = [];
     readyCount = 0;
 
     dirtyText = 'settings.common.unsaved';
@@ -55,6 +56,7 @@ export class RecordingProfilesComponent implements OnInit {
 
     onTabOpen(e: { index: number }) {
         this.currentTab = e.index;
+        this.isLoaded[this.currentTab] = true;
         this.showDirty();
     }
 

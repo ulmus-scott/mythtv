@@ -5,7 +5,9 @@
             <p-accordion-header>{{ 'settings.hostaddress.title' | translate }}
                 {{ dirtyMessages[0] }}</p-accordion-header>
             <p-accordion-content>
+                @if (currentTab == 0 || isLoaded[0]) {
                 <app-host-address [parent]="this" [tabIndex]="0"></app-host-address>
+                }
             </p-accordion-content>
         </p-accordion-panel>
 
@@ -13,7 +15,9 @@
             <p-accordion-header>{{ 'settings.locale.title' | translate }}
                 {{ dirtyMessages[1] }}</p-accordion-header>
             <p-accordion-content>
+                @if (currentTab == 1 || isLoaded[1]) {
                 <app-locale [parent]="this" [tabIndex]="1"></app-locale>
+                }
             </p-accordion-content>
         </p-accordion-panel>
 
@@ -21,7 +25,9 @@
             <p-accordion-header>{{ 'settings.misc.title' | translate }}
                 {{ dirtyMessages[2] }}</p-accordion-header>
             <p-accordion-content>
+                @if (currentTab == 2 || isLoaded[2]) {
                 <app-misc-settings [parent]="this" [tabIndex]="2"></app-misc-settings>
+                }
             </p-accordion-content>
         </p-accordion-panel>
 
@@ -29,7 +35,9 @@
             <p-accordion-header>{{ 'settings.eit.title' | translate }}
                 {{ dirtyMessages[3] }}</p-accordion-header>
             <p-accordion-content>
+                @if (currentTab == 3 || isLoaded[3]) {
                 <app-eit-scanner [parent]="this" [tabIndex]="3"></app-eit-scanner>
+                }
             </p-accordion-content>
         </p-accordion-panel>
 
@@ -37,7 +45,9 @@
             <p-accordion-header>{{ 'settings.shutwake.title' | translate }}
                 {{ dirtyMessages[4] }}</p-accordion-header>
             <p-accordion-content>
+                @if (currentTab == 4 || isLoaded[4]) {
                 <app-shutdown-wakeup [parent]="this" [tabIndex]="4"></app-shutdown-wakeup>
+                }
             </p-accordion-content>
         </p-accordion-panel>
 
@@ -45,7 +55,9 @@
             <p-accordion-header>{{ 'settings.backendwake.title' | translate }}
                 {{ dirtyMessages[5] }}</p-accordion-header>
             <p-accordion-content>
+                @if (currentTab == 5 || isLoaded[5]) {
                 <app-backend-wakeup [parent]="this" [tabIndex]="5"></app-backend-wakeup>
+                }
             </p-accordion-content>
         </p-accordion-panel>
 
@@ -53,7 +65,9 @@
             <p-accordion-header>{{ 'settings.backendctrl.title' | translate }}
                 {{ dirtyMessages[6] }}</p-accordion-header>
             <p-accordion-content>
+                @if (currentTab == 6 || isLoaded[6]) {
                 <app-backend-control [parent]="this" [tabIndex]="6"></app-backend-control>
+                }
             </p-accordion-content>
         </p-accordion-panel>
 
@@ -61,7 +75,9 @@
             <p-accordion-header>{{ 'settings.jobqbackend.title' | translate }}
                 {{ dirtyMessages[7] }}</p-accordion-header>
             <p-accordion-content>
+                @if (currentTab == 7 || isLoaded[7]) {
                 <app-jobqueue-backend [parent]="this" [tabIndex]="7"></app-jobqueue-backend>
+                }
             </p-accordion-content>
         </p-accordion-panel>
 
@@ -69,7 +85,9 @@
             <p-accordion-header>{{ 'settings.jobqglobal.title' | translate }}
                 {{ dirtyMessages[8] }}</p-accordion-header>
             <p-accordion-content>
+                @if (currentTab == 8 || isLoaded[8]) {
                 <app-jobqueue-global [parent]="this" [tabIndex]="8"></app-jobqueue-global>
+                }
             </p-accordion-content>
         </p-accordion-panel>
 
@@ -77,7 +95,9 @@
             <p-accordion-header>{{ 'settings.jobqcommands.title' | translate }}
                 {{ dirtyMessages[9] }}</p-accordion-header>
             <p-accordion-content>
+                @if (currentTab == 9 || isLoaded[9]) {
                 <app-jobqueue-commands [parent]="this" [tabIndex]="9"></app-jobqueue-commands>
+                }
             </p-accordion-content>
         </p-accordion-panel>
 
@@ -85,7 +105,9 @@
             <p-accordion-header>{{ 'settings.epgdownload.title' | translate }}
                 {{ dirtyMessages[10] }}</p-accordion-header>
             <p-accordion-content>
+                @if (currentTab == 10 || isLoaded[10]) {
                 <app-epg-downloading [parent]="this" [tabIndex]="10"></app-epg-downloading>
+                }
             </p-accordion-content>
         </p-accordion-panel>
 

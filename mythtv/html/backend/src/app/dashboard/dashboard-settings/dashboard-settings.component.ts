@@ -26,6 +26,7 @@ export class DashboardSettingsComponent implements OnInit, CanComponentDeactivat
     m_showHelp: boolean = false;
     currentTab: number = -1;
     dirtyMessages: string[] = [];
+    isLoaded: boolean[] = [];
     dirtyText = 'settings.common.unsaved';
     warningText = 'settings.common.warning';
     children: any[] = [];
@@ -46,6 +47,7 @@ export class DashboardSettingsComponent implements OnInit, CanComponentDeactivat
     onTabOpen(e: { index: number }) {
         this.showDirty();
         this.currentTab = e.index;
+        this.isLoaded[this.currentTab] = true;
     }
 
     onTabClose(e: any) {

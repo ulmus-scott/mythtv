@@ -54,6 +54,7 @@ export class SettingsComponent implements OnInit, CanComponentDeactivate {
     dirtyText = 'settings.common.unsaved';
     warningText = 'settings.common.warning';
     children: any[] = [];
+    isLoaded: boolean[] = [];
 
     constructor(private setupService: SetupService, private translate: TranslateService, public router: Router) {
         translate.get(this.dirtyText).subscribe(data => this.dirtyText = data);
@@ -66,6 +67,7 @@ export class SettingsComponent implements OnInit, CanComponentDeactivate {
     onTabOpen(e: { index: number }) {
         this.showDirty();
         this.currentTab = e.index;
+        this.isLoaded[this.currentTab] = true;
     }
 
     onTabClose(e: any) {

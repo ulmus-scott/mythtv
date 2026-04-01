@@ -45,6 +45,7 @@ export class StorageGroupsComponent implements OnInit, CanComponentDeactivate {
     dirtyMessages: string[] = [];
     currentTab: number = -1;
     activeTab: boolean[] = [];
+    isLoaded: boolean[] = [];
 
     dirtyText = 'settings.common.unsaved';
     warningText = 'settings.common.warning';
@@ -124,6 +125,7 @@ export class StorageGroupsComponent implements OnInit, CanComponentDeactivate {
     onTabOpen(e: { index: number }) {
         this.showDirty();
         this.currentTab = e.index;
+        this.isLoaded[this.currentTab] = true;
     }
 
     onTabClose(e: any) {

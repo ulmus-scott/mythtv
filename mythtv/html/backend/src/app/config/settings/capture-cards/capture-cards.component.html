@@ -76,6 +76,7 @@
                 {{dirtyMessages[ix]}}
             </p-accordion-header>
             <p-accordion-content>
+                @if (currentTab == ix || isLoaded[ix]) {
                 <p-button severity="warn" label="{{ 'settings.capture.delete_this' | translate }}" icon="pi pi-trash"
                     (onClick)="displayDeleteThis[ix]=true"
                     [disabled]="!this.m_CaptureCardsFiltered[ix].CardId || setupService.schedulingEnabled">
@@ -156,6 +157,7 @@
                     }
                     }
                 </div>
+                }
             </p-accordion-content>
         </p-accordion-panel>
         }

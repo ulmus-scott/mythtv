@@ -35,6 +35,7 @@ export class InputConnectionsComponent implements OnInit {
     dirtyMessages: string[] = [];
     children: IconnectionComponent[] = [];
     activeTab: boolean[] = [];
+    isLoaded: boolean[] = [];
     readyCount = 0;
 
     dirtyText = 'settings.common.unsaved';
@@ -115,6 +116,7 @@ export class InputConnectionsComponent implements OnInit {
     onTabOpen(e: { index: number }) {
         this.showDirty();
         this.currentTab = e.index;
+        this.isLoaded[this.currentTab] = true;
     }
 
     onTabClose(e: any) {

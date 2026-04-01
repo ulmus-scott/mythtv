@@ -104,6 +104,5 @@ export class SetupWizardComponent implements OnInit, AfterViewInit, OnDestroy {
         let tab = this.fullMenu.findIndex((el) => el.routerLink == route[0]);
         this.tabClass = [];
         this.tabClass[tab] = 'tabselected';
-        console.log("updateMenu", url, tab, route[0], this.fullMenu, this.tabClass)
     }
 }

@@ -9,7 +9,9 @@
                 {{dirtyMessages[ix]}}
             </p-accordion-header>
             <p-accordion-content>
+                @if (currentTab == ix || isLoaded[ix]) {
                 <app-profile-group [group]="group" [parent]="this" [tabIndex]="ix"></app-profile-group>
+                }
             </p-accordion-content>
         </p-accordion-panel>
         }

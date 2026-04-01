@@ -5,63 +5,81 @@
             <p-accordion-header>{{ 'dashboard.autoexpire.heading' | translate }}
                 {{ dirtyMessages[0] }}</p-accordion-header>
             <p-accordion-content>
+                @if (currentTab == 0 || isLoaded[0]) {
                 <app-auto-expire [parent]="this" [tabIndex]="0"></app-auto-expire>
+                }
             </p-accordion-content>
         </p-accordion-panel>
         <p-accordion-panel value="1">
             <p-accordion-header>{{ 'dashboard.jobs.heading' | translate }}
                 {{ dirtyMessages[1] }}</p-accordion-header>
             <p-accordion-content>
+                @if (currentTab == 1 || isLoaded[1]) {
                 <app-jobs [parent]="this" [tabIndex]="1"></app-jobs>
+                }
             </p-accordion-content>
         </p-accordion-panel>
         <p-accordion-panel value="2">
             <p-accordion-header>{{ 'dashboard.quality.heading' | translate }}
                 {{ dirtyMessages[2] }}</p-accordion-header>
             <p-accordion-content>
+                @if (currentTab == 2 || isLoaded[2]) {
                 <app-rec-quality [parent]="this" [tabIndex]="2"></app-rec-quality>
+                }
             </p-accordion-content>
         </p-accordion-panel>
         <p-accordion-panel value="3">
             <p-accordion-header>{{ 'dashboard.priorities.heading' | translate }}
                 {{ dirtyMessages[3] }}</p-accordion-header>
             <p-accordion-content>
+                @if (currentTab == 3 || isLoaded[3]) {
                 <app-rec-priorities [parent]="this" [tabIndex]="3"></app-rec-priorities>
+                }
             </p-accordion-content>
         </p-accordion-panel>
         <p-accordion-panel value="4">
             <p-accordion-header>{{ 'dashboard.custom.heading' | translate }}
                 {{ dirtyMessages[4] }}</p-accordion-header>
             <p-accordion-content>
+                @if (currentTab == 4 || isLoaded[4]) {
                 <app-custom-priorities></app-custom-priorities>
+                }
             </p-accordion-content>
         </p-accordion-panel>
         <p-accordion-panel value="5">
             <p-accordion-header>{{ 'dashboard.channelgroup.heading' | translate }}
                 {{ dirtyMessages[5] }}</p-accordion-header>
             <p-accordion-content>
+                @if (currentTab == 55 || isLoaded[5]) {
                 <app-channel-groups></app-channel-groups>
+                }
             </p-accordion-content>
         </p-accordion-panel>
         <p-accordion-panel value="6">
             <p-accordion-header>{{ 'dashboard.playgroup.heading' | translate }}
                 {{ dirtyMessages[6] }}</p-accordion-header>
             <p-accordion-content>
+                @if (currentTab == 6 || isLoaded[6]) {
                 <app-playback-groups></app-playback-groups>
+                }
             </p-accordion-content>
         </p-accordion-panel>
         <p-accordion-panel value="7">
             <p-accordion-header>{{ 'dashboard.datasources.heading' | translate }}
                 {{ dirtyMessages[7] }}</p-accordion-header>
             <p-accordion-content>
+                @if (currentTab == 7 || isLoaded[7]) {
                 <app-data-sources [parent]="this" [tabIndex]="7"></app-data-sources>
+                }
             </p-accordion-content>
         </p-accordion-panel>
         <p-accordion-panel value="8">
             <p-accordion-header>{{ 'dashboard.users.heading' | translate }}
                 {{ dirtyMessages[8] }}</p-accordion-header>
             <p-accordion-content>
+                @if (currentTab == 8 || isLoaded[8]) {
                 <app-users></app-users>
+                }
             </p-accordion-content>
         </p-accordion-panel>
     </p-accordion>

@@ -40,6 +40,7 @@ export class VideoSourcesComponent implements OnInit, CanComponentDeactivate {
     disabledTab: boolean[] = [];
     activeTab: boolean[] = [];
     displayDeleteThis: boolean[] = [];
+    isLoaded: boolean[] = [];
     dirtyText = 'settings.common.unsaved';
     warningText = 'settings.common.warning';
     deletedText = 'settings.common.deleted';
@@ -98,6 +99,7 @@ export class VideoSourcesComponent implements OnInit, CanComponentDeactivate {
         }
         this.showDirty();
         this.currentTab = e.index;
+        this.isLoaded[this.currentTab] = true;
     }
 
     onTabClose(e: any) {
