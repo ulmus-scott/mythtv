@@ -47,7 +47,7 @@ HTTPResponse MythHTTPFile::ProcessFile(const HTTPRequest2& Request)
 
     if (!QFileInfo::exists(file))
     {
-        LOG(VB_GENERAL, LOG_WARNING, LOC + QString("Failed to find '%1'").arg(file));
+        LOG(VB_HTTP, LOG_INFO, LOC + QString("Failed to find '%1'").arg(file));
         Request->m_status = HTTPNotFound;
         return MythHTTPResponse::ErrorResponse(Request);
     }
