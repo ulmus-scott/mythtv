@@ -46,7 +46,7 @@
                 @if (dataService.loggedInUser) {
                 <li class="toolbar" style="height: 80px;" class="mt-4">
                     <p-button label="{{ 'navbar.logout' | translate }}" variant="text" severity="primary"
-                        (click)="logout()" />
+                        (click)="logout(true)" />
                 </li>
                 }
                 <li class="toolbar" style="height: 80px;">

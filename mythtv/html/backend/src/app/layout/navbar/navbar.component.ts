@@ -21,6 +21,7 @@ import { RippleModule } from 'primeng/ripple';
 
 import { Popover, PopoverModule } from 'primeng/popover';
 import { Menu, MenuModule } from 'primeng/menu';
+import { timeout } from 'rxjs';
 
 
 @Component({
@@ -52,7 +53,7 @@ export class NavbarComponent implements OnInit {
     keepLogin = false;
     navMenu: MenuItem[] = [];
     mnulogin: MenuItem = { id: 'login', label: 'navbar.login', command: (event) => this.showLogin() };
-    mnulogout: MenuItem = { id: 'logout', label: 'navbar.logout', command: (event) => this.logout() };
+    mnulogout: MenuItem = { id: 'logout', label: 'navbar.logout', command: (event) => this.logout(true) };
     // { label: 'navbar.switchTheme', command: (event) => this.themePanel.toggle(event) },
     mnulang: MenuItem = {
         label: 'navbar.changeLanguage',
@@ -191,7 +192,12 @@ export class NavbarComponent implements OnInit {
                         location.reload();
                     }
                     else {
-                        this.displayLogin = true;
+                        this.logout(false);
+                        // Need timeout here because auto login takes place before UI
+                        // is initialized and trying to diaply login may fail.
+                        setTimeout(() => {
+                            this.displayLogin = true;
+                        });
                         this.errorCount++;
                     }
                 },
@@ -206,12 +212,13 @@ export class NavbarComponent implements OnInit {
         this.displayLogin = false;
     }
 
-    logout() {
+    logout(reload: boolean) {
         this.dataService.loggedInUser = '';
         sessionStorage.removeItem('accessToken');
         sessionStorage.removeItem('loggedInUser');
         localStorage.removeItem('userName');
         localStorage.removeItem('userPassword');
-        location.reload();
+        if (reload)
+            location.reload();
     }
 }
