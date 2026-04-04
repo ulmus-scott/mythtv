@@ -7,4 +7,8 @@
 if(CMAKE_CROSSCOMPILING)
   return()
 endif()
-add_subdirectory(test_recordingextender)
+
+file(GLOB test_dirs "test_*")
+foreach(dir ${test_dirs})
+  add_subdirectory(${dir})
+endforeach()
