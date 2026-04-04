@@ -580,8 +580,8 @@ export class ScheduleComponent implements OnInit {
     }
 
     iText(recRule: RecRule) {
-        this.metaPrefix = recRule.Inetref.replace(/_.*/, '_');
-        if (!this.metaPrefix.endsWith('.py_'))
+        this.metaPrefix = recRule.Inetref?.replace(/_.*/, '_');
+        if (!this.metaPrefix?.endsWith('.py_'))
             this.metaPrefix = '';
     }
 
