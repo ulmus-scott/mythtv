@@ -60,7 +60,7 @@ HTTPResponse MythHTTPRewrite::RewriteToSPA(const HTTPRequest2& Request, const QS
     if (Request->m_path == "/" && Request->m_fileName.startsWith("chunk-"))
     {
         LOG(VB_HTTP, LOG_INFO, QString("Rewriting request %1 to web app '%2'")
-            .arg(Request->m_path + Request->m_fileName).arg(File));
+            .arg(Request->m_path + Request->m_fileName, File));
         int ix = File.lastIndexOf('/');
         Request->m_path = "/" + File.left(ix+1);
         Request->m_status = HTTPOK;
