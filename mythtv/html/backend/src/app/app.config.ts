@@ -1,11 +1,11 @@
-import { HttpClient, HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
 import { ApplicationConfig, importProvidersFrom } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
-import { TranslateLoader, provideTranslateService } from "@ngx-translate/core";
+import { provideTranslateService } from "@ngx-translate/core";
+import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MenuModule } from "primeng/menu";
 import { AppRoutingModule } from "./app-routing.module";
-import { HttpLoaderFactory } from "./app.module";
 import { SetupWizardRoutingModule } from "./config/setupwizard/setupwizard-routing.module";
 import { DashboardRoutingModule } from "./dashboard/dashboard-routing.module";
 import { ErrorInterceptor } from "./services/error.interceptor";
@@ -20,12 +20,8 @@ export const appConfig: ApplicationConfig = {
         importProvidersFrom(BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule, MenuModule,
             SetupWizardRoutingModule, DashboardRoutingModule),
         provideTranslateService({
-            defaultLanguage: 'en_US',
-            loader: {
-                provide: TranslateLoader,
-                useFactory: HttpLoaderFactory,
-                deps: [HttpClient]
-            }
+            fallbackLang: 'en_US',
+            loader: provideTranslateHttpLoader({ prefix: "./assets/i18n/", suffix: ".json" }),
         }),
         { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

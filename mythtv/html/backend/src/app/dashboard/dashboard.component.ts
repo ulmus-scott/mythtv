@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { TranslateService, TranslatePipe } from '@ngx-translate/core';
+import { TranslateService} from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
 import { RouterOutlet, RouterLink, Router, NavigationEnd } from '@angular/router';
 import { TooltipModule } from 'primeng/tooltip';
@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
     selector: 'app-dashboard',
     templateUrl: './dashboard.component.html',
     styleUrls: ['./dashboard.component.css'],
-    imports: [ButtonModule, RippleModule, TooltipModule, TabsModule, RouterOutlet, TranslatePipe, RouterLink, NgClass]
+    imports: [ButtonModule, RippleModule, TooltipModule, TabsModule, RouterOutlet, RouterLink, NgClass]
 })
 export class DashboardComponent implements OnInit, OnDestroy {
 
