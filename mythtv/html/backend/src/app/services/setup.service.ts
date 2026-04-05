@@ -273,7 +273,7 @@ export class SetupService {
         }
         for (let ix = 0; ix < 4; ix++) {
             let num = ix + 1;
-            this.translate.get('settings.services.job_default', { num: num })
+            this.translate.stream('settings.services.job_default', { num: num })
                 .subscribe(data => this.m_JobQCommands.UserJobDesc[ix] = data);
             this.mythService.GetSetting({ HostName: '_GLOBAL_', Key: "UserJobDesc" + num, Default: "" })
                 .subscribe({

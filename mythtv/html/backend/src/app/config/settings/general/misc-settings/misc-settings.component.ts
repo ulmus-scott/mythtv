@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms';
-import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 
 import { MythService } from 'src/app/services/myth.service';
 import { SetupService } from 'src/app/services/setup.service';
@@ -20,7 +20,7 @@ import { SettingsComponent } from '../general-settings.component';
     selector: 'app-misc-settings',
     templateUrl: './misc-settings.component.html',
     styleUrls: ['./misc-settings.component.css'],
-    imports: [FormsModule, CardModule, SharedModule, FieldsetModule, CheckboxModule, InputNumberModule, SelectModule, MessageModule, ButtonModule, TranslateModule]
+    imports: [FormsModule, CardModule, SharedModule, FieldsetModule, CheckboxModule, InputNumberModule, SelectModule, MessageModule, ButtonModule, TranslatePipe]
 })
 
 export class MiscSettingsComponent implements OnInit, AfterViewInit {

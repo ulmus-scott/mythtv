@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, EventEmitter, forwardRef, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms';
-import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { Observable, Observer, PartialObserver } from 'rxjs';
 import { CaptureCardService } from 'src/app/services/capture-card.service';
 import { DiseqcParm, DiseqcTree, DiseqcTreeList } from 'src/app/services/interfaces/capture-card.interface';
@@ -41,7 +41,7 @@ interface Fields {
     selector: 'app-rotor',
     templateUrl: './rotor.component.html',
     styleUrls: ['./rotor.component.css'],
-    imports: [FormsModule, CardModule, SharedModule, InputNumberModule, SelectModule, TableModule, FieldsetModule, ButtonModule, DialogModule, ListboxModule, LnbComponent, forwardRef(() => SwitchComponent), UnicableComponent, TranslateModule]
+    imports: [FormsModule, CardModule, SharedModule, InputNumberModule, SelectModule, TableModule, FieldsetModule, ButtonModule, DialogModule, ListboxModule, LnbComponent, forwardRef(() => SwitchComponent), UnicableComponent, TranslatePipe]
 })
 export class RotorComponent implements OnInit, AfterViewInit, DiseqcSettingBase {
 

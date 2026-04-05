@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { GuideService } from 'src/app/services/guide.service';
 import { Channel } from '../services/interfaces/channel.interface';
 import { ProgramGuide } from 'src/app/services/interfaces/programguide.interface';
-import { TranslateService, TranslationChangeEvent, TranslateModule } from '@ngx-translate/core';
+import { TranslateService, TranslationChangeEvent, TranslatePipe } from '@ngx-translate/core';
 import { ScheduleLink, SchedulerSummary, ScheduleComponent } from '../schedule/schedule.component';
 import { ScheduleOrProgram } from '../services/interfaces/program.interface';
 import { GetProgramListRequest } from '../services/interfaces/guide.interface';
@@ -30,7 +30,7 @@ import { SelectModule } from 'primeng/select';
     selector: 'app-guide',
     templateUrl: './guide.component.html',
     styleUrls: ['./guide.component.css'],
-    imports: [FormsModule, TooltipModule, ButtonModule, RippleModule, CheckboxModule, DataViewModule, SharedModule, TimebarComponent, ChannelIconComponent, ProgramEntryComponent, ProgramsComponent, ScheduleComponent, DialogModule, LegendComponent, TranslateModule, DatePicker, SelectModule]
+    imports: [FormsModule, TooltipModule, ButtonModule, RippleModule, CheckboxModule, DataViewModule, SharedModule, TimebarComponent, ChannelIconComponent, ProgramEntryComponent, ProgramsComponent, ScheduleComponent, DialogModule, LegendComponent, TranslatePipe, DatePicker, SelectModule]
 })
 export class GuideComponent implements OnInit, SchedulerSummary {
 
@@ -88,7 +88,7 @@ export class GuideComponent implements OnInit, SchedulerSummary {
             this.switchLanguage(event.lang);
         });
         this.groupByList.forEach(element => {
-            this.translate.get(element.Name).subscribe(data => {
+            this.translate.stream(element.Name).subscribe(data => {
                 element.Name = data;
             });
         });

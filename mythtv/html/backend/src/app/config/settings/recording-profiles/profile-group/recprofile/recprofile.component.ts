@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms';
-import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { PartialObserver } from 'rxjs';
 import { CaptureCardService } from 'src/app/services/capture-card.service';
 import { RecProfile, RecProfileGroup } from 'src/app/services/interfaces/recprofile.interface';
@@ -20,7 +20,7 @@ import { SelectModule } from 'primeng/select';
     selector: 'app-recprofile',
     templateUrl: './recprofile.component.html',
     styleUrls: ['./recprofile.component.css'],
-    imports: [FormsModule, CardModule, SharedModule, CheckboxModule, InputNumberModule, SelectModule, FieldsetModule, MessageModule, ButtonModule, TranslateModule]
+    imports: [FormsModule, CardModule, SharedModule, CheckboxModule, InputNumberModule, SelectModule, FieldsetModule, MessageModule, ButtonModule, TranslatePipe]
 })
 export class RecprofileComponent implements OnInit, AfterViewInit {
 

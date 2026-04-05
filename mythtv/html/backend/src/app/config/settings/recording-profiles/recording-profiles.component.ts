@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit, ViewEncapsulation } from '@angular/core';
-import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
 import { CaptureCardService } from 'src/app/services/capture-card.service';
 import { RecProfileGroup } from 'src/app/services/interfaces/recprofile.interface';
@@ -15,7 +15,7 @@ import { CardModule } from 'primeng/card';
     templateUrl: './recording-profiles.component.html',
     styleUrls: ['./recording-profiles.component.css'],
     encapsulation: ViewEncapsulation.None,
-    imports: [CardModule, AccordionModule, SharedModule, ProfileGroupComponent, ButtonModule, TranslateModule,]
+    imports: [CardModule, AccordionModule, SharedModule, ProfileGroupComponent, ButtonModule, TranslatePipe,]
 })
 export class RecordingProfilesComponent implements OnInit {
 

@@ -34,7 +34,7 @@ export class UtilityService {
         // translations
         for (const [key, value] of Object.entries(this.recTypeTrans)) {
             const label = 'recrule.' + key.replace(this.deSpacer, '');
-            this.translate.get(label).subscribe(data => {
+            this.translate.stream(label).subscribe(data => {
                 Object.defineProperty(this.recTypeTrans, key, { value: data });
             });
         }

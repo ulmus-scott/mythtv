@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms';
-import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { MythService } from 'src/app/services/myth.service';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
@@ -15,7 +15,7 @@ import { DashboardSettingsComponent } from '../dashboard-settings.component';
     selector: 'app-data-sources',
     templateUrl: './data-sources.component.html',
     styleUrls: ['./data-sources.component.css'],
-    imports: [FormsModule, CardModule, SharedModule, SelectModule, CheckboxModule, MessageModule, ButtonModule, TranslateModule]
+    imports: [FormsModule, CardModule, SharedModule, SelectModule, CheckboxModule, MessageModule, ButtonModule, TranslatePipe]
 })
 export class DataSourcesComponent implements OnInit, AfterViewInit {
 

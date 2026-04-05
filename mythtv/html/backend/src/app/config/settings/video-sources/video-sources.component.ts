@@ -1,6 +1,6 @@
 import { Component, HostListener, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
-import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
 import { CanComponentDeactivate } from 'src/app/can-deactivate-guard.service';
 import { ChannelService } from 'src/app/services/channel.service';
@@ -28,7 +28,7 @@ import { CardModule } from 'primeng/card';
         MessageModule,
         AccordionModule,
         VsourceComponent,
-        TranslateModule
+        TranslatePipe
     ]
 })
 export class VideoSourcesComponent implements OnInit, CanComponentDeactivate {

@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms';
-import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { CaptureCardService } from 'src/app/services/capture-card.service';
 import { CaptureCardList, CaptureDevice, CaptureDeviceList, CardAndInput } from 'src/app/services/interfaces/capture-card.interface';
 import { SetupService } from 'src/app/services/setup.service';
@@ -16,7 +16,7 @@ import { SelectModule } from 'primeng/select';
     selector: 'app-v4l2',
     templateUrl: './v4l2.component.html',
     styleUrls: ['./v4l2.component.css'],
-    imports: [FormsModule, CardModule, SharedModule, SelectModule, MessageModule, ButtonModule, TranslateModule]
+    imports: [FormsModule, CardModule, SharedModule, SelectModule, MessageModule, ButtonModule, TranslatePipe]
 })
 export class V4l2Component implements OnInit, AfterViewInit {
 

@@ -3,7 +3,7 @@ import { CaptureCardService } from 'src/app/services/capture-card.service';
 import { CardAndInput } from 'src/app/services/interfaces/capture-card.interface';
 import { Encoder, TVState } from 'src/app/services/interfaces/encoder.interface';
 import { UtilityService } from 'src/app/services/utility.service';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 
 interface myEncoder extends Encoder {
@@ -14,7 +14,7 @@ interface myEncoder extends Encoder {
     selector: 'app-status-encoders',
     templateUrl: './encoders.component.html',
     styleUrls: ['./encoders.component.css', '../../status.component.css'],
-    imports: [TranslateModule]
+    imports: [TranslatePipe]
 })
 
 export class EncodersComponent implements OnInit {

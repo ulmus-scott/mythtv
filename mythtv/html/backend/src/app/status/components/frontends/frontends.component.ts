@@ -1,13 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Frontend } from "src/app/services/interfaces/frontend.interface";
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 
 @Component({
     selector: 'app-status-frontends',
     templateUrl: './frontends.component.html',
     styleUrls: ['./frontends.component.css', '../../status.component.css'],
-    imports: [TranslateModule]
+    imports: [TranslatePipe]
 })
 export class FrontendsComponent implements OnInit {
     @Input() frontends?: Frontend[];

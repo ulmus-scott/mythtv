@@ -3,7 +3,7 @@ import { NgForm, FormsModule } from '@angular/forms';
 import { ConfigService } from 'src/app/services/config.service';
 import { HostAddress } from 'src/app/services/interfaces/setup.interface';
 import { SetupService } from 'src/app/services/setup.service';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
 import { CheckboxModule } from 'primeng/checkbox';
@@ -18,7 +18,7 @@ import { SettingsComponent } from '../general-settings.component';
     selector: 'app-host-address',
     templateUrl: './host-address.component.html',
     styleUrls: ['./host-address.component.css'],
-    imports: [FormsModule, CardModule, SharedModule, FieldsetModule, NgClass, CheckboxModule, SelectModule, MessageModule, ButtonModule, TranslateModule]
+    imports: [FormsModule, CardModule, SharedModule, FieldsetModule, NgClass, CheckboxModule, SelectModule, MessageModule, ButtonModule, TranslatePipe]
 })
 export class HostAddressComponent implements OnInit, AfterViewInit {
     m_HostAddressData!: HostAddress;

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { CaptureCardService } from 'src/app/services/capture-card.service';
 import { CaptureCardList, CardAndInput } from 'src/app/services/interfaces/capture-card.interface';
 import { SetupService } from 'src/app/services/setup.service';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
 
@@ -17,7 +17,7 @@ import { CaptureCardsComponent } from '../capture-cards.component';
     selector: 'app-iptv',
     templateUrl: './iptv.component.html',
     styleUrls: ['./iptv.component.css'],
-    imports: [FormsModule, CardModule, SharedModule, InputNumberModule, MessageModule, ButtonModule, TranslateModule]
+    imports: [FormsModule, CardModule, SharedModule, InputNumberModule, MessageModule, ButtonModule, TranslatePipe]
 })
 export class IptvComponent implements OnInit, AfterViewInit {
     @Input() card!: CardAndInput;

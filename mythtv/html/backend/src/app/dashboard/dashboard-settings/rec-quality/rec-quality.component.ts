@@ -2,7 +2,7 @@ import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/cor
 import { NgForm, FormsModule } from '@angular/forms';
 import { GuideService } from 'src/app/services/guide.service';
 import { MythService } from 'src/app/services/myth.service';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
 
@@ -17,7 +17,7 @@ import { DashboardSettingsComponent } from '../dashboard-settings.component';
     selector: 'app-rec-quality',
     templateUrl: './rec-quality.component.html',
     styleUrls: ['./rec-quality.component.css'],
-    imports: [FormsModule, CardModule, SharedModule, InputNumberModule, FieldsetModule, SelectModule, MessageModule, ButtonModule, TranslateModule, Select]
+    imports: [FormsModule, CardModule, SharedModule, InputNumberModule, FieldsetModule, SelectModule, MessageModule, ButtonModule, TranslatePipe, Select]
 })
 export class RecQualityComponent implements OnInit, AfterViewInit {
 

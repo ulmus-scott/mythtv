@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, EventEmitter, forwardRef, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms';
-import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { Observable, Observer } from 'rxjs';
 import { CaptureCardService } from 'src/app/services/capture-card.service';
 import { DiseqcParm, DiseqcTree, DiseqcTreeList } from 'src/app/services/interfaces/capture-card.interface';
@@ -28,7 +28,7 @@ interface SwitchType {
     selector: 'app-switch',
     templateUrl: './switch.component.html',
     styleUrls: ['./switch.component.css'],
-    imports: [FormsModule, CardModule, SharedModule, InputNumberModule, SelectModule, FieldsetModule, ButtonModule, DialogModule, LnbComponent, forwardRef(() => RotorComponent), forwardRef(() => UnicableComponent), ListboxModule, TranslateModule, Select]
+    imports: [FormsModule, CardModule, SharedModule, InputNumberModule, SelectModule, FieldsetModule, ButtonModule, DialogModule, LnbComponent, forwardRef(() => RotorComponent), forwardRef(() => UnicableComponent), ListboxModule, TranslatePipe, Select]
 })
 export class SwitchComponent implements OnInit, AfterViewInit, DiseqcSettingBase {
 

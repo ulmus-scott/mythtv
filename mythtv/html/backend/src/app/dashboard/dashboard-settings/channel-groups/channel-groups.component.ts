@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms';
-import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { Observable, of, PartialObserver } from 'rxjs';
 import { ChannelService } from 'src/app/services/channel.service';
 import { GuideService } from 'src/app/services/guide.service';
@@ -34,7 +34,7 @@ interface MyChannelGroup extends ChannelGroup {
     selector: 'app-channel-groups',
     templateUrl: './channel-groups.component.html',
     styleUrls: ['./channel-groups.component.css'],
-    imports: [TableModule, SharedModule, ButtonModule, RippleModule, TooltipModule, FormsModule, DialogModule, CheckboxModule, MessageModule, TranslateModule]
+    imports: [TableModule, SharedModule, ButtonModule, RippleModule, TooltipModule, FormsModule, DialogModule, CheckboxModule, MessageModule, TranslatePipe]
 })
 export class ChannelGroupsComponent implements OnInit, AfterViewInit {
 
@@ -87,7 +87,7 @@ export class ChannelGroupsComponent implements OnInit, AfterViewInit {
 
     loadTranslations(): void {
         for (const [key, value] of Object.entries(this.msg)) {
-            this.translate.get(value).subscribe(data => {
+            this.translate.stream(value).subscribe(data => {
                 Object.defineProperty(this.msg, key, { value: data });
             });
         }

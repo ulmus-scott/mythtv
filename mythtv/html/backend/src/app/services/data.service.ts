@@ -54,7 +54,7 @@ export class DataService {
     getTranslations() {
         // Translation keys like 'data.recstatus.Pending'
         for (const [key, value] of Object.entries(this.recStatusText)) {
-            this.translate.get('data.recstatus.' + key).subscribe(data => {
+            this.translate.stream('data.recstatus.' + key).subscribe(data => {
                 Object.defineProperty(this.recStatusText, key, { value: data });
                 let seq = 3;
                 if (key == 'Default') seq = 1;

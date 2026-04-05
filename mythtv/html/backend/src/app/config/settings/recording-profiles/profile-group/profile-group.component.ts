@@ -1,6 +1,6 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
 import { CaptureCardService } from 'src/app/services/capture-card.service';
 import { RecProfileGroup } from 'src/app/services/interfaces/recprofile.interface';
@@ -18,7 +18,7 @@ import { ButtonModule } from 'primeng/button';
     selector: 'app-profile-group',
     templateUrl: './profile-group.component.html',
     styleUrls: ['./profile-group.component.css'],
-    imports: [ButtonModule, DialogModule, FormsModule, SharedModule, MessageModule, AccordionModule, RecprofileComponent, TranslateModule]
+    imports: [ButtonModule, DialogModule, FormsModule, SharedModule, MessageModule, AccordionModule, RecprofileComponent, TranslatePipe]
 })
 export class ProfileGroupComponent implements OnInit {
 

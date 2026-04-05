@@ -8,7 +8,7 @@ import { SetupWizardService } from 'src/app/services/setupwizard.service';
 import { NgForm, FormsModule } from '@angular/forms';
 import { SetupService } from 'src/app/services/setup.service';
 import { Observable, of } from 'rxjs';
-import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { MythService } from 'src/app/services/myth.service';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
@@ -29,7 +29,7 @@ import { CardModule } from 'primeng/card';
         ListboxModule,
         MessageModule,
         ButtonModule,
-        TranslateModule
+        TranslatePipe
     ]
 })
 
@@ -56,7 +56,7 @@ export class SelectLanguageComponent implements OnInit, AfterViewInit {
     constructor(public router: Router, private translate: TranslateService,
         public setupService: SetupService, private configService: ConfigService,
         private wizardService: SetupWizardService, private mythService: MythService) {
-        this.translate.get(this.warningText).subscribe(data => {
+        translate.stream(this.warningText).subscribe(data => {
             this.warningText = data
         });
     }

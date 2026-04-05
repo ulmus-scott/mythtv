@@ -1,6 +1,6 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms';
-import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { Observable, of, PartialObserver } from 'rxjs';
 import { DvrService } from 'src/app/services/dvr.service';
 import { PowerPriority } from 'src/app/services/interfaces/dvr.interface';
@@ -18,7 +18,7 @@ import { TableModule } from 'primeng/table';
     selector: 'app-custom-priorities',
     templateUrl: './custom-priorities.component.html',
     styleUrls: ['./custom-priorities.component.css'],
-    imports: [TableModule, SharedModule, ButtonModule, RippleModule, TooltipModule, FormsModule, DialogModule, InputNumberModule, MessageModule, TranslateModule]
+    imports: [TableModule, SharedModule, ButtonModule, RippleModule, TooltipModule, FormsModule, DialogModule, InputNumberModule, MessageModule, TranslatePipe]
 })
 export class CustomPrioritiesComponent implements OnInit {
 
@@ -65,7 +65,7 @@ export class CustomPrioritiesComponent implements OnInit {
 
     loadTranslations(): void {
         for (const [key, value] of Object.entries(this.msg)) {
-            this.translate.get(value).subscribe(data => {
+            this.translate.stream(value).subscribe(data => {
                 Object.defineProperty(this.msg, key, { value: data });
             });
         }

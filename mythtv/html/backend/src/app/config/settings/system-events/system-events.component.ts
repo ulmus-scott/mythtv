@@ -1,7 +1,7 @@
 import { Component, HostListener, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
 import { ConfigService } from 'src/app/services/config.service';
 import { SystemEvent, SystemEventList } from 'src/app/services/interfaces/config.interface';
@@ -24,7 +24,7 @@ import { CardModule } from 'primeng/card';
         SharedModule,
         MessageModule,
         ButtonModule,
-        TranslateModule
+        TranslatePipe
     ]
 })
 
@@ -58,7 +58,7 @@ export class SystemEventsComponent implements OnInit {
             error: () => this.errorCount++
         })
 
-        this.translate.get(this.warningText).subscribe(data => {
+        this.translate.stream(this.warningText).subscribe(data => {
             this.warningText = data
         });
     }

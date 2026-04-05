@@ -3,7 +3,7 @@ import { NgForm, FormsModule } from '@angular/forms';
 
 import { MythService } from 'src/app/services/myth.service';
 import { SetupService } from 'src/app/services/setup.service';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
 
@@ -16,7 +16,7 @@ import { SettingsComponent } from '../general-settings.component';
     selector: 'app-eit-scanner',
     templateUrl: './eit-scanner.component.html',
     styleUrls: ['./eit-scanner.component.css'],
-    imports: [FormsModule, CardModule, SharedModule, InputNumberModule, MessageModule, ButtonModule, TranslateModule]
+    imports: [FormsModule, CardModule, SharedModule, InputNumberModule, MessageModule, ButtonModule, TranslatePipe]
 })
 export class EitScannerComponent implements OnInit, AfterViewInit {
 

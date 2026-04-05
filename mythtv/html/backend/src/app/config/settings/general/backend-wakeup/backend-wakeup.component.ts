@@ -3,7 +3,7 @@ import { NgForm, FormsModule } from '@angular/forms';
 
 import { MythService } from 'src/app/services/myth.service';
 import { SetupService } from 'src/app/services/setup.service';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
 
@@ -17,7 +17,7 @@ import { SettingsComponent } from '../general-settings.component';
     selector: 'app-backend-wakeup',
     templateUrl: './backend-wakeup.component.html',
     styleUrls: ['./backend-wakeup.component.css'],
-    imports: [FormsModule, CardModule, SharedModule, FieldsetModule, InputNumberModule, MessageModule, ButtonModule, TranslateModule]
+    imports: [FormsModule, CardModule, SharedModule, FieldsetModule, InputNumberModule, MessageModule, ButtonModule, TranslatePipe]
 })
 export class BackendWakeupComponent implements OnInit, AfterViewInit {
 

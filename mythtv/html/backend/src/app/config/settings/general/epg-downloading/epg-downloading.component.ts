@@ -3,7 +3,7 @@ import { NgForm, FormsModule } from '@angular/forms';
 
 import { MythService } from 'src/app/services/myth.service';
 import { SetupService } from 'src/app/services/setup.service';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
 import { InputNumberModule } from 'primeng/inputnumber';
@@ -17,7 +17,7 @@ import { SettingsComponent } from '../general-settings.component';
     selector: 'app-epg-downloading',
     templateUrl: './epg-downloading.component.html',
     styleUrls: ['./epg-downloading.component.css'],
-    imports: [FormsModule, CardModule, SharedModule, CheckboxModule, InputNumberModule, MessageModule, ButtonModule, TranslateModule]
+    imports: [FormsModule, CardModule, SharedModule, CheckboxModule, InputNumberModule, MessageModule, ButtonModule, TranslatePipe]
 })
 
 export class EpgDownloadingComponent implements OnInit, AfterViewInit {

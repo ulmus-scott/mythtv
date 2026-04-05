@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
-import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { JobQCommands } from 'src/app/services/interfaces/setup.interface';
 import { SetupService } from 'src/app/services/setup.service';
 import { NgForm, FormsModule } from '@angular/forms';
@@ -26,7 +26,7 @@ interface ddParm {
     selector: 'app-jobqueue-backend',
     templateUrl: './jobqueue-backend.component.html',
     styleUrls: ['./jobqueue-backend.component.css'],
-    imports: [FormsModule, CardModule, SharedModule, InputNumberModule, DatePickerModule, SelectModule, CheckboxModule, MessageModule, ButtonModule, TranslateModule]
+    imports: [FormsModule, CardModule, SharedModule, InputNumberModule, DatePickerModule, SelectModule, CheckboxModule, MessageModule, ButtonModule, TranslatePipe]
 })
 
 export class JobqueueBackendComponent implements OnInit, AfterViewInit {

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms';
-import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { DataService } from 'src/app/services/data.service';
 import { MythService } from 'src/app/services/myth.service';
 import { PasswordModule } from 'primeng/password';
@@ -30,7 +30,7 @@ interface MyUser {
     selector: 'app-users',
     templateUrl: './users.component.html',
     styleUrls: ['./users.component.css'],
-    imports: [RadioButtonModule, FormsModule, MessageModule, TableModule, SharedModule, ButtonModule, RippleModule, TooltipModule, DialogModule, PasswordModule, TranslateModule]
+    imports: [RadioButtonModule, FormsModule, MessageModule, TableModule, SharedModule, ButtonModule, RippleModule, TooltipModule, DialogModule, PasswordModule, TranslatePipe]
 })
 export class UsersComponent implements OnInit {
 
@@ -82,7 +82,7 @@ export class UsersComponent implements OnInit {
 
     loadTranslations(): void {
         for (const [key, value] of Object.entries(this.msg)) {
-            this.translate.get(value).subscribe(data => {
+            this.translate.stream(value).subscribe(data => {
                 Object.defineProperty(this.msg, key, { value: data });
             });
         }

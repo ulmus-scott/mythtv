@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms';
-import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { MythService } from 'src/app/services/myth.service';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
@@ -16,7 +16,7 @@ import { SelectModule } from 'primeng/select';
     selector: 'app-rec-priorities',
     templateUrl: './rec-priorities.component.html',
     styleUrls: ['./rec-priorities.component.css'],
-    imports: [FormsModule, CardModule, SharedModule, FieldsetModule, SelectModule, InputNumberModule, MessageModule, ButtonModule, TranslateModule]
+    imports: [FormsModule, CardModule, SharedModule, FieldsetModule, SelectModule, InputNumberModule, MessageModule, ButtonModule, TranslatePipe]
 })
 export class RecPrioritiesComponent implements OnInit, AfterViewInit {
 
@@ -55,7 +55,7 @@ export class RecPrioritiesComponent implements OnInit, AfterViewInit {
 
     loadTranslations() {
         this.btobList.forEach((entry) =>
-            this.translate.get(entry.Label).subscribe(data => entry.Label = data));
+            this.translate.stream(entry.Label).subscribe(data => entry.Label = data));
     }
 
     ngAfterViewInit() {

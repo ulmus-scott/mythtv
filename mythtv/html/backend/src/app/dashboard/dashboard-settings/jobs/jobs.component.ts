@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms';
-import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { MythService } from 'src/app/services/myth.service';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
@@ -16,7 +16,7 @@ import { DashboardSettingsComponent } from '../dashboard-settings.component';
     selector: 'app-jobs',
     templateUrl: './jobs.component.html',
     styleUrls: ['./jobs.component.css'],
-    imports: [FormsModule, CardModule, SharedModule, SelectModule, CheckboxModule, InputNumberModule, MessageModule, ButtonModule, TranslateModule]
+    imports: [FormsModule, CardModule, SharedModule, SelectModule, CheckboxModule, InputNumberModule, MessageModule, ButtonModule, TranslatePipe]
 })
 export class JobsComponent implements OnInit, AfterViewInit {
 
@@ -62,7 +62,7 @@ export class JobsComponent implements OnInit, AfterViewInit {
 
     loadTranslations() {
         this.methodList.forEach((entry) =>
-            this.translate.get(entry.Label).subscribe(data => entry.Label = data));
+            this.translate.stream(entry.Label).subscribe(data => entry.Label = data));
     }
 
     ngAfterViewInit() {

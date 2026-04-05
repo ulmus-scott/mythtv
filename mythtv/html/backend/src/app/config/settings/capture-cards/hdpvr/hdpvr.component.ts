@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms';
-import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { CaptureCardService } from 'src/app/services/capture-card.service';
 import { CaptureCardList, CaptureDevice, CaptureDeviceList, CardAndInput } from 'src/app/services/interfaces/capture-card.interface';
 import { SetupService } from 'src/app/services/setup.service';
@@ -17,7 +17,7 @@ import { CaptureCardsComponent } from '../capture-cards.component';
     selector: 'app-hdpvr',
     templateUrl: './hdpvr.component.html',
     styleUrls: ['./hdpvr.component.css'],
-    imports: [FormsModule, CardModule, SharedModule, SelectModule, InputNumberModule, MessageModule, ButtonModule, TranslateModule]
+    imports: [FormsModule, CardModule, SharedModule, SelectModule, InputNumberModule, MessageModule, ButtonModule, TranslatePipe]
 })
 
 export class HdpvrComponent implements OnInit, AfterViewInit {

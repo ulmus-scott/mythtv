@@ -5,7 +5,7 @@ import { JobQCommands } from 'src/app/services/interfaces/setup.interface';
 import { SetupService } from 'src/app/services/setup.service';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateDirective, TranslatePipe } from '@ngx-translate/core';
 
 import { SharedModule } from 'primeng/api';
 import { CardModule } from 'primeng/card';
@@ -15,7 +15,7 @@ import { SettingsComponent } from '../general-settings.component';
     selector: 'app-jobqueue-commands',
     templateUrl: './jobqueue-commands.component.html',
     styleUrls: ['./jobqueue-commands.component.css'],
-    imports: [FormsModule, CardModule, SharedModule, TranslateModule, MessageModule, ButtonModule]
+    imports: [FormsModule, CardModule, SharedModule, TranslatePipe, MessageModule, ButtonModule, TranslateDirective]
 })
 export class JobqueueCommandsComponent implements OnInit, AfterViewInit {
 

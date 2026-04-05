@@ -1,7 +1,7 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { SortMeta, SharedModule } from 'primeng/api';
 import { Observable, of, PartialObserver } from 'rxjs';
 import { ChannelService } from 'src/app/services/channel.service';
@@ -34,7 +34,7 @@ interface MyChannel extends Channel {
     selector: 'app-channel-editor',
     templateUrl: './channel-editor.component.html',
     styleUrls: ['./channel-editor.component.css'],
-    imports: [TableModule, SharedModule, ButtonModule, RippleModule, TooltipModule, SelectModule, FormsModule, NgClass, DialogModule, InputNumberModule, CheckboxModule, MessageModule, RadioButtonModule, ListboxModule, TranslateModule, PanelModule]
+    imports: [TableModule, SharedModule, ButtonModule, RippleModule, TooltipModule, SelectModule, FormsModule, NgClass, DialogModule, InputNumberModule, CheckboxModule, MessageModule, RadioButtonModule, ListboxModule, TranslatePipe, PanelModule]
 })
 export class ChannelEditorComponent implements OnInit {
 
@@ -153,7 +153,7 @@ export class ChannelEditorComponent implements OnInit {
         public setupService: SetupService, public router: Router, private mythService: MythService,
         private utility: UtilityService,) {
 
-        this.translate.get(this.unassignedText).subscribe(data => {
+        this.translate.stream(this.unassignedText).subscribe(data => {
             // this translation has to be done before loading lists
             this.unassignedText = data;
             this.transDone++
@@ -261,7 +261,7 @@ export class ChannelEditorComponent implements OnInit {
 
     loadTranslations(): void {
         this.visibilities.forEach(entry => {
-            this.translate.get(entry.prompt).subscribe(data => {
+            this.translate.stream(entry.prompt).subscribe(data => {
                 entry.prompt = data;
                 this.transDone++;   // There will be 4 of these
                 this.visDone++;
@@ -270,29 +270,29 @@ export class ChannelEditorComponent implements OnInit {
                     this.visibilities = [...this.visibilities]
             });
         });
-        this.translate.get(this.headingNew).subscribe(data => {
+        this.translate.stream(this.headingNew).subscribe(data => {
             this.headingNew = data
             this.transDone++
         });
-        this.translate.get(this.headingEdit).subscribe(data => {
+        this.translate.stream(this.headingEdit).subscribe(data => {
             this.headingEdit = data
             this.transDone++
         });
-        this.translate.get(this.warningText).subscribe(data => {
+        this.translate.stream(this.warningText).subscribe(data => {
             this.warningText = data
             this.transDone++
         });
-        this.translate.get(this.deleteText).subscribe(data => {
+        this.translate.stream(this.deleteText).subscribe(data => {
             this.deleteText = data
             this.transDone++
         });
-        this.translate.get(this.tvFormats[0].prompt).subscribe(data => {
+        this.translate.stream(this.tvFormats[0].prompt).subscribe(data => {
             this.tvFormats[0].prompt = data;
             // notify of change
             this.tvFormats = [...this.tvFormats]
             this.transDone++
         });
-        this.translate.get(this.noneSelected).subscribe(data => {
+        this.translate.stream(this.noneSelected).subscribe(data => {
             this.noneSelected = data
             this.transDone++
         });

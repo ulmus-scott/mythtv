@@ -2,7 +2,7 @@ import { HttpClient, HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromD
 import { ApplicationConfig, importProvidersFrom } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
-import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
+import { TranslateLoader, provideTranslateService } from "@ngx-translate/core";
 import { MenuModule } from "primeng/menu";
 import { AppRoutingModule } from "./app-routing.module";
 import { HttpLoaderFactory } from "./app.module";
@@ -17,14 +17,16 @@ import { MyPreset } from "./mypreset";
 export const appConfig: ApplicationConfig = {
     providers: [
         // Other global providers can be added here
-        importProvidersFrom(BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule, MenuModule, TranslateModule.forRoot({
+        importProvidersFrom(BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule, MenuModule,
+            SetupWizardRoutingModule, DashboardRoutingModule),
+        provideTranslateService({
             defaultLanguage: 'en_US',
             loader: {
                 provide: TranslateLoader,
                 useFactory: HttpLoaderFactory,
                 deps: [HttpClient]
             }
-        }), SetupWizardRoutingModule, DashboardRoutingModule),
+        }),
         { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
         provideHttpClient(withInterceptorsFromDi()),

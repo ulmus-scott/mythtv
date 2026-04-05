@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms';
-import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { MenuItem, MessageService, SortMeta, SharedModule } from 'primeng/api';
 import { Menu, MenuModule } from 'primeng/menu';
 import { Table, TableLazyLoadEvent, TableModule } from 'primeng/table';
@@ -26,7 +26,7 @@ import { DatePicker, DatePickerModule } from "primeng/datepicker";
     templateUrl: './videos.component.html',
     styleUrls: ['./videos.component.css'],
     providers: [MessageService],
-    imports: [ToastModule, MenuModule, TableModule, SharedModule, ButtonModule, CheckboxModule, FormsModule, TooltipModule, RippleModule, SelectModule, DialogModule, TextareaModule, InputNumberModule, DatePickerModule, MessageModule, TranslateModule, DatePicker]
+    imports: [ToastModule, MenuModule, TableModule, SharedModule, ButtonModule, CheckboxModule, FormsModule, TooltipModule, RippleModule, SelectModule, DialogModule, TextareaModule, InputNumberModule, DatePickerModule, MessageModule, TranslatePipe, DatePicker]
 })
 export class VideosComponent implements OnInit {
 
@@ -79,14 +79,14 @@ export class VideosComponent implements OnInit {
                 this.catGroups.sort((a, b) => {
                     return a.Name?.localeCompare(b.Name || '') || 0
                 });
-                this.translate.get('dashboard.videos.allCategories').subscribe(translated => {
+                this.translate.stream('dashboard.videos.allCategories').subscribe(translated => {
                     this.catGroups.unshift({ Id: -1, Name: translated });
                 });
             });
 
         // translations
         for (const [key, value] of Object.entries(this.msg)) {
-            this.translate.get(value).subscribe(data => {
+            this.translate.stream(value).subscribe(data => {
                 Object.defineProperty(this.msg, key, { value: data });
             });
         }
@@ -94,7 +94,7 @@ export class VideosComponent implements OnInit {
         const mnu_entries = [this.mnu_markwatched, this.mnu_markunwatched, this.mnu_updatemeta];
         mnu_entries.forEach(entry => {
             if (entry.label)
-                this.translate.get(entry.label).subscribe(data =>
+                this.translate.stream(entry.label).subscribe(data =>
                     entry.label = data
                 );
         });

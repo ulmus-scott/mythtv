@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { SetupWizardService } from 'src/app/services/setupwizard.service';
 import { RouterOutlet, RouterLink, Router, NavigationEnd } from '@angular/router';
 import { BackendWarningComponent } from '../backend-warning/backend-warning.component';
@@ -15,7 +15,7 @@ import { Subscription } from 'rxjs';
     selector: 'app-settings',
     templateUrl: './setupwizard.component.html',
     styleUrls: ['./setupwizard.component.css'],
-    imports: [ButtonModule, RippleModule, TooltipModule, TabsModule, BackendWarningComponent, RouterOutlet, TranslateModule, RouterLink, NgClass]
+    imports: [ButtonModule, RippleModule, TooltipModule, TabsModule, BackendWarningComponent, RouterOutlet, TranslatePipe, RouterLink, NgClass]
 })
 export class SetupWizardComponent implements OnInit, AfterViewInit, OnDestroy {
 
@@ -38,7 +38,7 @@ export class SetupWizardComponent implements OnInit, AfterViewInit, OnDestroy {
     ngOnInit(): void {
         // }
         // setup() {
-        this.translate.get('setupwizard.steps.selectlanguage').subscribe(
+        this.translate.stream('setupwizard.steps.selectlanguage').subscribe(
             (translated: string) => {
                 this.fullMenu = [
                     {

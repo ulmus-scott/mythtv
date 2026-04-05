@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, Input, OnInit, Output, ViewChild, EventEmitter } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms';
-import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { CaptureCardService } from 'src/app/services/capture-card.service';
 import { DiseqcTree, DiseqcTreeList } from 'src/app/services/interfaces/capture-card.interface';
 import { SetupService } from 'src/app/services/setup.service';
@@ -31,7 +31,7 @@ interface LnbSubType {
     selector: 'app-lnb',
     templateUrl: './lnb.component.html',
     styleUrls: ['./lnb.component.css'],
-    imports: [FormsModule, CardModule, SharedModule, SelectModule, InputNumberModule, CheckboxModule, TranslateModule, Select]
+    imports: [FormsModule, CardModule, SharedModule, SelectModule, InputNumberModule, CheckboxModule, TranslatePipe, Select]
 })
 export class LnbComponent implements OnInit, AfterViewInit, DiseqcSettingBase {
 

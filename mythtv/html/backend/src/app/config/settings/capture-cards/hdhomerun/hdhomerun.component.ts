@@ -3,7 +3,7 @@ import { NgForm, FormsModule } from '@angular/forms';
 import { CaptureCardService } from 'src/app/services/capture-card.service';
 import { CaptureCardList, CaptureDevice, CaptureDeviceList, CardAndInput } from 'src/app/services/interfaces/capture-card.interface';
 import { SetupService } from 'src/app/services/setup.service';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
 import { CheckboxModule } from 'primeng/checkbox';
@@ -18,7 +18,7 @@ import { CaptureCardsComponent } from '../capture-cards.component';
     selector: 'app-hdhomerun',
     templateUrl: './hdhomerun.component.html',
     styleUrls: ['./hdhomerun.component.css'],
-    imports: [FormsModule, CardModule, SharedModule, ListboxModule, InputNumberModule, CheckboxModule, MessageModule, ButtonModule, TranslateModule]
+    imports: [FormsModule, CardModule, SharedModule, ListboxModule, InputNumberModule, CheckboxModule, MessageModule, ButtonModule, TranslatePipe]
 })
 export class HdhomerunComponent implements OnInit, AfterViewInit {
 

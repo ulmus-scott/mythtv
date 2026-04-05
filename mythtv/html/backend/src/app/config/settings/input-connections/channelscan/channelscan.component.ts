@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
-import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { TranslateService, TranslatePipe, TranslateDirective } from '@ngx-translate/core';
 import { Fieldset, FieldsetModule } from 'primeng/fieldset';
 import { ScrollPanel, ScrollPanelModule } from 'primeng/scrollpanel';
 import { CaptureCardService } from 'src/app/services/capture-card.service';
@@ -59,7 +59,7 @@ class SatTuning {
     selector: 'app-channelscan',
     templateUrl: './channelscan.component.html',
     styleUrls: ['./channelscan.component.css'],
-    imports: [SelectModule, FormsModule, CheckboxModule, ButtonModule, FieldsetModule, InputNumberModule, TranslateModule, ProgressBarModule, ScrollPanelModule]
+    imports: [SelectModule, FormsModule, CheckboxModule, ButtonModule, FieldsetModule, InputNumberModule, TranslatePipe, ProgressBarModule, ScrollPanelModule, TranslateDirective]
 })
 export class ChannelscanComponent implements OnInit, AfterViewInit {
 
@@ -363,7 +363,7 @@ export class ChannelscanComponent implements OnInit, AfterViewInit {
         table.forEach(
             entry => {
                 if (entry.label.startsWith('settings.'))
-                    this.translate.get(entry.label).subscribe(data => entry.label = data);
+                    this.translate.stream(entry.label).subscribe(data => entry.label = data);
             });
     }
 
@@ -491,10 +491,10 @@ export class ChannelscanComponent implements OnInit, AfterViewInit {
             this.scanTypes.push({ label: 'settings.channelscan.type.onetransport', value: 'ONETRANSPORT' });
         }
         this.scanTypes.forEach(
-            entry => this.translate.get(entry.label).subscribe(data => entry.label = data));
+            entry => this.translate.stream(entry.label).subscribe(data => entry.label = data));
 
         if (this.helpText)
-            this.translate.get(this.helpText).subscribe(data => this.helpText = data);
+            this.translate.stream(this.helpText).subscribe(data => this.helpText = data);
     }
 
     onScanTypeChange() {

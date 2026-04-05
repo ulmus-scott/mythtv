@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ScheduleOrProgram } from 'src/app/services/interfaces/program.interface';
 import { ProgramGuide } from 'src/app/services/interfaces/programguide.interface';
 import { MythService } from 'src/app/services/myth.service';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { NgClass } from '@angular/common';
 import { SharedModule } from 'primeng/api';
 import { DataViewModule } from 'primeng/dataview';
@@ -12,7 +12,7 @@ import { DataViewModule } from 'primeng/dataview';
     selector: 'app-legend',
     templateUrl: './legend.component.html',
     styleUrls: ['./legend.component.css'],
-    imports: [DataViewModule, SharedModule, NgClass, TranslateModule]
+    imports: [DataViewModule, SharedModule, NgClass, TranslatePipe]
 })
 export class LegendComponent implements OnInit {
     @Input() programGuide!: ProgramGuide | null;

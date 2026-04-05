@@ -4,7 +4,7 @@ import { RecRule, RecRuleFilter } from '../services/interfaces/recording.interfa
 import { DvrService } from '../services/dvr.service';
 import { InputList } from '../services/interfaces/input.interface';
 import { Channel } from '../services/interfaces/channel.interface';
-import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { MythService } from '../services/myth.service';
 import { NgForm, FormsModule } from '@angular/forms';
 import { RecordScheduleRequest } from '../services/interfaces/dvr.interface';
@@ -53,7 +53,7 @@ interface MyChannel extends Channel {
     selector: 'app-schedule',
     templateUrl: './schedule.component.html',
     styleUrls: ['./schedule.component.css'],
-    imports: [FormsModule, DialogModule, SelectModule, DividerModule, DatePicker, InputNumberModule, CheckboxModule, MultiSelectModule, RadioButtonModule, SharedModule, MessageModule, PopoverModule, ScrollPanelModule, ButtonModule, TranslateModule]
+    imports: [FormsModule, DialogModule, SelectModule, DividerModule, DatePicker, InputNumberModule, CheckboxModule, MultiSelectModule, RadioButtonModule, SharedModule, MessageModule, PopoverModule, ScrollPanelModule, ButtonModule, TranslatePipe]
 })
 export class ScheduleComponent implements OnInit {
     @Input() inter!: ScheduleLink;

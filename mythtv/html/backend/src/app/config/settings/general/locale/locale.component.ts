@@ -2,7 +2,7 @@ import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/cor
 import { NgForm, FormsModule } from '@angular/forms';
 import { MythService } from 'src/app/services/myth.service';
 import { SetupService } from 'src/app/services/setup.service';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
 
@@ -16,7 +16,7 @@ import { SettingsComponent } from '../general-settings.component';
     selector: 'app-locale',
     templateUrl: './locale.component.html',
     styleUrls: ['./locale.component.css'],
-    imports: [FormsModule, CardModule, SharedModule, FieldsetModule, SelectModule, MessageModule, ButtonModule, TranslateModule]
+    imports: [FormsModule, CardModule, SharedModule, FieldsetModule, SelectModule, MessageModule, ButtonModule, TranslatePipe]
 })
 
 export class LocaleComponent implements OnInit, AfterViewInit {

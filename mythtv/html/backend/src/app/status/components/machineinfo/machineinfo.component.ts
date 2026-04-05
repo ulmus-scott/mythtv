@@ -2,14 +2,14 @@ import { Component, OnInit, Input } from '@angular/core';
 import { BackendStatus, MachineInfo } from 'src/app/services/interfaces/status.interface';
 import { StorageGroup } from "src/app/services/interfaces/storagegroup.interface";
 import { UtilityService } from 'src/app/services/utility.service';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { NgTemplateOutlet } from '@angular/common';
 
 @Component({
     selector: 'app-status-machineinfo',
     templateUrl: './machineinfo.component.html',
     styleUrls: ['./machineinfo.component.css', '../../status.component.css'],
-    imports: [NgTemplateOutlet, TranslateModule]
+    imports: [NgTemplateOutlet, TranslatePipe]
 })
 export class MachineinfoComponent implements OnInit {
     @Input() machineinfo?: MachineInfo;

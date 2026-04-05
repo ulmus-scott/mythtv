@@ -4,7 +4,7 @@ import { ScheduleLink, SchedulerSummary } from 'src/app/schedule/schedule.compon
 import { DvrService } from 'src/app/services/dvr.service';
 import { RecRule } from 'src/app/services/interfaces/recording.interface';
 import { UtilityService } from 'src/app/services/utility.service';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { ScheduleComponent } from '../../schedule/schedule.component';
 import { MessageModule } from 'primeng/message';
 import { DialogModule } from 'primeng/dialog';
@@ -22,7 +22,7 @@ interface MyRecRule extends RecRule {
     selector: 'app-recrules',
     templateUrl: './recrules.component.html',
     styleUrls: ['./recrules.component.css'],
-    imports: [TableModule, SharedModule, ButtonModule, RippleModule, TooltipModule, DialogModule, MessageModule, ScheduleComponent, TranslateModule]
+    imports: [TableModule, SharedModule, ButtonModule, RippleModule, TooltipModule, DialogModule, MessageModule, ScheduleComponent, TranslatePipe]
 })
 export class RecrulesComponent implements OnInit, SchedulerSummary {
 

@@ -5,7 +5,7 @@ import { FreqTableList, Grabber, GrabberList, VideoSource, VideoSourceList }
     from 'src/app/services/interfaces/videosource.interface';
 import { UpdateVideoSourceRequest } from 'src/app/services/interfaces/channel.interface';
 import { PartialObserver } from 'rxjs';
-import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { SetupService } from 'src/app/services/setup.service';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { BackendInfo } from 'src/app/services/interfaces/backend.interface';
@@ -26,7 +26,7 @@ import { VideoSourcesComponent } from '../video-sources.component';
     selector: 'app-vsource',
     templateUrl: './vsource.component.html',
     styleUrls: ['./vsource.component.css'],
-    imports: [FormsModule, CardModule, SharedModule, SelectModule, ButtonModule, RippleModule, TooltipModule, CheckboxModule, InputNumberModule, MessageModule, TranslateModule]
+    imports: [FormsModule, CardModule, SharedModule, SelectModule, ButtonModule, RippleModule, TooltipModule, CheckboxModule, InputNumberModule, MessageModule, TranslatePipe]
 })
 export class VsourceComponent implements OnInit, AfterViewInit {
 

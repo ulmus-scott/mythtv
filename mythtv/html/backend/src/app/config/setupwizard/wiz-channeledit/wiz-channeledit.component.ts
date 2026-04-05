@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { ChannelEditorComponent } from '../../settings/channel-editor/channel-editor.component';
 import { CardModule } from 'primeng/card';
@@ -9,7 +9,7 @@ import { CardModule } from 'primeng/card';
     selector: 'app-wiz-channeledit',
     templateUrl: './wiz-channeledit.component.html',
     styleUrls: ['./wiz-channeledit.component.css'],
-    imports: [CardModule, ChannelEditorComponent, ButtonModule, TranslateModule]
+    imports: [CardModule, ChannelEditorComponent, ButtonModule, TranslatePipe]
 })
 export class WizChanneleditComponent implements OnInit {
 

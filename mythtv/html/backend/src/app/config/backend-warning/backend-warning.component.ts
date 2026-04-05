@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { MessageService } from 'primeng/api';
 import { DvrService } from 'src/app/services/dvr.service';
 import { ScheduleOrProgram } from 'src/app/services/interfaces/program.interface';
@@ -16,7 +16,7 @@ import { CardModule } from 'primeng/card';
     templateUrl: './backend-warning.component.html',
     styleUrls: ['./backend-warning.component.css'],
     providers: [MessageService],
-    imports: [CardModule, MessageModule, ButtonModule, TranslateModule]
+    imports: [CardModule, MessageModule, ButtonModule, TranslatePipe]
 })
 export class BackendWarningComponent implements OnInit {
 

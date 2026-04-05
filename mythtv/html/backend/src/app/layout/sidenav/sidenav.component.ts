@@ -1,6 +1,6 @@
-import { Component, isDevMode, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { RippleModule } from 'primeng/ripple';
 import { TooltipModule } from 'primeng/tooltip';
 import { RouterLink, RouterOutlet } from '@angular/router';
@@ -9,7 +9,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
     selector: 'app-sidenav',
     templateUrl: './sidenav.component.html',
     styleUrls: ['./sidenav.component.css'],
-    imports: [RouterLink, TooltipModule, RippleModule, RouterOutlet, TranslateModule]
+    imports: [RouterLink, TooltipModule, RippleModule, RouterOutlet, TranslatePipe]
 })
 
 export class SidenavComponent implements OnInit {

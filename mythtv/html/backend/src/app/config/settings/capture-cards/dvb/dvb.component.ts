@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms';
-import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { PartialObserver } from 'rxjs';
 import { CaptureCardService } from 'src/app/services/capture-card.service';
 import { CaptureCardList, CaptureDevice, CaptureDeviceList, CardAndInput, DiseqcParm, DiseqcTree, DiseqcTreeList } from 'src/app/services/interfaces/capture-card.interface';
@@ -28,7 +28,7 @@ import { SelectModule } from 'primeng/select';
     selector: 'app-dvb',
     templateUrl: './dvb.component.html',
     styleUrls: ['./dvb.component.css'],
-    imports: [FormsModule, CardModule, SharedModule, SelectModule, InputNumberModule, CheckboxModule, FieldsetModule, ButtonModule, DialogModule, ListboxModule, TooltipModule, MessageModule, LnbComponent, RotorComponent, SwitchComponent, UnicableComponent, TranslateModule]
+    imports: [FormsModule, CardModule, SharedModule, SelectModule, InputNumberModule, CheckboxModule, FieldsetModule, ButtonModule, DialogModule, ListboxModule, TooltipModule, MessageModule, LnbComponent, RotorComponent, SwitchComponent, UnicableComponent, TranslatePipe]
 })
 export class DvbComponent implements OnInit, AfterViewInit {
 

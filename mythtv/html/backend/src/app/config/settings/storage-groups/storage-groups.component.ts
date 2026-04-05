@@ -1,7 +1,7 @@
 import { Component, HostListener, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { TranslateService, TranslatePipe, TranslateDirective } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
 import { CanComponentDeactivate } from 'src/app/can-deactivate-guard.service';
 import { StorageGroupDir } from 'src/app/services/interfaces/storagegroup.interface';
@@ -34,8 +34,9 @@ interface GroupCard {
         FormsModule,
         SharedModule,
         AccordionModule,
-        TranslateModule,
-        SgroupComponent
+        TranslatePipe,
+        SgroupComponent,
+        TranslateDirective
     ]
 })
 

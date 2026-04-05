@@ -1,6 +1,6 @@
 import { Component, HostListener, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
-import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
 import { CaptureCardService } from 'src/app/services/capture-card.service';
 import { ChannelService } from 'src/app/services/channel.service';
@@ -25,7 +25,7 @@ import { CardModule } from 'primeng/card';
         SharedModule,
         IconnectionComponent,
         ButtonModule,
-        TranslateModule,
+        TranslatePipe,
     ]
 })
 export class InputConnectionsComponent implements OnInit {

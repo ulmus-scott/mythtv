@@ -1,7 +1,7 @@
 import { Component, HostListener, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
 import { CanComponentDeactivate } from 'src/app/can-deactivate-guard.service';
 import { CaptureCardService } from 'src/app/services/capture-card.service';
@@ -55,7 +55,7 @@ import { CardModule } from 'primeng/card';
         SatipComponent,
         VboxComponent,
         FirewireComponent,
-        TranslateModule
+        TranslatePipe
     ]
 })
 export class CaptureCardsComponent implements OnInit, CanComponentDeactivate {

@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms';
-import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { FilterMatchMode, MenuItem, MessageService, SelectItem, SortMeta, SharedModule } from 'primeng/api';
 import { Menu, MenuModule } from 'primeng/menu';
 import { Table, TableLazyLoadEvent, TableModule } from 'primeng/table';
@@ -29,7 +29,7 @@ import { DatePickerModule } from 'primeng/datepicker';
     templateUrl: './recordings.component.html',
     styleUrls: ['./recordings.component.css'],
     providers: [MessageService],
-    imports: [FormsModule, ToastModule, MenuModule, ButtonModule, RippleModule, TooltipModule, SelectModule, TableModule, SharedModule, NgClass, DialogModule, TextareaModule, InputNumberModule, DatePickerModule, MessageModule, ListboxModule, DecimalPipe, TranslateModule]
+    imports: [FormsModule, ToastModule, MenuModule, ButtonModule, RippleModule, TooltipModule, SelectModule, TableModule, SharedModule, NgClass, DialogModule, TextareaModule, InputNumberModule, DatePickerModule, MessageModule, ListboxModule, DecimalPipe, TranslatePipe]
 })
 export class RecordingsComponent implements OnInit {
 
@@ -140,7 +140,7 @@ export class RecordingsComponent implements OnInit {
             });
         // translations
         for (const [key, value] of Object.entries(this.msg)) {
-            this.translate.get(value).subscribe(data => {
+            this.translate.stream(value).subscribe(data => {
                 Object.defineProperty(this.msg, key, { value: data });
             });
         }
@@ -152,7 +152,7 @@ export class RecordingsComponent implements OnInit {
 
         mnu_entries.forEach(entry => {
             if (entry.label)
-                this.translate.get(entry.label).subscribe(data =>
+                this.translate.stream(entry.label).subscribe(data =>
                     entry.label = data
                 );
         });

@@ -5,7 +5,7 @@ import { CaptureCardService } from 'src/app/services/capture-card.service';
 import { DiseqcParm, DiseqcTree, DiseqcTreeList } from 'src/app/services/interfaces/capture-card.interface';
 import { DiseqcSettingBase } from '../diseqc-setting-base';
 import { DvbComponent } from '../dvb.component';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { SwitchComponent } from '../switch/switch.component';
 import { RotorComponent } from '../rotor/rotor.component';
 import { LnbComponent } from '../lnb/lnb.component';
@@ -22,7 +22,7 @@ import { CardModule } from 'primeng/card';
     selector: 'app-unicable',
     templateUrl: './unicable.component.html',
     styleUrls: ['./unicable.component.css'],
-    imports: [FormsModule, CardModule, SharedModule, InputNumberModule, FieldsetModule, ButtonModule, DialogModule, ListboxModule, LnbComponent, RotorComponent, SwitchComponent, TranslateModule]
+    imports: [FormsModule, CardModule, SharedModule, InputNumberModule, FieldsetModule, ButtonModule, DialogModule, ListboxModule, LnbComponent, RotorComponent, SwitchComponent, TranslatePipe]
 })
 export class UnicableComponent implements OnInit, AfterViewInit, DiseqcSettingBase {
 

@@ -6,7 +6,7 @@ import { WizardData } from '../../../services/interfaces/wizarddata.interface';
 import { SetupWizardService } from '../../../services/setupwizard.service';
 import { MessageService, SharedModule } from 'primeng/api';
 import { Database, TestDBSettingsRequest } from 'src/app/services/interfaces/myth.interface';
-import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { NgForm, FormsModule } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { SetupService } from 'src/app/services/setup.service';
@@ -41,7 +41,7 @@ import { ToastModule } from 'primeng/toast';
         RadioButtonModule,
         RippleModule,
         TooltipModule,
-        TranslateModule
+        TranslatePipe
     ]
 })
 export class DbsetupComponent implements OnInit {
@@ -76,10 +76,10 @@ export class DbsetupComponent implements OnInit {
         private messageService: MessageService,
         public setupService: SetupService,
         private clipboard: Clipboard) {
-        this.translate.get(this.msg_testconnection).subscribe(data => this.msg_testconnection = data);
-        this.translate.get(this.msg_connectionsuccess).subscribe(data => this.msg_connectionsuccess = data);
-        this.translate.get(this.msg_connectionfail).subscribe(data => this.msg_connectionfail = data);
-        this.translate.get(this.warningText).subscribe(data => this.warningText = data);
+        this.translate.stream(this.msg_testconnection).subscribe(data => this.msg_testconnection = data);
+        this.translate.stream(this.msg_connectionsuccess).subscribe(data => this.msg_connectionsuccess = data);
+        this.translate.stream(this.msg_connectionfail).subscribe(data => this.msg_connectionfail = data);
+        this.translate.stream(this.warningText).subscribe(data => this.warningText = data);
     }
 
     ngOnInit(): void {

@@ -3,7 +3,7 @@ import { Language, MythLanguageList } from "src/app/services/interfaces/language
 import { Theme } from 'src/app/services/interfaces/theme.interface';
 import { ThemeService } from '../../services/theme.service';
 import { ConfigService } from '../../services/config.service';
-import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { MenuItem, SharedModule } from 'primeng/api';
 import { PrimeNG } from 'primeng/config';
 import { DataService } from 'src/app/services/data.service';
@@ -21,14 +21,14 @@ import { RippleModule } from 'primeng/ripple';
 
 import { Popover, PopoverModule } from 'primeng/popover';
 import { Menu, MenuModule } from 'primeng/menu';
-import { timeout } from 'rxjs';
+
 
 
 @Component({
     selector: 'app-navbar',
     templateUrl: './navbar.component.html',
     styleUrls: ['./navbar.component.css'],
-    imports: [RippleModule, ButtonModule, TooltipModule, PopoverModule, SharedModule, TableModule, FormsModule, DialogModule, PasswordModule, CheckboxModule, MessageModule, TranslateModule, MenuModule]
+    imports: [RippleModule, ButtonModule, TooltipModule, PopoverModule, SharedModule, TableModule, FormsModule, DialogModule, PasswordModule, CheckboxModule, MessageModule, MenuModule, TranslatePipe]
 })
 export class NavbarComponent implements OnInit {
     @ViewChild("themePanel") themePanel!: Popover;

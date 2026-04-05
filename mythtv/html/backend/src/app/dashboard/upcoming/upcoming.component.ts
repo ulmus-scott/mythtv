@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { MessageService, SortMeta, SharedModule } from 'primeng/api';
 import { Table, TableLazyLoadEvent, TableModule } from 'primeng/table';
 import { ScheduleLink, SchedulerSummary } from 'src/app/schedule/schedule.component';
@@ -31,7 +31,7 @@ interface RuleListEntry {
     templateUrl: './upcoming.component.html',
     styleUrls: ['./upcoming.component.css'],
     providers: [MessageService],
-    imports: [ToastModule, TableModule, SharedModule, SelectModule, FormsModule, ButtonModule, RippleModule, TooltipModule, NgClass, DialogModule, MessageModule, ScheduleComponent, DecimalPipe, TranslateModule]
+    imports: [ToastModule, TableModule, SharedModule, SelectModule, FormsModule, ButtonModule, RippleModule, TooltipModule, NgClass, DialogModule, MessageModule, ScheduleComponent, DecimalPipe, TranslatePipe]
 })
 export class UpcomingComponent implements OnInit, SchedulerSummary {
 
@@ -66,8 +66,8 @@ export class UpcomingComponent implements OnInit, SchedulerSummary {
     constructor(private dvrService: DvrService, private messageService: MessageService,
         private translate: TranslateService, public dataService: DataService,
         private utility: UtilityService) {
-        this.translate.get(this.defaultRecRule.Title).subscribe(data => this.defaultRecRule.Title = data);
-        this.translate.get(this.restartErrMsg).subscribe(data => this.restartErrMsg = data);
+        this.translate.stream(this.defaultRecRule.Title).subscribe(data => this.defaultRecRule.Title = data);
+        this.translate.stream(this.restartErrMsg).subscribe(data => this.restartErrMsg = data);
 
         this.dvrService.GetRecGroupList('schedule')
             .subscribe((data) => {

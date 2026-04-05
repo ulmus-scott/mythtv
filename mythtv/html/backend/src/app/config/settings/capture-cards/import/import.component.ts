@@ -3,7 +3,7 @@ import { NgForm, FormsModule } from '@angular/forms';
 import { CaptureCardService } from 'src/app/services/capture-card.service';
 import { CaptureCardList, CardAndInput } from 'src/app/services/interfaces/capture-card.interface';
 import { SetupService } from 'src/app/services/setup.service';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
 
@@ -15,7 +15,7 @@ import { CaptureCardsComponent } from '../capture-cards.component';
     selector: 'app-import',
     templateUrl: './import.component.html',
     styleUrls: ['./import.component.css'],
-    imports: [FormsModule, CardModule, SharedModule, MessageModule, ButtonModule, TranslateModule]
+    imports: [FormsModule, CardModule, SharedModule, MessageModule, ButtonModule, TranslatePipe]
 })
 export class ImportComponent implements OnInit, AfterViewInit {
     @Input() card!: CardAndInput;
