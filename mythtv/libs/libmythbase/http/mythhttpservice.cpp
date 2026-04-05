@@ -81,37 +81,41 @@ HTTPResponse MythHTTPService::HTTPRequest(const HTTPRequest2& Request)
         LOG(VB_HTTP, LOG_INFO, LOC + "Authentication required for this call");
     }
 
-    // Ensure that a valid login has been done if "authentication required" is enabled
-    // Myth/LoginUser is exempt from this requirement
-    QString authReqOption = gCoreContext->GetSetting("APIAuthReqd","NONE");
-    bool authReq = false;
-    if (authReqOption == "REMOTE") {
-        if (!gCoreContext->IsLocalSubnet(Request->m_peerAddress, false))
-            authReq = true;
-    }
-    else if (authReqOption == "ALL") {
-        authReq = true;
-    }
-    QString authorization = MythHTTP::GetHeader(Request->m_headers, "authorization").trimmed();
-    if (authorization.isEmpty())
-            authorization = Request->m_queries.value("authorization",{});
-    MythSessionManager *sessionManager = gCoreContext->GetSessionManager();
-    // methods /Myth/LoginUser and /Myth/GetConnectionInfo do not require authentication
-    if ( ! (Request->m_path == "/Myth/"
-            && (method == "LoginUser" || method == "GetConnectionInfo")) )
-    {
-        if (!authorization.isEmpty() || authReq)
+    if (gCoreContext->IsBackend())
         {
-            if (!sessionManager->IsValidSession(authorization))
+        // Ensure that a valid login has been done if "authentication required" is enabled
+        // Myth/LoginUser is exempt from this requirement
+        QString authReqOption = gCoreContext->GetSetting("APIAuthReqd","NONE");
+        bool authReq = false;
+        if (authReqOption == "REMOTE")
+        {
+            if (!gCoreContext->IsLocalSubnet(Request->m_peerAddress, false))
+                authReq = true;
+        }
+        else if (authReqOption == "ALL")
+        {
+            authReq = true;
+        }
+        QString authorization = MythHTTP::GetHeader(Request->m_headers, "authorization").trimmed();
+        if (authorization.isEmpty())
+                authorization = Request->m_queries.value("authorization",{});
+        MythSessionManager *sessionManager = gCoreContext->GetSessionManager();
+        // methods /Myth/LoginUser and /Myth/GetConnectionInfo do not require authentication
+        if ( ! (Request->m_path == "/Myth/"
+                && (method == "LoginUser" || method == "GetConnectionInfo")) )
+        {
+            if (!authorization.isEmpty() || authReq)
             {
-                QString error(" Invalid authorization token");
-                LOG(VB_HTTP, LOG_ERR, LOC + error);
-                Request->m_status = HTTPUnauthorized;
-                return MythHTTPResponse::ErrorResponse(Request, error);
+                if (!sessionManager->IsValidSession(authorization))
+                {
+                    QString error(" Invalid authorization token");
+                    LOG(VB_HTTP, LOG_ERR, LOC + error);
+                    Request->m_status = HTTPUnauthorized;
+                    return MythHTTPResponse::ErrorResponse(Request, error);
+                }
             }
         }
     }
-
     // Sanity check type count (handler should have the return type at least)
     if (handler->m_types.empty())
         return nullptr;
