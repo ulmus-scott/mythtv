@@ -96,6 +96,7 @@ MythRenderOpenGL* MythRenderOpenGL::Create(QWidget *Widget)
     bool opengles = !qEnvironmentVariableIsEmpty("MYTHTV_OPENGL_ES");
     bool core     = !qEnvironmentVariableIsEmpty("MYTHTV_OPENGL_CORE");
     QSurfaceFormat format = QSurfaceFormat::defaultFormat();
+    format.setRenderableType(QSurfaceFormat::OpenGL);
     if (core)
     {
         format.setProfile(QSurfaceFormat::CoreProfile);
@@ -117,6 +118,7 @@ MythRenderOpenGL* MythRenderOpenGL::Create(QWidget *Widget)
     if (VERBOSE_LEVEL_CHECK(VB_GPU, LOG_INFO))
         format.setOption(QSurfaceFormat::DebugContext);
 
+    QSurfaceFormat::setDefaultFormat(format);
     return new MythRenderOpenGL(format, Widget);
 }
 
@@ -545,8 +547,14 @@ void MythRenderOpenGL::SetWidget(QWidget *Widget)
 #if defined(Q_OS_ANDROID) || (QT_VERSION > QT_VERSION_CHECK(6,3,0))
     // Ensure surface type is always OpenGL
     m_window->setSurfaceType(QWindow::OpenGLSurface);
-    if (native && native->windowHandle())
+    m_window->destroy();
+    m_window->create();
+    if (native && native->windowHandle() != m_window)
+    {
         native->windowHandle()->setSurfaceType(QWindow::OpenGLSurface);
+        native->windowHandle()->destroy();
+        native->windowHandle()->create();
+    }
 #endif
 
 #ifdef CONFIG_QTWEBENGINE
