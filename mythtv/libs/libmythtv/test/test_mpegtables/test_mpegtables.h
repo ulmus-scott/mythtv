@@ -118,6 +118,9 @@ class TestMPEGTables: public QObject
     /** test atsc huffman1 decoding */
     static void atsc_huffman_test_data (void);
     static void atsc_huffman_test (void);
+
+    static void mss_test_data(void);
+    static void mss_test(void);
 };
 
 #endif // LIBMYTHTV_TEST_MPEGTABLES_H
