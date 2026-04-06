@@ -2,9 +2,9 @@ import { Component, HostListener, OnInit, ViewEncapsulation } from '@angular/cor
 import { Router } from '@angular/router';
 import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
-import { CanComponentDeactivate } from 'src/app/can-deactivate-guard.service';
+import { CanComponentDeactivate } from '../../../can-deactivate-guard.service';
 
-import { SetupService } from 'src/app/services/setup.service';
+import { SetupService } from '../../../services/setup.service';
 import { ButtonModule } from 'primeng/button';
 import { EpgDownloadingComponent } from './epg-downloading/epg-downloading.component';
 import { JobqueueCommandsComponent } from './jobqueue-commands/jobqueue-commands.component';
@@ -20,6 +20,7 @@ import { HostAddressComponent } from './host-address/host-address.component';
 import { SharedModule } from 'primeng/api';
 import { AccordionModule } from 'primeng/accordion';
 import { CardModule } from 'primeng/card';
+
 
 @Component({
     selector: 'app-general-settings',

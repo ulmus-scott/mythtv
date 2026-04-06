@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { GuideService } from 'src/app/services/guide.service';
+import { GuideService } from '../services/guide.service';
 import { Channel } from '../services/interfaces/channel.interface';
-import { ProgramGuide } from 'src/app/services/interfaces/programguide.interface';
+import { ProgramGuide } from '../services/interfaces/programguide.interface';
 import { TranslateService, TranslationChangeEvent, TranslatePipe } from '@ngx-translate/core';
 import { ScheduleLink, SchedulerSummary, ScheduleComponent } from '../schedule/schedule.component';
 import { ScheduleOrProgram } from '../services/interfaces/program.interface';

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Frontend } from "src/app/services/interfaces/frontend.interface";
+import { Frontend } from "../../../services/interfaces/frontend.interface";
 import { TranslatePipe } from '@ngx-translate/core';
 
 

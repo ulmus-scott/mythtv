@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ScheduleOrProgram } from 'src/app/services/interfaces/program.interface';
+import { ScheduleOrProgram } from '../../../services/interfaces/program.interface';
 import { GuideComponent } from '../../guide.component';
-import { DataService } from 'src/app/services/data.service';
-import { Channel } from 'src/app/services/interfaces/channel.interface';
-import { UtilityService } from 'src/app/services/utility.service';
+import { DataService } from '../../../services/data.service';
+import { Channel } from '../../../services/interfaces/channel.interface';
+import { UtilityService } from '../../../services/utility.service';
 import { TranslateService } from '@ngx-translate/core';
 import { TooltipModule } from 'primeng/tooltip';
 import { NgClass } from '@angular/common';

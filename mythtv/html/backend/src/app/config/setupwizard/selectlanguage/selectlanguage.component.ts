@@ -4,12 +4,12 @@ import { MythCountryList, Country } from '../../../services/interfaces/country.i
 import { MythLanguageList, Language } from "../../../services/interfaces/language.interface";
 import { ConfigService } from '../../../services/config.service';
 import { WizardData } from '../../../services/interfaces/wizarddata.interface';
-import { SetupWizardService } from 'src/app/services/setupwizard.service';
+import { SetupWizardService } from '../../../services/setupwizard.service';
 import { NgForm, FormsModule } from '@angular/forms';
-import { SetupService } from 'src/app/services/setup.service';
+import { SetupService } from '../../../services/setup.service';
 import { Observable, of } from 'rxjs';
 import { TranslateService, TranslatePipe } from '@ngx-translate/core';
-import { MythService } from 'src/app/services/myth.service';
+import { MythService } from '../../../services/myth.service';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
 

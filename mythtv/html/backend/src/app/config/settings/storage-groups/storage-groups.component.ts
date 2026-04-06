@@ -3,10 +3,10 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService, TranslatePipe, TranslateDirective } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
-import { CanComponentDeactivate } from 'src/app/can-deactivate-guard.service';
-import { StorageGroupDir } from 'src/app/services/interfaces/storagegroup.interface';
-import { MythService } from 'src/app/services/myth.service';
-import { SetupService } from 'src/app/services/setup.service';
+import { CanComponentDeactivate } from '../../../can-deactivate-guard.service';
+import { StorageGroupDir } from '../../../services/interfaces/storagegroup.interface';
+import { MythService } from '../../../services/myth.service';
+import { SetupService } from '../../../services/setup.service';
 import { SgroupComponent } from './sgroup/sgroup.component';
 
 import { AccordionModule } from 'primeng/accordion';
@@ -14,6 +14,7 @@ import { SharedModule } from 'primeng/api';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
+
 
 
 interface GroupCard {

@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms';
 
-import { JobQCommands } from 'src/app/services/interfaces/setup.interface';
-import { SetupService } from 'src/app/services/setup.service';
+import { JobQCommands } from '../../../../services/interfaces/setup.interface';
+import { SetupService } from '../../../../services/setup.service';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
 import { TranslateDirective, TranslatePipe } from '@ngx-translate/core';

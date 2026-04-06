@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ScheduleLink } from 'src/app/schedule/schedule.component';
-import { DataService } from 'src/app/services/data.service';
-import { DvrService } from 'src/app/services/dvr.service';
-import { ScheduleOrProgram } from 'src/app/services/interfaces/program.interface';
-import { RecRule } from 'src/app/services/interfaces/recording.interface';
-import { UtilityService } from 'src/app/services/utility.service';
+import { ScheduleLink } from '../../schedule/schedule.component';
+import { DataService } from '../../services/data.service';
+import { DvrService } from '../../services/dvr.service';
+import { ScheduleOrProgram } from '../../services/interfaces/program.interface';
+import { RecRule } from '../../services/interfaces/recording.interface';
+import { UtilityService } from '../../services/utility.service';
 import { TranslatePipe } from '@ngx-translate/core';
 import { MessageModule } from 'primeng/message';
 import { DialogModule } from 'primeng/dialog';

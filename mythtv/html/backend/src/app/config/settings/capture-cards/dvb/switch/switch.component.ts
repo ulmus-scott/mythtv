@@ -2,8 +2,8 @@ import { AfterViewInit, Component, EventEmitter, forwardRef, Input, OnInit, Outp
 import { NgForm, FormsModule } from '@angular/forms';
 import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { Observable, Observer } from 'rxjs';
-import { CaptureCardService } from 'src/app/services/capture-card.service';
-import { DiseqcParm, DiseqcTree, DiseqcTreeList } from 'src/app/services/interfaces/capture-card.interface';
+import { CaptureCardService } from '../../../../../services/capture-card.service';
+import { DiseqcParm, DiseqcTree, DiseqcTreeList } from '../../../../../services/interfaces/capture-card.interface';
 import { DiseqcSettingBase } from '../diseqc-setting-base';
 import { DvbComponent } from '../dvb.component';
 import { ListboxModule } from 'primeng/listbox';
@@ -18,6 +18,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { SharedModule } from 'primeng/api';
 import { CardModule } from 'primeng/card';
 import { Select, SelectModule } from "primeng/select";
+
 
 interface SwitchType {
     Name: string;

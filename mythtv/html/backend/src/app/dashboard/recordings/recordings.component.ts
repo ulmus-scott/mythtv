@@ -5,12 +5,12 @@ import { FilterMatchMode, MenuItem, MessageService, SelectItem, SortMeta, Shared
 import { Menu, MenuModule } from 'primeng/menu';
 import { Table, TableLazyLoadEvent, TableModule } from 'primeng/table';
 import { PartialObserver } from 'rxjs';
-import { DvrService } from 'src/app/services/dvr.service';
-import { GetRecordedListRequest, UpdateRecordedMetadataRequest } from 'src/app/services/interfaces/dvr.interface';
-import { ScheduleOrProgram } from 'src/app/services/interfaces/program.interface';
-import { JobQCommands } from 'src/app/services/interfaces/setup.interface';
-import { SetupService } from 'src/app/services/setup.service';
-import { UtilityService } from 'src/app/services/utility.service';
+import { DvrService } from '../../services/dvr.service';
+import { GetRecordedListRequest, UpdateRecordedMetadataRequest } from '../../services/interfaces/dvr.interface';
+import { ScheduleOrProgram } from '../../services/interfaces/program.interface';
+import { JobQCommands } from '../../services/interfaces/setup.interface';
+import { SetupService } from '../../services/setup.service';
+import { UtilityService } from '../../services/utility.service';
 import { ListboxModule } from 'primeng/listbox';
 import { MessageModule } from 'primeng/message';
 import { InputNumberModule } from 'primeng/inputnumber';

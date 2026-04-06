@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { TranslateService, TranslatePipe } from '@ngx-translate/core';
-import { SetupWizardService } from 'src/app/services/setupwizard.service';
+import { SetupWizardService } from '../../services/setupwizard.service';
 import { RouterOutlet, RouterLink, Router, NavigationEnd } from '@angular/router';
 import { BackendWarningComponent } from '../backend-warning/backend-warning.component';
 import { TooltipModule } from 'primeng/tooltip';

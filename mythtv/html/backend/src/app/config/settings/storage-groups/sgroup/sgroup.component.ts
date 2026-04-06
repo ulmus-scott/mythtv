@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms';
 import { TranslateService, TranslatePipe, TranslateDirective } from '@ngx-translate/core';
-import { MythService } from 'src/app/services/myth.service';
-import { SetupService } from 'src/app/services/setup.service';
+import { MythService } from '../../../../services/myth.service';
+import { SetupService } from '../../../../services/setup.service';
 import { MessageModule } from 'primeng/message';
 import { ListboxModule } from 'primeng/listbox';
 import { DialogModule } from 'primeng/dialog';

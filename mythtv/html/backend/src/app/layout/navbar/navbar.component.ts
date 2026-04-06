@@ -1,13 +1,13 @@
 import { Component, isDevMode, OnInit, ViewChild } from '@angular/core';
-import { Language, MythLanguageList } from "src/app/services/interfaces/language.interface";
-import { Theme } from 'src/app/services/interfaces/theme.interface';
+import { Language, MythLanguageList } from "../../services/interfaces/language.interface";
+import { Theme } from '../../services/interfaces/theme.interface';
 import { ThemeService } from '../../services/theme.service';
 import { ConfigService } from '../../services/config.service';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { MenuItem, SharedModule } from 'primeng/api';
 import { PrimeNG } from 'primeng/config';
-import { DataService } from 'src/app/services/data.service';
-import { MythService } from 'src/app/services/myth.service';
+// import { DataService } from '../../services/data.service';
+import { MythService } from '../../services/myth.service';
 import { Router } from '@angular/router';
 import { MessageModule } from 'primeng/message';
 import { CheckboxModule } from 'primeng/checkbox';
@@ -21,6 +21,7 @@ import { RippleModule } from 'primeng/ripple';
 
 import { Popover, PopoverModule } from 'primeng/popover';
 import { Menu, MenuModule } from 'primeng/menu';
+import { DataService } from '../../services/data.service';
 
 
 

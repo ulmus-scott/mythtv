@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Channel } from 'src/app/services/interfaces/channel.interface';
+import { Channel } from '../../../services/interfaces/channel.interface';
 import { GuideComponent } from '../../guide.component';
 
 import { TooltipModule } from 'primeng/tooltip';

@@ -2,12 +2,12 @@ import { Component, HostListener, OnInit, ViewEncapsulation } from '@angular/cor
 import { Router } from '@angular/router';
 import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
-import { CaptureCardService } from 'src/app/services/capture-card.service';
-import { ChannelService } from 'src/app/services/channel.service';
-import { CaptureCardList, CardAndInput } from 'src/app/services/interfaces/capture-card.interface';
-import { VideoSource, VideoSourceList } from 'src/app/services/interfaces/videosource.interface';
-import { MythService } from 'src/app/services/myth.service';
-import { SetupService } from 'src/app/services/setup.service';
+import { CaptureCardService } from '../../../services/capture-card.service';
+import { ChannelService } from '../../../services/channel.service';
+import { CaptureCardList, CardAndInput } from '../../../services/interfaces/capture-card.interface';
+import { VideoSource, VideoSourceList } from '../../../services/interfaces/videosource.interface';
+import { MythService } from '../../../services/myth.service';
+import { SetupService } from '../../../services/setup.service';
 import { ButtonModule } from 'primeng/button';
 import { IconnectionComponent } from './iconnection/iconnection.component';
 import { SharedModule } from 'primeng/api';

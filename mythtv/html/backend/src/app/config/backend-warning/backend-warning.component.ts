@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { MessageService } from 'primeng/api';
-import { DvrService } from 'src/app/services/dvr.service';
-import { ScheduleOrProgram } from 'src/app/services/interfaces/program.interface';
-import { MythService } from 'src/app/services/myth.service';
-import { SetupService } from 'src/app/services/setup.service';
-import { SetupWizardService } from 'src/app/services/setupwizard.service';
+import { DvrService } from '../../services/dvr.service';
+import { ScheduleOrProgram } from '../../services/interfaces/program.interface';
+import { MythService } from '../../services/myth.service';
+import { SetupService } from '../../services/setup.service';
+import { SetupWizardService } from '../../services/setupwizard.service';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
 

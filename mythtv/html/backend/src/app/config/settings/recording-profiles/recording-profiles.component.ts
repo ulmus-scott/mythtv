@@ -1,8 +1,8 @@
 import { Component, HostListener, OnInit, ViewEncapsulation } from '@angular/core';
 import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
-import { CaptureCardService } from 'src/app/services/capture-card.service';
-import { RecProfileGroup } from 'src/app/services/interfaces/recprofile.interface';
+import { CaptureCardService } from '../../../services/capture-card.service';
+import { RecProfileGroup } from '../../../services/interfaces/recprofile.interface';
 import { ProfileGroupComponent } from './profile-group/profile-group.component';
 import { Router } from '@angular/router';
 import { ButtonModule } from 'primeng/button';

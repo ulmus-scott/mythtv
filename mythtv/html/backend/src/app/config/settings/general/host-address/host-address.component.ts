@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms';
-import { ConfigService } from 'src/app/services/config.service';
-import { HostAddress } from 'src/app/services/interfaces/setup.interface';
-import { SetupService } from 'src/app/services/setup.service';
+import { ConfigService } from '../../../../services/config.service';
+import { HostAddress } from '../../../../services/interfaces/setup.interface';
+import { SetupService } from '../../../../services/setup.service';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';

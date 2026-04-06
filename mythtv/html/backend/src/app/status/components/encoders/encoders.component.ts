@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { CaptureCardService } from 'src/app/services/capture-card.service';
-import { CardAndInput } from 'src/app/services/interfaces/capture-card.interface';
-import { Encoder, TVState } from 'src/app/services/interfaces/encoder.interface';
-import { UtilityService } from 'src/app/services/utility.service';
+import { CaptureCardService } from '../../../services/capture-card.service';
+import { CardAndInput } from '../../../services/interfaces/capture-card.interface';
+import { Encoder, TVState } from '../../../services/interfaces/encoder.interface';
+import { UtilityService } from '../../../services/utility.service';
 import { TranslatePipe } from '@ngx-translate/core';
 
 

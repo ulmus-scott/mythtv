@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { JobQueueJob } from 'src/app/services/interfaces/jobqueue.interface';
-import { UtilityService } from 'src/app/services/utility.service';
+import { JobQueueJob } from '../../../services/interfaces/jobqueue.interface';
+import { UtilityService } from '../../../services/utility.service';
 import { TranslatePipe } from '@ngx-translate/core';
 
 

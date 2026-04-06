@@ -1,9 +1,9 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms';
 import { TranslateService, TranslatePipe } from '@ngx-translate/core';
-import { CaptureCardService } from 'src/app/services/capture-card.service';
-import { CaptureCardList, CaptureDevice, CaptureDeviceList, CardAndInput } from 'src/app/services/interfaces/capture-card.interface';
-import { SetupService } from 'src/app/services/setup.service';
+import { CaptureCardService } from '../../../../services/capture-card.service';
+import { CaptureCardList, CaptureDevice, CaptureDeviceList, CardAndInput } from '../../../../services/interfaces/capture-card.interface';
+import { SetupService } from '../../../../services/setup.service';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
 import { InputNumberModule } from 'primeng/inputnumber';

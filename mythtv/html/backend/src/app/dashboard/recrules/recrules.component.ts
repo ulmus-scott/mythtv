@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { SortMeta, SharedModule } from 'primeng/api';
-import { ScheduleLink, SchedulerSummary } from 'src/app/schedule/schedule.component';
-import { DvrService } from 'src/app/services/dvr.service';
-import { RecRule } from 'src/app/services/interfaces/recording.interface';
-import { UtilityService } from 'src/app/services/utility.service';
+import { DvrService } from '../../services/dvr.service';
+import { RecRule } from '../../services/interfaces/recording.interface';
+import { UtilityService } from '../../services/utility.service';
 import { TranslatePipe } from '@ngx-translate/core';
-import { ScheduleComponent } from '../../schedule/schedule.component';
+import { ScheduleComponent, ScheduleLink, SchedulerSummary } from '../../schedule/schedule.component';
 import { MessageModule } from 'primeng/message';
 import { DialogModule } from 'primeng/dialog';
 import { TooltipModule } from 'primeng/tooltip';

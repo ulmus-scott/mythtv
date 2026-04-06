@@ -3,13 +3,12 @@ import { RouterModule } from '@angular/router'
 import { SetupWizardComponent } from './setupwizard.component';
 import { SelectLanguageComponent } from './selectlanguage/selectlanguage.component';
 import { DbsetupComponent } from './dbsetup/dbsetup.component';
-import { CanDeactivateGuardService } from 'src/app/can-deactivate-guard.service';
+import { CanDeactivateGuardService } from '../../can-deactivate-guard.service';
 import { SettingsComponent } from '../settings/general/general-settings.component';
 import { CaptureCardsComponent } from '../settings/capture-cards/capture-cards.component';
 import { RecordingProfilesComponent } from '../settings/recording-profiles/recording-profiles.component';
 import { VideoSourcesComponent } from '../settings/video-sources/video-sources.component';
 import { InputConnectionsComponent } from '../settings/input-connections/input-connections.component';
-import { ChannelEditorComponent } from '../settings/channel-editor/channel-editor.component';
 import { StorageGroupsComponent } from '../settings/storage-groups/storage-groups.component';
 import { SystemEventsComponent } from '../settings/system-events/system-events.component';
 import { WizChanneleditComponent } from './wiz-channeledit/wiz-channeledit.component';

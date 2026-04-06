@@ -1,11 +1,11 @@
 import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { TranslateService, TranslatePipe } from '@ngx-translate/core';
-import { JobQCommands } from 'src/app/services/interfaces/setup.interface';
-import { SetupService } from 'src/app/services/setup.service';
+import { JobQCommands } from '../../../../services/interfaces/setup.interface';
+import { SetupService } from '../../../../services/setup.service';
 import { NgForm, FormsModule } from '@angular/forms';
-import { GetSettingResponse } from 'src/app/services/interfaces/myth.interface';
+import { GetSettingResponse } from '../../../../services/interfaces/myth.interface';
 import { Observable } from 'rxjs';
-import { MythService } from 'src/app/services/myth.service';
+import { MythService } from '../../../../services/myth.service';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
 

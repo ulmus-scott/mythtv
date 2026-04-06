@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms';
 import { TranslateService, TranslatePipe } from '@ngx-translate/core';
-import { DataService } from 'src/app/services/data.service';
-import { MythService } from 'src/app/services/myth.service';
+import { DataService } from '../../../services/data.service';
+import { MythService } from '../../../services/myth.service';
 import { PasswordModule } from 'primeng/password';
 import { DialogModule } from 'primeng/dialog';
 import { TooltipModule } from 'primeng/tooltip';

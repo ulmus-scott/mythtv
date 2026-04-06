@@ -2,9 +2,9 @@ import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '
 import { NgForm, FormsModule } from '@angular/forms';
 import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { PartialObserver } from 'rxjs';
-import { CaptureCardService } from 'src/app/services/capture-card.service';
-import { RecProfile, RecProfileGroup } from 'src/app/services/interfaces/recprofile.interface';
-import { SetupService } from 'src/app/services/setup.service';
+import { CaptureCardService } from '../../../../../services/capture-card.service';
+import { RecProfile, RecProfileGroup } from '../../../../../services/interfaces/recprofile.interface';
+import { SetupService } from '../../../../../services/setup.service';
 import { ProfileGroupComponent } from '../profile-group.component';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';

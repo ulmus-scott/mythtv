@@ -2,7 +2,7 @@ import { AfterViewInit, ChangeDetectorRef, Component, HostListener, OnInit } fro
 import { Router } from '@angular/router';
 import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
-import { CanComponentDeactivate } from 'src/app/can-deactivate-guard.service';
+import { CanComponentDeactivate } from '../../can-deactivate-guard.service';
 import { UsersComponent } from './users/users.component';
 import { DataSourcesComponent } from './data-sources/data-sources.component';
 import { PlaybackGroupsComponent } from './playback-groups/playback-groups.component';

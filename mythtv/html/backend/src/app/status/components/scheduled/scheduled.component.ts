@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ScheduleOrProgram } from 'src/app/services/interfaces/program.interface';
-import { UtilityService } from 'src/app/services/utility.service';
+import { ScheduleOrProgram } from '../../../services/interfaces/program.interface';
+import { UtilityService } from '../../../services/utility.service';
 import { TranslatePipe } from '@ngx-translate/core';
 import { TooltipModule } from 'primeng/tooltip';
 

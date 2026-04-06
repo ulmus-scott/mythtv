@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms';
 import { Observable, Observer, PartialObserver } from 'rxjs';
-import { CaptureCardService } from 'src/app/services/capture-card.service';
-import { DiseqcParm, DiseqcTree, DiseqcTreeList } from 'src/app/services/interfaces/capture-card.interface';
+import { CaptureCardService } from '../../../../../services/capture-card.service';
+import { DiseqcParm, DiseqcTree, DiseqcTreeList } from '../../../../../services/interfaces/capture-card.interface';
 import { DiseqcSettingBase } from '../diseqc-setting-base';
 import { DvbComponent } from '../dvb.component';
 import { TranslatePipe } from '@ngx-translate/core';

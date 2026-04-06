@@ -1,9 +1,9 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms';
 import { delay } from 'rxjs/operators';
-import { CaptureCardService } from 'src/app/services/capture-card.service';
-import { CaptureCardList, CardAndInput } from 'src/app/services/interfaces/capture-card.interface';
-import { SetupService } from 'src/app/services/setup.service';
+import { CaptureCardService } from '../../../../services/capture-card.service';
+import { CaptureCardList, CardAndInput } from '../../../../services/interfaces/capture-card.interface';
+import { SetupService } from '../../../../services/setup.service';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';

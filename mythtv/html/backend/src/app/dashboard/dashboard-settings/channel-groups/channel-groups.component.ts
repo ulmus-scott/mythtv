@@ -2,11 +2,11 @@ import { AfterViewInit, Component, HostListener, OnInit, ViewChild } from '@angu
 import { NgForm, FormsModule } from '@angular/forms';
 import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { Observable, of, PartialObserver } from 'rxjs';
-import { ChannelService } from 'src/app/services/channel.service';
-import { GuideService } from 'src/app/services/guide.service';
-import { Channel } from 'src/app/services/interfaces/channel.interface';
-import { ChannelGroup } from 'src/app/services/interfaces/channelgroup.interface';
-import { VideoSource } from 'src/app/services/interfaces/videosource.interface';
+import { ChannelService } from '../../../services/channel.service';
+import { GuideService } from '../../../services/guide.service';
+import { Channel } from '../../../services/interfaces/channel.interface';
+import { ChannelGroup } from '../../../services/interfaces/channelgroup.interface';
+import { VideoSource } from '../../../services/interfaces/videosource.interface';
 import { MessageModule } from 'primeng/message';
 import { CheckboxModule } from 'primeng/checkbox';
 import { DialogModule } from 'primeng/dialog';

@@ -2,14 +2,14 @@ import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/cor
 import { TranslateService, TranslatePipe, TranslateDirective } from '@ngx-translate/core';
 import { Fieldset, FieldsetModule } from 'primeng/fieldset';
 import { ScrollPanel, ScrollPanelModule } from 'primeng/scrollpanel';
-import { CaptureCardService } from 'src/app/services/capture-card.service';
-import { ChannelService } from 'src/app/services/channel.service';
-import { CaptureCardList, CardAndInput, CardSubType } from 'src/app/services/interfaces/capture-card.interface';
-import { ChannelScanRequest, ChannelScanStatus, Scan, ScanDialogResponse } from 'src/app/services/interfaces/channel.interface';
-import { VideoMultiplex } from 'src/app/services/interfaces/multiplex.interface';
-import { SetupService } from 'src/app/services/setup.service';
+import { CaptureCardService } from '../../../../services/capture-card.service';
+import { ChannelService } from '../../../../services/channel.service';
+import { CaptureCardList, CardAndInput, CardSubType } from '../../../../services/interfaces/capture-card.interface';
+import { ChannelScanRequest, ChannelScanStatus, Scan, ScanDialogResponse } from '../../../../services/interfaces/channel.interface';
+import { VideoMultiplex } from '../../../../services/interfaces/multiplex.interface';
+import { SetupService } from '../../../../services/setup.service';
 import { IconnectionComponent } from '../iconnection/iconnection.component';
-import { VideoSource } from 'src/app/services/interfaces/videosource.interface';
+import { VideoSource } from '../../../../services/interfaces/videosource.interface';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { InputNumberModule } from 'primeng/inputnumber';
 

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ScheduleOrProgram } from 'src/app/services/interfaces/program.interface';
-import { ProgramGuide } from 'src/app/services/interfaces/programguide.interface';
-import { MythService } from 'src/app/services/myth.service';
+import { ScheduleOrProgram } from '../../../services/interfaces/program.interface';
+import { ProgramGuide } from '../../../services/interfaces/programguide.interface';
+import { MythService } from '../../../services/myth.service';
 import { TranslatePipe } from '@ngx-translate/core';
 import { NgClass } from '@angular/common';
 import { SharedModule } from 'primeng/api';

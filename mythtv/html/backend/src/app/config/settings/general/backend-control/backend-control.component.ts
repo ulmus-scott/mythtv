@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms';
 
-import { MythService } from 'src/app/services/myth.service';
-import { SetupService } from 'src/app/services/setup.service';
+import { MythService } from '../../../../services/myth.service';
+import { SetupService } from '../../../../services/setup.service';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';

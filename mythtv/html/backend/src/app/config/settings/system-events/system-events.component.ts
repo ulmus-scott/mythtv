@@ -3,10 +3,10 @@ import { NgForm, FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
-import { ConfigService } from 'src/app/services/config.service';
-import { SystemEvent, SystemEventList } from 'src/app/services/interfaces/config.interface';
-import { MythService } from 'src/app/services/myth.service';
-import { SetupService } from 'src/app/services/setup.service';
+import { ConfigService } from '../../../services/config.service';
+import { SystemEvent, SystemEventList } from '../../../services/interfaces/config.interface';
+import { MythService } from '../../../services/myth.service';
+import { SetupService } from '../../../services/setup.service';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
 

@@ -2,10 +2,10 @@ import { Component, HostListener, OnInit, ViewEncapsulation } from '@angular/cor
 import { Router } from '@angular/router';
 import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
-import { CanComponentDeactivate } from 'src/app/can-deactivate-guard.service';
-import { ChannelService } from 'src/app/services/channel.service';
-import { VideoSource, VideoSourceList } from 'src/app/services/interfaces/videosource.interface';
-import { SetupService } from 'src/app/services/setup.service';
+import { CanComponentDeactivate } from '../../../can-deactivate-guard.service';
+import { ChannelService } from '../../../services/channel.service';
+import { VideoSource, VideoSourceList } from '../../../services/interfaces/videosource.interface';
+import { SetupService } from '../../../services/setup.service';
 import { VsourceComponent } from './vsource/vsource.component';
 import { AccordionModule } from 'primeng/accordion';
 import { MessageModule } from 'primeng/message';
@@ -14,6 +14,7 @@ import { SharedModule } from 'primeng/api';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
+
 
 @Component({
     selector: 'app-video-sources',
