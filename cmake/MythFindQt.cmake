@@ -63,8 +63,33 @@ foreach(component ${_REQUIRED_COMPONENTS} ${_OPTIONAL_COMPONENTS})
     list(APPEND _components_missing ${component})
   endif()
 endforeach()
+
+#
+# Now that we know the Qt version installed, perform an additional
+# check for Qt >= 6.10.  Prior to this, checking for "Gui" also
+# checked for "GuiPrivate".  Starting with 6.10 an explicit check is
+# necessary.  Once 6.10 becoms the baseline, this can be folded into
+# the earlier _OPTIONAL_COMPONENTS variable.
+#
+if(${QT_PKG_NAME}_VERSION VERSION_GREATER_EQUAL "6.10")
+  set(QT_NO_PRIVATE_MODULE_WARNING ON)
+  find_package(
+    ${QT_PKG_NAME} ${QT_MIN_VERSION_STR} NO_MODULE
+    OPTIONAL_COMPONENTS GuiPrivate)
+  if(TARGET ${QT_PKG_NAME}::GuiPrivate)
+    list(APPEND _components_found "GuiPrivate")
+  else()
+    list(APPEND _components_missing "GuiPrivate")
+  endif()
+endif()
+
+#
+# Print which Qt components were found.
+#
+list(SORT _components_found)
 list(JOIN _components_found " " _components_found_str)
 if(_components_missing)
+  list(SORT _components_missing)
   list(JOIN _components_missing " " _components_missing_str)
 else()
   set(_components_missing_str "(none)")
