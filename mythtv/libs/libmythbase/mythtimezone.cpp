@@ -1,7 +1,7 @@
 #include "mythtimezone.h"
 
 #include <QtGlobal>
-#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+#if QT_VERSION >= QT_VERSION_CHECK(6,5,0)
 #include <QtEnvironmentVariables>
 #include <QtSystemDetection>
 #include <QtVersionChecks>

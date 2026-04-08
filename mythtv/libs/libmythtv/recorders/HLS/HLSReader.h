@@ -8,7 +8,7 @@
 #include <QString>
 #include <QTextStream>
 #include <QtGlobal> // Qt 5 for QtTypes and QtVersionChecks
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
 #include <QtTypes>
 #endif
 #include <QVector>

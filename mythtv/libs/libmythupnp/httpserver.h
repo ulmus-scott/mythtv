@@ -15,7 +15,7 @@
 #define HTTPSERVER_H
 
 #include <QtGlobal>
-#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+#if QT_VERSION >= QT_VERSION_CHECK(6,5,0)
 #include <QtSystemDetection>
 #endif
 // POSIX headers
