@@ -1264,6 +1264,12 @@ void MythDisplay::ConfigureQtGUI(int SwapInterval, const MythCommandLineParser& 
 #if QT_VERSION < QT_VERSION_CHECK(6,0,0)
     // Ignore desktop scaling
     QApplication::setAttribute(Qt::AA_DisableHighDpiScaling);
+#else
+    // Disable high DPI scaling unless defined in the environment
+if (qEnvironmentVariableIsEmpty("QT_ENABLE_HIGHDPI_SCALING"))
+    {
+        qputenv("QT_ENABLE_HIGHDPI_SCALING", "0");
+    }
 #endif
 
 #if CONFIG_X11
