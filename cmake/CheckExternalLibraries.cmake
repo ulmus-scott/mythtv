@@ -230,7 +230,7 @@ else(_QT_HAS_GLES)
   endif()
 endif(_QT_HAS_GLES)
 
-if ("Qt${QT_VERSION_MAJOR}" EQUAL 5)
+if ("${QT_VERSION_MAJOR}" EQUAL 5)
   # Set the QT_FEATURE_vulkan variable that Qt6 sets.
   get_property(
     _guiprops
