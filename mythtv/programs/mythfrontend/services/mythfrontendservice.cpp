@@ -364,6 +364,16 @@ bool MythFrontendService::PlayVideo(const QString& Id, bool UseBookmark)
     return true;
 }
 
+QString MythFrontendService::GetSetting(
+                            const QString &sKey,
+                            const QString &sDefault )
+{
+    if (sKey.isEmpty())
+        throw( QString("Missing or empty Key (settings.value)") );
+    return gCoreContext->GetSetting(sKey, sDefault);
+}
+
+
 FrontendStatus::FrontendStatus(QString Name, QString Version, QVariantMap State)
     : m_Name(std::move(Name)),
       m_Version(std::move(Version)),

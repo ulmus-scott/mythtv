@@ -725,23 +725,25 @@ int run_backend(MythBackendCommandLineParser &cmdline)
     MythHTTPInstance::Addservices(be_services);
 
     // Send all unknown requests into the web app. make bookmarks and direct access work.
+    // Also all js files not found will be redirected to the apps/backend directory
     auto spa_index = [](auto && PH1) { return MythHTTPRewrite::RewriteToSPA(std::forward<decltype(PH1)>(PH1), "apps/backend/index.html"); };
     MythHTTPInstance::AddErrorPageHandler({ "=404", spa_index });
 
     // Serve components of the backend web app as if they were hosted at '/'
-    auto main_js = [](auto && PH1) { return MythHTTPRewrite::RewriteFile(std::forward<decltype(PH1)>(PH1), "apps/backend/main.js"); };
-    auto styles_css = [](auto && PH1) { return MythHTTPRewrite::RewriteFile(std::forward<decltype(PH1)>(PH1), "apps/backend/styles.css"); };
-    auto polyfills_js = [](auto && PH1) { return MythHTTPRewrite::RewriteFile(std::forward<decltype(PH1)>(PH1), "apps/backend/polyfills.js"); };
-    auto runtime_js = [](auto && PH1) { return MythHTTPRewrite::RewriteFile(std::forward<decltype(PH1)>(PH1), "apps/backend/runtime.js"); };
+    // These are no needed as the RewrtiteToSPA will handle redirects of js files
+    // auto main_js = [](auto && PH1) { return MythHTTPRewrite::RewriteFile(std::forward<decltype(PH1)>(PH1), "apps/backend/main.js"); };
+    // auto styles_css = [](auto && PH1) { return MythHTTPRewrite::RewriteFile(std::forward<decltype(PH1)>(PH1), "apps/backend/styles.css"); };
+    // auto polyfills_js = [](auto && PH1) { return MythHTTPRewrite::RewriteFile(std::forward<decltype(PH1)>(PH1), "apps/backend/polyfills.js"); };
+    // auto runtime_js = [](auto && PH1) { return MythHTTPRewrite::RewriteFile(std::forward<decltype(PH1)>(PH1), "apps/backend/runtime.js"); };
 
     // Default index page
     auto root = [](auto && PH1) { return MythHTTPRoot::RedirectRoot(std::forward<decltype(PH1)>(PH1), "apps/backend/index.html"); };
 
     const HTTPHandlers be_handlers = {
-        { "/main.js", main_js },
-        { "/styles.css", styles_css },
-        { "/polyfills.js", polyfills_js },
-        { "/runtime.js", runtime_js },
+        // { "/main.js", main_js },
+        // { "/styles.css", styles_css },
+        // { "/polyfills.js", polyfills_js },
+        // { "/runtime.js", runtime_js },
         { "/", root }
     };
 

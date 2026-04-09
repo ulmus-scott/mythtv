@@ -2362,10 +2362,10 @@ Q_DECL_EXPORT int main(int argc, char **argv)
         MythHTTPInstance::Addservices({{ FRONTEND_SERVICE, &MythHTTPService::Create<MythFrontendService> }});
 
         // Send all unknown requests into the web app. make bookmarks and direct access work.
-        auto spa_index = [](auto && PH1) { return MythHTTPRewrite::RewriteToSPA(std::forward<decltype(PH1)>(PH1), "mythfrontend.html"); };
+        auto spa_index = [](auto && PH1) { return MythHTTPRewrite::RewriteToSPA(std::forward<decltype(PH1)>(PH1), "apps/frontend/index.html"); };
         MythHTTPInstance::AddErrorPageHandler({ "=404", spa_index });
 
-        auto root = [](auto && PH1) { return MythHTTPRoot::RedirectRoot(std::forward<decltype(PH1)>(PH1), "mythfrontend.html"); };
+        auto root = [](auto && PH1) { return MythHTTPRoot::RedirectRoot(std::forward<decltype(PH1)>(PH1), "apps/frontend/index.html"); };
         MythHTTPScopedInstance webserver({{ "/", root}});
         ret = QCoreApplication::exec();
     }

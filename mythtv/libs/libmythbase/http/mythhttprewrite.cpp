@@ -57,7 +57,8 @@ HTTPResponse MythHTTPRewrite::RewriteToSPA(const HTTPRequest2& Request, const QS
     if (!Request)
         return result;
 
-    if (Request->m_path == "/" && Request->m_fileName.startsWith("chunk-"))
+    if (Request->m_path == "/" && 
+        (Request->m_fileName.endsWith(".js") || Request->m_fileName.endsWith(".css")))
     {
         LOG(VB_HTTP, LOG_INFO, QString("Rewriting request %1 to web app '%2'")
             .arg(Request->m_path + Request->m_fileName, File));

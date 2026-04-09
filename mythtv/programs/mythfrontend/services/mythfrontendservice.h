@@ -56,6 +56,7 @@ class MythFrontendService : public MythHTTPService
     Q_CLASSINFO("SendMessage",      "methods=POST")
     Q_CLASSINFO("SendNotification", "methods=POST")
     Q_CLASSINFO("GetContextList",   "name=StringList") // Consistency with old code
+    Q_CLASSINFO( "GetSetting",      "methods=GET;name=String"     )
 
   public slots:
     static bool SendAction      (const QString& Action, const QString& Value, uint Width, uint Height);
@@ -73,6 +74,8 @@ class MythFrontendService : public MythHTTPService
                                  float Progress,             std::chrono::seconds Timeout,
                                  bool  Fullscreen,           uint  Visibility,
                                  uint  Priority);
+    static QString         GetSetting       ( const QString   &Key,
+                                              const QString   &Default );
 
   public:
     MythFrontendService();
