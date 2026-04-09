@@ -9,8 +9,6 @@
 install(
   FILES
         favicon.ico
-        mythbackend.html
-        mythfrontend.html
         robots.txt
   DESTINATION ${CMAKE_INSTALL_DATADIR}/mythtv/html)
 
