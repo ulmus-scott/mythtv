@@ -431,7 +431,7 @@ endif()
 # alsa: fedora:alsa-lib-devel debian:libasound2-dev
 if(ENABLE_AUDIO_ALSA AND (${CMAKE_SYSTEM_NAME} STREQUAL "Linux"))
   find_package(ALSA 1.0.16)
-  add_build_config(PkgConfig::ALSA "alsa")
+  add_build_config(ALSA::ALSA "alsa")
   set(CONFIG_AUDIO_ALSA ${ALSA_FOUND})
 endif()
 
