@@ -492,6 +492,17 @@
             "WillRecord": "Kaydedecek"
         }
     },
+    "frontend": {
+        "back_label": "Duruma Geri Dön",
+        "machinfo_title": "Makine Bilgileri",
+        "name_label": "İsim",
+        "remote_bn_label": "Uzaktan Kontrole Geç",
+        "services_title": "Hizmetler",
+        "status_heading": "EfsaneÖn Uç Durumu",
+        "status_label": "Mevcut Ön Uç Durumu",
+        "title": "Bu Ön Uç",
+        "version_label": "Sürüm"
+    },
     "navbar": {
         "backendSetup": "Arka Uç Kurulumu",
         "changeLanguage": "Dili değiştir",

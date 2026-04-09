@@ -492,6 +492,17 @@
             "WillRecord": "Vil optage"
         }
     },
+    "frontend": {
+        "back_label": "Tilbage til Status",
+        "machinfo_title": "Maskininformation",
+        "name_label": "Navn",
+        "remote_bn_label": "Skift til fjernbetjening",
+        "services_title": "Tjenester",
+        "status_heading": "MythFrontend Status",
+        "status_label": "Nuværende frontend-status",
+        "title": "Denne frontend",
+        "version_label": "Version"
+    },
     "navbar": {
         "backendSetup": "Backend opsætning",
         "changeLanguage": "Skift sprog",

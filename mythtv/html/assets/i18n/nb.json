@@ -492,6 +492,17 @@
             "WillRecord": "Vil ta opp"
         }
     },
+    "frontend": {
+        "back_label": "Tilbake til Status",
+        "machinfo_title": "Maskininformasjon",
+        "name_label": "Navn",
+        "remote_bn_label": "Bytt til fjernkontroll",
+        "services_title": "Tjenester",
+        "status_heading": "MythFrontend Status",
+        "status_label": "Gjeldende grensesnittstatus",
+        "title": "Denne frontenden",
+        "version_label": "Versjon"
+    },
     "navbar": {
         "backendSetup": "Oppsett av backend",
         "changeLanguage": "Skifte språk",

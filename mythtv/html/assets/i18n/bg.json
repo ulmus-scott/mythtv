@@ -492,6 +492,17 @@
             "WillRecord": "Ще записва"
         }
     },
+    "frontend": {
+        "back_label": "Назад към Статус",
+        "machinfo_title": "Информация за машината",
+        "name_label": "Име",
+        "remote_bn_label": "Превключване към дистанционно управление",
+        "services_title": "Услуги",
+        "status_heading": "Състояние на MythFrontend",
+        "status_label": "Текущо състояние на интерфейса",
+        "title": "Този фронтенд",
+        "version_label": "Версия"
+    },
     "navbar": {
         "backendSetup": "Настройка на бекенда",
         "changeLanguage": "Смени езика",

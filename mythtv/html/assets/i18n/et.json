@@ -492,6 +492,17 @@
             "WillRecord": "Salvestab"
         }
     },
+    "frontend": {
+        "back_label": "Tagasi olekusse",
+        "machinfo_title": "Masinateave",
+        "name_label": "Nimi",
+        "remote_bn_label": "Lülituge kaugjuhtimispuldile",
+        "services_title": "Teenused",
+        "status_heading": "MythFrontendi olek",
+        "status_label": "Praegune kasutajaliidese olek",
+        "title": "See Frontend",
+        "version_label": "Versioon"
+    },
     "navbar": {
         "backendSetup": "Taustaprogrammi häälestus",
         "changeLanguage": "Keele vahetamine",

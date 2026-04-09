@@ -492,6 +492,17 @@
             "WillRecord": "Będzie nagrywać"
         }
     },
+    "frontend": {
+        "back_label": "Powrót do stanu",
+        "machinfo_title": "Informacje o maszynie",
+        "name_label": "Nazwa",
+        "remote_bn_label": "Przełącz na zdalne sterowanie",
+        "services_title": "Usługi",
+        "status_heading": "Status MythFrontend",
+        "status_label": "Aktualny stan frontendu",
+        "title": "Ten interfejs",
+        "version_label": "Wersja"
+    },
     "navbar": {
         "backendSetup": "Konfiguracja zaplecza",
         "changeLanguage": "Zmień język",

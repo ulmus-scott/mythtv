@@ -492,6 +492,17 @@
             "WillRecord": "Kommer att spela in"
         }
     },
+    "frontend": {
+        "back_label": "Tillbaka till Status",
+        "machinfo_title": "Maskininformation",
+        "name_label": "Namn",
+        "remote_bn_label": "Byt till fjärrkontroll",
+        "services_title": "Tjänster",
+        "status_heading": "MythFrontend Status",
+        "status_label": "Aktuell gränssnittsstatus",
+        "title": "Denna frontend",
+        "version_label": "Version"
+    },
     "navbar": {
         "backendSetup": "Backend Setup",
         "changeLanguage": "Ändra språk",

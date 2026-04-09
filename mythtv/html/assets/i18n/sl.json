@@ -492,6 +492,17 @@
             "WillRecord": "Bo Snemanje"
         }
     },
+    "frontend": {
+        "back_label": "Nazaj na Status",
+        "machinfo_title": "Informacije o stroju",
+        "name_label": "Ime",
+        "remote_bn_label": "Preklopite na daljinski upravljalnik",
+        "services_title": "Storitve",
+        "status_heading": "Status MythFrontenda",
+        "status_label": "Trenutno stanje sprednjega dela",
+        "title": "Ta Frontend",
+        "version_label": "Različica"
+    },
     "navbar": {
         "backendSetup": "Nastavitev zaledja",
         "changeLanguage": "Spremeni jezik",

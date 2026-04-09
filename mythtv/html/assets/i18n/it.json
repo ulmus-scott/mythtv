@@ -492,6 +492,17 @@
             "WillRecord": "Registrerà"
         }
     },
+    "frontend": {
+        "back_label": "Torna allo stato",
+        "machinfo_title": "Informazioni sulla macchina",
+        "name_label": "Nome",
+        "remote_bn_label": "Passa al controllo remoto",
+        "services_title": "Servizi",
+        "status_heading": "Stato di MythFrontend",
+        "status_label": "Stato attuale del frontend",
+        "title": "Questo frontend",
+        "version_label": "Versione"
+    },
     "navbar": {
         "backendSetup": "Configurazione back-end",
         "changeLanguage": "Cambia lingua",

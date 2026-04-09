@@ -492,6 +492,17 @@
             "WillRecord": "Wird aufzeichnen"
         }
     },
+    "frontend": {
+        "back_label": "Zurück zum Status",
+        "machinfo_title": "Maschineninformationen",
+        "name_label": "Name",
+        "remote_bn_label": "Wechseln Sie zur Fernbedienung",
+        "services_title": "Dienstleistungen",
+        "status_heading": "MythFrontend-Status",
+        "status_label": "Aktueller Frontend-Status",
+        "title": "Dieses Frontend",
+        "version_label": "Version"
+    },
     "navbar": {
         "backendSetup": "Backend-Setup",
         "changeLanguage": "Sprache ändern",

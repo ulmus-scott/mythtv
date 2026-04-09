@@ -492,6 +492,17 @@
             "WillRecord": "Tallentaa"
         }
     },
+    "frontend": {
+        "back_label": "Takaisin tilaan",
+        "machinfo_title": "Koneen tiedot",
+        "name_label": "Nimi",
+        "remote_bn_label": "Vaihda kaukosäätimeen",
+        "services_title": "Palvelut",
+        "status_heading": "MythFrontend-tila",
+        "status_label": "Nykyinen käyttöliittymän tila",
+        "title": "Tämä käyttöliittymä",
+        "version_label": "Versio"
+    },
     "navbar": {
         "backendSetup": "Taustajärjestelmän asetukset",
         "changeLanguage": "Vaihda kieltä",

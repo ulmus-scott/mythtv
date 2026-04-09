@@ -492,6 +492,17 @@
             "WillRecord": "vai gravar"
         }
     },
+    "frontend": {
+        "back_label": "Voltar ao status",
+        "machinfo_title": "Informações da máquina",
+        "name_label": "Nome",
+        "remote_bn_label": "Mudar para controle remoto",
+        "services_title": "Serviços",
+        "status_heading": "Status do MythFrontend",
+        "status_label": "Status atual do front-end",
+        "title": "Este front-end",
+        "version_label": "Versão"
+    },
     "navbar": {
         "backendSetup": "Configuração de back-end",
         "changeLanguage": "Mudar idioma",

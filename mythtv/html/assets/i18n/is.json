@@ -492,6 +492,17 @@
             "WillRecord": "Mun taka upp"
         }
     },
+    "frontend": {
+        "back_label": "Aftur í stöðu",
+        "machinfo_title": "Upplýsingar um vél",
+        "name_label": "Nafn",
+        "remote_bn_label": "Skiptu yfir í fjarstýringu",
+        "services_title": "Þjónusta",
+        "status_heading": "MythFrontend Staða",
+        "status_label": "Núverandi framendastaða",
+        "title": "Þessi Frontend",
+        "version_label": "Útgáfa"
+    },
     "navbar": {
         "backendSetup": "Configurazione back-end",
         "changeLanguage": "Cambia lingua",

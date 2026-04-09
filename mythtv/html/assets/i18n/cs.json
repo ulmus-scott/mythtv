@@ -492,6 +492,17 @@
             "WillRecord": "Will Record"
         }
     },
+    "frontend": {
+        "back_label": "Zpět na Stav",
+        "machinfo_title": "Informace o stroji",
+        "name_label": "Jméno",
+        "remote_bn_label": "Přepněte na dálkové ovládání",
+        "services_title": "Služby",
+        "status_heading": "Stav MythFrontend",
+        "status_label": "Aktuální stav frontendu",
+        "title": "Tento Frontend",
+        "version_label": "Verze"
+    },
     "navbar": {
         "backendSetup": "Nastavení backendu",
         "changeLanguage": "Změnit jazyk",

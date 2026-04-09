@@ -492,6 +492,17 @@
             "WillRecord": "会记录"
         }
     },
+    "frontend": {
+        "back_label": "返回状态",
+        "machinfo_title": "机器信息",
+        "name_label": "姓名",
+        "remote_bn_label": "切换到远程控制",
+        "services_title": "服务",
+        "status_heading": "MythFrontend 状态",
+        "status_label": "当前前端状态",
+        "title": "这个前端",
+        "version_label": "版本"
+    },
     "navbar": {
         "backendSetup": "后端设置",
         "changeLanguage": "改变语言",

@@ -492,6 +492,17 @@
             "WillRecord": "Va enregistrer"
         }
     },
+    "frontend": {
+        "back_label": "Retour au statut",
+        "machinfo_title": "Informations sur la machine",
+        "name_label": "Nom",
+        "remote_bn_label": "Passer à la télécommande",
+        "services_title": "Services",
+        "status_heading": "Statut MythFrontend",
+        "status_label": "Statut actuel du front-end",
+        "title": "Cette interface",
+        "version_label": "Version"
+    },
     "navbar": {
         "backendSetup": "Configuration du back-end",
         "changeLanguage": "Changer de langue",

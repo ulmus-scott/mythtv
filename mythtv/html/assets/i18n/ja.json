@@ -492,6 +492,17 @@
             "WillRecord": "記録します"
         }
     },
+    "frontend": {
+        "back_label": "ステータスに戻る",
+        "machinfo_title": "マシン情報",
+        "name_label": "名前",
+        "remote_bn_label": "リモコンに切り替える",
+        "services_title": "サービス",
+        "status_heading": "Mythフロントエンドのステータス",
+        "status_label": "現在のフロントエンドのステータス",
+        "title": "このフロントエンド",
+        "version_label": "バージョン"
+    },
     "navbar": {
         "backendSetup": "バックエンドのセットアップ",
         "changeLanguage": "言語を変えてください",

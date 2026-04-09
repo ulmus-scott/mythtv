@@ -492,6 +492,17 @@
             "WillRecord": "Θα Ηχογραφήσει"
         }
     },
+    "frontend": {
+        "back_label": "Επιστροφή στην Κατάσταση",
+        "machinfo_title": "Πληροφορίες μηχανήματος",
+        "name_label": "Ονομα",
+        "remote_bn_label": "Μεταβείτε στο Τηλεχειριστήριο",
+        "services_title": "Υπηρεσίες",
+        "status_heading": "Κατάσταση MythFrontend",
+        "status_label": "Τρέχουσα κατάσταση διεπαφής",
+        "title": "Αυτό το Frontend",
+        "version_label": "Εκδοχή"
+    },
     "navbar": {
         "backendSetup": "Ρύθμιση Backend",
         "changeLanguage": "Αλλαξε γλώσσα",

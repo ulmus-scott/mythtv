@@ -492,6 +492,17 @@
             "WillRecord": "יקליט"
         }
     },
+    "frontend": {
+        "back_label": "חזרה לסטטוס",
+        "machinfo_title": "מידע על מכונה",
+        "name_label": "שֵׁם",
+        "remote_bn_label": "עבור לשלט רחוק",
+        "services_title": "שירותים",
+        "status_heading": "סטטוס MythFrontend",
+        "status_label": "סטטוס חזיתי נוכחי",
+        "title": "החזית הזו",
+        "version_label": "גִרְסָה"
+    },
     "navbar": {
         "backendSetup": "הגדרות אחורי",
         "changeLanguage": "שנה שפה",

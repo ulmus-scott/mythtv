@@ -492,6 +492,17 @@
             "WillRecord": "zal opnemen"
         }
     },
+    "frontend": {
+        "back_label": "Terug naar Status",
+        "machinfo_title": "Machine-informatie",
+        "name_label": "Naam",
+        "remote_bn_label": "Schakel over naar afstandsbediening",
+        "services_title": "Diensten",
+        "status_heading": "MythFrontend-status",
+        "status_label": "Huidige frontendstatus",
+        "title": "Deze frontend",
+        "version_label": "Versie"
+    },
     "navbar": {
         "backendSetup": "Backend-configuratie",
         "changeLanguage": "Taal wijzigen",

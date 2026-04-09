@@ -492,6 +492,17 @@
             "WillRecord": "Will Record"
         }
     },
+    "frontend": {
+        "back_label": "Vissza az állapothoz",
+        "machinfo_title": "Gépinformáció",
+        "name_label": "Név",
+        "remote_bn_label": "Váltson távirányítóra",
+        "services_title": "Szolgáltatások",
+        "status_heading": "MythFrontend állapota",
+        "status_label": "Jelenlegi kezelőfelület állapota",
+        "title": "Ez a frontend",
+        "version_label": "Változat"
+    },
     "navbar": {
         "backendSetup": "Háttérbeállítás",
         "changeLanguage": "Válts nyelvet",
