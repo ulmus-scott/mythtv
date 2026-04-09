@@ -1307,7 +1307,7 @@ protected:
 
 private:
     HLSRingBuffer  *m_parent         {nullptr};
-    bool            m_interrupted    {false};
+    volatile bool   m_interrupted    {false};
                     // measured average download bandwidth (bits per second)
     int64_t         m_bandwidth      {0};
     int             m_stream         {0};// current HLSStream
@@ -2787,7 +2787,7 @@ int HLSRingBuffer::SafeRead(void *data, uint sz)
         return 0;
     }
 
-    while (i_read > 0 && !m_interrupted) // cppcheck-suppress knownConditionTrueFalse
+    while (i_read > 0 && !m_interrupted)
     {
         int segnum = m_playback->Segment();
         if (segnum >= NumSegments())
