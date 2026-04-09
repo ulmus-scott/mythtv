@@ -1,7 +1,10 @@
-// MythTV
+#include "mythpainterwindowopengl.h"
+
+#include <QGuiApplication>
+#include <QWindow>
+
 #include "libmythbase/mythlogging.h"
 #include "mythmainwindow.h"
-#include "opengl/mythpainterwindowopengl.h"
 
 #define LOC QString("GLPaintWin: ")
 
@@ -12,6 +15,13 @@ MythPainterWindowOpenGL::MythPainterWindowOpenGL(MythMainWindow *MainWin)
     setAttribute(Qt::WA_NoSystemBackground);
     setAttribute(Qt::WA_NativeWindow);
     setAttribute(Qt::WA_DontCreateNativeAncestors);
+    // The eglfs QPA platform works without setting the surface type and
+    // can only have one OpenGLSurface, which must be the top level widget
+    // (which for us is currently the MythMainWindow).
+    if (QGuiApplication::platformName() != "eglfs" && windowHandle() != nullptr)
+    {
+        windowHandle()->setSurfaceType(QWindow::OpenGLSurface);
+    }
     winId();
 #ifdef Q_OS_MACOS
      // must be visible before OpenGL initialisation on OSX
