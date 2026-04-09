@@ -1,0 +1,100 @@
+<div class="row">
+    <div class="button" (click)="action('1')">1
+    </div>
+    <div class="button" (click)="action('2')">2
+    </div>
+    <div class="button" (click)="action('3')">3
+    </div>
+</div>
+<div class="row">
+    <div class="button" (click)="action('4')">4
+    </div>
+    <div class="button" (click)="action('5')">5
+    </div>
+    <div class="button" (click)="action('6')">6
+    </div>
+</div>
+<div class="row">
+    <div class="button" (click)="action('7')">7
+    </div>
+    <div class="button" (click)="action('8')">8
+    </div>
+    <div class="button" (click)="action('9')">9
+    </div>
+</div>
+<div class="row">
+    <div class="fill">
+    </div>
+    <div class="button" (click)="action('0')">0
+    </div>
+    <div class="fill">
+    </div>
+</div>
+<div class="row topgap">
+    <div class="button" (click)="action('MENU')">
+        <i class="fas fa-bars"></i>
+    </div>
+    <div class="button" (click)="action('MUTE')">
+        <i class="fas fa-volume-mute"></i>
+    </div>
+    <div class="button" (click)="action('INFO')">
+        <i class="fas fa-info"></i>
+    </div>
+</div>
+<div class="row topgap">
+    <div class="fill">
+    </div>
+    <div class="button" (click)="action('UP')">
+        <i class="fas fa-angle-up"></i>
+    </div>
+    <div class="fill">
+    </div>
+</div>
+<div class="row">
+    <div class="button" (click)="action('LEFT')">
+        <i class="fas fa-angle-left"></i>
+    </div>
+    <div class="button" (click)="action('SELECT')">
+        <i class="fas fa-check"></i>
+    </div>
+    <div class="button" (click)="action('RIGHT')">
+        <i class="fas fa-angle-right"></i>
+    </div>
+</div>
+<div class="row">
+    <div class="button" (click)="action('ESCAPE')">
+        <i class="fas fa-backspace"></i>
+    </div>
+    <div class="button" (click)="action('DOWN')">
+        <i class="fas fa-angle-down"></i>
+    </div>
+    <div class="fill">
+    </div>
+</div>
+<div class="row topgap">
+    <div class="button" (click)="action('JUMPRWND')">
+        <i class="fas fa-angle-double-left"></i>
+    </div>
+    <div class="button" (click)="action('PAUSE')">
+        <i class="fas fa-pause"></i>
+    </div>
+    <div class="button" (click)="action('JUMPFFWD')">
+        <i class="fas fa-angle-double-right"></i>
+    </div>
+</div>
+<div class="row">
+    <div class="button" (click)="action('SEEKRWND')">
+        <i class="fas fa-step-backward"></i>
+    </div>
+    <div class="button" (click)="action('PLAY')">
+        <i class="fas fa-play"></i>
+    </div>
+    <div class="button" (click)="action('SEEKFFWD')">
+        <i class="fas fa-step-forward"></i>
+    </div>
+</div>
+<div class="row">
+    <a routerLink="">
+        <div class="buttonbig">{{ 'frontend.back_label' | translate }}</div>
+    </a>
+</div>

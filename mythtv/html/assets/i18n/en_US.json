@@ -492,6 +492,17 @@
             "WillRecord": "Will Record"
         }
     },
+    "frontend": {
+        "back_label": "Back to Status",
+        "machinfo_title": "Machine Information",
+        "name_label": "Name",
+        "remote_bn_label": "Switch to Remote Control",
+        "services_title": "Services",
+        "status_heading": "MythFrontend Status",
+        "status_label": "Current Frontend Status",
+        "title": "This Frontend",
+        "version_label": "Version"
+    },
     "navbar": {
         "backendSetup": "Backend Setup",
         "changeLanguage": "Change Language",

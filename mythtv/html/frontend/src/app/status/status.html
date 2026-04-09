@@ -1,0 +1,45 @@
+<div class="box">
+    <div class="logo">
+        <a href="/" class="brand-logo">
+            <img src="/images/mythtv.png" alt="MythTV logo">
+
+        </a>
+    </div>
+    <div class="fill"></div>
+</div>
+<h2>{{ 'frontend.status_heading' | translate }}</h2>
+<div class="comtainer">
+
+    <div class="panel">
+        <div class="head">
+            {{ 'frontend.title' | translate }}
+        </div>
+        <div class="detail">
+            {{ 'frontend.name_label' | translate }}: {{ feStatus?.Name }} <br>
+            {{ 'frontend.version_label' | translate }}: {{ feStatus?.Version }}
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="head">
+            {{ 'frontend.services_title' | translate }}
+        </div>
+        <a routerLink="remote">
+            <div class="box">
+                <div class="detail button">
+                    {{ 'frontend.remote_bn_label' | translate }}
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="panel">
+        <div class="head">
+            {{ 'frontend.machinfo_title' | translate }}
+        </div>
+        <div class="detail">
+            {{ 'frontend.status_label' | translate }}: {{ feStatus?.State.state}}
+        </div>
+    </div>
+
+</div>
