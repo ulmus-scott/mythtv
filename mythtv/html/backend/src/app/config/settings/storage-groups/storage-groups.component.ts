@@ -47,7 +47,6 @@ export class StorageGroupsComponent implements OnInit, CanComponentDeactivate {
     dirtyMessages: string[] = [];
     currentTab: number = -1;
     activeTab: boolean[] = [];
-    isLoaded: boolean[] = [];
 
     dirtyText = 'settings.common.unsaved';
     warningText = 'settings.common.warning';
@@ -74,7 +73,6 @@ export class StorageGroupsComponent implements OnInit, CanComponentDeactivate {
 
     displayNewDlg = false;
     newGroupName = "";
-    loadedCount = 0;
 
 
     constructor(private setupService: SetupService, private translate: TranslateService,
@@ -112,7 +110,6 @@ export class StorageGroupsComponent implements OnInit, CanComponentDeactivate {
                     }
 
                 });
-                this.loadedCount++;
                 for (let ix = 0; ix < this.children.length; ix++) {
                     if (this.children[ix]) {
                         this.children[ix].load();
@@ -127,7 +124,6 @@ export class StorageGroupsComponent implements OnInit, CanComponentDeactivate {
     onTabOpen(e: { index: number }) {
         this.showDirty();
         this.currentTab = e.index;
-        this.isLoaded[this.currentTab] = true;
     }
 
     onTabClose(e: any) {
