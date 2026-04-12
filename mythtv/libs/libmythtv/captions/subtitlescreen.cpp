@@ -1762,10 +1762,8 @@ void SubtitleScreen::Pulse(void)
         currentFrame ? currentFrame->m_timecode : std::chrono::milliseconds::max();
     bool needRescale = (m_textFontZoom != m_textFontZoomPrev);
 
-    for (it = m_childrenList.begin(); it != m_childrenList.end(); it = itNext)
+    for (auto *child : std::as_const(m_childrenList))
     {
-        itNext = it + 1;
-        MythUIType *child = *it;
         auto *wrapper = dynamic_cast<SubWrapper *>(child);
         if (!wrapper)
             continue;
