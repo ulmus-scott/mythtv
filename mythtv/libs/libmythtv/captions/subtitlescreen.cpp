@@ -1606,11 +1606,8 @@ std::chrono::milliseconds SubtitleScreen::GetDelay(void) const
 
 void SubtitleScreen::Clear708Cache(uint64_t mask)
 {
-    QList<MythUIType *> list = m_childrenList;
-    QList<MythUIType *>::iterator it;
-    for (it = list.begin(); it != list.end(); ++it)
+    for (auto *child : std::as_const(m_childrenList))
     {
-        MythUIType *child = *it;
         auto *wrapper = dynamic_cast<SubWrapper *>(child);
         if (wrapper)
         {
