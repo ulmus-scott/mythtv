@@ -1530,8 +1530,8 @@ void SubtitleScreen::DisplayDVDButton(AVSubtitle* dvdButton, QRect &buttonPos)
     if (!vo)
         return;
 
-    DeleteAllChildren();
     SetElementDeleted();
+    DeleteAllChildren();
 
     float tmp = 0.0;
     QRect dummy;
@@ -1635,7 +1635,7 @@ void SubtitleScreen::SetElementResized(void)
     SetElementAdded();
 }
 
-// SetElementAdded() should be called *before* an element is deleted
+// SetElementDeleted() should be called *before* an element is deleted
 // from the subtitle screen.
 void SubtitleScreen::SetElementDeleted(void)
 {
@@ -1769,8 +1769,8 @@ void SubtitleScreen::Pulse(void)
         std::chrono::milliseconds expireTime = wrapper->GetExpireTime();
         if (expireTime > 0ms && expireTime < now)
         {
-            DeleteChild(child);
             SetElementDeleted();
+            DeleteChild(child);
             continue;
         }
 
@@ -2268,8 +2268,8 @@ void SubtitleScreen::DisplayRawTextSubtitles(void)
     m_safeArea = vo->GetSafeRect();
 
     // delete old subs that may still be on screen
-    DeleteAllChildren();
     SetElementDeleted();
+    DeleteAllChildren();
     DrawTextSubtitles(subs, currentFrame->m_timecode, duration);
 }
 
