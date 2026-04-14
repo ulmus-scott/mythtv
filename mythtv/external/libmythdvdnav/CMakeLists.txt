@@ -111,22 +111,27 @@ add_library(
   )
 
 if(WIN32)
+  set(CMAKE_DL_LIBS dl)
+  target_compile_definitions(mythdvdnav PRIVATE WIN32)
   target_sources(mythdvdnav PRIVATE
     dvdread/win32_dlfcn.h
     )
+  message(WARNING "mythdvdnav won't link because of undefined symbols referencing the frontend.")
 endif()
 
 # Don't allow the hidden visibility flag for this target.
 set_property(TARGET mythdvdnav PROPERTY C_VISIBILITY_PRESET)
 
-# libdvdread
-pkg_check_modules(DVDCSS "libdvdcss>=1.2" IMPORTED_TARGET)
-if(TARGET PkgConfig::DVDCSS)
-  target_link_libraries(mythdvdnav PRIVATE PkgConfig::DVDCSS)
-  set(HAVE_DVDCSS_DVDCSS_H 1)
-else()
+# libdvdcss
+if(ANDROID OR WIN32)
   check_include_file(dlfcn.h HAVE_DLFCN_H)
   target_link_libraries(mythdvdnav PUBLIC ${CMAKE_DL_LIBS})
+else()
+  pkg_check_modules(DVDCSS "libdvdcss>=1.2" IMPORTED_TARGET)
+  if(TARGET PkgConfig::DVDCSS)
+    target_link_libraries(mythdvdnav PRIVATE PkgConfig::DVDCSS)
+    set(HAVE_DVDCSS_DVDCSS_H 1)
+  endif()
 endif()
 
 check_include_file(sys/param.h HAVE_SYS_PARAM_H)
