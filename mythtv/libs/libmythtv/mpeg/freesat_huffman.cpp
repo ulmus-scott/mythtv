@@ -1,8 +1,8 @@
 #include "freesat_huffman.h"
 
-static constexpr uint8_t START   { '\0' };
-static constexpr uint8_t STOP    { '\0' };
-static constexpr uint8_t ESCAPE  { '\1' };
+static constexpr uint8_t START   { 255 };
+static constexpr uint8_t STOP    {   0 };
+static constexpr uint8_t ESCAPE  {   1 };
 
 QString freesat_huffman_to_string(const unsigned char *compressed, uint size)
 {
@@ -14,8 +14,8 @@ QString freesat_huffman_to_string(const unsigned char *compressed, uint size)
     const std::vector<fsattab> &fsat_table = (src[1] == 1) ? fsat_table_1 : fsat_table_2;
     const std::vector<uint16_t> &fsat_index = (src[1] == 1) ? fsat_index_1 : fsat_index_2;
 
-    QByteArray uncompressed(size * 3, '\0');
-    int p = 0;
+    QByteArray uncompressed;
+    uncompressed.reserve(size * 3);
     unsigned value = 0;
     unsigned byte = 2;
     unsigned bit = 0;
@@ -26,8 +26,10 @@ QString freesat_huffman_to_string(const unsigned char *compressed, uint size)
     }
     uchar lastch = START;
 
-    do
+    while (lastch != STOP && byte < size+4)
     {
+        if (lastch == START)
+            lastch = STOP;
         bool found = false;
         unsigned bitShift = 0;
         uchar nextCh = STOP;
@@ -70,11 +72,7 @@ QString freesat_huffman_to_string(const unsigned char *compressed, uint size)
         if (found)
         {
             if (nextCh != STOP && nextCh != ESCAPE)
-            {
-                if (p >= uncompressed.size())
-                    uncompressed.resize(p+10);
-                uncompressed[p++] = nextCh;
-            }
+                uncompressed.append(nextCh);
             // Shift up by the number of bits.
             for (unsigned b = 0; b < bitShift; b++)
             {
@@ -95,11 +93,11 @@ QString freesat_huffman_to_string(const unsigned char *compressed, uint size)
         else
         {
             // Entry missing in table.
-            QString result = QString::fromUtf8(uncompressed.constData(), p);
+            QString result = QString::fromUtf8(uncompressed);
             result.append("...");
             return result;
         }
-    } while (lastch != STOP && byte < size+4);
+    }
 
-    return QString::fromUtf8(uncompressed.constData(), p);
+    return QString::fromUtf8(uncompressed);
 }

@@ -97,10 +97,10 @@ class MTV_PUBLIC LiveTVChain : public ReferenceCounter
     // deserialize m_maxpos and m_chain from a stringlist
     bool entriesFromStringList(const QStringList &items);
 
-  private:
+  protected:
     void BroadcastUpdate();
     void GetEntryAt(int at, LiveTVChainEntry &entry) const;
-    static ProgramInfo *EntryToProgram(const LiveTVChainEntry &entry);
+    virtual ProgramInfo *EntryToProgram(const LiveTVChainEntry &entry) const;
     ProgramInfo *DoGetNextProgram(bool up, int curpos, int &newid,
                                   bool &discont, bool &newtype);
 

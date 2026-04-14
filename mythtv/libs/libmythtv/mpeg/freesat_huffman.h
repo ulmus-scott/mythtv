@@ -10,6 +10,9 @@
 // Qt header
 #include <QString>
 
+// MythTV
+#include "libmythtv/mythtvexp.h"
+
 struct fsattab {
     uint32_t m_value;
     uint16_t m_bits;
@@ -21,6 +24,7 @@ extern const std::vector<fsattab> fsat_table_2;
 extern const std::vector<uint16_t> fsat_index_1;
 extern const std::vector<uint16_t> fsat_index_2;
 
+MTV_PUBLIC
 QString freesat_huffman_to_string(const unsigned char *compressed, uint size);
 
 #endif // FREESAT_HUFFMAN_H

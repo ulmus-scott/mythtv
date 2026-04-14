@@ -83,14 +83,13 @@ bool CetonRTSP::ProcessRequest(
         // empty socket's waiting data just in case
         m_socket->waitForReadyRead(30);
         QVector<char> trash;
-        do
+        uint avail {0};
+        while ((avail = m_socket->bytesAvailable()) > 0)
         {
-            uint avail = m_socket->bytesAvailable();
             trash.resize(std::max((uint)trash.size(), avail));
             m_socket->read(trash.data(), avail);
             m_socket->waitForReadyRead(30);
         }
-        while (m_socket->bytesAvailable() > 0);
     }
 
     QStringList requestHeaders;
@@ -255,28 +254,6 @@ bool CetonRTSP::GetOptions(QStringList &options)
 }
 
 /**
- * splitLines. prepare SDP content for easy read
- */
-QStringList CetonRTSP::splitLines(const QByteArray &lines)
-{
-    QStringList list;
-    QTextStream stream(lines);
-    QString line;
-
-    do
-    {
-        line = stream.readLine();
-        if (!line.isNull())
-        {
-            list.append(line);
-        }
-    }
-    while (!line.isNull());
-
-    return list;
-}
-
-/**
  * readParameters. Scan a line like: Session: 1234556;destination=xx;client_port
  * and return the first entry and fill the arguments in the provided Params
  */
@@ -336,7 +313,9 @@ bool CetonRTSP::Describe(void)
         return false;
 
     // find control url
-    QStringList lines = splitLines(m_responseContent);
+    static const QRegularExpression eol { "[\r\n]" };
+    QString content = QString::fromUtf8(m_responseContent);
+    QStringList lines = content.split(eol, Qt::SkipEmptyParts);
     bool found = false;
     QUrl base = m_controlUrl = GetBaseUrl();
 

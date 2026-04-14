@@ -2395,6 +2395,29 @@ int ChannelUtil::GetNearestChannel(const ChannelInfoList &list,
     return b;
 }
 
+namespace {
+    ChannelInfoList_ci next_w_wrap (const ChannelInfoList& l,
+                                    ChannelInfoList_ci it,
+                                    ChannelChangeDirection d)
+    {
+        if (CHANNEL_DIRECTION_DOWN == d)
+        {
+            if (it != l.begin())
+                return --it;
+            it = find(l.begin(), l.end(), l.rbegin()->m_chanId);
+            if (it == l.end())
+                return --it;
+            return it;
+        }
+
+        // UP or FAVORITE
+        ++it;
+        if (it == l.end())
+            return l.begin();
+        return it;
+    }
+}
+
 uint ChannelUtil::GetNextChannel(
     const ChannelInfoList &sorted,
     uint              old_chanid,
@@ -2405,66 +2428,34 @@ uint ChannelUtil::GetNextChannel(
     bool              skip_same_channum_and_callsign,
     bool              skip_other_sources)
 {
-    auto it = find(sorted.cbegin(), sorted.cend(), old_chanid);
+    if (sorted.empty())
+        return 0; // no channels..
 
+    auto it = find(sorted.cbegin(), sorted.cend(), old_chanid);
     if (it == sorted.end())
         it = sorted.begin(); // not in list, pretend we are on first channel
 
-    if (it == sorted.end())
-        return 0; // no channels..
+    if (CHANNEL_DIRECTION_SAME == direction)
+        return it->m_chanId;
 
     auto start = it;
 
-    if (CHANNEL_DIRECTION_DOWN == direction)
+    for (it = next_w_wrap(sorted, it, direction);
+         it != start;
+         it = next_w_wrap(sorted, it, direction))
     {
-        do
-        {
-            if (it == sorted.begin())
-            {
-                it = find(sorted.begin(), sorted.end(),
-                          sorted.rbegin()->m_chanId);
-                if (it == sorted.end())
-                {
-                    --it;
-                }
-            }
-            else
-            {
-                --it;
-            }
-        }
-        while ((it != start) &&
-               ((skip_non_visible && it->m_visible < kChannelVisible) ||
-                (skip_other_sources &&
-                 it->m_sourceId != start->m_sourceId) ||
-                (skip_same_channum_and_callsign &&
-                 it->m_chanNum  == start->m_chanNum &&
-                 it->m_callSign == start->m_callSign) ||
-                ((mplexid_restriction != 0U) &&
-                 (mplexid_restriction != it->m_mplexId)) ||
-                ((chanid_restriction != 0U) &&
-                 (chanid_restriction != it->m_chanId))));
-    }
-    else if ((CHANNEL_DIRECTION_UP == direction) ||
-             (CHANNEL_DIRECTION_FAVORITE == direction))
-    {
-        do
-        {
-            ++it;
-            if (it == sorted.end())
-                it = sorted.begin();
-        }
-        while ((it != start) &&
-               ((skip_non_visible && it->m_visible < kChannelVisible) ||
-                (skip_other_sources &&
-                 it->m_sourceId != start->m_sourceId) ||
-                (skip_same_channum_and_callsign &&
-                 it->m_chanNum  == start->m_chanNum &&
-                 it->m_callSign == start->m_callSign) ||
-                ((mplexid_restriction != 0U) &&
-                 (mplexid_restriction != it->m_mplexId)) ||
-                ((chanid_restriction != 0U) &&
-                 (chanid_restriction != it->m_chanId))));
+        if (skip_non_visible && (it->m_visible < kChannelVisible))
+            continue;
+        if (skip_other_sources && (it->m_sourceId != start->m_sourceId))
+            continue;
+        if (skip_same_channum_and_callsign && (it->m_chanNum  == start->m_chanNum &&
+                                               it->m_callSign == start->m_callSign))
+            continue;
+        if ((mplexid_restriction != 0U) && (mplexid_restriction != it->m_mplexId))
+            continue;
+        if ((chanid_restriction != 0U) && (chanid_restriction != it->m_chanId))
+            continue;
+        break;
     }
 
     return it->m_chanId;
