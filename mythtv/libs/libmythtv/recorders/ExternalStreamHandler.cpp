@@ -1724,10 +1724,12 @@ bool ExternalStreamHandler::CheckForError(void)
             {
                 elements = doc.toVariant().toMap();
                 if (elements.contains("command") &&
-                    elements["command"] == "STATUS")
+                    (QString::compare(elements["command"].toString(),
+                                      "STATUS",
+                                      Qt::CaseInsensitive) == 0))
                 {
                     LogLevel_t level { LOG_INFO };
-                    QString status  = elements["status"].toString();
+                    QString status  = elements["status"].toString().trimmed();
                     QString message = elements["message"].toString();
                     if (status.startsWith("crit", Qt::CaseInsensitive))
                     {
@@ -1741,6 +1743,16 @@ bool ExternalStreamHandler::CheckForError(void)
                                                Qt::CaseInsensitive))
                     {
                         level = LOG_WARNING;
+                    }
+                    else if (status.startsWith("debug",
+                                               Qt::CaseInsensitive))
+                    {
+                        level = LOG_DEBUG;
+                    }
+                    else if (status.startsWith("trace",
+                                               Qt::CaseInsensitive))
+                    {
+                        level = LOG_TRACE;
                     }
                     else if (status.startsWith("damage",
                                                Qt::CaseInsensitive))
