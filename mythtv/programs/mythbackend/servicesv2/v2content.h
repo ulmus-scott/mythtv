@@ -107,41 +107,6 @@ class V2Content : public MythHTTPService
         static bool         DownloadFile        ( const QString   &URL,
                                                   const QString   &StorageGroup );
 
-        // // HTTP Live Streaming
-        // V2LiveStreamInfo     *AddLiveStream          ( const QString   &StorageGroup,
-        //                                                   const QString   &FileName,
-        //                                                   const QString   &HostName,
-        //                                                   int              MaxSegments,
-        //                                                   int              Width,
-        //                                                   int              Height,
-        //                                                   int              Bitrate,
-        //                                                   int              AudioBitrate,
-        //                                                   int              SampleRate );
-
-        // V2LiveStreamInfo     *AddRecordingLiveStream ( int              RecordedId,
-        //                                                   int              ChanId,
-        //                                                   const QDateTime &StartTime,
-        //                                                   int              MaxSegments,
-        //                                                   int              Width,
-        //                                                   int              Height,
-        //                                                   int              Bitrate,
-        //                                                   int              AudioBitrate,
-        //                                                   int              SampleRate );
-
-        // V2LiveStreamInfo     *AddVideoLiveStream     ( int              Id,
-        //                                                   int              MaxSegments,
-        //                                                   int              Width,
-        //                                                   int              Height,
-        //                                                   int              Bitrate,
-        //                                                   int              AudioBitrate,
-        //                                                   int              SampleRate );
-
-        // V2LiveStreamInfo     *GetLiveStream            ( int Id );
-        // V2LiveStreamInfoList *GetLiveStreamList        ( const QString &FileName );
-
-        // V2LiveStreamInfo     *StopLiveStream         ( int Id );
-        // bool                     RemoveLiveStream       ( int Id );
-
   private:
         Q_DISABLE_COPY(V2Content)
 

@@ -285,8 +285,6 @@ add_library(
   Bluray/mythbdoverlay.cpp
   Bluray/mythbdoverlay.h
   # HLS
-  HLS/httplivestream.cpp
-  HLS/httplivestream.h
   HLS/httplivestreambuffer.cpp
   HLS/httplivestreambuffer.h
   HLS/m3u.cpp

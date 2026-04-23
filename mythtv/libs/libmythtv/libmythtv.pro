@@ -449,8 +449,6 @@ using_system_libbluray:android {
 }
 
 #HLS stuff
-HEADERS += HLS/httplivestream.h
-SOURCES += HLS/httplivestream.cpp
 HEADERS += HLS/httplivestreambuffer.h
 SOURCES += HLS/httplivestreambuffer.cpp
 HEADERS += HLS/m3u.h

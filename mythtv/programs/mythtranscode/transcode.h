@@ -26,9 +26,6 @@ class Transcode : public QObject
     void ShowProgress(bool val) { m_showProgress = val; }
     void SetRecorderOptions(const QString& options) { m_recorderOptions = options; }
     void SetAVFMode(void) { m_avfMode = true; }
-    void SetHLSMode(void) { m_hlsMode = true; }
-    void SetHLSStreamID(int streamid) { m_hlsStreamID = streamid; }
-    void SetHLSMaxSegments(int segments) { m_hlsMaxSegments = segments; }
     void SetCMDContainer(const QString& container) { m_cmdContainer = container; }
     void SetCMDAudioCodec(const QString& codec) { m_cmdAudioCodec = codec; }
     void SetCMDVideoCodec(const QString& codec) { m_cmdVideoCodec = codec; }
@@ -36,7 +33,6 @@ class Transcode : public QObject
     void SetCMDWidth(int width) { m_cmdWidth = width; }
     void SetCMDBitrate(int bitrate) { m_cmdBitrate = bitrate; }
     void SetCMDAudioBitrate(int bitrate) { m_cmdAudioBitrate = bitrate; }
-    void DisableAudioOnlyHLS(void) { m_hlsDisableAudioOnly = true; }
 
   private:
     bool GetProfile(const QString& profileName, const QString& encodingType, int height,
@@ -56,10 +52,6 @@ class Transcode : public QObject
     bool                 m_showProgress        { false };
     QString              m_recorderOptions;
     bool                 m_avfMode             { false };
-    bool                 m_hlsMode             { false };
-    int                  m_hlsStreamID         { -1 };
-    bool                 m_hlsDisableAudioOnly { false };
-    int                  m_hlsMaxSegments      { 0 };
     QString              m_cmdContainer        { "mpegts" };
     QString              m_cmdAudioCodec       { "aac" };
     QString              m_cmdVideoCodec       { "libx264" };

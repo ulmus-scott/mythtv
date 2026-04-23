@@ -42,8 +42,6 @@ void MythTranscodeCommandLineParser::LoadArguments(void)
         ->SetGroup("Encoding");
     add("--avf", "avf", false, "Generate libavformat output file.", "")
         ->SetGroup("Encoding");
-    add("--hls", "hls", false, "Generate HTTP Live Stream output.", "")
-        ->SetGroup("Encoding");
 
     add(QStringList{"-f", "--fifodir"}, "fifodir", "",
             "Directory in which to write fifos to.", "")
@@ -97,23 +95,13 @@ void MythTranscodeCommandLineParser::LoadArguments(void)
 //    add("--vcodec", "vcodec", "", "Output file video codec", "")
 //        ->SetChildOf("avf");
     add("--width", "width", 0, "Output Video Width", "")
-        ->SetChildOf("avf")
-        ->SetChildOf("hls");
+        ->SetChildOf("avf");
     add("--height", "height", 0, "Output Video Height", "")
-        ->SetChildOf("avf")
-        ->SetChildOf("hls");
+        ->SetChildOf("avf");
     add("--bitrate", "bitrate", 800, "Output Video Bitrate (Kbits)", "")
-        ->SetChildOf("avf")
-        ->SetChildOf("hls");
+        ->SetChildOf("avf");
     add("--audiobitrate", "audiobitrate", 64, "Output Audio Bitrate (Kbits)", "")
-        ->SetChildOf("avf")
-        ->SetChildOf("hls");
-    add("--maxsegments", "maxsegments", 0, "Max HTTP Live Stream segments", "")
-        ->SetChildOf("hls");
-    add("--noaudioonly", "noaudioonly", 0, "Disable Audio-Only HLS Stream", "")
-        ->SetChildOf("hls");
-    add("--hlsstreamid", "hlsstreamid", -1, "Stream ID to process", "")
-        ->SetChildOf("hls");
+        ->SetChildOf("avf");
     add(QStringList{"-d", "--delete"}, "delete", false,
             "Delete original after successful transcoding", "")
         ->SetGroup("Encoding");

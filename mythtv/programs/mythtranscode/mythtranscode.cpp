@@ -23,7 +23,6 @@
 #include "libmythbase/mythtranslation.h"
 #include "libmythbase/mythversion.h"
 #include "libmythbase/remotefile.h"
-#include "libmythtv/HLS/httplivestream.h"
 #include "libmythtv/jobqueue.h"
 #include "libmythtv/programinfo.h"
 #include "libmythtv/recordinginfo.h"
@@ -229,7 +228,7 @@ int main(int argc, char *argv[])
         useCutlist = true;
         if (!cmdline.toString("usecutlist").isEmpty())
         {
-            if (!cmdline.toBool("inputfile") && !cmdline.toBool("hls"))
+            if (!cmdline.toBool("inputfile"))
             {
                 LOG(VB_GENERAL, LOG_CRIT, "External cutlists are only allowed "
                                           "when using the --infile option.");
@@ -392,13 +391,12 @@ int main(int argc, char *argv[])
     }
 
     if (((!found_infile && !(found_chanid && found_starttime)) ||
-         (found_infile && (found_chanid || found_starttime))) &&
-        (!cmdline.toBool("hls")))
+         (found_infile && (found_chanid || found_starttime))))
     {
          std::cerr << "Must specify -i OR -c AND -s options!\n";
          return GENERIC_EXIT_INVALID_CMDLINE;
     }
-    if (isVideo && !found_infile && !cmdline.toBool("hls"))
+    if (isVideo && !found_infile)
     {
          std::cerr << "Must specify --infile to use --video\n";
          return GENERIC_EXIT_INVALID_CMDLINE;
@@ -453,17 +451,7 @@ int main(int argc, char *argv[])
     }
 
     ProgramInfo *pginfo = nullptr;
-    if (cmdline.toBool("hls"))
-    {
-        if (cmdline.toBool("hlsstreamid"))
-        {
-            HTTPLiveStream hls(cmdline.toInt("hlsstreamid"));
-            pginfo = new ProgramInfo(hls.GetSourceFile());
-        }
-        if (pginfo == nullptr)
-            pginfo = new ProgramInfo();
-    }
-    else if (isVideo)
+    if (isVideo)
     {
         // We want the absolute file path for the filemarkup table
         QFileInfo inf(infile);
@@ -511,7 +499,7 @@ int main(int argc, char *argv[])
     }
 
     if (infile.startsWith("myth://") && (outfile.isEmpty() || outfile != "-") &&
-        fifodir.isEmpty() && !cmdline.toBool("hls") && !cmdline.toBool("avf"))
+        fifodir.isEmpty() && !cmdline.toBool("avf"))
     {
         LOG(VB_GENERAL, LOG_ERR,
             QString("Attempted to transcode %1. Mythtranscode is currently "
@@ -530,13 +518,7 @@ int main(int argc, char *argv[])
 
     if (!build_index)
     {
-        if (cmdline.toBool("hlsstreamid"))
-        {
-            LOG(VB_GENERAL, LOG_NOTICE,
-                QString("Transcoding HTTP Live Stream ID %1")
-                        .arg(cmdline.toInt("hlsstreamid")));
-        }
-        else if (fifodir.isEmpty())
+        if (fifodir.isEmpty())
         {
             LOG(VB_GENERAL, LOG_NOTICE, QString("Transcoding from %1 to %2")
                     .arg(infile, outfile));
@@ -559,19 +541,8 @@ int main(int argc, char *argv[])
         if (cmdline.toBool("vcodec"))
             transcode->SetCMDVideoCodec(cmdline.toString("vcodec"));
     }
-    else if (cmdline.toBool("hls"))
-    {
-        transcode->SetHLSMode();
 
-        if (cmdline.toBool("hlsstreamid"))
-            transcode->SetHLSStreamID(cmdline.toInt("hlsstreamid"));
-        if (cmdline.toBool("maxsegments"))
-            transcode->SetHLSMaxSegments(cmdline.toInt("maxsegments"));
-        if (cmdline.toBool("noaudioonly"))
-            transcode->DisableAudioOnlyHLS();
-    }
-
-    if (cmdline.toBool("avf") || cmdline.toBool("hls"))
+    if (cmdline.toBool("avf"))
     {
         if (cmdline.toBool("width"))
             transcode->SetCMDWidth(cmdline.toInt("width"));
@@ -583,7 +554,7 @@ int main(int argc, char *argv[])
             transcode->SetCMDAudioBitrate(cmdline.toInt("audiobitrate") * 1000);
     }
 
-    if (!cmdline.toBool("avf") && !cmdline.toBool("hls") && fifodir.isEmpty())
+    if (!cmdline.toBool("avf") && fifodir.isEmpty())
     {
         mpeg2 = true;
     }
@@ -593,7 +564,7 @@ int main(int argc, char *argv[])
     if (!recorderOptions.isEmpty())
         transcode->SetRecorderOptions(recorderOptions);
     int result = 0;
-    if ((!mpeg2 && !build_index) || cmdline.toBool("hls"))
+    if ((!mpeg2 && !build_index))
     {
         result = transcode->TranscodeFile(infile, outfile,
                                           profilename, useCutlist,

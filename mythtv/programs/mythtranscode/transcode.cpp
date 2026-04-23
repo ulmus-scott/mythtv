@@ -22,7 +22,6 @@
 #include "libmythbase/mythcorecontext.h"
 #include "libmythbase/mythdbcon.h"
 #include "libmythbase/mythlogging.h"
-#include "libmythtv/HLS/httplivestream.h"
 #include "libmythtv/deletemap.h"
 #include "libmythtv/io/mythavformatwriter.h"
 #include "libmythtv/jobqueue.h"
@@ -144,29 +143,9 @@ int Transcode::TranscodeFile(const QString &inputname,
     int audioFrame = 0;
     std::unique_ptr<Cutter> cutter = nullptr;
     std::unique_ptr<MythAVFormatWriter> avfw = nullptr;
-    std::unique_ptr<MythAVFormatWriter> avfw2 = nullptr;
-    std::unique_ptr<HTTPLiveStream> hls = nullptr;
-    int hlsSegmentSize = 0;
-    int hlsSegmentFrames = 0;
 
     if (jobID >= 0)
         JobQueue::ChangeJobComment(jobID, "0% " + QObject::tr("Completed"));
-
-    if (m_hlsMode)
-    {
-        m_avfMode = true;
-
-        if (m_hlsStreamID != -1)
-        {
-            hls = std::make_unique<HTTPLiveStream>(m_hlsStreamID);
-            hls->UpdateStatus(kHLSStatusStarting);
-            hls->UpdateStatusMessage("Transcoding Starting");
-            m_cmdWidth = hls->GetWidth();
-            m_cmdHeight = hls->GetHeight();
-            m_cmdBitrate = hls->GetBitrate();
-            m_cmdAudioBitrate = hls->GetAudioBitrate();
-        }
-    }
 
     if (!m_avfMode && fifodir.isEmpty())
     {
@@ -177,9 +156,7 @@ int Transcode::TranscodeFile(const QString &inputname,
     // Input setup
     auto *player_ctx = new PlayerContext(kTranscoderInUseID);
     player_ctx->SetPlayingInfo(m_proginfo);
-    MythMediaBuffer *rb = (hls && (m_hlsStreamID != -1)) ?
-        MythMediaBuffer::Create(hls->GetSourceFile(), false, false) :
-        MythMediaBuffer::Create(inputname, false, false);
+    MythMediaBuffer *rb = MythMediaBuffer::Create(inputname, false, false);
     if (!rb || !rb->GetLastError().isEmpty())
     {
         LOG(VB_GENERAL, LOG_ERR,
@@ -315,10 +292,7 @@ int Transcode::TranscodeFile(const QString &inputname,
         // original resolution, quality is degraded, transcoding is
         // slower and in future we may wish to scale bitrate according to
         // resolution, so it would also waste bandwidth (when streaming)
-        //
-        // This change could be said to apply for all transcoding, but for now
-        // we're limiting it to HLS where it's uncontroversial
-        if (m_hlsMode)
+        if (false)
         {
 //             if (newWidth > video_width)
 //                 newWidth = video_width;
@@ -371,87 +345,6 @@ int Transcode::TranscodeFile(const QString &inputname,
         avfw->SetAudioFrameRate(arb->m_eff_audiorate);
         avfw->SetAudioFormat(FORMAT_S16);
 
-        if (m_hlsMode)
-        {
-
-            if (m_hlsStreamID == -1)
-            {
-                hls = std::make_unique<HTTPLiveStream>(inputname, newWidth, newHeight,
-                                         m_cmdBitrate, m_cmdAudioBitrate,
-                                         m_hlsMaxSegments, 0, 0);
-
-                m_hlsStreamID = hls->GetStreamID();
-                if (!hls || m_hlsStreamID == -1)
-                {
-                    LOG(VB_GENERAL, LOG_ERR, "Unable to create new stream");
-                    SetPlayerContext(nullptr);
-                    return REENCODE_ERROR;
-                }
-            }
-
-            int segmentSize = hls->GetSegmentSize();
-
-            LOG(VB_GENERAL, LOG_NOTICE,
-                QString("HLS: Using segment size of %1 seconds")
-                    .arg(segmentSize));
-
-            if (!m_hlsDisableAudioOnly)
-            {
-                int audioOnlyBitrate = hls->GetAudioOnlyBitrate();
-
-                avfw2 = std::make_unique<MythAVFormatWriter>();
-                avfw2->SetContainer("mpegts");
-                avfw2->SetAudioCodec("aac");
-                avfw2->SetAudioBitrate(audioOnlyBitrate);
-                avfw2->SetAudioChannels(arb->m_channels);
-                avfw2->SetAudioFrameRate(arb->m_eff_audiorate);
-                avfw2->SetAudioFormat(FORMAT_S16);
-            }
-
-            avfw->SetContainer("mpegts");
-            avfw->SetVideoCodec("libx264");
-            avfw->SetAudioCodec("aac");
-            hls->UpdateStatus(kHLSStatusStarting);
-            hls->UpdateStatusMessage("Transcoding Starting");
-            hls->UpdateSizeInfo(newWidth, newHeight, video_width, video_height);
-
-            if (!hls->InitForWrite())
-            {
-                LOG(VB_GENERAL, LOG_ERR, "hls->InitForWrite() failed");
-                SetPlayerContext(nullptr);
-                return REENCODE_ERROR;
-            }
-
-            if (video_frame_rate > 30)
-            {
-                halfFramerate = true;
-                avfw->SetFramerate(video_frame_rate/2);
-
-                if (avfw2)
-                    avfw2->SetFramerate(video_frame_rate/2);
-
-                hlsSegmentSize = (int)(segmentSize * video_frame_rate / 2);
-            }
-            else
-            {
-                avfw->SetFramerate(video_frame_rate);
-
-                if (avfw2)
-                    avfw2->SetFramerate(video_frame_rate);
-
-                hlsSegmentSize = (int)(segmentSize * video_frame_rate);
-            }
-
-            avfw->SetKeyFrameDist(30);
-            if (avfw2)
-                avfw2->SetKeyFrameDist(30);
-
-            hls->AddSegment();
-            avfw->SetFilename(hls->GetCurrentFilename());
-            if (avfw2)
-                avfw2->SetFilename(hls->GetCurrentFilename(true));
-        }
-        else
         {
             avfw->SetContainer(m_cmdContainer);
             avfw->SetVideoCodec(m_cmdVideoCodec);
@@ -466,15 +359,12 @@ int Transcode::TranscodeFile(const QString &inputname,
         QString tune   = gCoreContext->GetSetting("HTTPLiveStreamTune", "film");
 
         LOG(VB_GENERAL, LOG_NOTICE,
-            QString("x264 HLS using: %1 threads, '%2' profile and '%3' tune")
+            QString("x264 using: %1 threads, '%2' profile and '%3' tune")
                 .arg(QString::number(threads), preset, tune));
 
         avfw->SetThreadCount(threads);
         avfw->SetEncodingPreset(preset);
         avfw->SetEncodingTune(tune);
-
-        if (avfw2)
-            avfw2->SetThreadCount(1);
 
         if (!avfw->Init())
         {
@@ -486,20 +376,6 @@ int Transcode::TranscodeFile(const QString &inputname,
         if (!avfw->OpenFile())
         {
             LOG(VB_GENERAL, LOG_ERR, "avfw->OpenFile() failed");
-            SetPlayerContext(nullptr);
-            return REENCODE_ERROR;
-        }
-
-        if (avfw2 && !avfw2->Init())
-        {
-            LOG(VB_GENERAL, LOG_ERR, "avfw2->Init() failed");
-            SetPlayerContext(nullptr);
-            return REENCODE_ERROR;
-        }
-
-        if (avfw2 && !avfw2->OpenFile())
-        {
-            LOG(VB_GENERAL, LOG_ERR, "avfw2->OpenFile() failed");
             SetPlayerContext(nullptr);
             return REENCODE_ERROR;
         }
@@ -533,10 +409,6 @@ int Transcode::TranscodeFile(const QString &inputname,
         SetPlayerContext(nullptr);
         return REENCODE_ERROR;
     }
-
-    // must come after InitForTranscode - which creates the VideoOutput instance
-    if (m_hlsMode && player->GetVideoOutput())
-        player->GetVideoOutput()->SetDeinterlacing(true, false, DEINT_CPU | DEINT_MEDIUM);
 
     MythVideoFrame frame;
     // Do not use padding when compressing to RTjpeg or when in fifomode.
@@ -695,8 +567,6 @@ int Transcode::TranscodeFile(const QString &inputname,
 
     if (m_fifow)
         LOG(VB_GENERAL, LOG_INFO, "Dumping Video and Audio data to fifos");
-    else if (m_hlsMode)
-        LOG(VB_GENERAL, LOG_INFO, "Transcoding for HTTP Live Streaming");
     else if (m_avfMode)
         LOG(VB_GENERAL, LOG_INFO, "Transcoding to libavformat container");
     else
@@ -714,12 +584,6 @@ int Transcode::TranscodeFile(const QString &inputname,
 
     bool stopSignalled = false;
     MythVideoFrame *lastDecode = nullptr;
-
-    if (hls)
-    {
-        hls->UpdateStatus(kHLSStatusRunning);
-        hls->UpdateStatusMessage("Transcoding");
-    }
 
     while ((!stopSignalled) &&
            (lastDecode = videoBuffer->GetFrame(did_ff, is_key)))
@@ -910,19 +774,6 @@ int Transcode::TranscodeFile(const QString &inputname,
                         std::chrono::milliseconds tc = ab->m_time - timecodeOffset;
                         avfw->WriteAudioFrame(buf, audioFrame, tc);
 
-                        if (avfw2)
-                        {
-                            if ((avfw2->GetTimecodeOffset() == -1ms) &&
-                                (avfw->GetTimecodeOffset() != -1ms))
-                            {
-                                avfw2->SetTimecodeOffset(
-                                    avfw->GetTimecodeOffset());
-                            }
-
-                            tc = ab->m_time - timecodeOffset;
-                            avfw2->WriteAudioFrame(buf, audioFrame, tc);
-                        }
-
                         ++audioFrame;
                     }
                 }
@@ -948,25 +799,9 @@ int Transcode::TranscodeFile(const QString &inputname,
                 {
                     skippedLastFrame = false;
 
-                    if ((hls) &&
-                        (avfw->GetFramesWritten()) &&
-                        (hlsSegmentFrames > hlsSegmentSize) &&
-                        (avfw->NextFrameIsKeyFrame()))
-                    {
-                        hls->AddSegment();
-                        avfw->ReOpen(hls->GetCurrentFilename());
-
-                        if (avfw2)
-                            avfw2->ReOpen(hls->GetCurrentFilename(true));
-
-                        hlsSegmentFrames = 0;
-                    }
-
                     if (avfw->WriteVideoFrame(rescale ? &frame : lastDecode) > 0)
                     {
                         lastWrittenTime = frame.m_timecode + timecodeOffset;
-                        if (hls)
-                            ++hlsSegmentFrames;
                     }
 
                 }
@@ -980,12 +815,6 @@ int Transcode::TranscodeFile(const QString &inputname,
                     QString("Processed: %1 of %2 frames(%3 seconds)").
                         arg(curFrameNum).arg((long)total_frame_count).
                         arg((long)(curFrameNum / video_frame_rate)));
-            }
-
-            if (hls && hls->CheckStop())
-            {
-                hls->UpdateStatus(kHLSStatusStopping);
-                stopSignalled = true;
             }
 
             statustime = MythDate::current().addSecs(5);
@@ -1016,11 +845,6 @@ int Transcode::TranscodeFile(const QString &inputname,
                     SetPlayerContext(nullptr);
                     if (videoBuffer)
                         videoBuffer->stop();
-                    if (hls)
-                    {
-                        hls->UpdateStatus(kHLSStatusStopped);
-                        hls->UpdateStatusMessage("Transcoding Stopped");
-                    }
                     return REENCODE_STOPPED;
                 }
 
@@ -1031,9 +855,6 @@ int Transcode::TranscodeFile(const QString &inputname,
 
                 total_frame_count = player->GetCurrentFrameCount();
                 int percentage = curFrameNum * 100 / total_frame_count;
-
-                if (hls)
-                    hls->UpdatePercentComplete(percentage);
 
                 if (jobID >= 0)
                 {
@@ -1065,9 +886,6 @@ int Transcode::TranscodeFile(const QString &inputname,
         if (avfw)
             avfw->CloseFile();
 
-        if (avfw2)
-            avfw2->CloseFile();
-
         if (!m_avfMode && m_proginfo)
         {
             m_proginfo->ClearPositionMap(MARK_KEYFRAME);
@@ -1077,21 +895,6 @@ int Transcode::TranscodeFile(const QString &inputname,
         }
     } else {
         m_fifow->FIFODrain();
-    }
-
-    if (hls)
-    {
-        if (!stopSignalled)
-        {
-            hls->UpdateStatus(kHLSStatusCompleted);
-            hls->UpdateStatusMessage("Transcoding Completed");
-            hls->UpdatePercentComplete(100);
-        }
-        else
-        {
-            hls->UpdateStatus(kHLSStatusStopped);
-            hls->UpdateStatusMessage("Transcoding Stopped");
-        }
     }
 
     if (videoBuffer)
