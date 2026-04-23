@@ -7,7 +7,7 @@
  */
 #include "test_hls.h"
 
-#include "libmythtv/HLS/httplivestreambuffer.h"
+#include "libmythtv/io/httplivestreambuffer.h"
 
 // Examples from draft-pantos-http-live-streaming-04
 

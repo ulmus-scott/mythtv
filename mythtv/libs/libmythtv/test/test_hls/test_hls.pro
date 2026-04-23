@@ -39,7 +39,7 @@ QMAKE_LFLAGS += -Wl,$$_RPATH_$(PWD)/../../../libmythfreemheg
 
 # Input
 HEADERS += test_hls.h
-SOURCES += test_hls.cpp ../../HLS/httplivestreambuffer.cpp
+SOURCES += test_hls.cpp ../../io/httplivestreambuffer.cpp
 
 QMAKE_CLEAN += $(TARGET) $(TARGETA) $(TARGETD) $(TARGET0) $(TARGET1) $(TARGET2)
 QMAKE_CLEAN += ; ( cd $(OBJECTS_DIR) && rm -f *.gcov *.gcda *.gcno )

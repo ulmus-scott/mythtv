@@ -14,7 +14,7 @@
 #include "libmythbase/mythchrono.h"
 #include "libmythbase/mythlogging.h"
 
-#include "HLS/m3u.h"
+#include "m3u.h"
 
 #define LOC QString("HLSReader[%1]: ").arg(m_inputId)
 

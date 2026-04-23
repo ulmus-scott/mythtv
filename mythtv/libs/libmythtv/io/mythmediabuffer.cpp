@@ -30,7 +30,7 @@
 #include "Bluray/mythbdbuffer.h"
 #include "DVD/mythdvdbuffer.h"
 #include "DVD/mythdvdstream.h"
-#include "HLS/httplivestreambuffer.h"
+#include "httplivestreambuffer.h"
 #include "io/mythfilebuffer.h"
 #include "io/mythmediabuffer.h"
 #include "io/mythstreamingbuffer.h"

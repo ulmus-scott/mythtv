@@ -24,7 +24,7 @@
 #define MythXCode_hlsbuffer_h
 
 #include "libmythbase/mythconfig.h"
-#include "libmythtv/io/mythmediabuffer.h"
+#include "mythmediabuffer.h"
 
 class MythDownloadManager;
 class HLSStream;

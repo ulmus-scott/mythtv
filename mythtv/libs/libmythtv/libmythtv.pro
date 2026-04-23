@@ -178,6 +178,9 @@ SOURCES += recordingtypes.cpp
 SOURCES += mythhdrvideometadata.cpp
 SOURCES += mythhdrtracker.cpp
 
+HEADERS += io/httplivestreambuffer.h
+SOURCES += io/httplivestreambuffer.cpp
+
 # DiSEqC
 HEADERS += diseqc.h                 diseqcsettings.h
 SOURCES += diseqc.cpp               diseqcsettings.cpp
@@ -449,10 +452,6 @@ using_system_libbluray:android {
 }
 
 #HLS stuff
-HEADERS += HLS/httplivestreambuffer.h
-SOURCES += HLS/httplivestreambuffer.cpp
-HEADERS += HLS/m3u.h
-SOURCES += HLS/m3u.cpp
 using_libcrypto:LIBS    += -lcrypto
 
 using_frontend {
@@ -1002,6 +1001,8 @@ using_backend {
     SOURCES += recorders/HLS/HLSStream.cpp
     SOURCES += recorders/HLS/HLSStreamWorker.cpp
 
+    HEADERS += recorders/HLS/m3u.h
+    SOURCES += recorders/HLS/m3u.cpp
 
     # Support for HDHomeRun box
     using_hdhomerun {

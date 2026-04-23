@@ -127,6 +127,8 @@ target_sources(
           recorders/HLS/HLSSegment.cpp
           recorders/HLS/HLSStream.cpp
           recorders/HLS/HLSStreamWorker.cpp
+          recorders/HLS/m3u.cpp
+          recorders/HLS/m3u.h
           # External recorder
           recorders/ExternalChannel.h
           recorders/ExternalRecChannelFetcher.h

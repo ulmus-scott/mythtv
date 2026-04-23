@@ -84,6 +84,8 @@ add_library(
   dbcheck.cpp
   dbcheck.h
   driveroption.h
+  io/httplivestreambuffer.cpp
+  io/httplivestreambuffer.h
   io/mythavformatbuffer.cpp
   io/mythavformatbuffer.h
   io/mythfilebuffer.cpp
@@ -284,11 +286,7 @@ add_library(
   Bluray/mythbdiowrapper.h
   Bluray/mythbdoverlay.cpp
   Bluray/mythbdoverlay.h
-  # HLS
-  HLS/httplivestreambuffer.cpp
-  HLS/httplivestreambuffer.h
-  HLS/m3u.cpp
-  HLS/m3u.h)
+  )
 if(APPLE)
   target_sources(mythtv PRIVATE util-osx.h util-osx.mm)
   if(APPLE_VIDEOTOOLBOX_LIBRARY)

@@ -6,7 +6,7 @@
 
 add_executable(
   test_hls
-  ../../HLS/httplivestreambuffer.cpp
+  ../../io/httplivestreambuffer.cpp
   test_hls.cpp test_hls.h)
 
 target_include_directories(test_hls PRIVATE . ../..)

@@ -1,3 +1,5 @@
+#include "m3u.h"
+
 #include <QRegularExpression>
 #include <QStringList>
 #include <QUrl>
@@ -5,7 +7,6 @@
 #include "libmythbase/mythconfig.h"
 #include "libmythbase/mythdate.h"
 #include "libmythbase/mythlogging.h"
-#include "HLS/m3u.h"
 
 namespace M3U
 {
